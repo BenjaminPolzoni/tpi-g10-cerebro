@@ -4,15 +4,16 @@ codigo: HT-09
 ref: 4251
 estado: "Done"
 responsable: "Stefano Zoffoli"
-epica: "[G10] — Esqueleto del servicio Roadmap — TRANSVERSAL (v3)"
+epicas: "[[epicas/EP-144 Esqueleto del servicio Roadmap — TRANSVERSAL (v3)|EP-144]]"
 sprint: "G10 - Sprint 2"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4251
 ---
 
 # HT-09: Eliminar simulaciones y datos de ejemplo del microservicio
 
-> [!info] Generado desde Taiga (2026-10-14 18:47). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4251) · Estado: **Done** · Responsable: **Stefano Zoffoli** · Sprint: **G10 - Sprint 2**
+> Épica: [[epicas/EP-144 Esqueleto del servicio Roadmap — TRANSVERSAL (v3)|EP-144]] · Tareas cerradas: **7/7**
 
 [G10] — HT-09 — Eliminar simulaciones y datos de ejemplo del microservicio
 -------------------------------------------------------------------------

@@ -4,15 +4,16 @@ codigo: HU-47
 ref: 7196
 estado: "Done"
 responsable: "Mateo Delgado Costa"
-epica: "[G10] — Edición del roadmap por el profesor"
+epicas: "[[epicas/EP-4232 Edición del roadmap por el profesor|EP-4232]]"
 sprint: "Backlog"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7196
 ---
 
 # HU-47: Asignar a un nodo un desafío de mi pool del Motor
 
-> [!info] Generado desde Taiga (2026-10-14 18:47). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7196) · Estado: **Done** · Responsable: **Mateo Delgado Costa** · Sprint: **Backlog**
+> Épica: [[epicas/EP-4232 Edición del roadmap por el profesor|EP-4232]] · Tareas cerradas: **5/14**
 
 [G10] — HU-47 — Asignar a un nodo un desafío de mi pool del Motor
 -----------------------------------------------------------------

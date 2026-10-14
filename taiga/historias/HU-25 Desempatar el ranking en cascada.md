@@ -4,15 +4,16 @@ codigo: HU-25
 ref: 4242
 estado: "Done"
 responsable: "Lorenzo Araujo"
-epica: "[G10] — Ranking y cierre académico"
+epicas: "[[epicas/EP-61 Ranking y cierre académico|EP-61]]"
 sprint: "G10 - Sprint 2"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4242
 ---
 
 # HU-25: Desempatar el ranking en cascada
 
-> [!info] Generado desde Taiga (2026-10-14 18:47). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4242) · Estado: **Done** · Responsable: **Lorenzo Araujo** · Sprint: **G10 - Sprint 2**
+> Épica: [[epicas/EP-61 Ranking y cierre académico|EP-61]] · Tareas cerradas: **6/6**
 
 [G10] — HU-25 — Desempatar el ranking en cascada
 ------------------------------------------------

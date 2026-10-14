@@ -4,15 +4,16 @@ codigo: HU-49
 ref: 7211
 estado: "New"
 responsable: "Sin asignar"
-epica: "[G10] — Unidades del roadmap sincronizadas con Courses"
+epicas: "[[epicas/EP-4230 Unidades del roadmap sincronizadas con Courses|EP-4230]]"
 sprint: "Backlog"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7211
 ---
 
 # HU-49: Aplicar en el roadmap las restricciones de sección y actividad que publica Courses
 
-> [!info] Generado desde Taiga (2026-10-14 18:47). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7211) · Estado: **New** · Responsable: **Sin asignar** · Sprint: **Backlog**
+> Épica: [[epicas/EP-4230 Unidades del roadmap sincronizadas con Courses|EP-4230]] · Tareas cerradas: **0/8**
 
 [G10] — HU-49 — Aplicar en el roadmap las restricciones de sección y actividad que publica Courses
 --------------------------------------------------------------------------------------------------

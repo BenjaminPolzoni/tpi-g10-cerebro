@@ -4,15 +4,16 @@ codigo: HU-20
 ref: 4243
 estado: "Done"
 responsable: "Benjamin Polzoni"
-epica: "[G10] — Logros e insignias"
+epicas: "[[epicas/EP-69 Logros e insignias|EP-69]]"
 sprint: "G10 - Sprint 2"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4243
 ---
 
 # HU-20: Definir el catálogo de insignias del curso
 
-> [!info] Generado desde Taiga (2026-10-14 18:47). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4243) · Estado: **Done** · Responsable: **Benjamin Polzoni** · Sprint: **G10 - Sprint 2**
+> Épica: [[epicas/EP-69 Logros e insignias|EP-69]] · Tareas cerradas: **7/7**
 
 [G10] — HU-20 — Definir el catálogo de insignias del curso
 ----------------------------------------------------------

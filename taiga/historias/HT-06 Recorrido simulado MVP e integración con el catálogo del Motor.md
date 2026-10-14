@@ -4,15 +4,16 @@ codigo: HT-06
 ref: 3735
 estado: "Done"
 responsable: "Iker Alonso"
-epica: "[G10] — Esqueleto del servicio Roadmap — TRANSVERSAL (v3)"
+epicas: "[[epicas/EP-144 Esqueleto del servicio Roadmap — TRANSVERSAL (v3)|EP-144]]"
 sprint: "G10 - Sprint 1"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/3735
 ---
 
 # HT-06: Recorrido simulado MVP e integración con el catálogo del Motor
 
-> [!info] Generado desde Taiga (2026-10-14 18:47). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/3735) · Estado: **Done** · Responsable: **Iker Alonso** · Sprint: **G10 - Sprint 1**
+> Épica: [[epicas/EP-144 Esqueleto del servicio Roadmap — TRANSVERSAL (v3)|EP-144]] · Tareas cerradas: **8/8**
 
 [G10] — HT-06 — Recorrido simulado MVP e integración con el catálogo del Motor
 ------------------------------------------------------------------------------------

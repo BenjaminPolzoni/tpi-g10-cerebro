@@ -4,15 +4,16 @@ codigo: HT-04
 ref: 2844
 estado: "Done"
 responsable: "Franco Maximiliano Amarilla"
-epica: "Sin épica"
+epicas: "Sin épica"
 sprint: "G10 - Sprint 1"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/2844
 ---
 
 # HT-04: Documentación de la Wiki del Sprint 1
 
-> [!info] Generado desde Taiga (2026-10-14 18:47). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/2844) · Estado: **Done** · Responsable: **Franco Maximiliano Amarilla** · Sprint: **G10 - Sprint 1**
+> Épica: Sin épica · Tareas cerradas: **2/2**
 
 \[G10\] — HT-04 — Documentación de la wiki del Sprint 1
 -------------------------------------------------------

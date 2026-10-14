@@ -4,15 +4,16 @@ codigo: HU-37
 ref: 4236
 estado: "Done"
 responsable: "Iker Alonso"
-epica: "[G10] — Unidades del roadmap sincronizadas con Courses"
+epicas: "[[epicas/EP-4230 Unidades del roadmap sincronizadas con Courses|EP-4230]]"
 sprint: "G10 - Sprint 2"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4236
 ---
 
 # HU-37: Ver en el editor del roadmap las unidades de Cursos y sincronizarlas (front)
 
-> [!info] Generado desde Taiga (2026-10-14 18:47). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4236) · Estado: **Done** · Responsable: **Iker Alonso** · Sprint: **G10 - Sprint 2**
+> Épica: [[epicas/EP-4230 Unidades del roadmap sincronizadas con Courses|EP-4230]] · Tareas cerradas: **6/6**
 
 [G10] — HU-37 — Ver en el editor del roadmap las unidades de Cursos y sincronizarlas (front)
 --------------------------------------------------------------------------------------------

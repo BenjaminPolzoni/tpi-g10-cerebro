@@ -4,15 +4,16 @@ codigo: HU-06
 ref: 594
 estado: "Done"
 responsable: "Fenoglio Santino"
-epica: "[G10] — Nodos de contenido y lectura previa"
+epicas: "[[epicas/EP-593 Nodos de contenido y lectura previa|EP-593]]"
 sprint: "G10 - Sprint 1"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/594
 ---
 
 # HU-06: Marcar un nodo de contenido como leído
 
-> [!info] Generado desde Taiga (2026-10-14 18:46). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:43). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/594) · Estado: **Done** · Responsable: **Fenoglio Santino** · Sprint: **G10 - Sprint 1**
+> Épica: [[epicas/EP-593 Nodos de contenido y lectura previa|EP-593]] · Tareas cerradas: **6/6**
 
 [G10] — HU-06 — Marcar un nodo de contenido como leído
 ------------------------------------------------------

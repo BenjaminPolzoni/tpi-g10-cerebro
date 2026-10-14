@@ -4,15 +4,16 @@ codigo: HU-52
 ref: 7385
 estado: "Done"
 responsable: "Iker Alonso"
-epica: "[G10] — Mundos (biomas) del roadmap"
+epicas: "[[epicas/EP-7340 Mundos (biomas) del roadmap|EP-7340]]"
 sprint: "G10 - Sprint 2"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7385
 ---
 
 # HU-52: Recorrer la unidad en el mundo Cementerio
 
-> [!info] Generado desde Taiga (2026-10-14 18:48). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7385) · Estado: **Done** · Responsable: **Iker Alonso** · Sprint: **G10 - Sprint 2**
+> Épica: [[epicas/EP-7340 Mundos (biomas) del roadmap|EP-7340]] · Tareas cerradas: **5/5**
 
 [G10] — HU-52 — Recorrer la unidad en el mundo Cementerio
 --------------------------------------------------------

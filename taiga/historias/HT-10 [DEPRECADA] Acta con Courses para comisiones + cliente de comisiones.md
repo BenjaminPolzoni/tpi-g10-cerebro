@@ -4,15 +4,16 @@ codigo: HT-10
 ref: 5372
 estado: "Done"
 responsable: "Mateo Delgado Costa"
-epica: "[G10] — Roadmap por grupo de la cohorte"
+epicas: "[[epicas/EP-5371 Roadmap por grupo de la cohorte|EP-5371]]"
 sprint: "G10 - Sprint 2"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/5372
 ---
 
 # HT-10: [DEPRECADA] Acta con Courses para comisiones + cliente de comisiones
 
-> [!info] Generado desde Taiga (2026-10-14 18:47). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/5372) · Estado: **Done** · Responsable: **Mateo Delgado Costa** · Sprint: **G10 - Sprint 2**
+> Épica: [[epicas/EP-5371 Roadmap por grupo de la cohorte|EP-5371]] · Tareas cerradas: **6/6**
 
 [G10] — HT-10 — Acta con Courses para comisiones + cliente de comisiones
 ------------------------------------------------------------------------

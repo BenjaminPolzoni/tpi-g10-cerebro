@@ -4,15 +4,16 @@ codigo: HU-46
 ref: 5375
 estado: "Done"
 responsable: "Fenoglio Santino"
-epica: "[G10] — Nodos de contenido y lectura previa"
+epicas: "[[epicas/EP-593 Nodos de contenido y lectura previa|EP-593]]"
 sprint: "G10 - Sprint 2"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/5375
 ---
 
 # HU-46: Ver en los nodos y en el Templo el material teórico de Courses
 
-> [!info] Generado desde Taiga (2026-10-14 18:47). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/5375) · Estado: **Done** · Responsable: **Fenoglio Santino** · Sprint: **G10 - Sprint 2**
+> Épica: [[epicas/EP-593 Nodos de contenido y lectura previa|EP-593]] · Tareas cerradas: **5/5**
 
 [G10] — HU-46 — Ver en los nodos y en el Templo el material teórico de Courses
 ------------------------------------------------------------------------------

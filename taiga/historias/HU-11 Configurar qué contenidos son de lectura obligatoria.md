@@ -4,15 +4,16 @@ codigo: HU-11
 ref: 738
 estado: "Done"
 responsable: "Gabriela Camacho"
-epica: "[G10] — Nodos de contenido y lectura previa"
+epicas: "[[epicas/EP-593 Nodos de contenido y lectura previa|EP-593]]"
 sprint: "G10 - Sprint 1"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/738
 ---
 
 # HU-11: Configurar qué contenidos son de lectura obligatoria
 
-> [!info] Generado desde Taiga (2026-10-14 18:46). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/738) · Estado: **Done** · Responsable: **Gabriela Camacho** · Sprint: **G10 - Sprint 1**
+> Épica: [[epicas/EP-593 Nodos de contenido y lectura previa|EP-593]] · Tareas cerradas: **5/5**
 
 [G10] — HU-11 — Configurar qué contenidos son de lectura obligatoria
 --------------------------------------------------------------------

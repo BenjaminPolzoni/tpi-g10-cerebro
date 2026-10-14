@@ -4,15 +4,16 @@ codigo: HU-18
 ref: 4235
 estado: "Done"
 responsable: "Mateo Delgado Costa"
-epica: "[G10] — Unidades del roadmap sincronizadas con Courses"
+epicas: "[[epicas/EP-4230 Unidades del roadmap sincronizadas con Courses|EP-4230]]"
 sprint: "G10 - Sprint 2"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4235
 ---
 
 # HU-18: Reflejar el reordenamiento de secciones de Courses
 
-> [!info] Generado desde Taiga (2026-10-14 18:47). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4235) · Estado: **Done** · Responsable: **Mateo Delgado Costa** · Sprint: **G10 - Sprint 2**
+> Épica: [[epicas/EP-4230 Unidades del roadmap sincronizadas con Courses|EP-4230]] · Tareas cerradas: **4/4**
 
 [G10] — HU-18 — Reflejar el reordenamiento de secciones de Courses
 ------------------------------------------------------------------

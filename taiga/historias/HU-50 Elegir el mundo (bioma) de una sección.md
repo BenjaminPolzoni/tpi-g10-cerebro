@@ -4,15 +4,16 @@ codigo: HU-50
 ref: 7341
 estado: "Done"
 responsable: "Ludmila Mailen Cejas"
-epica: "[G10] — Mundos (biomas) del roadmap"
+epicas: "[[epicas/EP-7340 Mundos (biomas) del roadmap|EP-7340]]"
 sprint: "G10 - Sprint 2"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7341
 ---
 
 # HU-50: Elegir el mundo (bioma) de una sección
 
-> [!info] Generado desde Taiga (2026-10-14 18:48). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7341) · Estado: **Done** · Responsable: **Ludmila Mailen Cejas** · Sprint: **G10 - Sprint 2**
+> Épica: [[epicas/EP-7340 Mundos (biomas) del roadmap|EP-7340]] · Tareas cerradas: **5/5**
 
 [G10] — HU-50 — Elegir el mundo (bioma) de una sección
 -----------------------------------------------------

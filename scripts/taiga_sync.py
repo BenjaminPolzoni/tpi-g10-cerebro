@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Baja las épicas, historias y tareas de G10 desde Taiga a notas de Obsidian en taiga/.
 
+Jerarquía: taiga/epicas/ (una nota por épica, con sus HU) → taiga/historias/ (una nota por HU, con sus tareas).
+
 Uso:  python3 scripts/taiga_sync.py
 Credenciales: variables de entorno o un .env en la raíz del repo (ver .env.example).
 Todo lo que hay en taiga/ se regenera: no editar a mano.
@@ -78,6 +80,14 @@ def status(item):
     return (item.get("status_extra_info") or {}).get("name", "?")
 
 
+def closed(item):
+    return bool((item.get("status_extra_info") or {}).get("is_closed"))
+
+
+def note_name(code, subject):
+    return f"{code} {clean_subject(subject)}"[:90].replace("/", "-").replace(":", " -")
+
+
 def yaml_str(s):
     return json.dumps(s, ensure_ascii=False)
 
@@ -100,16 +110,22 @@ def main():
 
     shutil.rmtree(OUT, ignore_errors=True)
     (OUT / "historias").mkdir(parents=True)
+    (OUT / "epicas").mkdir(parents=True)
+    epic_note = {e["id"]: note_name(f"EP-{e['ref']}", e["subject"]) for e in epics}
 
     rows = []
     for s in sorted(stories, key=lambda s: s["ref"]):
         d = api(f"/userstories/{s['id']}", token)[0]
         tasks = api_all(f"/tasks?user_story={s['id']}", token)
         code = code_of(s["subject"], s["ref"])
-        name = f"{code} {clean_subject(s['subject'])}"[:90].replace("/", "-").replace(":", " -")
-        epic = (s.get("epics") or [{}])[0].get("subject", "Sin épica")
+        name = note_name(code, s["subject"])
+        # una HU puede colgar de varias épicas: se enlaza a todas las de G10
+        epic_ids = [e["id"] for e in s.get("epics") or [] if e["id"] in epic_note]
+        epic_links = ", ".join(f"[[epicas/{epic_note[i]}|EP-{epic_note[i].split()[0][3:]}]]" for i in epic_ids) or "Sin épica"
         sprint = milestones.get(s.get("milestone"), "Backlog")
-        rows.append((epic, code, name, status(s), who(s), sprint, s["ref"]))
+        done_tasks = sum(closed(t) for t in tasks)
+        rows.append(dict(epics=epic_ids, code=code, name=name, status=status(s), closed=closed(s), who=who(s),
+                         sprint=sprint, tasks=f"{done_tasks}/{len(tasks)}"))
         lines = [
             "---",
             f"tags: [tpi, g10, taiga, {code.split('-')[0].lower()}]",
@@ -117,7 +133,7 @@ def main():
             f"ref: {s['ref']}",
             f"estado: {yaml_str(status(s))}",
             f"responsable: {yaml_str(who(s))}",
-            f"epica: {yaml_str(epic)}",
+            f"epicas: {yaml_str(epic_links)}",
             f"sprint: {yaml_str(sprint)}",
             f"url: {us_url}{s['ref']}",
             "---",
@@ -126,6 +142,7 @@ def main():
             "",
             f"> [!info] Generado desde Taiga ({datetime.now():%Y-%m-%d %H:%M}). No editar a mano: correr `scripts/taiga_sync.py`.",
             f"> [Abrir en Taiga]({us_url}{s['ref']}) · Estado: **{status(s)}** · Responsable: **{who(s)}** · Sprint: **{sprint}**",
+            f"> Épica: {epic_links} · Tareas cerradas: **{done_tasks}/{len(tasks)}**",
             "",
             d.get("description") or "_Sin descripción en Taiga._",
             "",
@@ -137,28 +154,66 @@ def main():
                   for t in sorted(tasks, key=lambda t: t["ref"])] or ["_Sin tareas._"]
         (OUT / "historias" / f"{name}.md").write_text("\n".join(lines) + "\n")
 
+    def hu_table(rs):
+        return ["| HU | Estado | Responsable | Sprint | Tareas |", "|---|---|---|---|---|"] + \
+               [f"| [[historias/{r['name']}\\|{r['code']}]] {r['name'][len(r['code']) + 1:]} | {r['status']} | "
+                f"{r['who']} | {r['sprint']} | {r['tasks']} |" for r in rs]
+
+    def progress(rs):
+        return f"{sum(r['closed'] for r in rs)}/{len(rs)}"
+
+    epic_index = []
+    for e in sorted(epics, key=lambda e: e["ref"]):
+        d = api(f"/epics/{e['id']}", token)[0]
+        rs = [r for r in rows if e["id"] in r["epics"]]
+        url = us_url.replace("/us/", "/epic/") + str(e["ref"])
+        epic_index.append(f"| [[epicas/{epic_note[e['id']]}\\|EP-{e['ref']}]] {clean_subject(e['subject'])} | "
+                          f"{status(e)} | {progress(rs)} |")
+        lines = [
+            "---",
+            "tags: [tpi, g10, taiga, epica]",
+            f"ref: {e['ref']}",
+            f"estado: {yaml_str(status(e))}",
+            f"responsable: {yaml_str(who(e))}",
+            f"avance: {yaml_str(progress(rs))}",
+            f"url: {url}",
+            "---",
+            "",
+            f"# EP-{e['ref']}: {clean_subject(e['subject'])}",
+            "",
+            f"> [!info] Generado desde Taiga ({datetime.now():%Y-%m-%d %H:%M}). No editar a mano: correr `scripts/taiga_sync.py`.",
+            f"> [Abrir en Taiga]({url}) · Estado: **{status(e)}** · Responsable: **{who(e)}** · HU cerradas: **{progress(rs)}**",
+            "",
+            d.get("description") or "_Sin descripción en Taiga._",
+            "",
+            "## Historias",
+            "",
+        ]
+        lines += hu_table(rs) if rs else ["_Sin historias de G10._"]
+        (OUT / "epicas" / f"{epic_note[e['id']]}.md").write_text("\n".join(lines) + "\n")
+
     by_status = {}
     for r in rows:
-        by_status[r[3]] = by_status.get(r[3], 0) + 1
+        by_status[r["status"]] = by_status.get(r["status"], 0) + 1
     out = [
         "---", "tags: [tpi, g10, taiga]", f"actualizado: {datetime.now():%Y-%m-%d %H:%M}", "---", "",
         "# Taiga G10", "",
         f"> [!info] Generado el {datetime.now():%Y-%m-%d %H:%M} con `scripts/taiga_sync.py`. No editar a mano.", "",
-        "**Por estado:** " + " · ".join(f"{k}: {v}" for k, v in sorted(by_status.items())), "",
+        "Jerarquía: **épica** (`epicas/`) → **historias** (`historias/`) → **tareas** (dentro de cada historia).", "",
+        "**Historias por estado:** " + " · ".join(f"{k}: {v}" for k, v in sorted(by_status.items())), "",
         "## Épicas", "",
-    ]
-    out += [f"- [{e['ref']}]({us_url.replace('/us/', '/epic/')}{e['ref']}) {e['subject']}"
-            for e in sorted(epics, key=lambda e: e["ref"])]
-    for epic in sorted({r[0] for r in rows}):
-        out += ["", f"## {epic}", "", "| HU | Estado | Responsable | Sprint |", "|---|---|---|---|"]
-        out += [f"| [[historias/{r[2]}\\|{r[1]}]] {r[2][len(r[1]) + 1:]} | {r[3]} | {r[4]} | {r[5]} |"
-                for r in rows if r[0] == epic]
+        "| Épica | Estado | HU cerradas |", "|---|---|---|",
+    ] + epic_index
+    orphans = [r for r in rows if not r["epics"]]
+    if orphans:
+        out += ["", "## Historias sin épica", "", "> [!warning] Entran por el tag `g10`. Conviene asignarles una épica en Taiga.", ""]
+        out += hu_table(orphans)
     out += ["", "## Por responsable", ""]
-    for person in sorted({r[4] for r in rows}):
-        out.append(f"- **{person}**: " + ", ".join(f"[[historias/{r[2]}|{r[1]}]] ({r[3]})"
-                                                   for r in rows if r[4] == person))
+    for person in sorted({r["who"] for r in rows}):
+        out.append(f"- **{person}**: " + ", ".join(f"[[historias/{r['name']}|{r['code']}]] ({r['status']})"
+                                                   for r in rows if r["who"] == person))
     (OUT / "README.md").write_text("\n".join(out) + "\n")
-    print(f"OK: {len(epics)} épicas, {len(rows)} historias → {OUT}")
+    print(f"OK: {len(epics)} épicas, {len(rows)} historias, {len(orphans)} sin épica → {OUT}")
 
 
 if __name__ == "__main__":

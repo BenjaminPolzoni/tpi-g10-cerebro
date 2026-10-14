@@ -4,15 +4,16 @@ codigo: HT-11
 ref: 7048
 estado: "Done"
 responsable: "Sin asignar"
-epica: "Sin épica"
+epicas: "Sin épica"
 sprint: "G10 - Sprint 2"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7048
 ---
 
 # HT-11: Adaptar el consumo del evento de cierre del Motor al nuevo contrato (producer y camelCase)
 
-> [!info] Generado desde Taiga (2026-10-14 18:47). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7048) · Estado: **Done** · Responsable: **Sin asignar** · Sprint: **G10 - Sprint 2**
+> Épica: Sin épica · Tareas cerradas: **3/3**
 
 **Como** equipo de Roadmap (G10)
 **quiero** que el listener del evento de cierre del Motor (G09) lea el contrato vigente

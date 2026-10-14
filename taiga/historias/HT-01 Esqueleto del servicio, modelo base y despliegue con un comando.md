@@ -4,15 +4,16 @@ codigo: HT-01
 ref: 552
 estado: "Done"
 responsable: "Lautaro Jesus Diego"
-epica: "[G10] — Esqueleto del servicio Roadmap — TRANSVERSAL (v3)"
+epicas: "[[epicas/EP-144 Esqueleto del servicio Roadmap — TRANSVERSAL (v3)|EP-144]]"
 sprint: "G10 - Sprint 1"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/552
 ---
 
 # HT-01: Esqueleto del servicio, modelo base y despliegue con un comando
 
-> [!info] Generado desde Taiga (2026-10-14 18:46). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:43). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/552) · Estado: **Done** · Responsable: **Lautaro Jesus Diego** · Sprint: **G10 - Sprint 1**
+> Épica: [[epicas/EP-144 Esqueleto del servicio Roadmap — TRANSVERSAL (v3)|EP-144]] · Tareas cerradas: **17/17**
 
 [G10] — HT-01 — Esqueleto del servicio, modelo base y despliegue con un comando
 -------------------------------------------------------------------------------

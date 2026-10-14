@@ -4,15 +4,16 @@ codigo: HU-42
 ref: 4248
 estado: "Done"
 responsable: "Fenoglio Santino"
-epica: "[G10] — Nodos de contenido y lectura previa"
+epicas: "[[epicas/EP-593 Nodos de contenido y lectura previa|EP-593]]"
 sprint: "G10 - Sprint 2"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4248
 ---
 
 # HU-42: Abrir y leer el material de un nodo de lectura desde el roadmap
 
-> [!info] Generado desde Taiga (2026-10-14 18:47). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4248) · Estado: **Done** · Responsable: **Fenoglio Santino** · Sprint: **G10 - Sprint 2**
+> Épica: [[epicas/EP-593 Nodos de contenido y lectura previa|EP-593]] · Tareas cerradas: **5/5**
 
 [G10] — HU-42 — Abrir y leer el material de un nodo de lectura desde el roadmap
 ------------------------------------------------------------------------------

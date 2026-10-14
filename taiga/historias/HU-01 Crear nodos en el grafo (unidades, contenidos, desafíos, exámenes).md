@@ -4,15 +4,16 @@ codigo: HU-01
 ref: 76
 estado: "Done"
 responsable: "Mateo Delgado Costa"
-epica: "[G10] — Estructura del roadmap como grafo de nodos"
+epicas: "[[epicas/EP-56 Estructura del roadmap como grafo de nodos|EP-56]]"
 sprint: "G10 - Sprint 1"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/76
 ---
 
 # HU-01: Crear nodos en el grafo (unidades, contenidos, desafíos, exámenes)
 
-> [!info] Generado desde Taiga (2026-10-14 18:46). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:43). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/76) · Estado: **Done** · Responsable: **Mateo Delgado Costa** · Sprint: **G10 - Sprint 1**
+> Épica: [[epicas/EP-56 Estructura del roadmap como grafo de nodos|EP-56]] · Tareas cerradas: **8/8**
 
 [G10] — HU-01 — Crear nodos en el grafo (unidades, contenidos, desafíos, exámenes)
 ----------------------------------------------------------------------------------

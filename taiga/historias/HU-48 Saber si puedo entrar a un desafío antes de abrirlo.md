@@ -4,15 +4,16 @@ codigo: HU-48
 ref: 7206
 estado: "Done"
 responsable: "Mateo Delgado Costa"
-epica: "[G10] — Progreso y desbloqueo"
+epicas: "[[epicas/EP-60 Progreso y desbloqueo|EP-60]]"
 sprint: "Backlog"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7206
 ---
 
 # HU-48: Saber si puedo entrar a un desafío antes de abrirlo
 
-> [!info] Generado desde Taiga (2026-10-14 18:47). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7206) · Estado: **Done** · Responsable: **Mateo Delgado Costa** · Sprint: **Backlog**
+> Épica: [[epicas/EP-60 Progreso y desbloqueo|EP-60]] · Tareas cerradas: **4/8**
 
 [G10] — HU-48 — Saber si puedo entrar a un desafío antes de abrirlo
 -------------------------------------------------------------------

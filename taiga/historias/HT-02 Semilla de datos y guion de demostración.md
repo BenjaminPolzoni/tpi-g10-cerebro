@@ -4,15 +4,16 @@ codigo: HT-02
 ref: 555
 estado: "Done"
 responsable: "Stefano Zoffoli"
-epica: "[G10] — Esqueleto del servicio Roadmap — TRANSVERSAL (v3)"
+epicas: "[[epicas/EP-144 Esqueleto del servicio Roadmap — TRANSVERSAL (v3)|EP-144]]"
 sprint: "G10 - Sprint 1"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/555
 ---
 
 # HT-02: Semilla de datos y guion de demostración
 
-> [!info] Generado desde Taiga (2026-10-14 18:46). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:43). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/555) · Estado: **Done** · Responsable: **Stefano Zoffoli** · Sprint: **G10 - Sprint 1**
+> Épica: [[epicas/EP-144 Esqueleto del servicio Roadmap — TRANSVERSAL (v3)|EP-144]] · Tareas cerradas: **2/2**
 
 [G10] — HT-02 — Semilla de datos y guion de demostración
 --------------------------------------------------------

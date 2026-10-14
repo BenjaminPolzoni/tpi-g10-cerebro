@@ -4,15 +4,16 @@ codigo: HU-45
 ref: 5374
 estado: "New"
 responsable: "Lorenzo Araujo"
-epica: "[G10] — Roadmap por grupo de la cohorte"
+epicas: "[[epicas/EP-5371 Roadmap por grupo de la cohorte|EP-5371]]"
 sprint: "G10 - Sprint 2"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/5374
 ---
 
 # HU-45: Ranking de la cohorte y avance por comisión
 
-> [!info] Generado desde Taiga (2026-10-14 18:47). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/5374) · Estado: **New** · Responsable: **Lorenzo Araujo** · Sprint: **G10 - Sprint 2**
+> Épica: [[epicas/EP-5371 Roadmap por grupo de la cohorte|EP-5371]] · Tareas cerradas: **5/6**
 
 [G10] — HU-45 — Ranking y avance por comisión
 ---------------------------------------------

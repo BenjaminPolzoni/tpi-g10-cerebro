@@ -4,15 +4,16 @@ codigo: HU-16
 ref: 4237
 estado: "Done"
 responsable: "Lautaro Jesus Diego"
-epica: "[G10] — Progreso y desbloqueo"
+epicas: "[[epicas/EP-60 Progreso y desbloqueo|EP-60]]"
 sprint: "G10 - Sprint 2"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4237
 ---
 
 # HU-16: Integración real con Inventario para las vidas del gate
 
-> [!info] Generado desde Taiga (2026-10-14 18:47). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4237) · Estado: **Done** · Responsable: **Lautaro Jesus Diego** · Sprint: **G10 - Sprint 2**
+> Épica: [[epicas/EP-60 Progreso y desbloqueo|EP-60]] · Tareas cerradas: **5/5**
 
 [G10] — HU-16 — Integración real con Inventario para las vidas del gate
 -----------------------------------------------------------------------

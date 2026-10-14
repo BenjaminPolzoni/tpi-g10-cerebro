@@ -4,15 +4,16 @@ codigo: HU-41
 ref: 4247
 estado: "Done"
 responsable: "Stefano Zoffoli"
-epica: "[G10] — Edición del roadmap por el profesor"
+epicas: "[[epicas/EP-4232 Edición del roadmap por el profesor|EP-4232]]"
 sprint: "G10 - Sprint 2"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4247
 ---
 
 # HU-41: Editar un nodo del roadmap de forma individual
 
-> [!info] Generado desde Taiga (2026-10-14 18:47). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4247) · Estado: **Done** · Responsable: **Stefano Zoffoli** · Sprint: **G10 - Sprint 2**
+> Épica: [[epicas/EP-4232 Edición del roadmap por el profesor|EP-4232]] · Tareas cerradas: **6/6**
 
 [G10] — HU-41 — Editar un nodo del roadmap de forma individual
 --------------------------------------------------------------
