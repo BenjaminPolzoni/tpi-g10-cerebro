@@ -26,7 +26,7 @@ estado: vigente
 > 1. **La BD de grafos ahora la piden los profes.** Responde la pregunta 7 de [[03-requerimientos-profes]]. La opción C (Neo4j) de [[04-base-de-grafos]] pasa de "si los profes la piden" a **decisión del sprint**.
 > 2. **Las relaciones pasan a tener tipo** (4 niveles, con nombre visible y configurables). Ya no son solo "prerrequisito AND/OR". Esto refuerza Neo4j: las relaciones con tipo y propiedades son su punto fuerte.
 > 3. **Nodos de inicio y fin obligatorios.** Es una regla nueva del grafo, que se valida al guardar.
-> 4. **"El mapa *es* el curso."** Puede chocar con "un curso con N roadmaps". Ver [[#Preguntas nuevas para los profes]].
+> 4. **"El mapa *es* el curso."** Puede chocar con "un curso con N roadmaps". Ver P1 en [[08-dudas]].
 
 ## 1. Lo que es nuestro
 
@@ -95,7 +95,7 @@ Están fuera del alcance de G10. Igual hay que tenerlos presentes porque nos toc
 
 ## Preguntas nuevas para los profes
 
-> [!question] Sumar a las preguntas de [[03-requerimientos-profes]]
+> [!question] Sumadas a [[08-dudas]] (P1, P4, P9, P10 y P11)
 > 1. **"El mapa es el curso"** contra **"un curso puede tener 1 o más roadmaps"**: ¿cómo conviven? ¿Cada roadmap es un mapa distinto del mismo curso, o el curso es un único mapa y lo de los N roadmaps queda descartado?
 > 2. **¿Cuáles son los 4 tipos de relación?** El documento menciona "Related to", "Belongs to" y "una necesita de otra". ¿Cuál es el cuarto? ¿Alguno además de "necesita" afecta el desbloqueo?
 > 3. **Examen por hora**: ¿la ventana horaria la define el profesor en el roadmap, o la publica Courses (HU-49)?

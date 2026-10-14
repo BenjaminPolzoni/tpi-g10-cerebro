@@ -26,6 +26,7 @@ estado: borrador
 | 05 | [UI-KIT](05-ui-kit.md) | Adopción de la librería de componentes en el front: qué falta, qué reemplazar en el roadmap y huecos del kit |
 | 06 | [Backlog Sprint 3](06-backlog-sprint-3.md) | Épicas, HU e HT propuestas, con esfuerzo, dependencias, orden y riesgos |
 | 07 | [Correcciones de los profes](07-correcciones-profes.md) | Lo que pidieron corregir, cruzado con lo ya planteado (✅/⚠️/🆕), qué no es nuestro y preguntas nuevas |
+| 08 | [Dudas del sprint](08-dudas.md) | Todas las dudas abiertas: para los profes, para otros grupos y del equipo, con prioridad y qué frenan |
 
 ## Mapa de la propuesta
 
@@ -37,6 +38,11 @@ flowchart LR
   C --> E[05 UI-KIT]
   D --> F
   E --> F
+  G[07 Correcciones] --> D
+  G --> F
+  C --> H[08 Dudas]
+  G --> H
+  H --> F
 ```
 
 ## TL;DR
@@ -65,9 +71,12 @@ flowchart LR
 
 ## Decisiones pendientes
 
-> [!question] A responder por los profes o el PO
+> [!question] Ver [[08-dudas]]
+> Están todas ahí, con prioridad y qué frenan. Las 🔴 (antes de arrancar el modelo):
+> - **P1** "El mapa es el curso" contra N roadmaps por curso.
+> - **P2** XP, vidas, nivel y ranking: por curso o por roadmap.
+> - **P3** Cómo se mapean las secciones de Courses con N roadmaps.
+> - **P4** Cuáles son los 4 tipos de relación.
+> - **G1** Quién suma Neo4j a la plataforma.
 >
-> Ver las preguntas de [[03-requerimientos-profes#Preguntas abiertas para los profesores o el PO (cambian el diseño)|03]]. Las críticas son:
-> - **XP por curso o por roadmap.**
-> - **Cómo se mapean las secciones de Courses con N roadmaps.**
-> - **Si Neo4j es requisito de la materia.**
+> Ya respondida: Neo4j es pedido de los profes ([[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap|DEC-016]]).

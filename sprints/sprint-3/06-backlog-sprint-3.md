@@ -87,21 +87,34 @@ flowchart LR
   HT2 --> HT11[11 Contratos G01/Motor]
   H5 --> HT12[12 Gate con reglas]
   H6 --> HT12
+  HT3 --> C1[C1 Inicio y fin]
+  HT3 --> C2[C2 Tipos de relación]
+  H9 --> C3[C3 Editor como mapa]
+  C1 --> C8[C8 Seed demo]
+  C2 --> C8
+  C4[C4 Examen por hora] --> C8
+  G06[Catálogo de permisos G06] --> C9[C9 Permisos]
 ```
+
+Las correcciones sin dependencias (C5 lista de nodos, C6 ranking, C7 Archibaldo, C10 documentación, C11 acuerdo con G06) se pueden tomar desde la semana 1 por quien no esté en el modelo.
 
 1. **Semana 1**:
    - Bloque 0 (deuda).
    - Spike 1.
-   - Respuestas de los profes a las preguntas de [03](03-requerimientos-profes.md).
+   - Respuestas de los profes: las 🔴 de [[08-dudas]] (P1 a P4) antes de arrancar los ítems 2 y 3.
    - Acordar con G01 el contrato de secciones para el modelo 1:N.
+   - Correcciones independientes: C5, C6 (reproducir el error), C7, C10 y C11 (acuerdo con G06).
 2. **Semana 2**:
    - HT 2 y 3 (modelo y almacenamiento).
    - En paralelo, el front arranca la UI-KIT (10) y la vista de grafo (9) sobre un mock del endpoint `/graph`.
-3. **Cierre**: HU 4 a 8 y 12 integradas, y demo con 2 roadmaps en un curso.
+   - C1 y C2 sobre el módulo `graph`; C4 si P9 ya está respondida; C9 si G06 ya pasó el catálogo.
+3. **Cierre**: HU 4 a 8 y 12 integradas, C3 y C8 (seed curado), y demo con un curso completo de inicio a fin (con 2 roadmaps si P1 lo confirma).
 
 ## Riesgos del sprint
 
 > [!danger] Riesgos
 > - **Alcance.** La épica nueva es grande. Si además se elige Neo4j, es el cambio más grande del proyecto hasta ahora. Conviene acordar con los profes un mínimo para la demo.
 > - **Dependencias externas**: G01 (contrato de secciones, HU-49) y la plataforma (infra de Neo4j).
+> - **Contradicción abierta.** "El mapa es el curso" puede descartar los N roadmaps (P1 en [[08-dudas]]). Si se descarta, los ítems 2, 4, 8 y 11 se caen o se achican.
+> - **Correcciones.** Suman 11 ítems (C1–C11) a una épica que ya era grande. C9 depende de G06 y C8 depende de casi todo: van al final.
 > - **Regresiones.** Cambiar `/courses/{id}` por `/roadmaps/{id}` toca casi todo el front y el back. Mantener compatibilidad mientras se migra.

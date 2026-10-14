@@ -64,6 +64,7 @@ flowchart LR
 ## Preguntas abiertas para los profesores o el PO (cambian el diseño)
 
 > [!question] Estas respuestas cambian el diseño: conseguirlas en la semana 1.
+> El seguimiento (respuestas y qué frenan) está en [[08-dudas]].
 > 1. **XP, vidas, nivel y ranking**: ¿son **por curso** (compartidos entre roadmaps) o **por roadmap**?
 > 2. **Secciones de Courses**: hoy cada sección del roadmap se sincroniza con una sección de Courses (HU-36, `course_section_id`). Con varios roadmaps, ¿cada roadmap elige qué secciones de Courses usa? ¿O las secciones pasan a ser propias del roadmap?
 > 3. ¿El alumno ve **todos** los roadmaps del curso, o se asignan **por comisión** (HU-44)?
