@@ -41,5 +41,20 @@ python3 scripts/taiga_sync.py
 - Reescribe todo `taiga/`. Después hay que commitear y subir los cambios (o dejar que Obsidian Git lo haga).
 - Una HU entra si pertenece a una **épica de G10** o tiene el **tag `g10` / `[g10]`**. Si una HU nueva no aparece, agregarle el tag en Taiga.
 
+### Qué trae y cómo se organiza
+
+Respeta la jerarquía de Taiga: **épica → historias → tareas**.
+
+| Nivel | Dónde queda | Qué trae |
+|---|---|---|
+| Épica | `taiga/epicas/EP-<ref> ….md` | Estado, responsable, descripción completa (objetivo, supuestos, criterios a nivel épico) y tabla de sus HU con avance |
+| Historia (HU / HT) | `taiga/historias/<código> ….md` | Estado, responsable, sprint, link a su(s) épica(s), descripción con criterios de aceptación y avance de tareas |
+| Tarea | Dentro de la nota de su historia | Checklist con número, estado y responsable. No tienen nota propia |
+| Índice | `taiga/README.md` | Épicas con HU cerradas, historias sin épica y quién tiene qué |
+
+- Una HU que cuelga de varias épicas aparece en todas.
+- Las épicas que no tienen HU de G10 (las "FUERA DE ALCANCE", Avatares, Racha) igual tienen nota, con "Sin historias de G10".
+- No trae: comentarios, adjuntos, historial de cambios ni issues de Taiga.
+
 > [!danger] Credenciales
 > El `.env` está en `.gitignore`. Nunca commitear usuarios, contraseñas ni tokens.

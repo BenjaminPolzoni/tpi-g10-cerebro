@@ -65,6 +65,9 @@ estado: vigente
 | E6 | 🟢 | `KAFKA_TOPIC_ROADMAP`: en `develop` el default es `roadmap.events`. ¿El compose de cada entorno lo pisa con otro valor? | Revisar `tpi-system-compose` | — | [[acuerdos/notificaciones-bus]] | |
 | E7 | 🟢 | `TraceIdFilter` figura en `08-comunicacion-gateway.md` pero no está en `develop`. ¿Se borró a propósito? ¿El MDC de `logback-spring.xml` sigue vigente? | Revisar el historial de git del back | C10 | [[acuerdos/plataforma-gateway-kafka]] | |
 | E8 | 🟢 | Accounting publica `LIVES_EXHAUSTED` / `LIVES_AVAILABLE` y no tenemos consumidor. ¿Hace falta? | Revisar contra el Gate (hoy lee vidas por REST) | — | [[acuerdos/accounting]] | |
+| E10 | 🟢 | **Épicas desactualizadas en Taiga**: 15 de 17 épicas siguen en *New* aunque todas sus HU estén Done (solo EP-60 está Done). ¿Las cerramos o quedan abiertas hasta el Sprint 3? | Actualizarlas en Taiga junto con HT-11 | Bloque 0 | [[taiga/README\|Taiga]] | |
+| E11 | 🟢 | **HU sin épica**: HT-04, HT-10 y HT-11 entran solo por el tag `g10`, y HT-05 no tiene ni épica ni tag (no aparece). ¿Qué épica les corresponde? (HT-10 → EP-5371 y HT-11 → EP-60 parecen naturales) | Asignarlas en Taiga | — | [[taiga/README\|Taiga]] | |
+| E12 | 🟢 | **Épicas sin HU de G10**: EP-72 Avatares y EP-592 Racha no tienen historias (las otras tres vacías están marcadas FUERA DE ALCANCE). ¿Se descartan o entran en el Sprint 3? | Decidir en la reunión del equipo | — | [[taiga/README\|Taiga]] | |
 | E9 | 🟢 | `ParUnavailableException`: ¿qué casos de uso la propagan con Backoffice caído (ej. el nivel del alumno)? | Revisar el código y documentarlo | — | [[acuerdos/backoffice]] | |
 
 ## Respondidas
