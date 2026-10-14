@@ -12,8 +12,11 @@ git clone https://github.com/BenjaminPolzoni/tpi-g10-cerebro.git
 
 1. Abrir Obsidian → *Open folder as vault* → elegir la carpeta `tpi-g10-cerebro`.
 2. Cuando pregunte, **confiar en el vault** (habilita los plugins).
-3. *Settings → Community plugins → Browse* → instalar **Obsidian Git** y activarlo.
-   La configuración ya viene en el repo: trae cambios al abrir y cada 5 minutos, y guarda y sube los tuyos cada 5 minutos.
+3. El plugin **Obsidian Git** ya viene instalado en el repo. Si Obsidian muestra "Restricted mode", ir a *Settings → Community plugins → Turn on community plugins* y verificar que **Git** esté activado.
+   La configuración también viene en el repo: trae cambios al abrir y cada 5 minutos, y guarda y sube los tuyos cada 5 minutos.
+
+> [!warning] Abrir el vault correcto
+> Los comandos `Obsidian Git: ...` solo aparecen con **este** vault abierto. Si tenés otro vault, cambiá desde el ícono de vaults (abajo a la izquierda) → *Open folder as vault*.
 
 > [!tip] Sin Obsidian
 > Son archivos Markdown: se pueden leer y editar desde GitHub o cualquier editor. Los diagramas Mermaid y las cajas de aviso se ven en GitHub también.
