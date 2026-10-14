@@ -25,6 +25,7 @@ estado: borrador
 | 04 | [Base de grafos](04-base-de-grafos.md) | Neo4j vs Postgres extendido vs Apache AGE: ventajas, desventajas, riesgos, recomendación y diseño si se elige Neo4j |
 | 05 | [UI-KIT](05-ui-kit.md) | Adopción de la librería de componentes en el front: qué falta, qué reemplazar en el roadmap y huecos del kit |
 | 06 | [Backlog Sprint 3](06-backlog-sprint-3.md) | Épicas, HU e HT propuestas, con esfuerzo, dependencias, orden y riesgos |
+| 07 | [Correcciones de los profes](07-correcciones-profes.md) | Lo que pidieron corregir, cruzado con lo ya planteado (✅/⚠️/🆕), qué no es nuestro y preguntas nuevas |
 
 ## Mapa de la propuesta
 
@@ -56,7 +57,8 @@ flowchart LR
    - La vista visual la hace el front igual, con cualquier BD.
    - Si se elige, va como **módulo dentro de roadmap-service**, y el estado del alumno se queda en Postgres.
    - Alternativas de menor riesgo: Postgres + `jsonb`, o Apache AGE.
-4. **UI-KIT**:
+4. **Correcciones de los profes** ([07](07-correcciones-profes.md)): piden **Neo4j** (queda decidido), nodos de **inicio y fin obligatorios**, **relaciones con tipo** (4 niveles), examen por hora, ranking por curso por defecto, mejoras en Archibaldo, seed de demo y **permisos en vez de roles**. De 17 puntos, 1 ya estaba planteado, 7 en parte y 9 son nuevos.
+5. **UI-KIT**:
    - El front ya la usa en gran parte, pero está en 0.7.1 (la última es 0.8.0, que destraba 9 TODOs).
    - El roadmap tiene adopción baja de tokens: 316 colores hardcodeados y un puente de tokens propio.
    - Al kit le falta un **componente de grafo**, que es la base de la nueva vista de nodos.

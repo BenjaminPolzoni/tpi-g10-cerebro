@@ -1,12 +1,12 @@
 ---
 tags: [tpi, g10, acuerdo, users, identidad, ranking]
 fecha: 2026-09-26
-grupos: [G10, Gxx]  # Users = Tema 01 (Identidad y Usuarios); número de grupo no aparece en los docs (verificar)
+grupos: [G10, G07]  # Users = Tema 01; G07 según las correcciones de los profes y Taiga ("[G07] - Users-service")
 estado: vigente
 contrato: "tpi-roadmap/docs/contracts/reporte-users-contratos-y-endpoints.md"
 ---
 
-# Acuerdo con Users (Tema 01, Gxx verificar): perfiles para el ranking, roles y tokens de servicio
+# Acuerdo con Users (Tema 01, G07): perfiles para el ranking, roles y tokens de servicio
 
 > [!info] Fuentes
 > - `tpi-roadmap/docs/contracts/reporte-users-contratos-y-endpoints.md` ([GitHub](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/reporte-users-contratos-y-endpoints.md)): reporte de contratos de `users-service` (fuente `tpi-users` @ `9f2f976`, 2026-09-23; `ProfileResponse` actualizado contra `develop` `753e5a5`, 2026-10-10).
@@ -23,7 +23,7 @@ contrato: "tpi-roadmap/docs/contracts/reporte-users-contratos-y-endpoints.md"
 
 ## Quién lo acordó
 - G10: equipo Roadmap.
-- Otro grupo: equipo Users/Identity (Tema 01), Gxx (verificar). Los scopes se tramitan con issues de onboarding en `tpi-users` y `tpi-system-compose` (`registry/services.yml`).
+- Otro grupo: equipo Users/Identity (Tema 01), G07. Los scopes se tramitan con issues de onboarding en `tpi-users` y `tpi-system-compose` (`registry/services.yml`).
 
 ## Contrato técnico
 

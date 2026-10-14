@@ -32,7 +32,8 @@ flowchart LR
 
 - [[sprints/sprint-3/02-pendientes|Pendientes del Sprint 2]]: historias en Done que no lo están.
 - [[sprints/sprint-3/03-requerimientos-profes#Preguntas abiertas para los profesores o el PO (cambian el diseño)|Preguntas para los profes]].
-- [[sprints/sprint-3/04-base-de-grafos|Decisión: Neo4j o alternativas]].
+- [[sprints/sprint-3/07-correcciones-profes|Correcciones de los profes]]: qué piden y qué ya estaba planteado.
+- [[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap|DEC-016: Neo4j para la estructura del roadmap]].
 
 ## Reglas del cerebro
 

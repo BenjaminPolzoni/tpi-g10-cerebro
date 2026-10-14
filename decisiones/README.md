@@ -27,6 +27,7 @@ Registro de decisiones **ya tomadas** que se deducen del código, los contratos 
 | DEC-013 | Roadmap no calcula XP: aplica el delta del Motor en un ledger idempotente | 2026-09-27 | aceptada | [[decisiones/DEC-013-roadmap-no-calcula-xp-ledger-idempotente\|DEC-013]] |
 | DEC-014 | Comisiones: un roadmap por cohorte, pertenencia múltiple y evaluación en Roadmap | 2026-10-08 | aceptada | [[decisiones/DEC-014-comisiones-modelo-b-evaluacion-en-roadmap\|DEC-014]] |
 | DEC-015 | Un 4xx de Accounting no es una indisponibilidad | 2026-10-13 | aceptada | [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad\|DEC-015]] |
+| DEC-016 | Neo4j para la estructura del roadmap (pedido de los profes) | 2026-10-14 | aceptada | [[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap\|DEC-016]] |
 
 ## Decisiones que conviene revisar pronto
 > [!warning] Con deuda abierta
@@ -34,3 +35,4 @@ Registro de decisiones **ya tomadas** que se deducen del código, los contratos 
 > - [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad\|DEC-015]]: la rama `fix/account-not-found-gate` sigue sin mergear junto a #193.
 > - [[decisiones/DEC-001-wire-kafka-v8-snake-case\|DEC-001]]: falta confirmar que los consumidores de `roadmap.events` leen v8.
 > - [[decisiones/DEC-006-insignias-sistema-y-curso\|DEC-006]] y [[decisiones/DEC-012-curva-de-niveles-desde-par-09\|DEC-012]]: confirmar qué curva PAR-09 está activa (600/1800/4200 vs la de ejemplo de Backoffice).
+> - [[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap\|DEC-016]]: falta validar la infra de Neo4j con la plataforma y definir el cuarto tipo de relación.

@@ -72,6 +72,10 @@ flowchart LR
 > 6. ¿Qué significa "completamente personalizable"? ¿Campos libres definidos por el profesor, tipos de nodo nuevos, o solo nombre, ícono, descripción y reglas?
 > 7. ¿Exigen **Neo4j** (u otra BD de grafos) como requisito de la materia, o es una decisión nuestra?
 
+> [!success] Respondidas por las correcciones (2026-10-14)
+> - **Pregunta 7:** sí, los profes piden una BD de grafos (Neo4j). Ver [[07-correcciones-profes]].
+> - Aparecen preguntas nuevas (mapa = curso, 4 tipos de relación, examen por hora): [[07-correcciones-profes#Preguntas nuevas para los profes]].
+
 ## Impacto en otros grupos
 
 - **Courses (G01)**: si un curso tiene N roadmaps, se acuerda de nuevo el contrato de secciones (HT-07, HU-36) y el de restricciones (HU-49).

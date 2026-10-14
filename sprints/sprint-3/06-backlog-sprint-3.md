@@ -32,7 +32,7 @@ Detalle en [02-pendientes.md](02-pendientes.md).
 
 | # | Tipo | Título | Capa | Esfuerzo | Depende de |
 |---|---|---|---|---|---|
-| 1 | Spike | Decidir el almacenamiento del grafo: Postgres, AGE o Neo4j (ver [04](04-base-de-grafos.md)) y validar la infra con la plataforma | Back + Infra | S | Respuesta de los profes (pregunta 7) |
+| 1 | Spike | ~~Decidir el almacenamiento~~ **Neo4j, decidido por los profes** ([07](07-correcciones-profes.md)). Validar la infra con la plataforma y modelar los tipos de relación | Back + Infra | S | — |
 | 2 | HT | Modelo 1:N curso → roadmaps: quitar el UNIQUE, agregar `roadmap_id` en las rutas, compatibilidad con `/courses/{id}` mientras migra el front | Back | L | 1 |
 | 3 | HT | (Si se elige Neo4j) módulo `graph`, esquema, migración inicial de datos y caché de reglas para el gate | Back | L | 1 |
 | 4 | HU | Como GESTOR o PROFESOR quiero habilitar varios roadmaps en un curso y crearlos, renombrarlos y archivarlos | Back + Front | M | 2 |
@@ -44,6 +44,24 @@ Detalle en [02-pendientes.md](02-pendientes.md).
 | 10 | HU | Como PROFESOR quiero la vista tipo Moodle refactorizada con la UI-KIT, sincronizada con la vista de grafo | Front | L | [05](05-ui-kit.md) |
 | 11 | HT | Adaptar los contratos con Courses (secciones y restricciones) y con el Motor al modelo 1:N | Back | M | 2, pregunta 2 |
 | 12 | HT | Gate y progreso evaluando reglas combinadas + XP mínimo (tests BDD) | Back | M | 5, 6 |
+
+## Épica: correcciones de los profes (2026-10-14)
+
+Detalle y estado de cada punto en [07-correcciones-profes.md](07-correcciones-profes.md).
+
+| # | Tipo | Título | Capa | Esfuerzo | Depende de |
+|---|---|---|---|---|---|
+| C1 | HU | Como PROFESOR quiero que el roadmap tenga siempre un nodo de inicio ("Bienvenidos") y uno final ("Felicitaciones"), y que no se pueda guardar sin ellos | Back + Front | M | 3 |
+| C2 | HU | Como PROFESOR quiero relacionar nodos y unidades con tipos de relación (4 niveles), ver su nombre y elegir cuáles se muestran | Back + Front | L | 3, pregunta 2 de [07] |
+| C3 | HU | Como PROFESOR quiero arrastrar nodos y crear relaciones arrastrando en el editor, y que el curso se vea como un mapa | Front | L | 9, pregunta 1 de [07] |
+| C4 | HU | Como PROFESOR quiero habilitar un nodo examen en una ventana horaria | Back + Front | M | pregunta 3 de [07] |
+| C5 | HU | Como PROFESOR quiero ver en la lista de nodos cuáles son obligatorios y de qué dependen | Front | S | — |
+| C6 | Bug | El ranking por grupo da error: reproducir, default por curso, filtro opcional por comisión | Back + Front | M | Flag `ROADMAP_BY_GROUP_ENABLED` |
+| C7 | HU | Como ALUMNO quiero hablar con Archibaldo con Enter, que tenga el aspecto de Hernán y que un destello me guíe por el camino | Front (3D) | M | — |
+| C8 | HT | Seed de la demo con un curso entero, curado y reproducible (usa los usuarios demo de G07) | Back | M | C1, C2, C4 |
+| C9 | HT | Migrar 17 `hasRole`/`hasAnyRole` (y el chequeo manual de `RankingController`) a permisos | Back | M | Catálogo de permisos de G06 |
+| C10 | HT | Documentación global del micro Roadmap | Back / Docs | S | — |
+| C11 | HT | Acordar con G06 los datos que aportamos al dashboard (progreso, ranking, XP) | Back + acuerdo | S | — |
 
 ## Épica transversal: consistencia visual con la UI-KIT
 

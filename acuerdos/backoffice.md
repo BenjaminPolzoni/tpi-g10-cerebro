@@ -1,12 +1,12 @@
 ---
 tags: [tpi, g10, acuerdo, backoffice, tema-12, par, kafka]
 fecha: 2026-09-24
-grupos: [G10, Gxx]  # Backoffice = Tema 12; número de grupo no aparece en los docs (verificar)
+grupos: [G10, G06]  # Backoffice = Tema 12; G06 según las correcciones de los profes y Taiga ("G06 - Parámetros Globales")
 estado: vigente  # REST + evento recibidos; faltan confirmaciones del payload v8
 contrato: "tpi-roadmap/docs/contracts/backoffice-par.md"
 ---
 
-# Acuerdo con Backoffice (Tema 12, Gxx verificar): parámetros PAR y eventos
+# Acuerdo con Backoffice (Tema 12, G06): parámetros PAR y eventos
 
 > [!info] Fuentes
 > - `tpi-roadmap/docs/contracts/backoffice-par.md` ([GitHub](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/backoffice-par.md)): estado vigente del lado de Roadmap.
@@ -29,7 +29,7 @@ contrato: "tpi-roadmap/docs/contracts/backoffice-par.md"
 
 ## Quién lo acordó
 - G10: equipo Roadmap.
-- Otro grupo: equipo Backoffice (Tema 12), Gxx (verificar). Para `roadmap-events-v1.md` la fila de Backoffice en la tabla de firmas está **pendiente**; Roadmap firmó el 2026-10-11 ("schema y endpoint implementados").
+- Otro grupo: equipo Backoffice (Tema 12), G06. Para `roadmap-events-v1.md` la fila de Backoffice en la tabla de firmas está **pendiente**; Roadmap firmó el 2026-10-11 ("schema y endpoint implementados").
 
 ## Contrato técnico
 

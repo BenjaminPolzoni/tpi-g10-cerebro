@@ -82,12 +82,21 @@ Lo que hay hoy en Postgres:
 
 ## Recomendación
 
-> [!tip] Recomendación
+> [!success] Actualización 2026-10-14
+> Los profes pidieron **explícitamente** una BD de grafos (ver [[07-correcciones-profes]]). La decisión queda en **C. Neo4j**. A, B y D quedan como registro de las alternativas evaluadas.
+
+> [!tip] Recomendación (antes de las correcciones)
 > - **Si los profes exigen o valoran explícitamente una BD de grafos → C. Neo4j**, con el diseño de abajo.
 > - **Si es decisión nuestra → A**, más reglas en JSON y la vista nueva en el front. Da el mismo resultado visible para el usuario con mucho menos riesgo.
 > - **B (AGE)** es un punto medio a considerar si la plataforma acepta cambiar la imagen de Postgres.
 
 ## Diseño propuesto si se elige Neo4j
+
+> [!info] Agregados por las correcciones de los profes
+> - **Nodos `START` y `END`** obligatorios por roadmap: exactamente uno de cada uno, todos los nodos alcanzables desde `START` y `END` alcanzable. Se valida al guardar.
+> - **Relaciones con tipo**: catálogo de tipos (`REQUIRES`, `BELONGS_TO`, `RELATED_TO` y un cuarto a definir), cada uno con `label` visible y `visible` configurable. Solo `REQUIRES` (y las `Rule`) afectan el desbloqueo.
+> - **Ventana horaria** en nodos `EXAM`: `availableFrom` / `availableUntil`, evaluada por el gate como `DATE_RESTRICTED`.
+
 
 ```mermaid
 flowchart TB

@@ -19,8 +19,8 @@ fecha: 2026-10-14
 | Motor de Desafíos | G09 | Evento de cierre de intento (`challenges.events`, v8); gate de elegibilidad v1.3; catálogo y pool de desafíos | vigente (gate sin firma nominal) | [[acuerdos/motor-desafios-g09\|Motor de desafíos]] |
 | Accounting | Gxx (Tema 08, verificar) | Vidas, saldo, ítems, vidas perdidas (ranking); eventos `LIFE_*`, `LIVES_*`, `ITEM_EQUIP_*` | vigente (firma nominal pendiente) | [[acuerdos/accounting\|Accounting]] |
 | Inventario | Gxx (verificar) | `equip-summary` para el Gate y la pantalla de inventario; 404 `ACCOUNT_NOT_FOUND` | vigente | [[acuerdos/inventario\|Inventario]] |
-| Backoffice | Gxx (Tema 12, verificar) | Parámetros PAR-01/09/12 (REST) y `GLOBAL_CONFIGURATION_CHANGED`; nosotros publicamos `roadmap.events` | vigente (payload v8 por confirmar) | [[acuerdos/backoffice\|Backoffice]] |
-| Users / Identity | Gxx (Tema 01, verificar) | Perfiles para el ranking del profesor; emisión del token técnico; roles | vigente | [[acuerdos/users\|Users]] |
+| Backoffice | G06 (Tema 12) | Parámetros PAR-01/09/12 (REST) y `GLOBAL_CONFIGURATION_CHANGED`; nosotros publicamos `roadmap.events` | vigente (payload v8 por confirmar) | [[acuerdos/backoffice\|Backoffice]] |
+| Users / Identity | G07 (Tema 01) | Perfiles para el ranking del profesor; emisión del token técnico; roles | vigente | [[acuerdos/users\|Users]] |
 | Notificaciones / bus | G02 | Envelope de 6 campos, topics por dominio, claves, DLT; `roadmap.events` | propuesto (borrador sin acta) | [[acuerdos/notificaciones-bus\|Notificaciones y bus]] |
 | API Gateway, Eureka, Kafka | Gxx (Tema 01 y Tema 11, verificar) | Ruteo `/api/roadmap/**`, identidad propagada, tokens de servicio y scopes, broker | vigente | [[acuerdos/plataforma-gateway-kafka\|Plataforma]] |
 
