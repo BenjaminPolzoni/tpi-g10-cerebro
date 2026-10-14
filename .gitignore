@@ -1,0 +1,6 @@
+.env
+.obsidian/workspace*.json
+.obsidian/cache
+.trash/
+.DS_Store
+__pycache__/

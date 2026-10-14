@@ -1,0 +1,11 @@
+{
+  "autoPullOnBoot": true,
+  "autoPullInterval": 5,
+  "autoSaveInterval": 5,
+  "autoPushInterval": 0,
+  "disablePush": false,
+  "pullBeforePush": true,
+  "commitMessage": "notas: {{date}} ({{numFiles}} archivos)",
+  "autoCommitMessage": "notas: {{date}} ({{numFiles}} archivos)",
+  "syncMethod": "rebase"
+}

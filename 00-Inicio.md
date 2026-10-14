@@ -1,0 +1,45 @@
+---
+tags: [tpi, g10, indice]
+---
+
+# Cerebro G10 — roadmap-service
+
+Todo lo que el grupo necesita saber sin tener que preguntarle a nadie: qué está hecho, qué falta, qué se acordó con otros grupos y por qué se decidió cada cosa.
+
+```mermaid
+flowchart LR
+  T[Taiga] -->|scripts/taiga_sync.py| TG[taiga/]
+  TG --> S[sprints/]
+  A[acuerdos/] --> S
+  D[decisiones/] --> S
+  M[minutas/] --> A
+  M --> D
+```
+
+## Secciones
+
+| Carpeta | Qué hay | Quién la mantiene |
+|---|---|---|
+| [[taiga/README\|taiga/]] | Épicas, historias y tareas de G10, con estado y responsable | **Generada** por `scripts/taiga_sync.py`. No editar a mano |
+| [[sprints/sprint-3/00-indice\|sprints/]] | Planificación y análisis por sprint. Hoy: propuesta del Sprint 3 | El equipo |
+| [[acuerdos/README\|acuerdos/]] | Una nota por grupo o servicio con el que integramos: qué se acordó, contrato, pendientes | El equipo, cada vez que se acuerda algo |
+| [[decisiones/README\|decisiones/]] | Decisiones técnicas (DEC-xxx): contexto, alternativas y consecuencias | El equipo |
+| `minutas/` | Notas de reuniones (daily, profes, otros grupos) | Quien estuvo en la reunión |
+| [[equipo]] | Integrantes, áreas que conoce cada uno | El equipo |
+| `plantillas/` | Plantillas para acuerdo, decisión y minuta | — |
+
+## Lo urgente ahora
+
+- [[sprints/sprint-3/02-pendientes|Pendientes del Sprint 2]]: historias en Done que no lo están.
+- [[sprints/sprint-3/03-requerimientos-profes#Preguntas abiertas para los profesores o el PO (cambian el diseño)|Preguntas para los profes]].
+- [[sprints/sprint-3/04-base-de-grafos|Decisión: Neo4j o alternativas]].
+
+## Reglas del cerebro
+
+1. **Si se acordó algo con otro grupo, va a `acuerdos/`** el mismo día, con link al contrato o al mensaje.
+2. **Si se decidió algo técnico que alguien podría cuestionar después, va a `decisiones/`.**
+3. **Taiga es la fuente de verdad del estado de las HU.** Para actualizar `taiga/`, correr el script. No editar esas notas.
+4. **Los contratos técnicos viven en el repo del back** (`tpi-roadmap/docs/contracts/`). Acá se enlazan y se resumen, no se copian.
+5. Antes de preguntar en el grupo, buscar acá (`Ctrl/Cmd + Shift + F`).
+
+Cómo instalarlo y sincronizarlo: [[COMO-USAR]].
