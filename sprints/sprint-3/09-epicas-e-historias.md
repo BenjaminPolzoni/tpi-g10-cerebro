@@ -20,14 +20,14 @@ estado: borrador
 | Épica | Historias | Puntos |
 |---|---|---|
 | [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2\|Deuda del Sprint 2]] | 9 | 61 |
-| [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable\|Múltiples roadmaps por curso y grafo configurable]] | 12 | 73 |
+| [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable\|Múltiples roadmaps por curso y grafo configurable]] | 11 | 65 |
 | [[sprints/sprint-3/epicas/G10 — Correcciones de los profes\|Correcciones de los profes]] | 7 | 31 |
 | [[sprints/sprint-3/epicas/G10 — Consistencia visual con la UI-KIT\|Consistencia visual con la UI-KIT]] | 2 | 16 |
 
-**Total:** 30 historias (2 a reabrir y 28 nuevas), 181 puntos. Ninguna supera 8 puntos (máximo por historia). El 2026-10-15 los CA pendientes de 10 HU cerradas quedaron en cuatro HT por tema (HT-30 a HT-33) y la UI-KIT en dos (HT-26 pantallas y HT-34 componente de grafo).
+**Total:** 29 historias (2 a reabrir y 27 nuevas), 173 puntos. Ninguna supera 8 puntos (máximo por historia). El 2026-10-15 los CA pendientes de 10 HU cerradas quedaron en cuatro HT por tema (HT-30 a HT-33) y la UI-KIT en dos (HT-26 pantallas y HT-34 componente de grafo).
 
 > [!note] Revisión del 2026-10-15
-> Aplicada la revisión de HU: HU-60 eliminada (su validación pasó a HT-18), HU-66 fusionada en HU-62 y HU-63, HU-67 fusionada en HU-49, HU-63 creada, solapamientos resueltos (reglas en HU-59, XP mínimo en HU-58, oculto/bloqueado en HU-49, comisión en HT-33), permisos unificados y prioridades corregidas (HU-49 y HU-59 a Must, HU-72 a Should).
+> Aplicada la revisión de HU: HU-60 eliminada (su validación pasó a HT-18), HU-66 fusionada en HU-62, HU-67 fusionada en HU-49, HU-63 descartada (la vista tipo Moodle ya no existe: la edición en lista está en «Contenido del curso» de Courses), solapamientos resueltos (reglas en HU-59, XP mínimo en HU-58, oculto/bloqueado en HU-49, comisión en HT-33), permisos unificados y prioridades corregidas (HU-49 y HU-59 a Must, HU-72 a Should).
 
 ## Deuda del Sprint 2
 
@@ -55,7 +55,6 @@ estado: borrador
 | [[sprints/sprint-3/historias/HU-59 Dependencias entre nodos con reglas combinadas\|HU-59]] | Dependencias entre nodos con reglas combinadas | Nueva | 5 | Must | [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps\|HT-17]], [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial\|HT-18]] | [[sprints/sprint-3/08-dudas\|P7]] ✅ |
 | [[sprints/sprint-3/historias/HU-61 Roadmaps por grupo del curso y restricciones de visualización\|HU-61]] | Roadmaps por grupo del curso y restricciones de visualización | Nueva | 5 | Should | [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps\|HT-17]] | [[sprints/sprint-3/08-dudas\|P1]] ✅, [[sprints/sprint-3/08-dudas\|P2]] ✅, [[sprints/sprint-3/08-dudas\|P5]] ✅ |
 | [[sprints/sprint-3/historias/HU-62 Vista de grafo cómoda para el profesor\|HU-62]] | Vista de grafo cómoda para el profesor | Nueva | 8 | Must | [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps\|HT-17]], [[sprints/sprint-3/historias/HT-34 Componente de grafo en la UI-KIT\|HT-34]], [[sprints/sprint-3/historias/HU-65 Relaciones con tipo\|HU-65]] | [[sprints/sprint-3/08-dudas\|G13]] ✅ |
-| [[sprints/sprint-3/historias/HU-63 Vista tipo Moodle con la UI-KIT\|HU-63]] | Vista tipo Moodle con la UI-KIT | Nueva | 8 | Should | [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps\|HT-17]], [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap\|HT-26]], [[sprints/sprint-3/historias/HU-62 Vista de grafo cómoda para el profesor\|HU-62]] | [[sprints/sprint-3/08-dudas\|P1]] ✅ |
 | [[sprints/sprint-3/historias/HT-19 Contratos con Courses y el Motor para el modelo 1 a N\|HT-19]] | Contratos con Courses y el Motor para el modelo 1 a N | Nueva | 5 | Must | [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps\|HT-17]] | [[sprints/sprint-3/08-dudas\|P3]] ✅, [[sprints/sprint-3/08-dudas\|G4]] ✅, [[sprints/sprint-3/08-dudas\|G8]] ✅ |
 | [[sprints/sprint-3/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo\|HT-20]] | Gate y progreso con reglas combinadas y XP mínimo | Nueva | 5 | Must | [[sprints/sprint-3/historias/HU-58 Dependencias entre secciones\|HU-58]], [[sprints/sprint-3/historias/HU-59 Dependencias entre nodos con reglas combinadas\|HU-59]] | [[sprints/sprint-3/08-dudas\|P7]] ✅ |
 | [[sprints/sprint-3/historias/HU-71 Clonar un roadmap con sus restricciones\|HU-71]] | Clonar un roadmap con sus restricciones | Nueva | 8 | Should | [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial\|HT-18]], [[sprints/sprint-3/historias/HU-57 Habilitar y gestionar varios roadmaps por curso\|HU-57]] | [[sprints/sprint-3/08-dudas\|G4]] ✅, [[sprints/sprint-3/08-dudas\|P17]] |
@@ -83,8 +82,8 @@ estado: borrador
 
 0. **Prioridad 1 (desde el día 1):** [[sprints/sprint-3/historias/HT-30 Insignias pendientes de HU-20 y HU-21|HT-30]] a HT-33 (criterios pendientes de HU cerradas, empezando por las insignias de HT-30) y [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap|HT-26]] (UI-KIT) y [[sprints/sprint-3/historias/HT-34 Componente de grafo en la UI-KIT|HT-34]] (componente de grafo). Van antes que el resto.
 1. **Semana 1:** el resto de la deuda del Sprint 2 y HT-16 (spike de Neo4j). Las dudas 🔴 de [[sprints/sprint-3/08-dudas|08]] (P1 a P4, G1) ya están respondidas (2026-10-15). En paralelo, lo que no depende de nada: HU-68, HU-69, HT-22 (si G07 pasó el catálogo) y HT-23.
-2. **Semana 2:** HT-17 y HT-18. Front: HU-62 y HU-63 (con el componente de grafo de HT-34) sobre un mock de `/roadmaps/{id}/graph`. HU-64 y HU-65 sobre el módulo `graph`, y HU-49 (restricciones y examen).
-3. **Cierre:** HU-57 a HU-59, HU-61, HT-19, HT-20, HU-63 y HT-21. Demo con un curso completo de inicio a fin.
+2. **Semana 2:** HT-17 y HT-18. Front: HU-62 (con el componente de grafo de HT-34) sobre un mock de `/roadmaps/{id}/graph`. HU-64 y HU-65 sobre el módulo `graph`, y HU-49 (restricciones y examen).
+3. **Cierre:** HU-57 a HU-59, HU-61, HT-19, HT-20 y HT-21. Demo con un curso completo de inicio a fin.
 
 Dependencias y riesgos: [[sprints/sprint-3/06-backlog-sprint-3|06-backlog]].
 

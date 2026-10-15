@@ -13,7 +13,7 @@ en_taiga: false
 # HU-62: Vista de grafo cómoda para el profesor
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga. Desde el 2026-10-15 es la única dueña de guardar posiciones y crear relaciones arrastrando (HU-66 se eliminó).
+> Nueva: todavía no está cargada en Taiga. Desde el 2026-10-15 es la única dueña de guardar posiciones y crear relaciones arrastrando (HU-66 se eliminó) y de elegir qué roadmap del curso se ve como mapa (antes en HU-63, descartada).
 
 [G10] — HU-62 — Vista de grafo cómoda para el profesor
 ------------------------------------------------------
@@ -37,7 +37,7 @@ Notas / Observaciones
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): Fluido con 150 nodos.
 *   [ ] Seguridad (roles, permisos, datos sensibles): ADMIN, GESTOR o PROFESSOR dueño.
-*   [ ] Accesibilidad (WCAG/teclado/lectores): Navegación con teclado entre nodos, foco visible y alternativa en lista (HU-63).
+*   [ ] Accesibilidad (WCAG/teclado/lectores): Navegación con teclado entre nodos, foco visible y, como alternativa en lista, la lista de nodos de cada sección en «Contenido del curso» (`roadmap-section-nodes`).
 *   [ ] Otros: No aplica.
 
 * * *
@@ -50,6 +50,7 @@ Criterios de Aceptación (CA)
 *   [ ] **CA3**: Crear y borrar aristas arrastrando, eligiendo el tipo de relación (HU-65).
 *   [ ] **CA4**: Usa el componente de grafo del kit (HT-34).
 *   [ ] **CA5**: Se puede usar con teclado.
+*   [ ] **CA6**: En un curso con varios roadmaps, el profesor elige cuál ver como mapa (cada roadmap es un mapa distinto, P1).
 
 * * *
 
@@ -75,6 +76,12 @@ BDD (mínimo 3 escenarios)
 *   **Dado**: dos nodos
 *   **Cuando**: el profesor arrastra de uno al otro
 *   **Entonces**: se crea la relación
+
+**Escenario 4**  
+
+*   **Dado**: un curso con 2 roadmaps
+*   **Cuando**: el profesor elige el segundo en el mapa
+*   **Entonces**: ve el mapa del segundo roadmap
 
 * * *
 
@@ -125,8 +132,11 @@ Dependencias / Impactos
     - **Qué:** arrastrar de un nodo a otro crea la relación (eligiendo su tipo, HU-65); se borra desde la arista.
     - **Listo cuando:** el profesor arma las relaciones de una unidad sin usar formularios.
 - [ ] **T-62.4 Usar el grafo con teclado** · Front
-    - **Qué:** moverse entre nodos con teclado, foco visible y un acceso a la vista en lista como alternativa.
+    - **Qué:** moverse entre nodos con teclado, foco visible y un enlace a la lista de nodos de la sección en «Contenido del curso» como alternativa.
     - **Listo cuando:** se puede revisar y editar el grafo sin mouse.
+- [ ] **T-62.5 Elegir qué roadmap del curso ver como mapa** · Front
+    - **Qué:** en `course-editor-page` (hoy solo el mapa), un selector con los roadmaps del curso (HU-57) que cambia el mapa que se muestra (P1).
+    - **Listo cuando:** en un curso con dos roadmaps, el profesor ve el mapa de cada uno.
 
 ---
 
@@ -134,7 +144,7 @@ Dependencias / Impactos
 
 ### Qué hay hoy en el código
 
-La vista de grafo existe pero es incómoda. `moveNode` devuelve 501: las posiciones no se guardan.
+La vista de grafo existe pero es incómoda. Desde el 13/10 (`31d31510`) `course-editor-page` solo muestra el mapa: la edición en lista está en «Contenido del curso» de Courses. `moveNode` devuelve 501: las posiciones no se guardan.
 
 ### Depende de
 
