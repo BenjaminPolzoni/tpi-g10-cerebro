@@ -10,7 +10,7 @@ prioridad: Should
 en_taiga: true
 ---
 
-# HU-20: Sin CA pendiente: editar y dar de baja insignias en el front
+# HU-20: Sin CA pendiente - editar y dar de baja insignias en el front
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-20 Definir el catálogo de insignias del curso|HU-20]] (épica EP-69). En el Sprint 3 se **reabre** con lo que falta.

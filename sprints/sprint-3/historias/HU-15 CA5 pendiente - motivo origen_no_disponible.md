@@ -10,7 +10,7 @@ prioridad: Should
 en_taiga: true
 ---
 
-# HU-15: CA5 pendiente: motivo origen_no_disponible
+# HU-15: CA5 pendiente - motivo origen_no_disponible
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-15 Impedir la entrega en un nodo bloqueado (gate, vocabulario v3)|HU-15]] (épica EP-60). En el Sprint 3 se **reabre** con lo que falta.

@@ -10,7 +10,7 @@ prioridad: Should
 en_taiga: true
 ---
 
-# HU-46: CA1 y CA3 pendientes: Templo y visor embebido
+# HU-46: CA1 y CA3 pendientes - Templo y visor embebido
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-46 Ver en los nodos y en el Templo el material teórico de Courses|HU-46]] (épica EP-593). En el Sprint 3 se **reabre** con lo que falta.

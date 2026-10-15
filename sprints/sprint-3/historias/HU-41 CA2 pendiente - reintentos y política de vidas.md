@@ -10,7 +10,7 @@ prioridad: Must
 en_taiga: true
 ---
 
-# HU-41: CA2 pendiente: reintentos y política de vidas
+# HU-41: CA2 pendiente - reintentos y política de vidas
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-41 Editar un nodo del roadmap de forma individual|HU-41]] (épica EP-4232). En el Sprint 3 se **reabre** con lo que falta.

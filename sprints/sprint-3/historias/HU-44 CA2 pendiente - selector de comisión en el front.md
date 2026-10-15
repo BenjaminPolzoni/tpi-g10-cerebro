@@ -10,7 +10,7 @@ prioridad: Must
 en_taiga: true
 ---
 
-# HU-44: CA2 pendiente: selector de comisión en el front
+# HU-44: CA2 pendiente - selector de comisión en el front
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-44 Ver el roadmap de cada una de mis comisiones|HU-44]] (épica EP-5371). En el Sprint 3 se **reabre** con lo que falta.

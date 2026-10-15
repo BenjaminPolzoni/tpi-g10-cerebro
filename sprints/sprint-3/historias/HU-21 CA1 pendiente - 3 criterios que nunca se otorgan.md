@@ -10,7 +10,7 @@ prioridad: Should
 en_taiga: true
 ---
 
-# HU-21: CA1 pendiente: 3 criterios que nunca se otorgan
+# HU-21: CA1 pendiente - 3 criterios que nunca se otorgan
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-21 Otorgar insignias automáticamente|HU-21]] (épica EP-69). En el Sprint 3 se **reabre** con lo que falta.

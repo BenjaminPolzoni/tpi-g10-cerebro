@@ -10,7 +10,7 @@ prioridad: Must
 en_taiga: true
 ---
 
-# HU-48: CA1 pendiente: pre-chequeo con el JWT del alumno
+# HU-48: CA1 pendiente - pre-chequeo con el JWT del alumno
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-48 Saber si puedo entrar a un desafío antes de abrirlo|HU-48]] (épica EP-60). En el Sprint 3 se **reabre** con lo que falta.
