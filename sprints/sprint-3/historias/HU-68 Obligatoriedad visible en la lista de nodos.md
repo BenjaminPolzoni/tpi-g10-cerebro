@@ -17,8 +17,9 @@ en_taiga: false
 
 > [!question] A qué se refiere
 > **Lo que pidieron los profes:** «Lista de nodos que muestre la obligatoriedad (qué nodo es prerrequisito de otro)».
-> **Dónde:** la lista de nodos de cada sección que ve el **profesor** al armar la materia (página de la materia → sección → nodos; componente `roadmap-section-nodes`). Cada fila de esa lista describe un nodo en una línea, por ejemplo: «Lectura · Obligatoria · Requiere: Teoría 1, Práctica 2 (todos) · Disponible».
-> **Estado al 2026-10-15:** casi todo está hecho (commit `b592bf2e`, 13/10). Solo falta mostrar si es obligatorio en los **desafíos y exámenes**: hoy esa palabra aparece solo en los nodos de lectura.
+> **Dónde:** en la página de contenido de la materia, cada sección tiene dos vistas:
+> - **Vista de edición** (nuestra, componente `roadmap-section-nodes` embebido en Cursos): ya muestra en cada fila, por ejemplo, «Lectura · Obligatoria · Requiere: Teoría 1, Práctica 2 (todos) · Disponible» (`b592bf2e`, 13/10). Solo falta la obligatoriedad en **desafíos y exámenes**.
+> - **Vista simplificada** (sin permiso de edición): es de **Cursos (G01)**. Muestra solo el nombre de los desafíos y los recursos, sin obligatoriedad ni requisitos. Lo pedimos con un issue: [[sprints/sprint-3/borradores/Issue G01 - obligatoriedad y requisitos en la vista simplificada|borrador del issue para G01]] (sin enviar).
 
 [G10] — HU-68 — Obligatoriedad visible en la lista de nodos
 -----------------------------------------------------------
@@ -54,6 +55,7 @@ Criterios de Aceptación (CA)
 *   [x] **CA2**: Un nodo sin requisitos dice «Abierto al entrar a la unidad». ✅ hecho
 *   [x] **CA3**: Los nodos de lectura dicen «Obligatoria» u «Opcional». ✅ hecho
 *   [ ] **CA4**: Los desafíos y exámenes también dicen «Obligatorio» u «Opcional».
+*   [ ] **CA5**: La vista simplificada de la sección (de G01) muestra la misma obligatoriedad y los mismos requisitos (issue a G01).
 
 * * *
 
@@ -112,8 +114,8 @@ Dependencias / Impactos
 -----------------------
 
 *   Servicios involucrados: Ninguno.
-*   Módulos afectados: `roadmap-section-nodes` (método `detailsOf`).
-*   Otros equipos / aprobaciones: Ninguno.
+*   Módulos afectados: `roadmap-section-nodes` (método `detailsOf`) y `features/roadmap/embeds` (función para G01). De G01: `section-resources-container` y `section-resource-list`.
+*   Otros equipos / aprobaciones: G01 Courses, para la vista simplificada (CA5).
 *   Impacto en datos / migraciones: Sin migración.
 *   Riesgos y mitigación (opcional): Ninguno.
 
@@ -123,6 +125,7 @@ Dependencias / Impactos
 - [x] T-68.2 «Obligatoria / Opcional» en los nodos de lectura
 - [ ] T-68.3 «Obligatorio / Opcional» también en desafíos y exámenes
 - [ ] T-68.4 Test de la fila de un desafío obligatorio
+- [ ] T-68.5 Mandar el issue a G01 y, si lo aceptan, exportar desde `embeds` la función que arma obligatoriedad y requisitos
 
 ---
 
@@ -137,7 +140,7 @@ Verificado contra el front en `develop` (`dd642114`, 2026-10-15):
 
 ### Depende de
 
-Nada: se puede empezar ya.
+Nada: CA4 se puede empezar ya. CA5 depende de G01.
 
 ### Dudas que la frenan
 
