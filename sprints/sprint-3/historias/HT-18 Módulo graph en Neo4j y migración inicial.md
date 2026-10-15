@@ -115,11 +115,21 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-18.1 Módulo `graph` y esquema
-- [ ] T-18.2 Job de migración inicial
-- [ ] T-18.3 Caché de reglas para el gate
-- [ ] T-18.4 Endpoint `/graph`
-- [ ] T-18.5 Tests con Testcontainers
+- [ ] **T-18.1 Crear el módulo `graph` y su esquema en Neo4j** · Back
+    - **Qué:** paquete `graph` dentro de roadmap-service con las entidades de Spring Data Neo4j del modelo de HT-16 (roadmap, sección, nodo, relaciones con tipo, reglas) y el esquema versionado con `neo4j-migrations` (unicidad por `id`).
+    - **Listo cuando:** la app arranca contra Neo4j, el esquema se aplica solo y hay tests con Testcontainers de guardar y leer.
+- [ ] **T-18.2 Pasar la estructura actual de Postgres a Neo4j** · Back
+    - **Qué:** job que lee `section`, `node`, `node_prerequisite` y `section_prerequisite` y arma el grafo con los mismos UUID. Va detrás de un flag y mientras convivan las dos bases la lectura sigue en Postgres.
+    - **Listo cuando:** correrlo dos veces deja el mismo grafo y un reporte compara cantidades de nodos y relaciones entre las dos bases.
+- [ ] **T-18.3 Mantener las dos bases en orden** · Back
+    - **Qué:** cada cambio del grafo se registra en `node_edit_log` y sale por el outbox de Postgres como hoy; solo baja lógica en Neo4j; un job de reconciliación detecta ids que existen en una base y no en la otra.
+    - **Listo cuando:** editar un nodo deja su log y su evento, y el job reporta los huérfanos de una base de prueba.
+- [ ] **T-18.4 Caché de reglas por roadmap para el gate** · Back
+    - **Qué:** `GateEvaluator` lee las reglas de una caché por roadmap que se invalida en cada edición, para no ir a Neo4j en cada pedido del Motor.
+    - **Listo cuando:** una regla editada se aplica en la siguiente consulta del gate y el P95 sigue debajo de 200 ms.
+- [ ] **T-18.5 Endpoint que devuelve el grafo entero para dibujarlo** · Back
+    - **Qué:** `GET /roadmaps/{id}/graph` con `{nodes, edges, layout}`: nodos con tipo y posición, aristas con tipo y visibilidad. Documentado en OpenAPI.
+    - **Listo cuando:** el front dibuja el grafo completo con una sola llamada y hay test del contrato.
 
 ---
 

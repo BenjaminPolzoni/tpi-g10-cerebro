@@ -115,11 +115,18 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-61.1 Asignación de roadmap a grupos (modelo y endpoint)
-- [ ] T-61.2 Filtrar los roadmaps visibles por los grupos del alumno
-- [ ] T-61.3 Aplicar las restricciones de visualización del curso (oculto, bloqueado)
-- [ ] T-61.4 Asignación en el editor del profesor y vista del alumno
-- [ ] T-61.5 Tests
+- [ ] **T-61.1 Asignar un roadmap a grupos del curso** · Back
+    - **Qué:** tabla roadmap ↔ grupo (migración) y acción para que el profesor dueño asigne grupos o «todos». Un grupo que no existe en Courses se rechaza (`CourseGroupsClient`).
+    - **Listo cuando:** hay tests de asignar, quitar y grupo inexistente.
+- [ ] **T-61.2 Que el alumno vea solo los roadmaps de sus grupos** · Back
+    - **Qué:** la lista de roadmaps visibles se filtra con los grupos del alumno (`GroupAccessService`, con su caché). Entrar por URL a un roadmap de otro grupo da 403.
+    - **Listo cuando:** hay tests de visible, no visible y 403.
+- [ ] **T-61.3 Aplicar lo oculto y lo bloqueado que define el curso** · Back
+    - **Qué:** usar lo de HU-49 (HIDDEN y LOCKED) también a nivel de roadmap y de sección.
+    - **Listo cuando:** un roadmap oculto no aparece y uno bloqueado aparece con motivo y fecha.
+- [ ] **T-61.4 Asignación en la pantalla del profesor y aviso al alumno** · Front
+    - **Qué:** en la pantalla de roadmaps (HU-57) el profesor elige los grupos de cada roadmap; el alumno ve el bloqueo con motivo y fecha, legible con lector de pantalla.
+    - **Listo cuando:** se puede hacer todo desde la pantalla, sin tocar la base.
 
 ---
 

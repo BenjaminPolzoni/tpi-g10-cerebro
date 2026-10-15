@@ -115,10 +115,18 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-62.1 Integrar el componente de grafo
-- [ ] T-62.2 Guardar posiciones (reemplazar el 501)
-- [ ] T-62.3 Aristas arrastrando
-- [ ] T-62.4 Teclado y accesibilidad
+- [ ] **T-62.1 Vista de grafo con el componente del kit** · Front
+    - **Qué:** `course-map-page` usa `generic-node-graph` (HT-26) con acomodo automático (`elkjs`), zoom, pan y minimapa. Si el componente todavía no está, arrancar con la librería directa y cambiar después.
+    - **Listo cuando:** se mueve fluido con 150 nodos.
+- [ ] **T-62.2 Guardar las posiciones de los nodos** · Back + Front
+    - **Qué:** endpoint para guardar la posición de cada nodo en el grafo; el front deja de dar error al mover nodos (`moveNode` del store).
+    - **Listo cuando:** se mueve un nodo, se recarga la página y queda donde se dejó.
+- [ ] **T-62.3 Crear y borrar relaciones arrastrando** · Front
+    - **Qué:** arrastrar de un nodo a otro crea la relación (eligiendo su tipo, HU-65); se borra desde la arista.
+    - **Listo cuando:** el profesor arma las relaciones de una unidad sin usar formularios.
+- [ ] **T-62.4 Usar el grafo con teclado** · Front
+    - **Qué:** moverse entre nodos con teclado, foco visible y un acceso a la vista en lista como alternativa.
+    - **Listo cuando:** se puede revisar y editar el grafo sin mouse.
 
 ---
 

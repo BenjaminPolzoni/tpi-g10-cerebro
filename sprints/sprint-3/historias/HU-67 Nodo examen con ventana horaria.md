@@ -114,10 +114,15 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-67.1 Leer de Courses la ventana del nodo examen
-- [ ] T-67.2 Evaluación en el gate
-- [ ] T-67.3 Front: aviso al alumno
-- [ ] T-67.4 Tests con reloj simulado
+- [ ] **T-67.1 Aplicar al examen la ventana que publica Courses** · Back
+    - **Qué:** la restricción de fecha que Courses publica para la actividad (`CourseRestrictionsClient`) se aplica al nodo `EXAM` correspondiente (P9: la ventana la define Courses).
+    - **Listo cuando:** el examen toma la ventana de Courses sin datos propios en el nodo.
+- [ ] **T-67.2 Bloquear el examen fuera de la ventana** · Back
+    - **Qué:** el gate responde `DATE_RESTRICTED` antes y después de la ventana.
+    - **Listo cuando:** hay tests con reloj simulado a las 17:59, 18:30 y 20:01.
+- [ ] **T-67.3 Mostrarle al alumno cuándo se habilita** · Front
+    - **Qué:** el nodo examen dice «Se habilita el {fecha} a las {hora}» en texto.
+    - **Listo cuando:** se ve en el mapa y en el mundo.
 
 ---
 

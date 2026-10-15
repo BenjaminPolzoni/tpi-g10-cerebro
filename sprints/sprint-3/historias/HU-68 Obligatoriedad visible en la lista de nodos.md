@@ -121,11 +121,16 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [x] T-68.1 «Requiere: …» y «Abierto al entrar a la unidad» por nodo (`b592bf2e`)
-- [x] T-68.2 «Obligatoria / Opcional» en los nodos de lectura
-- [ ] T-68.3 «Obligatorio / Opcional» también en desafíos y exámenes
-- [ ] T-68.4 Test de la fila de un desafío obligatorio
-- [ ] T-68.5 Issue a G01 enviado ([#581](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/issues/581)); si lo aceptan, exportar desde `embeds` la función que arma obligatoriedad y requisitos
+- [x] **T-68.1 «Requiere: …» y «Abierto al entrar a la unidad» en cada nodo** · Front
+    - Hecho en `b592bf2e` (13/10) en la lista del profesor (`roadmap-section-nodes`).
+- [x] **T-68.2 «Obligatoria / Opcional» en los nodos de lectura** · Front
+    - Hecho: lo arma `detailsOf` en la misma lista.
+- [ ] **T-68.3 Mostrar «Obligatorio / Opcional» también en desafíos y exámenes** · Front
+    - **Qué:** en `detailsOf` de `roadmap-section-nodes`, la obligatoriedad hoy se muestra solo si `node.type === 'theory'`; mostrarla para todos los tipos que pueden ser obligatorios.
+    - **Listo cuando:** un desafío obligatorio dice «Obligatorio» en la lista y hay test.
+- [ ] **T-68.4 Seguir el pedido a Courses para la vista simplificada** · Coordinación
+    - **Qué:** acompañar el issue [#581](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/issues/581). Si G01 lo acepta, exportar desde `features/roadmap/embeds` una función que devuelva ya armadas la obligatoriedad y los requisitos de un nodo.
+    - **Listo cuando:** la vista simplificada muestra lo mismo que la del profesor.
 
 ---
 

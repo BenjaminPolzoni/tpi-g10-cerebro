@@ -113,9 +113,21 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-19.1 Propuesta de mapeo a G01
-- [x] T-19.2 Confirmación con G09 (G8, 2026-10-15)
-- [ ] T-19.3 Código y contratos
+- [ ] **T-19.1 Proponerle a Courses (G01) cómo se usan sus secciones con varios roadmaps** · Coordinación
+    - **Qué:** escribir y mandar a G01: cada roadmap elige si usa secciones de Courses o propias (P3); el sync de secciones (HU-36) solo toca los roadmaps que usan secciones de Courses; las restricciones se definen por roadmap y se copian al clonar (G4).
+    - **Listo cuando:** G01 respondió y el acuerdo está en `acuerdos/courses-g01`.
+- [x] **T-19.2 Confirmar con el Motor (G09) que `node_id` alcanza** · Coordinación
+    - Hecho el 2026-10-15 (G8): `node_id` es único global, también después de clonar.
+- [ ] **T-19.3 Sincronizar secciones solo en los roadmaps que las usan** · Back
+    - **Qué:** que el sync de secciones de Courses actúe solo sobre los roadmaps marcados para usar secciones de Courses, según el acuerdo de T-19.1.
+    - **Dónde:** `CourseSectionSyncService`, `CourseSectionsReconciliationService`.
+    - **Listo cuando:** en un curso con un roadmap de secciones de Courses y otro de secciones propias, el sync solo cambia el primero. Hay test.
+- [ ] **T-19.4 Ubicar el roadmap correcto en los eventos del Motor** · Back
+    - **Qué:** `RoadmapEventListener` encuentra el roadmap a partir del `id_node` en vez de suponer un roadmap por curso.
+    - **Listo cuando:** el cierre de un intento de un nodo del segundo roadmap suma en ese roadmap. Hay test.
+- [ ] **T-19.5 Actualizar los contratos escritos** · Docs
+    - **Qué:** `docs/contracts/courses.md` y `motor-desafios-evento-cierre.md` describen el modelo de varios roadmaps por curso.
+    - **Listo cuando:** los dos contratos coinciden con el código.
 
 ---
 

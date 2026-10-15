@@ -115,11 +115,18 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-72.1 Acordar con G01 dónde se guarda el estado final (endpoint o evento)
-- [ ] T-72.2 Endpoint de candidatos P90/P10 con sus condiciones
-- [ ] T-72.3 Pantalla de cierre del profesor
-- [ ] T-72.4 Exportar el resumen por alumno
-- [ ] T-72.5 Tests
+- [ ] **T-72.1 Acordar con Courses dónde se guarda el estado final** · Coordinación
+    - **Qué:** resolver G14 con G01: el estado final (`finalAcademicStatus`) lo guarda Courses (endpoint o evento) o Roadmap.
+    - **Listo cuando:** el acuerdo está en `acuerdos/courses-g01`.
+- [ ] **T-72.2 Calcular los candidatos a promoción y a pérdida de regularidad** · Back
+    - **Qué:** endpoint de candidatos P90/P10 con sus condiciones (vidas perdidas, obligatorios aprobados), usando las zonas que ya calcula `RankingService`. Solo con 10 o más inscriptos.
+    - **Listo cuando:** un curso de 24 da candidatos y uno de 7 no. Hay tests.
+- [ ] **T-72.3 Pantalla de cierre del curso** · Front
+    - **Qué:** tabla con los candidatos y sus condiciones, un selector de estado final por alumno (promocionado, regular, no regular, abandonó) y confirmar. Después, el roadmap y el ranking quedan en solo lectura.
+    - **Listo cuando:** el profesor cierra un curso de punta a punta.
+- [ ] **T-72.4 Exportar el resumen por alumno** · Back + Front
+    - **Qué:** archivo con legajo, nombre, estado final, XP e insignias de cada alumno (el legajo sale de Users o Courses).
+    - **Listo cuando:** el archivo se descarga con una fila por alumno.
 
 ---
 

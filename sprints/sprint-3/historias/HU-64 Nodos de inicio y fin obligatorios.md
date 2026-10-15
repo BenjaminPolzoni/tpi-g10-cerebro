@@ -114,10 +114,18 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-64.1 Tipos START/END y validación al guardar
-- [ ] T-64.2 Migración de roadmaps existentes
-- [ ] T-64.3 Visual en 2D y 3D
-- [ ] T-64.4 Tests
+- [ ] **T-64.1 Tipos de nodo de inicio y fin** · Back
+    - **Qué:** agregar `START` y `END` a los tipos de nodo (DEC-018). Al crear un roadmap y cada unidad o sección se crean solos, con los nombres «Bienvenidos» y «Felicitaciones».
+    - **Listo cuando:** un roadmap nuevo y una unidad nueva ya traen los dos.
+- [ ] **T-64.2 Validar al guardar que haya inicio, fin y camino** · Back
+    - **Qué:** `GraphValidator` rechaza guardar si falta el inicio o el fin, o si algún nodo no tiene camino desde el inicio, y devuelve la lista de problemas.
+    - **Listo cuando:** hay tests de cada error.
+- [ ] **T-64.3 Agregar inicio y fin a los roadmaps que ya existen** · Back
+    - **Qué:** migración que agrega `START` y `END` a cada roadmap y unidad existente y los conecta con el primer y el último nodo.
+    - **Listo cuando:** después de migrar, todos los roadmaps pasan la validación de T-64.2.
+- [ ] **T-64.4 Cómo se ven el inicio y el fin** · Front
+    - **Qué:** visual propio en el mapa 2D y en el mundo 3D, con texto y no solo un ícono.
+    - **Listo cuando:** el alumno identifica dónde empieza y dónde termina.
 
 ---
 

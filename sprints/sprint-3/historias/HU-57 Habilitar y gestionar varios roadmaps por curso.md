@@ -114,10 +114,15 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-57.1 Flag por curso
-- [ ] T-57.2 ABM de roadmaps
-- [ ] T-57.3 Pantalla del profesor
-- [ ] T-57.4 Tests
+- [ ] **T-57.1 Habilitar varios roadmaps en un curso** · Back
+    - **Qué:** columna `multiple_roadmaps_allowed` por curso (migración) y acción para que el profesor dueño o el gestor la active. Con el ajuste apagado, crear un segundo roadmap devuelve 409.
+    - **Listo cuando:** hay tests con el ajuste prendido y apagado.
+- [ ] **T-57.2 Crear, renombrar y archivar roadmaps** · Back
+    - **Qué:** nombre obligatorio y único dentro del curso; archivar es baja lógica y conserva el progreso (DEC-005).
+    - **Listo cuando:** un roadmap archivado no lo ve el alumno, su progreso sigue en la base y hay tests.
+- [ ] **T-57.3 Pantalla de roadmaps del curso para el profesor** · Front
+    - **Qué:** lista de roadmaps con crear, renombrar, archivar y el interruptor de «varios roadmaps», con componentes del kit. Acá también va la acción «Clonar» (HU-71) y la asignación a grupos (HU-61).
+    - **Listo cuando:** el profesor maneja los roadmaps del curso sin salir de la pantalla.
 
 ---
 

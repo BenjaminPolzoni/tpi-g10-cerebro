@@ -114,10 +114,19 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-20.1 Evaluador sobre árbol de reglas
-- [ ] T-20.2 XP mínimo
-- [ ] T-20.3 BDD del ejemplo de los profes
-- [ ] T-20.4 Medir el P95
+- [ ] **T-20.1 Un solo evaluador de reglas para el gate y para lo que ve el alumno** · Back
+    - **Qué:** `GateEvaluator` evalúa el árbol de reglas (AND/OR anidados, HU-59) y el progreso del alumno usa ese mismo resultado para el motivo de bloqueo.
+    - **Dónde:** `GateEvaluator`, `GateService`, `NodeProgressService`.
+    - **Listo cuando:** no queda lógica de desbloqueo duplicada y hay tests con reglas anidadas.
+- [ ] **T-20.2 Evaluar el XP mínimo** · Back
+    - **Qué:** sumar al evaluador la condición de XP mínimo de las reglas (HU-58 y `requires` con XP), tomando el XP del alumno según cómo esté configurado el roadmap (por curso o por roadmap, P2).
+    - **Listo cuando:** un alumno con menos XP que el mínimo ve el motivo y el gate lo rechaza. Hay test.
+- [ ] **T-20.3 Escenarios BDD con el ejemplo de los profes** · Back
+    - **Qué:** escribir en Cucumber el ejemplo de las secciones 1 a 5 del pedido de los profes (`03-requerimientos-profes`) y hacerlo pasar.
+    - **Listo cuando:** los escenarios pasan en el CI.
+- [ ] **T-20.4 Medir la latencia del gate** · Back
+    - **Qué:** medir el P95 del gate con la caché de reglas (HT-18) sobre un roadmap de 150 nodos y dejar el resultado en el PR.
+    - **Listo cuando:** el P95 es menor a 200 ms.
 
 ---
 

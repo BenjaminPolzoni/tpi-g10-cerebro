@@ -116,10 +116,19 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-58.1 XP mínimo y reglas en el módulo graph
-- [ ] T-58.2 Validación de ciclos
-- [ ] T-58.3 Editor de reglas de sección
-- [ ] T-58.4 Tests con el ejemplo de los profes
+- [ ] **T-58.1 Volver a tener XP mínimo por sección** · Back
+    - **Qué:** XP mínimo opcional en las reglas de sección del módulo `graph`, validado como mayor o igual a 0. Vuelve lo que se quitó en V8 (actualizar DEC-011).
+    - **Listo cuando:** se guarda, se lee y el gate lo evalúa (HT-20).
+- [ ] **T-58.2 Dependencias entre subsecciones y sin ciclos** · Back
+    - **Qué:** las reglas aceptan subsecciones como requisito (P6) y al guardar se rechaza cualquier ciclo.
+    - **Dónde:** `GraphValidator`, `SectionPrerequisiteService`.
+    - **Listo cuando:** guardar un ciclo devuelve error con un mensaje claro. Hay tests.
+- [ ] **T-58.3 Editor de reglas de sección con XP mínimo y «todas las anteriores»** · Front
+    - **Qué:** en `rules-wizard` (modo unidad): elegir secciones o subsecciones requeridas, AND/OR, XP mínimo y un atajo que guarda un AND con todas las anteriores. Usable con teclado.
+    - **Listo cuando:** el profesor arma el ejemplo de los profes desde la pantalla.
+- [ ] **T-58.4 Explicarle al alumno por qué una sección está bloqueada** · Front
+    - **Qué:** el motivo dice qué secciones faltan o cuánto XP le falta.
+    - **Listo cuando:** el motivo aparece en el mapa y en la lista del alumno.
 
 ---
 

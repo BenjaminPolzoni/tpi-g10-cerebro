@@ -115,10 +115,16 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-71.1 Copia del subgrafo con ids nuevos en el módulo graph
-- [ ] T-71.2 Endpoint de clonado y permisos
-- [ ] T-71.3 Acción «Clonar» en la pantalla del profesor
-- [ ] T-71.4 Tests: ids nuevos, sin progreso, permisos y evento del Motor sobre la copia
+- [ ] **T-71.1 Copiar un roadmap con ids nuevos** · Back
+    - **Qué:** copia del subgrafo completo (secciones, subsecciones, nodos con inicio y fin, relaciones, reglas, restricciones y configuración) generando ids nuevos (G8) y sin progreso de alumnos. Si algo falla, lo copiado se da de baja lógica.
+    - **Dónde:** módulo `graph`.
+    - **Listo cuando:** la copia es igual al original salvo los ids, y un evento del Motor sobre la copia suma en la copia.
+- [ ] **T-71.2 Endpoint de clonado con permisos** · Back
+    - **Qué:** `POST /roadmaps/{roadmapId}/clone` con `target_course_id`, `target_group_id` (opcional) y `name`. Solo el dueño de los dos cursos; nombre único en el curso destino.
+    - **Listo cuando:** sin permiso devuelve 403 y no crea nada. Hay tests.
+- [ ] **T-71.3 Acción «Clonar» en la pantalla del profesor** · Front
+    - **Qué:** en la pantalla de roadmaps (HU-57), un diálogo para elegir curso y comisión destino y el nombre de la copia.
+    - **Listo cuando:** el profesor clona un roadmap a otra comisión sin ayuda.
 
 ---
 

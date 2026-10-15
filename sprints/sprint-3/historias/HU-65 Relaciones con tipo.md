@@ -115,9 +115,16 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-65.1 Catálogo de tipos en el módulo graph
-- [ ] T-65.2 Etiqueta y visibilidad en el front
-- [ ] T-65.3 Tests
+- [ ] **T-65.1 Catálogo de los 5 tipos de relación** · Back
+    - **Qué:** `requires`, `recommends`, `belongs_to`, `related_to` y `part_of` (DEC-018), cada uno con `label` y `visible`. Solo `requires` afecta el desbloqueo, con la condición AND/OR, XP mínimo o las dos.
+    - **Dónde:** módulo `graph`.
+    - **Listo cuando:** hay tests de que solo `requires` cambia el desbloqueo.
+- [ ] **T-65.2 Ver el nombre de cada relación y ocultar tipos** · Front
+    - **Qué:** la arista muestra el nombre del tipo y se distingue por texto y forma de línea (no solo color); el profesor puede ocultar un tipo en el mapa.
+    - **Listo cuando:** ocultar un tipo lo saca del mapa del alumno.
+- [ ] **T-65.3 Elegir el tipo al crear una relación** · Front
+    - **Qué:** al crear una relación (desde el editor o arrastrando, HU-62/HU-66) se elige el tipo; en `requires` se elige además la condición.
+    - **Listo cuando:** el profesor crea una relación de cada tipo.
 
 ---
 

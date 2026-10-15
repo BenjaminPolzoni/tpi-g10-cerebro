@@ -114,9 +114,16 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-59.1 Árbol de reglas en el módulo graph
-- [ ] T-59.2 Constructor de reglas en el front
-- [ ] T-59.3 Tests
+- [ ] **T-59.1 Guardar reglas combinadas como árbol** · Back
+    - **Qué:** las reglas de nodo pasan a ser un árbol con AND/OR anidados (`A y (B o C)`). La lectura obligatoria sigue contando como requisito. Se rechazan ciclos y reglas vacías.
+    - **Dónde:** módulo `graph`, `GraphValidator`.
+    - **Listo cuando:** se guarda y se lee una regla anidada y hay tests de ciclos y reglas vacías.
+- [ ] **T-59.2 Armar reglas combinadas en el editor** · Front
+    - **Qué:** extender `rules-wizard` para armar grupos AND/OR, empezando con un nivel de anidamiento. Usable con teclado y lector de pantalla.
+    - **Listo cuando:** el profesor arma `A y (B o C)` sin escribir nada a mano.
+- [ ] **T-59.3 Mostrarle al alumno qué le falta** · Front
+    - **Qué:** describir la regla en palabras («Requiere A y (B o C)») marcando lo que ya cumplió.
+    - **Listo cuando:** el alumno entiende qué le falta para desbloquear el nodo.
 
 ---
 

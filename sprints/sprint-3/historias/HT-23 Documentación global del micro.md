@@ -114,8 +114,12 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-23.1 Armar el documento
-- [ ] T-23.2 Corregir contratos desactualizados
+- [ ] **T-23.1 Escribir la guía del micro** · Docs
+    - **Qué:** un documento en `docs/` del back con: qué hace roadmap-service, el modelo (Postgres y Neo4j), endpoints principales, eventos que publica y consume, flags (`SECTIONS_SYNC_ENABLED`, `ROADMAP_BY_GROUP_ENABLED`…), cómo levantarlo local y enlaces a decisiones y contratos. Se arma con lo que ya está en el Obsidian (`arquitectura/`, `decisiones/`, `acuerdos/`).
+    - **Listo cuando:** alguien que no conoce el micro lo levanta y entiende qué hace leyendo solo ese documento.
+- [ ] **T-23.2 Corregir los contratos que no coinciden con el código** · Docs
+    - **Qué:** revisar `docs/contracts/` contra develop (DT-18). Por ejemplo, `roadmap-service.asyncapi.yaml` sigue en v3 y camelCase, y la documentación nombra `TraceIdFilter`, que se borró a propósito (E7).
+    - **Listo cuando:** cada contrato coincide con develop.
 
 ---
 

@@ -114,29 +114,37 @@ Dependencias / Impactos
 *   Módulos afectados: Pantallas del roadmap y del ranking; repo `2026-PIV-TPI-UI-KIT` (componente de grafo).
 *   Otros equipos / aprobaciones: Equipo del kit, para publicar el componente de grafo (el dueño es G10).
 *   Impacto en datos / migraciones: Sin migración.
-*   Riesgos y mitigación (opcional): Regresiones visuales; mitigación: tests visuales. Que el kit no acepte el componente de grafo; mitigación: acordarlo antes de empezar (T-26.7).
+*   Riesgos y mitigación (opcional): Regresiones visuales; mitigación: tests visuales. Que el kit no acepte el componente de grafo; mitigación: acordarlo antes de empezar (T-26.6).
 
 ## Tareas
 
-**Controles y botones** (antes HT-26)
-- [ ] T-26.1 Formularios del kit en `entity-editor-dialog`, `badges-catalog-page` y `avatar-panel`
-- [ ] T-26.2 Botones y headings del kit en `course-editor-page`, `section-nodes`, `course-map-page`, `hex-world-page` y `feedback-toast`
-
-**Overlays y componentes locales** (antes HT-28)
-- [ ] T-26.3 `npc-dialogue` y `shop-interior` con `generic-modal`/`generic-drawer`
-- [ ] T-26.4 HUD con el kit: `lives`, `level-hud`, `inventory-item-card` y `role-switch` (la racha va en HU-73)
-
-**Ranking** (antes HT-29)
-- [ ] T-26.5 `generic-table` y `generic-badge` en `ranking/*`
-- [ ] T-26.6 Tests del ranking (anonimato y visuales)
-
-**Componente de grafo en el kit** (antes HU-70)
-- [ ] T-26.7 Acordar con el equipo del kit
-- [ ] T-26.8 Componente `generic-node-graph` (envuelve `ngx-vflow` o `@foblex/flow` + `elkjs`, con tokens)
-- [ ] T-26.9 Storybook y release del kit
-
-**Cierre**
-- [ ] T-26.10 Tests visuales de las pantallas tocadas
+- [ ] **T-26.1 Formularios con los controles del kit** · Front
+    - **Qué:** reemplazar `<input>`, `<select>` y `<button>` crudos por `generic-input`, `generic-select`, `generic-checkbox` y `generic-button`, con los labels y mensajes de error del kit.
+    - **Dónde:** `entity-editor-dialog`, `badges-catalog-page`, `avatar-panel`.
+    - **Listo cuando:** ninguno de los tres tiene controles crudos y `ui-review` no marca nada en esos archivos.
+- [ ] **T-26.2 Botones y títulos sueltos con el kit** · Front
+    - **Qué:** pasar los botones y headings armados a mano a `generic-button` y `generic-title`.
+    - **Dónde:** `course-editor-page`, `section-nodes`, `course-map-page`, `hex-world-page`, `feedback-toast`.
+    - **Listo cuando:** `ui-review` no marca botones ni títulos propios en esas pantallas.
+- [ ] **T-26.3 Diálogos del mundo con el modal del kit** · Front
+    - **Qué:** `npc-dialogue` y `shop-interior` dejan su `role="dialog"` propio y usan `generic-modal` o `generic-drawer`, que manejan el foco y Escape.
+    - **Listo cuando:** los dos se abren y se cierran con teclado y el foco vuelve a donde estaba.
+- [ ] **T-26.4 HUD del mundo con componentes del kit** · Front
+    - **Qué:** `lives` con `generic-icon`/`generic-progress`, `level-hud` con `generic-xp-bar`, `inventory-item-card` con `generic-item-tile` y `role-switch` con el componente del kit que corresponda. La racha va en HU-73.
+    - **Listo cuando:** el HUD no usa componentes propios para esas piezas y se ve igual o mejor que hoy.
+- [ ] **T-26.5 Ranking con la tabla y los badges del kit** · Front
+    - **Qué:** las 3 `<table>` crudas pasan a `generic-table` y los chips `rk-chip`/`rk-status` a `generic-badge`. El anonimato de las filas ajenas no cambia (DEC-007).
+    - **Dónde:** `ranking/*` (incluye el TODO #59 de `ranking-detail`).
+    - **Listo cuando:** el ranking se ve con el kit y hay tests del anonimato y visuales.
+- [ ] **T-26.6 Acordar el componente de grafo con el equipo del kit** · Coordinación
+    - **Qué:** acordar la API de `generic-node-graph`, la librería que envuelve (`ngx-vflow` o `@foblex/flow` con `elkjs`) y cómo se publica. El dueño es G10 (G13).
+    - **Listo cuando:** el equipo del kit aceptó la propuesta por escrito.
+- [ ] **T-26.7 Construir y publicar `generic-node-graph` en el kit** · Front (repo del kit)
+    - **Qué:** componente con pan, zoom, minimapa, aristas, navegación con teclado y tokens del kit; historia en Storybook; release de una versión del kit.
+    - **Listo cuando:** el componente está en una versión publicada del kit y lo puede usar HU-62.
+- [ ] **T-26.8 Revisar todo con `ui-review` y tests visuales** · Front
+    - **Qué:** correr `ui-review` (llegó a develop en el PR #579) sobre roadmap y ranking y dejar los tests visuales en verde.
+    - **Listo cuando:** `ui-review` no reporta hallazgos nuevos en roadmap y ranking.
 
 ---
 

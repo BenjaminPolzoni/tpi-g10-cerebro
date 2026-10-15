@@ -115,11 +115,19 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-22.1 Matriz rol → permisos
-- [ ] T-22.2 Acordar con G07
-- [ ] T-22.3 Migrar los `@PreAuthorize`
-- [ ] T-22.4 Scope del gate
-- [ ] T-22.5 Tests de autorización
+- [ ] **T-22.1 Escribir la matriz de permisos** · Back
+    - **Qué:** listar cada endpoint del micro con el permiso que va a pedir (por ejemplo `roadmap.graph.edit`, `roadmap.ranking.read`) y qué roles lo tienen hoy. Sale de las constantes `CAN_EDIT`, `CAN_VIEW`… de cada controller. Cierra DT-03.
+    - **Listo cuando:** la matriz está en el Obsidian y en `docs/` del back.
+- [ ] **T-22.2 Acordar los nombres de permisos con Users (G07)** · Coordinación
+    - **Qué:** mandar la matriz a G07, que es dueño del catálogo (G2), y acordar nombres y cómo llegan en el token o en los headers del Gateway. Mientras no haya respuesta se sigue con `PROFESSOR`/`GESTOR` (G6).
+    - **Listo cuando:** la respuesta de G07 está en `acuerdos/users`.
+- [ ] **T-22.3 Autorizar por permisos en todos los controllers** · Back
+    - **Qué:** reemplazar `hasRole`/`hasAnyRole` por `hasAuthority('roadmap.…')` en los 12 controllers y sacar los chequeos de rol a mano de `RankingController` y `requireOwner`. El chequeo de dueño del curso se mantiene.
+    - **Listo cuando:** no queda `hasRole` en el código y hay tests de autorización por endpoint (permitido y 403).
+- [ ] **T-22.4 Exigir el scope del gate** · Back
+    - **Qué:** el endpoint del gate pide el scope `roadmap.gate.read` al servicio que llama (DT-01).
+    - **Dónde:** `SecurityConfig`, `ServiceIdentity`.
+    - **Listo cuando:** un servicio sin el scope recibe 403 y el Motor con el scope sigue funcionando. Hay test.
 
 ---
 

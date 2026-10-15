@@ -116,9 +116,16 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-60.1 Campos personalizables en el módulo graph
-- [ ] T-60.2 Panel en el editor
-- [ ] T-60.3 Mostrar en el detalle
+- [ ] **T-60.1 Editar nombre, ícono, descripción y reglas de nodos y secciones** · Back
+    - **Qué:** esos cuatro campos son los únicos personalizables (P8, DEC-018). El back rechaza con 400 campos libres o tipos de nodo nuevos.
+    - **Dónde:** módulo `graph`, `NodeController`.
+    - **Listo cuando:** hay tests de lo permitido y lo rechazado.
+- [ ] **T-60.2 Panel de edición del nodo y la sección** · Front
+    - **Qué:** `entity-editor-dialog` con nombre, ícono (del catálogo de HU-43), descripción y acceso al editor de reglas.
+    - **Listo cuando:** el profesor cambia los cuatro datos desde el editor.
+- [ ] **T-60.3 Mostrarle al alumno lo personalizado** · Front
+    - **Qué:** `node-detail` muestra el nombre, el ícono y la descripción que eligió el profesor.
+    - **Listo cuando:** un cambio del profesor se ve en el detalle del alumno.
 
 ---
 

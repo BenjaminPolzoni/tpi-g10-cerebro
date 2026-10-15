@@ -114,9 +114,15 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-21.1 Guion del curso de demo
-- [ ] T-21.2 Script idempotente
-- [ ] T-21.3 Probarlo en el entorno de demo
+- [ ] **T-21.1 Escribir el guion del curso de demo** · Equipo
+    - **Qué:** definir el curso que se muestra: secciones, nodos de cada tipo, inicio y fin, relaciones con tipo, reglas combinadas, un examen con ventana de Courses, insignias, dos roadmaps y dos comisiones, y en qué punto está cada alumno demo.
+    - **Listo cuando:** el guion está en el Obsidian y el equipo lo aprobó.
+- [ ] **T-21.2 Cargar el curso del guion con un seed repetible** · Back
+    - **Qué:** seed del curso del guion en el perfil `demo` (nunca en el productivo), con los usuarios demo de G07 y la curva PAR-09 de Backoffice (E4). Correrlo dos veces no duplica nada. Los ids de los usuarios demo todavía no existen (G7).
+    - **Listo cuando:** base vacía → seed → la demo se puede recorrer completa.
+- [ ] **T-21.3 Recorrer la demo de punta a punta en el entorno de demo** · Equipo
+    - **Qué:** levantar el entorno de demo, correr el seed y seguir el guion con un alumno y un profesor.
+    - **Listo cuando:** el recorrido sale sin errores; lo que falle queda anotado como issue.
 
 ---
 

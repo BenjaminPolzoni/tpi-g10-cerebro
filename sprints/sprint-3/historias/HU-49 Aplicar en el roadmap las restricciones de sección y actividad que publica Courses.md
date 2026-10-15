@@ -114,10 +114,20 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-49.9 HIDDEN vs LOCKED en el back
-- [ ] T-49.10 Consumir el evento de cambio de restricción
-- [ ] T-49.11 Front: oculto, bloqueado y aviso con fecha
-- [ ] T-49.12 Tests y acta con G01
+- [ ] **T-49.9 Corroborar qué ya está hecho** · Equipo
+    - **Qué:** según E3 puede estar hecho. Probar en develop restricciones de Courses ocultas, bloqueadas y por fecha, y actualizar esta HU con lo que falte antes de seguir.
+    - **Listo cuando:** la HU dice exactamente qué falta.
+- [ ] **T-49.10 Distinguir oculto de bloqueado** · Back
+    - **Qué:** con el `on_unmet` que publica Courses, `HIDDEN` saca el nodo o la sección de lo que ve el alumno y `LOCKED` lo deja visible bloqueado, con su fecha.
+    - **Dónde:** `CourseRestrictionsClient`, `UnitRestrictionRules`, `GroupVisibilityRules`.
+    - **Listo cuando:** hay tests de los dos casos.
+- [ ] **T-49.11 Actualizar el roadmap cuando Courses cambia una restricción** · Back + Coordinación
+    - **Qué:** si G01 publica un evento de cambio, consumirlo e invalidar la caché de restricciones; si no lo publica, usar caché corta con lectura por pull. Registrar el acuerdo con G01.
+    - **Dónde:** `CoursesLifecycleEventListener`.
+    - **Listo cuando:** un cambio en Courses se ve en el roadmap sin reiniciar nada.
+- [ ] **T-49.12 Mostrarle al alumno lo bloqueado y cuándo se habilita** · Front
+    - **Qué:** el mapa del alumno no muestra lo oculto y en lo bloqueado dice «Se habilita el {fecha}», en texto.
+    - **Listo cuando:** se ve en el mapa 2D y en el mundo, y lo lee un lector de pantalla.
 
 ---
 

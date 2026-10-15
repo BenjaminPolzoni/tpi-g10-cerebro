@@ -114,10 +114,21 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-14.1 Reemplazar `DEMO_STUDENT_ID` por el alumno de la sesión
-- [ ] T-14.2 Reemplazar `COURSE_SEED_ID` por el curso de la ruta
-- [ ] T-14.3 Reemplazar `CURRENT_STUDENT_ID` en `ranking-detail`
-- [ ] T-14.4 Tests de las pantallas sin sesión
+- [ ] **T-14.1 Usar el alumno logueado en el roadmap, el mundo y los intentos** · Front
+    - **Qué:** sacar el respaldo `DEMO_STUDENT_ID` y tomar el id del alumno de la sesión. Si no hay sesión, mostrar un error en vez de seguir con el alumno de prueba.
+    - **Dónde:** `roadmap.store.ts`, `hex-world-page`, `challenge-attempt.service`.
+    - **Listo cuando:** con dos alumnos distintos cada uno ve su propio progreso, y sin sesión aparece el error (anunciado con `aria-live`). Hay un test de cada caso.
+- [ ] **T-14.2 Usar el curso de la URL en el roadmap y el ranking** · Front
+    - **Qué:** sacar `COURSE_SEED_ID` como curso por defecto y leer el curso de la ruta. Si la ruta no trae curso, error claro.
+    - **Dónde:** `RoadmapStore` (`roadmap.store.ts`) y `ranking-panel`.
+    - **Listo cuando:** dos cursos distintos muestran datos distintos, y hay un test sin curso en la ruta.
+- [ ] **T-14.3 Resaltar la fila del alumno logueado en el detalle del ranking** · Front
+    - **Qué:** reemplazar el mock `CURRENT_STUDENT_ID` por el alumno de la sesión para marcar «mi fila».
+    - **Dónde:** `ranking-detail`.
+    - **Listo cuando:** se resalta la fila del alumno logueado y no la de un alumno fijo. Hay un test.
+- [ ] **T-14.4 Dejar el front sin ids de prueba** · Front
+    - **Qué:** buscar `DEMO_STUDENT_ID`, `COURSE_SEED_ID` y `CURRENT_STUDENT_ID` en `src/app` y dejarlos solo en tests y mocks.
+    - **Listo cuando:** la búsqueda da cero fuera de tests y mocks, y `npm run verify` pasa.
 
 ---
 

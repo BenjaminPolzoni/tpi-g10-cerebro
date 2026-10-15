@@ -113,9 +113,15 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-66.1 Arrastre en el editor
-- [ ] T-66.2 Crear relación con tipo
-- [ ] T-66.3 Vista de mapa
+- [ ] **T-66.1 Arrastrar nodos en el editor y que queden ahí** · Front
+    - **Qué:** arrastre en `course-editor-page` usando el guardado de posiciones de HU-62.
+    - **Listo cuando:** la posición se mantiene al recargar.
+- [ ] **T-66.2 Crear una relación arrastrando y elegir su tipo** · Front
+    - **Qué:** arrastrar de un nodo a otro abre la elección del tipo (HU-65).
+    - **Listo cuando:** la relación queda creada con el tipo elegido.
+- [ ] **T-66.3 Ver cada roadmap del curso como un mapa** · Front
+    - **Qué:** en el editor, cambiar entre la vista tipo Moodle y el mapa de cada roadmap del curso (P1).
+    - **Listo cuando:** el profesor ve el mapa de cada roadmap desde el editor.
 
 ---
 

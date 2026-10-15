@@ -115,12 +115,22 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-45.7 Reproducir el error (E1)
-- [ ] T-45.8 Filtro por comisión en el back
-- [ ] T-45.9 Filtro en el front
-- [ ] T-45.10 Avance por comisión del profesor
-- [ ] T-45.11 Tests
-- [ ] T-45.12 Criterio de orden configurable (XP o notas) y lectura de notas del Motor
+- [ ] **T-45.7 Reproducir y arreglar el error del ranking por comisión** · Back + Front
+    - **Qué:** reproducirlo en el entorno integrado con `ROADMAP_BY_GROUP_ENABLED=true`, anotar el pedido y la respuesta que fallan, arreglarlo (E1: se arregla este sprint).
+    - **Listo cuando:** el caso que fallaba tiene un test y ya no falla.
+- [ ] **T-45.8 Ranking del curso con filtro opcional por comisión** · Back
+    - **Qué:** por defecto se muestra el ranking del curso; un parámetro opcional de comisión lo filtra (la comisión es un filtro, P10). El anonimato no cambia (DEC-007).
+    - **Dónde:** `RankingService`, `RankingController`.
+    - **Listo cuando:** con y sin comisión devuelve lo esperado. Hay tests.
+- [ ] **T-45.9 Filtro por comisión en la pantalla del ranking** · Front
+    - **Qué:** un `generic-select` con las comisiones en `ranking-panel`.
+    - **Listo cuando:** el alumno cambia de comisión y el ranking se actualiza.
+- [ ] **T-45.10 Avance por comisión para el profesor** · Front
+    - **Qué:** vista para el profesor con el avance de cada comisión, usando `GET /courses/{id}/groups/{gid}/progress` (`GroupProgressController`, ya existe).
+    - **Listo cuando:** el profesor compara el avance de dos comisiones.
+- [ ] **T-45.11 Elegir si el ranking ordena por XP o por notas** · Back + Front
+    - **Qué:** ajuste del profesor por roadmap (DEC-017). Con «notas», el orden usa la nota que manda el Motor (P14; acordar con G09 cómo llega). El desempate en cascada sigue igual.
+    - **Listo cuando:** cambiar el ajuste cambia el orden y hay tests de los dos modos.
 
 ---
 

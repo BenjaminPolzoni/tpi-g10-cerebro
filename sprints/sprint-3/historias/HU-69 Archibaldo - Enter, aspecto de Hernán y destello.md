@@ -114,9 +114,16 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-69.1 Interacción con Enter y foco
-- [ ] T-69.2 Avatar y nombre de Archibaldo editables por profesor y gestor
-- [ ] T-69.3 Destello del camino
+- [ ] **T-69.1 Hablar con Archibaldo con Enter** · Front
+    - **Qué:** Enter abre `npc-dialogue` solo si el personaje está cerca del NPC; el foco queda en el diálogo y Escape lo cierra (con el modal del kit de HT-26).
+    - **Dónde:** `world-3d.service`, `npc-dialogue`.
+    - **Listo cuando:** se puede hablar con Archibaldo sin mouse.
+- [ ] **T-69.2 Avatar y nombre de Archibaldo configurables por curso** · Back + Front
+    - **Qué:** el profesor y el gestor eligen el avatar (reutilizando el editor de avatares, que ya está hecho) y el nombre; se guarda por curso y el mundo los usa en vez de la skin del capitán pirata (`world-3d.service.ts:3109`).
+    - **Listo cuando:** dos cursos muestran Archibaldos distintos.
+- [ ] **T-69.3 Destello que marca el camino al próximo nodo** · Front
+    - **Qué:** efecto en el mundo 3D que guía hasta el próximo nodo disponible, sin bajar los FPS.
+    - **Listo cuando:** el alumno sigue el destello y llega al nodo correcto.
 
 ---
 

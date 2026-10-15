@@ -115,10 +115,16 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-17.1 Migración y entidades
-- [ ] T-17.2 Rutas `/roadmaps/{id}` y compatibilidad
-- [ ] T-17.3 Ajuste por roadmap: XP, vidas, nivel y ranking por curso o por roadmap
-- [ ] T-17.4 Tests de regresión
+- [ ] **T-17.1 Permitir varios roadmaps por curso en la base** · Back
+    - **Qué:** migración Flyway (la siguiente a V26) que quita el UNIQUE de `roadmap.course_cohort_id` y agrega `is_primary`; el roadmap actual de cada curso queda como principal. Ajustar entidad y repositorio para buscar por id de roadmap y por «principal del curso».
+    - **Listo cuando:** la migración corre sobre una base con datos sin perder nada y cada curso tiene exactamente un roadmap principal.
+- [ ] **T-17.2 Rutas por roadmap sin romper las rutas por curso** · Back
+    - **Qué:** exponer `/roadmaps/{roadmapId}/...` y sumar `roadmap_id` a los DTOs. Las rutas actuales `/courses/{courseId}/...` siguen funcionando y resuelven el roadmap principal.
+    - **Dónde:** `GraphController`, `NodeController`, `ProgressController`, `LevelController`, `RankingController` y sus DTOs.
+    - **Listo cuando:** el front actual anda sin cambios, las rutas nuevas responden lo mismo para el roadmap principal y toda la suite existente pasa.
+- [ ] **T-17.3 Elegir por roadmap si XP, vidas, nivel y ranking son del curso o del roadmap** · Back
+    - **Qué:** guardar en cada roadmap si esos datos se comparten con todo el curso o son propios (P2, DEC-017), y hacer que el ledger de XP, `LevelService` y `RankingService` respeten esa elección.
+    - **Listo cuando:** con dos roadmaps en un curso, en modo «por curso» el XP se acumula en un solo total y en modo «por roadmap» cada uno tiene el suyo. Hay tests de los dos modos.
 
 ---
 

@@ -114,10 +114,19 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-16.1 Neo4j en el compose local
-- [ ] T-16.2 Sumar Neo4j a la plataforma y a la demo (lo hacemos nosotros, G1)
-- [ ] T-16.3 Prueba de concepto con Spring Data Neo4j + Testcontainers
-- [ ] T-16.4 Modelo escrito en 04
+- [ ] **T-16.1 Levantar Neo4j en el compose local** · Infra
+    - **Qué:** sumar el servicio `neo4j` (Community, imagen oficial) al compose local del back, con volumen persistente, usuario y clave por variables de entorno y healthcheck.
+    - **Dónde:** compose de desarrollo de `tpi-roadmap`.
+    - **Listo cuando:** `docker compose up` lo levanta, el navegador de Neo4j responde en localhost y los datos sobreviven a un reinicio.
+- [ ] **T-16.2 Sumar Neo4j a la plataforma y a la demo** · Infra
+    - **Qué:** agregar Neo4j a `tpi-system-compose` y a los entornos (mesh y demo) de forma que solo lo alcance roadmap-service. Lo hacemos nosotros y solo lo usa nuestro micro (G1). Avisar a quien mantiene la plataforma.
+    - **Listo cuando:** roadmap-service se conecta a Neo4j en el entorno integrado, ningún otro servicio lo ve, y queda anotado en `acuerdos/plataforma-gateway-kafka`.
+- [ ] **T-16.3 Probar Spring Data Neo4j con un test en el CI** · Back
+    - **Qué:** sumar `spring-boot-starter-data-neo4j`, mapear un ejemplo mínimo (una sección con dos nodos unidos por `REQUIRES`) y escribir un test de integración con Testcontainers que lo guarde y lo lea.
+    - **Listo cuando:** el test corre en verde en el CI sin Neo4j instalado en la máquina.
+- [ ] **T-16.4 Escribir el modelo del grafo** · Docs
+    - **Qué:** documentar en `04-base-de-grafos` las etiquetas (roadmap, sección, nodo con los tipos fijos de DEC-018), las 5 relaciones con sus propiedades (`label`, `visible`, modo AND/OR y XP mínimo en `requires`), dónde van `START`/`END` y qué se queda en Postgres.
+    - **Listo cuando:** el equipo lo revisó y HT-18 puede arrancar sin dudas de modelo.
 
 ---
 

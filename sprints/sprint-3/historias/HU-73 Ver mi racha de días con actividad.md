@@ -115,12 +115,19 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-73.1 Migración: `actividad_diaria` y `racha_maxima`
-- [ ] T-73.2 Registrar la actividad al completar un nodo o leer un contenido obligatorio
-- [ ] T-73.3 Racha vigente y máxima en la respuesta del progreso
-- [ ] T-73.4 HUD con `generic-streak-flame` (saca el valor fijo, DT-13)
-- [ ] T-73.5 Flag de la racha
-- [ ] T-73.6 Tests con reloj simulado
+- [ ] **T-73.1 Registrar los días con actividad** · Back
+    - **Qué:** migración con `actividad_diaria` (alumno, curso-cohorte, día; únicos los tres) y `racha_maxima`. Se registra al completar un nodo o leer un contenido obligatorio, con el día según la zona horaria del curso.
+    - **Dónde:** `ProgressService`, `ContentReadingWriter`.
+    - **Listo cuando:** dos actividades el mismo día dejan un solo registro. Hay test.
+- [ ] **T-73.2 Calcular la racha y devolverla con el progreso** · Back
+    - **Qué:** `current_streak` y `max_streak` en la respuesta del progreso, detrás de un flag de racha.
+    - **Listo cuando:** responde en menos de 200 ms y hay tests con reloj simulado (3 días seguidos, un día salteado).
+- [ ] **T-73.3 Mostrar la racha real en el HUD** · Front
+    - **Qué:** `streak.component` usa `generic-streak-flame` con el dato real y se saca el 7 fijo (DT-13).
+    - **Listo cuando:** la llama muestra la racha del alumno logueado.
+- [ ] **T-73.4 Insignia por racha** · Back
+    - **Qué:** criterio de insignia por racha (por ejemplo, 50 días) evaluado en `BadgeEvaluator`.
+    - **Listo cuando:** se otorga una vez al llegar a la racha. Hay test.
 
 ---
 
