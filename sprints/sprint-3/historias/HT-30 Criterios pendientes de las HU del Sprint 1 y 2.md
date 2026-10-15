@@ -17,7 +17,7 @@ en_taiga: false
 > Nueva: todavía no está cargada en Taiga. El 2026-10-15 junta en una sola HT lo que les falta a 10 HU que figuran Done en Taiga: HU-01, HU-15, HU-16, HU-20, HU-21, HU-41, HU-43, HU-44, HU-46 y HU-48 (34 puntos). Las HU originales quedan en Done en su sprint; cada tarea dice a qué HU y a qué CA corresponde.
 
 > [!important] Prioridad 1 del sprint (2026-10-15)
-> Va primero, junto con la otra prioridad 1: HT-26 (UI-KIT). Son criterios que ya se dieron por terminados y no se cumplen.
+> Va primero, junto con la otra prioridad 1: HT-26 (UI-KIT). Son criterios que ya se dieron por terminados y no se cumplen. Dentro de la HT, las tareas de **insignias** (HU-20 y HU-21, T-30.10 a T-30.16) van primero.
 
 [G10] — HT-30 — Criterios pendientes de las HU del Sprint 1 y 2
 ---------------------------------------------------------------
@@ -139,12 +139,12 @@ Dependencias / Impactos
 - [ ] T-30.8 HU-16 CA3: el gate ignora los datos `stale`
 - [ ] T-30.9 HU-16 CA3: tests de caché vigente, vencida y sin caché
 
-**HU-20: editar y dar de baja insignias en el front** ([us/4243](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4243))
+⭐ **HU-20: editar y dar de baja insignias en el front** (insignias, prioridad 1) ([us/4243](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4243))
 - [ ] T-30.10 HU-20: front de edición de insignias del curso
 - [ ] T-30.11 HU-20: front de baja lógica de insignias (y endpoint si no existe)
 - [ ] T-30.12 HU-20: tests
 
-**HU-21 CA1: tres criterios que nunca se otorgan** ([us/4244](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4244))
+⭐ **HU-21 CA1: tres criterios que nunca se otorgan** (insignias, prioridad 1) ([us/4244](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4244))
 - [ ] T-30.13 HU-21 CA1: evaluador de `SECTION_NO_LIVES_LOST`
 - [ ] T-30.14 HU-21 CA1: evaluador de `NODE_NO_RETRIES`
 - [ ] T-30.15 HU-21 CA1: evaluador de `LIFE_RECOVERED`, consumiendo `LIVES_EXHAUSTED` / `LIVES_AVAILABLE` de Accounting (E8)

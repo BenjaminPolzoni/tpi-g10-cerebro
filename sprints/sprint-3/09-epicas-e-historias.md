@@ -77,7 +77,7 @@ estado: borrador
 
 ## Orden sugerido
 
-0. **Prioridad 1 (desde el día 1):** [[sprints/sprint-3/historias/HT-30 Criterios pendientes de las HU del Sprint 1 y 2|HT-30]] (criterios pendientes de HU cerradas) y [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap|HT-26]] (UI-KIT y componente de grafo). Van antes que el resto.
+0. **Prioridad 1 (desde el día 1):** [[sprints/sprint-3/historias/HT-30 Criterios pendientes de las HU del Sprint 1 y 2|HT-30]] (criterios pendientes de HU cerradas, empezando por las insignias: T-30.10 a T-30.16) y [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap|HT-26]] (UI-KIT y componente de grafo). Van antes que el resto.
 1. **Semana 1:** el resto de la deuda del Sprint 2 y HT-16 (spike de Neo4j). Las dudas 🔴 de [[sprints/sprint-3/08-dudas|08]] (P1 a P4, G1) ya están respondidas (2026-10-15). En paralelo, lo que no depende de nada: HU-67, HU-68, HU-69, HT-22 (si G07 pasó el catálogo) y HT-23.
 2. **Semana 2:** HT-17 y HT-18. Front: HU-62 y HU-63 (con el componente de grafo de HT-26) sobre un mock de `/roadmaps/{id}/graph`. HU-64 y HU-65 sobre el módulo `graph`.
 3. **Cierre:** HU-57 a HU-61, HT-19, HT-20, HU-66 y HT-21. Demo con un curso completo de inicio a fin.
