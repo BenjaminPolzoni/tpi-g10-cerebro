@@ -9,7 +9,7 @@ url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaj
 
 # EP-144: Esqueleto del servicio Roadmap — TRANSVERSAL (v3)
 
-> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-15 16:55). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/epic/144) · Estado: **New** · Responsable: **Gabriela Camacho** · HU cerradas: **7/7**
 
 [G10] — Esqueleto del servicio Roadmap — TRANSVERSAL (v3)

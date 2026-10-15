@@ -11,7 +11,7 @@ url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaj
 
 # HU-22: Ver mis insignias
 
-> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-15 16:54). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4245) · Estado: **Done** · Responsable: **Ludmila Mailen Cejas** · Sprint: **G10 - Sprint 2**
 > Épica: [[epicas/EP-69 Logros e insignias|EP-69]] · Tareas cerradas: **5/5**
 

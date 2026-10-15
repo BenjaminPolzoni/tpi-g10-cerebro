@@ -11,7 +11,7 @@ url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaj
 
 # HU-11: Configurar qué contenidos son de lectura obligatoria
 
-> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-15 16:53). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/738) · Estado: **Done** · Responsable: **Gabriela Camacho** · Sprint: **G10 - Sprint 1**
 > Épica: [[epicas/EP-593 Nodos de contenido y lectura previa|EP-593]] · Tareas cerradas: **5/5**
 

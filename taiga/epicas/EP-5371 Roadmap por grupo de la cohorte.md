@@ -9,7 +9,7 @@ url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaj
 
 # EP-5371: Roadmap por grupo de la cohorte
 
-> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-15 16:55). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/epic/5371) · Estado: **New** · Responsable: **Sin asignar** · HU cerradas: **2/3**
 
 [G10] — Roadmap por grupo de la cohorte
@@ -61,4 +61,4 @@ Dependencias / Impactos
 |---|---|---|---|---|
 | [[historias/HT-10 [DEPRECADA] Acta con Courses para comisiones + cliente de comisiones\|HT-10]] [DEPRECADA] Acta con Courses para comisiones + cliente de comisiones | Done | Mateo Delgado Costa | G10 - Sprint 2 | 6/6 |
 | [[historias/HU-44 Ver el roadmap de cada una de mis comisiones\|HU-44]] Ver el roadmap de cada una de mis comisiones | Done | Baltasar Rodriguez Teruel | G10 - Sprint 2 | 10/10 |
-| [[historias/HU-45 Ranking de la cohorte y avance por comisión\|HU-45]] Ranking de la cohorte y avance por comisión | New | Lorenzo Araujo | G10 - Sprint 2 | 5/6 |
+| [[historias/HU-45 Ranking de la cohorte y avance por comisión\|HU-45]] Ranking de la cohorte y avance por comisión | New | Lorenzo Araujo | G10 - Sprint 03 | 5/13 |

@@ -9,7 +9,7 @@ url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaj
 
 # EP-4232: Edición del roadmap por el profesor
 
-> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-15 16:55). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/epic/4232) · Estado: **New** · Responsable: **Sin asignar** · HU cerradas: **3/3**
 
 [G10] — Edición del roadmap por el profesor

@@ -11,7 +11,7 @@ url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaj
 
 # HU-38: Ver mi nivel en el curso y cuánto me falta para el siguiente
 
-> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-15 16:53). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4240) · Estado: **Done** · Responsable: **Benjamin Polzoni** · Sprint: **G10 - Sprint 2**
 > Épica: [[epicas/EP-4231 Niveles por curso|EP-4231]] · Tareas cerradas: **5/5**
 

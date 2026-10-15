@@ -4,98 +4,115 @@ codigo: HU-45
 ref: 5374
 estado: "New"
 responsable: "Lorenzo Araujo"
-epicas: "[[epicas/EP-5371 Roadmap por grupo de la cohorte|EP-5371]]"
-sprint: "G10 - Sprint 2"
+epicas: "[[epicas/EP-5371 Roadmap por grupo de la cohorte|EP-5371]], [[epicas/EP-8632 Deuda del Sprint 2|EP-8632]]"
+sprint: "G10 - Sprint 03"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/5374
 ---
 
 # HU-45: Ranking de la cohorte y avance por comisión
 
-> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
-> [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/5374) · Estado: **New** · Responsable: **Lorenzo Araujo** · Sprint: **G10 - Sprint 2**
-> Épica: [[epicas/EP-5371 Roadmap por grupo de la cohorte|EP-5371]] · Tareas cerradas: **5/6**
+> [!info] Generado desde Taiga (2026-10-15 16:54). No editar a mano: correr `scripts/taiga_sync.py`.
+> [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/5374) · Estado: **New** · Responsable: **Lorenzo Araujo** · Sprint: **G10 - Sprint 03**
+> Épica: [[epicas/EP-5371 Roadmap por grupo de la cohorte|EP-5371]], [[epicas/EP-8632 Deuda del Sprint 2|EP-8632]] · Tareas cerradas: **5/13**
 
-[G10] — HU-45 — Ranking y avance por comisión
----------------------------------------------
+[G10] — HU-45 — Ranking de la cohorte y avance por comisión
+-----------------------------------------------------------
 
 * * *
+
 Descripción (Como / Quiero / Para)
 ----------------------------------
 
-*   **Como**: PROFESOR y ALUMNO
-*   **Quiero**: ver el ranking de mi cohorte y el avance de cada comisión del curso
-*   **Para**: comparar la XP de la cohorte en el ranking y seguir el avance de cada comisión por separado
+*   **Como**: ALUMNO / PROFESOR
+*   **Quiero**: ver el ranking sin errores, por curso por defecto y filtrable por comisión, y como profesor ver el avance por comisión
+*   **Para**: comparar el avance con el curso o la comisión
 
 * * *
+
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: El ranking es de la COHORTE y se calcula con la XP de la cohorte, que es compartida entre todas las comisiones del alumno. El selector de comisión filtra el AVANCE/recorrido (modelo B), NO el ranking: sirve para ver el avance de una comisión, pero la XP y las posiciones del ranking son siempre de la cohorte. Solo PROFESSOR/MANAGER (Gestor) asignan el grupo de cada alumno; Roadmap solo lee, nunca asigna ni mueve comisiones. Decisión del 08/10 (reemplaza D-02 y P-29).
-*   [ ] Validaciones: La comisión elegida (para el avance) pertenece al curso-cohorte; el alumno solo puede pedir el avance de sus comisiones.
-*   [ ] Datos obligatorios: courseCohortId; la comisión elegida solo aplica al avance (selector), no al ranking.
-*   [ ] Performance (tiempos, volumen, límites): Mismo endpoint de ranking de HU-24 (siempre por cohorte); el parámetro de comisión solo aplica a los endpoints de avance; sin llamadas extra a Courses.
-*   [ ] Seguridad (roles, permisos, datos sensibles): El ranking es de la cohorte (visible según HU-24). Para el avance, PROFESSOR dueño, GESTOR o ADMIN eligen cualquier comisión; el alumno solo las suyas (403 si pide otra).
-*   [ ] Accesibilidad (WCAG/teclado/lectores): Selector de comisión (para el avance) operable por teclado y con etiqueta en texto.
-*   [ ] Otros: Depende de HU-24 y HT-10.
+*   [ ] Reglas de negocio: Default: ranking por curso; la comisión (= grupo) es un filtro (P10, confirmado). El profesor configura si el ranking ordena por XP o por notas (P14); las notas vienen del Motor de desafíos y falta acordar con G09 cómo llegan. El desempate en cascada (HU-25) se mantiene. Corrección de los profes: hoy el ranking por grupo da error (sin reproducir); se arregla en este sprint (E1).
+*   [ ] Validaciones: No aplica.
+*   [ ] Datos obligatorios: No aplica.
+*   [ ] Performance (tiempos, volumen, límites): No aplica.
+*   [ ] Seguridad (roles, permisos, datos sensibles): Anonimato de filas ajenas (DEC-007). El avance por comisión: ADMIN o PROFESSOR.
+*   [ ] Accesibilidad (WCAG/teclado/lectores): Filtro accesible con teclado.
+*   [ ] Otros: No aplica.
 
 * * *
+
 Criterios de Aceptación (CA)
 ----------------------------
 
-*   [ ] **CA1**: El profesor elige 2W1 y ve el avance de 2W1; el ranking que ve es de la cohorte.
-*   [ ] **CA2**: Un alumno de 2W1 y 2W2 aparece una sola vez en el ranking de la cohorte con su XP.
-*   [ ] **CA3**: Al quitar a un alumno de 2W1, el avance de 2W1 ya no lo incluye; su posición en el ranking de la cohorte no cambia.
-*   [ ] **CA4**: Un alumno que pide el avance de una comisión ajena recibe 403.
+*   [ ] **CA1**: Error del ranking por grupo reproducido y documentado.
+*   [ ] **CA2**: El ranking muestra el del curso por defecto, con filtro opcional por comisión.
+*   [ ] **CA3**: El profesor ve el avance por comisión (`GET /courses/{id}/groups/{gid}/progress`).
+*   [ ] **CA4**: Test que cubre el caso que fallaba.
+*   [ ] **CA5**: El profesor elige si el ranking ordena por XP o por notas.
 
 * * *
+
 BDD (mínimo 3 escenarios)
 -------------------------
 
-**Característica:** Ranking de la cohorte y avance por comisión
+**Característica:** Ranking y avance por comisión
 
-**Escenario 1**  
+**Escenario 1**
 
-*   **Dado**: un curso con 2W1 y 2W2
-*   **Cuando**: el profesor elige 2W2
-*   **Entonces**: ve solo a los alumnos de 2W2 en el avance; el ranking sigue siendo de la cohorte
+*   **Dado**: un curso con 2 comisiones
+*   **Cuando**: el alumno abre el ranking
+*   **Entonces**: ve el del curso completo
 
-**Escenario 2**  
+**Escenario 2**
 
-*   **Dado**: un alumno de 2W1 y 2W2 con 500 XP
-*   **Cuando**: se calcula el ranking de la cohorte
-*   **Entonces**: aparece una sola vez con 500 XP
+*   **Dado**: el mismo curso
+*   **Cuando**: elige su comisión
+*   **Entonces**: ve solo los de su comisión, sin datos personales ajenos
 
-**Escenario 3**  
+**Escenario 3**
 
-*   **Dado**: un alumno quitado de 2W1
-*   **Cuando**: se recalcula el avance de 2W1
-*   **Entonces**: ya no aparece en el avance de 2W1; el ranking de la cohorte no cambia
+*   **Dado**: un profesor del curso
+*   **Cuando**: abre el avance por comisión
+*   **Entonces**: ve el progreso de cada comisión
 
 * * *
+
 Prototipo
 ---------
 
-*   **Capturas**: Selector de comisión (filtra avance, no ranking) en StaffRankingView, teacher-home-page y el ranking del alumno.
-*   **URL Figma**: Pendiente de publicar.
-*   **Storybook**: Pendiente.
-*   **Mock API / Swagger**: GET /api/roadmap/courses/{courseId}/ranking (HU-24, por cohorte); parámetro de comisión solo en los endpoints de avance del profesor.
+*   **Capturas**: Ranking con filtro; panel del profesor.
+*   **URL Figma**: Pendiente.
+*   **Storybook**: `generic-select`, `generic-table`.
+*   **Mock API / Swagger**: GET /api/roadmap/courses/{courseId}/ranking?group_id=… y GET /api/roadmap/courses/{courseId}/groups/{groupId}/progress.
 
 * * *
+
 Estimación / Prioridad
 ----------------------
 
+**Formato rápido**
+
 *   **Puntos (Fibonacci)**: 5
-*   **Prioridad (MoSCoW / Numérica)**: Should
+*   **Prioridad (MoSCoW / Numérica)**: Must
+
+**Formato tabla (opcional)**
+
+| Puntos (Fibonacci) | Prioridad (MoSCoW / Numérica) |
+| --- | --- |
+| 5 | Must |
 
 * * *
+
 Dependencias / Impactos
 -----------------------
 
-*   Servicios involucrados: Courses (comisiones, vía HT-10), API Gateway.
-*   Módulos afectados: RankingService, RankingController, StaffRankingView, teacher-home-page.
-*   Otros equipos / aprobaciones: G01 (HT-10).
-*   Impacto en datos / migraciones: Usa student_course_group de HT-10.
-*   Riesgos y mitigación (opcional): Ninguno adicional.
+*   Servicios involucrados: Courses (comisiones).
+*   Módulos afectados: `RankingController`, `RankingService`, `GroupProgressController`, `ranking-panel`.
+*   Otros equipos / aprobaciones: G09 (cómo llegan las notas del Motor; solo para CA5).
+*   Impacto en datos / migraciones: Sin migración.
+*   Riesgos y mitigación (opcional): Que G09 no defina a tiempo cómo llegan las notas; mitigación: pedirlo la semana 1 (T-45.12).
+
 
 ## Tareas
 
@@ -105,3 +122,10 @@ Dependencias / Impactos
 - [x] #5424 T-45.4 Alumno en varias comisiones y alumno quitado de una · Closed · Lorenzo Araujo
 - [x] #5425 T-45.5 BDD ranking de la cohorte · Closed · Lorenzo Araujo
 - [x] #5426 T-45.6 Wiki, OpenAPI y diagrama de secuencia · Closed · Quinteros Tomás
+- [ ] #9305 T-45.7 Reproducir y arreglar el error del ranking por comisión · New · Benjamin Polzoni
+- [ ] #9306 T-45.8 Ranking del curso con filtro opcional por comisión · New · Benjamin Polzoni
+- [ ] #9307 T-45.9 Filtro por comisión en la pantalla del ranking · New · Benjamin Polzoni
+- [ ] #9308 T-45.10 Avance por comisión para el profesor · New · Benjamin Polzoni
+- [ ] #9309 T-45.11 Elegir si el ranking ordena por XP o por notas · New · Benjamin Polzoni
+- [ ] #9310 T-45.12 Acordar con el Motor (G09) cómo llegan las notas · New · Benjamin Polzoni
+- [ ] #9345 T-45.13 Wiki, OpenAPI y diagrama de secuencia · New · Quinteros Tomás

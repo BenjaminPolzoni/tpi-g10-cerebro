@@ -9,7 +9,7 @@ url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaj
 
 # EP-59: XP y niveles — FUERA DE ALCANCE (v3)
 
-> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-15 16:55). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/epic/59) · Estado: **New** · Responsable: **Baltasar Rodriguez Teruel** · HU cerradas: **0/0**
 
 [G10] — XP y niveles — FUERA DE ALCANCE (v3)

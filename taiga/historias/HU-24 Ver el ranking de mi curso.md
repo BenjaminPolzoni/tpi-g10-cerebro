@@ -11,7 +11,7 @@ url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaj
 
 # HU-24: Ver el ranking de mi curso
 
-> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-15 16:53). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4241) · Estado: **Done** · Responsable: **Lorenzo Araujo** · Sprint: **G10 - Sprint 2**
 > Épica: [[epicas/EP-61 Ranking y cierre académico|EP-61]] · Tareas cerradas: **6/6**
 

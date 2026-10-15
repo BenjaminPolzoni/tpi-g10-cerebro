@@ -11,7 +11,7 @@ url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaj
 
 # HU-47: Asignar a un nodo un desafío de mi pool del Motor
 
-> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-15 16:54). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7196) · Estado: **Done** · Responsable: **Mateo Delgado Costa** · Sprint: **Backlog**
 > Épica: [[epicas/EP-4232 Edición del roadmap por el profesor|EP-4232]] · Tareas cerradas: **5/14**
 

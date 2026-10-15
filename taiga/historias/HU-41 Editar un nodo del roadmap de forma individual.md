@@ -11,7 +11,7 @@ url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaj
 
 # HU-41: Editar un nodo del roadmap de forma individual
 
-> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-15 16:54). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4247) · Estado: **Done** · Responsable: **Stefano Zoffoli** · Sprint: **G10 - Sprint 2**
 > Épica: [[epicas/EP-4232 Edición del roadmap por el profesor|EP-4232]] · Tareas cerradas: **6/6**
 

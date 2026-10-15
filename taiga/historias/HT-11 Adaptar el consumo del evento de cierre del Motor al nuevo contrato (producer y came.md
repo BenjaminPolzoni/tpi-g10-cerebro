@@ -11,7 +11,7 @@ url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaj
 
 # HT-11: Adaptar el consumo del evento de cierre del Motor al nuevo contrato (producer y camelCase)
 
-> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-15 16:54). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7048) · Estado: **Done** · Responsable: **Sin asignar** · Sprint: **G10 - Sprint 2**
 > Épica: Sin épica · Tareas cerradas: **3/3**
 

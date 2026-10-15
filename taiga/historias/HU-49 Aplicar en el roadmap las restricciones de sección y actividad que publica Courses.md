@@ -4,107 +4,128 @@ codigo: HU-49
 ref: 7211
 estado: "New"
 responsable: "Sin asignar"
-epicas: "[[epicas/EP-4230 Unidades del roadmap sincronizadas con Courses|EP-4230]]"
-sprint: "Backlog"
+epicas: "[[epicas/EP-4230 Unidades del roadmap sincronizadas con Courses|EP-4230]], [[epicas/EP-8632 Deuda del Sprint 2|EP-8632]]"
+sprint: "G10 - Sprint 03"
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7211
 ---
 
 # HU-49: Aplicar en el roadmap las restricciones de sección y actividad que publica Courses
 
-> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
-> [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7211) · Estado: **New** · Responsable: **Sin asignar** · Sprint: **Backlog**
-> Épica: [[epicas/EP-4230 Unidades del roadmap sincronizadas con Courses|EP-4230]] · Tareas cerradas: **0/8**
+> [!info] Generado desde Taiga (2026-10-15 16:54). No editar a mano: correr `scripts/taiga_sync.py`.
+> [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7211) · Estado: **New** · Responsable: **Sin asignar** · Sprint: **G10 - Sprint 03**
+> Épica: [[epicas/EP-4230 Unidades del roadmap sincronizadas con Courses|EP-4230]], [[epicas/EP-8632 Deuda del Sprint 2|EP-8632]] · Tareas cerradas: **0/6**
 
 [G10] — HU-49 — Aplicar en el roadmap las restricciones de sección y actividad que publica Courses
 --------------------------------------------------------------------------------------------------
 
 * * *
+
 Descripción (Como / Quiero / Para)
 ----------------------------------
 
 *   **Como**: ALUMNO
-*   **Quiero**: que el roadmap respete las restricciones de fecha y de comisión que el profesor configura en Courses sobre secciones y actividades
-*   **Para**: no ver ni entrar a lo que todavía no me corresponde
+*   **Quiero**: saber por qué un nodo, una sección o un roadmap está oculto o bloqueado por fecha (incluida la ventana horaria de los exámenes), y que se actualice cuando Courses cambia la restricción
+*   **Para**: no perderme una actividad habilitada ni intentar una que todavía no lo está
 
 * * *
+
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Courses es dueño de las restricciones (fecha desde/hasta, comisión, operador ALL/ANY y comportamiento HIDDEN/LOCKED); Roadmap las lee y las aplica, no las edita. HIDDEN: la unidad o el nodo no aparece ni cuenta para el avance. LOCKED: aparece bloqueado con el motivo. Las restricciones de la sección y las de la actividad se cumplen juntas: una actividad no anula el bloqueo de su sección. La apertura es inclusiva y el cierre exclusivo, como en Courses. El gate rechaza con group_restricted o date_restricted. Las restricciones de comisión sobre secciones las resuelve HU-44; esta historia suma la fecha y el nivel de actividad. Los cambios rigen hacia adelante y no revierten desbloqueos (RF-CFG-06).
-*   [ ] Validaciones: La restricción pertenece a una sección o actividad del curso-cohorte; la actividad está vinculada a un nodo con el identificador que defina el acta con G01.
-*   [ ] Datos obligatorios: courseCohortId, course_section_id, identificador de actividad y condiciones.
-*   [ ] Performance (tiempos, volumen, límites): Sin llamadas a Courses por consulta del recorrido: se usa la copia local que actualiza el evento.
-*   [ ] Seguridad (roles, permisos, datos sensibles): Lectura con token técnico por el API Gateway (scope a proveer por G01/G07).
-*   [ ] Accesibilidad (WCAG/teclado/lectores): Motivo en texto, por ejemplo «disponible desde el 12/10 08:00».
-*   [ ] Otros: Bloqueada por G01: hoy las restricciones existen solo por sección (GET/PUT /course-sections/{id}/restrictions), solo las leen personas y no se publican eventos. Pedidos en T-49.1 y T-49.2. Los motivos nuevos del gate se piden a G09 en T-44.10.
+*   [ ] Reglas de negocio: Courses publica restricciones por sección y actividad. HIDDEN: el alumno no ve el nodo. LOCKED: lo ve bloqueado con la fecha. El gate ya evalúa `DATE_RESTRICTED`. La ventana horaria de un nodo `EXAM` es una restricción de fecha más que publica Courses (P9): el nodo no tiene campos propios. Lo oculto y lo bloqueado se aplica también a un roadmap entero.
+*   [ ] Validaciones: Si llega un evento de cambio, se invalida la caché de restricciones del curso. Las fechas se guardan en UTC y se muestran en la zona horaria del curso.
+*   [ ] Datos obligatorios: No aplica.
+*   [ ] Performance (tiempos, volumen, límites): No aplica.
+*   [ ] Seguridad (roles, permisos, datos sensibles): No aplica.
+*   [ ] Accesibilidad (WCAG/teclado/lectores): La fecha de habilitación en texto, no solo con un ícono.
+*   [ ] Otros: Depende de G01 (evento de cambio). Con N roadmaps, el profesor define las restricciones de cada roadmap y se copian al clonarlo (G4). E3: puede que ya esté hecha; corroborarlo antes de empezar.
 
 * * *
+
 Criterios de Aceptación (CA)
 ----------------------------
 
-*   [ ] **CA1**: Una unidad HIDDEN fuera de fecha no aparece ni cuenta para el avance.
-*   [ ] **CA2**: Una unidad LOCKED fuera de fecha aparece bloqueada con su motivo.
-*   [ ] **CA3**: El gate rechaza un nodo fuera de fecha con date_restricted.
-*   [ ] **CA4**: Un cambio de restricción en Courses se refleja sin reiniciar el servicio y sin perder progreso.
-*   [ ] **CA5**: Con Courses caído se usa la última copia guardada y se registra el error.
+*   [ ] **CA1**: Un nodo HIDDEN no aparece al alumno.
+*   [ ] **CA2**: Un nodo LOCKED aparece bloqueado con su fecha de habilitación.
+*   [ ] **CA3**: Al llegar el evento de cambio de Courses, el estado se actualiza.
+*   [ ] **CA4**: El front muestra el aviso con la fecha.
+*   [ ] **CA5**: Un nodo examen fuera de su ventana horaria responde `DATE_RESTRICTED` y muestra «Se habilita el {fecha} a las {hora}», con tests de reloj simulado.
+*   [ ] **CA6**: Un roadmap que Courses marca como oculto no aparece al alumno; uno bloqueado aparece con el motivo y la fecha.
 
 * * *
+
 BDD (mínimo 3 escenarios)
 -------------------------
 
-**Característica:** Restricciones de Courses en el roadmap
+**Característica:** Restricciones de Courses
 
-**Escenario 1**  
+**Escenario 1**
 
-*   **Dado**: una unidad HIDDEN disponible desde mañana
-*   **Cuando**: el alumno abre su recorrido hoy
-*   **Entonces**: no la ve
+*   **Dado**: un nodo con restricción HIDDEN
+*   **Cuando**: el alumno abre el roadmap
+*   **Entonces**: no lo ve
 
-**Escenario 2**  
+**Escenario 2**
 
-*   **Dado**: una actividad LOCKED hasta el viernes dentro de una unidad abierta
-*   **Cuando**: el alumno intenta entrar a su nodo
-*   **Entonces**: el gate responde date_restricted con la fecha en el motivo
+*   **Dado**: un nodo LOCKED hasta el 20/10
+*   **Cuando**: el alumno lo abre el 18/10
+*   **Entonces**: lo ve bloqueado con «se habilita el 20/10»
 
-**Escenario 3**  
+**Escenario 3**
 
-*   **Dado**: el profesor adelanta la fecha de apertura en Courses
-*   **Cuando**: llega el evento de cambio
-*   **Entonces**: el alumno ve la unidad en su próxima consulta y conserva su progreso
+*   **Dado**: Courses cambia la fecha de un nodo
+*   **Cuando**: llega el evento
+*   **Entonces**: el roadmap muestra la fecha nueva
+
+**Escenario 4**
+
+*   **Dado**: un examen habilitado de 18:00 a 20:00
+*   **Cuando**: el alumno entra a las 17:59
+*   **Entonces**: el gate responde `DATE_RESTRICTED` y el alumno ve «Se habilita hoy a las 18:00»
 
 * * *
+
 Prototipo
 ---------
 
-*   **Capturas**: Recorrido del alumno con unidades y nodos bloqueados por fecha.
-*   **URL Figma**: Pendiente de publicar.
-*   **Storybook**: Pendiente.
-*   **Mock API / Swagger**: Consumidos de Courses (a acordar con G01): lectura por lote de las restricciones de la cohorte y evento de cambio de restricciones en courses-lifecycle. Expuestos: GET /api/roadmap/courses/{courseId} y el gate con los motivos nuevos.
+*   **Capturas**: Nodo bloqueado por fecha y examen fuera de horario en el mapa.
+*   **URL Figma**: Pendiente.
+*   **Storybook**: `generic-badge` para el estado.
+*   **Mock API / Swagger**: Restricciones de Courses (`course.restrictions.read`) y evento de cambio a acordar.
 
 * * *
+
 Estimación / Prioridad
 ----------------------
 
+**Formato rápido**
+
 *   **Puntos (Fibonacci)**: 8
-*   **Prioridad (MoSCoW / Numérica)**: Should
+*   **Prioridad (MoSCoW / Numérica)**: Must
+
+**Formato tabla (opcional)**
+
+| Puntos (Fibonacci) | Prioridad (MoSCoW / Numérica) |
+| --- | --- |
+| 8 | Must |
 
 * * *
+
 Dependencias / Impactos
 -----------------------
 
-*   Servicios involucrados: Courses (G01, bloqueante), Motor (motivos del gate), API Gateway.
-*   Módulos afectados: Cliente de restricciones (nuevo), CoursesLifecycleEventListener, GateEvaluator, ProgressService, recorrido del front.
-*   Otros equipos / aprobaciones: G01: lectura por servicio, restricciones de actividad y evento de cambio (T-49.1, T-49.2). G07: scope (T-10.6).
-*   Impacto en datos / migraciones: Migración nueva con la copia local de restricciones (número a asignar tras V21).
-*   Riesgos y mitigación (opcional): Que G01 no exponga las restricciones de actividad a tiempo; mitigación: aplicar primero las de sección.
+*   Servicios involucrados: Courses (restricciones y evento).
+*   Módulos afectados: `CourseRestrictionsClient`, `GateEvaluator`, mapa del alumno.
+*   Otros equipos / aprobaciones: G01 (bloqueante para el evento; publica las ventanas de examen, P9).
+*   Impacto en datos / migraciones: Sin migración.
+*   Riesgos y mitigación (opcional): Que G01 no publique el evento a tiempo; mitigación: leer por pull con caché corta. Zonas horarias en los exámenes; mitigación: guardar en UTC y mostrar en la del curso.
+
 
 ## Tareas
 
-- [ ] #7212 T-49.1 Pedido a G01: lectura de restricciones por servicio y restricciones de actividad · New · Sin asignar
-- [ ] #7213 T-49.2 Pedido a G01: evento de cambio de restricciones · New · Sin asignar
-- [ ] #7214 T-49.3 Cliente de restricciones y copia local · New · Sin asignar
-- [ ] #7215 T-49.4 Consumir el evento de cambio de restricciones · New · Sin asignar
-- [ ] #7216 T-49.5 Evaluar fecha y actividad en el recorrido y en el gate · New · Sin asignar
-- [ ] #7217 T-49.6 Front: mostrar lo bloqueado con su motivo y ocultar lo HIDDEN · New · Sin asignar
-- [ ] #7218 T-49.7 BDD de restricciones · New · Sin asignar
-- [ ] #7219 T-49.8 Wiki, OpenAPI y diagrama de secuencia · New · Sin asignar
+- [ ] #9311 T-49.9 Corroborar qué ya está hecho · New · Mateo Delgado Costa
+- [ ] #9312 T-49.10 Distinguir oculto de bloqueado · New · Mateo Delgado Costa
+- [ ] #9313 T-49.11 Actualizar el roadmap cuando Courses cambia una restricción · New · Mateo Delgado Costa
+- [ ] #9314 T-49.12 Mostrarle al alumno lo bloqueado y cuándo se habilita · New · Mateo Delgado Costa
+- [ ] #9315 T-49.13 Aplicar al examen la ventana horaria que publica Courses · New · Mateo Delgado Costa
+- [ ] #9346 T-49.14 Wiki, OpenAPI y diagrama de secuencia · New · Franco Maximiliano Amarilla

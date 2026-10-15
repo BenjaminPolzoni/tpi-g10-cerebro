@@ -9,7 +9,7 @@ url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaj
 
 # EP-4230: Unidades del roadmap sincronizadas con Courses
 
-> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-15 16:55). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/epic/4230) · Estado: **New** · Responsable: **Sin asignar** · HU cerradas: **5/6**
 
 [G10] — Unidades del roadmap sincronizadas con Courses
@@ -63,4 +63,4 @@ Dependencias / Impactos
 | [[historias/HU-17 Reflejar la baja de una sección de Courses sin que los alumnos pierdan progreso\|HU-17]] Reflejar la baja de una sección de Courses sin que los alumnos pierdan progreso | Done | Mateo Delgado Costa | G10 - Sprint 2 | 8/8 |
 | [[historias/HU-18 Reflejar el reordenamiento de secciones de Courses\|HU-18]] Reflejar el reordenamiento de secciones de Courses | Done | Mateo Delgado Costa | G10 - Sprint 2 | 4/4 |
 | [[historias/HU-37 Ver en el editor del roadmap las unidades de Cursos y sincronizarlas (front)\|HU-37]] Ver en el editor del roadmap las unidades de Cursos y sincronizarlas (front) | Done | Iker Alonso | G10 - Sprint 2 | 6/6 |
-| [[historias/HU-49 Aplicar en el roadmap las restricciones de sección y actividad que publica Courses\|HU-49]] Aplicar en el roadmap las restricciones de sección y actividad que publica Courses | New | Sin asignar | Backlog | 0/8 |
+| [[historias/HU-49 Aplicar en el roadmap las restricciones de sección y actividad que publica Courses\|HU-49]] Aplicar en el roadmap las restricciones de sección y actividad que publica Courses | New | Sin asignar | G10 - Sprint 03 | 0/6 |

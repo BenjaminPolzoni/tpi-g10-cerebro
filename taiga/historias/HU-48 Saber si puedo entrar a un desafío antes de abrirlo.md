@@ -11,7 +11,7 @@ url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaj
 
 # HU-48: Saber si puedo entrar a un desafío antes de abrirlo
 
-> [!info] Generado desde Taiga (2026-10-14 20:45). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-15 16:54). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7206) · Estado: **Done** · Responsable: **Mateo Delgado Costa** · Sprint: **Backlog**
 > Épica: [[epicas/EP-60 Progreso y desbloqueo|EP-60]] · Tareas cerradas: **4/8**
 

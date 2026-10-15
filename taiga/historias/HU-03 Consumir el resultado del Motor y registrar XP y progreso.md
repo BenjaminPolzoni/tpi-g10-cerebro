@@ -11,7 +11,7 @@ url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaj
 
 # HU-03: Consumir el resultado del Motor y registrar XP y progreso
 
-> [!info] Generado desde Taiga (2026-10-14 20:44). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-15 16:53). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/942) · Estado: **Done** · Responsable: **Benjamin Polzoni** · Sprint: **G10 - Sprint 1**
 > Épica: [[epicas/EP-60 Progreso y desbloqueo|EP-60]] · Tareas cerradas: **5/5**
 
