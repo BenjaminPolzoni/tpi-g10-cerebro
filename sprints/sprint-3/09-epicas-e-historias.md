@@ -10,7 +10,7 @@ estado: borrador
 > Las historias del Sprint 3 con el **formato de la wiki de Taiga** (`template-hist-usuario` y `template-epicas`), listas para copiar y pegar.
 > - `epicas/`: una nota por épica.
 > - `historias/`: una nota por historia, con el código de Taiga (`HU-NN` / `HT-NN`).
-> - **Reabrir**: la HU ya existe en Taiga y figura Done (o New) sin cumplir sus criterios; la nota tiene lo que falta.
+> - **Reabrir**: la HU ya existe en Taiga y figura Done (o New) sin cumplir sus criterios; la nota tiene lo que falta. Los CA pendientes de HU cerradas van como tareas de [[sprints/sprint-3/historias/HT-30 Criterios pendientes de las HU del Sprint 1 y 2|HT-30]], que referencian la HU original; solo se reabren HU-45 y HU-49, que suman alcance nuevo.
 > - **Nueva**: se carga en Taiga con ese código. Las nuevas siguen la numeración del equipo: HU desde **HU-57** y HT desde **HT-12**.
 > - Debajo de la línea final de cada nota hay contexto del cerebro (código actual, dependencias, dudas) que no va a Taiga.
 > - No confundir con `taiga/` (raíz), que se genera desde Taiga y no se edita.
@@ -19,30 +19,21 @@ estado: borrador
 
 | Épica | Historias | Puntos |
 |---|---|---|
-| [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2\|Deuda del Sprint 2]] | 15 | 63 |
+| [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2\|Deuda del Sprint 2]] | 6 | 63 |
 | [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable\|Múltiples roadmaps por curso y grafo configurable]] | 13 | 79 |
 | [[sprints/sprint-3/epicas/G10 — Correcciones de los profes\|Correcciones de los profes]] | 9 | 45 |
 | [[sprints/sprint-3/epicas/G10 — Consistencia visual con la UI-KIT\|Consistencia visual con la UI-KIT]] | 1 | 21 |
 
-**Total:** 38 historias (12 a reabrir y 26 nuevas), 208 puntos. Todo lo de la UI-KIT quedó en una sola HT (HT-26) el 2026-10-15.
+**Total:** 29 historias (2 a reabrir y 27 nuevas), 208 puntos. Los CA pendientes de 10 HU cerradas quedaron en una sola HT (HT-30) el 2026-10-15. Todo lo de la UI-KIT quedó en una sola HT (HT-26) el 2026-10-15.
 
 ## Deuda del Sprint 2
 
 | HU | Título | En Taiga | Pts | Prioridad | Depende de | Dudas |
 |---|---|---|---|---|---|---|
 | [[sprints/sprint-3/historias/HT-14 Sacar los IDs de mock del front\|HT-14]] | Sacar los IDs de mock del front | Nueva | 3 | Must | — | — |
-| [[sprints/sprint-3/historias/HU-48 CA1 pendiente - pre-chequeo con el JWT del alumno\|HU-48]] | CA1 pendiente - pre-chequeo con el JWT del alumno | Reabrir | 3 | Must | — | — |
-| [[sprints/sprint-3/historias/HU-20 Sin CA pendiente - editar y dar de baja insignias en el front\|HU-20]] | Sin CA pendiente - editar y dar de baja insignias en el front | Reabrir | 3 | Should | — | — |
-| [[sprints/sprint-3/historias/HU-21 CA1 pendiente - 3 criterios que nunca se otorgan\|HU-21]] | CA1 pendiente - 3 criterios que nunca se otorgan | Reabrir | 5 | Should | — | [[sprints/sprint-3/08-dudas\|E2]] ✅, [[sprints/sprint-3/08-dudas\|E8]] ✅ |
-| [[sprints/sprint-3/historias/HU-15 CA5 pendiente - motivo origen_no_disponible\|HU-15]] | CA5 pendiente - motivo origen_no_disponible | Reabrir | 3 | Should | — | [[sprints/sprint-3/08-dudas\|E9]] ✅ |
-| [[sprints/sprint-3/historias/HU-16 CA3 pendiente - último dato de vidas si Accounting cae\|HU-16]] | CA3 pendiente - último dato de vidas si Accounting cae | Reabrir | 3 | Should | — | — |
-| [[sprints/sprint-3/historias/HU-43 Sin CA pendiente - ícono solo en desafíos y exámenes\|HU-43]] | Sin CA pendiente - ícono solo en desafíos y exámenes | Reabrir | 1 | Could | — | — |
-| [[sprints/sprint-3/historias/HU-46 CA1 y CA3 pendientes - Templo y visor embebido\|HU-46]] | CA1 y CA3 pendientes - Templo y visor embebido | Reabrir | 5 | Should | — | [[sprints/sprint-3/08-dudas\|P13]] ✅ |
-| [[sprints/sprint-3/historias/HU-44 CA2 pendiente - selector de comisión en el front\|HU-44]] | CA2 pendiente - selector de comisión en el front | Reabrir | 5 | Must | — | [[sprints/sprint-3/08-dudas\|P5]] ✅ |
+| [[sprints/sprint-3/historias/HT-30 Criterios pendientes de las HU del Sprint 1 y 2\|HT-30]] | Criterios pendientes de las HU del Sprint 1 y 2 | Nueva | 34 | Must | — | [[sprints/sprint-3/08-dudas\|G8]] ✅, [[sprints/sprint-3/08-dudas\|E2]] ✅, [[sprints/sprint-3/08-dudas\|E8]] ✅, [[sprints/sprint-3/08-dudas\|E9]] ✅, [[sprints/sprint-3/08-dudas\|P5]] ✅, [[sprints/sprint-3/08-dudas\|P13]] ✅ |
 | [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión\|HU-45]] | Ranking de la cohorte y avance por comisión | Reabrir | 5 | Must | — | [[sprints/sprint-3/08-dudas\|E1]] ✅, [[sprints/sprint-3/08-dudas\|P10]] ✅, [[sprints/sprint-3/08-dudas\|P14]] ✅ |
 | [[sprints/sprint-3/historias/HU-49 Aplicar en el roadmap las restricciones de sección y actividad que publica Courses\|HU-49]] | Aplicar en el roadmap las restricciones de sección y actividad que publica Courses | Reabrir | 8 | Should | [[sprints/sprint-3/historias/HU-67 Nodo examen con ventana horaria\|HU-67]] | [[sprints/sprint-3/08-dudas\|P9]] ✅, [[sprints/sprint-3/08-dudas\|G4]] ✅ |
-| [[sprints/sprint-3/historias/HU-41 CA2 pendiente - reintentos y política de vidas\|HU-41]] | CA2 pendiente - reintentos y política de vidas | Reabrir | 3 | Must | — | — |
-| [[sprints/sprint-3/historias/HU-01 CA8 pendiente - baja de desafío del Motor\|HU-01]] | CA8 pendiente - baja de desafío del Motor | Reabrir | 3 | Should | — | [[sprints/sprint-3/08-dudas\|G8]] ✅ |
 | [[sprints/sprint-3/historias/HU-72 Cerrar el curso con el estado académico final\|HU-72]] | Cerrar el curso con el estado académico final | Nueva | 8 | Must | [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión\|HU-45]] | [[sprints/sprint-3/08-dudas\|P15]] ✅, [[sprints/sprint-3/08-dudas\|G14]] |
 | [[sprints/sprint-3/historias/HU-73 Ver mi racha de días con actividad\|HU-73]] | Ver mi racha de días con actividad | Nueva | 5 | Should | — | [[sprints/sprint-3/08-dudas\|E12]] ✅ |
 

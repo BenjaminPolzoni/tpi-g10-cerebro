@@ -31,4 +31,4 @@ El `node_id` es **único global**, también después de clonar: la copia genera 
 
 ## Referencias
 - Respuestas del 2026-10-15 en [[sprints/sprint-3/08-dudas|08-dudas]] (P1, P2, P3, P5, P14, G4, G8).
-- [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps|HT-17]], [[sprints/sprint-3/historias/HT-19 Contratos con Courses y el Motor para el modelo 1 a N|HT-19]], [[sprints/sprint-3/historias/HU-61 El alumno elige qué roadmap recorrer|HU-61]].
+- [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps|HT-17]], [[sprints/sprint-3/historias/HT-19 Contratos con Courses y el Motor para el modelo 1 a N|HT-19]], [[sprints/sprint-3/historias/HU-61 Roadmaps por grupo del curso y restricciones de visualización|HU-61]].
