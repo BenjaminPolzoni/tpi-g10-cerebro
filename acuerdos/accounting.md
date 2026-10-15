@@ -29,7 +29,7 @@ contrato: "tpi-roadmap/docs/contracts/accounting-roadmap-v1.md"
 
 ## Quién lo acordó
 - G10: equipo Roadmap (Tema 10).
-- Otro grupo: equipo Accounting (Tema 08), número de grupo: Gxx (verificar).
+- Otro grupo: equipo Accounting (Tema 08), número de grupo: Gxx (verificar). Inventario es el mismo equipo (G10, 2026-10-15).
 - Aprobación nominal: **pendiente**. El acta aclara que no hay evidencia versionada de nombres o firmas y que no se inventan responsables.
 
 ## Contrato técnico
@@ -84,7 +84,7 @@ Ver [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad|DEC-015]].
 ## Pendiente / próximos pasos
 - [ ] Firma nominal del acta v1.0 (ambos equipos).
 - [ ] Accounting debe migrar el payload de `LIFE_*` a snake_case (`tpi-accounting#227`).
-- [ ] Decidir si se consumen `LIVES_EXHAUSTED`/`LIVES_AVAILABLE` y se implementa `ITEM_EQUIP_*`, o se retiran del acta. Alinear el topic con `bus-notificaciones.md`.
+- [ ] **E8 (2026-10-15): sí, se consumen** `LIVES_EXHAUSTED`/`LIVES_AVAILABLE` (para `LIFE_RECOVERED`, HU-21). Queda decidir y se implementa `ITEM_EQUIP_*`, o se retiran del acta. Alinear el topic con `bus-notificaciones.md`.
 - [ ] Verificar contra el **Accounting real** la fuente de vidas perdidas (T-25.2 "falta verificarla").
 - [ ] Gate: falta el motivo `origen_no_disponible` y el "último dato 24 h + stale" en el Gate (auditoría Sprint 3, HU-15/16).
 - [ ] Confirmar si `lives-availability` se implementará o se elimina del acta.
@@ -99,3 +99,4 @@ Ver [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad|DEC-015]].
 - 2026-10-12: cuenta ausente = 404 (`#193`); propagación de `traceparent`/`X-Request-Id`.
 - 2026-10-13: consumo de `LIFE_*` y `recovery_pending` (PR #195, V24); un 4xx deja de ser indisponibilidad (#199, #200).
 - 2026-10-14: nota creada desde `origin/develop` (`57ff06a`).
+- 2026-10-15: respuestas en [[sprints/sprint-3/08-dudas|08-dudas]]: Accounting e Inventario son el mismo equipo (G10); hay que consumir `LIVES_EXHAUSTED`/`LIVES_AVAILABLE` (E8). Con N roadmaps, XP y vidas pueden ser por curso o por roadmap según el profesor (P2).

@@ -89,3 +89,4 @@ contrato: "tpi-roadmap/docs/contracts/bus-notificaciones.md"
 - 2026-10-11: `roadmap.events` con default y progreso agregado (`#134`).
 - 2026-10-12: migración a `contratos-kafka` v8 snake_case (PR #191).
 - 2026-10-14: nota creada desde `origin/develop` (`57ff06a`).
+- 2026-10-15: Kafka lo lleva el equipo de Notificaciones (G11 en [[sprints/sprint-3/08-dudas|08-dudas]]). Sigue abierto si algún entorno pisa `KAFKA_TOPIC_ROADMAP` (E6).

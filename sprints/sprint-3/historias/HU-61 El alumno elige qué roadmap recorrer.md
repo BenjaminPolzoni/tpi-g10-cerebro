@@ -109,7 +109,7 @@ Dependencias / Impactos
 *   Módulos afectados: Roadmap del alumno, `RoadmapStore`.
 *   Otros equipos / aprobaciones: Ninguno.
 *   Impacto en datos / migraciones: Sin migración.
-*   Riesgos y mitigación (opcional): Depende de P1, P2 y P5.
+*   Riesgos y mitigación (opcional): Dos ajustes que configura el profesor (P2 y P5); hay que probar las combinaciones.
 
 ## Tareas
 

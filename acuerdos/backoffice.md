@@ -79,7 +79,7 @@ Respuesta: `{ "key": "PAR-01", "value": {...}, "version": 1 }` (`ParameterRespon
 
 > [!warning] Riesgos
 > - Backoffice sin publicar de verdad `GLOBAL_CONFIGURATION_CHANGED`: la caché solo se refresca por TTL (5 min).
-> - Con Backoffice caído en el cold start, el cliente lanza `ParUnavailableException` (verificar qué casos de uso la propagan, p. ej. el nivel del alumno).
+> - Con Backoffice caído en el cold start, el cliente lanza `ParUnavailableException` (verificar qué casos de uso la propagan, p. ej. el nivel del alumno). E9 (2026-10-15): se usan los valores guardados en caché.
 
 > [!question] Verificar
 > El contrato original exigía que Roadmap mandara headers `X-User-Roles: MS`; confirmar que Backoffice ya no depende de ello (`backoffice-par.md` dice "Confirmado por plataforma, revisión de la #77").
@@ -90,3 +90,4 @@ Respuesta: `{ "key": "PAR-01", "value": {...}, "version": 1 }` (`ParameterRespon
 - 2026-10-11: PAR-09 admite hasta 200 niveles (`#177`); `roadmap.events` v1 y progreso agregado (`#134`).
 - 2026-10-12: wire v8 snake_case (PR #191).
 - 2026-10-14: Backoffice publica `param_key` (`#208`, PR #209); nota creada desde `origin/develop` (`57ff06a`).
+- 2026-10-15: respuestas en [[sprints/sprint-3/08-dudas|08-dudas]]: la curva PAR-09 activa es la de Backoffice (E4); con Backoffice caído se usan los valores en caché (E9); el catálogo de permisos no es de Backoffice sino de Users (G2). Sigue sin confirmar si dependen de `X-User-Roles: MS` (G9).

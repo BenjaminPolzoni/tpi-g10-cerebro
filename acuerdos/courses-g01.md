@@ -67,7 +67,7 @@ Base path de Courses: `/api/course` (singular), siempre vía Gateway. Audience d
 Courses escribe el wire v8 en snake_case (`KafkaEventWire`, verificado en `docs/T-191-KAFKA-V8-CUTOVER.md`). Ver [[acuerdos/notificaciones-bus|bus de eventos]] y [[decisiones/DEC-001-wire-kafka-v8-snake-case|DEC-001]].
 
 > [!question] Verificar
-> `courses.md` §7.3 todavía muestra los payloads en camelCase (`courseCohortId`, `enrolledAt`). Tras #191 Roadmap lee solo snake_case. Confirmar con un evento real de G01.
+> `courses.md` §7.3 todavía muestra los payloads en camelCase (`courseCohortId`, `enrolledAt`). Tras #191 Roadmap lee solo snake_case. Confirmar con un evento real de G01. **G5 (2026-10-15): todo en snake_case.**
 
 ### Lo que exponemos a Courses
 Nada específico. El front de Courses no nos consume por contrato. Roadmap expone el sync manual `POST /api/roadmap/courses/{courseId}/sections/sync` (ADMIN, GESTOR o profesor dueño) **solo con `SECTIONS_SYNC_ENABLED=true`**.
@@ -86,7 +86,7 @@ Nada específico. El front de Courses no nos consume por contrato. Roadmap expon
 - [ ] Definir con G01 un **evento de cambio de grupo/restricción** (hoy no existe; solo pull).
 - [ ] Firma formal del acta T-10.1 (G01 y G10).
 - [ ] Cerrar `tpi-course#88` ("Alinear contrato de grupos tras PR #86").
-- [ ] Cierre de curso / `finalAcademicStatus` (P90/P10, RF-RNK-10/13): **postergado**; hoy solo se congela el roadmap al archivar.
+- [ ] Cierre de curso / `finalAcademicStatus` (P90/P10, RF-RNK-10/13): **postergado**; hoy solo se congela el roadmap al archivar. **P15 (2026-10-15): entra en el Sprint 3.**
 - [ ] Definir si el material de cohorte **sin sección** puede vincularse (hoy no: el lote se pide por secciones).
 - [ ] Condiciones `SECTION_COMPLETED`: no se evalúan en el Gate.
 - [ ] Encender `SECTIONS_SYNC_ENABLED` y `ROADMAP_BY_GROUP_ENABLED` en los entornos de la demo. Ver [[decisiones/DEC-004-flags-apagados-por-defecto|DEC-004]].
@@ -97,7 +97,7 @@ Nada específico. El front de Courses no nos consume por contrato. Roadmap expon
 > - El front no tiene selector de comisión (HU-44) según la auditoría de Sprint 3.
 
 > [!question] Verificar
-> Roles: Courses describe `X-User-Roles` como "GESTOR o PROFESOR" en español y el enum del body como `MANAGER/PROFESSOR/PROFESSOR_READ_ONLY`. Roadmap usa `GESTOR` desde #188. Confirmar el vocabulario actual de roles de Users.
+> Roles: Courses describe `X-User-Roles` como "GESTOR o PROFESOR" en español y el enum del body como `MANAGER/PROFESSOR/PROFESSOR_READ_ONLY`. Roadmap usa `GESTOR` desde #188. **G6 (2026-10-15):** no va a haber roles sino permisos; mientras tanto vale `PROFESSOR`/`GESTOR`.
 
 ## Historial
 - 2026-09-24: primer contrato `courses.md` (eventos de matrícula, membresía docente, material).
@@ -107,3 +107,4 @@ Nada específico. El front de Courses no nos consume por contrato. Roadmap expon
 - 2026-10-10: baja y reactivación de unidades en el sync (HU-17); restricción de actividad/nodo por comisión (HU-44).
 - 2026-10-12: Gate evalúa `DATE` y emite `date_restricted` (gate v1.3).
 - 2026-10-14: nota creada desde `origin/develop` (`57ff06a`).
+- 2026-10-15: respuestas en [[sprints/sprint-3/08-dudas|08-dudas]]: eventos en snake_case (G5); el profesor elige por roadmap secciones de Courses o propias (P3) y define las restricciones de cada roadmap, que se copian al clonarlo (G4); la ventana horaria de los exámenes la publica Courses (P9).

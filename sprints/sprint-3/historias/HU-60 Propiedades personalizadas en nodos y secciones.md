@@ -112,7 +112,7 @@ Dependencias / Impactos
 *   Módulos afectados: Módulo graph, editor de nodo, detalle de nodo.
 *   Otros equipos / aprobaciones: Ninguno.
 *   Impacto en datos / migraciones: `props` en Neo4j.
-*   Riesgos y mitigación (opcional): Depende de P8.
+*   Riesgos y mitigación (opcional): Ninguno abierto (P8 respondida el 2026-10-15: el alcance se achicó).
 
 ## Tareas
 

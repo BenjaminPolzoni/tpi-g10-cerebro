@@ -25,7 +25,7 @@ contrato: "tpi-roadmap/docs/contracts/08-comunicacion-gateway.md"
 
 ## Quién lo acordó
 - G10: equipo Roadmap.
-- Plataforma: equipo API Gateway, Identity/Users (Tema 01) y Tema 11 (Kafka), Gxx (verificar). Los trámites son issues de onboarding en `tpi-users` y `tpi-system-compose` (Identity los convierte en PR `feature/onboard-<serviceId>`).
+- Plataforma: equipo API Gateway, Identity/Users (Tema 01) y Tema 11 (Kafka), Gxx (verificar). Según G11 (2026-10-15): el Gateway lo lleva Users (G07) y Kafka, Notificaciones. Los trámites son issues de onboarding en `tpi-users` y `tpi-system-compose` (Identity los convierte en PR `feature/onboard-<serviceId>`).
 
 ## Contrato técnico
 
@@ -79,7 +79,7 @@ contrato: "tpi-roadmap/docs/contracts/08-comunicacion-gateway.md"
 - [ ] La ruta pública `/api/roadmap/public/**` sigue pendiente de confirmación con Gateway (`T-01-7`).
 - [ ] `serviceId` y scope nominales de **Motor** para el gate (hoy cualquier servicio puede llamar el gate; ver [[acuerdos/motor-desafios-g09|Motor]]).
 - [ ] `vidas.read`/`inventario.read` quedaron como propuesta nuestra y no se usan; limpiar la mención en el acta de Accounting.
-- [ ] Verificar que los scopes H1 de Courses y `users.legajo.read` están emitidos en el registry del entorno de la demo.
+- [ ] Verificar que los scopes H1 de Courses y `users.legajo.read` están emitidos en el registry del entorno de la demo. G12 (2026-10-15): existe `student.enrollment.read`, que lee la matrícula del alumno en el curso.
 
 > [!warning] Riesgos
 > - Sin allowlist, el Gateway ignora el servicio en silencio (404 para el cliente).
@@ -95,3 +95,4 @@ contrato: "tpi-roadmap/docs/contracts/08-comunicacion-gateway.md"
 - 2026-10-09: scopes H1 de Courses declarados como `needs`.
 - 2026-10-11: se ofrece `roadmap.progress.read` (`roadmap-events-v1`).
 - 2026-10-14: nota creada desde `origin/develop` (`57ff06a`).
+- 2026-10-15: respuestas en [[sprints/sprint-3/08-dudas|08-dudas]]: Gateway = Users (G07), Kafka = Notificaciones (G11); existe `student.enrollment.read` (G12); `TraceIdFilter` se borró a propósito (E7); Neo4j es solo para roadmap-service (G1).

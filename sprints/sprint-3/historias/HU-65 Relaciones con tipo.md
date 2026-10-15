@@ -111,7 +111,7 @@ Dependencias / Impactos
 *   Módulos afectados: Módulo graph, vista de grafo, mapa del alumno.
 *   Otros equipos / aprobaciones: Ninguno.
 *   Impacto en datos / migraciones: Relaciones con tipo en Neo4j.
-*   Riesgos y mitigación (opcional): Depende de P4.
+*   Riesgos y mitigación (opcional): Ninguno abierto (P4 respondida el 2026-10-15).
 
 ## Tareas
 

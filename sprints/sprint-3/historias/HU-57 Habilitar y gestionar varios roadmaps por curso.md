@@ -110,7 +110,7 @@ Dependencias / Impactos
 *   Módulos afectados: Controller y servicio de roadmaps, pantalla del profesor.
 *   Otros equipos / aprobaciones: Ninguno.
 *   Impacto en datos / migraciones: Columna `multiple_roadmaps_allowed`.
-*   Riesgos y mitigación (opcional): Depende de P1.
+*   Riesgos y mitigación (opcional): Ninguno abierto (P1 respondida el 2026-10-15).
 
 ## Tareas
 

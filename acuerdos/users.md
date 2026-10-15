@@ -75,3 +75,4 @@ Users publica `user-events` (`STUDENT-REGISTERED`, `ACCOUNT-DEACTIVATED`) y `not
 - 2026-10-10: ranking con perfil de Users (T-24.3) y presupuesto de carga; ranking sigue completo si Users falla.
 - 2026-10-11: un perfil incompleto solo deja sin perfil a ese alumno (`1a6ff15`).
 - 2026-10-14: nota creada desde `origin/develop` (`57ff06a`).
+- 2026-10-15: respuestas en [[sprints/sprint-3/08-dudas|08-dudas]]: el catálogo de permisos es de Users y todavía no está definido (G2); no habrá roles sino permisos, y mientras tanto vale `PROFESSOR`/`GESTOR` (G6); todavía no hay usuarios demo (G7); Users también lleva el Gateway (G11).

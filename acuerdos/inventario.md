@@ -27,7 +27,7 @@ contrato: "tpi-roadmap/docs/contracts/accounting-roadmap-v1.md"
 
 ## Quién lo acordó
 - G10: equipo Roadmap.
-- Otro grupo: equipo Accounting/Inventario (Tema 08), Gxx (verificar). La aprobación nominal del acta v1.0 está pendiente.
+- Otro grupo: equipo Accounting/Inventario (Tema 08), Gxx (verificar). Confirmado el 2026-10-15: Inventario y Accounting son el mismo equipo (G10). La aprobación nominal del acta v1.0 está pendiente.
 
 ## Contrato técnico
 - **Endpoint:** `GET /api/accounting/courses/{courseId}/accounts/{studentId}/equip-summary` por Gateway.
@@ -66,3 +66,4 @@ contrato: "tpi-roadmap/docs/contracts/accounting-roadmap-v1.md"
 - 2026-10-12: cuenta ausente = 404 (PR #193).
 - 2026-10-13: 4xx de Accounting distinto de 404 = 502, no 503/500 (PR #199).
 - 2026-10-14: nota creada desde `origin/develop` (`57ff06a`).
+- 2026-10-15: Inventario y Accounting son el mismo equipo (G10 en [[sprints/sprint-3/08-dudas|08-dudas]]); `fix/account-not-found-gate` ya está hecho (E5).

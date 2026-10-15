@@ -101,3 +101,4 @@ Roadmap expone `GET /api/roadmap/courses/{courseId}/challenge-pool` (ADMIN, GEST
 - 2026-10-11: gate v1.2 (`challenge_id`, `attempt_type`).
 - 2026-10-12: wire v8 snake_case (PR #191); gate v1.3 (`date_restricted`).
 - 2026-10-14: nota creada desde `origin/develop` (`57ff06a`).
+- 2026-10-15: respuestas en [[sprints/sprint-3/08-dudas|08-dudas]]: `node_id` único global, también en roadmaps clonados (G8); las notas del ranking vienen del Motor (P14, falta acordar cómo); "multiple choice con boss fight" es de Desafíos teóricos (P16).
