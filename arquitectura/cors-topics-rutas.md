@@ -24,7 +24,7 @@ flowchart LR
 
 ## CORS
 
-**Qué es:** una regla **del navegador**. Si una página de un origen (ej. `http://localhost:4200`) le pega con `fetch` a otro origen (ej. `http://localhost:8010`), el navegador bloquea la respuesta salvo que el servidor la autorice con headers `Access-Control-Allow-*`. Entre micros, Postman o curl no existe.
+**Qué es:** una regla **del navegador**. Si una página de un origen (ej. `http://localhost:4200`) le pega con `fetch` a otro origen (ej. `http://localhost:8010`), el navegador bloquea la respuesta salvo que el servidor la autorice con headers `Access-Control-Allow-*`. Entre micros, Postman o curl no existe. 
 
 > Origen = protocolo + host + puerto. `localhost:4200` y `localhost:8010` son orígenes distintos.
 

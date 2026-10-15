@@ -20,18 +20,18 @@ Son HU que figuran **Done** en Taiga pero no cumplen sus criterios de aceptació
 
 ## P1: HU marcadas Done que no lo están
 
-| HU | Falta | Capa |
-|---|---|---|
-| HU-44 | Selector de comisión en el roadmap y manejo del motivo `group_restricted` | Front |
-| HU-48 | Endpoint de pre-chequeo para el alumno (JWT, sin `studentId` en el path). Borrar `startChallenge` | Back |
-| HU-46 | Página Templo (material agrupado por unidad), o redefinir el CA con el PO | Front |
-| HU-01 / HU-41 | Campo `reintentos_permitidos` (0..PAR-13). Corregir el PUT que resetea `lives_policy`. Consumir la baja de desafío del Motor (CA8) | Back |
-| HU-01 | Guardar las posiciones del grafo (`moveNode` devuelve 501) | Front + Back |
-| HU-20 / HU-21 | Implementar o quitar del catálogo `SECTION_NO_LIVES_LOST`, `NODE_NO_RETRIES` y `LIFE_RECOVERED`. Edición y baja de insignias en el front | Back + Front |
-| HU-15 / HU-16 | Motivo `origen_no_disponible`. Último dato de 24 h con `stale` en el gate | Back |
-| HU-43 | Validar que el ícono solo aplique a DESAFIO/EXAMEN | Back |
-| HU-22 | Modo solo lectura de `GenericBadgeShowcase` (ui-kit#59) | Front + UI-KIT |
-| HT-11 | Actualizar el texto de Taiga a snake_case v8 | Taiga |
+| HU            | Falta                                                                                                                                    | Capa           |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| HU-44         | Selector de comisión en el roadmap y manejo del motivo `group_restricted`                                                                | Front          |
+| HU-48         | Endpoint de pre-chequeo para el alumno (JWT, sin `studentId` en el path). Borrar `startChallenge`                                        | Back           |
+| HU-46         | Página Templo (material agrupado por unidad), o redefinir el CA con el PO                                                                | Front          |
+| HU-01 / HU-41 | Campo `reintentos_permitidos` (0..PAR-13). Corregir el PUT que resetea `lives_policy`. Consumir la baja de desafío del Motor (CA8)       | Back           |
+| HU-01         | Guardar las posiciones del grafo (`moveNode` devuelve 501)                                                                               | Front + Back   |
+| HU-20 / HU-21 | Implementar o quitar del catálogo `SECTION_NO_LIVES_LOST`, `NODE_NO_RETRIES` y `LIFE_RECOVERED`. Edición y baja de insignias en el front | Back + Front   |
+| HU-15 / HU-16 | Motivo `origen_no_disponible`. Último dato de 24 h con `stale` en el gate                                                                | Back           |
+| HU-43         | Validar que el ícono solo aplique a DESAFIO/EXAMEN                                                                                       | Back           |
+| HU-22         | Modo solo lectura de `GenericBadgeShowcase` (ui-kit#59)                                                                                  | Front + UI-KIT |
+| HT-11         | Actualizar el texto de Taiga a snake_case v8                                                                                             | Taiga          |
 
 ## P2: HU en New (comprometidas)
 
