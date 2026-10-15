@@ -21,10 +21,10 @@ estado: borrador
 |---|---|---|
 | [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2\|Deuda del Sprint 2]] | 6 | 63 |
 | [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable\|Múltiples roadmaps por curso y grafo configurable]] | 13 | 79 |
-| [[sprints/sprint-3/epicas/G10 — Correcciones de los profes\|Correcciones de los profes]] | 9 | 45 |
+| [[sprints/sprint-3/epicas/G10 — Correcciones de los profes\|Correcciones de los profes]] | 9 | 44 |
 | [[sprints/sprint-3/epicas/G10 — Consistencia visual con la UI-KIT\|Consistencia visual con la UI-KIT]] | 1 | 21 |
 
-**Total:** 29 historias (2 a reabrir y 27 nuevas), 208 puntos. Los CA pendientes de 10 HU cerradas quedaron en una sola HT (HT-30) el 2026-10-15. Todo lo de la UI-KIT quedó en una sola HT (HT-26) el 2026-10-15.
+**Total:** 29 historias (2 a reabrir y 27 nuevas), 207 puntos. Los CA pendientes de 10 HU cerradas quedaron en una sola HT (HT-30) el 2026-10-15. Todo lo de la UI-KIT quedó en una sola HT (HT-26) el 2026-10-15.
 
 ## Deuda del Sprint 2
 
@@ -63,7 +63,7 @@ estado: borrador
 | [[sprints/sprint-3/historias/HU-65 Relaciones con tipo\|HU-65]] | Relaciones con tipo | Nueva | 8 | Must | [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial\|HT-18]] | [[sprints/sprint-3/08-dudas\|P4]] ✅ |
 | [[sprints/sprint-3/historias/HU-66 Editor con arrastre y el curso como mapa\|HU-66]] | Editor con arrastre y el curso como mapa | Nueva | 8 | Should | [[sprints/sprint-3/historias/HU-62 Vista de grafo cómoda para el profesor\|HU-62]], [[sprints/sprint-3/historias/HU-65 Relaciones con tipo\|HU-65]] | [[sprints/sprint-3/08-dudas\|P1]] ✅ |
 | [[sprints/sprint-3/historias/HU-67 Nodo examen con ventana horaria\|HU-67]] | Nodo examen con ventana horaria | Nueva | 5 | Must | — | [[sprints/sprint-3/08-dudas\|P9]] ✅ |
-| [[sprints/sprint-3/historias/HU-68 Obligatoriedad visible en la lista de nodos\|HU-68]] | Obligatoriedad visible en la lista de nodos | Nueva | 2 | Should | — | — |
+| [[sprints/sprint-3/historias/HU-68 Obligatoriedad visible en la lista de nodos\|HU-68]] | Obligatoriedad visible en la lista de nodos | Nueva | 1 | Should | — | — |
 | [[sprints/sprint-3/historias/HU-69 Archibaldo - Enter, aspecto de Hernán y destello\|HU-69]] | Archibaldo: Enter, avatar personalizable y destello | Nueva | 5 | Could | — | [[sprints/sprint-3/08-dudas\|P11]] ✅ |
 | [[sprints/sprint-3/historias/HT-21 Seed de demo curado\|HT-21]] | Seed de demo curado | Nueva | 5 | Must | [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios\|HU-64]], [[sprints/sprint-3/historias/HU-65 Relaciones con tipo\|HU-65]], [[sprints/sprint-3/historias/HU-67 Nodo examen con ventana horaria\|HU-67]] | [[sprints/sprint-3/08-dudas\|G7]], [[sprints/sprint-3/08-dudas\|E4]] ✅ |
 | [[sprints/sprint-3/historias/HT-22 Permisos en vez de roles\|HT-22]] | Permisos en vez de roles | Nueva | 5 | Should | — | [[sprints/sprint-3/08-dudas\|G2]], [[sprints/sprint-3/08-dudas\|G6]] ✅ |
