@@ -53,5 +53,6 @@ flowchart LR
 5. Antes de preguntar en el grupo, buscar acá (`Ctrl/Cmd + Shift + F`).
    - ¿Qué es CORS, qué topics usamos, cómo son las rutas? → [[arquitectura/cors-topics-rutas]].
    - ¿Cuál es la arquitectura y contexto completo? → [[arquitectura/contexto-integral]].
+   - ¿Cómo levanto el front y el back (estable o de prueba), qué claves hacen falta? → [[arquitectura/levantar-entorno]].
 
 Cómo instalarlo y sincronizarlo: [[COMO-USAR]].

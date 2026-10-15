@@ -17,6 +17,8 @@ actualizado: 2026-10-15
 | `levantar-micro` | Levanta un micro **sin** variante (`APP_VARIANT` vacío). Solo si no se quiere variante. |
 | `integrate-micro-gateway` | Antes de todo: genera `tpi-integration.yml`. Ya está hecho en el roadmap. |
 
+Visión general (modelo, claves, estable vs. prueba): [[arquitectura/levantar-entorno]].
+
 Documentación del equipo de plataforma: `tpi-system-compose/docs/variants.md` y `docs/mesh.md`.
 
 ## Qué hace falta
