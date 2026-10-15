@@ -32,6 +32,10 @@ estado: vigente
 | P12 | 🟢 | **Mínimo para la demo**: la épica nueva más las correcciones no entran enteras en un sprint. ¿Qué es imprescindible para la demo? | Todo el sprint | [[06-backlog-sprint-3#Riesgos del sprint]] | |
 | P13 | 🟢 | **HU-46 (Templo)**: se borró del front. ¿Se rehace o se redefine el criterio de aceptación? | Bloque 0 | [[02-pendientes]] | |
 
+| P14 | 🟠 | **Ranking por XP, por notas o por ambas.** Hoy ordena solo por XP (desempate: insignias, vidas perdidas, nodos completados). No recibimos notas de nadie: si van notas, ¿de quién vienen? | C6, ranking | Consulta del equipo (2026-10-15) | |
+| P15 | 🟠 | **Estado académico final** (cierre del curso, HU-27/28): la épica EP-61 lo declara "fase futura". ¿Entra en el Sprint 3? | — | Consulta del equipo (2026-10-15) | |
+| P16 | 🟠 | **"Multiple choice con boss fight"**: ¿qué esperan? El multiple choice es contenido de Desafíos (G04/G09); lo nuestro es el nodo `EXAM`, que el front dibuja como "boss". ¿La mecánica de pelea es nuestra? | — | Consulta del equipo (2026-10-15) | |
+
 > [!tip] Orden para la consulta
 > P1 a P4 primero: definen el modelo de Neo4j (módulo `graph`) y el 1:N. Sin esas respuestas no conviene arrancar los ítems 2 y 3.
 

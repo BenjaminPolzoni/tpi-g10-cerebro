@@ -13,7 +13,7 @@ estado: borrador
 
 ## Bloque 0: deuda del Sprint 2 (primera semana)
 
-Detalle en [02-pendientes.md](02-pendientes.md).
+Detalle en [02-pendientes.md](02-pendientes.md). La deuda técnica que no es una HU (código muerto, mocks, seguridad, docs) está en [[deuda-tecnica]]: los ítems marcados *Sprint 3* entran en este bloque.
 
 | Ítem | Capa | Esfuerzo |
 |---|---|---|
@@ -62,6 +62,24 @@ Detalle y estado de cada punto en [07-correcciones-profes.md](07-correcciones-pr
 | C9 | HT | Migrar 17 `hasRole`/`hasAnyRole` (y el chequeo manual de `RankingController`) a permisos | Back | M | Catálogo de permisos de G06 |
 | C10 | HT | Documentación global del micro Roadmap | Back / Docs | S | — |
 | C11 | HT | Acordar con G06 los datos que aportamos al dashboard (progreso, ranking, XP) | Back + acuerdo | S | — |
+
+## Temas consultados por el equipo (2026-10-15)
+
+Chequeo de si cada tema está contemplado en este sprint.
+
+| Tema | ¿En el Sprint 3? | Dónde |
+|---|---|---|
+| Ranking por XP, notas o ambas | ❓ Falta definir | Hoy solo XP. P14 en [[08-dudas]] |
+| Insignias | ✅ | Bloque 0 (HU-20/21: criterios que no se otorgan, edición y baja en el front) |
+| Grupos dentro de la cohorte (2w1, 2w2) | ✅ | Bloque 0 (HU-44/45, flag) y C6 (ranking por grupo) |
+| Subsecciones / N roadmaps por curso | ✅ con dudas | Ítems 2, 4 y 8. Dependen de P1 y P6 |
+| Archivado del curso | ✅ Ya hecho | Consumimos `COURSE_COHORT_ARCHIVED` |
+| Estado académico final | ❌ No | Diferido en EP-61. P15 en [[08-dudas]] |
+| Responsabilidades de cada rol | ⚠️ Parcial | C9 (permisos). Falta la matriz escrita: DT-03 en [[deuda-tecnica]] |
+| Racha | ❌ No | EP-592 sin HU. E12 en [[08-dudas]]; el front muestra un valor fijo (DT-13) |
+| Multiple choice con boss fight | ❌ No | P16 en [[08-dudas]] |
+| Garage | ✅ Ya hecho | Courses guarda el material; Roadmap pide la URL (HU-04/42/46) |
+| Nodos con restricción de fecha / parciales | ✅ | Bloque 0 (HU-49) y C4. Depende de P9 |
 
 ## Épica transversal: consistencia visual con la UI-KIT
 

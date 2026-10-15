@@ -26,12 +26,14 @@ flowchart LR
 | [[decisiones/README\|decisiones/]] | Decisiones técnicas (DEC-xxx): contexto, alternativas y consecuencias | El equipo |
 | [[arquitectura/cors-topics-rutas\|arquitectura/]] | Cómo funciona el micro por dentro: CORS, topics de Kafka y rutas que manejamos hoy | El equipo, cuando cambie el código |
 | `minutas/` | Notas de reuniones (daily, profes, otros grupos) | Quien estuvo en la reunión |
+| [[deuda-tecnica]] | Deuda técnica general (no son HU): código muerto, mocks, seguridad, docs, ramas. Vive entre sprints | El equipo |
 | [[equipo]] | Integrantes, áreas que conoce cada uno | El equipo |
 | `plantillas/` | Plantillas para acuerdo, decisión y minuta | — |
 
 ## Lo urgente ahora
 
 - [[sprints/sprint-3/02-pendientes|Pendientes del Sprint 2]]: historias en Done que no lo están.
+- [[deuda-tecnica|Deuda técnica]]: lo que hay que limpiar aunque no sea una HU. Empezar por las 🔴.
 - [[sprints/sprint-3/08-dudas|Dudas del sprint]]: para los profes, otros grupos y el equipo. Empezar por las 🔴.
 - [[sprints/sprint-3/07-correcciones-profes|Correcciones de los profes]]: qué piden y qué ya estaba planteado.
 - [[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap|DEC-016: Neo4j para la estructura del roadmap]].

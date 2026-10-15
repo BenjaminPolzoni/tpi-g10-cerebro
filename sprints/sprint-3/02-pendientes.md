@@ -42,6 +42,9 @@ Son HU que figuran **Done** en Taiga pero no cumplen sus criterios de aceptació
 
 ## P3: limpieza
 
+> [!info] La deuda técnica general (entre sprints) está en [[deuda-tecnica]].
+
+
 - Front: sacar el adapter in-memory y el seed del árbol de producción (dejarlos solo para tests). Unificar `level-curve.ts`. Pasar `BankDataPort` a HTTP.
 - Back: borrar los `@DefaultValue("stub")` y el listener legado v1/v2.
 - HT-08: versionar los GLB optimizados o documentar el pipeline.
