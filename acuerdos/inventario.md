@@ -3,15 +3,15 @@ tags: [tpi, g10, acuerdo, inventario, vidas, gate]
 fecha: 2026-09-26
 grupos: [G10, Gxx]  # Inventario sale servido por Accounting (Tema 08); grupo a verificar
 estado: vigente
-contrato: "tpi-roadmap/docs/contracts/accounting-roadmap-v1.md"
+contrato: "contratos/accounting-roadmap-v1.md"
 ---
 
 # Acuerdo con Inventario (vidas e ítems): equip-summary, Gate y pantalla de inventario
 
 > [!info] Fuentes
-> - `tpi-roadmap/docs/contracts/accounting-roadmap-v1.md` §3.7, §5, §6 ([GitHub](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/accounting-roadmap-v1.md)).
-> - `tpi-roadmap/docs/contracts/roadmap-motor-gate-v1.md` §5, §6, §6.2 ([GitHub](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/roadmap-motor-gate-v1.md)).
-> - `tpi-roadmap/docs/T-35-1-ENDPOINT-INVENTARIO.md`, `T-15-4-MATRICULA-VIDAS-RECUPERACION.md`, `T-03-2-ACCOUNTING-CLIENT.md`.
+> - `contratos/accounting-roadmap-v1.md` §3.7, §5, §6.
+> - `contratos/roadmap-motor-gate-v1.md` §5, §6, §6.2.
+> - `tareas/T-35-1-ENDPOINT-INVENTARIO.md`, `tareas/T-15-4-MATRICULA-VIDAS-RECUPERACION.md`, `tareas/T-03-2-ACCOUNTING-CLIENT.md`.
 > - Contrato general y eventos: [[acuerdos/accounting|Accounting]].
 
 > [!question] Verificar

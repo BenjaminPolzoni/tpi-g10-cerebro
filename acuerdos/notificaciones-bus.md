@@ -3,17 +3,17 @@ tags: [tpi, g10, acuerdo, notificaciones, bus, kafka, g02]
 fecha: 2026-09-24
 grupos: [G10, G02]
 estado: propuesto  # borrador sin acta (P-09); el wire v8 se usa en la práctica
-contrato: "tpi-roadmap/docs/contracts/bus-notificaciones.md"
+contrato: "contratos/bus-notificaciones.md"
 ---
 
 # Acuerdo con Notificaciones / bus de eventos (G02): envelope, topics y claves
 
 > [!info] Fuentes
-> - `tpi-roadmap/docs/contracts/bus-notificaciones.md` ([GitHub](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/bus-notificaciones.md)): **borrador, sin acta** (pendiente P-09).
-> - `tpi-roadmap/docs/contracts/KAFKA_EVENT_STANDARD (1).md` ([GitHub](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/KAFKA_EVENT_STANDARD%20%281%29.md)): estándar común del bus, **versión anterior** (camelCase, `eventType` con guiones). Reemplazado en la práctica por `contratos-kafka` v8.
-> - `tpi-roadmap/docs/contracts/KAFKA.pdf` ([GitHub](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/KAFKA.pdf)): PDF del bus, **existe, no se leyó**.
-> - `tpi-roadmap/docs/contracts/roadmap-service.asyncapi.yaml` ([GitHub](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/roadmap-service.asyncapi.yaml)): AsyncAPI 2.6 de Roadmap, escrita para `contratos-kafka` v3 (**desactualizada** respecto de v8).
-> - `tpi-roadmap/docs/T-191-KAFKA-V8-CUTOVER.md`, `docs/T-01-12-5-OUTBOX.md`.
+> - `contratos/bus-notificaciones.md`: **borrador, sin acta** (pendiente P-09).
+> - `contratos/KAFKA_EVENT_STANDARD (1).md`: estándar común del bus, **versión anterior** (camelCase, `eventType` con guiones). Reemplazado en la práctica por `contratos-kafka` v8.
+> - `contratos/KAFKA.pdf`: PDF del bus.
+> - `contratos/roadmap-service.asyncapi.yaml`: AsyncAPI 2.6 de Roadmap.
+> - `tareas/T-191-KAFKA-V8-CUTOVER.md`, `tareas/T-01-12-5-OUTBOX.md`.
 > - Contraparte: `2026-P4-BE/tpi-notifications` → `docs/contratos-kafka.md`.
 
 ## Qué se acordó

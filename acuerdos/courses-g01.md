@@ -3,15 +3,15 @@ tags: [tpi, g10, acuerdo, courses, g01]
 fecha: 2026-10-08
 grupos: [G10, G01]
 estado: vigente  # acta T-10.1 implementada en Courses; validación formal de ambos grupos pendiente
-contrato: "tpi-roadmap/docs/contracts/courses-grupos-t-10-1.md"
+contrato: "contratos/courses-grupos-t-10-1.md"
 ---
 
 # Acuerdo con Courses (G01): cohortes, secciones, comisiones y restricciones
 
 > [!info] Fuentes
-> - `tpi-roadmap/docs/contracts/courses.md` ([GitHub](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/courses.md)): base path, M2M, secciones, sync, scopes.
-> - `tpi-roadmap/docs/contracts/courses-grupos-t-10-1.md` ([GitHub](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/courses-grupos-t-10-1.md)): acta T-10.1 (comisiones y restricciones, ampliación H1).
-> - `tpi-roadmap/docs/contracts/contrato-cursos.txt` ([GitHub](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/contrato-cursos.txt)): OpenAPI original de Courses (histórico; documenta `CookieAuth fu_at`).
+> - `contratos/courses.md`: base path, M2M, secciones, sync, scopes.
+> - `contratos/courses-grupos-t-10-1.md`: acta T-10.1 (comisiones y restricciones, ampliación H1).
+> - `contratos/contrato-cursos.txt`: OpenAPI original de Courses (histórico; documenta `CookieAuth fu_at`).
 > - Repo de la contraparte: `2026-P4-BE/tpi-course` (issues #57, #58, #59, #84, #88).
 
 ## Qué se acordó

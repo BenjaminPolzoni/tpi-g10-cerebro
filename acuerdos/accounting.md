@@ -3,15 +3,15 @@ tags: [tpi, g10, acuerdo, accounting, tema-08, kafka]
 fecha: 2026-09-26
 grupos: [G10, Gxx]  # Accounting = Tema 08; número de grupo no aparece en los docs (verificar)
 estado: vigente  # acordado funcionalmente; firma nominal pendiente
-contrato: "tpi-roadmap/docs/contracts/accounting-roadmap-v1.md"
+contrato: "contratos/accounting-roadmap-v1.md"
 ---
 
 # Acuerdo con Accounting (Tema 08, Gxx verificar): vidas, ledger y eventos
 
 > [!info] Fuentes
-> - `tpi-roadmap/docs/contracts/accounting-roadmap-v1.md` ([GitHub](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/accounting-roadmap-v1.md)): acta v1.0, fuente vigente del contrato funcional.
-> - `tpi-roadmap/docs/contracts/Contrato de Integración_ Accounting (Tema 08).pdf` ([GitHub](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/Contrato%20de%20Integraci%C3%B3n_%20Accounting%20%28Tema%2008%29.pdf)): PDF de Accounting, **solo existe, no se leyó** para esta nota.
-> - `tpi-roadmap/docs/T-03-2-ACCOUNTING-CLIENT.md`, `T-15-2-ACCOUNTING-GATE-LEDGER.md`, `T-25-2-FUENTE-VIDAS-PERDIDAS.md`, `T-35-1-ENDPOINT-INVENTARIO.md`.
+> - `contratos/accounting-roadmap-v1.md`: acta v1.0, fuente vigente del contrato funcional.
+> - `contratos/Contrato de Integración_ Accounting (Tema 08).pdf`: PDF de Accounting.
+> - `tareas/T-03-2-ACCOUNTING-CLIENT.md`, `tareas/T-15-2-ACCOUNTING-GATE-LEDGER.md`, `tareas/T-25-2-FUENTE-VIDAS-PERDIDAS.md`, `tareas/T-35-1-ENDPOINT-INVENTARIO.md`.
 > - Repos de la contraparte: `2026-P4-BE/tpi-accounting` (issue #227).
 > - Nota hermana, centrada en el consumo de vidas e ítems: [[acuerdos/inventario|Inventario]].
 

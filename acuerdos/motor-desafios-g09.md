@@ -3,20 +3,20 @@ tags: [tpi, g10, acuerdo, motor, g09, kafka, gate]
 fecha: 2026-09-27
 grupos: [G10, G09]
 estado: vigente  # evento de cierre v8 y gate v1.3 vigentes; firma nominal del gate pendiente
-contrato: "tpi-roadmap/docs/contracts/motor-desafios-evento-cierre.md"
+contrato: "contratos/motor-desafios-evento-cierre.md"
 ---
 
 # Acuerdo con Motor de Desafíos (G09): evento de cierre, gate y catálogo
 
 > [!info] Fuentes
-> | Contrato | Ruta en el repo back | GitHub | Estado |
-> |---|---|---|---|
-> | Evento de cierre de intento | `tpi-roadmap/docs/contracts/motor-desafios-evento-cierre.md` | [ver](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/motor-desafios-evento-cierre.md) | **vigente** (v8 snake_case) |
-> | Gate de elegibilidad v1.3 | `tpi-roadmap/docs/contracts/roadmap-motor-gate-v1.md` | [ver](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/roadmap-motor-gate-v1.md) | **vigente** (firma pendiente) |
-> | Respuesta de G09 v2 (catálogo §1, gate §4, corrección diferida §5) | `tpi-roadmap/docs/contracts/respuesta-motor-a-roadmap-v2.md` | [ver](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/respuesta-motor-a-roadmap-v2.md) | vigente salvo §2 (evento), que quedó **reemplazado** |
-> | Contrato Roadmap-Motor original | `tpi-roadmap/docs/contracts/motor-desafios.md` | [ver](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/motor-desafios.md) | **reemplazado** en §1 y buena parte de §4 (historia) |
-> | Mensaje original del evento de cierre | `tpi-roadmap/docs/contracts/contrato-evento-motor-v2.md` | [ver](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/contrato-evento-motor-v2.md) | **reemplazado** (camelCase, `producer = THEME-02-CHALLENGE-ENGINE`) |
-> | Contrato del lado G09 | `2026-P4-BE/tpi-engine-challenge` → `docs/contracts/eventos-bus.md` y `roadmap-eligibility.yaml` | n/a | fuente de verdad del Motor |
+> | Contrato | Ruta en el cerebro | Estado |
+> |---|---|---|
+> | Evento de cierre de intento | `contratos/motor-desafios-evento-cierre.md` | **vigente** (v8 snake_case) |
+> | Gate de elegibilidad v1.3 | `contratos/roadmap-motor-gate-v1.md` | **vigente** (firma pendiente) |
+> | Respuesta de G09 v2 (catálogo §1, gate §4, corrección diferida §5) | `contratos/respuesta-motor-a-roadmap-v2.md` | vigente salvo §2 (evento), que quedó **reemplazado** |
+> | Contrato Roadmap-Motor original | `contratos/motor-desafios.md` | **reemplazado** en §1 y buena parte de §4 (historia) |
+> | Mensaje original del evento de cierre | `contratos/contrato-evento-motor-v2.md` | **reemplazado** (camelCase, `producer = THEME-02-CHALLENGE-ENGINE`) |
+> | Contrato del lado G09 | `2026-P4-BE/tpi-engine-challenge` → `docs/contracts/eventos-bus.md` y `roadmap-eligibility.yaml` | fuente de verdad del Motor |
 
 ## Qué se acordó
 - **Roadmap no calcula XP.** El Motor calcula `coins`, `xp`, `add_live`, `subtract_live` y `active_item` al cerrar el intento (con los parámetros de Backoffice congelados al abrirlo). Roadmap aplica `resources.xp` **tal cual**, como delta, en un ledger append-only. Ver [[decisiones/DEC-013-roadmap-no-calcula-xp-ledger-idempotente|DEC-013]].

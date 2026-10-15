@@ -3,15 +3,15 @@ tags: [tpi, g10, acuerdo, backoffice, tema-12, par, kafka]
 fecha: 2026-09-24
 grupos: [G10, G06]  # Backoffice = Tema 12; G06 según las correcciones de los profes y Taiga ("G06 - Parámetros Globales")
 estado: vigente  # REST + evento recibidos; faltan confirmaciones del payload v8
-contrato: "tpi-roadmap/docs/contracts/backoffice-par.md"
+contrato: "contratos/backoffice-par.md"
 ---
 
 # Acuerdo con Backoffice (Tema 12, G06): parámetros PAR y eventos
 
 > [!info] Fuentes
-> - `tpi-roadmap/docs/contracts/backoffice-par.md` ([GitHub](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/backoffice-par.md)): estado vigente del lado de Roadmap.
-> - `tpi-roadmap/docs/contracts/CONTRATO_T10_BACKOFFICE.md` ([GitHub](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/CONTRATO_T10_BACKOFFICE.md)): contrato original que **envió Backoffice** (2026-09-26). Parte quedó desactualizada (ver tabla de diferencias).
-> - Contrato de eventos propios hacia Backoffice: `tpi-roadmap/docs/contracts/roadmap-events-v1.md` ([GitHub](https://github.com/2026-P4-BE/tpi-roadmap/blob/develop/docs/contracts/roadmap-events-v1.md)).
+> - `contratos/backoffice-par.md`: estado vigente del lado de Roadmap.
+> - `contratos/CONTRATO_T10_BACKOFFICE.md`: contrato original que **envió Backoffice** (2026-09-26). Parte quedó desactualizada (ver tabla de diferencias).
+> - Contrato de eventos propios hacia Backoffice: `contratos/roadmap-events-v1.md`.
 > - Repo de la contraparte: `2026-P4-BE/tpi-backoffice` (PR/issue #208 de `tpi-roadmap`).
 
 ## Qué se acordó
