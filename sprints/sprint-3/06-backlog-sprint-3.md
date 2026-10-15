@@ -12,7 +12,7 @@ estado: borrador
 > Esfuerzo: S (≤1 día) · M (2-3 días) · L (≥4 días).
 
 > [!tip] Cada ítem tiene su nota con historia y criterios de aceptación
-> Ver [[sprints/sprint-3/09-epicas-e-historias|09 — Épicas e historias]], con el formato de la wiki de Taiga. Las del Bloque 0 son HU existentes que se reabren (HU-01, 15, 16, 20, 21, 41, 43, 44, 45, 46, 48, 49) más HT-12 a HT-15.
+> Ver [[sprints/sprint-3/09-epicas-e-historias|09 — Épicas e historias]], con el formato de la wiki de Taiga. Las del Bloque 0 son HU existentes que se reabren (HU-01, 15, 16, 20, 21, 41, 43, 44, 45, 46, 48, 49) más HT-14.
 
 ## Bloque 0: deuda del Sprint 2 (primera semana)
 
@@ -64,7 +64,6 @@ Detalle y estado de cada punto en [07-correcciones-profes.md](07-correcciones-pr
 | [[sprints/sprint-3/historias/HT-21 Seed de demo curado\|HT-21]] | HT | Seed de la demo con un curso entero, curado y reproducible (usa los usuarios demo de G07) | Back | M | HU-64, HU-65, HU-67 |
 | [[sprints/sprint-3/historias/HT-22 Permisos en vez de roles\|HT-22]] | HT | Migrar 17 `hasRole`/`hasAnyRole` (y el chequeo manual de `RankingController`) a permisos | Back | M | Catálogo de permisos de G07 Users (G2, sin definir) |
 | [[sprints/sprint-3/historias/HT-23 Documentación global del micro\|HT-23]] | HT | Documentación global del micro Roadmap | Back / Docs | S | — |
-| [[sprints/sprint-3/historias/HT-24 Datos para el dashboard de G06\|HT-24]] | HT | Acordar con G06 los datos que aportamos al dashboard (progreso, ranking, XP) | Back + acuerdo | S | — |
 
 ## Temas consultados por el equipo (2026-10-15)
 
@@ -104,7 +103,6 @@ flowchart LR
   HT3 --> H7[HU-60 Props personalizadas]
   HT2 --> H8[HU-61 Alumno elige roadmap]
   HT2 --> H9[HU-62 Vista de grafo]
-  UK[HT-25 UI-KIT 0.8.0] --> H10[HU-63 Vista Moodle]
   HT2 --> HT11[HT-19 Contratos G01/Motor]
   H5 --> HT12[HT-20 Gate con reglas]
   H6 --> HT12
@@ -117,14 +115,14 @@ flowchart LR
   G06[Catálogo de permisos G06] --> HT-22[HT-22 Permisos]
 ```
 
-Las correcciones sin dependencias (HU-68 lista de nodos, HU-45 ranking, HU-69 Archibaldo, HT-23 documentación, HT-24 acuerdo con G06) se pueden tomar desde la semana 1 por quien no esté en el modelo.
+Las correcciones sin dependencias (HU-68 lista de nodos, HU-45 ranking, HU-69 Archibaldo, HT-23 documentación) se pueden tomar desde la semana 1 por quien no esté en el modelo.
 
 1. **Semana 1**:
    - Bloque 0 (deuda).
    - HT-16 (spike de Neo4j).
    - ~~Respuestas de los profes: las 🔴 de [[08-dudas]] (P1 a P4)~~ Respondidas el 2026-10-15: HT-17 y HT-18 pueden arrancar.
    - Acordar con G01 el contrato de secciones para el modelo 1:N.
-   - Correcciones independientes: HU-68, HU-45 (reproducir el error), HU-69, HT-23 y HT-24 (acuerdo con G06).
+   - Correcciones independientes: HU-68, HU-45 (reproducir el error), HU-69 y HT-23.
 2. **Semana 2**:
    - HT-17 y HT-18 (modelo y almacenamiento).
    - En paralelo, el front arranca la vista Moodle (HU-63) y la vista de grafo (HU-62) sobre un mock del endpoint `/graph`.
@@ -138,5 +136,5 @@ Las correcciones sin dependencias (HU-68 lista de nodos, HU-45 ranking, HU-69 Ar
 > - **Dependencias externas**: G01 (contrato de secciones, HU-49) y la plataforma (infra de Neo4j).
 > - ~~**Contradicción abierta.**~~ Resuelta (P1): cada roadmap es un mapa distinto del mismo curso; HT-17, HU-57, HU-61 y HT-19 se mantienen.
 > - **Trabajo nuevo sin HU**: clonar roadmaps con sus restricciones (G4), estado académico final (P15) y racha (E12).
-> - **Correcciones.** Suman 10 historias (HU-64 a HU-69, HT-21 a HT-24; el ranking va en HU-45) a una épica que ya era grande. HT-22 depende de G07 (catálogo de permisos) y HT-21 depende de casi todo: van al final.
+> - **Correcciones.** Suman 9 historias (HU-64 a HU-69, HT-21 a HT-23; el ranking va en HU-45) a una épica que ya era grande. HT-22 depende de G07 (catálogo de permisos) y HT-21 depende de casi todo: van al final.
 > - **Regresiones.** Cambiar `/courses/{id}` por `/roadmaps/{id}` toca casi todo el front y el back. Mantener compatibilidad mientras se migra.

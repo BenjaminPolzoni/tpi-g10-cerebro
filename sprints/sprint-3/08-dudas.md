@@ -25,7 +25,7 @@ estado: vigente
 | # | Prio | Grupo | Duda | Bloquea | Origen | Estado |
 |---|---|---|---|---|---|---|
 | G2 | 🟠 | **G07 Users** (antes figuraba G06) | **Catálogo de permisos**: ¿qué nombres usan (ej. `roadmap.graph.edit`) y cómo llegan en el token? | HT-22 | [[07-correcciones-profes]] | 2026-10-15: todavía no está definido. El catálogo es de **Users**, no de Backoffice |
-| G3 | 🟠 | G06 Backoffice | **Dashboard**: ¿qué datos quieren de nosotros (progreso, ranking, XP) y por dónde (REST o eventos)? | HT-24 | [[07-correcciones-profes]] | 2026-10-15: todavía no se sabe |
+| G3 | 🟠 | G06 Backoffice | **Dashboard**: ¿qué datos quieren de nosotros (progreso, ranking, XP) y por dónde (REST o eventos)? | — | [[07-correcciones-profes]] | 2026-10-15: todavía no se sabe |
 | G7 | 🟢 | G07 Users | Usuarios demo (admin, profe, alumno): ¿ids y credenciales estables para usarlos en nuestro seed? | HT-21 | [[07-correcciones-profes#2. No son nuestros]] | 2026-10-15: todavía no hay |
 | G9 | 🟢 | G06 Backoffice | ¿Siguen dependiendo del header `X-User-Roles: MS` que exigía el contrato original? | — | [[acuerdos/backoffice]] | ⚠️ Confirmar: la respuesta recibida para G9 ("sí, debe ser único, incluso luego de una clonación…") habla del `node_id` y se cargó en G8 |
 
@@ -92,13 +92,13 @@ Descartadas: `is_a`, `instance_of`, `located_in`, `has_property` y `causes`.
 |---|---|---|---|---|
 | G1 | Plataforma | ¿Quién suma Neo4j al compose y a los entornos? | **Neo4j es solo para nuestro micro.** No se migra toda la base: solo los grafos (curso, sección, unidad, etc.) | HT-16, HT-18. Sigue por coordinar con plataforma quién lo suma al compose (T-16.2) |
 | G4 | G01 Courses | Con N roadmaps, ¿cómo quedan los contratos de secciones y de restricciones? | **El profesor define las restricciones por cada roadmap.** Además puede **clonar un roadmap con sus restricciones** para otros grupos o cursos | HT-19, HU-49. Clonar es trabajo nuevo (sin HU) |
-| G5 | G01 Courses | ¿Sus eventos reales ya salen en snake_case? | **Todo en snake_case** | HT-12. [[acuerdos/courses-g01]] |
+| G5 | G01 Courses | ¿Sus eventos reales ya salen en snake_case? | **Todo en snake_case** | [[acuerdos/courses-g01]] |
 | G6 | G07 Users / G01 | Vocabulario de roles | **Ya no habrá roles: habrá permisos.** Mientras tanto, vale `PROFESSOR`/`GESTOR` | HT-22 |
 | G8 | G09 Motor | ¿Alcanza con que `node_id` sea único global? | **Sí.** Tiene que ser único incluso después de una clonación: clonar genera `node_id` nuevos | HT-19, HU-01 |
 | G10 | Accounting / Inventario | ¿Qué número de grupo tienen? ¿Inventario y Accounting son el mismo equipo? | **Sí, es el mismo equipo: Accounting.** El número de grupo no se dio | [[acuerdos/accounting]], [[acuerdos/inventario]] |
 | G11 | Plataforma | ¿Qué grupo tiene Gateway / Kafka? | **Gateway lo lleva Users (G07); Kafka lo lleva Notificaciones** | [[acuerdos/plataforma-gateway-kafka]] |
-| G12 | Plataforma | ¿Están emitidos los scopes H1 de Courses y `users.legajo.read`? | **Existe `student.enrollment.read`**, que lee la matrícula del alumno en el curso | HT-13. [[acuerdos/plataforma-gateway-kafka]] |
-| G13 | Equipo UI-KIT | ¿Quién es dueño del componente de grafo? ¿El avatar `2xl` alcanza para el perfil? | **Los dueños del componente de grafo somos nosotros (G10).** El avatar **no se usa como foto de perfil** | HU-70, HU-62, HT-25 |
+| G12 | Plataforma | ¿Están emitidos los scopes H1 de Courses y `users.legajo.read`? | **Existe `student.enrollment.read`**, que lee la matrícula del alumno en el curso | [[acuerdos/plataforma-gateway-kafka]] |
+| G13 | Equipo UI-KIT | ¿Quién es dueño del componente de grafo? ¿El avatar `2xl` alcanza para el perfil? | **Los dueños del componente de grafo somos nosotros (G10).** El avatar **no se usa como foto de perfil** | HU-70, HU-62 |
 
 ### 3. Del equipo
 
@@ -108,12 +108,12 @@ Descartadas: `is_a`, `instance_of`, `located_in`, `has_property` y `causes`.
 | E2 | Tres criterios de insignia que nunca se otorgan | **Se implementan** | HU-21: `SECTION_NO_LIVES_LOST`, `NODE_NO_RETRIES` y `LIFE_RECOVERED` |
 | E3 | HU-45 / HU-49: ¿Bloque 0 o alcance nuevo? | **Ya debería estar hecho; se corrobora** | HU-45, HU-49 |
 | E4 | Curva PAR-09: ¿cuál está activa? | **La de Backoffice** (1200/3500/7300 para los niveles 3/5/7) | HT-21 (seed). [[decisiones/DEC-012-curva-de-niveles-desde-par-09\|DEC-012]] |
-| E5 | `fix/account-not-found-gate` | **Ya está hecho** | HT-12 |
+| E5 | `fix/account-not-found-gate` | **Ya está hecho** | — |
 | E7 | `TraceIdFilter`: ¿se borró a propósito? | **Sí, se borró a propósito** | HT-23: sacarlo de la documentación |
 | E8 | ¿Hace falta consumir `LIVES_EXHAUSTED` / `LIVES_AVAILABLE`? | **Sí** | HU-21 (`LIFE_RECOVERED`). [[acuerdos/accounting]] |
 | E9 | `ParUnavailableException`: ¿qué pasa con Backoffice caído? | **Se usan los valores guardados en caché** | HU-15. [[acuerdos/backoffice]] |
-| E10 | ¿Se cierran las épicas viejas en Taiga? | **Sí** | HT-15 |
-| E11 | HU sin épica (HT-04, HT-05, HT-10, HT-11) | **No llevan épica** (alcanza con el tag `g10`) | HT-15 |
+| E10 | ¿Se cierran las épicas viejas en Taiga? | **Sí** | — |
+| E11 | HU sin épica (HT-04, HT-05, HT-10, HT-11) | **No llevan épica** (alcanza con el tag `g10`) | — |
 | E12 | EP-72 Avatares y EP-592 Racha sin HU | **Avatares ya está hecho; Racha es nueva para el Sprint 3** | HT-28. Falta la HU de Racha |
 
 ### Anteriores

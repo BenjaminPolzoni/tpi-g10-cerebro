@@ -109,7 +109,7 @@ Dependencias / Impactos
 *   Módulos afectados: `course-editor-page`, `section-reorder-list`.
 *   Otros equipos / aprobaciones: Equipo UI-KIT (lista reordenable).
 *   Impacto en datos / migraciones: Sin migración.
-*   Riesgos y mitigación (opcional): Depende de HT-25 y HT-26.
+*   Riesgos y mitigación (opcional): Depende de HT-26.
 
 ## Tareas
 
@@ -127,7 +127,6 @@ Existe `course-editor-page` con controles propios.
 
 ### Depende de
 
-- [[sprints/sprint-3/historias/HT-25 Subir la UI-KIT a 0.8.0 y cerrar sus TODOs|HT-25]] Subir la UI-KIT a 0.8.0 y cerrar sus TODOs
 - [[sprints/sprint-3/historias/HT-26 Controles y botones del roadmap con el kit|HT-26]] Controles y botones del roadmap con el kit
 
 ### Dudas resueltas (2026-10-15)

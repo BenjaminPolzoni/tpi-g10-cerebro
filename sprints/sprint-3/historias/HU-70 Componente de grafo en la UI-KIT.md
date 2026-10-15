@@ -127,7 +127,7 @@ El kit no tiene componente de grafo. La vista de grafo del roadmap es un SVG pro
 
 ### Depende de
 
-- [[sprints/sprint-3/historias/HT-25 Subir la UI-KIT a 0.8.0 y cerrar sus TODOs|HT-25]] Subir la UI-KIT a 0.8.0 y cerrar sus TODOs
+Ninguna.
 
 ### Dudas resueltas (2026-10-15)
 

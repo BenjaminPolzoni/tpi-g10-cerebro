@@ -126,7 +126,7 @@ El ranking tiene 3 `<table>` crudas y chips propios.
 
 ### Depende de
 
-- [[sprints/sprint-3/historias/HT-25 Subir la UI-KIT a 0.8.0 y cerrar sus TODOs|HT-25]] Subir la UI-KIT a 0.8.0 y cerrar sus TODOs
+Ninguna.
 
 ### Dudas que la frenan
 

@@ -3,12 +3,12 @@ tags: [tpi, g10, sprint-3, epica]
 estado: Propuesta
 sprint: "G10 - Sprint 3"
 historias: 10
-puntos: 47
+puntos: 45
 ---
 
 # Correcciones de los profes
 
-> [!info] Épica del Sprint 3 · **10 historias** · **47 pts** · Estado: **Propuesta** (todavía no está en Taiga).
+> [!info] Épica del Sprint 3 · **9 historias** · **45 pts** · Estado: **Propuesta** (todavía no está en Taiga).
 
 [G10] — Correcciones de los profes
 ----------------------------------
@@ -38,7 +38,7 @@ Criterios de Aceptación a nivel Épico
 *   [ ] KPIs iniciales alcanzan: Correcciones nuestras resueltas: 11 de 11, o redefinidas con respuesta de los profes.
 *   [ ] Sin regresiones críticas en: El ranking mantiene el anonimato (DEC-007). Migrar a permisos no deja ningún endpoint abierto.
 *   [ ] Observabilidad y alertas configuradas: Errores del ranking por grupo; 403 por permisos mal asignados.
-*   [ ] Documentación de uso y operación publicada: Documentación global del micro (HT-23) y acuerdo con G06 (HT-24).
+*   [ ] Documentación de uso y operación publicada: Documentación global del micro (HT-23).
 
 * * *
 
@@ -64,7 +64,6 @@ Dependencias / Impactos
 | [[sprints/sprint-3/historias/HT-21 Seed de demo curado\|HT-21]] | Seed de demo curado | Nueva | 5 | Must | [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios\|HU-64]], [[sprints/sprint-3/historias/HU-65 Relaciones con tipo\|HU-65]], [[sprints/sprint-3/historias/HU-67 Nodo examen con ventana horaria\|HU-67]] | [[sprints/sprint-3/08-dudas\|G7]], [[sprints/sprint-3/08-dudas\|E4]] ✅ |
 | [[sprints/sprint-3/historias/HT-22 Permisos en vez de roles\|HT-22]] | Permisos en vez de roles | Nueva | 5 | Should | — | [[sprints/sprint-3/08-dudas\|G2]], [[sprints/sprint-3/08-dudas\|G6]] ✅ |
 | [[sprints/sprint-3/historias/HT-23 Documentación global del micro\|HT-23]] | Documentación global del micro | Nueva | 2 | Should | — | [[sprints/sprint-3/08-dudas\|E7]] ✅ |
-| [[sprints/sprint-3/historias/HT-24 Datos para el dashboard de G06\|HT-24]] | Datos para el dashboard de G06 | Nueva | 2 | Should | — | [[sprints/sprint-3/08-dudas\|G3]] |
 
 ---
 

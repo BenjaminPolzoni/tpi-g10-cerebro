@@ -110,7 +110,7 @@ Dependencias / Impactos
 *   Módulos afectados: `RankingController`, `RankingService`, `GroupProgressController`, `ranking-panel`.
 *   Otros equipos / aprobaciones: Ninguno.
 *   Impacto en datos / migraciones: Sin migración.
-*   Riesgos y mitigación (opcional): Depende de HT-13 (flag).
+*   Riesgos y mitigación (opcional): No aplica.
 
 ## Tareas
 
@@ -130,7 +130,7 @@ El back tiene ranking solo por curso y `GET /groups/{gid}/progress` aparte. El f
 
 ### Depende de
 
-- [[sprints/sprint-3/historias/HT-13 Encender los flags en los entornos|HT-13]] Encender los flags en los entornos
+Ninguna.
 
 ### Dudas resueltas (2026-10-15)
 

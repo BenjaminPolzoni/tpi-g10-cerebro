@@ -3,12 +3,12 @@ tags: [tpi, g10, sprint-3, epica]
 estado: Propuesta
 sprint: "G10 - Sprint 3"
 historias: 16
-puntos: 56
+puntos: 50
 ---
 
 # Deuda del Sprint 2
 
-> [!info] Épica del Sprint 3 · **16 historias** · **56 pts** · Estado: **Propuesta** (todavía no está en Taiga).
+> [!info] Épica del Sprint 3 · **13 historias** · **50 pts** · Estado: **Propuesta** (todavía no está en Taiga).
 
 [G10] — Deuda del Sprint 2
 --------------------------
@@ -56,8 +56,6 @@ Dependencias / Impactos
 
 | HU | Título | En Taiga | Pts | Prioridad | Depende de | Dudas |
 |---|---|---|---|---|---|---|
-| [[sprints/sprint-3/historias/HT-12 Cerrar o mergear las ramas colgadas del back\|HT-12]] | Cerrar o mergear las ramas colgadas del back | Nueva | 2 | Must | — | [[sprints/sprint-3/08-dudas\|E5]] ✅ |
-| [[sprints/sprint-3/historias/HT-13 Encender los flags en los entornos\|HT-13]] | Encender los flags en los entornos | Nueva | 2 | Must | — | [[sprints/sprint-3/08-dudas\|E6]] |
 | [[sprints/sprint-3/historias/HT-14 Sacar los IDs de mock del front\|HT-14]] | Sacar los IDs de mock del front | Nueva | 3 | Must | — | — |
 | [[sprints/sprint-3/historias/HU-48 Saber si puedo entrar a un desafío antes de abrirlo\|HU-48]] | Saber si puedo entrar a un desafío antes de abrirlo | Reabrir | 3 | Must | — | — |
 | [[sprints/sprint-3/historias/HU-20 Definir el catálogo de insignias del curso\|HU-20]] | Definir el catálogo de insignias del curso | Reabrir | 3 | Should | — | — |
@@ -66,12 +64,11 @@ Dependencias / Impactos
 | [[sprints/sprint-3/historias/HU-16 Integración real con Inventario para las vidas del gate\|HU-16]] | Integración real con Inventario para las vidas del gate | Reabrir | 3 | Should | — | — |
 | [[sprints/sprint-3/historias/HU-43 Elegir el ícono de un desafío\|HU-43]] | Elegir el ícono de un desafío | Reabrir | 1 | Could | — | — |
 | [[sprints/sprint-3/historias/HU-46 Ver en los nodos y en el Templo el material teórico de Courses\|HU-46]] | Ver en los nodos y en el Templo el material teórico de Courses | Reabrir | 5 | Should | — | [[sprints/sprint-3/08-dudas\|P13]] ✅ |
-| [[sprints/sprint-3/historias/HU-44 Ver el roadmap de cada una de mis comisiones\|HU-44]] | Ver el roadmap de cada una de mis comisiones | Reabrir | 5 | Must | [[sprints/sprint-3/historias/HT-13 Encender los flags en los entornos\|HT-13]] | [[sprints/sprint-3/08-dudas\|P5]] ✅ |
-| [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión\|HU-45]] | Ranking de la cohorte y avance por comisión | Reabrir | 5 | Must | [[sprints/sprint-3/historias/HT-13 Encender los flags en los entornos\|HT-13]] | [[sprints/sprint-3/08-dudas\|E1]] ✅, [[sprints/sprint-3/08-dudas\|P10]] ✅, [[sprints/sprint-3/08-dudas\|P14]] ✅ |
+| [[sprints/sprint-3/historias/HU-44 Ver el roadmap de cada una de mis comisiones\|HU-44]] | Ver el roadmap de cada una de mis comisiones | Reabrir | 5 | Must | — | [[sprints/sprint-3/08-dudas\|P5]] ✅ |
+| [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión\|HU-45]] | Ranking de la cohorte y avance por comisión | Reabrir | 5 | Must | — | [[sprints/sprint-3/08-dudas\|E1]] ✅, [[sprints/sprint-3/08-dudas\|P10]] ✅, [[sprints/sprint-3/08-dudas\|P14]] ✅ |
 | [[sprints/sprint-3/historias/HU-49 Aplicar en el roadmap las restricciones de sección y actividad que publica Courses\|HU-49]] | Aplicar en el roadmap las restricciones de sección y actividad que publica Courses | Reabrir | 8 | Should | [[sprints/sprint-3/historias/HU-67 Nodo examen con ventana horaria\|HU-67]] | [[sprints/sprint-3/08-dudas\|P9]] ✅, [[sprints/sprint-3/08-dudas\|G4]] ✅ |
 | [[sprints/sprint-3/historias/HU-41 Editar un nodo del roadmap de forma individual\|HU-41]] | Editar un nodo del roadmap de forma individual | Reabrir | 3 | Must | — | — |
 | [[sprints/sprint-3/historias/HU-01 Crear nodos en el grafo (unidades, contenidos, desafíos, exámenes)\|HU-01]] | Crear nodos en el grafo (unidades, contenidos, desafíos, exámenes) | Reabrir | 3 | Should | — | [[sprints/sprint-3/08-dudas\|G8]] ✅ |
-| [[sprints/sprint-3/historias/HT-15 Poner Taiga al día\|HT-15]] | Poner Taiga al día | Nueva | 2 | Must | — | [[sprints/sprint-3/08-dudas\|E10]] ✅, [[sprints/sprint-3/08-dudas\|E11]] ✅ |
 
 ---
 

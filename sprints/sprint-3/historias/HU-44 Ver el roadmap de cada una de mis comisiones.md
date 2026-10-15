@@ -109,7 +109,7 @@ Dependencias / Impactos
 *   Módulos afectados: Roadmap del alumno, `GroupSelectionService`.
 *   Otros equipos / aprobaciones: G01.
 *   Impacto en datos / migraciones: Sin migración.
-*   Riesgos y mitigación (opcional): Depende de HT-13 (flag) y de que Courses tenga las comisiones de la demo.
+*   Riesgos y mitigación (opcional): Depende de que Courses tenga las comisiones de la demo.
 
 ## Tareas
 
@@ -127,7 +127,7 @@ El back filtra por comisión detrás de `ROADMAP_BY_GROUP_ENABLED`. El front no 
 
 ### Depende de
 
-- [[sprints/sprint-3/historias/HT-13 Encender los flags en los entornos|HT-13]] Encender los flags en los entornos
+Ninguna.
 
 ### Dudas resueltas (2026-10-15)
 
