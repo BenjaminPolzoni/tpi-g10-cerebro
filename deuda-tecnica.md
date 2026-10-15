@@ -1,5 +1,7 @@
 ---
-tags: [tpi, g10, deuda-tecnica]
+tags:
+  - tpi
+  - g10
 actualizado: 2026-10-15
 ---
 
