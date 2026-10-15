@@ -1,12 +1,13 @@
 ---
 tags: [tpi, g10, sprint-3, borrador, issue]
 para: G01 Courses
-estado: borrador (sin enviar)
+estado: enviado
+issue: https://github.com/2026-P4-FE/2026-PIV-TPI-FE/issues/581
 origen: "[[sprints/sprint-3/historias/HU-68 Obligatoriedad visible en la lista de nodos|HU-68]]"
 fecha: 2026-10-15
 ---
 
-> [!warning] Borrador: todavía no se mandó a G01. Lo que va al issue es lo que está debajo de la línea.
+> [!success] Enviado a G01 el 2026-10-15: [#581](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/issues/581). Lo que se mandó es lo que está debajo de la línea.
 
 ---
 

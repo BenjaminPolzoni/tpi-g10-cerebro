@@ -19,7 +19,7 @@ en_taiga: false
 > **Lo que pidieron los profes:** «Lista de nodos que muestre la obligatoriedad (qué nodo es prerrequisito de otro)».
 > **Dónde:** en la página de contenido de la materia, cada sección tiene dos vistas:
 > - **Vista de edición** (nuestra, componente `roadmap-section-nodes` embebido en Cursos): ya muestra en cada fila, por ejemplo, «Lectura · Obligatoria · Requiere: Teoría 1, Práctica 2 (todos) · Disponible» (`b592bf2e`, 13/10). Solo falta la obligatoriedad en **desafíos y exámenes**.
-> - **Vista simplificada** (sin permiso de edición): es de **Cursos (G01)**. Muestra solo el nombre de los desafíos y los recursos, sin obligatoriedad ni requisitos. Lo pedimos con un issue: [[sprints/sprint-3/borradores/Issue G01 - obligatoriedad y requisitos en la vista simplificada|borrador del issue para G01]] (sin enviar).
+> - **Vista simplificada** (sin permiso de edición): es de **Cursos (G01)**. Muestra solo el nombre de los desafíos y los recursos, sin obligatoriedad ni requisitos. Lo pedimos con un issue: [[sprints/sprint-3/borradores/Issue G01 - obligatoriedad y requisitos en la vista simplificada|issue para G01]], enviado como [#581](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/issues/581).
 
 [G10] — HU-68 — Obligatoriedad visible en la lista de nodos
 -----------------------------------------------------------
@@ -125,7 +125,7 @@ Dependencias / Impactos
 - [x] T-68.2 «Obligatoria / Opcional» en los nodos de lectura
 - [ ] T-68.3 «Obligatorio / Opcional» también en desafíos y exámenes
 - [ ] T-68.4 Test de la fila de un desafío obligatorio
-- [ ] T-68.5 Mandar el issue a G01 y, si lo aceptan, exportar desde `embeds` la función que arma obligatoriedad y requisitos
+- [ ] T-68.5 Issue a G01 enviado ([#581](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/issues/581)); si lo aceptan, exportar desde `embeds` la función que arma obligatoriedad y requisitos
 
 ---
 
