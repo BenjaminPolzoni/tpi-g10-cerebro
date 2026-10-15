@@ -10,6 +10,7 @@ Todo lo que el grupo necesita saber sin tener que preguntarle a nadie: qué est�
 flowchart LR
   T[Taiga] -->|scripts/taiga_sync.py| TG[taiga/]
   TG --> S[sprints/]
+  MS[microservicios/] --> S
   A[acuerdos/] --> S
   D[decisiones/] --> S
   M[minutas/] --> A
@@ -20,11 +21,12 @@ flowchart LR
 
 | Carpeta | Qué hay | Quién la mantiene |
 |---|---|---|
+| [[microservicios/README\|microservicios/]] | **Ficha y documentación canónica por cada microservicio/repo de la plataforma** (evita dispersión de información) | El equipo |
 | [[taiga/README\|taiga/]] | Épicas, historias y tareas de G10, con estado y responsable | **Generada** por `scripts/taiga_sync.py`. No editar a mano |
 | [[sprints/sprint-3/00-indice\|sprints/]] | Planificación y análisis por sprint. Hoy: propuesta del Sprint 3 | El equipo |
-| [[acuerdos/README\|acuerdos/]] | Una nota por grupo o servicio con el que integramos: qué se acordó, contrato, pendientes | El equipo, cada vez que se acuerda algo |
+| [[acuerdos/README\|acuerdos/]] | Acuerdos por grupo o servicio con el que integramos | El equipo, cada vez que se acuerda algo |
 | [[decisiones/README\|decisiones/]] | Decisiones técnicas (DEC-xxx): contexto, alternativas y consecuencias | El equipo |
-| [[contratos/README\|contratos/]] | Contratos OpenAPI, AsyncAPI, esquemas de eventos Kafka y acuerdos técnicos con otros servicios | El equipo |
+| [[contratos/README\|contratos/]] | Contratos OpenAPI, AsyncAPI y esquemas de eventos Kafka | El equipo |
 | [[arquitectura/contexto-integral\|arquitectura/]] | Arquitectura y contexto del micro: contexto integral, estructura de paquetes/BD, E2E, CORS y rutas | El equipo, cuando cambie el código |
 | [[tareas/README\|tareas/]] | Especificaciones de tareas técnicas implementadas (T-xx, HU3, P-11) y su histórico | Histórico de tareas |
 | [[backlog/README\|backlog/]] | Notas de backlog técnico y funcionalidades futuras | El equipo |
