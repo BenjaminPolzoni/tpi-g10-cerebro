@@ -47,6 +47,7 @@ actualizado: 2026-10-15
 | DT-18 | 🟠 | **Contratos desactualizados**: `courses.md` §7.3 y el estándar de Kafka siguen en camelCase; el código lee snake_case (DEC-001) | Actualizar los docs | S | [[acuerdos/courses-g01]] | |
 | DT-19 | 🟢 | **Taiga desactualizado**: 15/17 épicas en New con sus HU Done, HT-11 dice camelCase, HT-04/10/11 sin épica, HT-05 sin épica ni tag | Ordenarlo (HT-11, E10, E11) | S | [[taiga/README\|Taiga]] | Sprint 3 (Bloque 0) |
 | DT-20 | 🟢 | Flags que esconden funcionalidad hecha: `SECTIONS_SYNC_ENABLED`, `ROADMAP_BY_GROUP_ENABLED` | Encenderlos en los entornos; después evaluar sacar el flag | S | [[decisiones/DEC-004-flags-apagados-por-defecto\|DEC-004]] | Sprint 3 (Bloque 0) |
+| DT-21 | 🟢 | **Vault personal sin git**: `~/Documents/Obsidian Vault` no es repo y no tiene el plugin Obsidian Git. El cerebro del equipo sí está conectado desde `~/dev/TPI_2026/tpi-g10-cerebro` (origin en GitHub, `main`, plugin activo) | Para usar el cerebro: abrir esa carpeta como vault y activar Git (ver [[COMO-USAR#1. Clonar y abrir en Obsidian (una sola vez)\|COMO-USAR §1]]). Para otro vault: `git init`, agregar el remote y el plugin Obsidian Git | S | [[COMO-USAR]] | |
 
 ## Resuelta
 

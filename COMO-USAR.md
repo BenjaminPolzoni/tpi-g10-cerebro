@@ -21,6 +21,33 @@ git clone https://github.com/BenjaminPolzoni/tpi-g10-cerebro.git
 > [!tip] Sin Obsidian
 > Son archivos Markdown: se pueden leer y editar desde GitHub o cualquier editor. Los diagramas Mermaid y las cajas de aviso se ven en GitHub también.
 
+### En una compu nueva
+
+1. **Instalar Git y Obsidian.** En macOS, `xcode-select --install` trae Git. Verificar con `git --version`.
+2. **Configurar tu identidad de Git** (sin esto, Obsidian Git no puede commitear):
+   ```bash
+   git config --global user.name "Tu nombre"
+   git config --global user.email "tu-mail-de-github@ejemplo.com"
+   ```
+3. **Autenticarse con GitHub** para poder subir tus cambios. Lo más simple es instalar la CLI de GitHub y loguearse por navegador:
+   ```bash
+   brew install gh
+   gh auth login        # elegir GitHub.com → HTTPS → Login with a web browser
+   ```
+   Si preferís SSH, cargá tu clave pública en GitHub y clonar con `git@github.com:BenjaminPolzoni/tpi-g10-cerebro.git`.
+4. **Clonar** en la carpeta donde guardes los proyectos (por ejemplo `~/dev/TPI_2026/`):
+   ```bash
+   git clone https://github.com/BenjaminPolzoni/tpi-g10-cerebro.git
+   cd tpi-g10-cerebro && git status    # debe decir "On branch main" y "up to date"
+   ```
+5. **Abrir en Obsidian:** *Open folder as vault* → elegir `tpi-g10-cerebro` → confiar en el vault. La configuración del plugin Git viene en el repo, así que no hace falta cargarla a mano.
+6. **Verificar el enlace:** *Command palette* → **Obsidian Git: Pull**. Tiene que terminar sin errores.
+   - Si dice que no encuentra `git`: *Settings → Obsidian Git → Custom Git binary path* con la salida de `which git`.
+   - Si no pide ni trae nada, revisar que el plugin esté activo (ver el paso 3 de arriba).
+
+> [!warning] No usar otro vault
+> Este repo es el único que se sincroniza. Un vault personal (por ejemplo en `Documents/`) no tiene git: abrir siempre la carpeta clonada.
+
 ## 2. Editar
 
 - Crear notas nuevas con las plantillas: *Command palette* (`Cmd/Ctrl + P`) → **Templates: Insert template** → `acuerdo`, `decision` o `minuta`.
