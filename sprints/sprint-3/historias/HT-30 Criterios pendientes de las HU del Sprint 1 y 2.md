@@ -7,6 +7,7 @@ epica: "Deuda del Sprint 2"
 sprint: "G10 - Sprint 3"
 puntos: 34
 prioridad: Must
+prioridad_sprint: 1
 en_taiga: false
 ---
 
@@ -14,6 +15,9 @@ en_taiga: false
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Nueva: todavía no está cargada en Taiga. El 2026-10-15 junta en una sola HT lo que les falta a 10 HU que figuran Done en Taiga: HU-01, HU-15, HU-16, HU-20, HU-21, HU-41, HU-43, HU-44, HU-46 y HU-48 (34 puntos). Las HU originales quedan en Done en su sprint; cada tarea dice a qué HU y a qué CA corresponde.
+
+> [!important] Prioridad 1 del sprint (2026-10-15)
+> Va primero, junto con la otra prioridad 1: HT-26 (UI-KIT). Son criterios que ya se dieron por terminados y no se cumplen.
 
 [G10] — HT-30 — Criterios pendientes de las HU del Sprint 1 y 2
 ---------------------------------------------------------------
@@ -99,13 +103,13 @@ Estimación / Prioridad
 **Formato rápido**
 
 *   **Puntos (Fibonacci)**: 34
-*   **Prioridad (MoSCoW / Numérica)**: Must
+*   **Prioridad (MoSCoW / Numérica)**: Must · 1 (máxima del sprint)
 
 **Formato tabla (opcional)**
 
 | Puntos (Fibonacci) | Prioridad (MoSCoW / Numérica) |
 | --- | --- |
-| 34 | Must |
+| 34 | Must · 1 (máxima del sprint) |
 
 * * *
 

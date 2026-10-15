@@ -7,6 +7,7 @@ epica: "Consistencia visual con la UI-KIT"
 sprint: "G10 - Sprint 3"
 puntos: 21
 prioridad: Must
+prioridad_sprint: 1
 en_taiga: false
 ---
 
@@ -14,6 +15,9 @@ en_taiga: false
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Consistencia visual con la UI-KIT|Consistencia visual con la UI-KIT]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Nueva: todavía no está cargada en Taiga. El 2026-10-15 junta en una sola HT todo lo de la UI-KIT que seguía en el sprint: HT-26, HT-28, HT-29 y HU-70 (19 puntos). HT-25 (bump y TODOs) y HT-27 (tokens) ya se habían borrado del sprint.
+
+> [!important] Prioridad 1 del sprint (2026-10-15)
+> Va primero, junto con la otra prioridad 1: HT-30 (criterios pendientes de HU cerradas). Es la parte visual: que el roadmap se vea y se use con la UI-KIT.
 
 [G10] — HT-26 — Adopción de la UI-KIT en el roadmap
 ---------------------------------------------------
@@ -93,13 +97,13 @@ Estimación / Prioridad
 **Formato rápido**
 
 *   **Puntos (Fibonacci)**: 21
-*   **Prioridad (MoSCoW / Numérica)**: Must
+*   **Prioridad (MoSCoW / Numérica)**: Must · 1 (máxima del sprint)
 
 **Formato tabla (opcional)**
 
 | Puntos (Fibonacci) | Prioridad (MoSCoW / Numérica) |
 | --- | --- |
-| 21 | Must |
+| 21 | Must · 1 (máxima del sprint) |
 
 * * *
 

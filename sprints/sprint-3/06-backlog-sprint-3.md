@@ -118,7 +118,8 @@ flowchart LR
 Las correcciones sin dependencias (HU-68 lista de nodos, HU-45 ranking, HU-69 Archibaldo, HT-23 documentación) se pueden tomar desde la semana 1 por quien no esté en el modelo.
 
 1. **Semana 1**:
-   - Bloque 0 (deuda).
+   - **Prioridad 1:** HT-30 (criterios pendientes de HU cerradas) y HT-26 (UI-KIT y componente de grafo).
+   - Resto del Bloque 0 (deuda).
    - HT-16 (spike de Neo4j).
    - ~~Respuestas de los profes: las 🔴 de [[08-dudas]] (P1 a P4)~~ Respondidas el 2026-10-15: HT-17 y HT-18 pueden arrancar.
    - Acordar con G01 el contrato de secciones para el modelo 1:N.

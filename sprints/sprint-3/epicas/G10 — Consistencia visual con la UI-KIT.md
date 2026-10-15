@@ -56,7 +56,7 @@ Dependencias / Impactos
 
 | HU | Título | En Taiga | Pts | Prioridad | Depende de | Dudas |
 |---|---|---|---|---|---|---|
-| [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap\|HT-26]] | Adopción de la UI-KIT en el roadmap | Nueva | 21 | Must | — | [[sprints/sprint-3/08-dudas\|G13]] ✅, [[sprints/sprint-3/08-dudas\|E12]] ✅ |
+| [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap\|HT-26]] | Adopción de la UI-KIT en el roadmap | Nueva | 21 | Must ⭐ 1 | — | [[sprints/sprint-3/08-dudas\|G13]] ✅, [[sprints/sprint-3/08-dudas\|E12]] ✅ |
 
 ---
 
