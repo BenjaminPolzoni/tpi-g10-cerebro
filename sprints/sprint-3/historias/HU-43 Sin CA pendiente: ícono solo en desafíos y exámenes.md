@@ -10,7 +10,7 @@ prioridad: Could
 en_taiga: true
 ---
 
-# HU-43: Elegir el ícono de un desafío
+# HU-43: Sin CA pendiente: ícono solo en desafíos y exámenes
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-43 Elegir el ícono de un desafío|HU-43]] (épica EP-4232). En el Sprint 3 se **reabre** con lo que falta.
@@ -119,6 +119,16 @@ Dependencias / Impactos
 ---
 
 ## Contexto del Sprint 3 (no va a Taiga)
+
+### Criterios de la HU original (Taiga)
+
+Verificados contra `origin/develop` (back `fc1917e`, front `67cbad4a`) el 2026-10-15. ✅ cumple · ❌ no cumple · ⚠️ hecho pero no anda de punta a punta.
+
+- [x] ✅ **CA1**: El profesor elige un ícono para un desafío y queda guardado. — `iconKey` en el PATCH del nodo
+- [x] ✅ **CA2**: El alumno ve ese ícono en su recorrido. — `app-icon-3d` en el mundo
+- [x] ✅ **CA3**: Un ícono fuera del catálogo se rechaza. — enum `IconKey`
+- [x] ✅ **CA4**: Sin ícono elegido se ve el ícono por defecto. — `defaultIconKeyOf`
+- [x] ✅ **CA5**: Cambiar el ícono no modifica estados de nodos ni desbloqueos. — el PATCH solo cambia el ícono
 
 ### Qué hay hoy en el código
 

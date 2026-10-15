@@ -10,7 +10,7 @@ prioridad: Should
 en_taiga: true
 ---
 
-# HU-20: Definir el catálogo de insignias del curso
+# HU-20: Sin CA pendiente: editar y dar de baja insignias en el front
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-20 Definir el catálogo de insignias del curso|HU-20]] (épica EP-69). En el Sprint 3 se **reabre** con lo que falta.
@@ -122,6 +122,15 @@ Dependencias / Impactos
 ---
 
 ## Contexto del Sprint 3 (no va a Taiga)
+
+### Criterios de la HU original (Taiga)
+
+Verificados contra `origin/develop` (back `fc1917e`, front `67cbad4a`) el 2026-10-15. ✅ cumple · ❌ no cumple · ⚠️ hecho pero no anda de punta a punta.
+
+- [x] ✅ **CA1**: El profesor ve las insignias del sistema y las de su curso. — `GET /courses/{id}/badges`
+- [x] ✅ **CA2**: Crea una insignia con criterio válido y queda guardada. — `POST /courses/{id}/badges`
+- [x] ✅ **CA3**: Un criterio fuera del catálogo se rechaza. — `BadgeValidation`
+- [x] ✅ **CA4**: El front deja de usar localStorage. — el front ya no usa localStorage
 
 ### Qué hay hoy en el código
 

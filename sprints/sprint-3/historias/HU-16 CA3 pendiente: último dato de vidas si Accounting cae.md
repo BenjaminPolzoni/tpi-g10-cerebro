@@ -10,7 +10,7 @@ prioridad: Should
 en_taiga: true
 ---
 
-# HU-16: Integración real con Inventario para las vidas del gate
+# HU-16: CA3 pendiente: último dato de vidas si Accounting cae
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-16 Integración real con Inventario para las vidas del gate|HU-16]] (épica EP-60). En el Sprint 3 se **reabre** con lo que falta.
@@ -121,6 +121,15 @@ Dependencias / Impactos
 ---
 
 ## Contexto del Sprint 3 (no va a Taiga)
+
+### Criterios de la HU original (Taiga)
+
+Verificados contra `origin/develop` (back `fc1917e`, front `67cbad4a`) el 2026-10-15. ✅ cumple · ❌ no cumple · ⚠️ hecho pero no anda de punta a punta.
+
+- [x] ✅ **CA1**: El gate usa las vidas que devuelve Accounting. — `InventoryClient.fetchLives`
+- [x] ✅ **CA2**: Con 0 vidas la entrega se rechaza con motivo «sin vidas». — `no_lives`
+- [ ] ❌ **CA3**: Con Accounting caído se usa el último dato conocido marcado como desactualizado. — el gate no usa el último dato; el cache `lastKnown` solo lo usa la pantalla de inventario
+- [x] ✅ **CA4**: Sin ningún dato conocido la respuesta es 503, no «habilitado». — 503 `inventory.unavailable`
 
 ### Qué hay hoy en el código
 

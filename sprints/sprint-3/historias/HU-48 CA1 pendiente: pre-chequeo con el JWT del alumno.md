@@ -10,7 +10,7 @@ prioridad: Must
 en_taiga: true
 ---
 
-# HU-48: Saber si puedo entrar a un desafío antes de abrirlo
+# HU-48: CA1 pendiente: pre-chequeo con el JWT del alumno
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-48 Saber si puedo entrar a un desafío antes de abrirlo|HU-48]] (épica EP-60). En el Sprint 3 se **reabre** con lo que falta.
@@ -123,6 +123,15 @@ Dependencias / Impactos
 ---
 
 ## Contexto del Sprint 3 (no va a Taiga)
+
+### Criterios de la HU original (Taiga)
+
+Verificados contra `origin/develop` (back `fc1917e`, front `67cbad4a`) el 2026-10-15. ✅ cumple · ❌ no cumple · ⚠️ hecho pero no anda de punta a punta.
+
+- [ ] ❌ **CA1**: Un alumno sin la lectura obligatoria ve «contenido no leído» y no se llama al Motor. — el front llama a `/eligibility`, pero `SecurityConfig` la reserva a `ServiceIdentity`: con el JWT del alumno da 403
+- [ ] ⚠️ **CA2**: Un nodo habilitado abre el intento en la misma pestaña con el attempt_type de su política de vidas. — el front navega en la misma pestaña con el `attempt_type`, pero no llega porque falla el CA1
+- [ ] ⚠️ **CA3**: Un nodo de recuperación abre con attempt_type RECOVERY aunque el alumno tenga 0 vidas. — el gate exime a RECOVERY de las vidas, pero no llega porque falla el CA1
+- [x] ✅ **CA4**: El endpoint POST …/start deja de existir y el OpenAPI lo refleja. — ya no hay `POST …/start` en los controllers
 
 ### Qué hay hoy en el código
 

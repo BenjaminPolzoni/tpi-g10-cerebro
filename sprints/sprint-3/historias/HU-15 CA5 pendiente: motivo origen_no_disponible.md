@@ -10,7 +10,7 @@ prioridad: Should
 en_taiga: true
 ---
 
-# HU-15: Impedir la entrega en un nodo bloqueado (gate, vocabulario v3)
+# HU-15: CA5 pendiente: motivo origen_no_disponible
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-15 Impedir la entrega en un nodo bloqueado (gate, vocabulario v3)|HU-15]] (épica EP-60). En el Sprint 3 se **reabre** con lo que falta.
@@ -121,6 +121,16 @@ Dependencias / Impactos
 ---
 
 ## Contexto del Sprint 3 (no va a Taiga)
+
+### Criterios de la HU original (Taiga)
+
+Verificados contra `origin/develop` (back `fc1917e`, front `67cbad4a`) el 2026-10-15. ✅ cumple · ❌ no cumple · ⚠️ hecho pero no anda de punta a punta.
+
+- [x] ✅ **CA1**: Un alumno sin la lectura obligatoria recibe contenido_no_leido. — `content_not_read`
+- [x] ✅ **CA2**: Un alumno sin el prerrequisito recibe prerrequisito_pendiente. — `prerequisite_pending`
+- [x] ✅ **CA3**: Un alumno fuera del curso recibe no_inscripto. — `not_enrolled`
+- [x] ✅ **CA4**: Un alumno con 0 vidas recibe sin_vidas, salvo que se trate de recuperación o de un desafío LLM. — `no_lives`; RECOVERY y LLM exentos
+- [ ] ❌ **CA5**: Si un origen externo no responde, devuelve habilitado en false con motivo origen_no_disponible, pendiente de acuerdo con G09. — si un origen no responde devuelve 503; no existe `origen_no_disponible`
 
 ### Qué hay hoy en el código
 

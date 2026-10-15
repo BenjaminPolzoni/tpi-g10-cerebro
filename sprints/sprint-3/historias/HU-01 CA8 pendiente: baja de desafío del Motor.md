@@ -10,7 +10,7 @@ prioridad: Should
 en_taiga: true
 ---
 
-# HU-01: Crear nodos en el grafo (unidades, contenidos, desafíos, exámenes)
+# HU-01: CA8 pendiente: baja de desafío del Motor
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-01 Crear nodos en el grafo (unidades, contenidos, desafíos, exámenes)|HU-01]] (épica EP-56). En el Sprint 3 se **reabre** con lo que falta.
@@ -121,6 +121,20 @@ Dependencias / Impactos
 ---
 
 ## Contexto del Sprint 3 (no va a Taiga)
+
+### Criterios de la HU original (Taiga)
+
+Verificados contra `origin/develop` (back `fc1917e`, front `67cbad4a`) el 2026-10-15. ✅ cumple · ❌ no cumple · ⚠️ hecho pero no anda de punta a punta.
+
+- [x] ✅ **CA1**: Una unidad creada en una posición ocupada desplaza a las siguientes. — `shiftSections`/`shiftNodes`
+- [x] ✅ **CA2**: Un nombre repetido se rechaza sin crear nada. — `requireUniqueSectionName`/`requireUniqueNodeName`
+- [x] ✅ **CA3**: Un profesor que no es dueño queda bloqueado y nada cambia. — `requireOwner` en `GraphController`
+- [x] ✅ **CA4**: Dar de baja una unidad con alumnos avanzando no les hace perder progreso. — baja lógica (`softDelete`); el progreso no se toca
+- [x] ✅ **CA5**: Un nodo se crea en la unidad y posición indicadas. — `createNode` con posición
+- [x] ✅ **CA6**: Una arista que cierra un ciclo se rechaza. — 409 `node.prerequisite-cycle`
+- [x] ✅ **CA7**: Una referencia inexistente al catálogo se rechaza. — `requireKnownChallenge` contra el catálogo del Motor
+- [ ] ❌ **CA8**: Un desafío dado de baja deja el nodo no disponible sin tocar el progreso. — no hay consumidor del evento de baja; solo existe el PATCH manual `/availability`
+- [x] ✅ **CA9**: Un profesor que no es dueño no puede agregar nodos ni aristas. — `requireOwner`
 
 ### Qué hay hoy en el código
 

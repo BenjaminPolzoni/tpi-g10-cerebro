@@ -10,7 +10,7 @@ prioridad: Must
 en_taiga: true
 ---
 
-# HU-44: Ver el roadmap de cada una de mis comisiones
+# HU-44: CA2 pendiente: selector de comisión en el front
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-44 Ver el roadmap de cada una de mis comisiones|HU-44]] (épica EP-5371). En el Sprint 3 se **reabre** con lo que falta.
@@ -120,6 +120,16 @@ Dependencias / Impactos
 ---
 
 ## Contexto del Sprint 3 (no va a Taiga)
+
+### Criterios de la HU original (Taiga)
+
+Verificados contra `origin/develop` (back `fc1917e`, front `67cbad4a`) el 2026-10-15. ✅ cumple · ❌ no cumple · ⚠️ hecho pero no anda de punta a punta.
+
+- [ ] ⚠️ **CA1**: Un alumno solo de 2W1 no ve las unidades restringidas a 2W2. — hecho en el back, pero `ROADMAP_BY_GROUP_ENABLED` está en false
+- [ ] ❌ **CA2**: Un alumno de 2W1 y 2W2 elige 2W2 y ve sus unidades con la misma XP. — el front no tiene selector de comisión
+- [ ] ⚠️ **CA3**: El gate rechaza con group_restricted un nodo de una unidad que no es de ninguna comisión del alumno. — `group_restricted` existe, pero depende del mismo flag
+- [ ] ⚠️ **CA4**: Con el mismo desafío en unidades de 2W1 y 2W2, el cierre del Motor suma la XP en el nodo correcto. — depende del mismo flag
+- [x] ✅ **CA5**: Una cohorte sin comisiones se comporta igual que hoy. — con el flag apagado se comporta igual que antes
 
 ### Qué hay hoy en el código
 

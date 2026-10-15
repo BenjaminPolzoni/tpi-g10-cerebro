@@ -10,7 +10,7 @@ prioridad: Should
 en_taiga: true
 ---
 
-# HU-46: Ver en los nodos y en el Templo el material teórico de Courses
+# HU-46: CA1 y CA3 pendientes: Templo y visor embebido
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-46 Ver en los nodos y en el Templo el material teórico de Courses|HU-46]] (épica EP-593). En el Sprint 3 se **reabre** con lo que falta.
@@ -126,6 +126,15 @@ Dependencias / Impactos
 ---
 
 ## Contexto del Sprint 3 (no va a Taiga)
+
+### Criterios de la HU original (Taiga)
+
+Verificados contra `origin/develop` (back `fc1917e`, front `67cbad4a`) el 2026-10-15. ✅ cumple · ❌ no cumple · ⚠️ hecho pero no anda de punta a punta.
+
+- [ ] ❌ **CA1**: El Templo muestra el material real agrupado por unidad. — se borró la página Templo (`student/materials`)
+- [x] ✅ **CA2**: En una unidad bloqueada el material se ve pero no se abre. — `material-access` muestra el material bloqueado sin abrirlo
+- [ ] ❌ **CA3**: El material se abre en el visor embebido. — se abre en una pestaña nueva con la URL firmada; no hay visor embebido
+- [x] ✅ **CA4**: Un material despublicado se ve «no disponible». — «Material no disponible por ahora»
 
 ### Qué hay hoy en el código
 

@@ -10,7 +10,7 @@ prioridad: Should
 en_taiga: true
 ---
 
-# HU-21: Otorgar insignias automáticamente
+# HU-21: CA1 pendiente: 3 criterios que nunca se otorgan
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-21 Otorgar insignias automáticamente|HU-21]] (épica EP-69). En el Sprint 3 se **reabre** con lo que falta.
@@ -123,6 +123,15 @@ Dependencias / Impactos
 ---
 
 ## Contexto del Sprint 3 (no va a Taiga)
+
+### Criterios de la HU original (Taiga)
+
+Verificados contra `origin/develop` (back `fc1917e`, front `67cbad4a`) el 2026-10-15. ✅ cumple · ❌ no cumple · ⚠️ hecho pero no anda de punta a punta.
+
+- [ ] ❌ **CA1**: Cumplir un criterio otorga la insignia una sola vez. — el `BadgeEvaluator` no otorga `SECTION_NO_LIVES_LOST`, `NODE_NO_RETRIES` ni `LIFE_RECOVERED`; el resto sí
+- [x] ✅ **CA2**: Un replay del mismo cierre no duplica. — UNIQUE `uq_badge_award_student_badge`
+- [x] ✅ **CA3**: Se publica BADGE_AWARDED por outbox. — `BadgeEventService` con outbox
+- [x] ✅ **CA4**: Los criterios de tiempo usan completed_at. — `getCompletedAt()` en `BadgeCriteriaChecks`
 
 ### Qué hay hoy en el código
 

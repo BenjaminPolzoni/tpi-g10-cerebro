@@ -10,7 +10,7 @@ prioridad: Must
 en_taiga: true
 ---
 
-# HU-41: Editar un nodo del roadmap de forma individual
+# HU-41: CA2 pendiente: reintentos y política de vidas
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-41 Editar un nodo del roadmap de forma individual|HU-41]] (épica EP-4232). En el Sprint 3 se **reabre** con lo que falta.
@@ -122,6 +122,17 @@ Dependencias / Impactos
 ---
 
 ## Contexto del Sprint 3 (no va a Taiga)
+
+### Criterios de la HU original (Taiga)
+
+Verificados contra `origin/develop` (back `fc1917e`, front `67cbad4a`) el 2026-10-15. ✅ cumple · ❌ no cumple · ⚠️ hecho pero no anda de punta a punta.
+
+- [x] ✅ **CA1**: El profesor abre un nodo y ve sus datos vigentes. — `NodeDetailService`
+- [ ] ❌ **CA2**: Al cambiar obligatoriedad, reintentos o reglas, el gate usa el valor nuevo en la próxima consulta. — no existe el campo de reintentos y un PUT sin `lives_policy` vuelve el nodo a STANDARD
+- [x] ✅ **CA3**: Una edición que cierra un ciclo se rechaza sin cambios. — 409 por ciclo
+- [x] ✅ **CA4**: Un alumno que ya desbloqueó el nodo conserva el desbloqueo tras la edición. — los desbloqueos están en `node_unlock` y la edición no los toca
+- [x] ✅ **CA5**: Un profesor que no es dueño recibe 403 sin efectos. — `requireOwner`
+- [x] ✅ **CA6**: Cada edición deja un log con autor, fecha, campos y cantidad de alumnos afectados. — `NodeEditLogService` con `affected_students`
 
 ### Qué hay hoy en el código
 
