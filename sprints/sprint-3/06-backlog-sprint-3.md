@@ -42,7 +42,7 @@ Detalle en [02-pendientes.md](02-pendientes.md). La deuda técnica que no es una
 | [[sprints/sprint-3/historias/HU-58 Dependencias entre secciones\|HU-58]] | HU | Como PROFESOR quiero definir dependencias entre secciones (AND/OR + XP mínimo + "todas las anteriores") | Back + Front | M | HT-17/HT-18 |
 | [[sprints/sprint-3/historias/HU-59 Dependencias entre nodos con reglas combinadas\|HU-59]] | HU | Como PROFESOR quiero definir dependencias entre nodos dentro de una sección, con reglas combinadas | Back + Front | M | HT-17/HT-18 |
 | [[sprints/sprint-3/historias/HU-60 Propiedades personalizadas en nodos y secciones\|HU-60]] | HU | Como PROFESOR quiero agregar propiedades personalizadas a nodos y secciones | Back + Front | M | HT-18 |
-| [[sprints/sprint-3/historias/HU-61 El alumno elige qué roadmap recorrer\|HU-61]] | HU | Como ALUMNO quiero elegir qué roadmap del curso recorrer y ver mi progreso en cada uno | Back + Front | M | HT-17, pregunta 1 |
+| [[sprints/sprint-3/historias/HU-61 Roadmaps por grupo del curso y restricciones de visualización\|HU-61]] | HU | Como PROFESOR quiero asignar un roadmap a cada grupo o división del curso y que se respeten las restricciones de visualización del curso | Back + Front | M | HT-17, pregunta 1 |
 | [[sprints/sprint-3/historias/HU-62 Vista de grafo cómoda para el profesor\|HU-62]] | HU | Como PROFESOR quiero una vista de grafo cómoda: acomodo automático, aristas editables arrastrando, zoom, minimapa y posiciones guardadas | Front (+ endpoint `/graph`) | L | HT-17 |
 | [[sprints/sprint-3/historias/HU-63 Vista tipo Moodle con la UI-KIT\|HU-63]] | HU | Como PROFESOR quiero la vista tipo Moodle refactorizada con la UI-KIT, sincronizada con la vista de grafo | Front | L | [05](05-ui-kit.md) |
 | [[sprints/sprint-3/historias/HT-19 Contratos con Courses y el Motor para el modelo 1 a N\|HT-19]] | HT | Adaptar los contratos con Courses (secciones y restricciones) y con el Motor al modelo 1:N | Back | M | HT-17, pregunta 2 |
@@ -101,7 +101,7 @@ flowchart LR
   HT2 --> H6[HU-59 Deps entre nodos]
   HT3 --> H6
   HT3 --> H7[HU-60 Props personalizadas]
-  HT2 --> H8[HU-61 Alumno elige roadmap]
+  HT2 --> H8[HU-61 Roadmaps por grupo]
   HT2 --> H9[HU-62 Vista de grafo]
   HT2 --> HT11[HT-19 Contratos G01/Motor]
   H5 --> HT12[HT-20 Gate con reglas]
