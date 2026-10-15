@@ -32,7 +32,7 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Exactamente un `START` y un `END` por roadmap. Todo nodo alcanzable desde `START` y `END` alcanzable. Un roadmap nuevo nace con los dos.
+*   [ ] Reglas de negocio: Exactamente un `START` y un `END` por roadmap y por cada unidad/sección (P8). Todo nodo alcanzable desde `START` y `END` alcanzable. Un roadmap nuevo nace con los dos.
 *   [ ] Validaciones: Al guardar, si falta alguno o hay nodos sueltos, error con la lista de problemas.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
@@ -46,7 +46,7 @@ Criterios de Aceptación (CA)
 ----------------------------
 
 *   [ ] **CA1**: Tipos de nodo `START` y `END`.
-*   [ ] **CA2**: Un roadmap nuevo se crea con los dos.
+*   [ ] **CA2**: Un roadmap nuevo y cada unidad/sección nueva se crean con los dos.
 *   [ ] **CA3**: No se puede guardar sin uno de cada uno ni con nodos inalcanzables.
 *   [ ] **CA4**: Visual propio en el mapa 2D y en el mundo 3D.
 
@@ -131,6 +131,6 @@ Dependencias / Impactos
 
 - [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial|HT-18]] Módulo graph en Neo4j y migración inicial
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-Ninguna.
+- ✅ [[sprints/sprint-3/08-dudas|P8]] Inicio y fin son obligatorios siempre, en el curso y en cada unidad/sección.

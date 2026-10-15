@@ -32,8 +32,8 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Campos `available_from` y `available_until` en nodos `EXAM`. Fuera de la ventana el gate responde `DATE_RESTRICTED`. Si Courses también define una ventana, gana lo que diga P9.
-*   [ ] Validaciones: `available_from` < `available_until`.
+*   [ ] Reglas de negocio: La ventana horaria del examen la publica Courses (P9), como las restricciones de HU-49: el nodo `EXAM` no tiene campos propios. Fuera de la ventana el gate responde `DATE_RESTRICTED`.
+*   [ ] Validaciones: La ventana llega de Courses.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
 *   [ ] Seguridad (roles, permisos, datos sensibles): No aplica.
@@ -45,7 +45,7 @@ Notas / Observaciones
 Criterios de Aceptación (CA)
 ----------------------------
 
-*   [ ] **CA1**: Ventana horaria en nodos examen.
+*   [ ] **CA1**: El nodo examen usa la ventana horaria que publica Courses.
 *   [ ] **CA2**: Fuera de la ventana el gate bloquea con `DATE_RESTRICTED`.
 *   [ ] **CA3**: El alumno ve cuándo se habilita.
 *   [ ] **CA4**: Tests con hora simulada.
@@ -108,13 +108,13 @@ Dependencias / Impactos
 
 *   Servicios involucrados: Courses (si también define ventanas).
 *   Módulos afectados: `GateEvaluator`, editor de nodo, mapa del alumno.
-*   Otros equipos / aprobaciones: G01 (según P9).
+*   Otros equipos / aprobaciones: G01 (publica la ventana, P9).
 *   Impacto en datos / migraciones: Columnas o props de ventana.
 *   Riesgos y mitigación (opcional): Zonas horarias; mitigación: guardar en UTC y mostrar en la del curso.
 
 ## Tareas
 
-- [ ] T-67.1 Ventana en el nodo
+- [ ] T-67.1 Leer de Courses la ventana del nodo examen
 - [ ] T-67.2 Evaluación en el gate
 - [ ] T-67.3 Front: aviso al alumno
 - [ ] T-67.4 Tests con reloj simulado
@@ -131,6 +131,6 @@ El gate evalúa `DATE_RESTRICTED` con ventanas que publica Courses (HU-49). El n
 
 Nada: se puede empezar ya.
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|P9]]
+- ✅ [[sprints/sprint-3/08-dudas|P9]] La ventana horaria la publica Courses.

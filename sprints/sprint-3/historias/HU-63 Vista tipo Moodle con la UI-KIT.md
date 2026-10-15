@@ -130,6 +130,6 @@ Existe `course-editor-page` con controles propios.
 - [[sprints/sprint-3/historias/HT-25 Subir la UI-KIT a 0.8.0 y cerrar sus TODOs|HT-25]] Subir la UI-KIT a 0.8.0 y cerrar sus TODOs
 - [[sprints/sprint-3/historias/HT-26 Controles y botones del roadmap con el kit|HT-26]] Controles y botones del roadmap con el kit
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|P1]]
+- ✅ [[sprints/sprint-3/08-dudas|P1]] Cada roadmap es un mapa distinto del mismo curso.

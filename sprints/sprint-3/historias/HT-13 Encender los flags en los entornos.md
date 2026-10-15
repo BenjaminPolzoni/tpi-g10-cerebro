@@ -130,10 +130,10 @@ Los dos flags están en `false` por defecto (DEC-004). Con eso apagado no andan 
 
 Nada: se puede empezar ya.
 
+### Dudas resueltas (2026-10-15)
+
+- ✅ [[sprints/sprint-3/08-dudas|G12]] Existe `student.enrollment.read`, que lee la matrícula del alumno en el curso.
+
 ### Dudas que la frenan
 
-- [[sprints/sprint-3/08-dudas|E6]]
-
-### Deuda técnica que cierra
-
-- [[deuda-tecnica|DT-20]]
+- [[sprints/sprint-3/08-dudas|E6]] ¿Algún entorno pisa `KAFKA_TOPIC_ROADMAP`? Todavía no se sabe.

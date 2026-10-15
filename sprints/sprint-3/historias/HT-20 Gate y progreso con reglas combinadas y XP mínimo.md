@@ -132,6 +132,6 @@ Dependencias / Impactos
 - [[sprints/sprint-3/historias/HU-58 Dependencias entre secciones|HU-58]] Dependencias entre secciones
 - [[sprints/sprint-3/historias/HU-59 Dependencias entre nodos con reglas combinadas|HU-59]] Dependencias entre nodos con reglas combinadas
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|P7]]
+- ✅ [[sprints/sprint-3/08-dudas|P7]] Sí hacen falta reglas combinadas, además de AND/OR + XP mínimo.

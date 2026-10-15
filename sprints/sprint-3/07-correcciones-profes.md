@@ -24,9 +24,9 @@ estado: vigente
 
 > [!important] Cambios de fondo que traen las correcciones
 > 1. **La BD de grafos ahora la piden los profes.** Responde la pregunta 7 de [[03-requerimientos-profes]]. La opción C (Neo4j) de [[04-base-de-grafos]] pasa de "si los profes la piden" a **decisión del sprint**.
-> 2. **Las relaciones pasan a tener tipo** (4 niveles, con nombre visible y configurables). Ya no son solo "prerrequisito AND/OR". Esto refuerza Neo4j: las relaciones con tipo y propiedades son su punto fuerte.
+> 2. **Las relaciones pasan a tener tipo** (5 tipos según P4: `requires`, `recommends`, `belongs_to`, `related_to` y `part_of`; con nombre visible y configurables). Ya no son solo "prerrequisito AND/OR". Esto refuerza Neo4j: las relaciones con tipo y propiedades son su punto fuerte.
 > 3. **Nodos de inicio y fin obligatorios.** Es una regla nueva del grafo, que se valida al guardar.
-> 4. **"El mapa *es* el curso."** Puede chocar con "un curso con N roadmaps". Ver P1 en [[08-dudas]].
+> 4. **"El mapa *es* el curso."** Resuelto (P1): cada roadmap es un mapa distinto del mismo curso, y se mantienen los N roadmaps.
 
 ## 1. Lo que es nuestro
 
@@ -47,7 +47,7 @@ estado: vigente
 |---|---|---|---|---|
 | Nodo de inicio "Bienvenidos", con un visual de que empieza acá | 🆕 | — | — | Nodo `START`, con su visual en el mapa 2D y en el mundo 3D |
 | Nodo final "Felicitaciones", con un visual de que termina ahí | 🆕 | — | — | Nodo `END`, con su visual. Puede disparar una insignia de fin de curso (HU-21) |
-| Nodo examen habilitado por hora. El nodo y su desbloqueo son nuestros (HU-01); el contenido lo arma desafíos (G04/G09) | ⚠️ | [[01-estado-actual]] HU-49 (restricciones por fecha que publica Courses) | El gate ya evalúa `DATE_RESTRICTED` con ventanas que vienen de Courses (`DateGateTest`) | Una **ventana horaria propia del nodo** (`available_from`/`available_until`), evaluada por el gate con el mismo motivo. Definir si manda Courses o nosotros (pregunta 3) |
+| Nodo examen habilitado por hora. El nodo y su desbloqueo son nuestros (HU-01); el contenido lo arma desafíos (G04/G09) | ⚠️ | [[01-estado-actual]] HU-49 (restricciones por fecha que publica Courses) | El gate ya evalúa `DATE_RESTRICTED` con ventanas que vienen de Courses (`DateGateTest`) | Una **ventana horaria propia del nodo** (`available_from`/`available_until`), evaluada por el gate con el mismo motivo. Respondido (P9): la ventana la publica Courses |
 
 ### Ranking
 
@@ -85,7 +85,7 @@ Están fuera del alcance de G10. Igual hay que tenerlos presentes porque nos toc
 | Drag and drop del orden del desafío | G04 (probable) | Nada |
 | Vista cross-curso del dashboard del admin | G06 | Aportar datos (ver "Dashboard") |
 | Rango de fechas por defecto en el reporte | G06 | Nada |
-| Roles y permisos desde parámetros globales | G06 | **Depende de nosotros**: nuestra migración a permisos tiene que usar su catálogo |
+| Roles y permisos desde parámetros globales | G06 | **Depende de nosotros**: nuestra migración a permisos usa el catálogo, que según G2 es de **Users (G07)** y todavía no está definido |
 | Alertas | G06 | Nada |
 | Permitir sumar parámetros globales | G06 | Nada |
 | Chat y canales externos | G02 | Nada |
@@ -95,7 +95,10 @@ Están fuera del alcance de G10. Igual hay que tenerlos presentes porque nos toc
 
 ## Preguntas nuevas para los profes
 
-> [!question] Sumadas a [[08-dudas]] (P1, P4, P9, P10 y P11)
+> [!success] Respondidas el 2026-10-15 (P1, P4, P9, P10 y P11 en [[08-dudas]])
+> 1. Cada roadmap es un mapa distinto del mismo curso. 2. Son 5 tipos: `related_to`, `belongs_to`, `part_of`, `requires` (AND/OR, XP mínimo o las dos) y `recommends`. 3. La ventana la publica Courses. 4. Sí; comisión = grupo. 5. Archibaldo es un avatar personalizable por el profesor y el gestor, con nombre editable.
+
+> [!question] Preguntas originales
 > 1. **"El mapa es el curso"** contra **"un curso puede tener 1 o más roadmaps"**: ¿cómo conviven? ¿Cada roadmap es un mapa distinto del mismo curso, o el curso es un único mapa y lo de los N roadmaps queda descartado?
 > 2. **¿Cuáles son los 4 tipos de relación?** El documento menciona "Related to", "Belongs to" y "una necesita de otra". ¿Cuál es el cuarto? ¿Alguno además de "necesita" afecta el desbloqueo?
 > 3. **Examen por hora**: ¿la ventana horaria la define el profesor en el roadmap, o la publica Courses (HU-49)?

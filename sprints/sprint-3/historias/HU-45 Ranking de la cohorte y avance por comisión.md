@@ -32,7 +32,7 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Default: ranking por curso; la comisión es un filtro (P10). Orden por XP con desempate en cascada (HU-25); si van notas lo define P14. Corrección de los profes: hoy el ranking por grupo da error (sin reproducir, E1).
+*   [ ] Reglas de negocio: Default: ranking por curso; la comisión (= grupo) es un filtro (P10, confirmado). Orden por XP con desempate en cascada (HU-25); las notas vienen del Motor de desafíos (P14): falta acordar con G09 cómo llegan y cómo se combinan con el XP. Corrección de los profes: hoy el ranking por grupo da error (sin reproducir); se arregla en este sprint (E1).
 *   [ ] Validaciones: No aplica.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
@@ -132,8 +132,9 @@ El back tiene ranking solo por curso y `GET /groups/{gid}/progress` aparte. El f
 
 - [[sprints/sprint-3/historias/HT-13 Encender los flags en los entornos|HT-13]] Encender los flags en los entornos
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|E1]]
-- [[sprints/sprint-3/08-dudas|P10]]
-- [[sprints/sprint-3/08-dudas|P14]]
+- ✅ [[sprints/sprint-3/08-dudas|E1]] El error del ranking por grupo se arregla en este sprint.
+- ✅ [[sprints/sprint-3/08-dudas|E3]] Ya debería estar hecho: corroborarlo.
+- ✅ [[sprints/sprint-3/08-dudas|P10]] Sí: por curso por defecto; la comisión (= grupo) es un filtro.
+- ✅ [[sprints/sprint-3/08-dudas|P14]] Las notas vienen del Motor de desafíos (G09).

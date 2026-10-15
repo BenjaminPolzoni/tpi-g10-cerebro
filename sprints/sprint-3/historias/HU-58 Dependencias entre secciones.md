@@ -32,7 +32,7 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Ya existen las dependencias AND/OR entre secciones (V25). Vuelve el XP mínimo por sección (se borró en V8, DEC-011). «Todas las anteriores» es un atajo de la UI que guarda un AND.
+*   [ ] Reglas de negocio: Ya existen las dependencias AND/OR entre secciones (V25). Vuelve el XP mínimo por sección (se borró en V8, DEC-011). «Todas las anteriores» es un atajo de la UI que guarda un AND. Las dependencias también se definen entre subsecciones (P6).
 *   [ ] Validaciones: No se puede guardar un ciclo. XP mínimo ≥ 0.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
@@ -50,6 +50,7 @@ Criterios de Aceptación (CA)
 *   [ ] **CA3**: Atajo «todas las anteriores».
 *   [ ] **CA4**: Guardar un ciclo devuelve error.
 *   [ ] **CA5**: El alumno ve por qué una sección está bloqueada.
+*   [ ] **CA6**: Las dependencias se pueden definir también entre subsecciones.
 
 * * *
 
@@ -133,6 +134,6 @@ Ya existen las dependencias AND/OR entre secciones (V25). El XP mínimo por secc
 - [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps|HT-17]] Modelo 1 a N de curso a roadmaps
 - [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial|HT-18]] Módulo graph en Neo4j y migración inicial
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|P6]]
+- ✅ [[sprints/sprint-3/08-dudas|P6]] Dependencias entre subsecciones.

@@ -129,10 +129,6 @@ El front está en ^0.7.1. La rama `feature/ui-lib-0-8-0` no está mergeada. Hay 
 
 Nada: se puede empezar ya.
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|G13]]
-
-### Deuda técnica que cierra
-
-- [[deuda-tecnica|DT-14]]
+- ✅ [[sprints/sprint-3/08-dudas|G13]] El componente de grafo es nuestro (G10). El avatar no se usa como foto de perfil.

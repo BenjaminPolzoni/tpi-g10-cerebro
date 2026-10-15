@@ -32,7 +32,7 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Catálogo de tipos: `REQUIRES`, `BELONGS_TO`, `RELATED_TO` y un cuarto a definir (P4). Solo `REQUIRES` afecta el desbloqueo. Cada tipo tiene nombre visible y visibilidad configurable.
+*   [ ] Reglas de negocio: Catálogo de 5 tipos (P4, DEC-018): `REQUIRES`, `RECOMMENDS`, `BELONGS_TO`, `RELATED_TO` y `PART_OF`. Solo `REQUIRES` afecta el desbloqueo, con la condición que elija el profesor: AND/OR, XP mínimo o las dos. `RECOMMENDS` se muestra pero no bloquea. Cada tipo tiene nombre visible y visibilidad configurable.
 *   [ ] Validaciones: No aplica.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
@@ -49,6 +49,7 @@ Criterios de Aceptación (CA)
 *   [ ] **CA2**: La arista muestra el nombre del tipo.
 *   [ ] **CA3**: El profesor oculta un tipo y deja de verse en el mapa.
 *   [ ] **CA4**: Solo `REQUIRES` cambia el desbloqueo.
+*   [ ] **CA5**: En `REQUIRES` el profesor elige AND/OR, XP mínimo o las dos.
 
 * * *
 
@@ -130,6 +131,6 @@ Solo existe la relación "prerrequisito" con modo AND/OR.
 
 - [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial|HT-18]] Módulo graph en Neo4j y migración inicial
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|P4]]
+- ✅ [[sprints/sprint-3/08-dudas|P4]] 5 tipos: `requires`, `recommends`, `belongs_to`, `related_to` y `part_of`.

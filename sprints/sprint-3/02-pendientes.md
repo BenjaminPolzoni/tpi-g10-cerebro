@@ -24,7 +24,7 @@ Son HU que figuran **Done** en Taiga pero no cumplen sus criterios de aceptació
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
 | HU-44         | Selector de comisión en el roadmap y manejo del motivo `group_restricted`                                                                | Front          |
 | HU-48         | Endpoint de pre-chequeo para el alumno (JWT, sin `studentId` en el path). Borrar `startChallenge`                                        | Back           |
-| HU-46         | Página Templo (material agrupado por unidad), o redefinir el CA con el PO                                                                | Front          |
+| HU-46         | Redefinir el CA en Taiga: el Templo no existe más (P13, 2026-10-15)                                                                     | Taiga          |
 | HU-01 / HU-41 | Campo `reintentos_permitidos` (0..PAR-13). Corregir el PUT que resetea `lives_policy`. Consumir la baja de desafío del Motor (CA8)       | Back           |
 | HU-01         | Guardar las posiciones del grafo (`moveNode` devuelve 501)                                                                               | Front + Back   |
 | HU-20 / HU-21 | Implementar o quitar del catálogo `SECTION_NO_LIVES_LOST`, `NODE_NO_RETRIES` y `LIFE_RECOVERED`. Edición y baja de insignias en el front | Back + Front   |

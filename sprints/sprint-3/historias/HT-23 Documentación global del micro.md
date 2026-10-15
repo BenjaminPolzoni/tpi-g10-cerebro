@@ -129,11 +129,6 @@ La documentación está repartida por tarea; el README del micro es básico.
 
 Nada: se puede empezar ya.
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|E7]]
-
-### Deuda técnica que cierra
-
-- [[deuda-tecnica|DT-03]]
-- [[deuda-tecnica|DT-18]]
+- ✅ [[sprints/sprint-3/08-dudas|E7]] `TraceIdFilter` se borró a propósito: sacarlo de la documentación.

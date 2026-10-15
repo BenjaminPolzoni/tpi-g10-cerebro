@@ -129,10 +129,6 @@ Dependencias / Impactos
 
 - [[sprints/sprint-3/historias/HT-25 Subir la UI-KIT a 0.8.0 y cerrar sus TODOs|HT-25]] Subir la UI-KIT a 0.8.0 y cerrar sus TODOs
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|E12]]
-
-### Deuda técnica que cierra
-
-- [[deuda-tecnica|DT-13]]
+- ✅ [[sprints/sprint-3/08-dudas|E12]] Avatares ya está hecho; Racha es nueva para el Sprint 3 (falta su HU).

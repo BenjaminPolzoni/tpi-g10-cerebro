@@ -32,7 +32,7 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: El back ya filtra por comisión detrás de `ROADMAP_BY_GROUP_ENABLED` (modelo B, DEC-014). El motivo `group_restricted` se muestra en texto.
+*   [ ] Reglas de negocio: El back ya filtra por comisión detrás de `ROADMAP_BY_GROUP_ENABLED` (modelo B, DEC-014). Con N roadmaps, el profesor configura si un roadmap se asigna por comisión o lo ven todos (P5). El motivo `group_restricted` se muestra en texto.
 *   [ ] Validaciones: No aplica.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
@@ -129,6 +129,6 @@ El back filtra por comisión detrás de `ROADMAP_BY_GROUP_ENABLED`. El front no 
 
 - [[sprints/sprint-3/historias/HT-13 Encender los flags en los entornos|HT-13]] Encender los flags en los entornos
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|P5]]
+- ✅ [[sprints/sprint-3/08-dudas|P5]] Lo configura el profesor: todos los roadmaps o por comisión.

@@ -130,6 +130,6 @@ Si Accounting o Courses no responden, el gate devuelve 503 en vez del motivo `or
 
 Nada: se puede empezar ya.
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|E9]]
+- ✅ [[sprints/sprint-3/08-dudas|E9]] Con Backoffice caído se usan los valores guardados en caché.

@@ -38,7 +38,7 @@ Notas / Observaciones
 *   [ ] Performance (tiempos, volumen, límites): El gate lee las reglas desde una caché por roadmap que se invalida en cada edición.
 *   [ ] Seguridad (roles, permisos, datos sensibles): No aplica.
 *   [ ] Accesibilidad (WCAG/teclado/lectores): No aplica.
-*   [ ] Otros: Migración inicial idempotente detrás de un flag; durante la convivencia la lectura sigue en Postgres.
+*   [ ] Otros: Migración inicial idempotente detrás de un flag; durante la convivencia la lectura sigue en Postgres. Esquema cerrado (DEC-018): 5 tipos de relación, tipos de nodo fijos sin propiedades libres, y subsecciones. Solo se migran los grafos (G1).
 
 * * *
 
@@ -133,8 +133,8 @@ Todo está en Postgres (`section`, `node`, `section_prerequisite`, `node_prerequ
 
 - [[sprints/sprint-3/historias/HT-16 Validar la infra de Neo4j y modelar las relaciones|HT-16]] Validar la infra de Neo4j y modelar las relaciones
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|P1]]
-- [[sprints/sprint-3/08-dudas|P4]]
-- [[sprints/sprint-3/08-dudas|P8]]
+- ✅ [[sprints/sprint-3/08-dudas|P1]] Cada roadmap es un mapa distinto del mismo curso.
+- ✅ [[sprints/sprint-3/08-dudas|P4]] 5 tipos de relación; solo `requires` afecta el desbloqueo.
+- ✅ [[sprints/sprint-3/08-dudas|P8]] Sin campos libres ni tipos de nodo nuevos: se personalizan nombre, ícono, descripción y reglas.

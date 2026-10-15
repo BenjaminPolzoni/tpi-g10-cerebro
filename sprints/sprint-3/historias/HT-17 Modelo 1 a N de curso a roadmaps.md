@@ -32,13 +32,13 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Se quita el UNIQUE de `roadmap.course_cohort_id`. Las rutas `/courses/{id}/...` siguen funcionando contra el roadmap principal del curso mientras el front migra a `/roadmaps/{id}/...`. Dónde viven XP, vidas, nivel y ranking lo define P2.
+*   [ ] Reglas de negocio: Se quita el UNIQUE de `roadmap.course_cohort_id`. Las rutas `/courses/{id}/...` siguen funcionando contra el roadmap principal del curso mientras el front migra a `/roadmaps/{id}/...`. XP, vidas, nivel y ranking pueden ser por curso o por roadmap: lo configura el profesor (P2). Las secciones también: de Courses o propias (P3). Ver DEC-017.
 *   [ ] Validaciones: Un curso sin roadmaps devuelve 404 claro; con varios, las rutas viejas usan el principal.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
 *   [ ] Seguridad (roles, permisos, datos sensibles): Mismas reglas de autorización que hoy.
 *   [ ] Accesibilidad (WCAG/teclado/lectores): No aplica.
-*   [ ] Otros: Bloqueado por P1 (si "el mapa es el curso" descarta N roadmaps, esta HT se achica).
+*   [ ] Otros: P1 confirmó los N roadmaps por curso: el alcance se mantiene (DEC-017).
 
 * * *
 
@@ -48,7 +48,7 @@ Criterios de Aceptación (CA)
 *   [ ] **CA1**: Migración que quita el UNIQUE y marca un roadmap principal por curso.
 *   [ ] **CA2**: Rutas y DTOs con `roadmap_id`.
 *   [ ] **CA3**: Las rutas `/courses/{id}/...` siguen respondiendo igual.
-*   [ ] **CA4**: XP, vidas, nivel y ranking según P2.
+*   [ ] **CA4**: XP, vidas, nivel y ranking por curso o por roadmap, según lo configure el profesor.
 *   [ ] **CA5**: Todos los tests existentes pasan.
 
 * * *
@@ -117,7 +117,7 @@ Dependencias / Impactos
 
 - [ ] T-17.1 Migración y entidades
 - [ ] T-17.2 Rutas `/roadmaps/{id}` y compatibilidad
-- [ ] T-17.3 XP, nivel y ranking según P2
+- [ ] T-17.3 Ajuste por roadmap: XP, vidas, nivel y ranking por curso o por roadmap
 - [ ] T-17.4 Tests de regresión
 
 ---
@@ -132,8 +132,8 @@ Dependencias / Impactos
 
 - [[sprints/sprint-3/historias/HT-16 Validar la infra de Neo4j y modelar las relaciones|HT-16]] Validar la infra de Neo4j y modelar las relaciones
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|P1]]
-- [[sprints/sprint-3/08-dudas|P2]]
-- [[sprints/sprint-3/08-dudas|P3]]
+- ✅ [[sprints/sprint-3/08-dudas|P1]] Cada roadmap es un mapa distinto del mismo curso.
+- ✅ [[sprints/sprint-3/08-dudas|P2]] XP, vidas, nivel y ranking: lo configura el profesor (por curso o por roadmap).
+- ✅ [[sprints/sprint-3/08-dudas|P3]] Secciones de Courses o propias: lo configura el profesor.

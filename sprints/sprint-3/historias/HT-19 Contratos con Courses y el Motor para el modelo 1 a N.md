@@ -45,8 +45,8 @@ Notas / Observaciones
 Criterios de Aceptación (CA)
 ----------------------------
 
-*   [ ] **CA1**: Acordado con G01 cómo se mapean sus secciones con N roadmaps (P3, G4).
-*   [ ] **CA2**: Confirmado con G09 que `node_id` alcanza (G8).
+*   [ ] **CA1**: Contrato con G01 para N roadmaps: el profesor elige por roadmap secciones de Courses o propias (P3) y define las restricciones de cada roadmap, que se copian al clonarlo (G4).
+*   [ ] **CA2**: `node_id` único global, también en los roadmaps clonados (G8, confirmado el 2026-10-15).
 *   [ ] **CA3**: Código y contratos actualizados.
 
 * * *
@@ -114,7 +114,7 @@ Dependencias / Impactos
 ## Tareas
 
 - [ ] T-19.1 Propuesta de mapeo a G01
-- [ ] T-19.2 Confirmación con G09
+- [x] T-19.2 Confirmación con G09 (G8, 2026-10-15)
 - [ ] T-19.3 Código y contratos
 
 ---
@@ -129,8 +129,8 @@ Cada sección del roadmap se sincroniza con una sección de Courses (HU-36). El 
 
 - [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps|HT-17]] Modelo 1 a N de curso a roadmaps
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|P3]]
-- [[sprints/sprint-3/08-dudas|G4]]
-- [[sprints/sprint-3/08-dudas|G8]]
+- ✅ [[sprints/sprint-3/08-dudas|P3]] Secciones de Courses o propias: lo configura el profesor.
+- ✅ [[sprints/sprint-3/08-dudas|G4]] El profesor define las restricciones de cada roadmap y puede clonarlo con ellas para otro grupo o curso.
+- ✅ [[sprints/sprint-3/08-dudas|G8]] Sí: `node_id` único global; clonar genera ids nuevos.

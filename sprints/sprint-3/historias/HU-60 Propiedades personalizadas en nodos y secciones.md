@@ -15,6 +15,9 @@ en_taiga: false
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Nueva: todavía no está cargada en Taiga.
 
+> [!warning] 2026-10-15: alcance redefinido por P8
+> No hay campos libres (clave y valor) ni tipos de nodo nuevos. "Personalizable" es nombre, ícono, descripción y reglas (DEC-018).
+
 [G10] — HU-60 — Propiedades personalizadas en nodos y secciones
 ---------------------------------------------------------------
 
@@ -24,7 +27,7 @@ Descripción (Como / Quiero / Para)
 ----------------------------------
 
 *   **Como**: PROFESOR
-*   **Quiero**: agregar datos propios (clave y valor) a nodos y secciones
+*   **Quiero**: personalizar el nombre, el ícono, la descripción y las reglas de nodos y secciones
 *   **Para**: personalizar el roadmap sin pedir cambios de código
 
 * * *
@@ -32,12 +35,12 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Las propiedades libres no pisan los campos fijos que usa el dominio (tipo, vidas, reglas). Qué tan libre es depende de P8.
-*   [ ] Validaciones: Claves únicas por nodo; tamaño máximo por valor.
+*   [ ] Reglas de negocio: No hay campos libres ni tipos de nodo nuevos (P8, DEC-018). Se personalizan nombre, ícono, descripción y reglas. Los tipos de nodo son fijos: desafíos teóricos, prácticos, de IA y de recuperación de vida, examen, contenido teórico, inicio y fin.
+*   [ ] Validaciones: Nombre obligatorio; el ícono sale del catálogo de íconos (HU-43).
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
 *   [ ] Seguridad (roles, permisos, datos sensibles): ADMIN, GESTOR o PROFESSOR dueño.
-*   [ ] Accesibilidad (WCAG/teclado/lectores): Lista de pares editable con teclado.
+*   [ ] Accesibilidad (WCAG/teclado/lectores): Formulario editable con teclado.
 *   [ ] Otros: No aplica.
 
 * * *
@@ -45,41 +48,41 @@ Notas / Observaciones
 Criterios de Aceptación (CA)
 ----------------------------
 
-*   [ ] **CA1**: Agregar, editar y borrar propiedades en un nodo o sección.
+*   [ ] **CA1**: Editar nombre, ícono, descripción y reglas de un nodo o sección.
 *   [ ] **CA2**: Se muestran en el detalle del nodo.
-*   [ ] **CA3**: Una clave reservada devuelve error.
+*   [ ] **CA3**: No se pueden crear campos libres ni tipos de nodo nuevos.
 
 * * *
 
 BDD (mínimo 3 escenarios)
 -------------------------
 
-**Característica:** Propiedades personalizadas
+**Característica:** Personalizar nodos y secciones
 
 **Escenario 1**  
 
 *   **Dado**: un nodo
-*   **Cuando**: el profesor agrega «dificultad: alta»
-*   **Entonces**: el alumno la ve en el detalle
+*   **Cuando**: el profesor le cambia el nombre, el ícono y la descripción
+*   **Entonces**: el alumno los ve en el detalle
 
 **Escenario 2**  
 
-*   **Dado**: un nodo con una propiedad
-*   **Cuando**: el profesor la borra
-*   **Entonces**: deja de mostrarse
+*   **Dado**: un nodo con reglas de desbloqueo
+*   **Cuando**: el profesor las cambia
+*   **Entonces**: el desbloqueo usa las reglas nuevas
 
 **Escenario 3**  
 
-*   **Dado**: la clave reservada `type`
-*   **Cuando**: el profesor la usa
-*   **Entonces**: recibe error
+*   **Dado**: el editor de un nodo
+*   **Cuando**: el profesor elige el tipo
+*   **Entonces**: solo puede elegir entre los tipos fijos
 
 * * *
 
 Prototipo
 ---------
 
-*   **Capturas**: Panel de propiedades del nodo.
+*   **Capturas**: Panel de edición del nodo.
 *   **URL Figma**: Pendiente.
 *   **Storybook**: `generic-input`.
 *   **Mock API / Swagger**: PATCH /api/roadmap/nodes/{nodeId} con `props`.
@@ -113,7 +116,7 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] T-60.1 Props en el módulo graph
+- [ ] T-60.1 Campos personalizables en el módulo graph
 - [ ] T-60.2 Panel en el editor
 - [ ] T-60.3 Mostrar en el detalle
 
@@ -129,6 +132,6 @@ Nodos y secciones tienen columnas fijas (tipo, nombre, ícono, vidas, etc.).
 
 - [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial|HT-18]] Módulo graph en Neo4j y migración inicial
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|P8]]
+- ✅ [[sprints/sprint-3/08-dudas|P8]] Sin campos libres ni tipos de nodo nuevos: se personalizan nombre, ícono, descripción y reglas.

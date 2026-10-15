@@ -10,12 +10,12 @@ prioridad: Could
 en_taiga: false
 ---
 
-# HU-69: Archibaldo: Enter, aspecto de Hernán y destello
+# HU-69: Archibaldo: Enter, avatar personalizable y destello
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Correcciones de los profes|Correcciones de los profes]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Nueva: todavía no está cargada en Taiga.
 
-[G10] — HU-69 — Archibaldo: Enter, aspecto de Hernán y destello
+[G10] — HU-69 — Archibaldo: Enter, avatar personalizable y destello
 ---------------------------------------------------------------
 
 * * *
@@ -24,7 +24,7 @@ Descripción (Como / Quiero / Para)
 ----------------------------------
 
 *   **Como**: ALUMNO
-*   **Quiero**: hablar con Archibaldo con Enter, que tenga el aspecto de Hernán y que un destello me guíe por el camino
+*   **Quiero**: hablar con Archibaldo con Enter y que un destello me guíe por el camino
 *   **Para**: moverme por el mundo sin depender del mouse y saber a dónde ir
 
 * * *
@@ -38,7 +38,7 @@ Notas / Observaciones
 *   [ ] Performance (tiempos, volumen, límites): El destello no baja los FPS del mundo.
 *   [ ] Seguridad (roles, permisos, datos sensibles): No aplica.
 *   [ ] Accesibilidad (WCAG/teclado/lectores): El diálogo toma el foco y se cierra con Escape (`generic-modal`).
-*   [ ] Otros: Modelo o skin de Hernán según la referencia de los profes (P11).
+*   [ ] Otros: Archibaldo es un avatar que personalizan el profesor y el gestor del curso, que también le pueden cambiar el nombre (P11). Ya no se copia a Hernán.
 
 * * *
 
@@ -47,7 +47,7 @@ Criterios de Aceptación (CA)
 
 *   [ ] **CA1**: Enter abre el diálogo con el NPC en rango.
 *   [ ] **CA2**: El foco queda en el diálogo y Escape lo cierra.
-*   [ ] **CA3**: Archibaldo con el aspecto de Hernán.
+*   [ ] **CA3**: El profesor y el gestor del curso personalizan el avatar y el nombre de Archibaldo.
 *   [ ] **CA4**: Destello sobre el camino al próximo nodo disponible.
 
 * * *
@@ -110,12 +110,12 @@ Dependencias / Impactos
 *   Módulos afectados: `world-3d.service`, `archipelago-3d.service`, `npc-dialogue`.
 *   Otros equipos / aprobaciones: Ninguno.
 *   Impacto en datos / migraciones: Sin migración.
-*   Riesgos y mitigación (opcional): Depende de P11 para el aspecto.
+*   Riesgos y mitigación (opcional): Ninguno abierto (P11 respondida).
 
 ## Tareas
 
 - [ ] T-69.1 Interacción con Enter y foco
-- [ ] T-69.2 Modelo de Hernán
+- [ ] T-69.2 Avatar y nombre de Archibaldo editables por profesor y gestor
 - [ ] T-69.3 Destello del camino
 
 ---
@@ -130,6 +130,6 @@ El NPC usa la skin del capitán pirata del kit (`world-3d.service.ts:3109`). El 
 
 Nada: se puede empezar ya.
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|P11]]
+- ✅ [[sprints/sprint-3/08-dudas|P11]] Archibaldo es un avatar personalizable por el profesor y el gestor, con nombre editable.

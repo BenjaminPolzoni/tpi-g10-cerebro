@@ -38,7 +38,7 @@ Notas / Observaciones
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
 *   [ ] Seguridad (roles, permisos, datos sensibles): No aplica.
 *   [ ] Accesibilidad (WCAG/teclado/lectores): La fecha de habilitación en texto, no solo con un ícono.
-*   [ ] Otros: Depende de G01 (evento de cambio) y de la respuesta a P9 sobre quién define la ventana.
+*   [ ] Otros: Depende de G01 (evento de cambio). La ventana horaria de los exámenes también la publica Courses (P9). Con N roadmaps, el profesor define las restricciones de cada roadmap y se copian al clonarlo (G4). E3: puede que ya esté hecha; corroborarlo antes de empezar.
 
 * * *
 
@@ -131,7 +131,8 @@ El gate aplica la restricción por fecha. Falta distinguir oculto (HIDDEN) de bl
 
 - [[sprints/sprint-3/historias/HU-67 Nodo examen con ventana horaria|HU-67]] Nodo examen con ventana horaria
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|P9]]
-- [[sprints/sprint-3/08-dudas|G4]]
+- ✅ [[sprints/sprint-3/08-dudas|P9]] La ventana horaria la publica Courses.
+- ✅ [[sprints/sprint-3/08-dudas|G4]] Restricciones por roadmap, definidas por el profesor; se copian al clonar.
+- ✅ [[sprints/sprint-3/08-dudas|E3]] Ya debería estar hecho: corroborarlo.

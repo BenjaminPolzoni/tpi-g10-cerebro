@@ -57,7 +57,7 @@ flowchart LR
 | "Todo lo anterior" | Se expresa como AND con todas las secciones previas | Atajo en la UI ("seleccionar todas las anteriores") |
 | Dependencias entre nodos AND/OR | **Ya existe**: `node_prerequisite` + `node.prerequisite_mode` (V5/V7), con lectura obligatoria | Nada en el modelo |
 | Reglas combinadas, ej. `A y (B o C) y XP ≥ 500` | Hoy hay un solo modo AND u OR por sección o nodo | **Nuevo**: reglas como árbol de expresiones. Ver [04](04-base-de-grafos.md) |
-| Personalización total de nodos | Columnas fijas (tipo, nombre, ícono, vidas, etc.) | Propiedades libres por nodo (map/JSON) además de las fijas que el dominio necesita |
+| Personalización total de nodos | Columnas fijas (tipo, nombre, ícono, vidas, etc.) | ~~Propiedades libres por nodo~~. Respondido (P8): se personalizan nombre, ícono, descripción y reglas; los tipos de nodo son fijos |
 | Vista tipo Moodle | `course-editor-page` | Refactor con la UI-KIT |
 | Vista de nodos | Existe. `moveNode` devuelve 501 (las posiciones no se guardan) | Librería de grafos en Angular (`ngx-vflow` o `@foblex/flow`) + acomodo automático (`elkjs`) + guardar las posiciones |
 
@@ -73,13 +73,21 @@ flowchart LR
 > 6. ¿Qué significa "completamente personalizable"? ¿Campos libres definidos por el profesor, tipos de nodo nuevos, o solo nombre, ícono, descripción y reglas?
 > 7. ¿Exigen **Neo4j** (u otra BD de grafos) como requisito de la materia, o es una decisión nuestra?
 
+> [!success] Respondidas el 2026-10-15 (detalle en [[08-dudas]])
+> 1. Lo configura el profesor: por curso o por roadmap (P2).
+> 2. Lo configura el profesor: secciones de Courses o propias (P3).
+> 3. Lo configura el profesor: todos o por comisión (P5).
+> 4. Dependencias entre subsecciones (P6).
+> 5. Sí, hacen falta reglas combinadas (P7).
+> 6. Solo nombre, ícono, descripción y reglas; sin campos libres ni tipos de nodo nuevos (P8).
+
 > [!success] Respondidas por las correcciones (2026-10-14)
 > - **Pregunta 7:** sí, los profes piden una BD de grafos (Neo4j). Ver [[07-correcciones-profes]].
 > - Aparecen preguntas nuevas (mapa = curso, 4 tipos de relación, examen por hora): [[07-correcciones-profes#Preguntas nuevas para los profes]].
 
 ## Impacto en otros grupos
 
-- **Courses (G01)**: si un curso tiene N roadmaps, se acuerda de nuevo el contrato de secciones (HT-07, HU-36) y el de restricciones (HU-49).
-- **Motor de desafíos (G09)**: el evento de cierre trae `id_course` + `id_node`. Si el `node_id` es único globalmente no cambia nada, pero hay que confirmarlo.
-- **Accounting / Inventario**: no cambia nada si XP y vidas siguen siendo por curso (pregunta 1).
-- **Plataforma (compose/mesh)**: si se suma Neo4j hay un servicio de infra nuevo, y hay que coordinarlo con quien mantiene la plataforma y el estable del roadmap.
+- **Courses (G01)**: con N roadmaps se acuerda de nuevo el contrato de secciones (HT-07, HU-36) y el de restricciones (HU-49). Respondido (G4): el profesor define las restricciones de cada roadmap y puede clonarlo con ellas.
+- **Motor de desafíos (G09)**: el evento de cierre trae `id_course` + `id_node`. Confirmado (G8): el `node_id` es único global, también en los roadmaps clonados, así que no cambia nada.
+- **Accounting / Inventario** (son el mismo equipo, G10): XP y vidas pueden ser por curso o por roadmap según el profesor (P2), así que hay que revisar si el ledger de vidas necesita el roadmap.
+- **Plataforma (compose/mesh)**: Neo4j es un servicio de infra nuevo, solo para nuestro micro (G1). Hay que coordinarlo con quien mantiene la plataforma y el estable del roadmap.

@@ -24,7 +24,7 @@ Descripción (Como / Quiero / Para)
 ----------------------------------
 
 *   **Como**: EQUIPO DE DESARROLLO
-*   **Quiero**: autorizar por permisos y no por roles, con el catálogo de G06
+*   **Quiero**: autorizar por permisos y no por roles, con el catálogo Users (G07)
 *   **Para**: que los permisos se configuren desde los parámetros globales sin cambiar código
 
 * * *
@@ -32,7 +32,7 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Matriz rol → permisos escrita (DT-03) y acordada con G06. Los chequeos de dueño del curso se mantienen.
+*   [ ] Reglas de negocio: Matriz rol → permisos escrita (DT-03) y acordada con G07: el catálogo es de Users, no de Backoffice (G2). Mientras no exista, se usan `PROFESSOR`/`GESTOR` (G6). Los chequeos de dueño del curso se mantienen.
 *   [ ] Validaciones: No aplica.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
@@ -45,7 +45,7 @@ Notas / Observaciones
 Criterios de Aceptación (CA)
 ----------------------------
 
-*   [ ] **CA1**: Matriz rol → permisos escrita y acordada con G06.
+*   [ ] **CA1**: Matriz rol → permisos escrita y acordada con G07.
 *   [ ] **CA2**: Todos los `@PreAuthorize` usan permisos.
 *   [ ] **CA3**: `RankingController` y `requireOwner` sin chequeos de rol a mano.
 *   [ ] **CA4**: El gate valida su scope.
@@ -107,16 +107,16 @@ Estimación / Prioridad
 Dependencias / Impactos
 -----------------------
 
-*   Servicios involucrados: Backoffice (catálogo de permisos), API Gateway (cómo llegan).
+*   Servicios involucrados: Users (catálogo de permisos), API Gateway (cómo llegan).
 *   Módulos afectados: Todos los controllers, `SecurityConfig`, `GatewayHeadersFilter`.
-*   Otros equipos / aprobaciones: G06 (bloqueante).
+*   Otros equipos / aprobaciones: G07 Users (bloqueante).
 *   Impacto en datos / migraciones: Sin migración.
-*   Riesgos y mitigación (opcional): Que G06 no tenga el catálogo; mitigación: proponer los nombres nosotros.
+*   Riesgos y mitigación (opcional): Que G07 no tenga el catálogo; mitigación: proponer los nombres nosotros.
 
 ## Tareas
 
 - [ ] T-22.1 Matriz rol → permisos
-- [ ] T-22.2 Acordar con G06
+- [ ] T-22.2 Acordar con G07
 - [ ] T-22.3 Migrar los `@PreAuthorize`
 - [ ] T-22.4 Scope del gate
 - [ ] T-22.5 Tests de autorización
@@ -133,13 +133,10 @@ Las reglas usan `hasRole`/`hasAnyRole` en constantes por controller (`CAN_EDIT`,
 
 Nada: se puede empezar ya.
 
+### Dudas resueltas (2026-10-15)
+
+- ✅ [[sprints/sprint-3/08-dudas|G6]] Ya no habrá roles sino permisos; mientras tanto vale `PROFESSOR`/`GESTOR`.
+
 ### Dudas que la frenan
 
-- [[sprints/sprint-3/08-dudas|G2]]
-- [[sprints/sprint-3/08-dudas|G6]]
-
-### Deuda técnica que cierra
-
-- [[deuda-tecnica|DT-01]]
-- [[deuda-tecnica|DT-02]]
-- [[deuda-tecnica|DT-03]]
+- [[sprints/sprint-3/08-dudas|G2]] Catálogo de permisos: es de Users (G07) y todavía no está definido.

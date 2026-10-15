@@ -132,7 +132,10 @@ Los datos de ejemplo se sacaron del micro (HT-09).
 - [[sprints/sprint-3/historias/HU-65 Relaciones con tipo|HU-65]] Relaciones con tipo
 - [[sprints/sprint-3/historias/HU-67 Nodo examen con ventana horaria|HU-67]] Nodo examen con ventana horaria
 
+### Dudas resueltas (2026-10-15)
+
+- ✅ [[sprints/sprint-3/08-dudas|E4]] La curva activa es la de Backoffice (1200/3500/7300 para los niveles 3/5/7).
+
 ### Dudas que la frenan
 
-- [[sprints/sprint-3/08-dudas|G7]]
-- [[sprints/sprint-3/08-dudas|E4]]
+- [[sprints/sprint-3/08-dudas|G7]] Usuarios demo de G07: todavía no hay.

@@ -15,6 +15,9 @@ en_taiga: true
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-46 Ver en los nodos y en el Templo el material teórico de Courses|HU-46]] (épica EP-593). En el Sprint 3 se **reabre** con lo que falta.
 
+> [!warning] 2026-10-15: el Templo no existe más (P13)
+> No se rehace. Queda redefinir el CA de HU-46 en Taiga para que cubra solo el material en los nodos, que ya funciona.
+
 [G10] — HU-46 — Ver en los nodos y en el Templo el material teórico de Courses
 ------------------------------------------------------------------------------
 
@@ -24,7 +27,7 @@ Descripción (Como / Quiero / Para)
 ----------------------------------
 
 *   **Como**: ALUMNO
-*   **Quiero**: ver en el Templo todo el material teórico de mi curso agrupado por unidad
+*   **Quiero**: ver desde los nodos el material teórico de mi curso
 *   **Para**: repasar sin recorrer el mapa nodo por nodo
 
 * * *
@@ -38,35 +41,35 @@ Notas / Observaciones
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
 *   [ ] Seguridad (roles, permisos, datos sensibles): Solo el alumno matriculado.
 *   [ ] Accesibilidad (WCAG/teclado/lectores): Lista navegable con teclado; los ítems bloqueados indican el motivo en texto.
-*   [ ] Otros: Si el PO prefiere no rehacerlo, se redefine el criterio de aceptación de HU-46 en Taiga (P13).
+*   [ ] Otros: El Templo no existe más (P13): se redefine el criterio de aceptación de HU-46 en Taiga.
 
 * * *
 
 Criterios de Aceptación (CA)
 ----------------------------
 
-*   [ ] **CA1**: Página Templo (`/student/materials`) con el material agrupado por unidad.
+*   [ ] **CA1**: ~~Página Templo (`/student/materials`) con el material agrupado por unidad.~~ Descartado: el Templo no existe más (P13).
 *   [ ] **CA2**: En una unidad bloqueada el material aparece sin poder abrirse.
 *   [ ] **CA3**: Abrir un material desbloqueado lo muestra en el visor.
-*   [ ] **CA4**: O el CA de HU-46 queda redefinido en Taiga.
+*   [ ] **CA4**: El CA de HU-46 queda redefinido en Taiga, sin el Templo.
 
 * * *
 
 BDD (mínimo 3 escenarios)
 -------------------------
 
-**Característica:** Templo de materiales
+**Característica:** Material teórico en los nodos
 
 **Escenario 1**  
 
 *   **Dado**: un alumno con 2 unidades desbloqueadas
-*   **Cuando**: abre el Templo
-*   **Entonces**: ve el material de ambas agrupado por unidad
+*   **Cuando**: abre sus nodos de contenido
+*   **Entonces**: ve el material de ambas
 
 **Escenario 2**  
 
 *   **Dado**: una unidad bloqueada
-*   **Cuando**: el alumno la mira en el Templo
+*   **Cuando**: el alumno la mira en el mapa
 *   **Entonces**: ve el material listado sin poder abrirlo
 
 **Escenario 3**  
@@ -80,7 +83,7 @@ BDD (mínimo 3 escenarios)
 Prototipo
 ---------
 
-*   **Capturas**: Templo del mundo (antes `materials-page`).
+*   **Capturas**: Material dentro del nodo.
 *   **URL Figma**: Pendiente.
 *   **Storybook**: `generic-course-outline`.
 *   **Mock API / Swagger**: GET /api/roadmap/courses/{courseId}/materials.
@@ -107,15 +110,16 @@ Dependencias / Impactos
 -----------------------
 
 *   Servicios involucrados: Courses (material en Garage).
-*   Módulos afectados: Página Templo (front), `UnitMaterialService`.
+*   Módulos afectados: `UnitMaterialService`.
 *   Otros equipos / aprobaciones: G01 (URLs del material).
 *   Impacto en datos / migraciones: Sin migración.
 *   Riesgos y mitigación (opcional): Que el PO no lo quiera; mitigación: preguntar antes (P13).
 
 ## Tareas
 
-- [ ] T-46.6 Confirmar con el PO (P13)
-- [ ] T-46.7 Página Templo con la UI-KIT
+- [x] T-46.6 Confirmar con el PO (P13: el Templo no existe más)
+- [ ] ~~T-46.7 Página Templo con la UI-KIT~~ (descartada)
+- [ ] T-46.10 Redefinir el CA de HU-46 en Taiga
 - [ ] T-46.8 Estados bloqueado y desbloqueado
 - [ ] T-46.9 Tests
 
@@ -131,6 +135,6 @@ Se borró la página Templo (`student/materials`). El material de los nodos sí 
 
 Nada: se puede empezar ya.
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|P13]]
+- ✅ [[sprints/sprint-3/08-dudas|P13]] El Templo no existe más: no se rehace.

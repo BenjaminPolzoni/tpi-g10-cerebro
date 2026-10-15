@@ -32,13 +32,13 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Neo4j está decidido por los profes (DEC-016). El spike no elige base: valida infra y modelo. Neo4j Community (GPLv3) en Docker.
+*   [ ] Reglas de negocio: Neo4j está decidido por los profes (DEC-016). El spike no elige base: valida infra y modelo. Neo4j Community (GPLv3) en Docker. Neo4j es solo para roadmap-service y guarda solo los grafos (curso, sección, unidad, etc.); no se migra toda la base (G1).
 *   [ ] Validaciones: La prueba de concepto corre en el CI con Testcontainers.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
 *   [ ] Seguridad (roles, permisos, datos sensibles): No aplica.
 *   [ ] Accesibilidad (WCAG/teclado/lectores): No aplica.
-*   [ ] Otros: El modelo incluye START/END (HU-64) y tipos de relación (HU-65); los huecos dependen de P1 y P4.
+*   [ ] Otros: El modelo incluye N roadmaps por curso (DEC-017), START/END por roadmap y por unidad/sección (HU-64), los 5 tipos de relación (HU-65) y los tipos de nodo fijos (DEC-018).
 
 * * *
 
@@ -131,8 +131,8 @@ Neo4j está decidido (DEC-016) pero no existe en el compose ni en la mesh.
 
 Nada: se puede empezar ya.
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|G1]]
-- [[sprints/sprint-3/08-dudas|P1]]
-- [[sprints/sprint-3/08-dudas|P4]]
+- ✅ [[sprints/sprint-3/08-dudas|G1]] Neo4j es solo para nuestro micro y guarda solo los grafos. Sigue por coordinar quién lo suma al compose (T-16.2).
+- ✅ [[sprints/sprint-3/08-dudas|P1]] Cada roadmap es un mapa distinto del mismo curso.
+- ✅ [[sprints/sprint-3/08-dudas|P4]] 5 tipos: `requires`, `recommends`, `belongs_to`, `related_to` y `part_of` (DEC-018).

@@ -133,6 +133,6 @@ La vista de grafo existe pero es incómoda. `moveNode` devuelve 501: las posicio
 - [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps|HT-17]] Modelo 1 a N de curso a roadmaps
 - [[sprints/sprint-3/historias/HU-70 Componente de grafo en la UI-KIT|HU-70]] Componente de grafo en la UI-KIT
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|G13]]
+- ✅ [[sprints/sprint-3/08-dudas|G13]] El componente de grafo es nuestro (G10).

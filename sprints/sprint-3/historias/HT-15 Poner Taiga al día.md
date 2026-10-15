@@ -48,7 +48,7 @@ Criterios de Aceptación (CA)
 *   [ ] **CA1**: Las HU que no cumplen sus CA vuelven a In progress (ver HU-48 a HU-41 y HU-01).
 *   [ ] **CA2**: Las épicas con todas sus HU cerradas pasan a Done (E10).
 *   [ ] **CA3**: HT-11 actualizado a snake_case v8.
-*   [ ] **CA4**: HT-04, HT-05, HT-10 y HT-11 con épica o tag `g10` (E11).
+*   [ ] **CA4**: HT-04, HT-05, HT-10 y HT-11 con el tag `g10`, sin épica (E11).
 *   [ ] **CA5**: Las historias de este sprint cargadas en Taiga con su código.
 
 * * *
@@ -132,11 +132,7 @@ Dependencias / Impactos
 
 Nada: se puede empezar ya.
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|E10]]
-- [[sprints/sprint-3/08-dudas|E11]]
-
-### Deuda técnica que cierra
-
-- [[deuda-tecnica|DT-19]]
+- ✅ [[sprints/sprint-3/08-dudas|E10]] Sí: las épicas con todas sus HU cerradas pasan a Done.
+- ✅ [[sprints/sprint-3/08-dudas|E11]] HT-04, HT-05, HT-10 y HT-11 no llevan épica.

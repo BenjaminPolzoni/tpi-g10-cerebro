@@ -32,7 +32,7 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Qué roadmaps ve el alumno depende de P5 (todos o por comisión). XP, nivel y ranking según P2.
+*   [ ] Reglas de negocio: Qué roadmaps ve el alumno lo configura el profesor: todos o por comisión (P5). XP, nivel y ranking por curso o por roadmap, según lo configure el profesor (P2). Ver DEC-017.
 *   [ ] Validaciones: No aplica.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
@@ -47,7 +47,7 @@ Criterios de Aceptación (CA)
 
 *   [ ] **CA1**: Si el curso tiene varios roadmaps visibles, el alumno elige uno.
 *   [ ] **CA2**: El progreso de cada roadmap se ve por separado.
-*   [ ] **CA3**: XP, nivel y ranking se muestran según P2.
+*   [ ] **CA3**: XP, nivel y ranking se muestran por curso o por roadmap, según la configuración del profesor.
 
 * * *
 
@@ -129,8 +129,8 @@ El alumno ve un único roadmap por curso.
 
 - [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps|HT-17]] Modelo 1 a N de curso a roadmaps
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|P1]]
-- [[sprints/sprint-3/08-dudas|P2]]
-- [[sprints/sprint-3/08-dudas|P5]]
+- ✅ [[sprints/sprint-3/08-dudas|P1]] Cada roadmap es un mapa distinto del mismo curso.
+- ✅ [[sprints/sprint-3/08-dudas|P2]] XP, vidas, nivel y ranking: lo configura el profesor (por curso o por roadmap).
+- ✅ [[sprints/sprint-3/08-dudas|P5]] Lo configura el profesor: todos los roadmaps o por comisión.

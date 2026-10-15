@@ -32,7 +32,7 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Las posiciones se guardan. Al crear una relación se elige su tipo (HU-65). Cómo se ve «el curso como mapa» depende de P1.
+*   [ ] Reglas de negocio: Las posiciones se guardan. Al crear una relación se elige su tipo (HU-65). Cada roadmap es un mapa distinto del mismo curso (P1).
 *   [ ] Validaciones: No aplica.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
@@ -47,7 +47,7 @@ Criterios de Aceptación (CA)
 
 *   [ ] **CA1**: Arrastrar nodos y guardar su posición.
 *   [ ] **CA2**: Crear una relación arrastrando y eligiendo su tipo.
-*   [ ] **CA3**: El editor muestra el curso como mapa según P1.
+*   [ ] **CA3**: El editor muestra cada roadmap del curso como un mapa.
 
 * * *
 
@@ -109,7 +109,7 @@ Dependencias / Impactos
 *   Módulos afectados: `course-editor-page`, vista de grafo.
 *   Otros equipos / aprobaciones: Ninguno.
 *   Impacto en datos / migraciones: Sin migración.
-*   Riesgos y mitigación (opcional): Depende de HU-62, HU-65 y P1.
+*   Riesgos y mitigación (opcional): Depende de HU-62 y HU-65.
 
 ## Tareas
 
@@ -130,6 +130,6 @@ Dependencias / Impactos
 - [[sprints/sprint-3/historias/HU-62 Vista de grafo cómoda para el profesor|HU-62]] Vista de grafo cómoda para el profesor
 - [[sprints/sprint-3/historias/HU-65 Relaciones con tipo|HU-65]] Relaciones con tipo
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|P1]]
+- ✅ [[sprints/sprint-3/08-dudas|P1]] Cada roadmap es un mapa distinto del mismo curso.

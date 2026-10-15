@@ -38,7 +38,7 @@ Notas / Observaciones
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
 *   [ ] Seguridad (roles, permisos, datos sensibles): No aplica.
 *   [ ] Accesibilidad (WCAG/teclado/lectores): Selección con teclado, foco visible y minimapa.
-*   [ ] Otros: Hay que acordar con el equipo del kit quién es dueño (G13).
+*   [ ] Otros: El dueño del componente de grafo es G10 (G13).
 
 * * *
 
@@ -107,7 +107,7 @@ Dependencias / Impactos
 
 *   Servicios involucrados: Ninguno.
 *   Módulos afectados: Repo `2026-PIV-TPI-UI-KIT`.
-*   Otros equipos / aprobaciones: Equipo del kit (G13).
+*   Otros equipos / aprobaciones: Equipo del kit, para publicarlo (el dueño es G10, G13).
 *   Impacto en datos / migraciones: Sin migración.
 *   Riesgos y mitigación (opcional): Que el kit no lo acepte; mitigación: acordar antes de empezar.
 
@@ -129,6 +129,6 @@ El kit no tiene componente de grafo. La vista de grafo del roadmap es un SVG pro
 
 - [[sprints/sprint-3/historias/HT-25 Subir la UI-KIT a 0.8.0 y cerrar sus TODOs|HT-25]] Subir la UI-KIT a 0.8.0 y cerrar sus TODOs
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|G13]]
+- ✅ [[sprints/sprint-3/08-dudas|G13]] El componente de grafo es nuestro (G10).

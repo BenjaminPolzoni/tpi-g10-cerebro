@@ -32,22 +32,22 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Cada criterio del catálogo tiene un evaluador que lo otorga, o se quita del catálogo (decisión E2 del equipo). Las insignias salen por el outbox como `BADGE_AWARDED`.
+*   [ ] Reglas de negocio: Cada criterio del catálogo tiene un evaluador que lo otorga: se implementan los tres que faltan (E2). Las insignias salen por el outbox como `BADGE_AWARDED`.
 *   [ ] Validaciones: El otorgamiento es idempotente: una insignia no se otorga dos veces al mismo alumno.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
 *   [ ] Seguridad (roles, permisos, datos sensibles): No aplica.
 *   [ ] Accesibilidad (WCAG/teclado/lectores): No aplica.
-*   [ ] Otros: `LIFE_RECOVERED` necesita un evento de Accounting que hoy no consumimos (E8).
+*   [ ] Otros: `LIFE_RECOVERED` necesita un evento de Accounting que hoy no consumimos; se va a consumir (E8).
 
 * * *
 
 Criterios de Aceptación (CA)
 ----------------------------
 
-*   [ ] **CA1**: `SECTION_NO_LIVES_LOST` se otorga con su test, o se quita del catálogo.
-*   [ ] **CA2**: `NODE_NO_RETRIES` se otorga con su test, o se quita del catálogo.
-*   [ ] **CA3**: `LIFE_RECOVERED` se otorga con su test, o se quita del catálogo.
+*   [ ] **CA1**: `SECTION_NO_LIVES_LOST` se otorga con su test.
+*   [ ] **CA2**: `NODE_NO_RETRIES` se otorga con su test.
+*   [ ] **CA3**: `LIFE_RECOVERED` se otorga con su test.
 *   [ ] **CA4**: Cada otorgamiento publica `BADGE_AWARDED` una sola vez.
 
 * * *
@@ -109,12 +109,12 @@ Dependencias / Impactos
 *   Servicios involucrados: Accounting (vidas perdidas y recuperadas), Motor (reintentos).
 *   Módulos afectados: Evaluador de criterios de insignias, outbox.
 *   Otros equipos / aprobaciones: Accounting (si se implementa `LIFE_RECOVERED`).
-*   Impacto en datos / migraciones: Si se quitan criterios, migración que los marque inactivos.
+*   Impacto en datos / migraciones: Sin migración: no se quita ningún criterio (E2).
 *   Riesgos y mitigación (opcional): Depende de eventos de Accounting que no consumimos; mitigación: quitar el criterio si no llegan a tiempo.
 
 ## Tareas
 
-- [ ] T-21.7 Decidir qué criterios se implementan (E2)
+- [x] T-21.7 Decidir qué criterios se implementan (E2: los tres, 2026-10-15)
 - [ ] T-21.8 Evaluador de `SECTION_NO_LIVES_LOST`
 - [ ] T-21.9 Evaluador de `NODE_NO_RETRIES`
 - [ ] T-21.10 `LIFE_RECOVERED` o quitarlo
@@ -132,7 +132,7 @@ Tres criterios del catálogo nunca se otorgan: `SECTION_NO_LIVES_LOST`, `NODE_NO
 
 Nada: se puede empezar ya.
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|E2]]
-- [[sprints/sprint-3/08-dudas|E8]]
+- ✅ [[sprints/sprint-3/08-dudas|E2]] Los tres criterios se implementan.
+- ✅ [[sprints/sprint-3/08-dudas|E8]] Sí hace falta consumir `LIVES_EXHAUSTED` / `LIVES_AVAILABLE`.

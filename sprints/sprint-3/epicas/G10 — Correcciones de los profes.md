@@ -26,7 +26,7 @@ Suposiciones y Restricciones
 ----------------------------
 
 *   Suposiciones: Correcciones del documento de los profes (2026-10-14), solo las marcadas como nuestras.
-*   Restricciones (legales/técnicas): Las que dependen de otros grupos (permisos de G06, usuarios demo de G07) se coordinan; no se implementa lo que es de ellos.
+*   Restricciones (legales/técnicas): Las que dependen de otros grupos (catálogo de permisos y usuarios demo de G07) se coordinan; no se implementa lo que es de ellos.
 
 * * *
 
@@ -56,14 +56,14 @@ Dependencias / Impactos
 | HU | Título | En Taiga | Pts | Prioridad | Depende de | Dudas |
 |---|---|---|---|---|---|---|
 | [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios\|HU-64]] | Nodos de inicio y fin obligatorios | Nueva | 5 | Must | [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial\|HT-18]] | — |
-| [[sprints/sprint-3/historias/HU-65 Relaciones con tipo\|HU-65]] | Relaciones con tipo | Nueva | 8 | Must | [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial\|HT-18]] | [[sprints/sprint-3/08-dudas\|P4]] |
-| [[sprints/sprint-3/historias/HU-66 Editor con arrastre y el curso como mapa\|HU-66]] | Editor con arrastre y el curso como mapa | Nueva | 8 | Should | [[sprints/sprint-3/historias/HU-62 Vista de grafo cómoda para el profesor\|HU-62]], [[sprints/sprint-3/historias/HU-65 Relaciones con tipo\|HU-65]] | [[sprints/sprint-3/08-dudas\|P1]] |
-| [[sprints/sprint-3/historias/HU-67 Nodo examen con ventana horaria\|HU-67]] | Nodo examen con ventana horaria | Nueva | 5 | Must | — | [[sprints/sprint-3/08-dudas\|P9]] |
+| [[sprints/sprint-3/historias/HU-65 Relaciones con tipo\|HU-65]] | Relaciones con tipo | Nueva | 8 | Must | [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial\|HT-18]] | [[sprints/sprint-3/08-dudas\|P4]] ✅ |
+| [[sprints/sprint-3/historias/HU-66 Editor con arrastre y el curso como mapa\|HU-66]] | Editor con arrastre y el curso como mapa | Nueva | 8 | Should | [[sprints/sprint-3/historias/HU-62 Vista de grafo cómoda para el profesor\|HU-62]], [[sprints/sprint-3/historias/HU-65 Relaciones con tipo\|HU-65]] | [[sprints/sprint-3/08-dudas\|P1]] ✅ |
+| [[sprints/sprint-3/historias/HU-67 Nodo examen con ventana horaria\|HU-67]] | Nodo examen con ventana horaria | Nueva | 5 | Must | — | [[sprints/sprint-3/08-dudas\|P9]] ✅ |
 | [[sprints/sprint-3/historias/HU-68 Obligatoriedad visible en la lista de nodos\|HU-68]] | Obligatoriedad visible en la lista de nodos | Nueva | 2 | Should | — | — |
-| [[sprints/sprint-3/historias/HU-69 Archibaldo - Enter, aspecto de Hernán y destello\|HU-69]] | Archibaldo: Enter, aspecto de Hernán y destello | Nueva | 5 | Could | — | [[sprints/sprint-3/08-dudas\|P11]] |
-| [[sprints/sprint-3/historias/HT-21 Seed de demo curado\|HT-21]] | Seed de demo curado | Nueva | 5 | Must | [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios\|HU-64]], [[sprints/sprint-3/historias/HU-65 Relaciones con tipo\|HU-65]], [[sprints/sprint-3/historias/HU-67 Nodo examen con ventana horaria\|HU-67]] | [[sprints/sprint-3/08-dudas\|G7]], [[sprints/sprint-3/08-dudas\|E4]] |
-| [[sprints/sprint-3/historias/HT-22 Permisos en vez de roles\|HT-22]] | Permisos en vez de roles | Nueva | 5 | Should | — | [[sprints/sprint-3/08-dudas\|G2]], [[sprints/sprint-3/08-dudas\|G6]] |
-| [[sprints/sprint-3/historias/HT-23 Documentación global del micro\|HT-23]] | Documentación global del micro | Nueva | 2 | Should | — | [[sprints/sprint-3/08-dudas\|E7]] |
+| [[sprints/sprint-3/historias/HU-69 Archibaldo - Enter, aspecto de Hernán y destello\|HU-69]] | Archibaldo: Enter, avatar personalizable y destello | Nueva | 5 | Could | — | [[sprints/sprint-3/08-dudas\|P11]] ✅ |
+| [[sprints/sprint-3/historias/HT-21 Seed de demo curado\|HT-21]] | Seed de demo curado | Nueva | 5 | Must | [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios\|HU-64]], [[sprints/sprint-3/historias/HU-65 Relaciones con tipo\|HU-65]], [[sprints/sprint-3/historias/HU-67 Nodo examen con ventana horaria\|HU-67]] | [[sprints/sprint-3/08-dudas\|G7]], [[sprints/sprint-3/08-dudas\|E4]] ✅ |
+| [[sprints/sprint-3/historias/HT-22 Permisos en vez de roles\|HT-22]] | Permisos en vez de roles | Nueva | 5 | Should | — | [[sprints/sprint-3/08-dudas\|G2]], [[sprints/sprint-3/08-dudas\|G6]] ✅ |
+| [[sprints/sprint-3/historias/HT-23 Documentación global del micro\|HT-23]] | Documentación global del micro | Nueva | 2 | Should | — | [[sprints/sprint-3/08-dudas\|E7]] ✅ |
 | [[sprints/sprint-3/historias/HT-24 Datos para el dashboard de G06\|HT-24]] | Datos para el dashboard de G06 | Nueva | 2 | Should | — | [[sprints/sprint-3/08-dudas\|G3]] |
 
 ---

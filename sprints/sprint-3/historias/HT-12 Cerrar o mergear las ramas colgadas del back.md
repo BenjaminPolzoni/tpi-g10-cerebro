@@ -130,10 +130,7 @@ Hay ramas sin decidir: `feature/t-21-7-roadmap-events-topic` (redundante con #13
 
 Nada: se puede empezar ya.
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|E5]]
-
-### Deuda técnica que cierra
-
-- [[deuda-tecnica|DT-17]]
+- ✅ [[sprints/sprint-3/08-dudas|E5]] `fix/account-not-found-gate`: ya está hecho.
+- ✅ [[sprints/sprint-3/08-dudas|G5]] Courses: todos sus eventos salen en snake_case.

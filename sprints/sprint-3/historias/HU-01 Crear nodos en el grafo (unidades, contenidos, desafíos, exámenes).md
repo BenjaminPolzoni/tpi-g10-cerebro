@@ -130,6 +130,6 @@ No se consume la baja de desafío del Motor (CA8). El resto de HU-01 está hecho
 
 Nada: se puede empezar ya.
 
-### Dudas que la frenan
+### Dudas resueltas (2026-10-15)
 
-- [[sprints/sprint-3/08-dudas|G8]]
+- ✅ [[sprints/sprint-3/08-dudas|G8]] Sí: `node_id` único global, también después de clonar.

@@ -26,7 +26,7 @@ estado: borrador
 | 05  | [UI-KIT](05-ui-kit.md)                                  | Adopción de la librería de componentes en el front: qué falta, qué reemplazar en el roadmap y huecos del kit                                 |
 | 06  | [Backlog Sprint 3](06-backlog-sprint-3.md)              | Épicas, HU e HT propuestas, con esfuerzo, dependencias, orden y riesgos                                                                      |
 | 07  | [Correcciones de los profes](07-correcciones-profes.md) | Lo que pidieron corregir, cruzado con lo ya planteado (✅/⚠️/🆕), qué no es nuestro y preguntas nuevas                                        |
-| 08  | [Dudas del sprint](08-dudas.md)                         | Todas las dudas abiertas: para los profes, para otros grupos y del equipo, con prioridad y qué frenan                                        |
+| 08  | [Dudas del sprint](08-dudas.md)                         | Dudas para los profes, otros grupos y el equipo. Al 2026-10-15: 36 respondidas y 5 abiertas                                                  |
 | 09  | [Épicas e historias](09-epicas-e-historias.md) | Las 4 épicas y las 44 historias del sprint con el formato de la wiki de Taiga (HU-NN / HT-NN). Carpetas `epicas/` e `historias/` |
 
 ## Mapa de la propuesta
@@ -72,12 +72,11 @@ flowchart LR
 
 ## Decisiones pendientes
 
-> [!question] Ver [[08-dudas]]
-> Están todas ahí, con prioridad y qué frenan. Las 🔴 (antes de arrancar el modelo):
-> - **P1** "El mapa es el curso" contra N roadmaps por curso.
-> - **P2** XP, vidas, nivel y ranking: por curso o por roadmap.
-> - **P3** Cómo se mapean las secciones de Courses con N roadmaps.
-> - **P4** Cuáles son los 4 tipos de relación.
-> - **G1** Quién suma Neo4j a la plataforma.
+> [!success] Respondidas el 2026-10-15 (ver [[08-dudas]])
+> - **P1** Se mantienen los N roadmaps: cada uno es un mapa distinto del mismo curso.
+> - **P2, P3 y P5** Lo configura el profesor: XP/vidas/nivel/ranking por curso o por roadmap, secciones de Courses o propias, roadmaps para todos o por comisión ([[decisiones/DEC-017-n-roadmaps-por-curso-configurables|DEC-017]]).
+> - **P4** 5 tipos de relación: `requires`, `recommends`, `belongs_to`, `related_to` y `part_of` ([[decisiones/DEC-018-catalogo-de-relaciones-y-tipos-de-nodo|DEC-018]]).
+> - **G1** Neo4j es solo para nuestro micro y guarda solo los grafos.
+> - Antes: Neo4j es pedido de los profes ([[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap|DEC-016]]).
 >
-> Ya respondida: Neo4j es pedido de los profes ([[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap|DEC-016]]).
+> Siguen abiertas G2, G3, G7, G9 y E6, y hay trabajo nuevo sin HU (clonar roadmaps, estado académico final, racha).
