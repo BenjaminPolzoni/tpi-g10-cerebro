@@ -17,16 +17,16 @@ estado: borrador
 
 ## Documentos
 
-| # | Documento | Contenido |
-|---|---|---|
-| 01 | [Estado actual](01-estado-actual.md) | Taiga vs código, HU por HU (back y front), ramas sin mergear, flags apagados, mocks que quedan |
-| 02 | [Pendientes](02-pendientes.md) | Lo que figura Done pero no lo está, y lo que debería cerrarse primero (P0 a P3) |
-| 03 | [Pedido de los profes](03-requerimientos-profes.md) | Varios roadmaps por curso, relaciones configurables entre secciones y nodos, las dos vistas. Qué existe, qué cambia y las preguntas abiertas |
-| 04 | [Base de grafos](04-base-de-grafos.md) | Neo4j vs Postgres extendido vs Apache AGE: ventajas, desventajas, riesgos, recomendación y diseño si se elige Neo4j |
-| 05 | [UI-KIT](05-ui-kit.md) | Adopción de la librería de componentes en el front: qué falta, qué reemplazar en el roadmap y huecos del kit |
-| 06 | [Backlog Sprint 3](06-backlog-sprint-3.md) | Épicas, HU e HT propuestas, con esfuerzo, dependencias, orden y riesgos |
-| 07 | [Correcciones de los profes](07-correcciones-profes.md) | Lo que pidieron corregir, cruzado con lo ya planteado (✅/⚠️/🆕), qué no es nuestro y preguntas nuevas |
-| 08 | [Dudas del sprint](08-dudas.md) | Todas las dudas abiertas: para los profes, para otros grupos y del equipo, con prioridad y qué frenan |
+| #   | Documento                                               | Contenido                                                                                                                                    |
+| --- | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| 01  | [Estado actual](01-estado-actual.md)                    | Taiga vs código, HU por HU (back y front), ramas sin mergear, flags apagados, mocks que quedan                                               |
+| 02  | [Pendientes](02-pendientes.md)                          | Lo que figura Done pero no lo está, y lo que debería cerrarse primero (P0 a P3)                                                              |
+| 03  | [Pedido de los profes](03-requerimientos-profes.md)     | Varios roadmaps por curso, relaciones configurables entre secciones y nodos, las dos vistas. Qué existe, qué cambia y las preguntas abiertas |
+| 04  | [Base de grafos](04-base-de-grafos.md)                  | Neo4j vs Postgres extendido vs Apache AGE: ventajas, desventajas, riesgos, recomendación y diseño si se elige Neo4j                          |
+| 05  | [UI-KIT](05-ui-kit.md)                                  | Adopción de la librería de componentes en el front: qué falta, qué reemplazar en el roadmap y huecos del kit                                 |
+| 06  | [Backlog Sprint 3](06-backlog-sprint-3.md)              | Épicas, HU e HT propuestas, con esfuerzo, dependencias, orden y riesgos                                                                      |
+| 07  | [Correcciones de los profes](07-correcciones-profes.md) | Lo que pidieron corregir, cruzado con lo ya planteado (✅/⚠️/🆕), qué no es nuestro y preguntas nuevas                                        |
+| 08  | [Dudas del sprint](08-dudas.md)                         | Todas las dudas abiertas: para los profes, para otros grupos y del equipo, con prioridad y qué frenan                                        |
 
 ## Mapa de la propuesta
 
