@@ -1,0 +1,333 @@
+asyncapi: '2.6.0'
+info:
+  title: Roadmap Service - Contrato Asíncrono de Eventos Kafka
+  version: '1.0.0'
+  description: |
+    Especificación oficial de eventos publicados y consumidos por el microservicio Roadmap (Tema 10)
+    en conformidad con la arquitectura DDD y el estándar `contratos-kafka` (v3) del Skill Hub.
+    
+    Reglas de integración:
+    - Todo mensaje viaja en texto plano JSON con un sobre canónico obligatorio de 6 campos.
+    - `eventVersion` es estrictamente el entero `1`.
+    - La serialización/deserialización utiliza StringSerializer / StringDeserializer.
+    - Consumer group canónico del servicio: `tema-10-roadmap-service-group`.
+    - La resiliencia define 3 reintentos con intervalo fijo de 2000 ms y derivación automática
+      a la DLT del dominio origen (`<topico>.DLT`).
+    
+    Brechas y pendientes declarados:
+    - [P-09]: Roadmap no tiene aún un tópico de dominio propio asignado en la tabla de Dominios de Tema 11
+      (`contratos-kafka` v3). Los eventos del Outbox (`NODE_COMPLETED`, `NODE_UNLOCKED`, `BADGE_AWARDED`) quedan almacenados
+      en estado `PENDING` hasta la provisión del canal oficial en el broker compartido (`event-bus:29092`).
+    - [G-09]: Se acepta compatibilidad transitoria de lectura para nombres de campo en snake_case
+      emitidos por versiones previas del Motor de Desafíos.
+
+servers:
+  dev:
+    url: localhost:29092
+    protocol: kafka
+    description: Broker local Kafka en modo KRaft
+  event-bus:
+    url: event-bus:29092
+    protocol: kafka
+    description: Broker compartido del TPI
+
+channels:
+  challenges.events:
+    description: Canal del dominio Desafíos (Tema 03).
+    publish:
+      summary: Consumo de eventos de finalización y aborto del motor de desafíos.
+      operationId: consumeChallengeEvents
+      bindings:
+        kafka:
+          groupId: tema-10-roadmap-service-group
+      message:
+        oneOf:
+          - $ref: '#/components/messages/ChallengeCompletedMessage'
+          - $ref: '#/components/messages/ChallengeAbortedMessage'
+
+  challenges.results:
+    description: Canal de transición del motor de desafíos (Tema 03).
+    publish:
+      summary: Consumo transitorio de resultados de corrección y cancelación de intentos.
+      operationId: consumeChallengeResults
+      bindings:
+        kafka:
+          groupId: tema-10-roadmap-service-group
+      message:
+        oneOf:
+          - $ref: '#/components/messages/AttemptCorrectedMessage'
+          - $ref: '#/components/messages/AttemptCanceledMessage'
+
+  courses.events:
+    description: Canal del dominio Cursos (Tema 02).
+    publish:
+      summary: Consumo de eventos del ciclo de vida de estudiantes y cohortes.
+      operationId: consumeCoursesLifecycleEvents
+      bindings:
+        kafka:
+          groupId: tema-10-roadmap-service-group
+      message:
+        oneOf:
+          - $ref: '#/components/messages/StudentEnrolledMessage'
+          - $ref: '#/components/messages/StudentUnenrolledMessage'
+          - $ref: '#/components/messages/CourseCohortArchivedMessage'
+
+  administration.events:
+    description: Canal del dominio Administración (Tema 12).
+    publish:
+      summary: Consumo de eventos de cambios de estado del catálogo PAR / Backoffice.
+      operationId: consumeAdministrationEvents
+      bindings:
+        kafka:
+          groupId: tema-10-roadmap-service-group
+      message:
+        $ref: '#/components/messages/ParStatusChangedMessage'
+
+  roadmap.events:
+    description: |
+      Canal propuesto para el dominio Roadmap (Tema 10).
+      Estado actual: PENDIENTE (P-09). Sujeto a creación por Tema 11.
+    subscribe:
+      summary: Publicación de eventos de progreso en el grafo (mediante Outbox pattern).
+      operationId: publishRoadmapEvents
+      bindings:
+        kafka:
+          bindingVersion: '0.4.0'
+      message:
+        oneOf:
+          - $ref: '#/components/messages/NodeCompletedMessage'
+          - $ref: '#/components/messages/NodeUnlockedMessage'
+          - $ref: '#/components/messages/BadgeAwardedMessage'
+
+components:
+  messages:
+    ChallengeCompletedMessage:
+      name: ChallengeCompletedMessage
+      title: Evento de desafío completado
+      payload:
+        $ref: '#/components/schemas/CanonicalEnvelope'
+      bindings:
+        kafka:
+          key:
+            type: string
+            description: Identificador del agregado (studentId o attemptId)
+
+    ChallengeAbortedMessage:
+      name: ChallengeAbortedMessage
+      title: Evento de desafío abortado
+      payload:
+        $ref: '#/components/schemas/CanonicalEnvelope'
+
+    AttemptCorrectedMessage:
+      name: AttemptCorrectedMessage
+      title: Evento de corrección de intento (transición)
+      payload:
+        $ref: '#/components/schemas/CanonicalEnvelope'
+
+    AttemptCanceledMessage:
+      name: AttemptCanceledMessage
+      title: Evento de cancelación de intento (transición)
+      payload:
+        $ref: '#/components/schemas/CanonicalEnvelope'
+
+    StudentEnrolledMessage:
+      name: StudentEnrolledMessage
+      title: Estudiante inscripto a cohorte
+      payload:
+        $ref: '#/components/schemas/CanonicalEnvelope'
+
+    StudentUnenrolledMessage:
+      name: StudentUnenrolledMessage
+      title: Estudiante desinscripto de cohorte
+      payload:
+        $ref: '#/components/schemas/CanonicalEnvelope'
+
+    CourseCohortArchivedMessage:
+      name: CourseCohortArchivedMessage
+      title: Cohorte de curso archivada
+      payload:
+        $ref: '#/components/schemas/CanonicalEnvelope'
+
+    ParStatusChangedMessage:
+      name: ParStatusChangedMessage
+      title: Notificación de actualización de parámetros PAR
+      payload:
+        $ref: '#/components/schemas/CanonicalEnvelope'
+
+    NodeCompletedMessage:
+      name: NodeCompletedMessage
+      title: Nodo del roadmap completado por estudiante
+      payload:
+        $ref: '#/components/schemas/NodeCompletedEnvelope'
+      bindings:
+        kafka:
+          key:
+            type: string
+            description: ID del estudiante (studentId)
+
+    NodeUnlockedMessage:
+      name: NodeUnlockedMessage
+      title: Nodo del roadmap desbloqueado para estudiante
+      payload:
+        $ref: '#/components/schemas/NodeUnlockedEnvelope'
+      bindings:
+        kafka:
+          key:
+            type: string
+            description: ID del estudiante (studentId)
+
+    BadgeAwardedMessage:
+      name: BadgeAwardedMessage
+      title: Insignia otorgada a estudiante (HU-21)
+      payload:
+        $ref: '#/components/schemas/BadgeAwardedEnvelope'
+      bindings:
+        kafka:
+          key:
+            type: string
+            description: ID del estudiante (studentId)
+
+  schemas:
+    CanonicalEnvelope:
+      type: object
+      description: Sobre canónico de 6 campos obligatorio según contratos-kafka v3 (§2).
+      required:
+        - eventId
+        - eventType
+        - eventVersion
+        - timestamp
+        - producer
+        - payload
+      properties:
+        eventId:
+          type: string
+          format: uuid
+          description: Identificador único del evento para garantizar idempotencia.
+        eventType:
+          type: string
+          pattern: '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'
+          description: Identificador del tipo de hecho en SCREAMING_SNAKE_CASE.
+        eventVersion:
+          type: integer
+          enum: [1]
+          description: Versión del contrato del payload. Estrictamente el entero 1.
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp ISO-8601 UTC de generación del evento.
+        producer:
+          type: string
+          description: Identificador del microservicio emisor (ej. tema-10-roadmap-service).
+        payload:
+          type: object
+          description: Cuerpo específico del evento según el eventType.
+
+    NodeCompletedEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/CanonicalEnvelope'
+        - type: object
+          properties:
+            eventType:
+              type: string
+              enum: [NODE_COMPLETED]
+            producer:
+              type: string
+              enum: [tema-10-roadmap-service]
+            payload:
+              $ref: '#/components/schemas/NodeCompletedPayload'
+
+    NodeUnlockedEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/CanonicalEnvelope'
+        - type: object
+          properties:
+            eventType:
+              type: string
+              enum: [NODE_UNLOCKED]
+            producer:
+              type: string
+              enum: [tema-10-roadmap-service]
+            payload:
+              $ref: '#/components/schemas/NodeUnlockedPayload'
+
+    BadgeAwardedEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/CanonicalEnvelope'
+        - type: object
+          properties:
+            eventType:
+              type: string
+              enum: [BADGE_AWARDED]
+            producer:
+              type: string
+              enum: [tema-10-roadmap-service]
+            payload:
+              $ref: '#/components/schemas/BadgeAwardedPayload'
+
+    NodeCompletedPayload:
+      type: object
+      required:
+        - courseId
+        - studentId
+        - nodeId
+      properties:
+        courseId:
+          type: string
+          format: uuid
+          description: Identificador de la cohorte / curso.
+        studentId:
+          type: string
+          format: uuid
+          description: Identificador del estudiante.
+        nodeId:
+          type: string
+          format: uuid
+          description: Identificador del nodo completado en el grafo.
+        challengeId:
+          type: string
+          format: uuid
+          description: Identificador del desafío completado (si aplica).
+        sectionId:
+          type: string
+          format: uuid
+          description: Identificador de la sección contenedora.
+
+    NodeUnlockedPayload:
+      type: object
+      required:
+        - courseId
+        - studentId
+        - nodeId
+      properties:
+        courseId:
+          type: string
+          format: uuid
+          description: Identificador de la cohorte / curso.
+        studentId:
+          type: string
+          format: uuid
+          description: Identificador del estudiante.
+        nodeId:
+          type: string
+          format: uuid
+          description: Identificador del nodo desbloqueado.
+
+    BadgeAwardedPayload:
+      type: object
+      required:
+        - courseId
+        - studentId
+        - badgeId
+      properties:
+        courseId:
+          type: string
+          format: uuid
+          description: Identificador de la cohorte / curso.
+        studentId:
+          type: string
+          format: uuid
+          description: Identificador del estudiante.
+        badgeId:
+          type: string
+          format: uuid
+          description: Identificador de la insignia otorgada. El momento del otorgamiento es el timestamp del envelope.

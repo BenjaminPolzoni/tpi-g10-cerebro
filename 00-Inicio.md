@@ -24,7 +24,10 @@ flowchart LR
 | [[sprints/sprint-3/00-indice\|sprints/]] | Planificación y análisis por sprint. Hoy: propuesta del Sprint 3 | El equipo |
 | [[acuerdos/README\|acuerdos/]] | Una nota por grupo o servicio con el que integramos: qué se acordó, contrato, pendientes | El equipo, cada vez que se acuerda algo |
 | [[decisiones/README\|decisiones/]] | Decisiones técnicas (DEC-xxx): contexto, alternativas y consecuencias | El equipo |
-| [[arquitectura/cors-topics-rutas\|arquitectura/]] | Cómo funciona el micro por dentro: CORS, topics de Kafka y rutas que manejamos hoy | El equipo, cuando cambie el código |
+| [[contratos/README\|contratos/]] | Contratos OpenAPI, AsyncAPI, esquemas de eventos Kafka y acuerdos técnicos con otros servicios | El equipo |
+| [[arquitectura/contexto-integral\|arquitectura/]] | Arquitectura y contexto del micro: contexto integral, estructura de paquetes/BD, E2E, CORS y rutas | El equipo, cuando cambie el código |
+| [[tareas/README\|tareas/]] | Especificaciones de tareas técnicas implementadas (T-xx, HU3, P-11) y su histórico | Histórico de tareas |
+| [[backlog/README\|backlog/]] | Notas de backlog técnico y funcionalidades futuras | El equipo |
 | `minutas/` | Notas de reuniones (daily, profes, otros grupos) | Quien estuvo en la reunión |
 | [[deuda-tecnica]] | Deuda técnica general (no son HU): código muerto, mocks, seguridad, docs, ramas. Vive entre sprints | El equipo |
 | [[equipo]] | Integrantes, áreas que conoce cada uno | El equipo |
@@ -44,8 +47,9 @@ flowchart LR
 1. **Si se acordó algo con otro grupo, va a `acuerdos/`** el mismo día, con link al contrato o al mensaje.
 2. **Si se decidió algo técnico que alguien podría cuestionar después, va a `decisiones/`.**
 3. **Taiga es la fuente de verdad del estado de las HU.** Para actualizar `taiga/`, correr el script. No editar esas notas.
-4. **Los contratos técnicos viven en el repo del back** (`tpi-roadmap/docs/contracts/`). Acá se enlazan y se resumen, no se copian.
+4. **Los contratos técnicos y documentación viven centralizados en este cerebro** (`contratos/`, `arquitectura/`, `tareas/`). El repo de código (`tpi-roadmap`) queda limpio de documentación estática y apunta a este cerebro como fuente canónica.
 5. Antes de preguntar en el grupo, buscar acá (`Ctrl/Cmd + Shift + F`).
    - ¿Qué es CORS, qué topics usamos, cómo son las rutas? → [[arquitectura/cors-topics-rutas]].
+   - ¿Cuál es la arquitectura y contexto completo? → [[arquitectura/contexto-integral]].
 
 Cómo instalarlo y sincronizarlo: [[COMO-USAR]].
