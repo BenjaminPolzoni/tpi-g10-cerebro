@@ -36,5 +36,5 @@ Registro de decisiones **ya tomadas** que se deducen del código, los contratos 
 > - [[decisiones/DEC-004-flags-apagados-por-defecto\|DEC-004]]: los flags apagados esconden HU ya hechas en la demo; falta decidir cuándo cambian de default.
 > - [[decisiones/DEC-001-wire-kafka-v8-snake-case\|DEC-001]]: falta confirmar que los consumidores de `roadmap.events` leen v8.
 > - [[decisiones/DEC-006-insignias-sistema-y-curso\|DEC-006]] y [[decisiones/DEC-012-curva-de-niveles-desde-par-09\|DEC-012]]: la curva PAR-09 activa es la de Backoffice (E4, 2026-10-15); actualizar el seed y lo que asuma 600/1800/4200.
-> - [[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap\|DEC-016]]: falta validar la infra de Neo4j con la plataforma. Los tipos de relación ya están definidos ([[decisiones/DEC-018-catalogo-de-relaciones-y-tipos-de-nodo\|DEC-018]]).
+> - [[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap\|DEC-016]]: Neo4j lo sumamos nosotros a la plataforma (G1); falta validar la infra. Los tipos de relación ya están definidos ([[decisiones/DEC-018-catalogo-de-relaciones-y-tipos-de-nodo\|DEC-018]]).
 > - [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad\|DEC-015]]: `fix/account-not-found-gate` ya está hecho (E5, 2026-10-15).

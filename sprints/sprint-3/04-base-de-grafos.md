@@ -97,7 +97,7 @@ Lo que hay hoy en Postgres:
 > - **Relaciones con tipo** (P4, [[decisiones/DEC-018-catalogo-de-relaciones-y-tipos-de-nodo|DEC-018]]): `REQUIRES`, `RECOMMENDS`, `BELONGS_TO`, `RELATED_TO` y `PART_OF`, cada uno con `label` visible y `visible` configurable. Solo `REQUIRES` (y las `Rule`, que admiten reglas combinadas) afectan el desbloqueo; el profesor elige si la condición es AND/OR, XP mínimo o las dos.
 > - **Tipos de nodo fijos** (P8): desafíos teóricos, prácticos, de IA y de recuperación de vida, examen, contenido teórico, inicio y fin. Sin propiedades libres: se personalizan nombre, ícono, descripción y reglas.
 > - **Subsecciones** con dependencias entre ellas (P6).
-> - **Alcance de Neo4j** (G1): solo para roadmap-service y solo los grafos (curso, sección, unidad); el estado del alumno sigue en Postgres.
+> - **Alcance de Neo4j** (G1): lo sumamos nosotros a la plataforma, lo usa solo roadmap-service y guarda solo los grafos (curso, sección, unidad); el estado del alumno sigue en Postgres.
 > - **Ventana horaria** de los nodos `EXAM`: la publica Courses (P9), no se guarda en el nodo. El gate la evalúa como `DATE_RESTRICTED`.
 
 

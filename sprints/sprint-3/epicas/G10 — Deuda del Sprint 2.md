@@ -3,12 +3,12 @@ tags: [tpi, g10, sprint-3, epica]
 estado: Propuesta
 sprint: "G10 - Sprint 3"
 historias: 16
-puntos: 50
+puntos: 63
 ---
 
 # Deuda del Sprint 2
 
-> [!info] Épica del Sprint 3 · **13 historias** · **50 pts** · Estado: **Propuesta** (todavía no está en Taiga).
+> [!info] Épica del Sprint 3 · **15 historias** · **63 pts** · Estado: **Propuesta** (todavía no está en Taiga).
 
 [G10] — Deuda del Sprint 2
 --------------------------
@@ -69,6 +69,8 @@ Dependencias / Impactos
 | [[sprints/sprint-3/historias/HU-49 Aplicar en el roadmap las restricciones de sección y actividad que publica Courses\|HU-49]] | Aplicar en el roadmap las restricciones de sección y actividad que publica Courses | Reabrir | 8 | Should | [[sprints/sprint-3/historias/HU-67 Nodo examen con ventana horaria\|HU-67]] | [[sprints/sprint-3/08-dudas\|P9]] ✅, [[sprints/sprint-3/08-dudas\|G4]] ✅ |
 | [[sprints/sprint-3/historias/HU-41 Editar un nodo del roadmap de forma individual\|HU-41]] | Editar un nodo del roadmap de forma individual | Reabrir | 3 | Must | — | — |
 | [[sprints/sprint-3/historias/HU-01 Crear nodos en el grafo (unidades, contenidos, desafíos, exámenes)\|HU-01]] | Crear nodos en el grafo (unidades, contenidos, desafíos, exámenes) | Reabrir | 3 | Should | — | [[sprints/sprint-3/08-dudas\|G8]] ✅ |
+| [[sprints/sprint-3/historias/HU-72 Cerrar el curso con el estado académico final\|HU-72]] | Cerrar el curso con el estado académico final | Nueva | 8 | Must | [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión\|HU-45]] | [[sprints/sprint-3/08-dudas\|P15]] ✅, [[sprints/sprint-3/08-dudas\|G14]] |
+| [[sprints/sprint-3/historias/HU-73 Ver mi racha de días con actividad\|HU-73]] | Ver mi racha de días con actividad | Nueva | 5 | Should | — | [[sprints/sprint-3/08-dudas\|E12]] ✅ |
 
 ---
 

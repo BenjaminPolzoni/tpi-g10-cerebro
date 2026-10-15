@@ -36,7 +36,7 @@ actualizado: 2026-10-15
 | DT-10 | 🟠 | `BankDataPort` → `InMemoryBankAdapter`: vidas, monedas y XP salen de **localStorage** | Pasarlo a HTTP | M | [[sprints/sprint-3/01-estado-actual\|01]] | |
 | DT-11 | 🟢 | Adapter in-memory y `seed.ts` dentro del árbol de producción | Moverlos a tests | S | [[sprints/sprint-3/02-pendientes\|02]] | |
 | DT-12 | 🟢 | `level-curve.ts` **duplicado** en `accounting` y en `roadmap/mocks` | Dejar uno | S | [[sprints/sprint-3/01-estado-actual\|01]] | |
-| DT-13 | 🟠 | **Racha falsa**: `streak.component` muestra un **7 fijo**, sin lógica (la épica EP-592 no tiene HU) | Sacarlo de la UI o implementar la épica (E12 en [[sprints/sprint-3/08-dudas\|08]]) | S | Consulta del equipo (2026-10-15) | |
+| DT-13 | 🟠 | **Racha falsa**: `streak.component` muestra un **7 fijo**, sin lógica (la épica EP-592 no tiene HU) | Se implementa la racha en [[sprints/sprint-3/historias/HU-73 Ver mi racha de días con actividad\|HU-73]] (E12 en [[sprints/sprint-3/08-dudas\|08]]) | S | Consulta del equipo (2026-10-15) | |
 | DT-14 | 🟠 | UI-KIT en **0.7.1** (última 0.8.0): 9 TODOs esperando el bump | Subir a 0.8.0 y cerrar los TODOs | M | [[sprints/sprint-3/05-ui-kit\|05]] | Sprint 3 (épica UI-KIT) |
 | DT-15 | 🟢 | Roadmap con **316 colores hardcodeados** y un puente de tokens `--color-*` propio | Pasar a los tokens del kit | L | [[sprints/sprint-3/05-ui-kit\|05]] | Sprint 3 (épica UI-KIT) |
 | DT-16 | 🟢 | GLB optimizados **no versionados** (219 GLB, ~60 MB) | Versionarlos o documentar el pipeline (HT-08) | S | [[sprints/sprint-3/01-estado-actual\|01]] | |

@@ -127,7 +127,7 @@ Existe `course-editor-page` con controles propios.
 
 ### Depende de
 
-- [[sprints/sprint-3/historias/HT-26 Controles y botones del roadmap con el kit|HT-26]] Controles y botones del roadmap con el kit
+- [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap|HT-26]] Adopción de la UI-KIT en el roadmap
 
 ### Dudas resueltas (2026-10-15)
 

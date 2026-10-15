@@ -32,7 +32,7 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Default: ranking por curso; la comisión (= grupo) es un filtro (P10, confirmado). Orden por XP con desempate en cascada (HU-25); las notas vienen del Motor de desafíos (P14): falta acordar con G09 cómo llegan y cómo se combinan con el XP. Corrección de los profes: hoy el ranking por grupo da error (sin reproducir); se arregla en este sprint (E1).
+*   [ ] Reglas de negocio: Default: ranking por curso; la comisión (= grupo) es un filtro (P10, confirmado). El profesor configura si el ranking ordena por XP o por notas (P14); las notas vienen del Motor de desafíos y falta acordar con G09 cómo llegan. El desempate en cascada (HU-25) se mantiene. Corrección de los profes: hoy el ranking por grupo da error (sin reproducir); se arregla en este sprint (E1).
 *   [ ] Validaciones: No aplica.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
@@ -49,6 +49,7 @@ Criterios de Aceptación (CA)
 *   [ ] **CA2**: El ranking muestra el del curso por defecto, con filtro opcional por comisión.
 *   [ ] **CA3**: El profesor ve el avance por comisión (`GET /courses/{id}/groups/{gid}/progress`).
 *   [ ] **CA4**: Test que cubre el caso que fallaba.
+*   [ ] **CA5**: El profesor elige si el ranking ordena por XP o por notas.
 
 * * *
 
@@ -119,6 +120,7 @@ Dependencias / Impactos
 - [ ] T-45.9 Filtro en el front
 - [ ] T-45.10 Avance por comisión del profesor
 - [ ] T-45.11 Tests
+- [ ] T-45.12 Criterio de orden configurable (XP o notas) y lectura de notas del Motor
 
 ---
 
@@ -137,4 +139,4 @@ Ninguna.
 - ✅ [[sprints/sprint-3/08-dudas|E1]] El error del ranking por grupo se arregla en este sprint.
 - ✅ [[sprints/sprint-3/08-dudas|E3]] Ya debería estar hecho: corroborarlo.
 - ✅ [[sprints/sprint-3/08-dudas|P10]] Sí: por curso por defecto; la comisión (= grupo) es un filtro.
-- ✅ [[sprints/sprint-3/08-dudas|P14]] Las notas vienen del Motor de desafíos (G09).
+- ✅ [[sprints/sprint-3/08-dudas|P14]] Lo configura el profesor: el ranking ordena por XP o por notas; las notas vienen del Motor de desafíos (G09).

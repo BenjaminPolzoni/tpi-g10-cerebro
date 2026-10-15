@@ -71,14 +71,14 @@ Chequeo de si cada tema está contemplado en este sprint.
 
 | Tema | ¿En el Sprint 3? | Dónde |
 |---|---|---|
-| Ranking por XP, notas o ambas | ✅ | HU-45. Las notas vienen del Motor de desafíos (P14); falta acordar con G09 cómo llegan |
+| Ranking por XP, notas o ambas | ✅ | HU-45. Lo configura el profesor: por XP o por notas (P14). Las notas vienen del Motor; falta acordar con G09 cómo llegan |
 | Insignias | ✅ | Bloque 0 (HU-20/21: criterios que no se otorgan, edición y baja en el front) |
 | Grupos dentro de la cohorte (2w1, 2w2) | ✅ | Bloque 0 (HU-44/45, flag) y HU-45 (ranking por grupo) |
 | Subsecciones / N roadmaps por curso | ✅ | HT-17, HU-57, HU-58 y HU-61 (P1 y P6 respondidas, [[decisiones/DEC-017-n-roadmaps-por-curso-configurables\|DEC-017]]) |
 | Archivado del curso | ✅ Ya hecho | Consumimos `COURSE_COHORT_ARCHIVED` |
-| Estado académico final | ✅ Sí (P15) | Falta crear la HU (era HU-27/28, diferidas en EP-61) |
+| Estado académico final | ✅ Sí (P15) | [[sprints/sprint-3/historias/HU-72 Cerrar el curso con el estado académico final\|HU-72]] (retoma HU-27/28 de EP-61) |
 | Responsabilidades de cada rol | ⚠️ Parcial | HT-22 (permisos). Falta la matriz escrita: DT-03 en [[deuda-tecnica]] |
-| Racha | ✅ Sí (E12) | EP-592 sin HU todavía: crearla. Hoy el front muestra un valor fijo (DT-13) |
+| Racha | ✅ Sí (E12) | [[sprints/sprint-3/historias/HU-73 Ver mi racha de días con actividad\|HU-73]]. Hoy el front muestra un valor fijo (DT-13) |
 | Multiple choice con boss fight | ❌ No es nuestro | Es de Desafíos teóricos (P16) |
 | Garage | ✅ Ya hecho | Courses guarda el material; Roadmap pide la URL (HU-04/42/46) |
 | Nodos con restricción de fecha / parciales | ✅ | Bloque 0 (HU-49) y HU-67. La ventana la publica Courses (P9) |
@@ -135,6 +135,6 @@ Las correcciones sin dependencias (HU-68 lista de nodos, HU-45 ranking, HU-69 Ar
 > - **Alcance.** La épica nueva es grande y Neo4j es el cambio más grande del proyecto hasta ahora. Respuesta a P12: el alcance se recorta según la [capacidad del Excel](https://docs.google.com/spreadsheets/d/1v2ofVa0sACpaW6F9Y4JUAtQQvN-g20Op/edit?usp=drive_web&ouid=112280761703985307915&rtpof=true): **445,6 h ajustadas** (532 h efectivas) para 12 personas en 14 días. Algunas historias se van a borrar.
 > - **Dependencias externas**: G01 (contrato de secciones, HU-49) y la plataforma (infra de Neo4j).
 > - ~~**Contradicción abierta.**~~ Resuelta (P1): cada roadmap es un mapa distinto del mismo curso; HT-17, HU-57, HU-61 y HT-19 se mantienen.
-> - **Trabajo nuevo sin HU**: clonar roadmaps con sus restricciones (G4), estado académico final (P15) y racha (E12).
+> - **Trabajo nuevo**: HU-71 (clonar roadmaps, G4), HU-72 (estado académico final, P15; depende de G01 por G14) y HU-73 (racha, E12).
 > - **Correcciones.** Suman 9 historias (HU-64 a HU-69, HT-21 a HT-23; el ranking va en HU-45) a una épica que ya era grande. HT-22 depende de G07 (catálogo de permisos) y HT-21 depende de casi todo: van al final.
 > - **Regresiones.** Cambiar `/courses/{id}` por `/roadmaps/{id}` toca casi todo el front y el back. Mantener compatibilidad mientras se migra.

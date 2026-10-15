@@ -76,7 +76,7 @@ flowchart LR
 > - **P1** Se mantienen los N roadmaps: cada uno es un mapa distinto del mismo curso.
 > - **P2, P3 y P5** Lo configura el profesor: XP/vidas/nivel/ranking por curso o por roadmap, secciones de Courses o propias, roadmaps para todos o por comisión ([[decisiones/DEC-017-n-roadmaps-por-curso-configurables|DEC-017]]).
 > - **P4** 5 tipos de relación: `requires`, `recommends`, `belongs_to`, `related_to` y `part_of` ([[decisiones/DEC-018-catalogo-de-relaciones-y-tipos-de-nodo|DEC-018]]).
-> - **G1** Neo4j es solo para nuestro micro y guarda solo los grafos.
+> - **G1** Neo4j lo sumamos nosotros a la plataforma; solo lo usa nuestro micro y guarda solo los grafos.
 > - Antes: Neo4j es pedido de los profes ([[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap|DEC-016]]).
 >
-> Siguen abiertas G2, G3, G7, G9 y E6, y hay trabajo nuevo sin HU (clonar roadmaps, estado académico final, racha).
+> Siguen abiertas G2, G3, G7, G9 y E6, más P17 y G14. El trabajo nuevo ya tiene historia: HU-71 (clonar roadmaps), HU-72 (estado académico final) y HU-73 (racha). Todo lo de la UI-KIT quedó en una sola HT (HT-26).

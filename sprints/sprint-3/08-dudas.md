@@ -15,10 +15,16 @@ estado: vigente
 **Prioridad:** 🔴 bloquea el diseño o el arranque · 🟠 bloquea una HU puntual · 🟢 se puede resolver sobre la marcha.
 
 > [!success] Estado al 2026-10-15
-> Se respondieron 36 de las 41 dudas (todas las de los profes). Quedan **5 abiertas** (G2, G3, G7, G9 y E6) y **6 pendientes nuevos** que salen de las respuestas (ver [[#Pendientes que salen de las respuestas]]).
+> Se respondieron 36 de las 41 dudas originales. Quedan **abiertas G2, G3, G7, G9 y E6**, más dos nuevas que salieron al armar las historias: **P17** y **G14**. Lo que salió de las respuestas está en [[#Pendientes que salen de las respuestas]].
 > Las decisiones de modelo quedaron en [[decisiones/DEC-017-n-roadmaps-por-curso-configurables|DEC-017]] y [[decisiones/DEC-018-catalogo-de-relaciones-y-tipos-de-nodo|DEC-018]].
 
 ## Abiertas
+
+### Para los profes o el PO
+
+| # | Prio | Duda | Bloquea | Origen | Estado |
+|---|---|---|---|---|---|
+| P17 | 🟠 | Clonar a otro curso un roadmap que usa secciones de Courses: ¿se vuelven a vincular con las secciones del curso destino o pasan a ser secciones propias? | HU-71 | G4 (2026-10-15) | Nueva |
 
 ### Para otros grupos
 
@@ -28,6 +34,7 @@ estado: vigente
 | G3 | 🟠 | G06 Backoffice | **Dashboard**: ¿qué datos quieren de nosotros (progreso, ranking, XP) y por dónde (REST o eventos)? | — | [[07-correcciones-profes]] | 2026-10-15: todavía no se sabe |
 | G7 | 🟢 | G07 Users | Usuarios demo (admin, profe, alumno): ¿ids y credenciales estables para usarlos en nuestro seed? | HT-21 | [[07-correcciones-profes#2. No son nuestros]] | 2026-10-15: todavía no hay |
 | G9 | 🟢 | G06 Backoffice | ¿Siguen dependiendo del header `X-User-Roles: MS` que exigía el contrato original? | — | [[acuerdos/backoffice]] | ⚠️ Confirmar: la respuesta recibida para G9 ("sí, debe ser único, incluso luego de una clonación…") habla del `node_id` y se cargó en G8 |
+| G14 | 🟠 | G01 Courses | **Cierre de curso**: ¿dónde se guarda el estado final que confirma el profesor (`finalAcademicStatus`)? ¿Courses expone un endpoint o un evento, o lo guarda Roadmap? | HU-72 | `courses.md` §3.5 y §7.6 (pregunta 8, sin respuesta) | Nueva |
 
 ### Del equipo
 
@@ -37,11 +44,11 @@ estado: vigente
 
 ### Pendientes que salen de las respuestas
 
-Trabajo nuevo o cambios de alcance que aparecieron al responder. No tienen historia todavía.
+Trabajo nuevo o cambios de alcance que aparecieron al responder. Las historias nuevas se crearon el 2026-10-15.
 
-- [ ] **Clonar un roadmap con sus restricciones** para otro grupo o curso (G4), generando `node_id` nuevos (G8). No hay HU: crearla en la épica [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps]].
-- [ ] **Estado académico final** entra en el Sprint 3 (P15). No hay HU en el sprint (era HU-27/28, diferidas en EP-61): crearla o reabrirla.
-- [ ] **Racha** es nueva para el Sprint 3 (E12). EP-592 no tiene HU: crearla.
+- [x] **Clonar un roadmap con sus restricciones** para otro grupo o curso (G4), con `node_id` nuevos (G8): [[sprints/sprint-3/historias/HU-71 Clonar un roadmap con sus restricciones|HU-71]].
+- [x] **Estado académico final** entra en el Sprint 3 (P15): [[sprints/sprint-3/historias/HU-72 Cerrar el curso con el estado académico final|HU-72]], que retoma HU-27/28 de EP-61.
+- [x] **Racha** es nueva para el Sprint 3 (E12): [[sprints/sprint-3/historias/HU-73 Ver mi racha de días con actividad|HU-73]].
 - [ ] **Tipos de nodo nuevos en el código** (P8): faltan recuperación de vida, desafío de IA, `START` y `END`. Y `START`/`END` pasan a ser obligatorios **también por unidad/sección**, no solo por roadmap: ajustar [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios|HU-64]].
 - [ ] **Configuraciones del profesor** (P2, P3, P5): dónde viven XP, vidas, nivel y ranking; si un roadmap usa secciones de Courses o propias; si el alumno ve todos los roadmaps o por comisión. Ubicarlas en HT-17, HU-57 y HU-61.
 - [ ] **Recortar el backlog con la capacidad del Excel** (P12): 445,6 h ajustadas para 12 personas. El equipo va a borrar algunas historias.
@@ -67,7 +74,7 @@ Fuente de todas: respuestas cargadas por Ludmila el 2026-10-15.
 | P11 | Archibaldo como Hernán: ¿referencia visual? | Archibaldo pasa a ser un **avatar personalizable por el profesor y el gestor del curso**, que también le pueden **cambiar el nombre** | HU-69 cambia: ya no es "aspecto de Hernán" |
 | P12 | Mínimo para la demo | **Guiarse por la capacidad del Excel** ([Capacidad Sprint 3](https://docs.google.com/spreadsheets/d/1v2ofVa0sACpaW6F9Y4JUAtQQvN-g20Op/edit?usp=drive_web&ouid=112280761703985307915&rtpof=true)). Algunas historias se van a borrar pronto | Al 2026-10-15: 12 integrantes, 14 días, **532 h efectivas / 445,6 h ajustadas**; las hojas Tareas y Reparto están vacías. Ver [[06-backlog-sprint-3]] |
 | P13 | HU-46 (Templo): ¿se rehace o se redefine? | **El Templo no existe más** | HU-46 se redefine sin Templo: queda el material dentro de los nodos |
-| P14 | Ranking por XP, por notas o por ambas | **Las notas vienen del Motor de desafíos (G09)** | HU-45: acordar con G09 cómo llegan las notas. No se especificó si el orden es solo por notas o XP + notas |
+| P14 | Ranking por XP, por notas o por ambas | **Lo configura el profesor**: el ranking ordena **por XP o por notas**. Las notas vienen del Motor de desafíos (G09) | HU-45: criterio de orden configurable; acordar con G09 cómo llegan las notas. [[decisiones/DEC-017-n-roadmaps-por-curso-configurables\|DEC-017]] |
 | P15 | Estado académico final: ¿entra en el Sprint 3? | **Sí** | No hay HU en el sprint: ver [[#Pendientes que salen de las respuestas]] |
 | P16 | "Multiple choice con boss fight" | **Es de Desafíos teóricos** (G04/G09), no nuestro | Nada para G10 más allá del nodo `EXAM` |
 
@@ -90,7 +97,7 @@ Descartadas: `is_a`, `instance_of`, `located_in`, `has_property` y `causes`.
 
 | # | Grupo | Duda | Respuesta | Impacto |
 |---|---|---|---|---|
-| G1 | Plataforma | ¿Quién suma Neo4j al compose y a los entornos? | **Neo4j es solo para nuestro micro.** No se migra toda la base: solo los grafos (curso, sección, unidad, etc.) | HT-16, HT-18. Sigue por coordinar con plataforma quién lo suma al compose (T-16.2) |
+| G1 | Plataforma | ¿Quién suma Neo4j al compose y a los entornos? | **Lo sumamos nosotros (G10)**, y solo lo usa nuestro micro. No se migra toda la base: solo los grafos (curso, sección, unidad, etc.) | HT-16 (T-16.2), HT-18 |
 | G4 | G01 Courses | Con N roadmaps, ¿cómo quedan los contratos de secciones y de restricciones? | **El profesor define las restricciones por cada roadmap.** Además puede **clonar un roadmap con sus restricciones** para otros grupos o cursos | HT-19, HU-49. Clonar es trabajo nuevo (sin HU) |
 | G5 | G01 Courses | ¿Sus eventos reales ya salen en snake_case? | **Todo en snake_case** | [[acuerdos/courses-g01]] |
 | G6 | G07 Users / G01 | Vocabulario de roles | **Ya no habrá roles: habrá permisos.** Mientras tanto, vale `PROFESSOR`/`GESTOR` | HT-22 |
@@ -98,7 +105,7 @@ Descartadas: `is_a`, `instance_of`, `located_in`, `has_property` y `causes`.
 | G10 | Accounting / Inventario | ¿Qué número de grupo tienen? ¿Inventario y Accounting son el mismo equipo? | **Sí, es el mismo equipo: Accounting.** El número de grupo no se dio | [[acuerdos/accounting]], [[acuerdos/inventario]] |
 | G11 | Plataforma | ¿Qué grupo tiene Gateway / Kafka? | **Gateway lo lleva Users (G07); Kafka lo lleva Notificaciones** | [[acuerdos/plataforma-gateway-kafka]] |
 | G12 | Plataforma | ¿Están emitidos los scopes H1 de Courses y `users.legajo.read`? | **Existe `student.enrollment.read`**, que lee la matrícula del alumno en el curso | [[acuerdos/plataforma-gateway-kafka]] |
-| G13 | Equipo UI-KIT | ¿Quién es dueño del componente de grafo? ¿El avatar `2xl` alcanza para el perfil? | **Los dueños del componente de grafo somos nosotros (G10).** El avatar **no se usa como foto de perfil** | HU-70, HU-62 |
+| G13 | Equipo UI-KIT | ¿Quién es dueño del componente de grafo? ¿El avatar `2xl` alcanza para el perfil? | **Los dueños del componente de grafo somos nosotros (G10).** El avatar **no se usa como foto de perfil** | HT-26, HU-62 |
 
 ### 3. Del equipo
 
@@ -114,7 +121,7 @@ Descartadas: `is_a`, `instance_of`, `located_in`, `has_property` y `causes`.
 | E9 | `ParUnavailableException`: ¿qué pasa con Backoffice caído? | **Se usan los valores guardados en caché** | HU-15. [[acuerdos/backoffice]] |
 | E10 | ¿Se cierran las épicas viejas en Taiga? | **Sí** | — |
 | E11 | HU sin épica (HT-04, HT-05, HT-10, HT-11) | **No llevan épica** (alcanza con el tag `g10`) | — |
-| E12 | EP-72 Avatares y EP-592 Racha sin HU | **Avatares ya está hecho; Racha es nueva para el Sprint 3** | HT-28. Falta la HU de Racha |
+| E12 | EP-72 Avatares y EP-592 Racha sin HU | **Avatares ya está hecho; Racha es nueva para el Sprint 3** | [[sprints/sprint-3/historias/HU-73 Ver mi racha de días con actividad\|HU-73]]; lo visual del kit va en HT-26 |
 
 ### Anteriores
 

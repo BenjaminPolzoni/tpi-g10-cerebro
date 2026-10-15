@@ -108,3 +108,4 @@ Nada específico. El front de Courses no nos consume por contrato. Roadmap expon
 - 2026-10-12: Gate evalúa `DATE` y emite `date_restricted` (gate v1.3).
 - 2026-10-14: nota creada desde `origin/develop` (`57ff06a`).
 - 2026-10-15: respuestas en [[sprints/sprint-3/08-dudas|08-dudas]]: eventos en snake_case (G5); el profesor elige por roadmap secciones de Courses o propias (P3) y define las restricciones de cada roadmap, que se copian al clonarlo (G4); la ventana horaria de los exámenes la publica Courses (P9).
+- 2026-10-15: dudas nuevas G14 (cierre de curso: dónde se guarda `finalAcademicStatus`) para HU-72, y P17 (clonar a otro curso un roadmap con secciones de Courses) para HU-71.

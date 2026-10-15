@@ -48,7 +48,7 @@ Criterios de Aceptación (CA)
 *   [ ] **CA1**: Acomodo automático (`elkjs`), zoom, pan y minimapa.
 *   [ ] **CA2**: Las posiciones se guardan y se recuperan.
 *   [ ] **CA3**: Crear y borrar aristas arrastrando.
-*   [ ] **CA4**: Usa el componente de grafo del kit (HU-70).
+*   [ ] **CA4**: Usa el componente de grafo del kit (HT-26).
 *   [ ] **CA5**: Se puede usar con teclado.
 
 * * *
@@ -83,7 +83,7 @@ Prototipo
 
 *   **Capturas**: Vista de grafo del editor.
 *   **URL Figma**: Pendiente.
-*   **Storybook**: `generic-node-graph` (HU-70).
+*   **Storybook**: `generic-node-graph` (HT-26).
 *   **Mock API / Swagger**: GET /api/roadmap/roadmaps/{roadmapId}/graph y PATCH de posiciones.
 
 * * *
@@ -109,9 +109,9 @@ Dependencias / Impactos
 
 *   Servicios involucrados: Ninguno.
 *   Módulos afectados: `course-map-page`, endpoint `/graph`.
-*   Otros equipos / aprobaciones: Equipo UI-KIT (HU-70).
+*   Otros equipos / aprobaciones: Equipo UI-KIT (HT-26).
 *   Impacto en datos / migraciones: Posiciones en Neo4j.
-*   Riesgos y mitigación (opcional): Depende de HU-70; mitigación: arrancar sobre la librería directa y migrar al kit.
+*   Riesgos y mitigación (opcional): Depende del componente de grafo de HT-26; mitigación: arrancar sobre la librería directa y migrar al kit.
 
 ## Tareas
 
@@ -131,7 +131,7 @@ La vista de grafo existe pero es incómoda. `moveNode` devuelve 501: las posicio
 ### Depende de
 
 - [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps|HT-17]] Modelo 1 a N de curso a roadmaps
-- [[sprints/sprint-3/historias/HU-70 Componente de grafo en la UI-KIT|HU-70]] Componente de grafo en la UI-KIT
+- [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap|HT-26]] Adopción de la UI-KIT en el roadmap (componente de grafo)
 
 ### Dudas resueltas (2026-10-15)
 

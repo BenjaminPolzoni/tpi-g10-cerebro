@@ -90,4 +90,4 @@ flowchart LR
 - **Courses (G01)**: con N roadmaps se acuerda de nuevo el contrato de secciones (HT-07, HU-36) y el de restricciones (HU-49). Respondido (G4): el profesor define las restricciones de cada roadmap y puede clonarlo con ellas.
 - **Motor de desafíos (G09)**: el evento de cierre trae `id_course` + `id_node`. Confirmado (G8): el `node_id` es único global, también en los roadmaps clonados, así que no cambia nada.
 - **Accounting / Inventario** (son el mismo equipo, G10): XP y vidas pueden ser por curso o por roadmap según el profesor (P2), así que hay que revisar si el ledger de vidas necesita el roadmap.
-- **Plataforma (compose/mesh)**: Neo4j es un servicio de infra nuevo, solo para nuestro micro (G1). Hay que coordinarlo con quien mantiene la plataforma y el estable del roadmap.
+- **Plataforma (compose/mesh)**: Neo4j es un servicio de infra nuevo que sumamos nosotros y que solo usa nuestro micro (G1). Hay que avisar a quien mantiene la plataforma y al estable del roadmap.

@@ -132,7 +132,7 @@ Dependencias / Impactos
 
 ### Depende de
 
-Nada: se puede empezar ya. El componente del kit se ordena junto con [[sprints/sprint-3/historias/HT-28 Overlays y componentes locales al kit|HT-28]].
+Nada: se puede empezar ya. El componente del kit se ordena junto con [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap|HT-26]].
 
 ### Dudas resueltas (2026-10-15)
 

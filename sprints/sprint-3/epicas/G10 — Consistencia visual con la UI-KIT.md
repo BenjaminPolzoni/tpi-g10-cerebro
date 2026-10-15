@@ -3,12 +3,12 @@ tags: [tpi, g10, sprint-3, epica]
 estado: Propuesta
 sprint: "G10 - Sprint 3"
 historias: 6
-puntos: 19
+puntos: 21
 ---
 
 # Consistencia visual con la UI-KIT
 
-> [!info] Épica del Sprint 3 · **4 historias** · **19 pts** · Estado: **Propuesta** (todavía no está en Taiga).
+> [!info] Épica del Sprint 3 · **1 historia** · **21 pts** · Estado: **Propuesta** (todavía no está en Taiga).
 
 [G10] — Consistencia visual con la UI-KIT
 -----------------------------------------
@@ -56,10 +56,7 @@ Dependencias / Impactos
 
 | HU | Título | En Taiga | Pts | Prioridad | Depende de | Dudas |
 |---|---|---|---|---|---|---|
-| [[sprints/sprint-3/historias/HT-26 Controles y botones del roadmap con el kit\|HT-26]] | Controles y botones del roadmap con el kit | Nueva | 3 | Should | — | — |
-| [[sprints/sprint-3/historias/HT-28 Overlays y componentes locales al kit\|HT-28]] | Overlays y componentes locales al kit | Nueva | 5 | Should | — | [[sprints/sprint-3/08-dudas\|E12]] ✅ |
-| [[sprints/sprint-3/historias/HT-29 Ranking con componentes del kit\|HT-29]] | Ranking con componentes del kit | Nueva | 3 | Should | — | — |
-| [[sprints/sprint-3/historias/HU-70 Componente de grafo en la UI-KIT\|HU-70]] | Componente de grafo en la UI-KIT | Nueva | 8 | Must | — | [[sprints/sprint-3/08-dudas\|G13]] ✅ |
+| [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap\|HT-26]] | Adopción de la UI-KIT en el roadmap | Nueva | 21 | Must | — | [[sprints/sprint-3/08-dudas\|G13]] ✅, [[sprints/sprint-3/08-dudas\|E12]] ✅ |
 
 ---
 

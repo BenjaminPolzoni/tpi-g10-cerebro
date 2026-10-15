@@ -95,4 +95,4 @@ contrato: "tpi-roadmap/docs/contracts/08-comunicacion-gateway.md"
 - 2026-10-09: scopes H1 de Courses declarados como `needs`.
 - 2026-10-11: se ofrece `roadmap.progress.read` (`roadmap-events-v1`).
 - 2026-10-14: nota creada desde `origin/develop` (`57ff06a`).
-- 2026-10-15: respuestas en [[sprints/sprint-3/08-dudas|08-dudas]]: Gateway = Users (G07), Kafka = Notificaciones (G11); existe `student.enrollment.read` (G12); `TraceIdFilter` se borró a propósito (E7); Neo4j es solo para roadmap-service (G1).
+- 2026-10-15: respuestas en [[sprints/sprint-3/08-dudas|08-dudas]]: Gateway = Users (G07), Kafka = Notificaciones (G11); existe `student.enrollment.read` (G12); `TraceIdFilter` se borró a propósito (E7); Neo4j lo sumamos nosotros y solo lo usa roadmap-service (G1).

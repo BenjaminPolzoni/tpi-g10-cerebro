@@ -19,12 +19,12 @@ estado: borrador
 
 | Épica | Historias | Puntos |
 |---|---|---|
-| [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2\|Deuda del Sprint 2]] | 13 | 50 |
-| [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable\|Múltiples roadmaps por curso y grafo configurable]] | 12 | 68 |
+| [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2\|Deuda del Sprint 2]] | 15 | 63 |
+| [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable\|Múltiples roadmaps por curso y grafo configurable]] | 13 | 76 |
 | [[sprints/sprint-3/epicas/G10 — Correcciones de los profes\|Correcciones de los profes]] | 9 | 45 |
-| [[sprints/sprint-3/epicas/G10 — Consistencia visual con la UI-KIT\|Consistencia visual con la UI-KIT]] | 4 | 19 |
+| [[sprints/sprint-3/epicas/G10 — Consistencia visual con la UI-KIT\|Consistencia visual con la UI-KIT]] | 1 | 21 |
 
-**Total:** 38 historias (12 a reabrir y 26 nuevas), 182 puntos.
+**Total:** 38 historias (12 a reabrir y 26 nuevas), 205 puntos. Todo lo de la UI-KIT quedó en una sola HT (HT-26) el 2026-10-15.
 
 ## Deuda del Sprint 2
 
@@ -43,6 +43,8 @@ estado: borrador
 | [[sprints/sprint-3/historias/HU-49 Aplicar en el roadmap las restricciones de sección y actividad que publica Courses\|HU-49]] | Aplicar en el roadmap las restricciones de sección y actividad que publica Courses | Reabrir | 8 | Should | [[sprints/sprint-3/historias/HU-67 Nodo examen con ventana horaria\|HU-67]] | [[sprints/sprint-3/08-dudas\|P9]] ✅, [[sprints/sprint-3/08-dudas\|G4]] ✅ |
 | [[sprints/sprint-3/historias/HU-41 Editar un nodo del roadmap de forma individual\|HU-41]] | Editar un nodo del roadmap de forma individual | Reabrir | 3 | Must | — | — |
 | [[sprints/sprint-3/historias/HU-01 Crear nodos en el grafo (unidades, contenidos, desafíos, exámenes)\|HU-01]] | Crear nodos en el grafo (unidades, contenidos, desafíos, exámenes) | Reabrir | 3 | Should | — | [[sprints/sprint-3/08-dudas\|G8]] ✅ |
+| [[sprints/sprint-3/historias/HU-72 Cerrar el curso con el estado académico final\|HU-72]] | Cerrar el curso con el estado académico final | Nueva | 8 | Must | [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión\|HU-45]] | [[sprints/sprint-3/08-dudas\|P15]] ✅, [[sprints/sprint-3/08-dudas\|G14]] |
+| [[sprints/sprint-3/historias/HU-73 Ver mi racha de días con actividad\|HU-73]] | Ver mi racha de días con actividad | Nueva | 5 | Should | — | [[sprints/sprint-3/08-dudas\|E12]] ✅ |
 
 ## Múltiples roadmaps por curso y grafo configurable
 
@@ -56,10 +58,11 @@ estado: borrador
 | [[sprints/sprint-3/historias/HU-59 Dependencias entre nodos con reglas combinadas\|HU-59]] | Dependencias entre nodos con reglas combinadas | Nueva | 5 | Should | [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps\|HT-17]], [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial\|HT-18]] | [[sprints/sprint-3/08-dudas\|P7]] ✅ |
 | [[sprints/sprint-3/historias/HU-60 Propiedades personalizadas en nodos y secciones\|HU-60]] | Propiedades personalizadas en nodos y secciones | Nueva | 3 | Could | [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial\|HT-18]] | [[sprints/sprint-3/08-dudas\|P8]] ✅ |
 | [[sprints/sprint-3/historias/HU-61 El alumno elige qué roadmap recorrer\|HU-61]] | El alumno elige qué roadmap recorrer | Nueva | 5 | Should | [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps\|HT-17]] | [[sprints/sprint-3/08-dudas\|P1]] ✅, [[sprints/sprint-3/08-dudas\|P2]] ✅, [[sprints/sprint-3/08-dudas\|P5]] ✅ |
-| [[sprints/sprint-3/historias/HU-62 Vista de grafo cómoda para el profesor\|HU-62]] | Vista de grafo cómoda para el profesor | Nueva | 8 | Must | [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps\|HT-17]], [[sprints/sprint-3/historias/HU-70 Componente de grafo en la UI-KIT\|HU-70]] | [[sprints/sprint-3/08-dudas\|G13]] ✅ |
-| [[sprints/sprint-3/historias/HU-63 Vista tipo Moodle con la UI-KIT\|HU-63]] | Vista tipo Moodle con la UI-KIT | Nueva | 8 | Should | [[sprints/sprint-3/historias/HT-26 Controles y botones del roadmap con el kit\|HT-26]] | [[sprints/sprint-3/08-dudas\|P1]] ✅ |
+| [[sprints/sprint-3/historias/HU-62 Vista de grafo cómoda para el profesor\|HU-62]] | Vista de grafo cómoda para el profesor | Nueva | 8 | Must | [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps\|HT-17]], [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap\|HT-26]] | [[sprints/sprint-3/08-dudas\|G13]] ✅ |
+| [[sprints/sprint-3/historias/HU-63 Vista tipo Moodle con la UI-KIT\|HU-63]] | Vista tipo Moodle con la UI-KIT | Nueva | 8 | Should | [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap\|HT-26]] | [[sprints/sprint-3/08-dudas\|P1]] ✅ |
 | [[sprints/sprint-3/historias/HT-19 Contratos con Courses y el Motor para el modelo 1 a N\|HT-19]] | Contratos con Courses y el Motor para el modelo 1 a N | Nueva | 5 | Must | [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps\|HT-17]] | [[sprints/sprint-3/08-dudas\|P3]] ✅, [[sprints/sprint-3/08-dudas\|G4]] ✅, [[sprints/sprint-3/08-dudas\|G8]] ✅ |
 | [[sprints/sprint-3/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo\|HT-20]] | Gate y progreso con reglas combinadas y XP mínimo | Nueva | 5 | Must | [[sprints/sprint-3/historias/HU-58 Dependencias entre secciones\|HU-58]], [[sprints/sprint-3/historias/HU-59 Dependencias entre nodos con reglas combinadas\|HU-59]] | [[sprints/sprint-3/08-dudas\|P7]] ✅ |
+| [[sprints/sprint-3/historias/HU-71 Clonar un roadmap con sus restricciones\|HU-71]] | Clonar un roadmap con sus restricciones | Nueva | 8 | Should | [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial\|HT-18]], [[sprints/sprint-3/historias/HU-57 Habilitar y gestionar varios roadmaps por curso\|HU-57]] | [[sprints/sprint-3/08-dudas\|G4]] ✅, [[sprints/sprint-3/08-dudas\|P17]] |
 
 ## Correcciones de los profes
 
@@ -79,15 +82,12 @@ estado: borrador
 
 | HU | Título | En Taiga | Pts | Prioridad | Depende de | Dudas |
 |---|---|---|---|---|---|---|
-| [[sprints/sprint-3/historias/HT-26 Controles y botones del roadmap con el kit\|HT-26]] | Controles y botones del roadmap con el kit | Nueva | 3 | Should | — | — |
-| [[sprints/sprint-3/historias/HT-28 Overlays y componentes locales al kit\|HT-28]] | Overlays y componentes locales al kit | Nueva | 5 | Should | — | [[sprints/sprint-3/08-dudas\|E12]] ✅ |
-| [[sprints/sprint-3/historias/HT-29 Ranking con componentes del kit\|HT-29]] | Ranking con componentes del kit | Nueva | 3 | Should | — | — |
-| [[sprints/sprint-3/historias/HU-70 Componente de grafo en la UI-KIT\|HU-70]] | Componente de grafo en la UI-KIT | Nueva | 8 | Must | — | [[sprints/sprint-3/08-dudas\|G13]] ✅ |
+| [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap\|HT-26]] | Adopción de la UI-KIT en el roadmap | Nueva | 21 | Must | — | [[sprints/sprint-3/08-dudas\|G13]] ✅, [[sprints/sprint-3/08-dudas\|E12]] ✅ |
 
 ## Orden sugerido
 
 1. **Semana 1:** toda la deuda del Sprint 2 y HT-16 (spike de Neo4j). Las dudas 🔴 de [[sprints/sprint-3/08-dudas|08]] (P1 a P4, G1) ya están respondidas (2026-10-15). En paralelo, lo que no depende de nada: HU-67, HU-68, HU-69, HT-22 (si G07 pasó el catálogo) y HT-23.
-2. **Semana 2:** HT-17 y HT-18. Front: HT-26 a HT-29, HU-70, HU-62 y HU-63 sobre un mock de `/roadmaps/{id}/graph`. HU-64 y HU-65 sobre el módulo `graph`.
+2. **Semana 2:** HT-17 y HT-18. Front: HT-26 (UI-KIT y componente de grafo), HU-62 y HU-63 sobre un mock de `/roadmaps/{id}/graph`. HU-64 y HU-65 sobre el módulo `graph`.
 3. **Cierre:** HU-57 a HU-61, HT-19, HT-20, HU-66 y HT-21. Demo con un curso completo de inicio a fin.
 
 Dependencias y riesgos: [[sprints/sprint-3/06-backlog-sprint-3|06-backlog]].
@@ -96,10 +96,10 @@ Dependencias y riesgos: [[sprints/sprint-3/06-backlog-sprint-3|06-backlog]].
 
 | Tema | Respuesta | Dónde |
 |---|---|---|
-| Racha | E12: es nueva para el Sprint 3. EP-592 no tiene HU; hoy el front muestra un valor fijo | Falta crear la HU. DT-13 en [[deuda-tecnica]] |
-| Estado académico final | P15: entra en el Sprint 3 (antes diferido en EP-61, HU-27/28) | Falta crear la HU |
-| Clonar un roadmap con sus restricciones | G4: el profesor clona un roadmap para otro grupo o curso, con `node_id` nuevos (G8) | Falta crear la HU |
-| Ranking por notas | P14: las notas vienen del Motor de desafíos | [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión\|HU-45]] |
+| Racha | E12: es nueva para el Sprint 3. Hoy el front muestra un valor fijo | [[sprints/sprint-3/historias/HU-73 Ver mi racha de días con actividad\|HU-73]]. DT-13 en [[deuda-tecnica]] |
+| Estado académico final | P15: entra en el Sprint 3 (antes diferido en EP-61, HU-27/28) | [[sprints/sprint-3/historias/HU-72 Cerrar el curso con el estado académico final\|HU-72]] |
+| Clonar un roadmap con sus restricciones | G4: el profesor clona un roadmap para otro grupo o curso, con `node_id` nuevos (G8) | [[sprints/sprint-3/historias/HU-71 Clonar un roadmap con sus restricciones\|HU-71]] |
+| Ranking por notas | P14: el profesor configura si el ranking ordena por XP o por notas; las notas vienen del Motor de desafíos | [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión\|HU-45]] |
 | Subsecciones | P6: dependencias entre subsecciones | [[sprints/sprint-3/historias/HU-58 Dependencias entre secciones\|HU-58]] |
 
 ## No entran en el Sprint 3
@@ -108,4 +108,4 @@ Dependencias y riesgos: [[sprints/sprint-3/06-backlog-sprint-3|06-backlog]].
 |---|---|---|
 | Multiple choice con boss fight | P16: es de Desafíos teóricos (G04/G09), no nuestro | [[sprints/sprint-3/08-dudas\|08]] |
 
-> [!tip] Para las que entran sin HU, crear su nota en `historias/` con el siguiente número libre (HU-71, HT-30…). Antes, revisar la capacidad (P12): el equipo va a borrar algunas historias.
+> [!tip] Las que entraban sin HU ya tienen nota (HU-71, HU-72 y HU-73). Para nuevas, usar el siguiente número libre (HU-74, HT-30…) y revisar la capacidad (P12).
