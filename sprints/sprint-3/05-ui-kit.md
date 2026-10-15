@@ -145,18 +145,18 @@ Rutas relativas a `src/app/features/roadmap/`.
 
 ## TODOs del front que se destraban con 0.8.0
 
-| TODO | Dónde | Qué trae 0.8.0 |
-|---|---|---|
-| ui-kit#59 | `ranking-detail.component.ts:190` | `interactive=false` + `earnedLabel`/`lockedLabel` en `badge-showcase` |
-| ui-kit#51 | `quiz-selection-card.component.html:40` | Íconos `edit`/`trash` |
-| ui-kit#53 | `profile-page.component.css:26` | `align` en `GenericTabs` |
-| ui-kit#63 | `parameter-history-list`, `ingestion-events-table` | Tooltip que describe al elemento enfocado |
-| ui-kit#83/#84 | `timeseries-chart.component.ts` | aria en button; chart con muchas columnas |
-| ui-kit#85 | `ceiling-usage.component.ts` | `valueText` en progress |
-| ui-kit#36 | `core/layout/sidebar` | `GenericSidebar` (ya existía en 0.7.1, sin adoptar) |
-| ui-kit#33 | `core/layout/nav-icon-sprite` | Íconos lucide. **Verificar** que cubran el sprite |
-| sin número | pagination centrada (`access-history-panel`, `profile-students-panel`) | Centrada por defecto |
-| sin número | `admin-audit-table` | `caption` en `GenericTable` |
+| TODO          | Dónde                                                                  | Qué trae 0.8.0                                                        |
+| ------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| ui-kit#59     | `ranking-detail.component.ts:190`                                      | `interactive=false` + `earnedLabel`/`lockedLabel` en `badge-showcase` |
+| ui-kit#51     | `quiz-selection-card.component.html:40`                                | Íconos `edit`/`trash`                                                 |
+| ui-kit#53     | `profile-page.component.css:26`                                        | `align` en `GenericTabs`                                              |
+| ui-kit#63     | `parameter-history-list`, `ingestion-events-table`                     | Tooltip que describe al elemento enfocado                             |
+| ui-kit#83/#84 | `timeseries-chart.component.ts`                                        | aria en button; chart con muchas columnas                             |
+| ui-kit#85     | `ceiling-usage.component.ts`                                           | `valueText` en progress                                               |
+| ui-kit#36     | `core/layout/sidebar`                                                  | `GenericSidebar` (ya existía en 0.7.1, sin adoptar)                   |
+| ui-kit#33     | `core/layout/nav-icon-sprite`                                          | Íconos lucide. **Verificar** que cubran el sprite                     |
+| sin número    | pagination centrada (`access-history-panel`, `profile-students-panel`) | Centrada por defecto                                                  |
+| sin número    | `admin-audit-table`                                                    | `caption` en `GenericTable`                                           |
 
 ## Plan priorizado
 

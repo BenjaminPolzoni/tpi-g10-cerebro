@@ -64,21 +64,21 @@ Los marcados son los que NO vamos a usar
 
 ## 2. Para otros grupos
 
-| # | Prio | Grupo | Duda | Bloquea | Origen | Respuesta |
-|---|---|---|---|---|---|---|
-| G1 | 🔴 | Plataforma (compose/mesh) | ¿Quién suma **Neo4j** al compose y a los entornos? ¿Hay recursos para un servicio más? | HT-16, HT-18 | [[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap\|DEC-016]] | |
-| G2 | 🟠 | G06 Backoffice | **Catálogo de permisos**: ¿qué nombres usan (ej. `roadmap.graph.edit`) y cómo llegan en el token? | HT-22 | [[07-correcciones-profes]] | |
-| G3 | 🟠 | G06 Backoffice | **Dashboard**: ¿qué datos quieren de nosotros (progreso, ranking, XP) y por dónde (REST o eventos)? | HT-24 | [[07-correcciones-profes]] | |
-| G4 | 🟠 | G01 Courses | Con N roadmaps, ¿cómo queda el contrato de secciones (HT-07, HU-36) y el de restricciones (HU-49)? Depende de P3 | HT-19 | [[03-requerimientos-profes#Impacto en otros grupos]] | |
-| G5 | 🟠 | G01 Courses | `courses.md` §7.3 sigue en camelCase y Roadmap lee solo snake_case desde #191. ¿Sus eventos reales ya salen en snake_case? | HT-12 | [[acuerdos/courses-g01]] | |
-| G6 | 🟢 | G07 Users / G01 | **Vocabulario de roles**: Users emite `GESTOR`/`PROFESSOR`; Courses documenta `MANAGER`/`PROFESSOR_READ_ONLY`. ¿Cuál vale? (Pierde peso si migramos a permisos, HT-22) | HT-22 | [[acuerdos/courses-g01]], [[acuerdos/users]] | |
-| G7 | 🟢 | G07 Users | Usuarios demo (admin, profe, alumno): ¿ids y credenciales estables para usarlos en nuestro seed? | HT-21 | [[07-correcciones-profes#2. No son nuestros]] | |
-| G8 | 🟢 | G09 Motor | El evento de cierre trae `id_course` + `id_node`. Con N roadmaps, ¿alcanza con que `node_id` sea único global? | HT-19 | [[03-requerimientos-profes#Impacto en otros grupos]] | |
-| G9 | 🟢 | G06 Backoffice | ¿Siguen dependiendo del header `X-User-Roles: MS` que exigía el contrato original? | — | [[acuerdos/backoffice]] | |
-| G10 | 🟢 | Accounting / Inventario | ¿Qué **número de grupo** tienen? ¿Inventario y Accounting son el mismo equipo? | — | [[acuerdos/accounting]], [[acuerdos/inventario]] | |
-| G11 | 🟢 | Plataforma | ¿Qué **número de grupo** tiene el equipo de Gateway / Kafka? | — | [[acuerdos/plataforma-gateway-kafka]] | |
-| G12 | 🟢 | Plataforma | ¿Los scopes H1 de Courses y `users.legajo.read` están emitidos en el registry del entorno de la demo? | — | [[acuerdos/plataforma-gateway-kafka]] | |
-| G13 | 🟢 | Equipo UI-KIT | ¿Quién es dueño del **componente de grafo**? ¿#33 cubre el `nav-icon-sprite`? ¿El avatar `2xl` (#39) alcanza para el perfil? | HU-62, HU-63 | [[05-ui-kit]] | |
+| #   | Prio | Grupo                     | Duda                                                                                                                                                                   | Bloquea      | Origen                                                               | Respuesta |
+| --- | ---- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | -------------------------------------------------------------------- | --------- |
+| G1  | 🔴   | Plataforma (compose/mesh) | ¿Quién suma **Neo4j** al compose y a los entornos? ¿Hay recursos para un servicio más?                                                                                 | HT-16, HT-18 | [[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap\|DEC-016]] |           |
+| G2  | 🟠   | G06 Backoffice            | **Catálogo de permisos**: ¿qué nombres usan (ej. `roadmap.graph.edit`) y cómo llegan en el token?                                                                      | HT-22        | [[07-correcciones-profes]]                                           |           |
+| G3  | 🟠   | G06 Backoffice            | **Dashboard**: ¿qué datos quieren de nosotros (progreso, ranking, XP) y por dónde (REST o eventos)?                                                                    | HT-24        | [[07-correcciones-profes]]                                           |           |
+| G4  | 🟠   | G01 Courses               | Con N roadmaps, ¿cómo queda el contrato de secciones (HT-07, HU-36) y el de restricciones (HU-49)? Depende de P3                                                       | HT-19        | [[03-requerimientos-profes#Impacto en otros grupos]]                 |           |
+| G5  | 🟠   | G01 Courses               | `courses.md` §7.3 sigue en camelCase y Roadmap lee solo snake_case desde #191. ¿Sus eventos reales ya salen en snake_case?                                             | HT-12        | [[acuerdos/courses-g01]]                                             |           |
+| G6  | 🟢   | G07 Users / G01           | **Vocabulario de roles**: Users emite `GESTOR`/`PROFESSOR`; Courses documenta `MANAGER`/`PROFESSOR_READ_ONLY`. ¿Cuál vale? (Pierde peso si migramos a permisos, HT-22) | HT-22        | [[acuerdos/courses-g01]], [[acuerdos/users]]                         |           |
+| G7  | 🟢   | G07 Users                 | Usuarios demo (admin, profe, alumno): ¿ids y credenciales estables para usarlos en nuestro seed?                                                                       | HT-21        | [[07-correcciones-profes#2. No son nuestros]]                        |           |
+| G8  | 🟢   | G09 Motor                 | El evento de cierre trae `id_course` + `id_node`. Con N roadmaps, ¿alcanza con que `node_id` sea único global?                                                         | HT-19        | [[03-requerimientos-profes#Impacto en otros grupos]]                 |           |
+| G9  | 🟢   | G06 Backoffice            | ¿Siguen dependiendo del header `X-User-Roles: MS` que exigía el contrato original?                                                                                     | —            | [[acuerdos/backoffice]]                                              |           |
+| G10 | 🟢   | Accounting / Inventario   | ¿Qué **número de grupo** tienen? ¿Inventario y Accounting son el mismo equipo?                                                                                         | —            | [[acuerdos/accounting]], [[acuerdos/inventario]]                     |           |
+| G11 | 🟢   | Plataforma                | ¿Qué **número de grupo** tiene el equipo de Gateway / Kafka?                                                                                                           | —            | [[acuerdos/plataforma-gateway-kafka]]                                |           |
+| G12 | 🟢   | Plataforma                | ¿Los scopes H1 de Courses y `users.legajo.read` están emitidos en el registry del entorno de la demo?                                                                  | —            | [[acuerdos/plataforma-gateway-kafka]]                                |           |
+| G13 | 🟢   | Equipo UI-KIT             | ¿Quién es dueño del **componente de grafo**? ¿#33 cubre el `nav-icon-sprite`? ¿El avatar `2xl` (#39) alcanza para el perfil?                                           | HU-62, HU-63 | [[05-ui-kit]]                                                        |           |
 
 ## 3. Del equipo (las resolvemos nosotros)
 
