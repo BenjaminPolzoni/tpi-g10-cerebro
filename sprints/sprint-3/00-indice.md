@@ -27,6 +27,7 @@ estado: borrador
 | 06  | [Backlog Sprint 3](06-backlog-sprint-3.md)              | Épicas, HU e HT propuestas, con esfuerzo, dependencias, orden y riesgos                                                                      |
 | 07  | [Correcciones de los profes](07-correcciones-profes.md) | Lo que pidieron corregir, cruzado con lo ya planteado (✅/⚠️/🆕), qué no es nuestro y preguntas nuevas                                        |
 | 08  | [Dudas del sprint](08-dudas.md)                         | Todas las dudas abiertas: para los profes, para otros grupos y del equipo, con prioridad y qué frenan                                        |
+| 09  | [Épicas e historias](09-epicas-e-historias.md) | Las 4 épicas y las 41 historias del sprint (deuda, múltiples roadmaps, correcciones, UI-KIT), cada una con sus criterios de aceptación. Carpetas `epicas/` e `historias/` |
 
 ## Mapa de la propuesta
 

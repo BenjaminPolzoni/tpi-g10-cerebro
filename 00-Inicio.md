@@ -33,6 +33,7 @@ flowchart LR
 ## Lo urgente ahora
 
 - [[sprints/sprint-3/02-pendientes|Pendientes del Sprint 2]]: historias en Done que no lo están.
+- [[sprints/sprint-3/09-epicas-e-historias|Épicas e historias del Sprint 3]]: qué vamos a hacer, con criterios de aceptación.
 - [[deuda-tecnica|Deuda técnica]]: lo que hay que limpiar aunque no sea una HU. Empezar por las 🔴.
 - [[sprints/sprint-3/08-dudas|Dudas del sprint]]: para los profes, otros grupos y el equipo. Empezar por las 🔴.
 - [[sprints/sprint-3/07-correcciones-profes|Correcciones de los profes]]: qué piden y qué ya estaba planteado.

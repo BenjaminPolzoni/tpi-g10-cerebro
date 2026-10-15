@@ -4,3 +4,5 @@
 .trash/
 .DS_Store
 __pycache__/
+.copilot/
+.obsidian/plugins/copilot/

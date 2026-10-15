@@ -11,6 +11,9 @@ estado: borrador
 >
 > Esfuerzo: S (≤1 día) · M (2-3 días) · L (≥4 días).
 
+> [!tip] Cada ítem tiene su nota con historia y criterios de aceptación
+> Ver [[sprints/sprint-3/09-epicas-e-historias|09 — Épicas e historias]]. IDs: Bloque 0 = `B01`–`B12`, épica nueva = `M01`–`M12` (ítem 1 = M01), correcciones = `C01`–`C11`, UI-KIT = `U01`–`U06`.
+
 ## Bloque 0: deuda del Sprint 2 (primera semana)
 
 Detalle en [02-pendientes.md](02-pendientes.md). La deuda técnica que no es una HU (código muerto, mocks, seguridad, docs) está en [[deuda-tecnica]]: los ítems marcados *Sprint 3* entran en este bloque.
@@ -32,18 +35,18 @@ Detalle en [02-pendientes.md](02-pendientes.md). La deuda técnica que no es una
 
 | # | Tipo | Título | Capa | Esfuerzo | Depende de |
 |---|---|---|---|---|---|
-| 1 | Spike | ~~Decidir el almacenamiento~~ **Neo4j, decidido por los profes** ([07](07-correcciones-profes.md)). Validar la infra con la plataforma y modelar los tipos de relación | Back + Infra | S | — |
-| 2 | HT | Modelo 1:N curso → roadmaps: quitar el UNIQUE, agregar `roadmap_id` en las rutas, compatibilidad con `/courses/{id}` mientras migra el front | Back | L | 1 |
-| 3 | HT | (Si se elige Neo4j) módulo `graph`, esquema, migración inicial de datos y caché de reglas para el gate | Back | L | 1 |
-| 4 | HU | Como GESTOR o PROFESOR quiero habilitar varios roadmaps en un curso y crearlos, renombrarlos y archivarlos | Back + Front | M | 2 |
-| 5 | HU | Como PROFESOR quiero definir dependencias entre secciones (AND/OR + XP mínimo + "todas las anteriores") | Back + Front | M | 2/3 |
-| 6 | HU | Como PROFESOR quiero definir dependencias entre nodos dentro de una sección, con reglas combinadas | Back + Front | M | 2/3 |
-| 7 | HU | Como PROFESOR quiero agregar propiedades personalizadas a nodos y secciones | Back + Front | M | 3 |
-| 8 | HU | Como ALUMNO quiero elegir qué roadmap del curso recorrer y ver mi progreso en cada uno | Back + Front | M | 2, pregunta 1 |
-| 9 | HU | Como PROFESOR quiero una vista de grafo cómoda: acomodo automático, aristas editables arrastrando, zoom, minimapa y posiciones guardadas | Front (+ endpoint `/graph`) | L | 2 |
-| 10 | HU | Como PROFESOR quiero la vista tipo Moodle refactorizada con la UI-KIT, sincronizada con la vista de grafo | Front | L | [05](05-ui-kit.md) |
-| 11 | HT | Adaptar los contratos con Courses (secciones y restricciones) y con el Motor al modelo 1:N | Back | M | 2, pregunta 2 |
-| 12 | HT | Gate y progreso evaluando reglas combinadas + XP mínimo (tests BDD) | Back | M | 5, 6 |
+| [[sprints/sprint-3/historias/M01 Validar la infra de Neo4j y modelar las relaciones\|M01]] | Spike | ~~Decidir el almacenamiento~~ **Neo4j, decidido por los profes** ([07](07-correcciones-profes.md)). Validar la infra con la plataforma y modelar los tipos de relación | Back + Infra | S | — |
+| [[sprints/sprint-3/historias/M02 Modelo 1 a N de curso a roadmaps\|M02]] | HT | Modelo 1:N curso → roadmaps: quitar el UNIQUE, agregar `roadmap_id` en las rutas, compatibilidad con `/courses/{id}` mientras migra el front | Back | L | 1 |
+| [[sprints/sprint-3/historias/M03 Módulo graph en Neo4j y migración inicial\|M03]] | HT | (Si se elige Neo4j) módulo `graph`, esquema, migración inicial de datos y caché de reglas para el gate | Back | L | 1 |
+| [[sprints/sprint-3/historias/M04 Habilitar y gestionar varios roadmaps por curso\|M04]] | HU | Como GESTOR o PROFESOR quiero habilitar varios roadmaps en un curso y crearlos, renombrarlos y archivarlos | Back + Front | M | 2 |
+| [[sprints/sprint-3/historias/M05 Dependencias entre secciones\|M05]] | HU | Como PROFESOR quiero definir dependencias entre secciones (AND/OR + XP mínimo + "todas las anteriores") | Back + Front | M | 2/3 |
+| [[sprints/sprint-3/historias/M06 Dependencias entre nodos con reglas combinadas\|M06]] | HU | Como PROFESOR quiero definir dependencias entre nodos dentro de una sección, con reglas combinadas | Back + Front | M | 2/3 |
+| [[sprints/sprint-3/historias/M07 Propiedades personalizadas en nodos y secciones\|M07]] | HU | Como PROFESOR quiero agregar propiedades personalizadas a nodos y secciones | Back + Front | M | 3 |
+| [[sprints/sprint-3/historias/M08 El alumno elige qué roadmap recorrer\|M08]] | HU | Como ALUMNO quiero elegir qué roadmap del curso recorrer y ver mi progreso en cada uno | Back + Front | M | 2, pregunta 1 |
+| [[sprints/sprint-3/historias/M09 Vista de grafo cómoda para el profesor\|M09]] | HU | Como PROFESOR quiero una vista de grafo cómoda: acomodo automático, aristas editables arrastrando, zoom, minimapa y posiciones guardadas | Front (+ endpoint `/graph`) | L | 2 |
+| [[sprints/sprint-3/historias/M10 Vista tipo Moodle con la UI-KIT\|M10]] | HU | Como PROFESOR quiero la vista tipo Moodle refactorizada con la UI-KIT, sincronizada con la vista de grafo | Front | L | [05](05-ui-kit.md) |
+| [[sprints/sprint-3/historias/M11 Contratos con Courses y el Motor para el modelo 1 a N\|M11]] | HT | Adaptar los contratos con Courses (secciones y restricciones) y con el Motor al modelo 1:N | Back | M | 2, pregunta 2 |
+| [[sprints/sprint-3/historias/M12 Gate y progreso con reglas combinadas y XP mínimo\|M12]] | HT | Gate y progreso evaluando reglas combinadas + XP mínimo (tests BDD) | Back | M | 5, 6 |
 
 ## Épica: correcciones de los profes (2026-10-14)
 
@@ -51,17 +54,17 @@ Detalle y estado de cada punto en [07-correcciones-profes.md](07-correcciones-pr
 
 | # | Tipo | Título | Capa | Esfuerzo | Depende de |
 |---|---|---|---|---|---|
-| C1 | HU | Como PROFESOR quiero que el roadmap tenga siempre un nodo de inicio ("Bienvenidos") y uno final ("Felicitaciones"), y que no se pueda guardar sin ellos | Back + Front | M | 3 |
-| C2 | HU | Como PROFESOR quiero relacionar nodos y unidades con tipos de relación (4 niveles), ver su nombre y elegir cuáles se muestran | Back + Front | L | 3, pregunta 2 de [07] |
-| C3 | HU | Como PROFESOR quiero arrastrar nodos y crear relaciones arrastrando en el editor, y que el curso se vea como un mapa | Front | L | 9, pregunta 1 de [07] |
-| C4 | HU | Como PROFESOR quiero habilitar un nodo examen en una ventana horaria | Back + Front | M | pregunta 3 de [07] |
-| C5 | HU | Como PROFESOR quiero ver en la lista de nodos cuáles son obligatorios y de qué dependen | Front | S | — |
-| C6 | Bug | El ranking por grupo da error: reproducir, default por curso, filtro opcional por comisión | Back + Front | M | Flag `ROADMAP_BY_GROUP_ENABLED` |
-| C7 | HU | Como ALUMNO quiero hablar con Archibaldo con Enter, que tenga el aspecto de Hernán y que un destello me guíe por el camino | Front (3D) | M | — |
-| C8 | HT | Seed de la demo con un curso entero, curado y reproducible (usa los usuarios demo de G07) | Back | M | C1, C2, C4 |
-| C9 | HT | Migrar 17 `hasRole`/`hasAnyRole` (y el chequeo manual de `RankingController`) a permisos | Back | M | Catálogo de permisos de G06 |
-| C10 | HT | Documentación global del micro Roadmap | Back / Docs | S | — |
-| C11 | HT | Acordar con G06 los datos que aportamos al dashboard (progreso, ranking, XP) | Back + acuerdo | S | — |
+| [[sprints/sprint-3/historias/C01 Nodos de inicio y fin obligatorios\|C01]] | HU | Como PROFESOR quiero que el roadmap tenga siempre un nodo de inicio ("Bienvenidos") y uno final ("Felicitaciones"), y que no se pueda guardar sin ellos | Back + Front | M | 3 |
+| [[sprints/sprint-3/historias/C02 Relaciones con tipo\|C02]] | HU | Como PROFESOR quiero relacionar nodos y unidades con tipos de relación (4 niveles), ver su nombre y elegir cuáles se muestran | Back + Front | L | 3, pregunta 2 de [07] |
+| [[sprints/sprint-3/historias/C03 Editor con arrastre y el curso como mapa\|C03]] | HU | Como PROFESOR quiero arrastrar nodos y crear relaciones arrastrando en el editor, y que el curso se vea como un mapa | Front | L | 9, pregunta 1 de [07] |
+| [[sprints/sprint-3/historias/C04 Nodo examen con ventana horaria\|C04]] | HU | Como PROFESOR quiero habilitar un nodo examen en una ventana horaria | Back + Front | M | pregunta 3 de [07] |
+| [[sprints/sprint-3/historias/C05 Obligatoriedad visible en la lista de nodos\|C05]] | HU | Como PROFESOR quiero ver en la lista de nodos cuáles son obligatorios y de qué dependen | Front | S | — |
+| [[sprints/sprint-3/historias/C06 Ranking por grupo con error\|C06]] | Bug | El ranking por grupo da error: reproducir, default por curso, filtro opcional por comisión | Back + Front | M | Flag `ROADMAP_BY_GROUP_ENABLED` |
+| [[sprints/sprint-3/historias/C07 Archibaldo - Enter, aspecto de Hernán y destello\|C07]] | HU | Como ALUMNO quiero hablar con Archibaldo con Enter, que tenga el aspecto de Hernán y que un destello me guíe por el camino | Front (3D) | M | — |
+| [[sprints/sprint-3/historias/C08 Seed de demo curado\|C08]] | HT | Seed de la demo con un curso entero, curado y reproducible (usa los usuarios demo de G07) | Back | M | C1, C2, C4 |
+| [[sprints/sprint-3/historias/C09 Permisos en vez de roles\|C09]] | HT | Migrar 17 `hasRole`/`hasAnyRole` (y el chequeo manual de `RankingController`) a permisos | Back | M | Catálogo de permisos de G06 |
+| [[sprints/sprint-3/historias/C10 Documentación global del micro\|C10]] | HT | Documentación global del micro Roadmap | Back / Docs | S | — |
+| [[sprints/sprint-3/historias/C11 Datos para el dashboard de G06\|C11]] | HT | Acordar con G06 los datos que aportamos al dashboard (progreso, ranking, XP) | Back + acuerdo | S | — |
 
 ## Temas consultados por el equipo (2026-10-15)
 
