@@ -22,7 +22,15 @@ estado: borrador
 - El back está muy avanzado y tiene tests: suites BDD en `src/test/.../bdd/` y tests por feature.
 - En el front casi todo usa HTTP real. Lo que todavía está en memoria es el banco de vidas, monedas y XP (`InMemoryBankAdapter` + localStorage).
 
-Leyenda: ✅ completo · ⚠️ parcial · ❌ falta · N/A no aplica a esa capa.
+Columnas:
+- **Taiga**: estado de la HU en Taiga.
+- **Back** / **Front**: qué tan implementada está la HU en el código de esa capa (`origin/develop`), contra sus criterios de aceptación.
+
+Leyenda de Back y Front:
+- ✅ **Completo**: cumple los criterios de aceptación en esa capa.
+- ⚠️ **Parcial**: existe, pero le falta algo o tiene un bug. Qué falta está en *Nota principal*.
+- ❌ **Falta**: la HU necesita esa capa y no hay nada hecho.
+- N/A **No aplica**: la HU no tiene trabajo en esa capa (ej. consumir un evento de Kafka no tiene pantalla).
 
 ## Tabla por HU
 
@@ -38,8 +46,8 @@ Leyenda: ✅ completo · ⚠️ parcial · ❌ falta · N/A no aplica a esa capa
 | HU-14 Recorrido con bloqueos | Done | ✅ | ✅ | `block_reason` sale del mismo evaluador que el gate. |
 | HU-15 Gate | Done | ⚠️ | ✅ | Back: no existe el motivo `origen_no_disponible` (devuelve 503). Front: usa `DEMO_STUDENT_ID` como respaldo. |
 | HU-16 Inventario real para las vidas | Done | ⚠️ | N/A | El gate no usa "último dato 24 h + stale". La rama `fix/account-not-found-gate` está sin mergear; revisar contra #193, que ya está en develop. |
-| HU-17 Baja de sección de Courses | Done | ✅ | — | Funciona solo con `SECTIONS_SYNC_ENABLED`, que está apagado por defecto. |
-| HU-18 Reordenamiento de secciones | Done | ✅ | — | Ídem (flag apagado). |
+| HU-17 Baja de sección de Courses | Done | ✅ | N/A | Funciona solo con `SECTIONS_SYNC_ENABLED`, que está apagado por defecto. |
+| HU-18 Reordenamiento de secciones | Done | ✅ | N/A | Ídem (flag apagado). |
 | HU-19 Avance de lectura | Done | ✅ | ✅ | |
 | HU-20 Catálogo de insignias | Done | ⚠️ | ⚠️ | Back: hay 3 criterios del catálogo que nunca se otorgan. Front: no se puede editar ni dar de baja. |
 | HU-21 Otorgar insignias | Done | ⚠️ | N/A | No se otorgan `SECTION_NO_LIVES_LOST`, `NODE_NO_RETRIES` ni `LIFE_RECOVERED`. El topic de salida ya es `roadmap.events` por defecto en develop (#134). |
