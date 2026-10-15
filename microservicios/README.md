@@ -78,3 +78,5 @@ flowchart TD
   Consulta [`08-frontend-app.md`](08-frontend-app.md).
 - **Si vas a implementar o modificar la lógica de Roadmap:**  
   Consulta [`10-roadmap-service.md`](10-roadmap-service.md).
+- **Si vas a levantar nuestra variante del roadmap (back + front) para probar:**  
+  Consulta [`11-levantar-variante-roadmap.md`](11-levantar-variante-roadmap.md).
