@@ -2,13 +2,13 @@
 tags: [tpi, g10, sprint-3, epica]
 estado: Propuesta
 sprint: "G10 - Sprint 3"
-historias: 6
-puntos: 21
+historias: 2
+puntos: 16
 ---
 
 # Consistencia visual con la UI-KIT
 
-> [!info] Épica del Sprint 3 · **1 historia** · **21 pts** · Estado: **Propuesta** (todavía no está en Taiga).
+> [!info] Épica del Sprint 3 · **2 historias** · **16 pts** · Estado: **Propuesta** (todavía no está en Taiga).
 
 [G10] — Consistencia visual con la UI-KIT
 -----------------------------------------
@@ -35,7 +35,7 @@ Criterios de Aceptación a nivel Épico
 
 *   [ ] El front está en la UI-KIT 0.8.0 sin TODOs pendientes del kit.
 *   [ ] Las pantallas de G10 no tienen `<button>`, `<input>` ni `<select>` crudos ni colores hardcodeados (salvo `engine/` y arte).
-*   [ ] El componente de grafo existe en el kit y lo usa la vista de grafo (HU-62).
+*   [ ] El componente de grafo existe en el kit (HT-34) y lo usa la vista de grafo (HU-62).
 *   [ ] KPIs iniciales alcanzan: Colores hardcodeados en el roadmap: de 316 a 0 fuera de `engine/` y arte. TODOs del kit: de 9 a 0.
 *   [ ] Sin regresiones críticas en: Tests visuales sin diferencias no esperadas en pantallas de otros grupos.
 *   [ ] Observabilidad y alertas configuradas: Regla de `stylelint` en el CI contra colores literales.
@@ -56,7 +56,8 @@ Dependencias / Impactos
 
 | HU | Título | En Taiga | Pts | Prioridad | Depende de | Dudas |
 |---|---|---|---|---|---|---|
-| [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap\|HT-26]] | Adopción de la UI-KIT en el roadmap | Nueva | 21 | Must ⭐ 1 | — | [[sprints/sprint-3/08-dudas\|G13]] ✅, [[sprints/sprint-3/08-dudas\|E12]] ✅ |
+| [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap\|HT-26]] | Adopción de la UI-KIT en el roadmap | Nueva | 8 | Must ⭐ 1 | — | [[sprints/sprint-3/08-dudas\|G13]] ✅, [[sprints/sprint-3/08-dudas\|E12]] ✅ |
+| [[sprints/sprint-3/historias/HT-34 Componente de grafo en la UI-KIT\|HT-34]] | Componente de grafo en la UI-KIT | Nueva | 8 | Must ⭐ 1 | — | [[sprints/sprint-3/08-dudas\|G13]] ✅ |
 
 ---
 

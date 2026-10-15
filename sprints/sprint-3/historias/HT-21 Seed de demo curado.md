@@ -32,7 +32,7 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Fuera del perfil productivo. Usa los usuarios demo de G07. Incluye START/END, tipos de relación, examen con ventana horaria y varias secciones.
+*   [ ] Reglas de negocio: Fuera del perfil productivo. Usa los usuarios demo de G07; si no existen a tiempo, usa usuarios de prueba configurables y se reemplazan cuando G07 los publique. Incluye START/END, tipos de relación, examen con ventana horaria y varias secciones.
 *   [ ] Validaciones: Correrlo dos veces no duplica datos.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
@@ -47,7 +47,7 @@ Criterios de Aceptación (CA)
 
 *   [ ] **CA1**: Script o migración `demo` separada del perfil productivo.
 *   [ ] **CA2**: Un curso completo con todo lo del sprint.
-*   [ ] **CA3**: Usa los usuarios demo de G07.
+*   [ ] **CA3**: Usa los usuarios demo de G07 o, si todavía no existen, usuarios de prueba configurables.
 *   [ ] **CA4**: Es idempotente.
 
 * * *
@@ -110,7 +110,7 @@ Dependencias / Impactos
 *   Módulos afectados: Scripts de seed.
 *   Otros equipos / aprobaciones: G07, G01.
 *   Impacto en datos / migraciones: Datos de demo.
-*   Riesgos y mitigación (opcional): Depende de HU-64, HU-65 y HU-67.
+*   Riesgos y mitigación (opcional): Depende de casi todo el sprint (ver «Depende de»); mitigación: el guion (T-21.1) se escribe la semana 1 y el seed se arma a medida que cierran las HU. Si G07 no tiene usuarios demo, se usan usuarios de prueba configurables.
 
 ## Tareas
 
@@ -118,7 +118,7 @@ Dependencias / Impactos
     - **Qué:** definir el curso que se muestra: secciones, nodos de cada tipo, inicio y fin, relaciones con tipo, reglas combinadas, un examen con ventana de Courses, insignias, dos roadmaps y dos comisiones, y en qué punto está cada alumno demo.
     - **Listo cuando:** el guion está en el Obsidian y el equipo lo aprobó.
 - [ ] **T-21.2 Cargar el curso del guion con un seed repetible** · Back
-    - **Qué:** seed del curso del guion en el perfil `demo` (nunca en el productivo), con los usuarios demo de G07 y la curva PAR-09 de Backoffice (E4). Correrlo dos veces no duplica nada. Los ids de los usuarios demo todavía no existen (G7).
+    - **Qué:** seed del curso del guion en el perfil `demo` (nunca en el productivo), con los usuarios demo de G07 y la curva PAR-09 de Backoffice (E4). Correrlo dos veces no duplica nada. Los ids de los usuarios demo todavía no existen (G7): mientras tanto, ids de prueba configurables por variable de entorno.
     - **Listo cuando:** base vacía → seed → la demo se puede recorrer completa.
 - [ ] **T-21.3 Recorrer la demo de punta a punta en el entorno de demo** · Equipo
     - **Qué:** levantar el entorno de demo, correr el seed y seguir el guion con un alumno y un profesor.
@@ -134,9 +134,15 @@ Los datos de ejemplo se sacaron del micro (HT-09).
 
 ### Depende de
 
+- [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial|HT-18]] Módulo graph en Neo4j y migración inicial
+- [[sprints/sprint-3/historias/HU-57 Habilitar y gestionar varios roadmaps por curso|HU-57]] Habilitar y gestionar varios roadmaps por curso (dos roadmaps)
+- [[sprints/sprint-3/historias/HU-58 Dependencias entre secciones|HU-58]] Dependencias entre secciones
+- [[sprints/sprint-3/historias/HU-59 Dependencias entre nodos con reglas combinadas|HU-59]] Dependencias entre nodos con reglas combinadas
 - [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios|HU-64]] Nodos de inicio y fin obligatorios
 - [[sprints/sprint-3/historias/HU-65 Relaciones con tipo|HU-65]] Relaciones con tipo
-- [[sprints/sprint-3/historias/HU-67 Nodo examen con ventana horaria|HU-67]] Nodo examen con ventana horaria
+- [[sprints/sprint-3/historias/HU-49 Aplicar en el roadmap las restricciones de sección y actividad que publica Courses|HU-49]] Restricciones de Courses y examen con ventana horaria
+- [[sprints/sprint-3/historias/HT-30 Insignias pendientes de HU-20 y HU-21|HT-30]] Insignias pendientes de HU-20 y HU-21
+- G07 Users: usuarios demo (G7). Si no llegan, usuarios de prueba configurables.
 
 ### Dudas resueltas (2026-10-15)
 

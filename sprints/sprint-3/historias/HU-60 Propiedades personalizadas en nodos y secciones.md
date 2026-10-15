@@ -1,7 +1,7 @@
 ---
 tags: [tpi, g10, sprint-3, hu]
 codigo: HU-60
-estado: Propuesta
+estado: Eliminada
 responsable: ""
 epica: "Múltiples roadmaps por curso y grafo configurable"
 sprint: "G10 - Sprint 3"
@@ -11,6 +11,8 @@ en_taiga: false
 ---
 
 # HU-60: Propiedades personalizadas en nodos y secciones
+
+> [!danger] Eliminada el 2026-10-15 (revisión de HU): no aportaba comportamiento nuevo después de P8. Nombre, ícono y descripción ya se editan (HU-41/HU-43), las reglas están en HU-58/HU-59 y el rechazo de campos libres pasó a HT-18 (CA7, T-18.7). **Borrar esta nota.**
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Nueva: todavía no está cargada en Taiga.

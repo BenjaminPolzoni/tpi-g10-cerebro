@@ -33,4 +33,4 @@ Las **dependencias** pueden definirse también entre **subsecciones**.
 
 ## Referencias
 - Respuestas del 2026-10-15 en [[sprints/sprint-3/08-dudas|08-dudas]] (P4, P6, P7, P8) y el catálogo de relaciones de esa nota.
-- [[sprints/sprint-3/04-base-de-grafos|04-base-de-grafos]], [[sprints/sprint-3/historias/HU-65 Relaciones con tipo|HU-65]], [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios|HU-64]], [[sprints/sprint-3/historias/HU-60 Propiedades personalizadas en nodos y secciones|HU-60]].
+- [[sprints/sprint-3/04-base-de-grafos|04-base-de-grafos]], [[sprints/sprint-3/historias/HU-65 Relaciones con tipo|HU-65]], [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios|HU-64]], HU-60 (eliminada el 2026-10-15; su validación pasó a [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial|HT-18]]).

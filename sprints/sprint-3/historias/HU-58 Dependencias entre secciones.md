@@ -32,7 +32,7 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Ya existen las dependencias AND/OR entre secciones (V25). Vuelve el XP mínimo por sección (se borró en V8, DEC-011). «Todas las anteriores» es un atajo de la UI que guarda un AND. Las dependencias también se definen entre subsecciones (P6).
+*   [ ] Reglas de negocio: Ya existen las dependencias AND/OR entre secciones (V25). La regla AND/OR (árbol `Rule`) se define en HU-59; esta HU la aplica a secciones y es la dueña del XP mínimo. Vuelve el XP mínimo por sección (se borró en V8, DEC-011). «Todas las anteriores» es un atajo de la UI que guarda un AND. Las dependencias también se definen entre subsecciones (P6).
 *   [ ] Validaciones: No se puede guardar un ciclo. XP mínimo ≥ 0.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
@@ -45,7 +45,7 @@ Notas / Observaciones
 Criterios de Aceptación (CA)
 ----------------------------
 
-*   [ ] **CA1**: Elegir las secciones requeridas y el modo AND/OR.
+*   [ ] **CA1**: Elegir las secciones requeridas con la regla AND/OR de HU-59.
 *   [ ] **CA2**: XP mínimo opcional por sección.
 *   [ ] **CA3**: Atajo «todas las anteriores».
 *   [ ] **CA4**: Guardar un ciclo devuelve error.
@@ -142,6 +142,7 @@ Ya existen las dependencias AND/OR entre secciones (V25). El XP mínimo por secc
 
 - [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps|HT-17]] Modelo 1 a N de curso a roadmaps
 - [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial|HT-18]] Módulo graph en Neo4j y migración inicial
+- [[sprints/sprint-3/historias/HU-59 Dependencias entre nodos con reglas combinadas|HU-59]] Dependencias entre nodos con reglas combinadas (la regla AND/OR)
 
 ### Dudas resueltas (2026-10-15)
 

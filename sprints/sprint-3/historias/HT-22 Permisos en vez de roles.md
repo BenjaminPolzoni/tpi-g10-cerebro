@@ -139,7 +139,8 @@ Las reglas usan `hasRole`/`hasAnyRole` en constantes por controller (`CAN_EDIT`,
 
 ### Depende de
 
-Nada: se puede empezar ya.
+- G07 Users: catálogo de permisos (G2). Bloquea T-22.2 a T-22.4.
+- T-22.1 (la matriz) se puede empezar ya.
 
 ### Dudas resueltas (2026-10-15)
 

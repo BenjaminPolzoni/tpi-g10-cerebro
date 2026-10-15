@@ -36,9 +36,9 @@ Notas / Observaciones
 *   [ ] Validaciones: No aplica.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): El destello no baja los FPS del mundo.
-*   [ ] Seguridad (roles, permisos, datos sensibles): No aplica.
+*   [ ] Seguridad (roles, permisos, datos sensibles): Personalizar a Archibaldo: ADMIN, GESTOR o PROFESSOR dueño del curso.
 *   [ ] Accesibilidad (WCAG/teclado/lectores): El diálogo toma el foco y se cierra con Escape (`generic-modal`).
-*   [ ] Otros: Archibaldo es un avatar que personalizan el profesor y el gestor del curso, que también le pueden cambiar el nombre (P11). Ya no se copia a Hernán.
+*   [ ] Otros: Archibaldo es un avatar que personalizan el profesor y el gestor del curso, que también le pueden cambiar el nombre (P11).
 
 * * *
 
@@ -107,9 +107,9 @@ Dependencias / Impactos
 -----------------------
 
 *   Servicios involucrados: Ninguno.
-*   Módulos afectados: `world-3d.service`, `archipelago-3d.service`, `npc-dialogue`.
+*   Módulos afectados: `world-3d.service`, `archipelago-3d.service`, `npc-dialogue`, configuración del curso en el back y pantalla del profesor y el gestor.
 *   Otros equipos / aprobaciones: Ninguno.
-*   Impacto en datos / migraciones: Sin migración.
+*   Impacto en datos / migraciones: Configuración de Archibaldo (avatar y nombre) por curso: columna o tabla nueva en el back (T-69.2).
 *   Riesgos y mitigación (opcional): Ninguno abierto (P11 respondida).
 
 ## Tareas

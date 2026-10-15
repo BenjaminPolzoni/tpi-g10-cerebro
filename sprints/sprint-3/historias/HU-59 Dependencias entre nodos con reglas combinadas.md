@@ -6,7 +6,7 @@ responsable: ""
 epica: "Múltiples roadmaps por curso y grafo configurable"
 sprint: "G10 - Sprint 3"
 puntos: 5
-prioridad: Should
+prioridad: Must
 en_taiga: false
 ---
 
@@ -32,7 +32,7 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Las reglas se guardan como árbol (`Rule` con AND/OR anidables). La lectura obligatoria sigue contando como requisito.
+*   [ ] Reglas de negocio: Las reglas se guardan como árbol (`Rule` con AND/OR anidables). Esta HU define la regla una sola vez: HU-58 la reusa para secciones (y agrega el XP mínimo) y HU-65 la asocia a `REQUIRES`. Pasa a Must el 2026-10-15 porque HT-20 (Must) depende de ella. La lectura obligatoria sigue contando como requisito.
 *   [ ] Validaciones: No se puede guardar un ciclo; una regla vacía no se guarda.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
@@ -93,13 +93,13 @@ Estimación / Prioridad
 **Formato rápido**
 
 *   **Puntos (Fibonacci)**: 5
-*   **Prioridad (MoSCoW / Numérica)**: Should
+*   **Prioridad (MoSCoW / Numérica)**: Must
 
 **Formato tabla (opcional)**
 
 | Puntos (Fibonacci) | Prioridad (MoSCoW / Numérica) |
 | --- | --- |
-| 5 | Should |
+| 5 | Must |
 
 * * *
 

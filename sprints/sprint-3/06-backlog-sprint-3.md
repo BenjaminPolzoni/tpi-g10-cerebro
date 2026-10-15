@@ -12,6 +12,7 @@ estado: borrador
 > Esfuerzo: S (≤1 día) · M (2-3 días) · L (≥4 días).
 
 > [!tip] Cada ítem tiene su nota con historia y criterios de aceptación
+> Revisión del 2026-10-15 aplicada: HU-60 eliminada, HU-66 y HU-67 fusionadas, HU-63 creada, HT-30 dividida en HT-30 a HT-33 y HT-26 en HT-26 y HT-34 (máximo 8 pts por historia).
 > Ver [[sprints/sprint-3/09-epicas-e-historias|09 — Épicas e historias]], con el formato de la wiki de Taiga. Las del Bloque 0 son HU existentes que se reabren (HU-01, 15, 16, 20, 21, 41, 43, 44, 45, 46, 48, 49) más HT-14.
 
 ## Bloque 0: deuda del Sprint 2 (primera semana)
@@ -39,12 +40,11 @@ Detalle en [02-pendientes.md](02-pendientes.md). La deuda técnica que no es una
 | [[sprints/sprint-3/historias/HT-17 Modelo 1 a N de curso a roadmaps\|HT-17]] | HT | Modelo 1:N curso → roadmaps: quitar el UNIQUE, agregar `roadmap_id` en las rutas, compatibilidad con `/courses/{id}` mientras migra el front | Back | L | HT-16 |
 | [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial\|HT-18]] | HT | (Si se elige Neo4j) módulo `graph`, esquema, migración inicial de datos y caché de reglas para el gate | Back | L | HT-16 |
 | [[sprints/sprint-3/historias/HU-57 Habilitar y gestionar varios roadmaps por curso\|HU-57]] | HU | Como GESTOR o PROFESOR quiero habilitar varios roadmaps en un curso y crearlos, renombrarlos y archivarlos | Back + Front | M | HT-17 |
-| [[sprints/sprint-3/historias/HU-58 Dependencias entre secciones\|HU-58]] | HU | Como PROFESOR quiero definir dependencias entre secciones (AND/OR + XP mínimo + "todas las anteriores") | Back + Front | M | HT-17/HT-18 |
+| [[sprints/sprint-3/historias/HU-58 Dependencias entre secciones\|HU-58]] | HU | Como PROFESOR quiero definir dependencias entre secciones (AND/OR + XP mínimo + "todas las anteriores") | Back + Front | M | HT-17/HT-18, HU-59 |
 | [[sprints/sprint-3/historias/HU-59 Dependencias entre nodos con reglas combinadas\|HU-59]] | HU | Como PROFESOR quiero definir dependencias entre nodos dentro de una sección, con reglas combinadas | Back + Front | M | HT-17/HT-18 |
-| [[sprints/sprint-3/historias/HU-60 Propiedades personalizadas en nodos y secciones\|HU-60]] | HU | Como PROFESOR quiero agregar propiedades personalizadas a nodos y secciones | Back + Front | M | HT-18 |
-| [[sprints/sprint-3/historias/HU-61 Roadmaps por grupo del curso y restricciones de visualización\|HU-61]] | HU | Como PROFESOR quiero asignar un roadmap a cada grupo o división del curso y que se respeten las restricciones de visualización del curso | Back + Front | M | HT-17, pregunta 1 |
-| [[sprints/sprint-3/historias/HU-62 Vista de grafo cómoda para el profesor\|HU-62]] | HU | Como PROFESOR quiero una vista de grafo cómoda: acomodo automático, aristas editables arrastrando, zoom, minimapa y posiciones guardadas | Front (+ endpoint `/graph`) | L | HT-17 |
-| [[sprints/sprint-3/historias/HU-63 Vista tipo Moodle con la UI-KIT\|HU-63]] | HU | Como PROFESOR quiero la vista tipo Moodle refactorizada con la UI-KIT, sincronizada con la vista de grafo | Front | L | [05](05-ui-kit.md) |
+| [[sprints/sprint-3/historias/HU-61 Roadmaps por grupo del curso y restricciones de visualización\|HU-61]] | HU | Como PROFESOR quiero asignar un roadmap a cada grupo o división del curso (lo oculto y bloqueado va en HU-49) | Back + Front | M | HT-17, pregunta 1 |
+| [[sprints/sprint-3/historias/HU-62 Vista de grafo cómoda para el profesor\|HU-62]] | HU | Como PROFESOR quiero una vista de grafo cómoda: acomodo automático, aristas editables arrastrando, zoom, minimapa y posiciones guardadas | Front (+ endpoint `/graph`) | L | HT-17, HT-34 |
+| [[sprints/sprint-3/historias/HU-63 Vista tipo Moodle con la UI-KIT\|HU-63]] | HU | Como PROFESOR quiero la vista tipo Moodle refactorizada con la UI-KIT, sincronizada con la vista de grafo, y ver cada roadmap como mapa (ex HU-66) | Front | L | HT-26, HU-62 |
 | [[sprints/sprint-3/historias/HT-19 Contratos con Courses y el Motor para el modelo 1 a N\|HT-19]] | HT | Adaptar los contratos con Courses (secciones y restricciones) y con el Motor al modelo 1:N | Back | M | HT-17, pregunta 2 |
 | [[sprints/sprint-3/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo\|HT-20]] | HT | Gate y progreso evaluando reglas combinadas + XP mínimo (tests BDD) | Back | M | HU-58, HU-59 |
 
@@ -56,12 +56,10 @@ Detalle y estado de cada punto en [07-correcciones-profes.md](07-correcciones-pr
 |---|---|---|---|---|---|
 | [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios\|HU-64]] | HU | Como PROFESOR quiero que el roadmap tenga siempre un nodo de inicio ("Bienvenidos") y uno final ("Felicitaciones"), y que no se pueda guardar sin ellos | Back + Front | M | HT-18 |
 | [[sprints/sprint-3/historias/HU-65 Relaciones con tipo\|HU-65]] | HU | Como PROFESOR quiero relacionar nodos y unidades con tipos de relación (5 tipos, P4), ver su nombre y elegir cuáles se muestran | Back + Front | L | HT-18 |
-| [[sprints/sprint-3/historias/HU-66 Editor con arrastre y el curso como mapa\|HU-66]] | HU | Como PROFESOR quiero arrastrar nodos y crear relaciones arrastrando en el editor, y que el curso se vea como un mapa | Front | L | HU-62 |
-| [[sprints/sprint-3/historias/HU-67 Nodo examen con ventana horaria\|HU-67]] | HU | Como PROFESOR quiero habilitar un nodo examen en la ventana horaria que publica Courses | Back + Front | M | HU-49 (P9) |
 | [[sprints/sprint-3/historias/HU-68 Obligatoriedad visible en la lista de nodos\|HU-68]] | HU | Como PROFESOR quiero ver en la lista de nodos de cada sección cuáles son obligatorios y de qué dependen. Casi hecho: falta la obligatoriedad en desafíos y exámenes | Front | XS | — |
-| [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión\|HU-45]] | Bug | El ranking por grupo da error: reproducir, default por curso, filtro opcional por comisión | Back + Front | M | Flag `ROADMAP_BY_GROUP_ENABLED` |
-| [[sprints/sprint-3/historias/HU-69 Archibaldo - Enter, aspecto de Hernán y destello\|HU-69]] | HU | Como ALUMNO quiero hablar con Archibaldo con Enter y que un destello me guíe por el camino; el profesor y el gestor personalizan su avatar y su nombre (P11) | Front (3D) | M | — |
-| [[sprints/sprint-3/historias/HT-21 Seed de demo curado\|HT-21]] | HT | Seed de la demo con un curso entero, curado y reproducible (usa los usuarios demo de G07) | Back | M | HU-64, HU-65, HU-67 |
+| [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión\|HU-45]] | Bug | El ranking por grupo da error: reproducir, default por curso, filtro opcional por comisión | Back + Front | M | Flag `ROADMAP_BY_GROUP_ENABLED`; G09 para ordenar por notas |
+| [[sprints/sprint-3/historias/HU-69 Archibaldo - Enter, avatar personalizable y destello\|HU-69]] | HU | Como ALUMNO quiero hablar con Archibaldo con Enter y que un destello me guíe por el camino; el profesor y el gestor personalizan su avatar y su nombre (P11) | Front (3D) + Back | M | — |
+| [[sprints/sprint-3/historias/HT-21 Seed de demo curado\|HT-21]] | HT | Seed de la demo con un curso entero, curado y reproducible (usa los usuarios demo de G07) | Back | M | HT-18, HU-57, HU-58, HU-59, HU-64, HU-65, HU-49, HT-30; G07 |
 | [[sprints/sprint-3/historias/HT-22 Permisos en vez de roles\|HT-22]] | HT | Migrar 17 `hasRole`/`hasAnyRole` (y el chequeo manual de `RankingController`) a permisos | Back | M | Catálogo de permisos de G07 Users (G2, sin definir) |
 | [[sprints/sprint-3/historias/HT-23 Documentación global del micro\|HT-23]] | HT | Documentación global del micro Roadmap | Back / Docs | S | — |
 
@@ -81,7 +79,7 @@ Chequeo de si cada tema está contemplado en este sprint.
 | Racha | ✅ Sí (E12) | [[sprints/sprint-3/historias/HU-73 Ver mi racha de días con actividad\|HU-73]]. Hoy el front muestra un valor fijo (DT-13) |
 | Multiple choice con boss fight | ❌ No es nuestro | Es de Desafíos teóricos (P16) |
 | Garage | ✅ Ya hecho | Courses guarda el material; Roadmap pide la URL (HU-04/42/46) |
-| Nodos con restricción de fecha / parciales | ✅ | Bloque 0 (HU-49) y HU-67. La ventana la publica Courses (P9) |
+| Nodos con restricción de fecha / parciales | ✅ | HU-49, que desde el 2026-10-15 incluye el examen con ventana horaria (ex HU-67). La ventana la publica Courses (P9) |
 
 ## Épica transversal: consistencia visual con la UI-KIT
 
@@ -100,7 +98,6 @@ flowchart LR
   HT3 --> H5
   HT2 --> H6[HU-59 Deps entre nodos]
   HT3 --> H6
-  HT3 --> H7[HU-60 Props personalizadas]
   HT2 --> H8[HU-61 Roadmaps por grupo]
   HT2 --> H9[HU-62 Vista de grafo]
   HT2 --> HT11[HT-19 Contratos G01/Motor]
@@ -108,17 +105,19 @@ flowchart LR
   H6 --> HT12
   HT3 --> HU-64[HU-64 Inicio y fin]
   HT3 --> HU-65[HU-65 Tipos de relación]
-  H9 --> HU-66[HU-66 Editor como mapa]
+  H9 --> H10[HU-63 Vista Moodle y mapa]
+  HT34[HT-34 Componente de grafo] --> H9
+  H6 --> H5
   HU-64 --> HT-21[HT-21 Seed demo]
   HU-65 --> HT-21
-  HU-67[HU-67 Examen por hora] --> HT-21
-  G06[Catálogo de permisos G06] --> HT-22[HT-22 Permisos]
+  HU-49[HU-49 Restricciones y examen] --> HT-21
+  G07[Catálogo de permisos G07] --> HT-22[HT-22 Permisos]
 ```
 
-Las correcciones sin dependencias (HU-68 lista de nodos, HU-45 ranking, HU-69 Archibaldo, HT-23 documentación) se pueden tomar desde la semana 1 por quien no esté en el modelo.
+Las correcciones sin dependencias (HU-68 lista de nodos, HU-45 ranking salvo el orden por notas, HU-69 Archibaldo, HT-23 documentación) se pueden tomar desde la semana 1 por quien no esté en el modelo.
 
 1. **Semana 1**:
-   - **Prioridad 1:** HT-30 (criterios pendientes de HU cerradas, empezando por las insignias de HU-20 y HU-21) y HT-26 (UI-KIT y componente de grafo).
+   - **Prioridad 1:** HT-30 a HT-33 (criterios pendientes de HU cerradas, empezando por las insignias de HT-30), HT-26 (UI-KIT) y HT-34 (componente de grafo).
    - Resto del Bloque 0 (deuda).
    - HT-16 (spike de Neo4j).
    - ~~Respuestas de los profes: las 🔴 de [[08-dudas]] (P1 a P4)~~ Respondidas el 2026-10-15: HT-17 y HT-18 pueden arrancar.
@@ -127,8 +126,8 @@ Las correcciones sin dependencias (HU-68 lista de nodos, HU-45 ranking, HU-69 Ar
 2. **Semana 2**:
    - HT-17 y HT-18 (modelo y almacenamiento).
    - En paralelo, el front arranca la vista Moodle (HU-63) y la vista de grafo (HU-62) sobre un mock del endpoint `/graph`.
-   - HU-64 y HU-65 sobre el módulo `graph`; HU-67 (P9 respondida: la ventana la publica Courses); HT-22 si G07 ya pasó el catálogo.
-3. **Cierre**: HU-57 a HU-61 y HT-20 integradas, HU-66 y HT-21 (seed curado), y demo con un curso completo de inicio a fin, con 2 roadmaps (P1 confirmado).
+   - HU-64 y HU-65 sobre el módulo `graph`; HU-49 (restricciones y examen con ventana, P9); HT-22 si G07 ya pasó el catálogo.
+3. **Cierre**: HU-57 a HU-59, HU-61 y HT-20 integradas, HU-63 y HT-21 (seed curado), y demo con un curso completo de inicio a fin, con 2 roadmaps (P1 confirmado).
 
 ## Riesgos del sprint
 
@@ -137,5 +136,5 @@ Las correcciones sin dependencias (HU-68 lista de nodos, HU-45 ranking, HU-69 Ar
 > - **Dependencias externas**: G01 (contrato de secciones, HU-49) y la plataforma (infra de Neo4j).
 > - ~~**Contradicción abierta.**~~ Resuelta (P1): cada roadmap es un mapa distinto del mismo curso; HT-17, HU-57, HU-61 y HT-19 se mantienen.
 > - **Trabajo nuevo**: HU-71 (clonar roadmaps, G4), HU-72 (estado académico final, P15; depende de G01 por G14) y HU-73 (racha, E12).
-> - **Correcciones.** Suman 9 historias (HU-64 a HU-69, HT-21 a HT-23; el ranking va en HU-45) a una épica que ya era grande. HT-22 depende de G07 (catálogo de permisos) y HT-21 depende de casi todo: van al final.
+> - **Correcciones.** Suman 7 historias (HU-64, HU-65, HU-68, HU-69 y HT-21 a HT-23; el ranking va en HU-45 y el examen en HU-49) a una épica que ya era grande. HT-22 depende de G07 (catálogo de permisos) y HT-21 depende de casi todo: van al final.
 > - **Regresiones.** Cambiar `/courses/{id}` por `/roadmaps/{id}` toca casi todo el front y el back. Mantener compatibilidad mientras se migra.

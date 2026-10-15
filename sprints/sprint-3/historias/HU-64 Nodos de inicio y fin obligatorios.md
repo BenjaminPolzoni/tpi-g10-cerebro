@@ -36,7 +36,7 @@ Notas / Observaciones
 *   [ ] Validaciones: Al guardar, si falta alguno o hay nodos sueltos, error con la lista de problemas.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
-*   [ ] Seguridad (roles, permisos, datos sensibles): No aplica.
+*   [ ] Seguridad (roles, permisos, datos sensibles): ADMIN, GESTOR o PROFESSOR dueño del curso.
 *   [ ] Accesibilidad (WCAG/teclado/lectores): El visual de inicio y fin tiene texto, no solo un ícono.
 *   [ ] Otros: Llegar a `END` puede otorgar una insignia de fin de curso (HU-21).
 

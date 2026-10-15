@@ -6,14 +6,14 @@ responsable: ""
 epica: "Deuda del Sprint 2"
 sprint: "G10 - Sprint 3"
 puntos: 8
-prioridad: Must
+prioridad: Should
 en_taiga: false
 ---
 
 # HU-72: Cerrar el curso con el estado académico final
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga. Retoma el cierre académico que [[taiga/epicas/EP-61 Ranking y cierre académico|EP-61]] había diferido (HU-27/28). Entra en el Sprint 3 por P15 (2026-10-15).
+> Nueva: todavía no está cargada en Taiga. Retoma el cierre académico que [[taiga/epicas/EP-61 Ranking y cierre académico|EP-61]] había diferido (HU-27/28). Entra en el Sprint 3 por P15 (2026-10-15). Pasa a Should el 2026-10-15 mientras G14 (dónde se guarda el estado final) no tenga respuesta.
 
 [G10] — HU-72 — Cerrar el curso con el estado académico final
 -------------------------------------------------------------
@@ -94,13 +94,13 @@ Estimación / Prioridad
 **Formato rápido**
 
 *   **Puntos (Fibonacci)**: 8
-*   **Prioridad (MoSCoW / Numérica)**: Must
+*   **Prioridad (MoSCoW / Numérica)**: Should
 
 **Formato tabla (opcional)**
 
 | Puntos (Fibonacci) | Prioridad (MoSCoW / Numérica) |
 | --- | --- |
-| 8 | Must |
+| 8 | Should |
 
 * * *
 

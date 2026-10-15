@@ -1,7 +1,7 @@
 ---
 tags: [tpi, g10, sprint-3, hu]
 codigo: HU-66
-estado: Propuesta
+estado: Eliminada
 responsable: ""
 epica: "Correcciones de los profes"
 sprint: "G10 - Sprint 3"
@@ -11,6 +11,8 @@ en_taiga: false
 ---
 
 # HU-66: Editor con arrastre y el curso como mapa
+
+> [!danger] Fusionada el 2026-10-15 (revisión de HU): arrastrar nodos y crear relaciones arrastrando ya estaban en HU-62 (CA2 y CA3); ver cada roadmap como mapa pasó a HU-63 (CA3). **Borrar esta nota.**
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Correcciones de los profes|Correcciones de los profes]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Nueva: todavía no está cargada en Taiga.

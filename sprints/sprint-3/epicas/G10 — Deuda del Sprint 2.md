@@ -2,13 +2,13 @@
 tags: [tpi, g10, sprint-3, epica]
 estado: Propuesta
 sprint: "G10 - Sprint 3"
-historias: 16
-puntos: 63
+historias: 9
+puntos: 61
 ---
 
 # Deuda del Sprint 2
 
-> [!info] Épica del Sprint 3 · **6 historias** · **63 pts** · Estado: **Propuesta** (todavía no está en Taiga).
+> [!info] Épica del Sprint 3 · **9 historias** · **61 pts** · Estado: **Propuesta** (todavía no está en Taiga).
 
 [G10] — Deuda del Sprint 2
 --------------------------
@@ -57,11 +57,14 @@ Dependencias / Impactos
 | HU | Título | En Taiga | Pts | Prioridad | Depende de | Dudas |
 |---|---|---|---|---|---|---|
 | [[sprints/sprint-3/historias/HT-14 Sacar los IDs de mock del front\|HT-14]] | Sacar los IDs de mock del front | Nueva | 3 | Must | — | — |
-| [[sprints/sprint-3/historias/HT-30 Criterios pendientes de las HU del Sprint 1 y 2\|HT-30]] | Criterios pendientes de las HU del Sprint 1 y 2 | Nueva | 34 | Must ⭐ 1 | — | [[sprints/sprint-3/08-dudas\|G8]] ✅, [[sprints/sprint-3/08-dudas\|E2]] ✅, [[sprints/sprint-3/08-dudas\|E8]] ✅, [[sprints/sprint-3/08-dudas\|E9]] ✅, [[sprints/sprint-3/08-dudas\|P5]] ✅, [[sprints/sprint-3/08-dudas\|P13]] ✅ |
-| [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión\|HU-45]] | Ranking de la cohorte y avance por comisión | Reabrir | 5 | Must | — | [[sprints/sprint-3/08-dudas\|E1]] ✅, [[sprints/sprint-3/08-dudas\|P10]] ✅, [[sprints/sprint-3/08-dudas\|P14]] ✅ |
-| [[sprints/sprint-3/historias/HU-49 Aplicar en el roadmap las restricciones de sección y actividad que publica Courses\|HU-49]] | Aplicar en el roadmap las restricciones de sección y actividad que publica Courses | Reabrir | 8 | Should | [[sprints/sprint-3/historias/HU-67 Nodo examen con ventana horaria\|HU-67]] | [[sprints/sprint-3/08-dudas\|P9]] ✅, [[sprints/sprint-3/08-dudas\|G4]] ✅ |
-| [[sprints/sprint-3/historias/HU-72 Cerrar el curso con el estado académico final\|HU-72]] | Cerrar el curso con el estado académico final | Nueva | 8 | Must | [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión\|HU-45]] | [[sprints/sprint-3/08-dudas\|P15]] ✅, [[sprints/sprint-3/08-dudas\|G14]] |
-| [[sprints/sprint-3/historias/HU-73 Ver mi racha de días con actividad\|HU-73]] | Ver mi racha de días con actividad | Nueva | 5 | Should | — | [[sprints/sprint-3/08-dudas\|E12]] ✅ |
+| [[sprints/sprint-3/historias/HT-30 Insignias pendientes de HU-20 y HU-21\|HT-30]] | Insignias pendientes de HU-20 y HU-21 | Nueva | 8 | Must ⭐ 1 | — | [[sprints/sprint-3/08-dudas\|E2]] ✅, [[sprints/sprint-3/08-dudas\|E8]] ✅ |
+| [[sprints/sprint-3/historias/HT-31 Gate y vidas pendientes de HU-15, HU-16 y HU-48\|HT-31]] | Gate y vidas pendientes de HU-15, HU-16 y HU-48 | Nueva | 8 | Must ⭐ 1 | G09 (acta del gate) | [[sprints/sprint-3/08-dudas\|E9]] ✅ |
+| [[sprints/sprint-3/historias/HT-32 Nodos y editor pendientes de HU-01, HU-41 y HU-43\|HT-32]] | Nodos y editor pendientes de HU-01, HU-41 y HU-43 | Nueva | 8 | Must ⭐ 1 | — | [[sprints/sprint-3/08-dudas\|G8]] ✅ |
+| [[sprints/sprint-3/historias/HT-33 Comisión y material pendientes de HU-44 y HU-46\|HT-33]] | Comisión y material pendientes de HU-44 y HU-46 | Nueva | 8 | Must ⭐ 1 | — | [[sprints/sprint-3/08-dudas\|P5]] ✅, [[sprints/sprint-3/08-dudas\|P13]] ✅ |
+| [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión\|HU-45]] | Ranking de la cohorte y avance por comisión | Reabrir | 5 | Must | Flag `ROADMAP_BY_GROUP_ENABLED`; G09 (solo CA5) | [[sprints/sprint-3/08-dudas\|E1]] ✅, [[sprints/sprint-3/08-dudas\|P10]] ✅, [[sprints/sprint-3/08-dudas\|P14]] ✅ |
+| [[sprints/sprint-3/historias/HU-49 Aplicar en el roadmap las restricciones de sección y actividad que publica Courses\|HU-49]] | Aplicar en el roadmap las restricciones de sección y actividad que publica Courses | Reabrir | 8 | Must | G01 (evento y ventanas de examen) | [[sprints/sprint-3/08-dudas\|P9]] ✅, [[sprints/sprint-3/08-dudas\|G4]] ✅, [[sprints/sprint-3/08-dudas\|E3]] ✅ |
+| [[sprints/sprint-3/historias/HU-72 Cerrar el curso con el estado académico final\|HU-72]] | Cerrar el curso con el estado académico final | Nueva | 8 | Should | [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión\|HU-45]] | [[sprints/sprint-3/08-dudas\|P15]] ✅, [[sprints/sprint-3/08-dudas\|G14]] |
+| [[sprints/sprint-3/historias/HU-73 Ver mi racha de días con actividad\|HU-73]] | Ver mi racha de días con actividad | Nueva | 5 | Should | [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap\|HT-26]] | [[sprints/sprint-3/08-dudas\|E12]] ✅ |
 
 ---
 

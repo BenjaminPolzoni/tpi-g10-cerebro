@@ -36,7 +36,7 @@ Notas / Observaciones
 *   [ ] Validaciones: Nombre obligatorio y único dentro del curso.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
-*   [ ] Seguridad (roles, permisos, datos sensibles): GESTOR, ADMIN o PROFESSOR dueño del curso.
+*   [ ] Seguridad (roles, permisos, datos sensibles): ADMIN, GESTOR o PROFESSOR dueño del curso.
 *   [ ] Accesibilidad (WCAG/teclado/lectores): Pantalla con componentes del kit.
 *   [ ] Otros: No aplica.
 

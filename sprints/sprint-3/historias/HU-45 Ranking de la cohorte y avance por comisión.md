@@ -109,9 +109,9 @@ Dependencias / Impactos
 
 *   Servicios involucrados: Courses (comisiones).
 *   Módulos afectados: `RankingController`, `RankingService`, `GroupProgressController`, `ranking-panel`.
-*   Otros equipos / aprobaciones: Ninguno.
+*   Otros equipos / aprobaciones: G09 (cómo llegan las notas del Motor; solo para CA5).
 *   Impacto en datos / migraciones: Sin migración.
-*   Riesgos y mitigación (opcional): No aplica.
+*   Riesgos y mitigación (opcional): Que G09 no defina a tiempo cómo llegan las notas; mitigación: pedirlo la semana 1 (T-45.12).
 
 ## Tareas
 
@@ -131,6 +131,9 @@ Dependencias / Impactos
 - [ ] **T-45.11 Elegir si el ranking ordena por XP o por notas** · Back + Front
     - **Qué:** ajuste del profesor por roadmap (DEC-017). Con «notas», el orden usa la nota que manda el Motor (P14; acordar con G09 cómo llega). El desempate en cascada sigue igual.
     - **Listo cuando:** cambiar el ajuste cambia el orden y hay tests de los dos modos.
+- [ ] **T-45.12 Acordar con el Motor (G09) cómo llegan las notas** · Coordinación
+    - **Qué:** definir con G09 si la nota llega en el evento de cierre del intento o por consulta, y con qué escala. T-45.11 no arranca hasta tenerlo.
+    - **Listo cuando:** el acuerdo está en `acuerdos/motor-desafios-g09`.
 
 ---
 
@@ -142,7 +145,8 @@ El back tiene ranking solo por curso y `GET /groups/{gid}/progress` aparte. El f
 
 ### Depende de
 
-Ninguna.
+- Flag `ROADMAP_BY_GROUP_ENABLED` encendido en el entorno (para reproducir el error y para el filtro por comisión).
+- G09 Motor: cómo llegan las notas (solo CA5 / T-45.11; bloqueante para esa tarea).
 
 ### Dudas resueltas (2026-10-15)
 

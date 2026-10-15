@@ -79,4 +79,4 @@ flowchart LR
 > - **G1** Neo4j lo sumamos nosotros a la plataforma; solo lo usa nuestro micro y guarda solo los grafos.
 > - Antes: Neo4j es pedido de los profes ([[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap|DEC-016]]).
 >
-> Siguen abiertas G2, G3, G7, G9 y E6, más P17 y G14. El trabajo nuevo ya tiene historia: HU-71 (clonar roadmaps), HU-72 (estado académico final) y HU-73 (racha). Todo lo de la UI-KIT quedó en una sola HT (HT-26).
+> Siguen abiertas G2, G3, G7, G9 y E6, más P17 y G14. El trabajo nuevo ya tiene historia: HU-71 (clonar roadmaps), HU-72 (estado académico final) y HU-73 (racha). La UI-KIT quedó en HT-26 (pantallas) y HT-34 (componente de grafo), y los criterios pendientes en HT-30 a HT-33 (máximo 8 pts por historia, 2026-10-15).

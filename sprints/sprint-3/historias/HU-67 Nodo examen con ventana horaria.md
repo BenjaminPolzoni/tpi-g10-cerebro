@@ -1,7 +1,7 @@
 ---
 tags: [tpi, g10, sprint-3, hu]
 codigo: HU-67
-estado: Propuesta
+estado: Eliminada
 responsable: ""
 epica: "Correcciones de los profes"
 sprint: "G10 - Sprint 3"
@@ -11,6 +11,8 @@ en_taiga: false
 ---
 
 # HU-67: Nodo examen con ventana horaria
+
+> [!danger] Fusionada en HU-49 el 2026-10-15 (revisión de HU): la ventana horaria la publica Courses (P9) y el gate ya evalúa `DATE_RESTRICTED`; lo que faltaba quedó en HU-49 (CA5, T-49.13). **Borrar esta nota.**
 
 > [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Correcciones de los profes|Correcciones de los profes]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
 > Nueva: todavía no está cargada en Taiga.

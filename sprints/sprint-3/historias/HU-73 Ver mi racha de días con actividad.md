@@ -38,7 +38,7 @@ Notas / Observaciones
 *   [ ] Performance (tiempos, volumen, límites): La racha responde en menos de 200 ms y llega en la misma carga que el progreso, sin una llamada extra.
 *   [ ] Seguridad (roles, permisos, datos sensibles): El alumno ve solo su racha.
 *   [ ] Accesibilidad (WCAG/teclado/lectores): El número de la racha se lee como texto, no solo como ícono.
-*   [ ] Otros: Detrás de un flag porque no tiene RF en el PRD (P-07). Reemplaza el 7 fijo del front (DT-13). La racha puede ser criterio de insignia (por ejemplo, 50 días).
+*   [ ] Otros: Detrás de un flag porque no tiene RF en el PRD (P-07). Reemplaza el 7 fijo del front (DT-13). La racha es criterio de una insignia (CA6).
 
 * * *
 
@@ -50,6 +50,7 @@ Criterios de Aceptación (CA)
 *   [ ] **CA3**: Dos actividades el mismo día cuentan como un día.
 *   [ ] **CA4**: El HUD muestra la racha real con `generic-streak-flame` y desaparece el valor fijo.
 *   [ ] **CA5**: Registrar la actividad no cambia ningún desbloqueo ni ninguna lectura.
+*   [ ] **CA6**: Al llegar a la racha configurada para la insignia (por ejemplo, 50 días), el alumno recibe la insignia de racha una sola vez.
 
 * * *
 
@@ -139,7 +140,7 @@ Dependencias / Impactos
 
 ### Depende de
 
-Nada: se puede empezar ya. El componente del kit se ordena junto con [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap|HT-26]].
+- [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap|HT-26]] Adopción de la UI-KIT en el roadmap (`generic-streak-flame`, para T-73.3). El back (T-73.1, T-73.2 y T-73.4) se puede empezar ya.
 
 ### Dudas resueltas (2026-10-15)
 

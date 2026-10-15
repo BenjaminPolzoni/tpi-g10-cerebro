@@ -32,7 +32,7 @@ Descripción (Como / Quiero / Para)
 Notas / Observaciones
 ---------------------
 
-*   [ ] Reglas de negocio: Catálogo de 5 tipos (P4, DEC-018): `REQUIRES`, `RECOMMENDS`, `BELONGS_TO`, `RELATED_TO` y `PART_OF`. Solo `REQUIRES` afecta el desbloqueo, con la condición que elija el profesor: AND/OR, XP mínimo o las dos. `RECOMMENDS` se muestra pero no bloquea. Cada tipo tiene nombre visible y visibilidad configurable.
+*   [ ] Reglas de negocio: Catálogo de 5 tipos (P4, DEC-018): `REQUIRES`, `RECOMMENDS`, `BELONGS_TO`, `RELATED_TO` y `PART_OF`. Solo `REQUIRES` afecta el desbloqueo; su condición es la regla AND/OR de HU-59 y el XP mínimo de HU-58, que acá no se redefinen. `RECOMMENDS` se muestra pero no bloquea. Cada tipo tiene nombre visible y visibilidad configurable.
 *   [ ] Validaciones: No aplica.
 *   [ ] Datos obligatorios: No aplica.
 *   [ ] Performance (tiempos, volumen, límites): No aplica.
@@ -49,7 +49,7 @@ Criterios de Aceptación (CA)
 *   [ ] **CA2**: La arista muestra el nombre del tipo.
 *   [ ] **CA3**: El profesor oculta un tipo y deja de verse en el mapa.
 *   [ ] **CA4**: Solo `REQUIRES` cambia el desbloqueo.
-*   [ ] **CA5**: En `REQUIRES` el profesor elige AND/OR, XP mínimo o las dos.
+*   [ ] **CA5**: Una relación `REQUIRES` alimenta las reglas de HU-58 y HU-59 (no define una condición propia).
 
 * * *
 
@@ -116,14 +116,14 @@ Dependencias / Impactos
 ## Tareas
 
 - [ ] **T-65.1 Catálogo de los 5 tipos de relación** · Back
-    - **Qué:** `requires`, `recommends`, `belongs_to`, `related_to` y `part_of` (DEC-018), cada uno con `label` y `visible`. Solo `requires` afecta el desbloqueo, con la condición AND/OR, XP mínimo o las dos.
+    - **Qué:** `requires`, `recommends`, `belongs_to`, `related_to` y `part_of` (DEC-018), cada uno con `label` y `visible`. Solo `requires` afecta el desbloqueo, usando las reglas de HU-58 y HU-59.
     - **Dónde:** módulo `graph`.
     - **Listo cuando:** hay tests de que solo `requires` cambia el desbloqueo.
 - [ ] **T-65.2 Ver el nombre de cada relación y ocultar tipos** · Front
     - **Qué:** la arista muestra el nombre del tipo y se distingue por texto y forma de línea (no solo color); el profesor puede ocultar un tipo en el mapa.
     - **Listo cuando:** ocultar un tipo lo saca del mapa del alumno.
 - [ ] **T-65.3 Elegir el tipo al crear una relación** · Front
-    - **Qué:** al crear una relación (desde el editor o arrastrando, HU-62/HU-66) se elige el tipo; en `requires` se elige además la condición.
+    - **Qué:** al crear una relación (desde el editor o arrastrando, HU-62) se elige el tipo; en `requires` la condición se arma con el editor de reglas de HU-58/HU-59.
     - **Listo cuando:** el profesor crea una relación de cada tipo.
 
 ---
@@ -137,6 +137,7 @@ Solo existe la relación "prerrequisito" con modo AND/OR.
 ### Depende de
 
 - [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial|HT-18]] Módulo graph en Neo4j y migración inicial
+- [[sprints/sprint-3/historias/HU-59 Dependencias entre nodos con reglas combinadas|HU-59]] Dependencias entre nodos con reglas combinadas (para la condición de `REQUIRES`)
 
 ### Dudas resueltas (2026-10-15)
 

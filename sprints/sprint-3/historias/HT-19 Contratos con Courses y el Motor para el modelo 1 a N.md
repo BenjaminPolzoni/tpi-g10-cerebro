@@ -70,9 +70,9 @@ BDD (mínimo 3 escenarios)
 
 **Escenario 3**  
 
-*   **Dado**: el acuerdo con G01
-*   **Cuando**: se registra
-*   **Entonces**: queda en `acuerdos/courses-g01`
+*   **Dado**: un curso con un roadmap que usa secciones de Courses y otro con secciones propias
+*   **Cuando**: Courses cambia una sección
+*   **Entonces**: el sync solo modifica el primer roadmap
 
 * * *
 

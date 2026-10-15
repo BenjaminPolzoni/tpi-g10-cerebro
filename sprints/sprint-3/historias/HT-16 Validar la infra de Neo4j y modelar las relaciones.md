@@ -71,9 +71,9 @@ BDD (mínimo 3 escenarios)
 
 **Escenario 3**  
 
-*   **Dado**: el modelo escrito
-*   **Cuando**: el equipo lo revisa
-*   **Entonces**: cubre roadmaps, secciones, nodos, reglas, START/END y tipos de relación
+*   **Dado**: la prueba de concepto con el modelo de `04-base-de-grafos`
+*   **Cuando**: se guarda una sección con dos nodos unidos por `REQUIRES` y se vuelve a leer
+*   **Entonces**: se recuperan los nodos, la relación y su tipo con los mismos `id`
 
 * * *
 
