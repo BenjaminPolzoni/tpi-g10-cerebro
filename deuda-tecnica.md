@@ -17,9 +17,9 @@ actualizado: 2026-10-15
 
 | # | Imp. | Deuda | Qué hacer | Esf. | Origen | Sprint |
 |---|---|---|---|---|---|---|
-| DT-01 | 🔴 | El **Gate** (`/eligibility`) acepta a cualquier servicio con token técnico: `SecurityConfig` exige `ServiceIdentity` pero no valida el scope `roadmap.gate.read` | Validar el scope como ya se hace con `roadmap.progress.read` en `/courses/*/progress` | S | [[arquitectura/cors-topics-rutas]] | Proponer con C9 |
-| DT-02 | 🟠 | Autorización con **roles fijos** (`hasRole`/`hasAnyRole` en constantes por controller) y dos chequeos a mano (`RankingController`, `requireOwner`) | Migrar a permisos con el catálogo de G06 | M | [[sprints/sprint-3/07-correcciones-profes\|07]] | Sprint 3 (C9) |
-| DT-03 | 🟠 | **No hay una matriz escrita de qué puede hacer cada rol** (ADMIN, GESTOR, PROFESSOR, STUDENT). Hoy hay que leer los controllers | Escribir la tabla rol → acciones. Es la base para C9 | S | Consulta del equipo (2026-10-15) | Sprint 3 (con C9/C10) |
+| DT-01 | 🔴 | El **Gate** (`/eligibility`) acepta a cualquier servicio con token técnico: `SecurityConfig` exige `ServiceIdentity` pero no valida el scope `roadmap.gate.read` | Validar el scope como ya se hace con `roadmap.progress.read` en `/courses/*/progress` | S | [[arquitectura/cors-topics-rutas]] | Proponer con HT-22 |
+| DT-02 | 🟠 | Autorización con **roles fijos** (`hasRole`/`hasAnyRole` en constantes por controller) y dos chequeos a mano (`RankingController`, `requireOwner`) | Migrar a permisos con el catálogo de G06 | M | [[sprints/sprint-3/07-correcciones-profes\|07]] | Sprint 3 (HT-22) |
+| DT-03 | 🟠 | **No hay una matriz escrita de qué puede hacer cada rol** (ADMIN, GESTOR, PROFESSOR, STUDENT). Hoy hay que leer los controllers | Escribir la tabla rol → acciones. Es la base para HT-22 | S | Consulta del equipo (2026-10-15) | Sprint 3 (con HT-22/C10) |
 | DT-04 | 🟢 | `ProgressService.startChallenge` es **código muerto** | Borrarlo al hacer el pre-chequeo de HU-48 | S | [[sprints/sprint-3/02-pendientes\|02]] | Sprint 3 (Bloque 0) |
 | DT-05 | 🟢 | Listener **legado** de `challenges.results` (payloads v1/v2) y su flag `KAFKA_TOPIC_CHALLENGE_RESULT_ENABLED`, apagado | Borrar listener, payloads y flag | S | `application.properties` | |
 | DT-06 | 🟢 | Quedan `@DefaultValue("stub")` en properties de clientes | Borrarlos (HT-09 ya prohíbe stubs en el arranque) | S | [[sprints/sprint-3/02-pendientes\|02]] | |

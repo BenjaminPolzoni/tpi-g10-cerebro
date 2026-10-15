@@ -10,7 +10,7 @@ estado: vigente
 > Todas las dudas abiertas del sprint en un solo lugar, con a quién preguntarle y qué trabajo frenan.
 > - Cuando se responda una, completar **Respuesta** con la fecha y la fuente (minuta, mensaje), y pasarla a [[#Respondidas]].
 > - Si la respuesta cambia una decisión técnica, registrarla también en [[decisiones/README|decisiones/]].
-> - Los números entre paréntesis (1–12, C1–C11, Bloque 0) son ítems de [[06-backlog-sprint-3]].
+> - Los códigos (HU-NN, HT-NN) son las historias de [[sprints/sprint-3/09-epicas-e-historias|09]]. "Bloque 0" = épica Deuda del Sprint 2.
 
 **Prioridad:** 🔴 bloquea el diseño o el arranque · 🟠 bloquea una HU puntual · 🟢 se puede resolver sobre la marcha.
 
@@ -18,58 +18,58 @@ estado: vigente
 
 | # | Prio | Duda | Bloquea | Origen | Respuesta |
 |---|---|---|---|---|---|
-| P1 | 🔴 | **"El mapa es el curso" contra "un curso puede tener 1 o más roadmaps".** ¿Cada roadmap es un mapa distinto del mismo curso, o el curso es un único mapa y se descarta lo de N roadmaps? | 2, 4, 8, 11, C3 | [[07-correcciones-profes]] | |
-| P2 | 🔴 | **XP, vidas, nivel y ranking**: ¿son por curso (compartidos entre roadmaps) o por roadmap? | 2, 8 | [[03-requerimientos-profes]] (1) | |
-| P3 | 🔴 | **Secciones de Courses con N roadmaps**: ¿cada roadmap elige qué secciones de Courses usa, o las secciones pasan a ser propias del roadmap? | 2, 11 | [[03-requerimientos-profes]] (2) | |
-| P4 | 🔴 | **¿Cuáles son los 4 tipos de relación?** El documento nombra "Related to", "Belongs to" y "una necesita de otra". ¿Cuál es el cuarto? ¿Alguno además de "necesita" afecta el desbloqueo? | 3, C2 | [[07-correcciones-profes]] | |
-| P5 | 🟠 | ¿El alumno ve **todos** los roadmaps del curso, o se asignan **por comisión** (HU-44)? | 8 | [[03-requerimientos-profes]] (3) | |
-| P6 | 🟠 | Secciones **"anidadas"**: ¿dependencias entre secciones o **subsecciones** (una sección adentro de otra)? | 3, 5 | [[03-requerimientos-profes]] (4) | |
-| P7 | 🟠 | ¿Hacen falta **reglas combinadas** (`A y (B o C)`), o alcanza con AND/OR + XP mínimo por sección y por nodo? | 6, 12 | [[03-requerimientos-profes]] (5) | |
-| P8 | 🟠 | ¿Qué significa **"completamente personalizable"**? ¿Campos libres definidos por el profesor, tipos de nodo nuevos, o solo nombre, ícono, descripción y reglas? | 7 | [[03-requerimientos-profes]] (6) | |
-| P9 | 🟠 | **Examen por hora**: ¿la ventana horaria la define el profesor en el roadmap, o la publica Courses (HU-49)? | C4, HU-49 | [[07-correcciones-profes]] | |
-| P10 | 🟢 | **Ranking**: ¿confirmamos que el default es por curso y que la comisión es solo un filtro? | C6 | [[07-correcciones-profes]] | |
-| P11 | 🟢 | **Archibaldo como Hernán**: ¿hay referencia visual o un modelo que debamos usar? | C7 | [[07-correcciones-profes]] | |
+| P1 | 🔴 | **"El mapa es el curso" contra "un curso puede tener 1 o más roadmaps".** ¿Cada roadmap es un mapa distinto del mismo curso, o el curso es un único mapa y se descarta lo de N roadmaps? | HT-17, HU-57, HU-61, HT-19, HU-66 | [[07-correcciones-profes]] | |
+| P2 | 🔴 | **XP, vidas, nivel y ranking**: ¿son por curso (compartidos entre roadmaps) o por roadmap? | HT-17, HU-61 | [[03-requerimientos-profes]] (1) | |
+| P3 | 🔴 | **Secciones de Courses con N roadmaps**: ¿cada roadmap elige qué secciones de Courses usa, o las secciones pasan a ser propias del roadmap? | HT-17, HT-19 | [[03-requerimientos-profes]] (2) | |
+| P4 | 🔴 | **¿Cuáles son los 4 tipos de relación?** El documento nombra "Related to", "Belongs to" y "una necesita de otra". ¿Cuál es el cuarto? ¿Alguno además de "necesita" afecta el desbloqueo? | HT-18, HU-65 | [[07-correcciones-profes]] | |
+| P5 | 🟠 | ¿El alumno ve **todos** los roadmaps del curso, o se asignan **por comisión** (HU-44)? | HU-61 | [[03-requerimientos-profes]] (3) | |
+| P6 | 🟠 | Secciones **"anidadas"**: ¿dependencias entre secciones o **subsecciones** (una sección adentro de otra)? | HT-18, HU-58 | [[03-requerimientos-profes]] (4) | |
+| P7 | 🟠 | ¿Hacen falta **reglas combinadas** (`A y (B o C)`), o alcanza con AND/OR + XP mínimo por sección y por nodo? | HU-59, HT-20 | [[03-requerimientos-profes]] (5) | |
+| P8 | 🟠 | ¿Qué significa **"completamente personalizable"**? ¿Campos libres definidos por el profesor, tipos de nodo nuevos, o solo nombre, ícono, descripción y reglas? | HU-60 | [[03-requerimientos-profes]] (6) | |
+| P9 | 🟠 | **Examen por hora**: ¿la ventana horaria la define el profesor en el roadmap, o la publica Courses (HU-49)? | HU-67, HU-49 | [[07-correcciones-profes]] | |
+| P10 | 🟢 | **Ranking**: ¿confirmamos que el default es por curso y que la comisión es solo un filtro? | HU-45 | [[07-correcciones-profes]] | |
+| P11 | 🟢 | **Archibaldo como Hernán**: ¿hay referencia visual o un modelo que debamos usar? | HU-69 | [[07-correcciones-profes]] | |
 | P12 | 🟢 | **Mínimo para la demo**: la épica nueva más las correcciones no entran enteras en un sprint. ¿Qué es imprescindible para la demo? | Todo el sprint | [[06-backlog-sprint-3#Riesgos del sprint]] | |
-| P13 | 🟢 | **HU-46 (Templo)**: se borró del front. ¿Se rehace o se redefine el criterio de aceptación? | Bloque 0 | [[02-pendientes]] | |
+| P13 | 🟢 | **HU-46 (Templo)**: se borró del front. ¿Se rehace o se redefine el criterio de aceptación? | HU-46 | [[02-pendientes]] | |
 
-| P14 | 🟠 | **Ranking por XP, por notas o por ambas.** Hoy ordena solo por XP (desempate: insignias, vidas perdidas, nodos completados). No recibimos notas de nadie: si van notas, ¿de quién vienen? | C6, ranking | Consulta del equipo (2026-10-15) | |
+| P14 | 🟠 | **Ranking por XP, por notas o por ambas.** Hoy ordena solo por XP (desempate: insignias, vidas perdidas, nodos completados). No recibimos notas de nadie: si van notas, ¿de quién vienen? | HU-45, ranking | Consulta del equipo (2026-10-15) | |
 | P15 | 🟠 | **Estado académico final** (cierre del curso, HU-27/28): la épica EP-61 lo declara "fase futura". ¿Entra en el Sprint 3? | — | Consulta del equipo (2026-10-15) | |
 | P16 | 🟠 | **"Multiple choice con boss fight"**: ¿qué esperan? El multiple choice es contenido de Desafíos (G04/G09); lo nuestro es el nodo `EXAM`, que el front dibuja como "boss". ¿La mecánica de pelea es nuestra? | — | Consulta del equipo (2026-10-15) | |
 
 > [!tip] Orden para la consulta
-> P1 a P4 primero: definen el modelo de Neo4j (módulo `graph`) y el 1:N. Sin esas respuestas no conviene arrancar los ítems 2 y 3.
+> P1 a P4 primero: definen el modelo de Neo4j (módulo `graph`) y el 1:N. Sin esas respuestas no conviene arrancar HT-17 y HT-18.
 
 ## 2. Para otros grupos
 
 | # | Prio | Grupo | Duda | Bloquea | Origen | Respuesta |
 |---|---|---|---|---|---|---|
-| G1 | 🔴 | Plataforma (compose/mesh) | ¿Quién suma **Neo4j** al compose y a los entornos? ¿Hay recursos para un servicio más? | 1, 3 | [[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap\|DEC-016]] | |
-| G2 | 🟠 | G06 Backoffice | **Catálogo de permisos**: ¿qué nombres usan (ej. `roadmap.graph.edit`) y cómo llegan en el token? | C9 | [[07-correcciones-profes]] | |
-| G3 | 🟠 | G06 Backoffice | **Dashboard**: ¿qué datos quieren de nosotros (progreso, ranking, XP) y por dónde (REST o eventos)? | C11 | [[07-correcciones-profes]] | |
-| G4 | 🟠 | G01 Courses | Con N roadmaps, ¿cómo queda el contrato de secciones (HT-07, HU-36) y el de restricciones (HU-49)? Depende de P3 | 11 | [[03-requerimientos-profes#Impacto en otros grupos]] | |
-| G5 | 🟠 | G01 Courses | `courses.md` §7.3 sigue en camelCase y Roadmap lee solo snake_case desde #191. ¿Sus eventos reales ya salen en snake_case? | Bloque 0 | [[acuerdos/courses-g01]] | |
-| G6 | 🟢 | G07 Users / G01 | **Vocabulario de roles**: Users emite `GESTOR`/`PROFESSOR`; Courses documenta `MANAGER`/`PROFESSOR_READ_ONLY`. ¿Cuál vale? (Pierde peso si migramos a permisos, C9) | C9 | [[acuerdos/courses-g01]], [[acuerdos/users]] | |
-| G7 | 🟢 | G07 Users | Usuarios demo (admin, profe, alumno): ¿ids y credenciales estables para usarlos en nuestro seed? | C8 | [[07-correcciones-profes#2. No son nuestros]] | |
-| G8 | 🟢 | G09 Motor | El evento de cierre trae `id_course` + `id_node`. Con N roadmaps, ¿alcanza con que `node_id` sea único global? | 11 | [[03-requerimientos-profes#Impacto en otros grupos]] | |
+| G1 | 🔴 | Plataforma (compose/mesh) | ¿Quién suma **Neo4j** al compose y a los entornos? ¿Hay recursos para un servicio más? | HT-16, HT-18 | [[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap\|DEC-016]] | |
+| G2 | 🟠 | G06 Backoffice | **Catálogo de permisos**: ¿qué nombres usan (ej. `roadmap.graph.edit`) y cómo llegan en el token? | HT-22 | [[07-correcciones-profes]] | |
+| G3 | 🟠 | G06 Backoffice | **Dashboard**: ¿qué datos quieren de nosotros (progreso, ranking, XP) y por dónde (REST o eventos)? | HT-24 | [[07-correcciones-profes]] | |
+| G4 | 🟠 | G01 Courses | Con N roadmaps, ¿cómo queda el contrato de secciones (HT-07, HU-36) y el de restricciones (HU-49)? Depende de P3 | HT-19 | [[03-requerimientos-profes#Impacto en otros grupos]] | |
+| G5 | 🟠 | G01 Courses | `courses.md` §7.3 sigue en camelCase y Roadmap lee solo snake_case desde #191. ¿Sus eventos reales ya salen en snake_case? | HT-12 | [[acuerdos/courses-g01]] | |
+| G6 | 🟢 | G07 Users / G01 | **Vocabulario de roles**: Users emite `GESTOR`/`PROFESSOR`; Courses documenta `MANAGER`/`PROFESSOR_READ_ONLY`. ¿Cuál vale? (Pierde peso si migramos a permisos, HT-22) | HT-22 | [[acuerdos/courses-g01]], [[acuerdos/users]] | |
+| G7 | 🟢 | G07 Users | Usuarios demo (admin, profe, alumno): ¿ids y credenciales estables para usarlos en nuestro seed? | HT-21 | [[07-correcciones-profes#2. No son nuestros]] | |
+| G8 | 🟢 | G09 Motor | El evento de cierre trae `id_course` + `id_node`. Con N roadmaps, ¿alcanza con que `node_id` sea único global? | HT-19 | [[03-requerimientos-profes#Impacto en otros grupos]] | |
 | G9 | 🟢 | G06 Backoffice | ¿Siguen dependiendo del header `X-User-Roles: MS` que exigía el contrato original? | — | [[acuerdos/backoffice]] | |
 | G10 | 🟢 | Accounting / Inventario | ¿Qué **número de grupo** tienen? ¿Inventario y Accounting son el mismo equipo? | — | [[acuerdos/accounting]], [[acuerdos/inventario]] | |
 | G11 | 🟢 | Plataforma | ¿Qué **número de grupo** tiene el equipo de Gateway / Kafka? | — | [[acuerdos/plataforma-gateway-kafka]] | |
 | G12 | 🟢 | Plataforma | ¿Los scopes H1 de Courses y `users.legajo.read` están emitidos en el registry del entorno de la demo? | — | [[acuerdos/plataforma-gateway-kafka]] | |
-| G13 | 🟢 | Equipo UI-KIT | ¿Quién es dueño del **componente de grafo**? ¿#33 cubre el `nav-icon-sprite`? ¿El avatar `2xl` (#39) alcanza para el perfil? | 9, 10 | [[05-ui-kit]] | |
+| G13 | 🟢 | Equipo UI-KIT | ¿Quién es dueño del **componente de grafo**? ¿#33 cubre el `nav-icon-sprite`? ¿El avatar `2xl` (#39) alcanza para el perfil? | HU-62, HU-63 | [[05-ui-kit]] | |
 
 ## 3. Del equipo (las resolvemos nosotros)
 
 | # | Prio | Duda | Cómo se resuelve | Bloquea | Origen | Respuesta |
 |---|---|---|---|---|---|---|
-| E1 | 🟠 | **Error del ranking por grupo**: no está reproducido. El back no tiene ranking por grupo (solo por curso, y `/groups/{gid}/progress` aparte) | Reproducirlo en el entorno integrado con `ROADMAP_BY_GROUP_ENABLED=true` y anotar request y respuesta | C6 | [[07-correcciones-profes]] | |
-| E2 | 🟠 | **HU-20/21**: tres criterios de insignia nunca se otorgan. ¿Se implementan o se quitan? | Decidir en la reunión del equipo (quitar es S, implementar es M) | Bloque 0 | [[02-pendientes]] | |
-| E3 | 🟠 | **HU-45 / HU-49**: ¿se cierran en el Bloque 0 o pasan al sprint con alcance nuevo? HU-49 depende de P9 | Decidir junto con P9 | Bloque 0, C4 | [[02-pendientes]] | |
-| E4 | 🟢 | **Curva PAR-09**: `V17` anota 600/1800/4200 para los niveles 3/5/7 y la curva de ejemplo de Backoffice da 1200/3500/7300. ¿Cuál está activa? | Leer PAR-09 del Backoffice en el entorno integrado | C8 (seed) | [[decisiones/DEC-006-insignias-sistema-y-curso\|DEC-006]] | |
-| E5 | 🟢 | `fix/account-not-found-gate`: ¿se cierra como obsoleta por #193? ¿El 404 llega bien al front? | Probarlo en el entorno integrado | Bloque 0 | [[acuerdos/inventario]] | |
+| E1 | 🟠 | **Error del ranking por grupo**: no está reproducido. El back no tiene ranking por grupo (solo por curso, y `/groups/{gid}/progress` aparte) | Reproducirlo en el entorno integrado con `ROADMAP_BY_GROUP_ENABLED=true` y anotar request y respuesta | HU-45 | [[07-correcciones-profes]] | |
+| E2 | 🟠 | **HU-20/21**: tres criterios de insignia nunca se otorgan. ¿Se implementan o se quitan? | Decidir en la reunión del equipo (quitar es S, implementar es M) | HU-21 | [[02-pendientes]] | |
+| E3 | 🟠 | **HU-45 / HU-49**: ¿se cierran en el Bloque 0 o pasan al sprint con alcance nuevo? HU-49 depende de P9 | Decidir junto con P9 | HU-45, HU-49, HU-67 | [[02-pendientes]] | |
+| E4 | 🟢 | **Curva PAR-09**: `V17` anota 600/1800/4200 para los niveles 3/5/7 y la curva de ejemplo de Backoffice da 1200/3500/7300. ¿Cuál está activa? | Leer PAR-09 del Backoffice en el entorno integrado | HT-21 (seed) | [[decisiones/DEC-006-insignias-sistema-y-curso\|DEC-006]] | |
+| E5 | 🟢 | `fix/account-not-found-gate`: ¿se cierra como obsoleta por #193? ¿El 404 llega bien al front? | Probarlo en el entorno integrado | HT-12 | [[acuerdos/inventario]] | |
 | E6 | 🟢 | `KAFKA_TOPIC_ROADMAP`: en `develop` el default es `roadmap.events`. ¿El compose de cada entorno lo pisa con otro valor? | Revisar `tpi-system-compose` | — | [[acuerdos/notificaciones-bus]] | |
-| E7 | 🟢 | `TraceIdFilter` figura en `08-comunicacion-gateway.md` pero no está en `develop`. ¿Se borró a propósito? ¿El MDC de `logback-spring.xml` sigue vigente? | Revisar el historial de git del back | C10 | [[acuerdos/plataforma-gateway-kafka]] | |
+| E7 | 🟢 | `TraceIdFilter` figura en `08-comunicacion-gateway.md` pero no está en `develop`. ¿Se borró a propósito? ¿El MDC de `logback-spring.xml` sigue vigente? | Revisar el historial de git del back | HT-23 | [[acuerdos/plataforma-gateway-kafka]] | |
 | E8 | 🟢 | Accounting publica `LIVES_EXHAUSTED` / `LIVES_AVAILABLE` y no tenemos consumidor. ¿Hace falta? | Revisar contra el Gate (hoy lee vidas por REST) | — | [[acuerdos/accounting]] | |
-| E10 | 🟢 | **Épicas desactualizadas en Taiga**: 15 de 17 épicas siguen en *New* aunque todas sus HU estén Done (solo EP-60 está Done). ¿Las cerramos o quedan abiertas hasta el Sprint 3? | Actualizarlas en Taiga junto con HT-11 | Bloque 0 | [[taiga/README\|Taiga]] | |
+| E10 | 🟢 | **Épicas desactualizadas en Taiga**: 15 de 17 épicas siguen en *New* aunque todas sus HU estén Done (solo EP-60 está Done). ¿Las cerramos o quedan abiertas hasta el Sprint 3? | Actualizarlas en Taiga junto con HT-11 | HT-15 | [[taiga/README\|Taiga]] | |
 | E11 | 🟢 | **HU sin épica**: HT-04, HT-10 y HT-11 entran solo por el tag `g10`, y HT-05 no tiene ni épica ni tag (no aparece). ¿Qué épica les corresponde? (HT-10 → EP-5371 y HT-11 → EP-60 parecen naturales) | Asignarlas en Taiga | — | [[taiga/README\|Taiga]] | |
 | E12 | 🟢 | **Épicas sin HU de G10**: EP-72 Avatares y EP-592 Racha no tienen historias (las otras tres vacías están marcadas FUERA DE ALCANCE). ¿Se descartan o entran en el Sprint 3? | Decidir en la reunión del equipo | — | [[taiga/README\|Taiga]] | |
 | E9 | 🟢 | `ParUnavailableException`: ¿qué casos de uso la propagan con Backoffice caído (ej. el nivel del alumno)? | Revisar el código y documentarlo | — | [[acuerdos/backoffice]] | |
