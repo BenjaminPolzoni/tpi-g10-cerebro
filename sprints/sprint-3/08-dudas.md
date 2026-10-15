@@ -45,6 +45,8 @@ estado: vigente
 > Tipos de relación propuestos para el mapeo del grafo (módulo `graph`, [[04-base-de-grafos]]). Marcar con `[x]` los que adoptamos; el resto queda descartado. Cada uno lleva `label` visible y `visible` configurable. Hoy solo `REQUIRES` (y las `Rule`) afectan el desbloqueo: si alguno nuevo también debe afectarlo, anotarlo al lado de la relación.
 > Al decidir, cerrar P4 en [[#Respondidas]] y registrarlo en [[decisiones/README|decisiones/]].
 
+- [ ] `requires` / `requiere`: una necesita de otra para desbloquearse (Nodo B requires Nodo A). Afecta el desbloqueo
+- [ ] `recommends` / `recomienda`: sugerida, no obligatoria (Nodo B recommends Nodo A). No bloquea
 - [ ] `belongs_to` / `pertenece_a`: pertenencia a un grupo (Juan belongs_to Equipo A)
 - [ ] `related_to` / `relacionado_con`: relación genérica, sin especificar el tipo
 - [ ] `is_a` / `es_un`: jerarquía de clases (dog is_a mammal)
@@ -54,8 +56,8 @@ estado: vigente
 - [ ] `has_property` / `tiene_propiedad`: atributos (water has_property liquid)
 - [ ] `causes` / `causa`: causalidad (smoking causes cancer)
 
-> [!note] Ya acordado
-> `REQUIRES` ("una necesita de otra") es la relación de desbloqueo y queda fuera de esta votación. Las 8 de arriba son candidatas a completar el catálogo junto con las que el documento de los profes ya nombra.
+> [!note] Sobre el desbloqueo
+> En el modelo actual solo `REQUIRES` (y las `Rule`) afectan el desbloqueo, y es lo que dice el documento de los profes ("una necesita de otra"). `RECOMMENDS` se propone como relación blanda: se muestra en el mapa pero no bloquea. Si se tilda, confirmar con los profes que no cuenta para desbloquear.
 
 ## 2. Para otros grupos
 
