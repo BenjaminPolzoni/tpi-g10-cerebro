@@ -84,19 +84,19 @@ Por categoría:
 
 ## Adopción por feature
 
-| Feature | Nivel | Controles crudos (btn / input / select / textarea / table / dialog) | Colores hardcodeados | Notas |
-|---|---|---|---|---|
-| core | Medio | 7 / 0 / 0 / 0 / 0 / 1 | 19 | Sidebar y topbar propios (kit #36/#33), `row-actions-menu` (el kit tiene `actionsMode='menu'`) |
-| accounting | Alto | 3 / 0 / 0 / 0 / 0 / 0 | 0 | |
-| admin | Alto | 15 / 20 / 3 / 2 / 12 / 3 | 196 | 5 modales sin `GenericModal`, `searchable-select` en vez de `combobox`, `timeseries-chart` en vez de `chart` |
-| auth | Alto | 10 / 1 / 0 / 0 / 0 / 0 | 62 | |
-| challenges | Medio | 42 / 7 / 5 / 2 / 0 / 4 | 468 | `toggle-switch` en vez de `switch`, `attempt-stepper` en vez de `stepper` |
-| chat | Alto | 1 / 1 / 0 / 1 / 0 / 0 | 109 | Banners en vez de `callout` |
-| courses | Medio | 40 / 24 / 1 / 0 / 2 / 0 | 261 | Cards y tablas propias, 172 `font-size` literales |
-| marketplace | Alto | 1 / 1 / 0 / 0 / 0 / 0 | 2 | |
-| notifications, onboarding, profile, ai-tutor, surveys, dashboard | Alto | ≈ bajos | ≤ 34 | `profile` usa `::ng-deep` para centrar tabs y pagination (se resuelve con 0.8.0) |
-| **ranking** (G10) | **Bajo** | 5 / 0 / 0 / 0 / **3** / 0 | 63 | 3 `<table>` crudas, chips `rk-chip` y `rk-status` hechos a mano, solo 3 de 7 componentes con el kit |
-| **roadmap** (G10) | **Medio / Bajo en tokens** | 16 / 5 / 9 / 1 / 0 / 2 | 316 | Detalle abajo |
+| Feature                                                          | Nivel                      | Controles crudos (btn / input / select / textarea / table / dialog) | Colores hardcodeados | Notas                                                                                                        |
+| ---------------------------------------------------------------- | -------------------------- | ------------------------------------------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------ |
+| core                                                             | Medio                      | 7 / 0 / 0 / 0 / 0 / 1                                               | 19                   | Sidebar y topbar propios (kit #36/#33), `row-actions-menu` (el kit tiene `actionsMode='menu'`)               |
+| accounting                                                       | Alto                       | 3 / 0 / 0 / 0 / 0 / 0                                               | 0                    |                                                                                                              |
+| admin                                                            | Alto                       | 15 / 20 / 3 / 2 / 12 / 3                                            | 196                  | 5 modales sin `GenericModal`, `searchable-select` en vez de `combobox`, `timeseries-chart` en vez de `chart` |
+| auth                                                             | Alto                       | 10 / 1 / 0 / 0 / 0 / 0                                              | 62                   |                                                                                                              |
+| challenges                                                       | Medio                      | 42 / 7 / 5 / 2 / 0 / 4                                              | 468                  | `toggle-switch` en vez de `switch`, `attempt-stepper` en vez de `stepper`                                    |
+| chat                                                             | Alto                       | 1 / 1 / 0 / 1 / 0 / 0                                               | 109                  | Banners en vez de `callout`                                                                                  |
+| courses                                                          | Medio                      | 40 / 24 / 1 / 0 / 2 / 0                                             | 261                  | Cards y tablas propias, 172 `font-size` literales                                                            |
+| marketplace                                                      | Alto                       | 1 / 1 / 0 / 0 / 0 / 0                                               | 2                    |                                                                                                              |
+| notifications, onboarding, profile, ai-tutor, surveys, dashboard | Alto                       | ≈ bajos                                                             | ≤ 34                 | `profile` usa `::ng-deep` para centrar tabs y pagination (se resuelve con 0.8.0)                             |
+| **ranking** (G10)                                                | **Bajo**                   | 5 / 0 / 0 / 0 / **3** / 0                                           | 63                   | 3 `<table>` crudas, chips `rk-chip` y `rk-status` hechos a mano, solo 3 de 7 componentes con el kit          |
+| **roadmap** (G10)                                                | **Medio / Bajo en tokens** | 16 / 5 / 9 / 1 / 0 / 2                                              | 316                  | Detalle abajo                                                                                                |
 
 ## Roadmap (G10): qué reemplazar
 
