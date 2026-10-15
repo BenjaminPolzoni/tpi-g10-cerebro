@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, hu]
 codigo: HU-57
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Múltiples roadmaps por curso y grafo configurable"
 sprint: "G10 - Sprint 3"
 puntos: 5
 prioridad: Should
-en_taiga: false
+en_taiga: true
+ref: 8607
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8607
+responsables_tareas: ["Baltasar Rodriguez Teruel", "Quinteros Tomás"]
+tareas_cerradas: "0/4"
 ---
 
 # HU-57: Habilitar y gestionar varios roadmaps por curso
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/4** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HU-57 Habilitar y gestionar varios roadmaps por curso|HU-57]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8607)) · Épica en Taiga: [[epicas/EP-8633 Múltiples roadmaps por curso y grafo configurable|EP-8633]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]] (3), [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]] (1).
 
 [G10] — HU-57 — Habilitar y gestionar varios roadmaps por curso
 ---------------------------------------------------------------
@@ -114,15 +118,19 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-57.1 Habilitar varios roadmaps en un curso** · Back
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/4**. Historia en Taiga: [[taiga/historias/HU-57 Habilitar y gestionar varios roadmaps por curso|HU-57]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8607)
+
+- [ ] [#9148](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9148) **T-57.1 Habilitar varios roadmaps en un curso** · Back · New · [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]]
     - **Qué:** columna `multiple_roadmaps_allowed` por curso (migración) y acción para que el profesor dueño o el gestor la active. Con el ajuste apagado, crear un segundo roadmap devuelve 409.
     - **Listo cuando:** hay tests con el ajuste prendido y apagado.
-- [ ] **T-57.2 Crear, renombrar y archivar roadmaps** · Back
+- [ ] [#9149](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9149) **T-57.2 Crear, renombrar y archivar roadmaps** · Back · New · [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]]
     - **Qué:** nombre obligatorio y único dentro del curso; archivar es baja lógica y conserva el progreso (DEC-005).
     - **Listo cuando:** un roadmap archivado no lo ve el alumno, su progreso sigue en la base y hay tests.
-- [ ] **T-57.3 Pantalla de roadmaps del curso para el profesor** · Front
+- [ ] [#9150](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9150) **T-57.3 Pantalla de roadmaps del curso para el profesor** · Front · New · [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]]
     - **Qué:** lista de roadmaps con crear, renombrar, archivar y el interruptor de «varios roadmaps», con componentes del kit. Acá también va la acción «Clonar» (HU-71) y la asignación a grupos (HU-61).
     - **Listo cuando:** el profesor maneja los roadmaps del curso sin salir de la pantalla.
+- [ ] [#9347](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9347) **T-57.4 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]]
+    - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 
 ---
 

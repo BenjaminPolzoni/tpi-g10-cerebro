@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, ht]
 codigo: HT-17
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Múltiples roadmaps por curso y grafo configurable"
 sprint: "G10 - Sprint 3"
 puntos: 8
 prioridad: Must
-en_taiga: false
+en_taiga: true
+ref: 8600
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8600
+responsables_tareas: ["Baltasar Rodriguez Teruel", "Quinteros Tomás"]
+tareas_cerradas: "0/4"
 ---
 
 # HT-17: Modelo 1 a N de curso a roadmaps
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/4** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HT-17 Modelo 1 a N de curso a roadmaps|HT-17]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8600)) · Épica en Taiga: [[epicas/EP-8633 Múltiples roadmaps por curso y grafo configurable|EP-8633]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]] (3), [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]] (1).
 
 [G10] — HT-17 — Modelo 1 a N de curso a roadmaps
 ------------------------------------------------
@@ -115,16 +119,20 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-17.1 Permitir varios roadmaps por curso en la base** · Back
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/4**. Historia en Taiga: [[taiga/historias/HT-17 Modelo 1 a N de curso a roadmaps|HT-17]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8600)
+
+- [ ] [#8918](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8918) **T-17.1 Permitir varios roadmaps por curso en la base** · Back · New · [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]]
     - **Qué:** migración Flyway (la siguiente a V26) que quita el UNIQUE de `roadmap.course_cohort_id` y agrega `is_primary`; el roadmap actual de cada curso queda como principal. Ajustar entidad y repositorio para buscar por id de roadmap y por «principal del curso».
     - **Listo cuando:** la migración corre sobre una base con datos sin perder nada y cada curso tiene exactamente un roadmap principal.
-- [ ] **T-17.2 Rutas por roadmap sin romper las rutas por curso** · Back
+- [ ] [#8924](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8924) **T-17.2 Rutas por roadmap sin romper las rutas por curso** · Back · New · [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]]
     - **Qué:** exponer `/roadmaps/{roadmapId}/...` y sumar `roadmap_id` a los DTOs. Las rutas actuales `/courses/{courseId}/...` siguen funcionando y resuelven el roadmap principal.
     - **Dónde:** `GraphController`, `NodeController`, `ProgressController`, `LevelController`, `RankingController` y sus DTOs.
     - **Listo cuando:** el front actual anda sin cambios, las rutas nuevas responden lo mismo para el roadmap principal y toda la suite existente pasa.
-- [ ] **T-17.3 Elegir por roadmap si XP, vidas, nivel y ranking son del curso o del roadmap** · Back
+- [ ] [#8925](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8925) **T-17.3 Elegir por roadmap si XP, vidas, nivel y ranking son del curso o del roadmap** · Back · New · [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]]
     - **Qué:** guardar en cada roadmap si esos datos se comparten con todo el curso o son propios (P2, DEC-017), y hacer que el ledger de XP, `LevelService` y `RankingService` respeten esa elección.
     - **Listo cuando:** con dos roadmaps en un curso, en modo «por curso» el XP se acumula en un solo total y en modo «por roadmap» cada uno tiene el suyo. Hay tests de los dos modos.
+- [ ] [#9335](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9335) **T-17.4 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]]
+    - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 
 ---
 

@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, ht]
 codigo: HT-22
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Correcciones de los profes"
 sprint: "G10 - Sprint 3"
 puntos: 5
 prioridad: Should
-en_taiga: false
+en_taiga: true
+ref: 8605
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8605
+responsables_tareas: ["Gabriela Camacho", "Baltasar Rodriguez Teruel"]
+tareas_cerradas: "0/4"
 ---
 
 # HT-22: Permisos en vez de roles
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Correcciones de los profes|Correcciones de los profes]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Correcciones de los profes|Correcciones de los profes]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/4** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HT-22 Permisos en vez de roles|HT-22]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8605)) · Épica en Taiga: [[epicas/EP-8631 Correcciones de los profes|EP-8631]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Gabriela Camacho|Gabriela Camacho]] (2), [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]] (2).
 
 [G10] — HT-22 — Permisos en vez de roles
 ----------------------------------------
@@ -115,16 +119,18 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-22.1 Escribir la matriz de permisos** · Back
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/4**. Historia en Taiga: [[taiga/historias/HT-22 Permisos en vez de roles|HT-22]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8605)
+
+- [ ] [#9090](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9090) **T-22.1 Escribir la matriz de permisos** · Back · New · [[sprints/sprint-3/12-responsables#Gabriela Camacho|Gabriela Camacho]]
     - **Qué:** listar cada endpoint del micro con el permiso que va a pedir (por ejemplo `roadmap.graph.edit`, `roadmap.ranking.read`) y qué roles lo tienen hoy. Sale de las constantes `CAN_EDIT`, `CAN_VIEW`… de cada controller. Cierra DT-03.
     - **Listo cuando:** la matriz está en el Obsidian y en `docs/` del back.
-- [ ] **T-22.2 Acordar los nombres de permisos con Users (G07)** · Coordinación
+- [ ] [#9091](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9091) **T-22.2 Acordar los nombres de permisos con Users (G07)** · Coordinación · New · [[sprints/sprint-3/12-responsables#Gabriela Camacho|Gabriela Camacho]]
     - **Qué:** mandar la matriz a G07, que es dueño del catálogo (G2), y acordar nombres y cómo llegan en el token o en los headers del Gateway. Mientras no haya respuesta se sigue con `PROFESSOR`/`GESTOR` (G6).
     - **Listo cuando:** la respuesta de G07 está en `acuerdos/users`.
-- [ ] **T-22.3 Autorizar por permisos en todos los controllers** · Back
+- [ ] [#9092](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9092) **T-22.3 Autorizar por permisos en todos los controllers** · Back · New · [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]]
     - **Qué:** reemplazar `hasRole`/`hasAnyRole` por `hasAuthority('roadmap.…')` en los 12 controllers y sacar los chequeos de rol a mano de `RankingController` y `requireOwner`. El chequeo de dueño del curso se mantiene.
     - **Listo cuando:** no queda `hasRole` en el código y hay tests de autorización por endpoint (permitido y 403).
-- [ ] **T-22.4 Exigir el scope del gate** · Back
+- [ ] [#9093](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9093) **T-22.4 Exigir el scope del gate** · Back · New · [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]]
     - **Qué:** el endpoint del gate pide el scope `roadmap.gate.read` al servicio que llama (DT-01).
     - **Dónde:** `SecurityConfig`, `ServiceIdentity`.
     - **Listo cuando:** un servicio sin el scope recibe 403 y el Motor con el scope sigue funcionando. Hay test.

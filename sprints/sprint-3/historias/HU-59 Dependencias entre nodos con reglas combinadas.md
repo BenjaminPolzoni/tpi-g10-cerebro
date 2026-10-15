@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, hu]
 codigo: HU-59
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Múltiples roadmaps por curso y grafo configurable"
 sprint: "G10 - Sprint 3"
 puntos: 5
 prioridad: Must
-en_taiga: false
+en_taiga: true
+ref: 8609
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8609
+responsables_tareas: ["Fenoglio Santino", "Franco Maximiliano Amarilla"]
+tareas_cerradas: "0/4"
 ---
 
 # HU-59: Dependencias entre nodos con reglas combinadas
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/4** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HU-59 Dependencias entre nodos con reglas combinadas|HU-59]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8609)) · Épica en Taiga: [[epicas/EP-8633 Múltiples roadmaps por curso y grafo configurable|EP-8633]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Fenoglio Santino|Fenoglio Santino]] (3), [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]] (1).
 
 [G10] — HU-59 — Dependencias entre nodos con reglas combinadas
 --------------------------------------------------------------
@@ -114,16 +118,20 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-59.1 Guardar reglas combinadas como árbol** · Back
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/4**. Historia en Taiga: [[taiga/historias/HU-59 Dependencias entre nodos con reglas combinadas|HU-59]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8609)
+
+- [ ] [#9155](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9155) **T-59.1 Guardar reglas combinadas como árbol** · Back · New · [[sprints/sprint-3/12-responsables#Fenoglio Santino|Fenoglio Santino]]
     - **Qué:** las reglas de nodo pasan a ser un árbol con AND/OR anidados (`A y (B o C)`). La lectura obligatoria sigue contando como requisito. Se rechazan ciclos y reglas vacías.
     - **Dónde:** módulo `graph`, `GraphValidator`.
     - **Listo cuando:** se guarda y se lee una regla anidada y hay tests de ciclos y reglas vacías.
-- [ ] **T-59.2 Armar reglas combinadas en el editor** · Front
+- [ ] [#9156](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9156) **T-59.2 Armar reglas combinadas en el editor** · Front · New · [[sprints/sprint-3/12-responsables#Fenoglio Santino|Fenoglio Santino]]
     - **Qué:** extender `rules-wizard` para armar grupos AND/OR, empezando con un nivel de anidamiento. Usable con teclado y lector de pantalla.
     - **Listo cuando:** el profesor arma `A y (B o C)` sin escribir nada a mano.
-- [ ] **T-59.3 Mostrarle al alumno qué le falta** · Front
+- [ ] [#9157](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9157) **T-59.3 Mostrarle al alumno qué le falta** · Front · New · [[sprints/sprint-3/12-responsables#Fenoglio Santino|Fenoglio Santino]]
     - **Qué:** describir la regla en palabras («Requiere A y (B o C)») marcando lo que ya cumplió.
     - **Listo cuando:** el alumno entiende qué le falta para desbloquear el nodo.
+- [ ] [#9349](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9349) **T-59.4 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]]
+    - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 
 ---
 

@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, ht]
 codigo: HT-20
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Múltiples roadmaps por curso y grafo configurable"
 sprint: "G10 - Sprint 3"
 puntos: 5
 prioridad: Must
-en_taiga: false
+en_taiga: true
+ref: 8603
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8603
+responsables_tareas: ["Fenoglio Santino", "Franco Maximiliano Amarilla"]
+tareas_cerradas: "0/5"
 ---
 
 # HT-20: Gate y progreso con reglas combinadas y XP mínimo
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/5** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo|HT-20]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8603)) · Épica en Taiga: [[epicas/EP-8633 Múltiples roadmaps por curso y grafo configurable|EP-8633]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Fenoglio Santino|Fenoglio Santino]] (4), [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]] (1).
 
 [G10] — HT-20 — Gate y progreso con reglas combinadas y XP mínimo
 -----------------------------------------------------------------
@@ -114,19 +118,23 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-20.1 Un solo evaluador de reglas para el gate y para lo que ve el alumno** · Back
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/5**. Historia en Taiga: [[taiga/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo|HT-20]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8603)
+
+- [ ] [#9030](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9030) **T-20.1 Un solo evaluador de reglas para el gate y para lo que ve el alumno** · Back · New · [[sprints/sprint-3/12-responsables#Fenoglio Santino|Fenoglio Santino]]
     - **Qué:** `GateEvaluator` evalúa el árbol de reglas (AND/OR anidados, HU-59) y el progreso del alumno usa ese mismo resultado para el motivo de bloqueo.
     - **Dónde:** `GateEvaluator`, `GateService`, `NodeProgressService`.
     - **Listo cuando:** no queda lógica de desbloqueo duplicada y hay tests con reglas anidadas.
-- [ ] **T-20.2 Evaluar el XP mínimo** · Back
+- [ ] [#9048](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9048) **T-20.2 Evaluar el XP mínimo** · Back · New · [[sprints/sprint-3/12-responsables#Fenoglio Santino|Fenoglio Santino]]
     - **Qué:** sumar al evaluador la condición de XP mínimo de las reglas (HU-58 y `requires` con XP), tomando el XP del alumno según cómo esté configurado el roadmap (por curso o por roadmap, P2).
     - **Listo cuando:** un alumno con menos XP que el mínimo ve el motivo y el gate lo rechaza. Hay test.
-- [ ] **T-20.3 Escenarios BDD con el ejemplo de los profes** · Back
+- [ ] [#9058](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9058) **T-20.3 Escenarios BDD con el ejemplo de los profes** · Back · New · [[sprints/sprint-3/12-responsables#Fenoglio Santino|Fenoglio Santino]]
     - **Qué:** escribir en Cucumber el ejemplo de las secciones 1 a 5 del pedido de los profes (`03-requerimientos-profes`) y hacerlo pasar.
     - **Listo cuando:** los escenarios pasan en el CI.
-- [ ] **T-20.4 Medir la latencia del gate** · Back
+- [ ] [#9060](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9060) **T-20.4 Medir la latencia del gate** · Back · New · [[sprints/sprint-3/12-responsables#Fenoglio Santino|Fenoglio Santino]]
     - **Qué:** medir el P95 del gate con la caché de reglas (HT-18) sobre un roadmap de 150 nodos y dejar el resultado en el PR.
     - **Listo cuando:** el P95 es menor a 200 ms.
+- [ ] [#9338](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9338) **T-20.5 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]]
+    - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 
 ---
 

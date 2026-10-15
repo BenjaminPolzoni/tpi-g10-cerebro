@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, hu]
 codigo: HU-61
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Múltiples roadmaps por curso y grafo configurable"
 sprint: "G10 - Sprint 3"
 puntos: 5
 prioridad: Should
-en_taiga: false
+en_taiga: true
+ref: 8611
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8611
+responsables_tareas: ["Stefano Zoffoli", "Franco Maximiliano Amarilla"]
+tareas_cerradas: "0/4"
 ---
 
 # HU-61: Roadmaps por grupo del curso y restricciones de visualización
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga. El 2026-10-15 lo oculto/bloqueado pasó a HU-49 y el selector de comisión dentro de un roadmap a HT-33 (HU-44): esta HU solo asigna roadmaps a grupos.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/4** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HU-61 Roadmaps por grupo del curso y restricciones de visualización|HU-61]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8611)) · Épica en Taiga: [[epicas/EP-8633 Múltiples roadmaps por curso y grafo configurable|EP-8633]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Stefano Zoffoli|Stefano Zoffoli]] (3), [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]] (1). El 2026-10-15 lo oculto/bloqueado pasó a HU-49 y el selector de comisión dentro de un roadmap a HT-33 (HU-44): esta HU solo asigna roadmaps a grupos.
 
 [G10] — HU-61 — Roadmaps por grupo del curso y restricciones de visualización
 -----------------------------------------------------------------------------
@@ -114,15 +118,19 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-61.1 Asignar un roadmap a grupos del curso** · Back
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/4**. Historia en Taiga: [[taiga/historias/HU-61 Roadmaps por grupo del curso y restricciones de visualización|HU-61]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8611)
+
+- [ ] [#9161](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9161) **T-61.1 Asignar un roadmap a grupos del curso** · Back · New · [[sprints/sprint-3/12-responsables#Stefano Zoffoli|Stefano Zoffoli]]
     - **Qué:** tabla roadmap ↔ grupo (migración) y acción para que ADMIN, GESTOR o PROFESSOR dueño del curso asignen grupos o «todos». Un grupo que no existe en Courses se rechaza (`CourseGroupsClient`).
     - **Listo cuando:** hay tests de asignar, quitar y grupo inexistente.
-- [ ] **T-61.2 Que el alumno vea solo los roadmaps de sus grupos** · Back
+- [ ] [#9162](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9162) **T-61.2 Que el alumno vea solo los roadmaps de sus grupos** · Back · New · [[sprints/sprint-3/12-responsables#Stefano Zoffoli|Stefano Zoffoli]]
     - **Qué:** la lista de roadmaps visibles se filtra con los grupos del alumno (`GroupAccessService`, con su caché). Entrar por URL a un roadmap de otro grupo da 403.
     - **Listo cuando:** hay tests de visible, no visible y 403.
-- [ ] **T-61.3 Asignación de grupos en la pantalla del profesor** · Front
+- [ ] [#9164](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9164) **T-61.3 Asignación de grupos en la pantalla del profesor** · Front · New · [[sprints/sprint-3/12-responsables#Stefano Zoffoli|Stefano Zoffoli]]
     - **Qué:** en la pantalla de roadmaps (HU-57) el profesor elige los grupos de cada roadmap (o «todos») con un `generic-select` múltiple, usable con teclado.
     - **Listo cuando:** se puede hacer todo desde la pantalla, sin tocar la base.
+- [ ] [#9350](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9350) **T-61.4 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]]
+    - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 
 ---
 

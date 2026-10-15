@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, ht]
 codigo: HT-19
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Múltiples roadmaps por curso y grafo configurable"
 sprint: "G10 - Sprint 3"
 puntos: 5
 prioridad: Must
-en_taiga: false
+en_taiga: true
+ref: 8602
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8602
+responsables_tareas: ["Mateo Delgado Costa", "Baltasar Rodriguez Teruel", "Quinteros Tomás"]
+tareas_cerradas: "1/5"
 ---
 
 # HT-19: Contratos con Courses y el Motor para el modelo 1 a N
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **1/5** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HT-19 Contratos con Courses y el Motor para el modelo 1 a N|HT-19]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8602)) · Épica en Taiga: [[epicas/EP-8633 Múltiples roadmaps por curso y grafo configurable|EP-8633]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]] (2), [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]] (1), [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]] (1).
 
 [G10] — HT-19 — Contratos con Courses y el Motor para el modelo 1 a N
 ---------------------------------------------------------------------
@@ -113,19 +117,21 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-19.1 Proponerle a Courses (G01) cómo se usan sus secciones con varios roadmaps** · Coordinación
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **1/5**. Historia en Taiga: [[taiga/historias/HT-19 Contratos con Courses y el Motor para el modelo 1 a N|HT-19]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8602)
+
+- [ ] [#8946](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8946) **T-19.1 Proponerle a Courses (G01) cómo se usan sus secciones con varios roadmaps** · Coordinación · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** escribir y mandar a G01: cada roadmap elige si usa secciones de Courses o propias (P3); el sync de secciones (HU-36) solo toca los roadmaps que usan secciones de Courses; las restricciones se definen por roadmap y se copian al clonar (G4).
     - **Listo cuando:** G01 respondió y el acuerdo está en `acuerdos/courses-g01`.
-- [x] **T-19.2 Confirmar con el Motor (G09) que `node_id` alcanza** · Coordinación
+- [x] [#8947](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8947) **T-19.2 Confirmar con el Motor (G09) que node_id alcanza** · Coordinación · Closed · Sin asignar
     - Hecho el 2026-10-15 (G8): `node_id` es único global, también después de clonar.
-- [ ] **T-19.3 Sincronizar secciones solo en los roadmaps que las usan** · Back
+- [ ] [#8948](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8948) **T-19.3 Sincronizar secciones solo en los roadmaps que las usan** · Back · New · [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]]
     - **Qué:** que el sync de secciones de Courses actúe solo sobre los roadmaps marcados para usar secciones de Courses, según el acuerdo de T-19.1.
     - **Dónde:** `CourseSectionSyncService`, `CourseSectionsReconciliationService`.
     - **Listo cuando:** en un curso con un roadmap de secciones de Courses y otro de secciones propias, el sync solo cambia el primero. Hay test.
-- [ ] **T-19.4 Ubicar el roadmap correcto en los eventos del Motor** · Back
+- [ ] [#8950](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8950) **T-19.4 Ubicar el roadmap correcto en los eventos del Motor** · Back · New · [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]]
     - **Qué:** `RoadmapEventListener` encuentra el roadmap a partir del `id_node` en vez de suponer un roadmap por curso.
     - **Listo cuando:** el cierre de un intento de un nodo del segundo roadmap suma en ese roadmap. Hay test.
-- [ ] **T-19.5 Actualizar los contratos escritos** · Docs
+- [ ] [#8953](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8953) **T-19.5 Actualizar los contratos escritos** · Docs · New · [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]]
     - **Qué:** `docs/contracts/courses.md` y `motor-desafios-evento-cierre.md` describen el modelo de varios roadmaps por curso.
     - **Listo cuando:** los dos contratos coinciden con el código.
 

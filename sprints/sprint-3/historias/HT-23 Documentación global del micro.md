@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, ht]
 codigo: HT-23
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Correcciones de los profes"
 sprint: "G10 - Sprint 3"
 puntos: 2
 prioridad: Should
-en_taiga: false
+en_taiga: true
+ref: 8606
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8606
+responsables_tareas: ["Franco Maximiliano Amarilla", "Quinteros Tomás"]
+tareas_cerradas: "0/2"
 ---
 
 # HT-23: Documentación global del micro
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Correcciones de los profes|Correcciones de los profes]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Correcciones de los profes|Correcciones de los profes]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/2** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HT-23 Documentación global del micro|HT-23]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8606)) · Épica en Taiga: [[epicas/EP-8631 Correcciones de los profes|EP-8631]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]] (1), [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]] (1).
 
 [G10] — HT-23 — Documentación global del micro
 ----------------------------------------------
@@ -114,10 +118,12 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-23.1 Escribir la guía del micro** · Docs
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/2**. Historia en Taiga: [[taiga/historias/HT-23 Documentación global del micro|HT-23]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8606)
+
+- [ ] [#9094](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9094) **T-23.1 Escribir la guía del micro** · Docs · New · [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]]
     - **Qué:** un documento en `docs/` del back con: qué hace roadmap-service, el modelo (Postgres y Neo4j), endpoints principales, eventos que publica y consume, flags (`SECTIONS_SYNC_ENABLED`, `ROADMAP_BY_GROUP_ENABLED`…), cómo levantarlo local y enlaces a decisiones y contratos. Se arma con lo que ya está en el Obsidian (`arquitectura/`, `decisiones/`, `acuerdos/`).
     - **Listo cuando:** alguien que no conoce el micro lo levanta y entiende qué hace leyendo solo ese documento.
-- [ ] **T-23.2 Corregir los contratos que no coinciden con el código** · Docs
+- [ ] [#9095](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9095) **T-23.2 Corregir los contratos que no coinciden con el código** · Docs · New · [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]]
     - **Qué:** revisar `docs/contracts/` contra develop (DT-18). Por ejemplo, `roadmap-service.asyncapi.yaml` sigue en v3 y camelCase, y la documentación nombra `TraceIdFilter`, que se borró a propósito (E7).
     - **Listo cuando:** cada contrato coincide con develop.
 

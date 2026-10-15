@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, hu]
 codigo: HU-58
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Múltiples roadmaps por curso y grafo configurable"
 sprint: "G10 - Sprint 3"
 puntos: 5
 prioridad: Must
-en_taiga: false
+en_taiga: true
+ref: 8608
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8608
+responsables_tareas: ["Fenoglio Santino", "Lorenzo Araujo", "Franco Maximiliano Amarilla"]
+tareas_cerradas: "0/5"
 ---
 
 # HU-58: Dependencias entre secciones
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/5** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HU-58 Dependencias entre secciones|HU-58]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8608)) · Épica en Taiga: [[epicas/EP-8633 Múltiples roadmaps por curso y grafo configurable|EP-8633]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Fenoglio Santino|Fenoglio Santino]] (3), [[sprints/sprint-3/12-responsables#Lorenzo Araujo|Lorenzo Araujo]] (1), [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]] (1).
 
 [G10] — HU-58 — Dependencias entre secciones
 --------------------------------------------
@@ -116,19 +120,23 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-58.1 Volver a tener XP mínimo por sección** · Back
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/5**. Historia en Taiga: [[taiga/historias/HU-58 Dependencias entre secciones|HU-58]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8608)
+
+- [ ] [#9151](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9151) **T-58.1 Volver a tener XP mínimo por sección** · Back · New · [[sprints/sprint-3/12-responsables#Fenoglio Santino|Fenoglio Santino]]
     - **Qué:** XP mínimo opcional en las reglas de sección del módulo `graph`, validado como mayor o igual a 0. Vuelve lo que se quitó en V8 (actualizar DEC-011).
     - **Listo cuando:** se guarda, se lee y el gate lo evalúa (HT-20).
-- [ ] **T-58.2 Dependencias entre subsecciones y sin ciclos** · Back
+- [ ] [#9152](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9152) **T-58.2 Dependencias entre subsecciones y sin ciclos** · Back · New · [[sprints/sprint-3/12-responsables#Fenoglio Santino|Fenoglio Santino]]
     - **Qué:** las reglas aceptan subsecciones como requisito (P6) y al guardar se rechaza cualquier ciclo.
     - **Dónde:** `GraphValidator`, `SectionPrerequisiteService`.
     - **Listo cuando:** guardar un ciclo devuelve error con un mensaje claro. Hay tests.
-- [ ] **T-58.3 Editor de reglas de sección con XP mínimo y «todas las anteriores»** · Front
+- [ ] [#9153](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9153) **T-58.3 Editor de reglas de sección con XP mínimo y «todas las anteriores»** · Front · New · [[sprints/sprint-3/12-responsables#Fenoglio Santino|Fenoglio Santino]]
     - **Qué:** en `rules-wizard` (modo unidad): elegir secciones o subsecciones requeridas, AND/OR, XP mínimo y un atajo que guarda un AND con todas las anteriores. Usable con teclado.
     - **Listo cuando:** el profesor arma el ejemplo de los profes desde la pantalla.
-- [ ] **T-58.4 Explicarle al alumno por qué una sección está bloqueada** · Front
+- [ ] [#9154](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9154) **T-58.4 Explicarle al alumno por qué una sección está bloqueada** · Front · New · [[sprints/sprint-3/12-responsables#Lorenzo Araujo|Lorenzo Araujo]]
     - **Qué:** el motivo dice qué secciones faltan o cuánto XP le falta.
     - **Listo cuando:** el motivo aparece en el mapa y en la lista del alumno.
+- [ ] [#9348](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9348) **T-58.5 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]]
+    - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 
 ---
 

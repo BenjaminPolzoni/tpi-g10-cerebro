@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, hu]
 codigo: HU-68
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Correcciones de los profes"
 sprint: "G10 - Sprint 3"
 puntos: 1
 prioridad: Should
-en_taiga: false
+en_taiga: true
+ref: 8617
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8617
+responsables_tareas: ["Mateo Delgado Costa"]
+tareas_cerradas: "2/4"
 ---
 
 # HU-68: Obligatoriedad visible en la lista de nodos
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Correcciones de los profes|Correcciones de los profes]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Correcciones de los profes|Correcciones de los profes]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **2/4** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HU-68 Obligatoriedad visible en la lista de nodos|HU-68]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8617)) · Épica en Taiga: [[epicas/EP-8631 Correcciones de los profes|EP-8631]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]] (2).
 
 > [!question] A qué se refiere
 > **Lo que pidieron los profes:** «Lista de nodos que muestre la obligatoriedad (qué nodo es prerrequisito de otro)».
@@ -121,14 +125,16 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [x] **T-68.1 «Requiere: …» y «Abierto al entrar a la unidad» en cada nodo** · Front
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **2/4**. Historia en Taiga: [[taiga/historias/HU-68 Obligatoriedad visible en la lista de nodos|HU-68]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8617)
+
+- [x] [#9215](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9215) **T-68.1 «Requiere: …» y «Abierto al entrar a la unidad» en cada nodo** · Front · Closed · Sin asignar
     - Hecho en `b592bf2e` (13/10) en la lista del profesor (`roadmap-section-nodes`).
-- [x] **T-68.2 «Obligatoria / Opcional» en los nodos de lectura** · Front
+- [x] [#9216](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9216) **T-68.2 «Obligatoria / Opcional» en los nodos de lectura** · Front · Closed · Sin asignar
     - Hecho: lo arma `detailsOf` en la misma lista.
-- [ ] **T-68.3 Mostrar «Obligatorio / Opcional» también en desafíos y exámenes** · Front
+- [ ] [#9217](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9217) **T-68.3 Mostrar «Obligatorio / Opcional» también en desafíos y exámenes** · Front · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** en `detailsOf` de `roadmap-section-nodes`, la obligatoriedad hoy se muestra solo si `node.type === 'theory'`; mostrarla para todos los tipos que pueden ser obligatorios.
     - **Listo cuando:** un desafío obligatorio dice «Obligatorio» en la lista y hay test.
-- [ ] **T-68.4 Seguir el pedido a Courses para la vista simplificada** · Coordinación
+- [ ] [#9218](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9218) **T-68.4 Seguir el pedido a Courses para la vista simplificada** · Coordinación · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** acompañar el issue [#581](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/issues/581). Si G01 lo acepta, exportar desde `features/roadmap/embeds` una función que devuelva ya armadas la obligatoriedad y los requisitos de un nodo.
     - **Listo cuando:** la vista simplificada muestra lo mismo que la del profesor.
 

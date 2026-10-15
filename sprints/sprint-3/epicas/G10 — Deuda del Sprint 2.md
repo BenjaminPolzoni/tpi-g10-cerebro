@@ -8,7 +8,7 @@ puntos: 61
 
 # Deuda del Sprint 2
 
-> [!info] Épica del Sprint 3 · **9 historias** · **61 pts** · Estado: **Propuesta** (todavía no está en Taiga).
+> [!info] Épica del Sprint 3 · **9 historias** · **61 pts** · Estado: **New** · En Taiga: [[taiga/epicas/EP-8632 Deuda del Sprint 2|EP-8632]].
 
 [G10] — Deuda del Sprint 2
 --------------------------

@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, ht]
 codigo: HT-18
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Múltiples roadmaps por curso y grafo configurable"
 sprint: "G10 - Sprint 3"
 puntos: 8
 prioridad: Must
-en_taiga: false
+en_taiga: true
+ref: 8601
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8601
+responsables_tareas: ["Iker Alonso", "Quinteros Tomás"]
+tareas_cerradas: "0/8"
 ---
 
 # HT-18: Módulo graph en Neo4j y migración inicial
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga. El 2026-10-15 suma el corte de lectura a Neo4j (qué base manda) y la validación del esquema cerrado que estaba en HU-60.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/8** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HT-18 Módulo graph en Neo4j y migración inicial|HT-18]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8601)) · Épica en Taiga: [[epicas/EP-8633 Múltiples roadmaps por curso y grafo configurable|EP-8633]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]] (7), [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]] (1). El 2026-10-15 suma el corte de lectura a Neo4j (qué base manda) y la validación del esquema cerrado que estaba en HU-60.
 
 [G10] — HT-18 — Módulo graph en Neo4j y migración inicial
 ---------------------------------------------------------
@@ -123,28 +127,32 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-18.1 Crear el módulo `graph` y su esquema en Neo4j** · Back
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/8**. Historia en Taiga: [[taiga/historias/HT-18 Módulo graph en Neo4j y migración inicial|HT-18]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8601)
+
+- [ ] [#8939](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8939) **T-18.1 Crear el módulo graph y su esquema en Neo4j** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** paquete `graph` dentro de roadmap-service con las entidades de Spring Data Neo4j del modelo de HT-16 (roadmap, sección, nodo, relaciones con tipo, reglas) y el esquema versionado con `neo4j-migrations` (unicidad por `id`).
     - **Listo cuando:** la app arranca contra Neo4j, el esquema se aplica solo y hay tests con Testcontainers de guardar y leer.
-- [ ] **T-18.2 Pasar la estructura actual de Postgres a Neo4j** · Back
+- [ ] [#8940](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8940) **T-18.2 Pasar la estructura actual de Postgres a Neo4j** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** job que lee `section`, `node`, `node_prerequisite` y `section_prerequisite` y arma el grafo con los mismos UUID. Va detrás de un flag; hasta que se pase la lectura (T-18.6) la estructura se sigue leyendo de Postgres.
     - **Listo cuando:** correrlo dos veces deja el mismo grafo y un reporte compara cantidades de nodos y relaciones entre las dos bases.
-- [ ] **T-18.3 Mantener las dos bases en orden** · Back
+- [ ] [#8942](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8942) **T-18.3 Mantener las dos bases en orden** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** cada cambio del grafo se registra en `node_edit_log` y sale por el outbox de Postgres como hoy; solo baja lógica en Neo4j; un job de reconciliación detecta ids que existen en una base y no en la otra.
     - **Listo cuando:** editar un nodo deja su log y su evento, y el job reporta los huérfanos de una base de prueba.
-- [ ] **T-18.4 Caché de reglas por roadmap para el gate** · Back
+- [ ] [#8944](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8944) **T-18.4 Caché de reglas por roadmap para el gate** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** `GateEvaluator` lee las reglas de una caché por roadmap que se invalida en cada edición, para no ir a Neo4j en cada pedido del Motor.
     - **Listo cuando:** una regla editada se aplica en la siguiente consulta del gate. La medición del P95 se hace en HT-20 (T-20.4).
-- [ ] **T-18.5 Endpoint que devuelve el grafo entero para dibujarlo** · Back
+- [ ] [#8945](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8945) **T-18.5 Endpoint que devuelve el grafo entero para dibujarlo** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** `GET /roadmaps/{id}/graph` con `{nodes, edges, layout}`: nodos con tipo y posición, aristas con tipo y visibilidad. Documentado en OpenAPI.
     - **Listo cuando:** el front dibuja el grafo completo con una sola llamada y hay test del contrato.
-- [ ] **T-18.6 Pasar la lectura de la estructura a Neo4j** · Back
+- [ ] [#9274](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9274) **T-18.6 Pasar la lectura de la estructura a Neo4j** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** flag de lectura: con el flag encendido, el gate, el editor y el roadmap del alumno leen secciones, nodos, relaciones y reglas de Neo4j, y las ediciones de estructura se escriben solo ahí (siguen dejando `node_edit_log` y su evento en el outbox). Con el flag apagado todo sigue en Postgres.
     - **Listo cuando:** hay tests con el flag encendido y apagado, y la reconciliación (T-18.3) no reporta diferencias antes de encenderlo en la demo.
-- [ ] **T-18.7 Rechazar campos libres y tipos de nodo fuera del catálogo** · Back
+- [ ] [#9275](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9275) **T-18.7 Rechazar campos libres y tipos de nodo fuera del catálogo** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** el esquema es cerrado (P8, DEC-018): el back rechaza con 400 propiedades que no son del modelo y tipos de nodo que no están en el catálogo. Lo personalizable es nombre, ícono, descripción y reglas.
     - **Dónde:** módulo `graph`, `NodeController`.
     - **Listo cuando:** hay tests de lo permitido y lo rechazado.
+- [ ] [#9337](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9337) **T-18.8 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]]
+    - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 
 ---
 

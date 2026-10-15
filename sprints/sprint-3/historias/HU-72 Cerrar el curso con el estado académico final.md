@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, hu]
 codigo: HU-72
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Deuda del Sprint 2"
 sprint: "G10 - Sprint 3"
 puntos: 8
 prioridad: Should
-en_taiga: false
+en_taiga: true
+ref: 8620
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8620
+responsables_tareas: ["Benjamin Polzoni", "Quinteros Tomás"]
+tareas_cerradas: "0/5"
 ---
 
 # HU-72: Cerrar el curso con el estado académico final
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga. Retoma el cierre académico que [[taiga/epicas/EP-61 Ranking y cierre académico|EP-61]] había diferido (HU-27/28). Entra en el Sprint 3 por P15 (2026-10-15). Pasa a Should el 2026-10-15 mientras G14 (dónde se guarda el estado final) no tenga respuesta.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/5** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HU-72 Cerrar el curso con el estado académico final|HU-72]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8620)) · Épica en Taiga: [[epicas/EP-8632 Deuda del Sprint 2|EP-8632]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]] (4), [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]] (1). Retoma el cierre académico que [[taiga/epicas/EP-61 Ranking y cierre académico|EP-61]] había diferido (HU-27/28). Entra en el Sprint 3 por P15 (2026-10-15). Pasa a Should el 2026-10-15 mientras G14 (dónde se guarda el estado final) no tenga respuesta.
 
 [G10] — HU-72 — Cerrar el curso con el estado académico final
 -------------------------------------------------------------
@@ -115,18 +119,22 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-72.1 Acordar con Courses dónde se guarda el estado final** · Coordinación
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/5**. Historia en Taiga: [[taiga/historias/HU-72 Cerrar el curso con el estado académico final|HU-72]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8620)
+
+- [ ] [#9222](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9222) **T-72.1 Acordar con Courses dónde se guarda el estado final** · Coordinación · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
     - **Qué:** resolver G14 con G01: el estado final (`finalAcademicStatus`) lo guarda Courses (endpoint o evento) o Roadmap.
     - **Listo cuando:** el acuerdo está en `acuerdos/courses-g01`.
-- [ ] **T-72.2 Calcular los candidatos a promoción y a pérdida de regularidad** · Back
+- [ ] [#9223](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9223) **T-72.2 Calcular los candidatos a promoción y a pérdida de regularidad** · Back · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
     - **Qué:** endpoint de candidatos P90/P10 con sus condiciones (vidas perdidas, obligatorios aprobados), usando las zonas que ya calcula `RankingService`. Solo con 10 o más inscriptos.
     - **Listo cuando:** un curso de 24 da candidatos y uno de 7 no. Hay tests.
-- [ ] **T-72.3 Pantalla de cierre del curso** · Front
+- [ ] [#9225](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9225) **T-72.3 Pantalla de cierre del curso** · Front · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
     - **Qué:** tabla con los candidatos y sus condiciones, un selector de estado final por alumno (promocionado, regular, no regular, abandonó) y confirmar. Después, el roadmap y el ranking quedan en solo lectura.
     - **Listo cuando:** el profesor cierra un curso de punta a punta.
-- [ ] **T-72.4 Exportar el resumen por alumno** · Back + Front
+- [ ] [#9226](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9226) **T-72.4 Exportar el resumen por alumno** · Back + Front · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
     - **Qué:** archivo con legajo, nombre, estado final, XP e insignias de cada alumno (el legajo sale de Users o Courses).
     - **Listo cuando:** el archivo se descarga con una fila por alumno.
+- [ ] [#9355](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9355) **T-72.5 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]]
+    - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 
 ---
 

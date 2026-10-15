@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, ht]
 codigo: HT-21
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Correcciones de los profes"
 sprint: "G10 - Sprint 3"
 puntos: 5
 prioridad: Must
-en_taiga: false
+en_taiga: true
+ref: 8604
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8604
+responsables_tareas: ["Benjamin Polzoni", "Quinteros Tomás"]
+tareas_cerradas: "0/4"
 ---
 
 # HT-21: Seed de demo curado
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Correcciones de los profes|Correcciones de los profes]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Correcciones de los profes|Correcciones de los profes]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/4** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HT-21 Seed de demo curado|HT-21]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8604)) · Épica en Taiga: [[epicas/EP-8631 Correcciones de los profes|EP-8631]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]] (3), [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]] (1).
 
 [G10] — HT-21 — Seed de demo curado
 -----------------------------------
@@ -114,15 +118,19 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-21.1 Escribir el guion del curso de demo** · Equipo
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/4**. Historia en Taiga: [[taiga/historias/HT-21 Seed de demo curado|HT-21]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8604)
+
+- [ ] [#9087](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9087) **T-21.1 Escribir el guion del curso de demo** · Equipo · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
     - **Qué:** definir el curso que se muestra: secciones, nodos de cada tipo, inicio y fin, relaciones con tipo, reglas combinadas, un examen con ventana de Courses, insignias, dos roadmaps y dos comisiones, y en qué punto está cada alumno demo.
     - **Listo cuando:** el guion está en el Obsidian y el equipo lo aprobó.
-- [ ] **T-21.2 Cargar el curso del guion con un seed repetible** · Back
+- [ ] [#9088](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9088) **T-21.2 Cargar el curso del guion con un seed repetible** · Back · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
     - **Qué:** seed del curso del guion en el perfil `demo` (nunca en el productivo), con los usuarios demo de G07 y la curva PAR-09 de Backoffice (E4). Correrlo dos veces no duplica nada. Los ids de los usuarios demo todavía no existen (G7): mientras tanto, ids de prueba configurables por variable de entorno.
     - **Listo cuando:** base vacía → seed → la demo se puede recorrer completa.
-- [ ] **T-21.3 Recorrer la demo de punta a punta en el entorno de demo** · Equipo
+- [ ] [#9089](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9089) **T-21.3 Recorrer la demo de punta a punta en el entorno de demo** · Equipo · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
     - **Qué:** levantar el entorno de demo, correr el seed y seguir el guion con un alumno y un profesor.
     - **Listo cuando:** el recorrido sale sin errores; lo que falle queda anotado como issue.
+- [ ] [#9339](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9339) **T-21.4 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]]
+    - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 
 ---
 

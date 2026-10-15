@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, hu]
 codigo: HU-64
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Correcciones de los profes"
 sprint: "G10 - Sprint 3"
 puntos: 5
 prioridad: Must
-en_taiga: false
+en_taiga: true
+ref: 8613
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8613
+responsables_tareas: ["Stefano Zoffoli", "Ludmila Mailen Cejas", "Franco Maximiliano Amarilla"]
+tareas_cerradas: "0/5"
 ---
 
 # HU-64: Nodos de inicio y fin obligatorios
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Correcciones de los profes|Correcciones de los profes]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Correcciones de los profes|Correcciones de los profes]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/5** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HU-64 Nodos de inicio y fin obligatorios|HU-64]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8613)) · Épica en Taiga: [[epicas/EP-8631 Correcciones de los profes|EP-8631]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Stefano Zoffoli|Stefano Zoffoli]] (3), [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]] (1), [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]] (1).
 
 [G10] — HU-64 — Nodos de inicio y fin obligatorios
 --------------------------------------------------
@@ -114,18 +118,22 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-64.1 Tipos de nodo de inicio y fin** · Back
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/5**. Historia en Taiga: [[taiga/historias/HU-64 Nodos de inicio y fin obligatorios|HU-64]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8613)
+
+- [ ] [#9179](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9179) **T-64.1 Tipos de nodo de inicio y fin** · Back · New · [[sprints/sprint-3/12-responsables#Stefano Zoffoli|Stefano Zoffoli]]
     - **Qué:** agregar `START` y `END` a los tipos de nodo (DEC-018). Al crear un roadmap y cada unidad o sección se crean solos, con los nombres «Bienvenidos» y «Felicitaciones».
     - **Listo cuando:** un roadmap nuevo y una unidad nueva ya traen los dos.
-- [ ] **T-64.2 Validar al guardar que haya inicio, fin y camino** · Back
+- [ ] [#9180](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9180) **T-64.2 Validar al guardar que haya inicio, fin y camino** · Back · New · [[sprints/sprint-3/12-responsables#Stefano Zoffoli|Stefano Zoffoli]]
     - **Qué:** `GraphValidator` rechaza guardar si falta el inicio o el fin, o si algún nodo no tiene camino desde el inicio, y devuelve la lista de problemas.
     - **Listo cuando:** hay tests de cada error.
-- [ ] **T-64.3 Agregar inicio y fin a los roadmaps que ya existen** · Back
+- [ ] [#9183](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9183) **T-64.3 Agregar inicio y fin a los roadmaps que ya existen** · Back · New · [[sprints/sprint-3/12-responsables#Stefano Zoffoli|Stefano Zoffoli]]
     - **Qué:** migración que agrega `START` y `END` a cada roadmap y unidad existente y los conecta con el primer y el último nodo.
     - **Listo cuando:** después de migrar, todos los roadmaps pasan la validación de T-64.2.
-- [ ] **T-64.4 Cómo se ven el inicio y el fin** · Front
+- [ ] [#9187](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9187) **T-64.4 Cómo se ven el inicio y el fin** · Front · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
     - **Qué:** visual propio en el mapa 2D y en el mundo 3D, con texto y no solo un ícono.
     - **Listo cuando:** el alumno identifica dónde empieza y dónde termina.
+- [ ] [#9352](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9352) **T-64.5 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]]
+    - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 
 ---
 

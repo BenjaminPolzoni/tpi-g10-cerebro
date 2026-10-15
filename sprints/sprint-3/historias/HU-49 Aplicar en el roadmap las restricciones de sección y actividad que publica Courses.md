@@ -1,18 +1,24 @@
 ---
 tags: [tpi, g10, sprint-3, hu]
 codigo: HU-49
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Deuda del Sprint 2"
 sprint: "G10 - Sprint 3"
 puntos: 8
 prioridad: Must
 en_taiga: true
+ref: 7211
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7211
+responsables_tareas: ["Mateo Delgado Costa", "Franco Maximiliano Amarilla"]
+tareas_cerradas: "0/6"
 ---
 
 # HU-49: Aplicar en el roadmap las restricciones de sección y actividad que publica Courses
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HU-49 Aplicar en el roadmap las restricciones de sección y actividad que publica Courses|HU-49]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7211)) · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]] (5), [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]] (1).
+
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/6** · Sprint: **G10 - Sprint 3**
 > Ya existe en Taiga: [[taiga/historias/HU-49 Aplicar en el roadmap las restricciones de sección y actividad que publica Courses|HU-49]] (épica EP-4230). En el Sprint 3 se **reabre** con lo que falta. El 2026-10-15 absorbe HU-67 (examen con ventana horaria) y lo oculto/bloqueado de un roadmap entero que estaba en HU-61, y pasa a Must porque la demo (HT-21) lo necesita.
 
 [G10] — HU-49 — Aplicar en el roadmap las restricciones de sección y actividad que publica Courses
@@ -122,23 +128,27 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-49.9 Corroborar qué ya está hecho** · Equipo
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/6**. Historia en Taiga: [[taiga/historias/HU-49 Aplicar en el roadmap las restricciones de sección y actividad que publica Courses|HU-49]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7211)
+
+- [ ] [#9311](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9311) **T-49.9 Corroborar qué ya está hecho** · Equipo · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** según E3 puede estar hecho. Probar en develop restricciones de Courses ocultas, bloqueadas y por fecha, y actualizar esta HU con lo que falte antes de seguir.
     - **Listo cuando:** la HU dice exactamente qué falta.
-- [ ] **T-49.10 Distinguir oculto de bloqueado** · Back
+- [ ] [#9312](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9312) **T-49.10 Distinguir oculto de bloqueado** · Back · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** con el `on_unmet` que publica Courses, `HIDDEN` saca el nodo, la sección o el roadmap de lo que ve el alumno y `LOCKED` lo deja visible bloqueado, con su fecha.
     - **Dónde:** `CourseRestrictionsClient`, `UnitRestrictionRules`, `GroupVisibilityRules`.
     - **Listo cuando:** hay tests de los dos casos en nodo, sección y roadmap.
-- [ ] **T-49.11 Actualizar el roadmap cuando Courses cambia una restricción** · Back + Coordinación
+- [ ] [#9313](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9313) **T-49.11 Actualizar el roadmap cuando Courses cambia una restricción** · Back + Coordinación · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** si G01 publica un evento de cambio, consumirlo e invalidar la caché de restricciones; si no lo publica, usar caché corta con lectura por pull. Registrar el acuerdo con G01.
     - **Dónde:** `CoursesLifecycleEventListener`.
     - **Listo cuando:** un cambio en Courses se ve en el roadmap sin reiniciar nada.
-- [ ] **T-49.12 Mostrarle al alumno lo bloqueado y cuándo se habilita** · Front
+- [ ] [#9314](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9314) **T-49.12 Mostrarle al alumno lo bloqueado y cuándo se habilita** · Front · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** el mapa del alumno no muestra lo oculto y en lo bloqueado dice «Se habilita el {fecha}» (en un examen, «Se habilita el {fecha} a las {hora}»), en texto.
     - **Listo cuando:** se ve en el mapa 2D y en el mundo, y lo lee un lector de pantalla.
-- [ ] **T-49.13 Aplicar al examen la ventana horaria que publica Courses** · Back
+- [ ] [#9315](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9315) **T-49.13 Aplicar al examen la ventana horaria que publica Courses** · Back · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** la restricción de fecha que Courses publica para la actividad (`CourseRestrictionsClient`) se aplica al nodo `EXAM` correspondiente, sin datos propios en el nodo (P9). Antes y después de la ventana el gate responde `DATE_RESTRICTED`.
     - **Listo cuando:** hay tests con reloj simulado a las 17:59, 18:30 y 20:01.
+- [ ] [#9346](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9346) **T-49.14 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]]
+    - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 
 ---
 

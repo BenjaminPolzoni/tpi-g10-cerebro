@@ -8,7 +8,7 @@ puntos: 65
 
 # Múltiples roadmaps por curso y grafo configurable
 
-> [!info] Épica del Sprint 3 · **11 historias** · **65 pts** · Estado: **Propuesta** (todavía no está en Taiga).
+> [!info] Épica del Sprint 3 · **11 historias** · **65 pts** · Estado: **New** · En Taiga: [[taiga/epicas/EP-8633 Múltiples roadmaps por curso y grafo configurable|EP-8633]].
 
 [G10] — Múltiples roadmaps por curso y grafo configurable
 ---------------------------------------------------------

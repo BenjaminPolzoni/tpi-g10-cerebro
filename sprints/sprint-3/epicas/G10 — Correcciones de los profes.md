@@ -8,7 +8,7 @@ puntos: 31
 
 # Correcciones de los profes
 
-> [!info] Épica del Sprint 3 · **7 historias** · **31 pts** · Estado: **Propuesta** (todavía no está en Taiga).
+> [!info] Épica del Sprint 3 · **7 historias** · **31 pts** · Estado: **New** · En Taiga: [[taiga/epicas/EP-8631 Correcciones de los profes|EP-8631]].
 
 [G10] — Correcciones de los profes
 ----------------------------------

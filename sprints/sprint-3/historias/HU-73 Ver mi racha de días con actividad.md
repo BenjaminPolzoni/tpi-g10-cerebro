@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, hu]
 codigo: HU-73
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Deuda del Sprint 2"
 sprint: "G10 - Sprint 3"
 puntos: 5
 prioridad: Should
-en_taiga: false
+en_taiga: true
+ref: 8621
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8621
+responsables_tareas: ["Lautaro Jesus Diego", "Franco Maximiliano Amarilla"]
+tareas_cerradas: "0/5"
 ---
 
 # HU-73: Ver mi racha de días con actividad
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga. Es la primera HU de [[taiga/epicas/EP-592 Racha|EP-592 Racha]], que entra en el Sprint 3 por E12 (2026-10-15).
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/5** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HU-73 Ver mi racha de días con actividad|HU-73]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8621)) · Épica en Taiga: [[epicas/EP-8632 Deuda del Sprint 2|EP-8632]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Lautaro Jesus Diego|Lautaro Jesus Diego]] (4), [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]] (1). Es la primera HU de [[taiga/epicas/EP-592 Racha|EP-592 Racha]], que entra en el Sprint 3 por E12 (2026-10-15).
 
 [G10] — HU-73 — Ver mi racha de días con actividad
 --------------------------------------------------
@@ -116,19 +120,23 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-73.1 Registrar los días con actividad** · Back
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/5**. Historia en Taiga: [[taiga/historias/HU-73 Ver mi racha de días con actividad|HU-73]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8621)
+
+- [ ] [#9227](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9227) **T-73.1 Registrar los días con actividad** · Back · New · [[sprints/sprint-3/12-responsables#Lautaro Jesus Diego|Lautaro Jesus Diego]]
     - **Qué:** migración con `actividad_diaria` (alumno, curso-cohorte, día; únicos los tres) y `racha_maxima`. Se registra al completar un nodo o leer un contenido obligatorio, con el día según la zona horaria del curso.
     - **Dónde:** `ProgressService`, `ContentReadingWriter`.
     - **Listo cuando:** dos actividades el mismo día dejan un solo registro. Hay test.
-- [ ] **T-73.2 Calcular la racha y devolverla con el progreso** · Back
+- [ ] [#9228](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9228) **T-73.2 Calcular la racha y devolverla con el progreso** · Back · New · [[sprints/sprint-3/12-responsables#Lautaro Jesus Diego|Lautaro Jesus Diego]]
     - **Qué:** `current_streak` y `max_streak` en la respuesta del progreso, detrás de un flag de racha.
     - **Listo cuando:** responde en menos de 200 ms y hay tests con reloj simulado (3 días seguidos, un día salteado).
-- [ ] **T-73.3 Mostrar la racha real en el HUD** · Front
+- [ ] [#9229](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9229) **T-73.3 Mostrar la racha real en el HUD** · Front · New · [[sprints/sprint-3/12-responsables#Lautaro Jesus Diego|Lautaro Jesus Diego]]
     - **Qué:** `streak.component` usa `generic-streak-flame` con el dato real y se saca el 7 fijo (DT-13).
     - **Listo cuando:** la llama muestra la racha del alumno logueado.
-- [ ] **T-73.4 Insignia por racha** · Back
+- [ ] [#9230](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9230) **T-73.4 Insignia por racha** · Back · New · [[sprints/sprint-3/12-responsables#Lautaro Jesus Diego|Lautaro Jesus Diego]]
     - **Qué:** criterio de insignia por racha (por ejemplo, 50 días) evaluado en `BadgeEvaluator`.
     - **Listo cuando:** se otorga una vez al llegar a la racha. Hay test.
+- [ ] [#9356](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9356) **T-73.5 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]]
+    - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 
 ---
 

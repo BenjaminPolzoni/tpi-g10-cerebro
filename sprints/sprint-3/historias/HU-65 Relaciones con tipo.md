@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, hu]
 codigo: HU-65
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Correcciones de los profes"
 sprint: "G10 - Sprint 3"
 puntos: 8
 prioridad: Must
-en_taiga: false
+en_taiga: true
+ref: 8614
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8614
+responsables_tareas: ["Iker Alonso", "Mateo Delgado Costa", "Quinteros Tomás"]
+tareas_cerradas: "0/4"
 ---
 
 # HU-65: Relaciones con tipo
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Correcciones de los profes|Correcciones de los profes]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Correcciones de los profes|Correcciones de los profes]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/4** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HU-65 Relaciones con tipo|HU-65]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8614)) · Épica en Taiga: [[epicas/EP-8631 Correcciones de los profes|EP-8631]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]] (2), [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]] (1), [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]] (1).
 
 [G10] — HU-65 — Relaciones con tipo
 -----------------------------------
@@ -115,16 +119,20 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-65.1 Catálogo de los 5 tipos de relación** · Back
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/4**. Historia en Taiga: [[taiga/historias/HU-65 Relaciones con tipo|HU-65]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8614)
+
+- [ ] [#9193](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9193) **T-65.1 Catálogo de los 5 tipos de relación** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** `requires`, `recommends`, `belongs_to`, `related_to` y `part_of` (DEC-018), cada uno con `label` y `visible`. Solo `requires` afecta el desbloqueo, usando las reglas de HU-58 y HU-59.
     - **Dónde:** módulo `graph`.
     - **Listo cuando:** hay tests de que solo `requires` cambia el desbloqueo.
-- [ ] **T-65.2 Ver el nombre de cada relación y ocultar tipos** · Front
+- [ ] [#9195](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9195) **T-65.2 Ver el nombre de cada relación y ocultar tipos** · Front · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** la arista muestra el nombre del tipo y se distingue por texto y forma de línea (no solo color); el profesor puede ocultar un tipo en el mapa.
     - **Listo cuando:** ocultar un tipo lo saca del mapa del alumno.
-- [ ] **T-65.3 Elegir el tipo al crear una relación** · Front
+- [ ] [#9197](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9197) **T-65.3 Elegir el tipo al crear una relación** · Front · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** al crear una relación (desde el editor o arrastrando, HU-62) se elige el tipo; en `requires` la condición se arma con el editor de reglas de HU-58/HU-59.
     - **Listo cuando:** el profesor crea una relación de cada tipo.
+- [ ] [#9353](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9353) **T-65.4 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]]
+    - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 
 ---
 

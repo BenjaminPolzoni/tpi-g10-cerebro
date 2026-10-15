@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, hu]
 codigo: HU-62
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Múltiples roadmaps por curso y grafo configurable"
 sprint: "G10 - Sprint 3"
 puntos: 8
 prioridad: Must
-en_taiga: false
+en_taiga: true
+ref: 8612
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8612
+responsables_tareas: ["Mateo Delgado Costa", "Franco Maximiliano Amarilla"]
+tareas_cerradas: "0/6"
 ---
 
 # HU-62: Vista de grafo cómoda para el profesor
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga. Desde el 2026-10-15 es la única dueña de guardar posiciones y crear relaciones arrastrando (HU-66 se eliminó) y de elegir qué roadmap del curso se ve como mapa (antes en HU-63, descartada).
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/6** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HU-62 Vista de grafo cómoda para el profesor|HU-62]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8612)) · Épica en Taiga: [[epicas/EP-8633 Múltiples roadmaps por curso y grafo configurable|EP-8633]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]] (5), [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]] (1). Desde el 2026-10-15 es la única dueña de guardar posiciones y crear relaciones arrastrando (HU-66 se eliminó) y de elegir qué roadmap del curso se ve como mapa (antes en HU-63, descartada).
 
 [G10] — HU-62 — Vista de grafo cómoda para el profesor
 ------------------------------------------------------
@@ -122,21 +126,25 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-62.1 Vista de grafo con el componente del kit** · Front
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/6**. Historia en Taiga: [[taiga/historias/HU-62 Vista de grafo cómoda para el profesor|HU-62]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8612)
+
+- [ ] [#9165](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9165) **T-62.1 Vista de grafo con el componente del kit** · Front · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** `course-map-page` usa `generic-node-graph` (HT-34) con acomodo automático (`elkjs`), zoom, pan y minimapa. Si el componente todavía no está, arrancar con la librería directa y cambiar después.
     - **Listo cuando:** se mueve fluido con 150 nodos.
-- [ ] **T-62.2 Guardar las posiciones de los nodos** · Back + Front
+- [ ] [#9166](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9166) **T-62.2 Guardar las posiciones de los nodos** · Back + Front · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** endpoint para guardar la posición de cada nodo en el grafo; el front deja de dar error al mover nodos (`moveNode` del store).
     - **Listo cuando:** se mueve un nodo, se recarga la página y queda donde se dejó.
-- [ ] **T-62.3 Crear y borrar relaciones arrastrando** · Front
+- [ ] [#9167](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9167) **T-62.3 Crear y borrar relaciones arrastrando** · Front · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** arrastrar de un nodo a otro crea la relación (eligiendo su tipo, HU-65); se borra desde la arista.
     - **Listo cuando:** el profesor arma las relaciones de una unidad sin usar formularios.
-- [ ] **T-62.4 Usar el grafo con teclado** · Front
+- [ ] [#9168](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9168) **T-62.4 Usar el grafo con teclado** · Front · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** moverse entre nodos con teclado, foco visible y un enlace a la lista de nodos de la sección en «Contenido del curso» como alternativa.
     - **Listo cuando:** se puede revisar y editar el grafo sin mouse.
-- [ ] **T-62.5 Elegir qué roadmap del curso ver como mapa** · Front
+- [ ] [#9316](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9316) **T-62.5 Elegir qué roadmap del curso ver como mapa** · Front · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** en `course-editor-page` (hoy solo el mapa), un selector con los roadmaps del curso (HU-57) que cambia el mapa que se muestra (P1).
     - **Listo cuando:** en un curso con dos roadmaps, el profesor ve el mapa de cada uno.
+- [ ] [#9351](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9351) **T-62.6 Wiki con capturas y componentes usados** · New · [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]]
+    - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 
 ---
 

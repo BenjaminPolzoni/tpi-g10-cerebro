@@ -1,20 +1,24 @@
 ---
 tags: [tpi, g10, sprint-3, ht]
 codigo: HT-26
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Consistencia visual con la UI-KIT"
 sprint: "G10 - Sprint 3"
 puntos: 8
 prioridad: Must
 prioridad_sprint: 1
-en_taiga: false
+en_taiga: true
+ref: 9268
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/9268
+responsables_tareas: ["Ludmila Mailen Cejas", "Lorenzo Araujo", "Quinteros Tomás"]
+tareas_cerradas: "0/7"
 ---
 
 # HT-26: Adopción de la UI-KIT en el roadmap
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Consistencia visual con la UI-KIT|Consistencia visual con la UI-KIT]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga. El 2026-10-15 junta en una sola HT todo lo de la UI-KIT que seguía en el sprint: HT-26, HT-28, HT-29 y HU-70 (19 puntos). HT-25 (bump y TODOs) y HT-27 (tokens) ya se habían borrado del sprint. El 2026-10-15 se dividió en dos HT de 8 (máximo por historia): esta queda con las pantallas y [[sprints/sprint-3/historias/HT-34 Componente de grafo en la UI-KIT|HT-34]] con el componente de grafo.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Consistencia visual con la UI-KIT|Consistencia visual con la UI-KIT]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/7** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HT-26 Adopción de la UI-KIT en el roadmap|HT-26]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/9268)) · Épica en Taiga: [[epicas/EP-8630 Consistencia visual con la UI-KIT|EP-8630]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]] (5), [[sprints/sprint-3/12-responsables#Lorenzo Araujo|Lorenzo Araujo]] (1), [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]] (1). El 2026-10-15 junta en una sola HT todo lo de la UI-KIT que seguía en el sprint: HT-26, HT-28, HT-29 y HU-70 (19 puntos). HT-25 (bump y TODOs) y HT-27 (tokens) ya se habían borrado del sprint. El 2026-10-15 se dividió en dos HT de 8 (máximo por historia): esta queda con las pantallas y [[sprints/sprint-3/historias/HT-34 Componente de grafo en la UI-KIT|HT-34]] con el componente de grafo.
 
 > [!important] Prioridad 1 del sprint (2026-10-15)
 > Va primero, junto con las otras prioridad 1: HT-30 a HT-33 (criterios pendientes de HU cerradas) y HT-34 (componente de grafo). Es la parte visual: que el roadmap se vea y se use con la UI-KIT.
@@ -118,27 +122,31 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-26.1 Formularios con los controles del kit** · Front
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/7**. Historia en Taiga: [[taiga/historias/HT-26 Adopción de la UI-KIT en el roadmap|HT-26]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/9268)
+
+- [ ] [#9276](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9276) **T-26.1 Formularios con los controles del kit** · Front · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
     - **Qué:** reemplazar `<input>`, `<select>` y `<button>` crudos por `generic-input`, `generic-select`, `generic-checkbox` y `generic-button`, con los labels y mensajes de error del kit.
     - **Dónde:** `entity-editor-dialog`, `badges-catalog-page`, `avatar-panel`.
     - **Listo cuando:** ninguno de los tres tiene controles crudos y `ui-review` no marca nada en esos archivos.
-- [ ] **T-26.2 Botones y títulos sueltos con el kit** · Front
+- [ ] [#9277](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9277) **T-26.2 Botones y títulos sueltos con el kit** · Front · New · [[sprints/sprint-3/12-responsables#Lorenzo Araujo|Lorenzo Araujo]]
     - **Qué:** pasar los botones y headings armados a mano a `generic-button` y `generic-title`.
     - **Dónde:** `course-editor-page`, `section-nodes`, `course-map-page`, `hex-world-page`, `feedback-toast`.
     - **Listo cuando:** `ui-review` no marca botones ni títulos propios en esas pantallas.
-- [ ] **T-26.3 Diálogos del mundo con el modal del kit** · Front
+- [ ] [#9278](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9278) **T-26.3 Diálogos del mundo con el modal del kit** · Front · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
     - **Qué:** `npc-dialogue` y `shop-interior` dejan su `role="dialog"` propio y usan `generic-modal` o `generic-drawer`, que manejan el foco y Escape.
     - **Listo cuando:** los dos se abren y se cierran con teclado y el foco vuelve a donde estaba.
-- [ ] **T-26.4 HUD del mundo con componentes del kit** · Front
+- [ ] [#9279](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9279) **T-26.4 HUD del mundo con componentes del kit** · Front · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
     - **Qué:** `lives` con `generic-icon`/`generic-progress`, `level-hud` con `generic-xp-bar`, `inventory-item-card` con `generic-item-tile` y `role-switch` con el componente del kit que corresponda. La racha va en HU-73.
     - **Listo cuando:** el HUD no usa componentes propios para esas piezas y se ve igual o mejor que hoy.
-- [ ] **T-26.5 Ranking con la tabla y los badges del kit** · Front
+- [ ] [#9280](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9280) **T-26.5 Ranking con la tabla y los badges del kit** · Front · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
     - **Qué:** las 3 `<table>` crudas pasan a `generic-table` y los chips `rk-chip`/`rk-status` a `generic-badge`. El anonimato de las filas ajenas no cambia (DEC-007).
     - **Dónde:** `ranking/*` (incluye el TODO #59 de `ranking-detail`).
     - **Listo cuando:** el ranking se ve con el kit y hay tests del anonimato y visuales.
-- [ ] **T-26.6 Revisar todo con `ui-review` y tests visuales** · Front
+- [ ] [#9281](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9281) **T-26.6 Revisar todo con ui-review y tests visuales** · Front · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
     - **Qué:** correr `ui-review` (llegó a develop en el PR #579) sobre roadmap y ranking y dejar los tests visuales en verde.
     - **Listo cuando:** `ui-review` no reporta hallazgos nuevos en roadmap y ranking.
+- [ ] [#9340](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9340) **T-26.7 Wiki con capturas y componentes usados** · New · [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]]
+    - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 
 ---
 

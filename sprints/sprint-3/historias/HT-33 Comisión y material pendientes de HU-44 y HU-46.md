@@ -1,20 +1,24 @@
 ---
 tags: [tpi, g10, sprint-3, ht]
 codigo: HT-33
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Deuda del Sprint 2"
 sprint: "G10 - Sprint 3"
 puntos: 8
 prioridad: Must
 prioridad_sprint: 1
-en_taiga: false
+en_taiga: true
+ref: 9272
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/9272
+responsables_tareas: ["Lorenzo Araujo", "Lautaro Jesus Diego", "Ludmila Mailen Cejas", "Quinteros Tomás"]
+tareas_cerradas: "0/6"
 ---
 
 # HT-33: Comisión y material pendientes de HU-44 y HU-46
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga. Sale de dividir por tema la HT de criterios pendientes (2026-10-15): ver [[sprints/sprint-3/historias/HT-30 Insignias pendientes de HU-20 y HU-21|HT-30]]. Las HU originales quedan en Done en su sprint; cada tarea dice a qué HU y a qué CA corresponde.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Deuda del Sprint 2|Deuda del Sprint 2]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/6** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HT-33 Comisión y material pendientes de HU-44 y HU-46|HT-33]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/9272)) · Épica en Taiga: [[epicas/EP-8632 Deuda del Sprint 2|EP-8632]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Lorenzo Araujo|Lorenzo Araujo]] (2), [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]] (2), [[sprints/sprint-3/12-responsables#Lautaro Jesus Diego|Lautaro Jesus Diego]] (1), [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]] (1). Sale de dividir por tema la HT de criterios pendientes (2026-10-15): ver [[sprints/sprint-3/historias/HT-30 Insignias pendientes de HU-20 y HU-21|HT-30]]. Las HU originales quedan en Done en su sprint; cada tarea dice a qué HU y a qué CA corresponde.
 
 > [!important] Prioridad 1 del sprint (2026-10-15)
 > Va después de las insignias (HT-30). Son criterios que ya se dieron por terminados y no se cumplen.
@@ -116,24 +120,26 @@ Dependencias / Impactos
 
 ## Tareas
 
-**HU-44: selector de comisión** ([us/5373](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/5373))
-- [ ] **T-33.1 HU-44 CA2 · Elegir la comisión en el roadmap del alumno** · Front
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/6**. Historia en Taiga: [[taiga/historias/HT-33 Comisión y material pendientes de HU-44 y HU-46|HT-33]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/9272)
+
+- [ ] [#9298](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9298) **T-33.1 HU-44 CA2 · Elegir la comisión en el roadmap del alumno** · Front · New · [[sprints/sprint-3/12-responsables#Lorenzo Araujo|Lorenzo Araujo]]
     - **Qué:** si el alumno está en más de una comisión, un `generic-select` para elegir cuál ver; usa la selección de comisión que ya existe en el back (`GroupSelectionService`).
     - **Listo cuando:** un alumno de 2W1 y 2W2 elige 2W2 y ve sus unidades con el mismo XP. Hay test.
-- [ ] **T-33.2 HU-44 CA3 · Explicar con texto el bloqueo por comisión (`group_restricted`)** · Front
+- [ ] [#9299](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9299) **T-33.2 HU-44 CA3 · Explicar con texto el bloqueo por comisión (group_restricted)** · Front · New · [[sprints/sprint-3/12-responsables#Lorenzo Araujo|Lorenzo Araujo]]
     - **Qué:** sumar el texto del motivo `group_restricted` en `roadmapLabels.blockReason`.
     - **Listo cuando:** el alumno ve por qué no puede entrar a un nodo de otra comisión.
-- [ ] **T-33.3 HU-44 CA1, CA3 y CA4 · Encender el filtro por comisión en la demo y probarlo** · Infra
+- [ ] [#9300](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9300) **T-33.3 HU-44 CA1, CA3 y CA4 · Encender el filtro por comisión en la demo y probarlo** · Infra · New · [[sprints/sprint-3/12-responsables#Lautaro Jesus Diego|Lautaro Jesus Diego]]
     - **Qué:** activar `ROADMAP_BY_GROUP_ENABLED` (`app.features.roadmap-by-group.enabled`) en el entorno de demo y probar los cuatro CA con un alumno en 2W1 y 2W2.
     - **Listo cuando:** los cuatro CA andan de punta a punta en la demo.
-
 **HU-46 CA3: visor embebido** ([us/5375](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/5375))
-- [ ] **T-33.4 HU-46 CA3 · Abrir el material dentro de la página** · Front
+- [ ] [#9301](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9301) **T-33.4 HU-46 CA3 · Abrir el material dentro de la página** · Front · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
     - **Qué:** hoy `material-access` abre la URL firmada en una pestaña nueva. Mostrar PDF y video en un visor dentro de la página (por ejemplo en un `generic-modal`), con la opción de abrir en pestaña nueva como respaldo.
     - **Listo cuando:** el alumno lee el material sin salir del roadmap. Hay test.
-- [ ] **T-33.5 HU-46 CA1 · Redefinir el CA de HU-46 en Taiga sin el Templo** · Equipo
+- [ ] [#9302](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9302) **T-33.5 HU-46 CA1 · Redefinir el CA de HU-46 en Taiga sin el Templo** · Equipo · New · [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]]
     - **Qué:** editar HU-46 (us/5375) en Taiga para sacar el CA1 del Templo, que no existe más (P13).
     - **Listo cuando:** la HU en Taiga ya no menciona el Templo.
+- [ ] [#9344](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9344) **T-33.6 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]]
+    - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 
 ---
 

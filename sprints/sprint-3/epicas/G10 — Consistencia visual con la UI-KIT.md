@@ -8,7 +8,7 @@ puntos: 16
 
 # Consistencia visual con la UI-KIT
 
-> [!info] Épica del Sprint 3 · **2 historias** · **16 pts** · Estado: **Propuesta** (todavía no está en Taiga).
+> [!info] Épica del Sprint 3 · **2 historias** · **16 pts** · Estado: **New** · En Taiga: [[taiga/epicas/EP-8630 Consistencia visual con la UI-KIT|EP-8630]].
 
 [G10] — Consistencia visual con la UI-KIT
 -----------------------------------------

@@ -1,19 +1,23 @@
 ---
 tags: [tpi, g10, sprint-3, hu]
 codigo: HU-71
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Múltiples roadmaps por curso y grafo configurable"
 sprint: "G10 - Sprint 3"
 puntos: 8
 prioridad: Should
-en_taiga: false
+en_taiga: true
+ref: 8619
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8619
+responsables_tareas: ["Baltasar Rodriguez Teruel", "Quinteros Tomás"]
+tareas_cerradas: "0/4"
 ---
 
 # HU-71: Clonar un roadmap con sus restricciones
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga. Sale de la respuesta a G4 (2026-10-15).
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/4** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HU-71 Clonar un roadmap con sus restricciones|HU-71]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8619)) · Épica en Taiga: [[epicas/EP-8633 Múltiples roadmaps por curso y grafo configurable|EP-8633]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]] (3), [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]] (1). Sale de la respuesta a G4 (2026-10-15).
 
 [G10] — HU-71 — Clonar un roadmap con sus restricciones
 -------------------------------------------------------
@@ -115,16 +119,20 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-71.1 Copiar un roadmap con ids nuevos** · Back
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/4**. Historia en Taiga: [[taiga/historias/HU-71 Clonar un roadmap con sus restricciones|HU-71]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8619)
+
+- [ ] [#9169](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9169) **T-71.1 Copiar un roadmap con ids nuevos** · Back · New · [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]]
     - **Qué:** copia del subgrafo completo (secciones, subsecciones, nodos con inicio y fin, relaciones, reglas, restricciones y configuración) generando ids nuevos (G8) y sin progreso de alumnos. Si algo falla, lo copiado se da de baja lógica.
     - **Dónde:** módulo `graph`.
     - **Listo cuando:** la copia es igual al original salvo los ids, y un evento del Motor sobre la copia suma en la copia.
-- [ ] **T-71.2 Endpoint de clonado con permisos** · Back
+- [ ] [#9170](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9170) **T-71.2 Endpoint de clonado con permisos** · Back · New · [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]]
     - **Qué:** `POST /roadmaps/{roadmapId}/clone` con `target_course_id`, `target_group_id` (opcional) y `name`. Solo el dueño de los dos cursos; nombre único en el curso destino.
     - **Listo cuando:** sin permiso devuelve 403 y no crea nada. Hay tests.
-- [ ] **T-71.3 Acción «Clonar» en la pantalla del profesor** · Front
+- [ ] [#9171](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9171) **T-71.3 Acción «Clonar» en la pantalla del profesor** · Front · New · [[sprints/sprint-3/12-responsables#Baltasar Rodriguez Teruel|Baltasar Rodriguez Teruel]]
     - **Qué:** en la pantalla de roadmaps (HU-57), un diálogo para elegir curso y comisión destino y el nombre de la copia.
     - **Listo cuando:** el profesor clona un roadmap a otra comisión sin ayuda.
+- [ ] [#9354](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9354) **T-71.4 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]]
+    - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 
 ---
 

@@ -1,20 +1,24 @@
 ---
 tags: [tpi, g10, sprint-3, ht]
 codigo: HT-34
-estado: Propuesta
-responsable: ""
+estado: New
+responsable: "Sin asignar"
 epica: "Consistencia visual con la UI-KIT"
 sprint: "G10 - Sprint 3"
 puntos: 8
 prioridad: Must
 prioridad_sprint: 1
-en_taiga: false
+en_taiga: true
+ref: 9273
+url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/9273
+responsables_tareas: ["Ludmila Mailen Cejas"]
+tareas_cerradas: "0/2"
 ---
 
 # HT-34: Componente de grafo en la UI-KIT
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Consistencia visual con la UI-KIT|Consistencia visual con la UI-KIT]] · Estado: **Propuesta** · Responsable: **a definir** · Sprint: **G10 - Sprint 3**
-> Nueva: todavía no está cargada en Taiga. Sale de dividir [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap|HT-26]] el 2026-10-15 (21 pts, fuera del máximo de 8): HT-26 queda con las pantallas y esta HT con `generic-node-graph`.
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Consistencia visual con la UI-KIT|Consistencia visual con la UI-KIT]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/2** · Sprint: **G10 - Sprint 3**
+> Cargada en Taiga: [[taiga/historias/HT-34 Componente de grafo en la UI-KIT|HT-34]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/9273)) · Épica en Taiga: [[epicas/EP-8630 Consistencia visual con la UI-KIT|EP-8630]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]] (2). Sale de dividir [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap|HT-26]] el 2026-10-15 (21 pts, fuera del máximo de 8): HT-26 queda con las pantallas y esta HT con `generic-node-graph`.
 
 > [!important] Prioridad 1 del sprint (2026-10-15)
 > Va primero: [[sprints/sprint-3/historias/HU-62 Vista de grafo cómoda para el profesor|HU-62]] depende de este componente.
@@ -117,10 +121,12 @@ Dependencias / Impactos
 
 ## Tareas
 
-- [ ] **T-34.1 Acordar el componente de grafo con el equipo del kit** · Coordinación
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/2**. Historia en Taiga: [[taiga/historias/HT-34 Componente de grafo en la UI-KIT|HT-34]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/9273)
+
+- [ ] [#9303](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9303) **T-34.1 Acordar el componente de grafo con el equipo del kit** · Coordinación · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
     - **Qué:** acordar la API de `generic-node-graph`, la librería que envuelve (`ngx-vflow` o `@foblex/flow` con `elkjs`) y cómo se publica. El dueño es G10 (G13).
     - **Listo cuando:** el equipo del kit aceptó la propuesta por escrito.
-- [ ] **T-34.2 Construir y publicar `generic-node-graph` en el kit** · Front (repo del kit)
+- [ ] [#9304](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9304) **T-34.2 Construir y publicar generic-node-graph en el kit** · Front (repo del kit) · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
     - **Qué:** componente con pan, zoom, minimapa, aristas, navegación con teclado y tokens del kit; historia en Storybook; release de una versión del kit.
     - **Listo cuando:** el componente está en una versión publicada del kit y lo puede usar HU-62.
 
