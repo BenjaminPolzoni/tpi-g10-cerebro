@@ -24,6 +24,7 @@ flowchart LR
 | [[sprints/sprint-3/00-indice\|sprints/]] | Planificación y análisis por sprint. Hoy: propuesta del Sprint 3 | El equipo |
 | [[acuerdos/README\|acuerdos/]] | Una nota por grupo o servicio con el que integramos: qué se acordó, contrato, pendientes | El equipo, cada vez que se acuerda algo |
 | [[decisiones/README\|decisiones/]] | Decisiones técnicas (DEC-xxx): contexto, alternativas y consecuencias | El equipo |
+| [[arquitectura/cors-topics-rutas\|arquitectura/]] | Cómo funciona el micro por dentro: CORS, topics de Kafka y rutas que manejamos hoy | El equipo, cuando cambie el código |
 | `minutas/` | Notas de reuniones (daily, profes, otros grupos) | Quien estuvo en la reunión |
 | [[equipo]] | Integrantes, áreas que conoce cada uno | El equipo |
 | `plantillas/` | Plantillas para acuerdo, decisión y minuta | — |
@@ -42,5 +43,6 @@ flowchart LR
 3. **Taiga es la fuente de verdad del estado de las HU.** Para actualizar `taiga/`, correr el script. No editar esas notas.
 4. **Los contratos técnicos viven en el repo del back** (`tpi-roadmap/docs/contracts/`). Acá se enlazan y se resumen, no se copian.
 5. Antes de preguntar en el grupo, buscar acá (`Ctrl/Cmd + Shift + F`).
+   - ¿Qué es CORS, qué topics usamos, cómo son las rutas? → [[arquitectura/cors-topics-rutas]].
 
 Cómo instalarlo y sincronizarlo: [[COMO-USAR]].
