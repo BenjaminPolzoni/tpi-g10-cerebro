@@ -6,3 +6,4 @@
 __pycache__/
 .copilot/
 .obsidian/plugins/copilot/
+.obsidian/plugins/obsidian-local-rest-api/data.json
