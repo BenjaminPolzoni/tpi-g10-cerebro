@@ -90,6 +90,65 @@ Lo que hay hoy en Postgres:
 > - **Si es decisión nuestra → A**, más reglas en JSON y la vista nueva en el front. Da el mismo resultado visible para el usuario con mucho menos riesgo.
 > - **B (AGE)** es un punto medio a considerar si la plataforma acepta cambiar la imagen de Postgres.
 
+## Modelo del grafo (T-16.4)
+
+> [!success] 2026-10-15 · Modelo escrito, pendiente de revisión del equipo
+> El detalle completo (propiedades, mapeo desde Postgres, esquema y consultas de ejemplo) está en el repo:
+> `tpi-roadmap/docs/T-16-4-MODELO-GRAFO.md`. Esta sección es el resumen. Donde no coincide con el
+> [[#Diseño propuesto si se elige Neo4j|diseño propuesto]] de más abajo, manda esta sección.
+
+**Etiquetas**
+
+| Etiqueta | Qué es | Propiedades principales |
+|---|---|---|
+| `:Roadmap` | Un mapa del curso (N por curso, uno principal) | `id`, `courseCohortId`, `primary`, `name`, `archived`, `hiddenRelationTypes` |
+| `:Section` | Sección o unidad. Una subsección también es `:Section` | `id`, `name`, `sortOrder`, `courseSectionId`, `biome`, `x`, `y` |
+| `:Node` | Desafío, examen, contenido, inicio o fin | `id`, `type`, `name`, `description`, `iconKey`, `mandatory`, `livesPolicy`, `challengeId`, `contentId`, `x`, `y` |
+| `:Rule` | Grupo AND/OR de una regla de desbloqueo | `id`, `op`, `minXp` |
+
+Todos llevan `createdAt` y `deletedAt` (baja lógica), salvo `:Rule`. Sin propiedades libres (DEC-018).
+
+**Relaciones estructurales** (no son aristas que dibuje el profesor): `HAS_SECTION`, `HAS_SUBSECTION`,
+`HAS_NODE`, `UNLOCKED_BY` (elemento → regla raíz) y `HAS_OPERAND` (regla → nodo, sección u otra regla).
+
+**Relaciones del catálogo** (DEC-018), con `id`, `label` y `visible`:
+
+| Tipo | Afecta el desbloqueo | Cómo se guarda |
+|---|---|---|
+| `REQUIRES` | Sí | Como operando del árbol de reglas. Se aplana en aristas para dibujarlo |
+| `RECOMMENDS`, `BELONGS_TO`, `RELATED_TO`, `PART_OF` | No | Relación propia entre elementos del mismo nivel |
+
+**Inicio y fin:** un `START` y un `END` por roadmap (cuelgan del `:Roadmap`) y por sección.
+
+**Qué se queda en Postgres:** todo el estado del alumno (`student_course`, `completed_node`,
+`content_reading`, `node_unlock`, `xp_movement`, `badge`, `badge_award`, `student_avatar`), `node_edit_log` y
+el outbox. Las tablas de estructura mandan hasta que se encienda el flag de lectura (T-18.6).
+
+**Cambios respecto del diseño de abajo**
+
+- Los operandos de una regla se unen con `HAS_OPERAND`, no con `REQUIRES`, para no confundirlas con el tipo
+  de relación del catálogo.
+- No hay propiedades libres (`props`): DEC-018 cerró el esquema.
+- Las posiciones son `x` e `y` en `:Node` y `:Section`, no una relación `LAID_OUT`.
+- No hay nodo `:Course`: el curso es de Courses y alcanza con `courseCohortId`.
+
+**Decisiones a validar en la revisión**
+
+| # | Decisión | Propuesta | Valida |
+|---|---|---|---|
+| D1 | Cómo se guarda `REQUIRES` | Solo como operando del árbol de reglas | Santino (HU-59) |
+| D2 | Desafíos de IA y de recuperación de vida | Por `livesPolicy` (`LLM`, `RECOVERY`), como hoy, sin tipos nuevos | Equipo |
+| D3 | Qué pasa con `UNIT` | La migración lo convierte en subsección | Equipo y Stefano (HU-64) |
+| D4 | Profundidad de las subsecciones | Un nivel | Santino (HU-58) |
+| D5 | Ocultar tipos de relación | Lista por roadmap más `visible` por arista | Mateo (HU-65) |
+| D6 | Entre qué se puede relacionar | Nodo con nodo, sección con sección | Equipo |
+| D7 | Inicio y fin del roadmap y de las subsecciones | Los del roadmap cuelgan del roadmap | Stefano (HU-64) |
+| D8 | Claves foráneas de Postgres hacia `node` y `section` | Se quitan junto con T-18.6; la integridad la cuidan la aplicación y la reconciliación | Baltasar y equipo |
+
+> [!warning] D2 cambia una tarea propuesta
+> Si se acepta D2, la tarea T-18.11 de [[sprints/sprint-3/10-propuesta-tareas-grafo|10-propuesta-tareas-grafo]]
+> (sumar tipos de nodo de IA y recuperación de vida) no hace falta: el código ya los distingue por `livesPolicy`.
+
 ## Diseño propuesto si se elige Neo4j
 
 > [!info] Agregados por las correcciones de los profes
