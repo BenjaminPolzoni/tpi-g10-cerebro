@@ -39,6 +39,24 @@ estado: vigente
 > [!tip] Orden para la consulta
 > P1 a P4 primero: definen el modelo de Neo4j (módulo `graph`) y el 1:N. Sin esas respuestas no conviene arrancar HT-17 y HT-18.
 
+### Catálogo de relaciones entre nodos (insumo de P4)
+
+> [!question] Marcar cuáles usamos
+> Tipos de relación propuestos para el mapeo del grafo (módulo `graph`, [[04-base-de-grafos]]). Marcar con `[x]` los que adoptamos; el resto queda descartado. Cada uno lleva `label` visible y `visible` configurable. Hoy solo `REQUIRES` (y las `Rule`) afectan el desbloqueo: si alguno nuevo también debe afectarlo, anotarlo al lado de la relación.
+> Al decidir, cerrar P4 en [[#Respondidas]] y registrarlo en [[decisiones/README|decisiones/]].
+
+- [ ] `belongs_to` / `pertenece_a`: pertenencia a un grupo (Juan belongs_to Equipo A)
+- [ ] `related_to` / `relacionado_con`: relación genérica, sin especificar el tipo
+- [ ] `is_a` / `es_un`: jerarquía de clases (dog is_a mammal)
+- [ ] `part_of` / `parte_de`: composición (wheel part_of car)
+- [ ] `instance_of` / `instancia_de`: elemento concreto de una clase (Python instance_of programming_language)
+- [ ] `located_in` / `ubicado_en`: lugar (Eiffel_Tower located_in Paris)
+- [ ] `has_property` / `tiene_propiedad`: atributos (water has_property liquid)
+- [ ] `causes` / `causa`: causalidad (smoking causes cancer)
+
+> [!note] Ya acordado
+> `REQUIRES` ("una necesita de otra") es la relación de desbloqueo y queda fuera de esta votación. Las 8 de arriba son candidatas a completar el catálogo junto con las que el documento de los profes ya nombra.
+
 ## 2. Para otros grupos
 
 | # | Prio | Grupo | Duda | Bloquea | Origen | Respuesta |
