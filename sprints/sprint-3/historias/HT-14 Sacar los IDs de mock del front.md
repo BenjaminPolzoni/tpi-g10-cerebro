@@ -11,7 +11,7 @@ en_taiga: true
 ref: 8598
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8598
 responsables_tareas: ["Benjamin Polzoni", "Quinteros Tomás"]
-tareas_cerradas: "0/5"
+tareas_cerradas: "4/5"
 ---
 
 # HT-14: Sacar los IDs de mock del front
@@ -120,19 +120,19 @@ Dependencias / Impactos
 
 > [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/5**. Historia en Taiga: [[taiga/historias/HT-14 Sacar los IDs de mock del front|HT-14]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8598)
 
-- [ ] [#8788](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8788) **T-14.1 Usar el alumno logueado en el roadmap, el mundo y los intentos** · Front · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
+- [x] [#8788](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8788) **T-14.1 Usar el alumno logueado en el roadmap, el mundo y los intentos** · Front · Closed · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
     - **Qué:** sacar el respaldo `DEMO_STUDENT_ID` y tomar el id del alumno de la sesión. Si no hay sesión, mostrar un error en vez de seguir con el alumno de prueba.
     - **Dónde:** `roadmap.store.ts`, `hex-world-page`, `challenge-attempt.service`.
     - **Listo cuando:** con dos alumnos distintos cada uno ve su propio progreso, y sin sesión aparece el error (anunciado con `aria-live`). Hay un test de cada caso.
-- [ ] [#8804](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8804) **T-14.2 Usar el curso de la URL en el roadmap y el ranking** · Front · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
+- [x] [#8804](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8804) **T-14.2 Usar el curso de la URL en el roadmap y el ranking** · Front · Closed · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
     - **Qué:** sacar `COURSE_SEED_ID` como curso por defecto y leer el curso de la ruta. Si la ruta no trae curso, error claro.
     - **Dónde:** `RoadmapStore` (`roadmap.store.ts`) y `ranking-panel`.
     - **Listo cuando:** dos cursos distintos muestran datos distintos, y hay un test sin curso en la ruta.
-- [ ] [#8805](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8805) **T-14.3 Resaltar la fila del alumno logueado en el detalle del ranking** · Front · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
+- [x] [#8805](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8805) **T-14.3 Resaltar la fila del alumno logueado en el detalle del ranking** · Front · Closed · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
     - **Qué:** reemplazar el mock `CURRENT_STUDENT_ID` por el alumno de la sesión para marcar «mi fila».
     - **Dónde:** `ranking-detail`.
     - **Listo cuando:** se resalta la fila del alumno logueado y no la de un alumno fijo. Hay un test.
-- [ ] [#8806](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8806) **T-14.4 Dejar el front sin ids de prueba** · Front · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
+- [x] [#8806](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8806) **T-14.4 Dejar el front sin ids de prueba** · Front · Closed · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
     - **Qué:** buscar `DEMO_STUDENT_ID`, `COURSE_SEED_ID` y `CURRENT_STUDENT_ID` en `src/app` y dejarlos solo en tests y mocks.
     - **Listo cuando:** la búsqueda da cero fuera de tests y mocks, y `npm run verify` pasa.
 - [ ] [#9334](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9334) **T-14.5 Wiki con capturas y componentes usados** · New · [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]]
