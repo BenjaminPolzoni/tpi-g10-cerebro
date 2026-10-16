@@ -23,7 +23,7 @@ contrato: "contratos/accounting-roadmap-v1.md"
 - **Roadmap no envía vidas ni ítems a Motor** para iniciar un desafío. El `ChallengeStart` heredado (con vidas y XP) es una brecha conocida, no se usa para integrar.
 - Roadmap conserva el **Gate**, calcula `freeLives = currentLives - reservedLives`, muestra el inventario y solicita el equipamiento (`ITEM_EQUIP_REQUESTED`).
 - Todo REST pasa **por Gateway**; `app.api.private-path` de Accounting = `/api/accounting`; `courseId`/`studentId` son UUID.
-- **Degradación:** sin caché vigente, una falla de Accounting es indisponibilidad (`503`); nunca `no_lives` ni `eligible=true`; nunca caché vencida para decidir el Gate. Para **visualización** de inventario sí se puede mostrar el último dato conocido marcado como desactualizado.
+- **Degradación:** sin caché vigente, una falla de Accounting es indisponibilidad (`503`; en la v1.4 propuesta del acta del gate pasa a `200` con `reason=origen_no_disponible`, [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503|DEC-020]]); nunca `no_lives` ni `eligible=true`; nunca caché vencida para decidir el Gate. Para **visualización** de inventario sí se puede mostrar el último dato conocido marcado como desactualizado.
 - El **techo de vidas** viene de Backoffice (PAR-12 `initialLives`/`maxLives`), no de Accounting. Ver [[acuerdos/backoffice|Backoffice]].
 - Contratos **reemplazados** por el acta v1.0: `GET /api/bank/courses/{courseId}/students/{studentId}/lives`; `GET /api/wallet/inventory/lives` y `POST .../lives/batch`; eventos `EXHAUSTED-LIVES`/`VIDAS-AGOTADAS`; enums `BOOST_XP`, `ABSORB_FAILURE`, `XP_MULTIPLIER`, `NO_EXAMS`.
 

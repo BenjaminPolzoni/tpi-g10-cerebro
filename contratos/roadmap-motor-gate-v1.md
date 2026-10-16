@@ -2,10 +2,10 @@
 
 | Dato | Valor |
 |---|---|
-| Tarea | T-15.5 — Acta y publicación OpenAPI del contrato; T-44.3 — motivo `group_restricted` (v1.1); T6-HU48 — `challenge_id` y `attempt_type` (v1.2); restricciones `DATE` (v1.3, acta T-10.1 §3.6) |
-| Versión | **1.3 — Sprint 3** (1.2 — Sprint 3; 1.1 — Sprint 2; 1.0 — Sprint 1) |
-| Fecha | 2026-10-12 (v1.2: 2026-10-11; v1.1: 2026-10-09; v1.0: 2026-09-26) |
-| Estado | **Acordado funcionalmente; aprobación nominal pendiente** |
+| Tarea | T-15.5 — Acta y publicación OpenAPI del contrato; T-44.3 — motivo `group_restricted` (v1.1); T6-HU48 — `challenge_id` y `attempt_type` (v1.2); restricciones `DATE` (v1.3, acta T-10.1 §3.6); T-31.1 — `origen_no_disponible` en vez de `503` (v1.4, HT-31) |
+| Versión | **1.4 — Sprint 3, propuesta** (vigente: 1.3 — Sprint 3; 1.2 — Sprint 3; 1.1 — Sprint 2; 1.0 — Sprint 1) |
+| Fecha | 2026-10-15 (v1.3: 2026-10-12; v1.2: 2026-10-11; v1.1: 2026-10-09; v1.0: 2026-09-26) |
+| Estado | **v1.3 acordada funcionalmente; v1.4 pendiente de aprobación de G09** (bloquea el merge de T-31.1); aprobación nominal pendiente |
 | Equipos | Roadmap (Tema 10) y Motor de Desafíos |
 
 Este documento es la fuente vigente del contrato funcional del Gate de Roadmap.
@@ -20,6 +20,7 @@ La especificación ejecutable se publica también en `/v3/api-docs` y
 | 1.1 | 2026-10-09 | T-44.3 (HU-44): se agrega el motivo `group_restricted` (§4 y §5), un `403` para la unidad cuya sección Courses no encuentra y el `503` cuando Courses no responde (§6). Cambio aditivo: no cambia la ruta, el envelope ni los motivos existentes. |
 | 1.2 | 2026-10-11 | T6 (HU-48): el `data` del gate suma `challenge_id` y `attempt_type` (§3). Cambio aditivo: el Motor ignora los campos que no conoce; no cambia la ruta, el envelope, `eligible` ni `reason`. |
 | 1.3 | 2026-10-12 | T-10.1 §3.6: se agrega el motivo `date_restricted` (§4 y §5) y el Gate evalúa las condiciones `DATE` de Courses. Cambio aditivo: solo con el flag `ROADMAP_BY_GROUP_ENABLED` encendido; no cambia la ruta, el envelope, `eligible` ni ninguno de los motivos existentes. |
+| 1.4 | 2026-10-15 | **Propuesta** (T-31.1, HU-15 CA5, [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503\|DEC-020]]): si Accounting o Courses no responden sin dato vigente, el Gate responde `200` con `eligible=false` y `reason=origen_no_disponible` en lugar del `503` (§6). **No es aditivo**: el Gate deja de devolver `503` por un origen caído. Además se documenta `unit_prerequisite_pending` (§4 y §5), que el Gate ya emitía desde los prerrequisitos entre unidades ([[decisiones/DEC-010-prerrequisitos-por-seccion-v25\|DEC-010]]) y faltaba en el acta. |
 
 La v1.1 solo cambia el comportamiento con el flag `ROADMAP_BY_GROUP_ENABLED` encendido. Con el flag
 apagado (default) el Gate responde exactamente como en la v1.0. La v1.2 es aditiva para todos los
@@ -119,6 +120,8 @@ al Motor qué desafío y qué clase de intento corresponde al nodo consultado.
 | `no_lives` | Un nodo `STANDARD` no tiene vidas libres disponibles. |
 | `group_restricted` | **v1.1.** La unidad del nodo está limitada a comisiones a las que el alumno no pertenece. Solo se emite con el flag `ROADMAP_BY_GROUP_ENABLED` encendido. |
 | `date_restricted` | **v1.3.** La unidad del nodo tiene una condición `DATE` que no se cumple en el instante de la consulta (acta T-10.1 §3.6). Solo se emite con el flag `ROADMAP_BY_GROUP_ENABLED` encendido. |
+| `unit_prerequisite_pending` | **v1.4 (documentación).** Falta completar una unidad requisito de la unidad del nodo (todos sus nodos obligatorios, [[decisiones/DEC-010-prerrequisitos-por-seccion-v25\|DEC-010]]). El Gate ya lo emitía; no estaba en el acta. |
+| `origen_no_disponible` | **v1.4 (propuesta).** Accounting o Courses no respondieron, o respondieron con un dato inválido, y no hay dato vigente (§6). Reemplaza al `503`. A diferencia del resto, el valor está en castellano porque lo fija HT-31. |
 
 El vocabulario sigue siendo cerrado: Roadmap no emite ningún valor fuera de esta tabla. Como la v1.0
 lo cerraba en cinco valores, cada ampliación se coordina con el consumidor (§9). El Motor ya reconoce
@@ -135,9 +138,14 @@ Roadmap devuelve el primer bloqueo aplicable en este orden:
 1. `course_archived`;
 2. `not_enrolled`;
 3. `group_restricted` o `date_restricted` (v1.1/v1.3, restricción de la unidad, solo con el flag encendido);
-4. `content_not_read`;
-5. `prerequisite_pending`;
-6. `no_lives`.
+4. `unit_prerequisite_pending` (unidad requisito incompleta);
+5. `content_not_read`;
+6. `prerequisite_pending`;
+7. `no_lives`.
+
+`origen_no_disponible` (v1.4) no tiene un lugar fijo: aparece en el paso donde el origen falla.
+Matrícula, comisiones y fechas consultan Courses (pasos 2 y 3) y las vidas consultan Accounting
+(paso 7), así que un bloqueo funcional anterior a la consulta que falla gana sobre la caída.
 
 La restricción de la unidad se evalúa antes que las condiciones de progreso, para no revelar lecturas
 ni prerrequisitos de una unidad a la que el alumno no accede, y después de la matrícula: sin matrícula
@@ -162,7 +170,7 @@ Regla de `group_restricted` y `date_restricted` (HU-44, T-44.3; T-10.1 §3.6):
   acta T-10.1 §3.6); un extremo ausente es abierto. Una fecha-hora **sin offset** se asume en esa
   zona. Un **cierre con fecha sola** abarca ese día completo: el fin exclusivo se corre al día
   siguiente. Una ventana **vacía o invertida** (`from >= until`) se informa como indisponibilidad
-  (`503`), nunca como un bloqueo permanente.
+  (`503` hasta la v1.3; `origen_no_disponible` desde la v1.4), nunca como un bloqueo permanente.
 - La restricción `DATE` aplica también a la **lectura** de un nodo de contenido: un contenido fuera
   de su ventana no se puede leer antes de tiempo (mismo `date_restricted`).
 - Cuando la unidad queda bloqueada, un incumplimiento `DATE` informa `date_restricted`; si ninguna
@@ -184,19 +192,36 @@ freeLives = currentLives - reservedLives
 
 ## 6. Degradación y errores reales
 
-Si Accounting falla y no existe caché vigente, `InventoryUnavailableException` produce:
+> [!warning] v1.4 propuesta, pendiente de G09
+> Hasta la v1.3, un origen caído respondía `503` Problem Details. La v1.4 lo reemplaza por un
+> bloqueo con motivo. El código está en `feature/t-31-1-gate-origen-no-disponible` y no se mergea
+> hasta que G09 apruebe este cambio.
 
-```http
-HTTP/1.1 503 Service Unavailable
-Content-Type: application/problem+json
+Si Accounting o Courses fallan (o responden con un dato inválido) y no existe caché vigente, el
+Gate responde un bloqueo:
+
+```json
+{
+  "data": {
+    "eligible": false,
+    "reason": "origen_no_disponible",
+    "challenge_id": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+    "attempt_type": "NORMAL"
+  },
+  "message": null,
+  "success": true,
+  "timestamp": "2026-10-15T18:00:00Z"
+}
 ```
 
-La respuesta sigue Problem Details e incluye `status=503` y `trace_id`. La indisponibilidad:
+Sigue siendo **fail-closed** ([[decisiones/DEC-003-gate-pull-identidad-de-servicio-fail-closed|DEC-003]]).
+La indisponibilidad:
 
-- no se convierte en `no_lives`;
+- no se convierte en `no_lives`, `not_enrolled` ni `group_restricted`;
 - no devuelve `eligible=true`;
-- no agrega una razón funcional;
 - no utiliza caché vencida para decidir el Gate.
+
+Un nodo `RECOVERY` no consulta vidas: la caída de Accounting no lo bloquea.
 
 También se conservan 401 para falta de identidad, 403 para principal o nodo no autorizado y 404
 cuando el nodo no existe en el curso.
@@ -219,7 +244,7 @@ con código `inventory.account-not-found` y los IDs consultados (`courseId`, `st
 - no usa caché: la cuenta debe crearse por el flujo previsto (inscripción/alta) antes de evaluar
   vidas.
 
-Cualquier otra falla HTTP o de transporte sigue siendo el `503` de indisponibilidad de §6. El
+Cualquier otra falla HTTP o de transporte sigue siendo la indisponibilidad de §6 (`503` hasta la v1.3, `origen_no_disponible` desde la v1.4); un rechazo `4xx` de Accounting es un `502` ([[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad|DEC-015]]). El
 consumidor (Motor) todavía define solo 403 y 503; su tratamiento de este `404` queda pendiente de
 coordinación, igual que el resto de los pendientes de §9.
 
@@ -233,13 +258,14 @@ comisiones del alumno. No consulta el resto del roadmap.
 |---|---|---|
 | La unidad o la actividad es de comisiones a las que el alumno no pertenece | `200`, `eligible=false`, `reason=group_restricted` | Bloqueo funcional |
 | La unidad tiene una sección asociada (o el nodo una actividad) que Courses no encuentra (inexistente o inactiva) | `403` Problem Details, código `node.unit-unresolved`, sin `reason` | Bloqueo funcional |
-| Courses no responde las restricciones o las comisiones | `503` Problem Details | Indisponibilidad |
+| Courses no responde las restricciones o las comisiones | `200`, `eligible=false`, `reason=origen_no_disponible` (v1.4; `503` hasta la v1.3) | Indisponibilidad |
 
 - El `403` de la unidad o actividad no resuelta no agrega un motivo al vocabulario: no se sabe si
   estaba restringida, así que no se informa `group_restricted` ni se concede acceso. Es el mismo
   tratamiento que el nodo no disponible.
-- El `503` por Courses sigue las mismas reglas que el de Accounting: no se convierte en
-  `group_restricted`, no devuelve `eligible=true` y no usa datos viejos para decidir.
+- La caída de Courses sigue las mismas reglas que la de Accounting: no se convierte en
+  `group_restricted`, no devuelve `eligible=true` y no usa datos viejos para decidir. Lo mismo para
+  la matrícula: si el fallback contra Courses no responde, no se informa `not_enrolled`.
 - No hay caché: cada evaluación de una unidad con sección asociada hace una llamada a Courses por su
   restricción y, si el nodo tiene `content_id`, otra por su actividad; una restricción con comisiones
   suma la lectura paginada de participantes de la cohorte.
@@ -250,6 +276,11 @@ Repetir el GET con el mismo estado produce la misma decisión. La operación no 
 lecturas, nodos completados, desbloqueos ni movimientos de XP, y no crea intentos o reservas.
 
 ## 8. Contratos reemplazados
+
+La v1.4 (propuesta) **no es aditiva**: reemplaza el `503` de §6 por el bloqueo
+`origen_no_disponible` y suma ese valor al vocabulario. No cambia la ruta, el envelope, el orden de
+los motivos existentes ni los demás errores (`401`, `403`, `404`, `502`). También documenta
+`unit_prerequisite_pending`, que el Gate ya emitía.
 
 La v1.3 es **aditiva** sobre la v1.2: agrega `date_restricted` al vocabulario de §4 (pasa de seis a
 siete valores) y activa la evaluación de las condiciones `DATE` de Courses. No retira ni reemplaza
@@ -287,9 +318,19 @@ commits `3ee47b4`/`d07cdbb` de `tpi-engine-challenge`, `develop`, verificados en
 [`motor-desafios-evento-cierre.md`](motor-desafios-evento-cierre.md) §"Motivos del gate"), y su
 passthrough de texto lo trata como cualquier otro motivo: `403` con el `reason` recibido.
 
-Pendiente de coordinar con G09: su contrato `docs/contracts/roadmap-eligibility.yaml` todavía lista
-los cinco valores de la v1.0 (seguimiento: `2026-P4-BE/tpi-engine-challenge#234`), y falta su
-conformidad explícita con el `403` de la unidad no resuelta.
+### Compatibilidad de la v1.4 con el consumidor (pendiente de G09)
+
+Con `eligible=false`, el Motor ya rechaza el intento con `403` y reenvía el `reason` como texto,
+así que `origen_no_disponible` llega al alumno sin cambiar su código. Lo que G09 tiene que aprobar
+es que el Gate deje de devolver `503` por un origen caído (su cliente hoy lo trata como "Roadmap no
+disponible") y sumar `origen_no_disponible` y `unit_prerequisite_pending` a
+`roadmap-eligibility.yaml`.
+
+Pendiente de coordinar con G09: su contrato `docs/contracts/roadmap-eligibility.yaml` ya lista los
+siete valores de la v1.3 (verificado en `tpi-engine-challenge`, `develop`, `e95adac6`, 2026-10-15;
+antes listaba los cinco de la v1.0, seguimiento `2026-P4-BE/tpi-engine-challenge#234`), pero le
+faltan `unit_prerequisite_pending` y `origen_no_disponible`, y todavía documenta el `503` por
+dependencia caída. También falta su conformidad explícita con el `403` de la unidad no resuelta.
 
 Las decisiones funcionales están registradas, pero el repositorio no contiene evidencia nominal
 verificable de aprobación Roadmap ↔ Motor. La firma debe completarse antes de considerar el acta

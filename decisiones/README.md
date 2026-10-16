@@ -31,6 +31,7 @@ Registro de decisiones **ya tomadas** que se deducen del código, los contratos 
 | DEC-017 | N roadmaps por curso, con el alcance configurable por el profesor | 2026-10-15 | aceptada | [[decisiones/DEC-017-n-roadmaps-por-curso-configurables\|DEC-017]] |
 | DEC-018 | Catálogo cerrado de relaciones y de tipos de nodo | 2026-10-15 | aceptada | [[decisiones/DEC-018-catalogo-de-relaciones-y-tipos-de-nodo\|DEC-018]] |
 | DEC-019 | El ranking avisa el estado de sus datos, tiene caché de respaldo y la autorización falla cerrado | 2026-10-15 | aceptada | [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo\|DEC-019]] |
+| DEC-020 | La caída de un origen del gate es un motivo (`origen_no_disponible`), no un 503 | 2026-10-15 | propuesta | [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503\|DEC-020]] |
 
 ## Decisiones que conviene revisar pronto
 > [!warning] Con deuda abierta
@@ -40,3 +41,4 @@ Registro de decisiones **ya tomadas** que se deducen del código, los contratos 
 > - [[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap\|DEC-016]]: Neo4j lo sumamos nosotros a la plataforma (G1); falta validar la infra. Los tipos de relación ya están definidos ([[decisiones/DEC-018-catalogo-de-relaciones-y-tipos-de-nodo\|DEC-018]]).
 > - [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad\|DEC-015]]: `fix/account-not-found-gate` ya está hecho (E5, 2026-10-15).
 > - [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo\|DEC-019]]: implementación en curso (T-45.7, `fix/t-45-7-error-ranking`). El `503` de dueño sigue siendo un error y la caché se pierde al reiniciar.
+> - [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503\|DEC-020]]: propuesta; reemplaza el `503` de [[decisiones/DEC-003-gate-pull-identidad-de-servicio-fail-closed\|DEC-003]] y necesita la aprobación de G09 (acta del gate v1.4) para mergear T-31.1.

@@ -157,4 +157,4 @@ Todas las llamadas salientes desde Roadmap hacia `course-service` se realizan a 
 
 ## 7. Clientes y Adaptadores en `tpi-roadmap`
 - Clientes HTTP: `com.utn.tpi.roadmap.clients.CoursesClient`, `com.utn.tpi.roadmap.clients.SectionSyncClient`, `com.utn.tpi.roadmap.clients.GroupProgressClient`.
-- Manejo de caídas: Si Courses no responde (503 / Timeout), el Gate responde `503 Service Unavailable` fail-closed (no asume matrícula activa).
+- Manejo de caídas: Si Courses no responde (503 / Timeout), el Gate responde `503 Service Unavailable` fail-closed (no asume matrícula activa). En la v1.4 propuesta del acta del gate pasa a `200` con `reason=origen_no_disponible` ([[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503|DEC-020]]).

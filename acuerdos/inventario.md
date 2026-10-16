@@ -35,7 +35,7 @@ contrato: "contratos/accounting-roadmap-v1.md"
 - **Respuesta:** `currentLives`, `reservedLives`, `availableBalance`, `items[]` (`itemInstanceId`, `catalogItemId`, `itemName`, `itemType`, `itemEffect`, `applicableChallengeScope`, `status`, `maxCharges`, `remainingUses`). Vocabulario abierto: un valor nuevo no rompe la lectura. Un resumen incompleto (sin vidas, saldo o lista; ítem sin id/estado/contadores válidos) se trata como indisponibilidad: nunca se completa con datos inventados.
 - **Lo que exponemos:** `GET /api/roadmap/courses/{courseId}/inventory` (`InventoryView`: vidas, `freeLives`, saldo, ítems, `stale`, `retrieved_at`, `notice`).
 - **Timeouts y caché:** conexión y lectura 2 s; caché `(courseId, studentId)` TTL 30 s (default técnico, no contractual); sin retries locales.
-- **Degradación del Gate:** 503 Problem Details (`trace_id`) si no hay caché vigente; 404 `inventory.account-not-found` si la cuenta no existe; 502 si Accounting rechaza la consulta (4xx no transitorio). Ver [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad|DEC-015]].
+- **Degradación del Gate:** 503 Problem Details (`trace_id`) si no hay caché vigente (en la v1.4 propuesta del acta del gate pasa a `200` con `reason=origen_no_disponible`, [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503|DEC-020]]); 404 `inventory.account-not-found` si la cuenta no existe; 502 si Accounting rechaza la consulta (4xx no transitorio). Ver [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad|DEC-015]].
 - **Proyección informativa:** `student_course.recovery_pending` (V24) sale de los eventos `LIFE_CREDITED`/`LIFE_DEBITED`; no decide nada del Gate.
 
 ## Impacto en nuestro código

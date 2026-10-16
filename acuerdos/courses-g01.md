@@ -93,7 +93,7 @@ Nada específico. El front de Courses no nos consume por contrato. Roadmap expon
 
 > [!warning] Riesgos
 > - Con `ROADMAP_BY_GROUP_ENABLED=false` (default) el gate no emite `group_restricted`/`date_restricted` y HU-44/45 no se ven.
-> - Cada evaluación de una unidad con restricciones hace llamadas a Courses (sin caché en el gate); si Courses no responde, el gate devuelve `503`, nunca `eligible=true`.
+> - Cada evaluación de una unidad con restricciones hace llamadas a Courses (sin caché en el gate); si Courses no responde, el gate devuelve `503`, nunca `eligible=true` (en la v1.4 propuesta del acta del gate pasa a `200` con `reason=origen_no_disponible`, [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503|DEC-020]]).
 > - El front no tiene selector de comisión (HU-44) según la auditoría de Sprint 3.
 > - **Validación de dueño fail-closed:** la validación de dueño (`teaching-memberships`) falla cerrado. Si Courses no responde, el ranking del profesor da `503 courses.ownership-unavailable` aunque haya ranking en caché. Ver [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo|DEC-019]].
 

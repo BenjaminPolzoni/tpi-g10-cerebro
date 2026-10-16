@@ -7,6 +7,11 @@ reemplaza: ""
 
 # DEC-003: Gate por pull con identidad de servicio, de solo lectura y fail-closed
 
+> [!warning] Parte en revisión
+> El `503` por Accounting o Courses caídos queda reemplazado por el bloqueo `origen_no_disponible`
+> en [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503|DEC-020]] (propuesta, T-31.1),
+> cuando G09 apruebe el acta del gate v1.4. El resto de esta decisión sigue vigente.
+
 ## Contexto
 Motor necesita saber si un alumno puede iniciar un nodo antes de crear el intento. G09 había implementado un contrato distinto (POST con autorización firmada) y pidió definir el gate porque, con la ruta vacía, toda apertura respondía 503. Roadmap además debe depender de Accounting (vidas) y Courses (comisiones), que pueden caer.
 
@@ -29,5 +34,5 @@ El gate es `GET /api/roadmap/courses/{courseId}/students/{studentId}/nodes/{node
 
 ## Referencias
 - Código / PR / doc: `controllers/GateController`, `services/GateService`, `services/GateEvaluator`, `models/GateReason`, `common/security/SecurityConfig`; `96fcff5` (2026-10-02), `548411d` (HU-48, 2026-10-11), `8b5578f` (DATE, 2026-10-12).
-- `tpi-roadmap/docs/contracts/roadmap-motor-gate-v1.md`, `docs/T-15-1-GATE-V3.md`, `docs/contracts/respuesta-motor-a-roadmap-v2.md`.
-- Relacionadas: [[acuerdos/motor-desafios-g09|Motor]], [[acuerdos/inventario|Inventario]], [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad|DEC-015]].
+- [[contratos/roadmap-motor-gate-v1|Acta del gate]], [[tareas/T-15-1-GATE-V3|T-15.1]] y [[contratos/respuesta-motor-a-roadmap-v2|respuesta de G09 v2]] (antes en `tpi-roadmap/docs/`, movidas al cerebro en `e292333`).
+- Relacionadas: [[acuerdos/motor-desafios-g09|Motor]], [[acuerdos/inventario|Inventario]], [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad|DEC-015]], [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503|DEC-020]].
