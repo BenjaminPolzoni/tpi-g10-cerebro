@@ -11,7 +11,7 @@ url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaj
 
 # HT-02: Semilla de datos y guion de demostración
 
-> [!info] Generado desde Taiga (2026-10-15 16:53). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-15 23:01). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/555) · Estado: **Done** · Responsable: **Stefano Zoffoli** · Sprint: **G10 - Sprint 1**
 > Épica: [[epicas/EP-144 Esqueleto del servicio Roadmap — TRANSVERSAL (v3)|EP-144]] · Tareas cerradas: **2/2**
 

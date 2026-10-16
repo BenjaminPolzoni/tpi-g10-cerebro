@@ -11,7 +11,7 @@ url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaj
 
 # HU-01: Crear nodos en el grafo (unidades, contenidos, desafíos, exámenes)
 
-> [!info] Generado desde Taiga (2026-10-15 16:53). No editar a mano: correr `scripts/taiga_sync.py`.
+> [!info] Generado desde Taiga (2026-10-15 23:01). No editar a mano: correr `scripts/taiga_sync.py`.
 > [Abrir en Taiga](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/76) · Estado: **Done** · Responsable: **Mateo Delgado Costa** · Sprint: **G10 - Sprint 1**
 > Épica: [[epicas/EP-56 Estructura del roadmap como grafo de nodos|EP-56]] · Tareas cerradas: **8/8**
 
