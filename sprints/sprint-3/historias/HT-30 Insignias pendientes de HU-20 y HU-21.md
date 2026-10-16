@@ -142,6 +142,12 @@ Dependencias / Impactos
     - **Qué:** consumir `LIVES_EXHAUSTED` / `LIVES_AVAILABLE` de Accounting (E8) y otorgar la insignia cuando el alumno recupera una vida.
     - **Dónde:** `AccountingEventsListener`, `BadgeEvaluator`.
     - **Listo cuando:** el evento repetido no duplica la insignia y hay test.
+
+**Acceso al catálogo** (agregada el 2026-10-15)
+- [ ] [#9893](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9893) **T-30.7 Acceso al catálogo de insignias desde «Contenido del curso»** · Front · In progress · 1 h · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
+    - **Qué:** el catálogo (`/roadmap/badges/:courseId`) quedó sin enlace al dejar de usarse `/roadmap/teacher`. Botón «🏅 Insignias del curso» al lado de «Ver mapa del roadmap» en «Contenido del curso», y el «Volver» del catálogo pasa a «Volver al curso». Textos es/en.
+    - **Dónde:** `courses/pages/cohort-general-page` (página de Courses, G01: avisarles), `roadmap/pages/badges-catalog-page`.
+    - **Listo cuando:** desde «Contenido del curso» el profesor entra al catálogo y vuelve con un clic; hay test del botón.
 - [ ] [#9341](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9341) **T-30.6 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]]
     - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 

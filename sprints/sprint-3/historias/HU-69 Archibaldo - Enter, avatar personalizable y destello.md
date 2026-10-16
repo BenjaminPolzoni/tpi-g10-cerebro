@@ -53,6 +53,7 @@ Criterios de Aceptación (CA)
 *   [ ] **CA2**: El foco queda en el diálogo y Escape lo cierra.
 *   [ ] **CA3**: El profesor y el gestor del curso personalizan el avatar y el nombre de Archibaldo.
 *   [ ] **CA4**: Destello sobre el camino al próximo nodo disponible.
+*   [ ] **CA5**: El mercado y la biblioteca muestran un ícono 3D flotante del mismo estilo que el de las torres, no un emoji.
 
 * * *
 
@@ -111,7 +112,7 @@ Dependencias / Impactos
 -----------------------
 
 *   Servicios involucrados: Ninguno.
-*   Módulos afectados: `world-3d.service`, `archipelago-3d.service`, `npc-dialogue`, configuración del curso en el back y pantalla del profesor y el gestor.
+*   Módulos afectados: `world-3d.service`, `archipelago-3d.service`, `npc-dialogue`, configuración del curso en el back y pantalla del profesor y el gestor, `icon-3d-geometries` (íconos de lugares).
 *   Otros equipos / aprobaciones: Ninguno.
 *   Impacto en datos / migraciones: Configuración de Archibaldo (avatar y nombre) por curso: columna o tabla nueva en el back (T-69.2).
 *   Riesgos y mitigación (opcional): Ninguno abierto (P11 respondida).
@@ -130,8 +131,16 @@ Dependencias / Impactos
 - [ ] [#9221](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9221) **T-69.3 Destello que marca el camino al próximo nodo** · Front · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
     - **Qué:** efecto en el mundo 3D que guía hasta el próximo nodo disponible, sin bajar los FPS.
     - **Listo cuando:** el alumno sigue el destello y llega al nodo correcto.
+<<<<<<< HEAD
 - [ ] [#9357](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9357) **T-69.4 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]]
     - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
+=======
+- [ ] [#9462](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9462) **T-69.5 Íconos 3D del mercado y la biblioteca como los de las torres** · Front · New · 3 h · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
+    - **Qué:** reemplazar los emojis planos (🏪 y 📚) que flotan sobre el mercado y la biblioteca por íconos 3D hechos con el mismo sistema que los de las torres (`icon-3d-geometries`): una bolsa de monedas para el mercado y una pila de libros para la biblioteca. Flotan, suben y bajan y giran igual que los de las torres. No se agregan al catálogo de íconos de desafíos.
+    - **Dónde:** `icon-3d-geometries.ts` (`buildPlaceIconObject`), `world-3d.service.ts`.
+    - **Listo cuando:** en el mundo, el mercado y la biblioteca muestran su ícono 3D y hay test de que cada lugar tiene su ícono.
+    - **Nota:** T-69.4 es la documentación (Wiki), cargada en el Excel y en Taiga.
+>>>>>>> cb8fc66 (notas: 2026-10-15 17:57:39 (1 archivos))
 
 ---
 

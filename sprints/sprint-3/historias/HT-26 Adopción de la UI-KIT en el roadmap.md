@@ -54,8 +54,8 @@ Criterios de Aceptación (CA)
 ----------------------------
 
 *   [ ] **CA1**: `entity-editor-dialog`, `badges-catalog-page` y `avatar-panel` usan los controles del kit, y los botones y headings sueltos de `course-editor-page`, `section-nodes`, `course-map-page`, `hex-world-page` y `feedback-toast` también.
-*   [ ] **CA2**: `npc-dialogue` y `shop-interior` usan `generic-modal`/`generic-drawer`, y `lives`, `level-hud`, `inventory-item-card` y `role-switch` usan componentes del kit.
-*   [ ] **CA3**: El ranking usa `generic-table` y `generic-badge`, con el anonimato intacto.
+*   [ ] **CA2**: `npc-dialogue` y `shop-interior` usan componentes del kit, y al cerrarlos el foco vuelve a donde estaba.
+*   [ ] **CA3**: El detalle de cada fila del ranking se abre en un `generic-drawer` con componentes del kit, con el anonimato intacto; la tabla queda nativa hasta que `GenericTable` soporte zonas, ayuda en el encabezado y la fila propia.
 *   [ ] **CA4**: `ui-review` no reporta hallazgos nuevos en roadmap y ranking y los tests visuales están en verde.
 
 * * *
@@ -135,13 +135,13 @@ Dependencias / Impactos
 - [ ] [#9278](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9278) **T-26.3 Diálogos del mundo con el modal del kit** · Front · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
     - **Qué:** `npc-dialogue` y `shop-interior` dejan su `role="dialog"` propio y usan `generic-modal` o `generic-drawer`, que manejan el foco y Escape.
     - **Listo cuando:** los dos se abren y se cierran con teclado y el foco vuelve a donde estaba.
-- [ ] [#9279](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9279) **T-26.4 HUD del mundo con componentes del kit** · Front · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
-    - **Qué:** `lives` con `generic-icon`/`generic-progress`, `level-hud` con `generic-xp-bar`, `inventory-item-card` con `generic-item-tile` y `role-switch` con el componente del kit que corresponda. La racha va en HU-73.
-    - **Listo cuando:** el HUD no usa componentes propios para esas piezas y se ve igual o mejor que hoy.
-- [ ] [#9280](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9280) **T-26.5 Ranking con la tabla y los badges del kit** · Front · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
-    - **Qué:** las 3 `<table>` crudas pasan a `generic-table` y los chips `rk-chip`/`rk-status` a `generic-badge`. El anonimato de las filas ajenas no cambia (DEC-007).
-    - **Dónde:** `ranking/*` (incluye el TODO #59 de `ranking-detail`).
-    - **Listo cuando:** el ranking se ve con el kit y hay tests del anonimato y visuales.
+- ~~**T-26.4 HUD del mundo con componentes del kit**~~ · **No aplica** (2026-10-15), sacada de Taiga
+    - El inventario y las vidas (`inventory-hud`, `inventory-item-card`, `lives`) son de Accounting; `level-hud` ya usa el kit (`GenericLevelBadge` + `GenericProgress`, con mejor accesibilidad que `GenericXpBar`); `role-switch` ya no existe en el código.
+- [ ] [#9280](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9280) **T-26.5 Ranking con el kit: detalle por alumno en drawer y borrar el gabinete viejo** · Front · In progress · 6 h · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
+    - **Qué:** `ranking-detail` (RF-RNK-07) vuelve a verse: el nombre de cada fila de `ranking-page` y «Ver mi detalle» abren el detalle en un `generic-drawer` a la derecha. El detalle pasa al kit (`generic-stat`, `generic-badge`, `generic-card`, tokens, textos es/en) y las insignias usan `generic-badge-showcase` en solo lectura (cierra el TODO ui-kit#59). Se borran los componentes muertos desde la PR 316: `ranking-panel`, `student-ranking-table`, `staff-ranking-table`, `ranking-status` y `ranking-theme`.
+    - **Pendiente del kit:** la tabla de `ranking-page` sigue nativa (baseline): `GenericTable` no soporta filas de zona, ayuda en el encabezado ni la fila propia.
+    - **Dónde:** `ranking/pages/ranking-page`, `ranking/ui/ranking-detail`, diccionarios.
+    - **Listo cuando:** el detalle de cualquier fila se abre en el drawer con el kit, no quedan los componentes muertos y hay tests del drawer y del anonimato.
 - [ ] [#9281](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9281) **T-26.6 Revisar todo con ui-review y tests visuales** · Front · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
     - **Qué:** correr `ui-review` (llegó a develop en el PR #579) sobre roadmap y ranking y dejar los tests visuales en verde.
     - **Listo cuando:** `ui-review` no reporta hallazgos nuevos en roadmap y ranking.
