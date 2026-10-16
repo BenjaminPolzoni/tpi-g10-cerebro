@@ -63,6 +63,7 @@
 
 - **Disponibilidad (T-45.7, [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo|DEC-019]]):**
   - **Accounting o Backoffice caídos:** el ranking sale degradado (vidas perdidas o nivel nulos, mismo orden por XP) y la respuesta lo indica con `data_status=DEGRADED`.
+  - **Users caído (vista del profesor):** si a alguna fila le falta el perfil (sale con seudónimo), también `data_status=DEGRADED`. El cliente no distingue "no lo tiene" de "no respondió" (T-45.7, revisión del PR #231).
   - **Fallo al armar el ranking después de autorizar** (por ejemplo, la base): se sirve el último ranking cacheado en memoria con `data_status=STALE` y su `generated_at`. Sin caché, `503 ranking.unavailable`.
   - **Autorización:** la validación de dueño (Courses o token técnico) y la de matrícula fallan cerrado (`503`). La caché nunca las saltea.
   - **Causa del 503:** el token técnico tiene su código (`courses.ownership-token-unavailable`), distinto de Courses caído (`courses.ownership-unavailable`).

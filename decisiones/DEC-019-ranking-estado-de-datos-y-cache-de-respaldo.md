@@ -35,7 +35,7 @@ Las respuestas del ranking (`StaffRankingView`, `StudentRankingView`) suman dos 
 
 - **`data_status`:**
   - `FRESH`: armado completo.
-  - `DEGRADED`: faltó Accounting o Backoffice; el ranking sale con XP al día y vidas o nivel nulos, sin cambiar el orden.
+  - `DEGRADED`: faltó Accounting o Backoffice (el ranking sale con XP al día y vidas o nivel nulos, sin cambiar el orden), o en la vista del profesor a alguna fila le falta el perfil de Users y sale con seudónimo. Lo de Users se sumó en la revisión del PR #231 (2026-10-16).
   - `STALE`: servido desde la caché.
 - **`generated_at`:** instante en que se armó la vista.
 
