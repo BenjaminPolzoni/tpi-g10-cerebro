@@ -23,7 +23,7 @@ contrato: "contratos/accounting-roadmap-v1.md"
 - **Roadmap no envía vidas ni ítems a Motor** para iniciar un desafío. El `ChallengeStart` heredado (con vidas y XP) es una brecha conocida, no se usa para integrar.
 - Roadmap conserva el **Gate**, calcula `freeLives = currentLives - reservedLives`, muestra el inventario y solicita el equipamiento (`ITEM_EQUIP_REQUESTED`).
 - Todo REST pasa **por Gateway**; `app.api.private-path` de Accounting = `/api/accounting`; `courseId`/`studentId` son UUID.
-- **Degradación:** sin caché vigente, una falla de Accounting es indisponibilidad (`503`; en la v1.4 propuesta del acta del gate pasa a `200` con `reason=origen_no_disponible`, [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503|DEC-020]]); nunca `no_lives` ni `eligible=true`; nunca caché vencida para decidir el Gate. Para **visualización** de inventario sí se puede mostrar el último dato conocido marcado como desactualizado.
+- **Degradación:** sin caché vigente, una falla de Accounting es indisponibilidad (`503`; en la v1.4 del acta del gate (aprobada por G09; entra con T-31.1) pasa a `200` con `reason=origin_unavailable`, [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503|DEC-020]]); nunca `no_lives` ni `eligible=true`; nunca caché vencida para decidir el Gate. Para **visualización** de inventario sí se puede mostrar el último dato conocido marcado como desactualizado.
 - El **techo de vidas** viene de Backoffice (PAR-12 `initialLives`/`maxLives`), no de Accounting. Ver [[acuerdos/backoffice|Backoffice]].
 - Contratos **reemplazados** por el acta v1.0: `GET /api/bank/courses/{courseId}/students/{studentId}/lives`; `GET /api/wallet/inventory/lives` y `POST .../lives/batch`; eventos `EXHAUSTED-LIVES`/`VIDAS-AGOTADAS`; enums `BOOST_XP`, `ABSORB_FAILURE`, `XP_MULTIPLIER`, `NO_EXAMS`.
 
@@ -86,7 +86,7 @@ Ver [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad|DEC-015]].
 - [ ] Accounting debe migrar el payload de `LIFE_*` a snake_case (`tpi-accounting#227`).
 - [ ] **E8 (2026-10-15): sí, se consumen** `LIVES_EXHAUSTED`/`LIVES_AVAILABLE` (para `LIFE_RECOVERED`, HU-21). Queda decidir y se implementa `ITEM_EQUIP_*`, o se retiran del acta. Alinear el topic con `bus-notificaciones.md`.
 - [ ] Verificar contra el **Accounting real** la fuente de vidas perdidas (T-25.2 "falta verificarla").
-- [ ] Gate: falta el motivo `origen_no_disponible` y el "último dato 24 h + stale" en el Gate (auditoría Sprint 3, HU-15/16).
+- [ ] Gate: falta el motivo `origin_unavailable` y el "último dato 24 h + stale" en el Gate (auditoría Sprint 3, HU-15/16).
 - [ ] Confirmar si `lives-availability` se implementará o se elimina del acta.
 - [ ] El `ChallengeStart` heredado (vidas y XP) debe retirarse.
 

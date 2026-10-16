@@ -7,10 +7,11 @@ reemplaza: ""
 
 # DEC-003: Gate por pull con identidad de servicio, de solo lectura y fail-closed
 
-> [!warning] Parte en revisión
-> El `503` por Accounting o Courses caídos queda reemplazado por el bloqueo `origen_no_disponible`
-> en [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503|DEC-020]] (propuesta, T-31.1),
-> cuando G09 apruebe el acta del gate v1.4. El resto de esta decisión sigue vigente.
+> [!warning] Parte reemplazada
+> El `503` por Accounting o Courses caídos queda reemplazado por el bloqueo `origin_unavailable`
+> en [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503|DEC-020]] (T-31.1; acta del gate
+> v1.4, aprobada por G09 el 2026-10-16). En `develop` aplica al mergear T-31.1. El resto de esta
+> decisión sigue vigente.
 
 ## Contexto
 Motor necesita saber si un alumno puede iniciar un nodo antes de crear el intento. G09 había implementado un contrato distinto (POST con autorización firmada) y pidió definir el gate porque, con la ruta vacía, toda apertura respondía 503. Roadmap además debe depender de Accounting (vidas) y Courses (comisiones), que pueden caer.

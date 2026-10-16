@@ -35,7 +35,7 @@ contrato: "contratos/accounting-roadmap-v1.md"
 - **Respuesta:** `currentLives`, `reservedLives`, `availableBalance`, `items[]` (`itemInstanceId`, `catalogItemId`, `itemName`, `itemType`, `itemEffect`, `applicableChallengeScope`, `status`, `maxCharges`, `remainingUses`). Vocabulario abierto: un valor nuevo no rompe la lectura. Un resumen incompleto (sin vidas, saldo o lista; ítem sin id/estado/contadores válidos) se trata como indisponibilidad: nunca se completa con datos inventados.
 - **Lo que exponemos:** `GET /api/roadmap/courses/{courseId}/inventory` (`InventoryView`: vidas, `freeLives`, saldo, ítems, `stale`, `retrieved_at`, `notice`).
 - **Timeouts y caché:** conexión y lectura 2 s; caché `(courseId, studentId)` TTL 30 s (default técnico, no contractual); sin retries locales.
-- **Degradación del Gate:** 503 Problem Details (`trace_id`) si no hay caché vigente (en la v1.4 propuesta del acta del gate pasa a `200` con `reason=origen_no_disponible`, [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503|DEC-020]]); 404 `inventory.account-not-found` si la cuenta no existe; 502 si Accounting rechaza la consulta (4xx no transitorio). Ver [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad|DEC-015]].
+- **Degradación del Gate:** 503 Problem Details (`trace_id`) si no hay caché vigente (en la v1.4 del acta del gate (aprobada por G09; entra con T-31.1) pasa a `200` con `reason=origin_unavailable`, [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503|DEC-020]]); 404 `inventory.account-not-found` si la cuenta no existe; 502 si Accounting rechaza la consulta (4xx no transitorio). Ver [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad|DEC-015]].
 - **Proyección informativa:** `student_course.recovery_pending` (V24) sale de los eventos `LIFE_CREDITED`/`LIFE_DEBITED`; no decide nada del Gate.
 
 ## Impacto en nuestro código
@@ -49,7 +49,7 @@ contrato: "contratos/accounting-roadmap-v1.md"
 - [ ] Coordinar con G09 el tratamiento del `404` del gate (su cliente solo define `403`/`503`). Ver [[acuerdos/motor-desafios-g09|Motor]].
 - [ ] Motivo funcional dedicado para "cuenta no aprovisionada" (hoy es un 404 fuera del vocabulario cerrado del Gate).
 - [ ] Alta de la cuenta del alumno al inscribirse: la crea el flujo de inscripción/alta, no Roadmap (se asume; verificar quién la dispara).
-- [ ] Gate: falta "último dato 24 h + stale" y el motivo `origen_no_disponible` (auditoría Sprint 3).
+- [ ] Gate: falta "último dato 24 h + stale" y el motivo `origin_unavailable` (auditoría Sprint 3).
 
 > [!warning] Riesgos
 > - Un alumno inscripto sin cuenta en Accounting no puede abrir desafíos `STANDARD` ni ver el inventario (404) hasta que se cree la cuenta.

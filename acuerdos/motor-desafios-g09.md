@@ -2,7 +2,7 @@
 tags: [tpi, g10, acuerdo, motor, g09, kafka, gate]
 fecha: 2026-09-27
 grupos: [G10, G09]
-estado: vigente  # evento de cierre v8 y gate v1.3 vigentes; gate v1.4 propuesto (T-31.1); firma nominal del gate pendiente
+estado: vigente  # evento de cierre v8 y gate v1.3 vigentes; gate v1.4 aprobado por G09 el 2026-10-16 (entra con T-31.1); firma nominal del gate pendiente
 contrato: "contratos/motor-desafios-evento-cierre.md"
 ---
 
@@ -55,9 +55,9 @@ GET /api/roadmap/courses/{courseId}/students/{studentId}/nodes/{nodeId}/eligibil
 ```
 - Solo **principal de servicio** (`X-Principal-Type: service`, `X-Service-Id`, `X-Service-Scopes`); `studentId` va en el path, no en `X-User-Id`. Roadmap no parsea el JWT. `serviceId` y scope nominales del Motor siguen **sin confirmar**; `tpi-integration.yml` ofrece `roadmap.gate.read`.
 - Respuesta (envelope global `data`): `{ "eligible": bool, "reason": string|null, "challenge_id": uuid|null, "attempt_type": "NORMAL|LIVES|LLM" }`. `challenge_id`/`attempt_type` son aditivos (v1.2, HU-48). `attempt_type` sale de `node.livesPolicy`: `STANDARD→NORMAL`, `RECOVERY→LIVES`, `LLM→LLM`.
-- Vocabulario cerrado de `reason`: `not_enrolled`, `course_archived`, `group_restricted` (v1.1), `date_restricted` (v1.3), `unit_prerequisite_pending`, `content_not_read`, `prerequisite_pending`, `no_lives`; `origen_no_disponible` en la v1.4 **propuesta**. Retirados: `recovery_pending`, `already_passed`. `unit_prerequisite_pending` el Gate ya lo emitía y faltaba en el acta.
+- Vocabulario cerrado de `reason`: `not_enrolled`, `course_archived`, `group_restricted` (v1.1), `date_restricted` (v1.3), `unit_prerequisite_pending`, `content_not_read`, `prerequisite_pending`, `no_lives`; `origin_unavailable` en la v1.4 (aprobada por G09; en inglés a su pedido). Retirados: `recovery_pending`, `already_passed`. `unit_prerequisite_pending` el Gate ya lo emitía y faltaba en el acta.
 - Orden: `course_archived`, `not_enrolled`, `group_restricted|date_restricted`, `unit_prerequisite_pending`, `content_not_read`, `prerequisite_pending`, `no_lives`.
-- Bloqueos funcionales: `200`. Errores: `401`, `403` (principal o nodo no autorizado; `node.unit-unresolved`), `404` (nodo inexistente; también cuenta ausente en Accounting, ver [[acuerdos/inventario|Inventario]]), `502` (rechazo `4xx` de Accounting, [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad|DEC-015]]) y, hasta la v1.3, `503` Problem Details si Accounting o Courses caen (nunca `no_lives` ni `eligible=true`). En la v1.4 propuesta ([[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503|DEC-020]], T-31.1) ese `503` pasa a `200` con `eligible=false` y `reason=origen_no_disponible`.
+- Bloqueos funcionales: `200`. Errores: `401`, `403` (principal o nodo no autorizado; `node.unit-unresolved`), `404` (nodo inexistente; también cuenta ausente en Accounting, ver [[acuerdos/inventario|Inventario]]), `502` (rechazo `4xx` de Accounting, [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad|DEC-015]]) y, hasta la v1.3, `503` Problem Details si Accounting o Courses caen (nunca `no_lives` ni `eligible=true`). En la v1.4, aprobada por G09 el 2026-10-16 ([[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503|DEC-020]], T-31.1) ese `503` pasa a `200` con `eligible=false` y `reason=origin_unavailable`.
 - Solo lectura e idempotente. Los motivos de comisión/fecha requieren `ROADMAP_BY_GROUP_ENABLED=true`.
 
 ### 3. Catálogo y pool (Roadmap → Motor, REST por Gateway)
@@ -77,8 +77,9 @@ Roadmap expone `GET /api/roadmap/courses/{courseId}/challenge-pool` (ADMIN, GEST
 
 ## Pendiente / próximos pasos
 - [ ] **`id_node`**: G09 debe confirmar (`tpi-engine-challenge#124`) que el Motor siempre manda un `id_node` consistente con el `challenge_id`. Política implementada, ítem abierto.
-- [ ] **Gate v1.4 (T-31.1, bloquea su merge):** mandar el acta a G09 y registrar su aprobación de que el Gate deje de devolver `503` por Accounting o Courses caídos y responda `200` con `origen_no_disponible`. Su cliente ya reenvía el `reason` con `eligible=false`; lo que cambia es que ya no recibe ese `503`.
-- [ ] G09 debe sumar `unit_prerequisite_pending` y `origen_no_disponible` a `roadmap-eligibility.yaml` y a `RoadmapIneligibilityReason`, y confirmar el `403` de `node.unit-unresolved`. El yaml ya lista los 7 valores de la v1.3 (`develop` `e95adac6`, 2026-10-15; antes eran 5, seguimiento `tpi-engine-challenge#234`).
+- [x] **Gate v1.4 (T-31.1):** G09 aprobó el 2026-10-16 que el Gate deje de devolver `503` por Accounting o Courses caídos y responda `200` con `eligible=false`, y que su front devuelva `403 student-not-eligible` con el `reason`. Pidió el valor en inglés: `origin_unavailable`.
+- [ ] Confirmarle a G09 el nombre `origin_unavailable` en su issue, para que publique sus cambios.
+- [ ] G09 debe sumar `unit_prerequisite_pending` y `origin_unavailable` a `roadmap-eligibility.yaml` y a `RoadmapIneligibilityReason`, aclarar en el yaml que el `503` ya no aplica a dependencias caídas de Roadmap, y agregar `@JsonIgnoreProperties(ignoreUnknown = true)` a `RoadmapEligibilityResponse` (comprometido en su respuesta del 2026-10-16). Falta confirmar el `403` de `node.unit-unresolved`. El yaml ya lista los 7 valores de la v1.3 (`develop` `e95adac6`, 2026-10-15; antes eran 5, seguimiento `tpi-engine-challenge#234`).
 - [ ] G09 debe tratar el `404 inventory.account-not-found` del gate (hoy su cliente define solo `403` y `503`).
 - [ ] `RECOVERY_PENDING` sigue en el enum del Motor (deprecado): confirmar su retiro.
 - [ ] `event_version` en el sobre: contradice la regla del PDF del bus; **abierto con Notificaciones** ([[acuerdos/notificaciones-bus|bus]]).
@@ -103,4 +104,5 @@ Roadmap expone `GET /api/roadmap/courses/{courseId}/challenge-pool` (ADMIN, GEST
 - 2026-10-12: wire v8 snake_case (PR #191); gate v1.3 (`date_restricted`).
 - 2026-10-14: nota creada desde `origin/develop` (`57ff06a`).
 - 2026-10-15: gate v1.4 propuesto (T-31.1): `origen_no_disponible` en vez de `503`; se documenta `unit_prerequisite_pending`.
+- 2026-10-16: G09 aprueba la v1.4 y pide el valor en inglés; queda `origin_unavailable`.
 - 2026-10-15: respuestas en [[sprints/sprint-3/08-dudas|08-dudas]]: `node_id` único global, también en roadmaps clonados (G8); el profesor configura si el ranking ordena por XP o por notas, y las notas vienen del Motor (P14, falta acordar cómo llegan); "multiple choice con boss fight" es de Desafíos teóricos (P16).
