@@ -32,8 +32,13 @@ fecha: 2026-10-15
 
 ## Benjamin Polzoni
 
-13 tareas · 0 cerradas
+17 tareas · 4 cerradas
 
+- [[sprints/sprint-3/historias/HT-14 Sacar los IDs de mock del front|HT-14]] Sacar los IDs de mock del front
+    - [x] [[sprints/sprint-3/historias/HT-14 Sacar los IDs de mock del front#Tareas|T-14.1]] Usar el alumno logueado en el roadmap, el mundo y los intentos · Closed
+    - [x] [[sprints/sprint-3/historias/HT-14 Sacar los IDs de mock del front#Tareas|T-14.2]] Usar el curso de la URL en el roadmap y el ranking · Closed
+    - [x] [[sprints/sprint-3/historias/HT-14 Sacar los IDs de mock del front#Tareas|T-14.3]] Resaltar la fila del alumno logueado en el detalle del ranking · Closed
+    - [x] [[sprints/sprint-3/historias/HT-14 Sacar los IDs de mock del front#Tareas|T-14.4]] Dejar el front sin ids de prueba · Closed
 - [[sprints/sprint-3/historias/HT-21 Seed de demo curado|HT-21]] Seed de demo curado
     - [ ] [[sprints/sprint-3/historias/HT-21 Seed de demo curado#Tareas|T-21.1]] Escribir el guion del curso de demo · New
     - [ ] [[sprints/sprint-3/historias/HT-21 Seed de demo curado#Tareas|T-21.2]] Cargar el curso del guion con un seed repetible · New
@@ -154,13 +159,8 @@ fecha: 2026-10-15
 
 ## Lorenzo Araujo
 
-15 tareas · 4 cerradas
+11 tareas · 4 cerradas
 
-- [[sprints/sprint-3/historias/HT-14 Sacar los IDs de mock del front|HT-14]] Sacar los IDs de mock del front
-    - [ ] [[sprints/sprint-3/historias/HT-14 Sacar los IDs de mock del front#Tareas|T-14.1]] Usar el alumno logueado en el roadmap, el mundo y los intentos · New
-    - [ ] [[sprints/sprint-3/historias/HT-14 Sacar los IDs de mock del front#Tareas|T-14.2]] Usar el curso de la URL en el roadmap y el ranking · New
-    - [ ] [[sprints/sprint-3/historias/HT-14 Sacar los IDs de mock del front#Tareas|T-14.3]] Resaltar la fila del alumno logueado en el detalle del ranking · New
-    - [ ] [[sprints/sprint-3/historias/HT-14 Sacar los IDs de mock del front#Tareas|T-14.4]] Dejar el front sin ids de prueba · New
 - [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap|HT-26]] Adopción de la UI-KIT en el roadmap
     - [ ] [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap#Tareas|T-26.2]] Botones y títulos sueltos con el kit · New
 - [[sprints/sprint-3/historias/HT-30 Insignias pendientes de HU-20 y HU-21|HT-30]] Insignias pendientes de HU-20 y HU-21

@@ -2,7 +2,7 @@
 tags: [tpi, g10, sprint-3, plan, HT-14, front]
 fecha: 2026-10-15
 autor: Benja
-estado: borrador
+estado: hecho
 historia: HT-14
 tareas: [T-14.1, T-14.2, T-14.3, T-14.4]
 repo: 2026-P4-FE/2026-PIV-TPI-FE
