@@ -27,6 +27,7 @@ actualizado: 2026-10-15
 | DT-06 | 🟢 | Quedan `@DefaultValue("stub")` en properties de clientes | Borrarlos (HT-09 ya prohíbe stubs en el arranque) | S | [[sprints/sprint-3/02-pendientes\|02]] | |
 | DT-07 | 🟠 | `TraceIdFilter` figura en `08-comunicacion-gateway.md` pero **no existe** en develop | Confirmar si se borró a propósito y actualizar el doc | S | E7 en [[sprints/sprint-3/08-dudas\|08]] | |
 | DT-08 | 🟢 | Accounting publica `LIVES_EXHAUSTED`/`LIVES_AVAILABLE` y no hay consumidor | Decidir si hace falta; si no, sacarlo del acta | S | E8 en [[sprints/sprint-3/08-dudas\|08]] | |
+| DT-09 | 🟢 | La **caché de respaldo del ranking** (T-45.7) vive en memoria: se pierde al reiniciar el micro y no se comparte entre instancias | Si se escala a varias instancias o hace falta sobrevivir reinicios, evaluar una caché compartida | M | [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo\|DEC-019]] | |
 
 ## Front
 

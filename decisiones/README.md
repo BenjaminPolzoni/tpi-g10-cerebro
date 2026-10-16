@@ -30,6 +30,7 @@ Registro de decisiones **ya tomadas** que se deducen del código, los contratos 
 | DEC-016 | Neo4j para la estructura del roadmap (pedido de los profes) | 2026-10-14 | aceptada | [[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap\|DEC-016]] |
 | DEC-017 | N roadmaps por curso, con el alcance configurable por el profesor | 2026-10-15 | aceptada | [[decisiones/DEC-017-n-roadmaps-por-curso-configurables\|DEC-017]] |
 | DEC-018 | Catálogo cerrado de relaciones y de tipos de nodo | 2026-10-15 | aceptada | [[decisiones/DEC-018-catalogo-de-relaciones-y-tipos-de-nodo\|DEC-018]] |
+| DEC-019 | El ranking avisa el estado de sus datos, tiene caché de respaldo y la autorización falla cerrado | 2026-10-15 | aceptada | [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo\|DEC-019]] |
 
 ## Decisiones que conviene revisar pronto
 > [!warning] Con deuda abierta
@@ -38,3 +39,4 @@ Registro de decisiones **ya tomadas** que se deducen del código, los contratos 
 > - [[decisiones/DEC-006-insignias-sistema-y-curso\|DEC-006]] y [[decisiones/DEC-012-curva-de-niveles-desde-par-09\|DEC-012]]: la curva PAR-09 activa es la de Backoffice (E4, 2026-10-15); actualizar el seed y lo que asuma 600/1800/4200.
 > - [[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap\|DEC-016]]: Neo4j lo sumamos nosotros a la plataforma (G1); falta validar la infra. Los tipos de relación ya están definidos ([[decisiones/DEC-018-catalogo-de-relaciones-y-tipos-de-nodo\|DEC-018]]).
 > - [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad\|DEC-015]]: `fix/account-not-found-gate` ya está hecho (E5, 2026-10-15).
+> - [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo\|DEC-019]]: implementación en curso (T-45.7, `fix/t-45-7-error-ranking`). El `503` de dueño sigue siendo un error y la caché se pierde al reiniciar.

@@ -61,6 +61,12 @@
   2. Menor cantidad de vidas perdidas históricamente (consultado a `accounting-service` en lote).
   3. Mayor cantidad de ejercicios completados.
 
+- **Disponibilidad (T-45.7, [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo|DEC-019]]):**
+  - **Accounting o Backoffice caídos:** el ranking sale degradado (vidas perdidas o nivel nulos, mismo orden por XP) y la respuesta lo indica con `data_status=DEGRADED`.
+  - **Fallo al armar el ranking después de autorizar** (por ejemplo, la base): se sirve el último ranking cacheado en memoria con `data_status=STALE` y su `generated_at`. Sin caché, `503 ranking.unavailable`.
+  - **Autorización:** la validación de dueño (Courses o token técnico) y la de matrícula fallan cerrado (`503`). La caché nunca las saltea.
+  - **Causa del 503:** el token técnico tiene su código (`courses.ownership-token-unavailable`), distinto de Courses caído (`courses.ownership-unavailable`).
+
 ### 2.5 Insignias y Niveles (`BadgeController`, `BadgeCatalogController`, `LevelController`)
 - Insignias del sistema precargadas (V17) y otorgamiento automático (`badge_award`, V16).
 - Curva oficial de 10 a 200 niveles sincronizada desde Backoffice (`PAR-09`) con caché Caffeine y actualización reactiva por Kafka.

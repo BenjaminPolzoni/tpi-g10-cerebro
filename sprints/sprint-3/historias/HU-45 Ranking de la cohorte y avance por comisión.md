@@ -137,6 +137,7 @@ Dependencias / Impactos
     - Tarea heredada del Sprint 2, ya cargada en Taiga.
 - [ ] [#9305](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9305) **T-45.7 Reproducir y arreglar el error del ranking por comisión** · Back + Front · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
     - Plan de implementación: [[13-plan-T-45-7|13 — Plan T-45.7]].
+    - Decisión y reglas: [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo|DEC-019]]. Back en curso en `fix/t-45-7-error-ranking`.
     - **Qué:** reproducirlo en el entorno integrado con `ROADMAP_BY_GROUP_ENABLED=true`, anotar el pedido y la respuesta que fallan, arreglarlo (E1: se arregla este sprint).
     - **Listo cuando:** el caso que fallaba tiene un test y ya no falla.
 - [ ] [#9306](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9306) **T-45.8 Ranking del curso con filtro opcional por comisión** · Back · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
@@ -174,6 +175,12 @@ El back tiene ranking solo por curso y `GET /groups/{gid}/progress` aparte. El f
 ### Dudas resueltas (2026-10-15)
 
 - ✅ [[sprints/sprint-3/08-dudas|E1]] El error del ranking por grupo se arregla en este sprint.
+- ✅ T-45.7 (2026-10-15):
+  - **Accounting o Backoffice caídos:** degradar con aviso.
+  - **Caché de respaldo:** en memoria.
+  - **Validación de dueño y matrícula:** fail-closed.
+  - **503 del token técnico:** código propio.
+  - Detalle en [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo|DEC-019]].
 - ✅ [[sprints/sprint-3/08-dudas|E3]] Ya debería estar hecho: corroborarlo.
 - ✅ [[sprints/sprint-3/08-dudas|P10]] Sí: por curso por defecto; la comisión (= grupo) es un filtro.
 - ✅ [[sprints/sprint-3/08-dudas|P14]] Lo configura el profesor: el ranking ordena por XP o por notas; las notas vienen del Motor de desafíos (G09).

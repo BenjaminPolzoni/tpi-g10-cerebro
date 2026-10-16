@@ -69,10 +69,12 @@ Users publica `user-events` (`STUDENT-REGISTERED`, `ACCOUNT-DEACTIVATED`) y `not
 > - Sin `users.legajo.read` el profesor ve el ranking sin legajo hasta que vence la caché (30 min).
 > - Con Users caído, el profesor ve seudónimos; el alumno nunca ve perfiles ajenos (ver DEC-007).
 > - El reporte de Users es una foto del 2026-09-23/10-10: puede quedar desactualizado.
+> - **Secret desactualizado:** si el secret de `roadmap-service` está viejo, Users responde `401` al pedir el token técnico, y todo lo que valida dueño en Courses da `503`. Desde T-45.7 ese `503` lleva el código `courses.ownership-token-unavailable`, no «Courses no responde». Pasó en la variante el 2026-10-15. Ver [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo|DEC-019]].
 
 ## Historial
 - 2026-09-26: reporte de contratos de Users incorporado (`reporte-users-contratos-y-endpoints.md`); token técnico (T-01.7).
 - 2026-10-10: ranking con perfil de Users (T-24.3) y presupuesto de carga; ranking sigue completo si Users falla.
+- 2026-10-15: secret de servicio desactualizado reproducido en la variante (`401` en el token técnico). La falla del token tiene código de error propio (T-45.7, [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo|DEC-019]]).
 - 2026-10-11: un perfil incompleto solo deja sin perfil a ese alumno (`1a6ff15`).
 - 2026-10-14: nota creada desde `origin/develop` (`57ff06a`).
 - 2026-10-15: respuestas en [[sprints/sprint-3/08-dudas|08-dudas]]: el catálogo de permisos es de Users y todavía no está definido (G2); no habrá roles sino permisos, y mientras tanto vale `PROFESSOR`/`GESTOR` (G6); todavía no hay usuarios demo (G7); Users también lleva el Gateway (G11).

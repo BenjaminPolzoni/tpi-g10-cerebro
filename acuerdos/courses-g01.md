@@ -95,6 +95,7 @@ Nada específico. El front de Courses no nos consume por contrato. Roadmap expon
 > - Con `ROADMAP_BY_GROUP_ENABLED=false` (default) el gate no emite `group_restricted`/`date_restricted` y HU-44/45 no se ven.
 > - Cada evaluación de una unidad con restricciones hace llamadas a Courses (sin caché en el gate); si Courses no responde, el gate devuelve `503`, nunca `eligible=true`.
 > - El front no tiene selector de comisión (HU-44) según la auditoría de Sprint 3.
+> - **Validación de dueño fail-closed:** la validación de dueño (`teaching-memberships`) falla cerrado. Si Courses no responde, el ranking del profesor da `503 courses.ownership-unavailable` aunque haya ranking en caché. Ver [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo|DEC-019]].
 
 > [!question] Verificar
 > Roles: Courses describe `X-User-Roles` como "GESTOR o PROFESOR" en español y el enum del body como `MANAGER/PROFESSOR/PROFESSOR_READ_ONLY`. Roadmap usa `GESTOR` desde #188. **G6 (2026-10-15):** no va a haber roles sino permisos; mientras tanto vale `PROFESSOR`/`GESTOR`.
@@ -107,5 +108,6 @@ Nada específico. El front de Courses no nos consume por contrato. Roadmap expon
 - 2026-10-10: baja y reactivación de unidades en el sync (HU-17); restricción de actividad/nodo por comisión (HU-44).
 - 2026-10-12: Gate evalúa `DATE` y emite `date_restricted` (gate v1.3).
 - 2026-10-14: nota creada desde `origin/develop` (`57ff06a`).
+- 2026-10-15: T-45.7. La validación de dueño sigue fail-closed, aunque el ranking tenga caché de respaldo ([[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo|DEC-019]]).
 - 2026-10-15: respuestas en [[sprints/sprint-3/08-dudas|08-dudas]]: eventos en snake_case (G5); el profesor elige por roadmap secciones de Courses o propias (P3) y define las restricciones de cada roadmap, que se copian al clonarlo (G4); la ventana horaria de los exámenes la publica Courses (P9).
 - 2026-10-15: dudas nuevas G14 (cierre de curso: dónde se guarda `finalAcademicStatus`) para HU-72, y P17 (clonar a otro curso un roadmap con secciones de Courses) para HU-71.
