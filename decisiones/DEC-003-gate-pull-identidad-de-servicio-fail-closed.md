@@ -30,7 +30,7 @@ El gate es `GET /api/roadmap/courses/{courseId}/students/{studentId}/nodes/{node
 - Negativas / deuda:
   - Motor aún define solo `403`/`503`; el `404 inventory.account-not-found` y el `403 node.unit-unresolved` no están coordinados.
   - `serviceId` y scope nominales de Motor siguen sin confirmar: hoy cualquier servicio puede llamar el gate.
-  - El alumno no puede pre-chequear con su JWT (HU-48 pendiente) y se retiró `/start`.
+  - El alumno no podía pre-chequear con su JWT y se retiró `/start`. Lo resuelve T-31.5 (HU-48): `GET /courses/{courseId}/nodes/{nodeId}/eligibility` con el JWT del alumno, mismo `GateService` ([[contratos/roadmap-motor-gate-v1|acta]] §2.1); en `develop` cuando se mergee.
   - Con el flag de comisiones activo cada evaluación hace llamadas a Courses sin caché.
 
 ## Referencias

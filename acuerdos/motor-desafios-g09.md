@@ -85,7 +85,7 @@ Roadmap expone `GET /api/roadmap/courses/{courseId}/challenge-pool` (ADMIN, GEST
 - [ ] `event_version` en el sobre: contradice la regla del PDF del bus; **abierto con Notificaciones** ([[acuerdos/notificaciones-bus|bus]]).
 - [ ] Borrar el listener legado v1/v2 (`RoadmapEventListener.onMessage`, payloads `AttemptCorrected`/`AttemptCanceled` y flag `app.kafka.topics.challenge-result.enabled=false`).
 - [ ] Re-corrección manual de un intento (¿`xp` total o delta?): un segundo evento con otro `event_id` **suma XP otra vez** (según `motor-desafios.md` §8, pregunta §4.5 sin respuesta registrada); el contrato vigente no lo aclara.
-- [ ] HU-48: falta un pre-chequeo que el alumno llame con su JWT (hoy el gate es solo servicio) y se retiró `/start`.
+- [ ] HU-48: el pre-chequeo del alumno con su JWT (`GET /api/roadmap/courses/{courseId}/nodes/{nodeId}/eligibility`, mismo `GateService`) está en `feature/t-31-1-gate-origen-no-disponible` (T-31.5); falta mergearlo y que el front lo use (T-31.6). Se retiró `/start` y se borró el código muerto `ProgressService.startChallenge`.
 - [ ] Baja/archivado de un desafío ubicado: el Motor no emite evento (HU-01 CA8 sin consumidor).
 - [ ] Firma nominal del acta del gate.
 

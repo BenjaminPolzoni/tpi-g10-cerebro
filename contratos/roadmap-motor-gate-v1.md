@@ -57,6 +57,19 @@ GET /api/roadmap/courses/{courseId}/students/{studentId}/nodes/{nodeId}/eligibil
 - El `serviceId`, scope y credenciales nominales de Motor siguen pendientes de confirmación; esta
   acta no los inventa.
 
+### 2.1 Pre-chequeo del alumno (HU-48, T-31.5)
+
+```http
+GET /api/roadmap/courses/{courseId}/nodes/{nodeId}/eligibility
+```
+
+- Lo llama el **front con el JWT del alumno**, antes de pedirle el intento al Motor. No es parte
+  del contrato con el Motor, que sigue usando el endpoint de §2.
+- No lleva `studentId`: el alumno sale del token (`X-User-Id` inyectado por Gateway), así que solo
+  responde por el alumno autenticado. Exige rol `STUDENT`: un servicio o un profesor reciben `403`.
+- Usa el mismo `GateService`: misma respuesta (§3), vocabulario (§4), orden (§5) y degradación
+  (§6, `origin_unavailable`). No crea intentos ni modifica progreso.
+
 ## 3. Respuesta exitosa
 
 El endpoint conserva el envelope global de Roadmap. Respuesta habilitada:
