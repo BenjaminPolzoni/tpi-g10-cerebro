@@ -30,6 +30,7 @@ estado: borrador
 | 09  | [Épicas e historias](09-epicas-e-historias.md) | Las 4 épicas y las 44 historias del sprint con el formato de la wiki de Taiga (HU-NN / HT-NN). Carpetas `epicas/` e `historias/` |
 | 10 | [Tareas que faltan para el grafo](10-propuesta-tareas-grafo.md) | Tareas nuevas, ajustes de criterio y cambios de responsable para cerrar Neo4j, `/graph` y el componente de grafo. Para cargar en Taiga |
 | 11 | [Plan de ejecución del grafo](11-plan-ejecucion-grafo.md) | Orden día por día de HT-16, HT-18, HT-34 y la parte de back de HU-65/HU-62, con dependencias hacia y desde otras personas y grupos |
+| 13 | [Contexto para Iker: reglas y Neo4j](13-contexto-neo4j-para-iker.md) | Qué hay hecho de reglas combinadas (T-59.1), cómo se guardan hoy en Postgres, qué choca con Neo4j y un camino propuesto para encenderlo |
 
 ## Mapa de la propuesta
 
