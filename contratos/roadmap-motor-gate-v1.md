@@ -2,10 +2,10 @@
 
 | Dato | Valor |
 |---|---|
-| Tarea | T-15.5 — Acta y publicación OpenAPI del contrato; T-44.3 — motivo `group_restricted` (v1.1); T6-HU48 — `challenge_id` y `attempt_type` (v1.2); restricciones `DATE` (v1.3, acta T-10.1 §3.6); T-31.1 — `origin_unavailable` en vez de `503` (v1.4, HT-31) |
-| Versión | **1.4 — Sprint 3** (1.3 — Sprint 3; 1.2 — Sprint 3; 1.1 — Sprint 2; 1.0 — Sprint 1) |
-| Fecha | 2026-10-16, aprobación de G09 (propuesta: 2026-10-15; v1.3: 2026-10-12; v1.2: 2026-10-11; v1.1: 2026-10-09; v1.0: 2026-09-26) |
-| Estado | **v1.4 aprobada por G09 (2026-10-16)**, con el valor `origin_unavailable` en inglés. Entra en `develop` al mergear T-31.1; hasta entonces `develop` responde como la v1.3. Aprobación nominal pendiente |
+| Tarea | T-15.5 — Acta y publicación OpenAPI del contrato; T-44.3 — motivo `group_restricted` (v1.1); T6-HU48 — `challenge_id` y `attempt_type` (v1.2); restricciones `DATE` (v1.3, acta T-10.1 §3.6); T-31.1 — `origin_unavailable` en vez de `503` (v1.4, HT-31); T-32.1 — `challenge_unavailable` (v1.5, HT-32) |
+| Versión | **1.5 — Sprint 3** (1.4 — Sprint 3; 1.3 — Sprint 3; 1.2 — Sprint 3; 1.1 — Sprint 2; 1.0 — Sprint 1) |
+| Fecha | 2026-10-17, G09 implementa la v1.5 en su PR de `tpi-engine-challenge#286` (v1.4: 2026-10-16; v1.3: 2026-10-12; v1.2: 2026-10-11; v1.1: 2026-10-09; v1.0: 2026-09-26) |
+| Estado | **v1.5 aceptada por G09 (2026-10-17)**: la implementaron en su PR de `#286`, sin mergear todavía. Entra en `develop` de Roadmap al mergear T-32.1. La v1.4 (aprobada el 2026-10-16) entra con T-31.1. Aprobación nominal pendiente |
 | Equipos | Roadmap (Tema 10) y Motor de Desafíos |
 
 Este documento es la fuente vigente del contrato funcional del Gate de Roadmap.
@@ -21,6 +21,7 @@ La especificación ejecutable se publica también en `/v3/api-docs` y
 | 1.2 | 2026-10-11 | T6 (HU-48): el `data` del gate suma `challenge_id` y `attempt_type` (§3). Cambio aditivo: el Motor ignora los campos que no conoce; no cambia la ruta, el envelope, `eligible` ni `reason`. |
 | 1.3 | 2026-10-12 | T-10.1 §3.6: se agrega el motivo `date_restricted` (§4 y §5) y el Gate evalúa las condiciones `DATE` de Courses. Cambio aditivo: solo con el flag `ROADMAP_BY_GROUP_ENABLED` encendido; no cambia la ruta, el envelope, `eligible` ni ninguno de los motivos existentes. |
 | 1.4 | 2026-10-16 | **Aprobada por G09** (propuesta el 2026-10-15; T-31.1, HU-15 CA5, [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503\|DEC-020]]): si Accounting o Courses no responden sin dato vigente, el Gate responde `200` con `eligible=false` y `reason=origin_unavailable` en lugar del `503` (§6). **No es aditivo**: el Gate deja de devolver `503` por un origen caído. Además se documenta `unit_prerequisite_pending` (§4 y §5), que el Gate ya emitía desde los prerrequisitos entre unidades ([[decisiones/DEC-010-prerrequisitos-por-seccion-v25\|DEC-010]]) y faltaba en el acta. El valor se acordó en inglés (`origin_unavailable`, no `origen_no_disponible`) a pedido de G09, por consistencia con el resto del vocabulario. |
+| 1.5 | 2026-10-17 | **Aceptada por G09** (T-32.1, HU-01 CA8; pedida en `tpi-engine-challenge#286`, junto con el evento `CHALLENGE_ARCHIVED`): un nodo cuyo desafío dio de baja el Motor responde `200` con `eligible=false` y `reason=challenge_unavailable` (§4 y §5). Cambio aditivo: no cambia la ruta, el envelope ni los motivos existentes. |
 
 La v1.1 solo cambia el comportamiento con el flag `ROADMAP_BY_GROUP_ENABLED` encendido. Con el flag
 apagado (default) el Gate responde exactamente como en la v1.0. La v1.2 es aditiva para todos los
@@ -135,6 +136,7 @@ al Motor qué desafío y qué clase de intento corresponde al nodo consultado.
 | `date_restricted` | **v1.3.** La unidad del nodo tiene una condición `DATE` que no se cumple en el instante de la consulta (acta T-10.1 §3.6). Solo se emite con el flag `ROADMAP_BY_GROUP_ENABLED` encendido. |
 | `unit_prerequisite_pending` | **v1.4 (documentación).** Falta completar una unidad requisito de la unidad del nodo (todos sus nodos obligatorios, [[decisiones/DEC-010-prerrequisitos-por-seccion-v25\|DEC-010]]). El Gate ya lo emitía; no estaba en el acta. |
 | `origin_unavailable` | **v1.4.** Accounting o Courses no respondieron, o respondieron con un dato inválido, y no hay dato vigente (§6). Reemplaza al `503`. |
+| `challenge_unavailable` | **v1.5.** El Motor dio de baja el desafío del nodo (`CHALLENGE_ARCHIVED`, T-32.1). Roadmap marcó el nodo como «desafío no disponible» y lo apagó; el progreso del alumno no cambia ([[decisiones/DEC-005-baja-logica-sin-borrar-progreso\|DEC-005]]). |
 
 El vocabulario sigue siendo cerrado: Roadmap no emite ningún valor fuera de esta tabla. Como la v1.0
 lo cerraba en cinco valores, cada ampliación se coordina con el consumidor (§9). El Motor ya reconoce
@@ -155,6 +157,10 @@ Roadmap devuelve el primer bloqueo aplicable en este orden:
 5. `content_not_read`;
 6. `prerequisite_pending`;
 7. `no_lives`.
+
+`challenge_unavailable` (v1.5) va antes que todos: se decide con el nodo, sin consultar
+Courses ni Accounting, y gana también sobre el `403` del nodo no disponible, porque el nodo
+marcado está apagado pero el motivo claro es la baja del desafío.
 
 `origin_unavailable` (v1.4) no tiene un lugar fijo: aparece en el paso donde el origen falla.
 Matrícula, comisiones y fechas consultan Courses (pasos 2 y 3) y las vidas consultan Accounting
@@ -290,6 +296,9 @@ lecturas, nodos completados, desbloqueos ni movimientos de XP, y no crea intento
 
 ## 8. Contratos reemplazados
 
+La v1.5 es **aditiva** sobre la v1.4: suma `challenge_unavailable` al vocabulario. No cambia la ruta,
+el envelope, el orden de los motivos existentes ni los errores.
+
 La v1.4 **no es aditiva**: reemplaza el `503` de §6 por el bloqueo
 `origin_unavailable` y suma ese valor al vocabulario. No cambia la ruta, el envelope, el orden de
 los motivos existentes ni los demás errores (`401`, `403`, `404`, `502`). También documenta
@@ -350,6 +359,14 @@ G09 respondió en su issue el 2026-10-16:
   - `RoadmapIneligibilityReason`: suma `UNIT_PREREQUISITE_PENDING` y `ORIGIN_UNAVAILABLE`;
   - `RoadmapEligibilityResponse`: `@JsonIgnoreProperties(ignoreUnknown = true)`, para tolerar
     `challenge_id` y `attempt_type` y cualquier campo nuevo de `data`.
+
+### Compatibilidad de la v1.5 con el consumidor (aceptada por G09, 2026-10-17)
+
+Pedida en `tpi-engine-challenge#286`. Verificado en su rama
+`feature/issue-286-challenge-archived-roadmap-unavailable` (commit `f414ebcb`, sin mergear):
+`challenge_unavailable` está en `roadmap-eligibility.yaml` y en `RoadmapIneligibilityReason`
+(`CHALLENGE_UNAVAILABLE`), con test de deserialización. Como con los demás motivos, el Motor
+rechaza el intento con `403 student-not-eligible` y reenvía el `reason`.
 
 Pendiente de coordinar con G09: su contrato `docs/contracts/roadmap-eligibility.yaml` ya lista los
 siete valores de la v1.3 (verificado en `tpi-engine-challenge`, `develop`, `e95adac6`, 2026-10-15;

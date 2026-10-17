@@ -2,7 +2,7 @@
 tags: [tpi, g10, acuerdo, motor, g09, kafka, gate]
 fecha: 2026-09-27
 grupos: [G10, G09]
-estado: vigente  # evento de cierre v8 y gate v1.3 vigentes; gate v1.4 aprobado por G09 el 2026-10-16 (entra con T-31.1); firma nominal del gate pendiente
+estado: vigente  # evento de cierre v8 y gate v1.3 vigentes; gate v1.4 aprobado por G09 el 2026-10-16 (entra con T-31.1); gate v1.5 y evento CHALLENGE_ARCHIVED en el PR de G09 para #286 (entran con T-32.1); firma nominal del gate pendiente
 contrato: "contratos/motor-desafios-evento-cierre.md"
 ---
 
@@ -49,14 +49,29 @@ Payload: `resources{coins,xp,add_live,subtract_live,active_item[]}`, `id_user`, 
 
 **Resolución del nodo (D-EVCIERRE-02, `ChallengeNodeResolver`):** `id_node` resuelve solo si existe en el roadmap de la cohorte **y** su `challenge_id` coincide. Si no, `WARN` (`error.node.id-hint-mismatch` / `id-hint-unknown`) y fallback por `challenge_id` con cardinalidad estricta: 0 nodos `node.not-found`, 1 nodo ese nodo, 2+ `node.challenge-ambiguous`.
 
+### 1b. Baja de desafío (Motor → Roadmap, Kafka; T-32.1)
+Pedido en `tpi-engine-challenge#286`; G09 lo implementó en la rama `feature/issue-286-challenge-archived-roadmap-unavailable` (`b6b68bc1`, sin mergear al 2026-10-17).
+
+| Campo | Valor |
+|---|---|
+| Topic | `challenges.events`, por el mismo outbox que los cierres |
+| `event_type` | `CHALLENGE_ARCHIVED` |
+| Key | `challenge_id` |
+| Cuándo | solo al pasar a `ARCHIVED` un desafío `PUBLISHED`; un borrador archivado no emite. `ARCHIVED` es final: no hay evento de vuelta |
+| Entrega | at-least-once |
+
+Sobre v8 igual al del cierre. Payload: `challenge_id`, `archived_at`, `performed_by_user_id` (opcional; no viaja si es null).
+
+Roadmap marca `challenge_unavailable` y apaga (`available=false`) los nodos vigentes con ese `challenge_id`, de cualquier curso. Es idempotente por estado: los nodos ya marcados no cambian, así que el evento repetido no marca dos veces ni deja otra entrada en el log del nodo. No toca el progreso ([[decisiones/DEC-005-baja-logica-sin-borrar-progreso|DEC-005]]). Si el profesor le cambia el desafío al nodo, la marca se borra y la disponibilidad la vuelve a encender él.
+
 ### 2. Gate (Motor → Roadmap, REST)
 ```http
 GET /api/roadmap/courses/{courseId}/students/{studentId}/nodes/{nodeId}/eligibility
 ```
 - Solo **principal de servicio** (`X-Principal-Type: service`, `X-Service-Id`, `X-Service-Scopes`); `studentId` va en el path, no en `X-User-Id`. Roadmap no parsea el JWT. `serviceId` y scope nominales del Motor siguen **sin confirmar**; `tpi-integration.yml` ofrece `roadmap.gate.read`.
 - Respuesta (envelope global `data`): `{ "eligible": bool, "reason": string|null, "challenge_id": uuid|null, "attempt_type": "NORMAL|LIVES|LLM" }`. `challenge_id`/`attempt_type` son aditivos (v1.2, HU-48). `attempt_type` sale de `node.livesPolicy`: `STANDARD→NORMAL`, `RECOVERY→LIVES`, `LLM→LLM`.
-- Vocabulario cerrado de `reason`: `not_enrolled`, `course_archived`, `group_restricted` (v1.1), `date_restricted` (v1.3), `unit_prerequisite_pending`, `content_not_read`, `prerequisite_pending`, `no_lives`; `origin_unavailable` en la v1.4 (aprobada por G09; en inglés a su pedido). Retirados: `recovery_pending`, `already_passed`. `unit_prerequisite_pending` el Gate ya lo emitía y faltaba en el acta.
-- Orden: `course_archived`, `not_enrolled`, `group_restricted|date_restricted`, `unit_prerequisite_pending`, `content_not_read`, `prerequisite_pending`, `no_lives`.
+- Vocabulario cerrado de `reason`: `not_enrolled`, `course_archived`, `group_restricted` (v1.1), `date_restricted` (v1.3), `unit_prerequisite_pending`, `content_not_read`, `prerequisite_pending`, `no_lives`; `origin_unavailable` en la v1.4 (aprobada por G09; en inglés a su pedido); `challenge_unavailable` en la v1.5 (desafío dado de baja, §1b). Retirados: `recovery_pending`, `already_passed`. `unit_prerequisite_pending` el Gate ya lo emitía y faltaba en el acta.
+- Orden: `challenge_unavailable` (v1.5, antes del `403` de nodo no disponible), `course_archived`, `not_enrolled`, `group_restricted|date_restricted`, `unit_prerequisite_pending`, `content_not_read`, `prerequisite_pending`, `no_lives`.
 - Bloqueos funcionales: `200`. Errores: `401`, `403` (principal o nodo no autorizado; `node.unit-unresolved`), `404` (nodo inexistente; también cuenta ausente en Accounting, ver [[acuerdos/inventario|Inventario]]), `502` (rechazo `4xx` de Accounting, [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad|DEC-015]]) y, hasta la v1.3, `503` Problem Details si Accounting o Courses caen (nunca `no_lives` ni `eligible=true`). En la v1.4, aprobada por G09 el 2026-10-16 ([[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503|DEC-020]], T-31.1) ese `503` pasa a `200` con `eligible=false` y `reason=origin_unavailable`.
 - Solo lectura e idempotente. Los motivos de comisión/fecha requieren `ROADMAP_BY_GROUP_ENABLED=true`.
 
@@ -69,7 +84,7 @@ GET /api/roadmap/courses/{courseId}/students/{studentId}/nodes/{nodeId}/eligibil
 Roadmap expone `GET /api/roadmap/courses/{courseId}/challenge-pool` (ADMIN, GESTOR o profesor dueño). Desde 2026-10-13 el pool **no filtra por autor para admin/gestor** (`1dbdd81`).
 
 ## Impacto en nuestro código
-- `events/RoadmapEventListener` (`@KafkaListener` sobre `challenge-events`), `ChallengeClosurePayload`, `ChallengeCompletedPayload`, `ChallengeAbortedPayload`, `EventParser`, `KafkaConsumerConfig` (backoff + DLT).
+- `events/RoadmapEventListener` (`@KafkaListener` sobre `challenge-events`; también recibe `CHALLENGE_ARCHIVED` y llama a `GraphService.markChallengeUnavailable`), `ChallengeArchivedPayload`, `ChallengeClosurePayload`, `ChallengeCompletedPayload`, `ChallengeAbortedPayload`, `EventParser`, `KafkaConsumerConfig` (backoff + DLT).
 - `services/ProgressService.recordResult`, `ChallengeNodeResolver`, `BadgeEvaluator` (se evalúa al procesar el cierre).
 - `controllers/GateController` -> `GateService` -> `GateEvaluator` (único evaluador; también alimenta `block_reason`).
 - `clients/motor/*` (`HttpMotorCatalogClient`, `MotorCatalogProperties`), `ChallengePoolController`, `GraphValidator` (existe/PUBLISHED/autor/tipo, HU-47).
@@ -86,7 +101,7 @@ Roadmap expone `GET /api/roadmap/courses/{courseId}/challenge-pool` (ADMIN, GEST
 - [ ] Borrar el listener legado v1/v2 (`RoadmapEventListener.onMessage`, payloads `AttemptCorrected`/`AttemptCanceled` y flag `app.kafka.topics.challenge-result.enabled=false`).
 - [ ] Re-corrección manual de un intento (¿`xp` total o delta?): un segundo evento con otro `event_id` **suma XP otra vez** (según `motor-desafios.md` §8, pregunta §4.5 sin respuesta registrada); el contrato vigente no lo aclara.
 - [ ] HU-48: el pre-chequeo del alumno con su JWT (`GET /api/roadmap/courses/{courseId}/nodes/{nodeId}/eligibility`, mismo `GateService`) está en `feature/t-31-1-gate-origen-no-disponible` (T-31.5); falta mergearlo y que el front lo use (T-31.6). Se retiró `/start` y se borró el código muerto `ProgressService.startChallenge`.
-- [ ] Baja/archivado de un desafío ubicado: el Motor no emite evento (HU-01 CA8 sin consumidor).
+- [ ] Baja de un desafío ubicado (HU-01 CA8, T-32.1): G09 implementó `CHALLENGE_ARCHIVED` y `challenge_unavailable` (§1b, `tpi-engine-challenge#286`); falta que mergee su PR. El consumidor de Roadmap está en `feature/t-32-1-desafio-no-disponible`.
 - [ ] Firma nominal del acta del gate.
 
 > [!warning] Riesgos
@@ -105,4 +120,6 @@ Roadmap expone `GET /api/roadmap/courses/{courseId}/challenge-pool` (ADMIN, GEST
 - 2026-10-14: nota creada desde `origin/develop` (`57ff06a`).
 - 2026-10-15: gate v1.4 propuesto (T-31.1): `origen_no_disponible` en vez de `503`; se documenta `unit_prerequisite_pending`.
 - 2026-10-16: G09 aprueba la v1.4 y pide el valor en inglés; queda `origin_unavailable`.
+- 2026-10-16: Roadmap pide a G09 el evento de baja de desafío y el motivo `challenge_unavailable` (`tpi-engine-challenge#286`).
+- 2026-10-17: G09 los implementa en su PR de `#286` (`CHALLENGE_ARCHIVED`, key `challenge_id`; gate v1.5).
 - 2026-10-15: respuestas en [[sprints/sprint-3/08-dudas|08-dudas]]: `node_id` único global, también en roadmaps clonados (G8); el profesor configura si el ranking ordena por XP o por notas, y las notas vienen del Motor (P14, falta acordar cómo llegan); "multiple choice con boss fight" es de Desafíos teóricos (P16).
