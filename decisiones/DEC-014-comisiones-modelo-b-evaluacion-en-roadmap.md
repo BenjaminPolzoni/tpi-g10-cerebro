@@ -2,6 +2,7 @@
 tags: [tpi, g10, decision, comisiones, courses]
 fecha: 2026-10-08
 estado: aceptada
+actualizado: 2026-10-16
 reemplaza: ""
 ---
 
@@ -14,8 +15,10 @@ HU-44/45 piden ver el roadmap y el avance por comisión. El 2026-10-08 producto 
 - **Modelo B:** un `roadmap` por cohorte (`courseCohortId`); la vista por comisión es un **filtro**, no un roadmap por grupo. El alumno que está en varias comisiones elige cuál ve (si no hay selección, `400 group.selection-required` con las opciones).
 - **Pull y evaluación en Roadmap ("opción R"):** Roadmap lee de Courses grupos, participantes y restricciones (sección primero, actividad/nodo después) y evalúa `DATE`/`GROUP` con su propio progreso y los grupos del alumno; aplica `ALL`/`ANY` sobre todas las condiciones. No hay caché en el gate.
 - **Solo lectura y asignación humana:** solo `PROFESSOR`/`MANAGER` asignan comisión; el principal de servicio nunca asigna.
-- **El ranking de cohorte no depende de las comisiones.** Todo detrás del flag `ROADMAP_BY_GROUP_ENABLED`.
+- **El ranking de cohorte no depende de las comisiones.** *(Actualizada, ver abajo.)* Todo detrás del flag `ROADMAP_BY_GROUP_ENABLED`.
 - **Regla (c):** un prerrequisito no puede quedar fuera del alcance de visibilidad del nodo que lo exige (validación transitiva en el editor y en el sync).
+
+**Actualización (2026-10-16):** el ranking es de la cohorte por defecto y la comisión es un **filtro opcional** (`group_id`; P10, T-45.8). Sin filtro no cambia. Con filtro, los puestos, percentiles y zonas se recalculan entre los miembros de la comisión. Sigue detrás de `ROADMAP_BY_GROUP_ENABLED`. Ver [[T-45.8 Back - ranking con filtro por comisión|Plan T-45.8]].
 
 ## Alternativas descartadas
 - **Un roadmap por comisión**: duplicaría el grafo y el progreso.

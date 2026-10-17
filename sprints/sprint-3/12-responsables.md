@@ -45,7 +45,7 @@ fecha: 2026-10-15
     - [ ] [[sprints/sprint-3/historias/HT-21 Seed de demo curado#Tareas|T-21.3]] Recorrer la demo de punta a punta en el entorno de demo · New
 - [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión|HU-45]] Ranking de la cohorte y avance por comisión
     - [x] [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión#Tareas|T-45.7]] Reproducir y arreglar el error del ranking por comisión · Closed
-    - [ ] [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión#Tareas|T-45.8]] Ranking del curso con filtro opcional por comisión · New
+    - [ ] [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión#Tareas|T-45.8]] Ranking del curso con filtro opcional por comisión · In progress
     - [ ] [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión#Tareas|T-45.9]] Filtro por comisión en la pantalla del ranking · New
     - [ ] [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión#Tareas|T-45.10]] Avance por comisión para el profesor · New
     - [ ] [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión#Tareas|T-45.11]] Elegir si el ranking ordena por XP o por notas · New

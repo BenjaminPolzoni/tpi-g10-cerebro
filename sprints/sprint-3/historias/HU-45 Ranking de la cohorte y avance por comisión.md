@@ -140,8 +140,9 @@ Dependencias / Impactos
     - Decisión y reglas: [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo|DEC-019]]. Back en curso en `fix/t-45-7-error-ranking`.
     - **Qué:** reproducirlo en el entorno integrado con `ROADMAP_BY_GROUP_ENABLED=true`, anotar el pedido y la respuesta que fallan, arreglarlo (E1: se arregla este sprint).
     - **Listo cuando:** el caso que fallaba tiene un test y ya no falla.
-- [ ] [#9306](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9306) **T-45.8 Ranking del curso con filtro opcional por comisión** · Back · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
-    - Plan de implementación: [[T-45.8 Back - ranking con filtro por comisión|Plan T-45.8]] (2026-10-16, borrador con decisiones a confirmar).
+- [ ] [#9306](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9306) **T-45.8 Ranking del curso con filtro opcional por comisión** · Back · In progress · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
+    - Plan de implementación: [[T-45.8 Back - ranking con filtro por comisión|Plan T-45.8]] (2026-10-16, implementado).
+    - **Estado (2026-10-16):** PR [#249](https://github.com/2026-P4-BE/tpi-roadmap/pull/249) abierto hacia `develop`, a la espera de revisión.
     - **Qué:** por defecto se muestra el ranking del curso; un parámetro opcional de comisión lo filtra (la comisión es un filtro, P10). El anonimato no cambia (DEC-007).
     - **Dónde:** `RankingService`, `RankingController`.
     - **Listo cuando:** con y sin comisión devuelve lo esperado. Hay tests.
