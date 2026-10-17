@@ -97,6 +97,9 @@ Lo que hay hoy en Postgres:
 > `tpi-roadmap/docs/T-16-4-MODELO-GRAFO.md`. Esta sección es el resumen. Donde no coincide con el
 > [[#Diseño propuesto si se elige Neo4j|diseño propuesto]] de más abajo, manda esta sección.
 
+> [!warning] 2026-10-17 · Escritura en una sola base: [[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion|DEC-021]]
+> **Postgres es la fuente de verdad de la estructura y Neo4j es una proyección.** Toda edición se escribe en Postgres, deja una marca en `graph_sync_pending` en la misma transacción, y un proyector copia el roadmap entero a Neo4j con `MERGE` por UUID (al confirmar la edición y con reintentos). Reemplaza el punto 5 del [[#Diseño propuesto si se elige Neo4j|diseño de abajo]] («escribir en Neo4j, luego registrar en Postgres») y descarta **D8**: las tablas de estructura y sus claves foráneas se mantienen. Todo dato del modelo de esta sección (tipos de relación, `hiddenRelationTypes`, subsecciones, inicio y fin, posiciones) tiene que existir primero en Postgres.
+
 **Etiquetas**
 
 | Etiqueta | Qué es | Propiedades principales |
@@ -122,7 +125,7 @@ Todos llevan `createdAt` y `deletedAt` (baja lógica), salvo `:Rule`. Sin propie
 
 **Qué se queda en Postgres:** todo el estado del alumno (`student_course`, `completed_node`,
 `content_reading`, `node_unlock`, `xp_movement`, `badge`, `badge_award`, `student_avatar`), `node_edit_log` y
-el outbox. Las tablas de estructura mandan hasta que se encienda el flag de lectura (T-18.6).
+el outbox. Las tablas de estructura mandan siempre (DEC-021); el flag de lectura (T-18.6) solo cambia de dónde se lee.
 
 **Cambios respecto del diseño de abajo**
 
@@ -143,7 +146,7 @@ el outbox. Las tablas de estructura mandan hasta que se encienda el flag de lect
 | D5 | Ocultar tipos de relación | Lista por roadmap más `visible` por arista | Mateo (HU-65) |
 | D6 | Entre qué se puede relacionar | Nodo con nodo, sección con sección | Equipo |
 | D7 | Inicio y fin del roadmap y de las subsecciones | Los del roadmap cuelgan del roadmap | Stefano (HU-64) |
-| D8 | Claves foráneas de Postgres hacia `node` y `section` | Se quitan junto con T-18.6; la integridad la cuidan la aplicación y la reconciliación | Baltasar y equipo |
+| D8 | Claves foráneas de Postgres hacia `node` y `section` | ~~Se quitan junto con T-18.6~~ Se mantienen: Postgres sigue siendo la fuente de verdad ([[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion\|DEC-021]], 2026-10-17) | Equipo |
 
 > [!warning] D2 cambia una tarea propuesta
 > Si se acepta D2, la tarea T-18.11 de [[sprints/sprint-3/10-propuesta-tareas-grafo|10-propuesta-tareas-grafo]]
@@ -204,9 +207,9 @@ completed_node, content_reading, xp_movement, student_course, badge_award, outbo
 2. **La app genera los UUID**, y Neo4j y Postgres comparten ids sin sincronizar.
 3. **Solo baja lógica** (`deletedAt`) en Neo4j. Nunca borrado físico, para no romper el progreso histórico.
 4. **Gate y progreso**: leen las reglas en Neo4j (con caché corta por roadmap) y el estado en Postgres. Evalúan en Java como hoy (`GateEvaluator`).
-5. **Las ediciones del grafo** siguen publicando por el outbox de Postgres. Patrón: escribir en Neo4j, luego registrar en Postgres el `node_edit_log` y el evento. Si falla lo segundo, se reintenta (es idempotente por id).
+5. ~~**Las ediciones del grafo** siguen publicando por el outbox de Postgres. Patrón: escribir en Neo4j, luego registrar en Postgres el `node_edit_log` y el evento.~~ Reemplazado por [[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion|DEC-021]]: se escribe en Postgres (con `node_edit_log`, outbox y marca de sincronización en la misma transacción) y se proyecta a Neo4j.
 6. **Esquema versionado** con `neo4j-migrations` (constraints de unicidad por `id`, índices).
-7. **Migración inicial**: un job único que lee `section`, `node`, `section_prerequisite` y `node_prerequisite` y crea el grafo. Queda un período de convivencia con la lectura todavía en Postgres, detrás de un flag.
+7. **Migración inicial**: el proyector de DEC-021 corrido sobre todos los roadmaps (antes: un job único) lee `section`, `node`, `section_prerequisite` y `node_prerequisite` y crea el grafo. Queda un período de convivencia con la lectura todavía en Postgres, detrás de un flag.
 8. **Endpoint para la vista**: `GET /roadmaps/{id}/graph` devuelve `{nodes:[...], edges:[...], layout}` listo para la librería del front.
 
 > [!warning] Riesgos y mitigación

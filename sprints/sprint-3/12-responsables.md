@@ -118,7 +118,7 @@ fecha: 2026-10-15
 
 ## Iker Alonso
 
-13 tareas · 0 cerradas
+14 tareas · 1 cerrada
 
 - [[sprints/sprint-3/historias/HT-16 Validar la infra de Neo4j y modelar las relaciones|HT-16]] Validar la infra de Neo4j y modelar las relaciones
     - [ ] [[sprints/sprint-3/historias/HT-16 Validar la infra de Neo4j y modelar las relaciones#Tareas|T-16.1]] Levantar Neo4j en el compose local · New
@@ -136,7 +136,8 @@ fecha: 2026-10-15
 - [[sprints/sprint-3/historias/HT-32 Nodos y editor pendientes de HU-01, HU-41 y HU-43|HT-32]] Nodos y editor pendientes de HU-01, HU-41 y HU-43
     - [ ] [[sprints/sprint-3/historias/HT-32 Nodos y editor pendientes de HU-01, HU-41 y HU-43#Tareas|T-32.3]] HU-41 CA2 · Que guardar un nodo no le borre la política de vidas · New
 - [[sprints/sprint-3/historias/HU-65 Relaciones con tipo|HU-65]] Relaciones con tipo
-    - [ ] [[sprints/sprint-3/historias/HU-65 Relaciones con tipo#Tareas|T-65.1]] Catálogo de los 5 tipos de relación · New
+    - [x] [[sprints/sprint-3/historias/HU-65 Relaciones con tipo#Tareas|T-65.1]] Catálogo de los 5 tipos de relación · Closed
+    - [ ] [[sprints/sprint-3/historias/HU-65 Relaciones con tipo#Tareas|T-65.5]] Guardar el tipo de relación en Postgres y aceptarlo en la API · New (agregada el 2026-10-17, [[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion|DEC-021]])
 
 ## Lautaro Jesus Diego
 

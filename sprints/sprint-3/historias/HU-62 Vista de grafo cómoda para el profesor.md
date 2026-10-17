@@ -121,7 +121,7 @@ Dependencias / Impactos
 *   Servicios involucrados: Ninguno.
 *   Módulos afectados: `course-map-page`, endpoint `/graph`.
 *   Otros equipos / aprobaciones: Equipo UI-KIT (HT-34).
-*   Impacto en datos / migraciones: Posiciones en Neo4j.
+*   Impacto en datos / migraciones: Posiciones en Postgres (`node.position_x` y `node.position_y`, V23), proyectadas a Neo4j (DEC-021).
 *   Riesgos y mitigación (opcional): Depende del componente de grafo de HT-34; mitigación: arrancar sobre la librería directa y migrar al kit.
 
 ## Tareas
@@ -149,6 +149,11 @@ Dependencias / Impactos
 ---
 
 ## Contexto del Sprint 3 (no va a Taiga)
+
+> [!warning] 2026-10-17 · [[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion|DEC-021]]: nada escribe directo en Neo4j
+> - **T-62.2:** el endpoint de posiciones guarda en Postgres, en las columnas `position_x` y `position_y` de `node` que ya existen. El proyector las copia a Neo4j.
+> - **T-62.3:** crear y borrar relaciones arrastrando usa los endpoints de prerrequisitos que ya existen, que con [[sprints/sprint-3/historias/HU-65 Relaciones con tipo|T-65.5]] aceptan el tipo de relación. No hace falta una ruta nueva.
+> - Si la vista llega a mover **secciones**, `section` no tiene columnas de posición: hay que agregarlas en Postgres primero.
 
 ### Qué hay hoy en el código
 

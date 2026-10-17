@@ -12,6 +12,9 @@ autor: Iker Alonso
 >
 > **Día 1** = primer día hábil después del planning. Son 14 días a unas 5 h por día.
 
+> [!warning] 2026-10-17 · Cambio de diseño: [[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion|DEC-021]]
+> Las escrituras de estructura van **siempre a Postgres** y Neo4j se proyecta desde ahí. Ya no hay un momento en que «se mueve» la escritura a Neo4j: T-18.6 solo cambia de dónde se lee. T-18.2 y T-18.3 pasan a ser el proyector (marca en `graph_sync_pending`, proyección del roadmap entero, reintentos y reconciliación). T-65.5 se cargó en Taiga ([#10591](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/10591)) con el tipo de relación en Postgres y en la API de prerrequisitos, y tiene que estar antes de T-18.2.
+
 ## La idea en una frase
 
 Primero se publican **los contratos** (modelo del grafo, JSON de `/graph`, API del componente y lector/escritor común) para que nadie espere código. Después se construye la base en Neo4j. Recién al final se mueve la lectura de Postgres a Neo4j, cuando todo lo demás ya funciona contra el modelo común.
@@ -31,11 +34,11 @@ Primero se publican **los contratos** (modelo del grafo, JSON de `/graph`, API d
 | 9 | T-18.5 `GET /roadmaps/{id}/graph` | HT-18 | 4 | `tpi-roadmap` |
 | 10 | T-18.4 Caché de reglas por roadmap para el gate | HT-18 | 4 | `tpi-roadmap` |
 | 11 | T-34.2 Construir y publicar `generic-node-graph` | HT-34 | 10 | `2026-PIV-TPI-UI-KIT` |
-| 12 | T-65.5 Endpoints de relaciones con tipo | HU-65 | 4 | `tpi-roadmap` |
+| 12 | T-65.5 Tipo de relación en Postgres y en la API de prerrequisitos (DEC-021) | HU-65 | 4 | `tpi-roadmap` |
 | 13 | T-62.7 Guardar posiciones (`PUT /layout`) | HU-62 | 2 | `tpi-roadmap` |
-| 14 | T-18.2 Job de migración Postgres → Neo4j | HT-18 | 6 | `tpi-roadmap` |
-| 15 | T-18.3 Log, outbox y reconciliación entre bases | HT-18 | 5 | `tpi-roadmap` |
-| 16 | T-18.6 Flag de lectura en Neo4j | HT-18 | 2 | `tpi-roadmap` |
+| 14 | T-18.2 Proyector Postgres → Neo4j (migración inicial y reconstrucción) | HT-18 | 6 | `tpi-roadmap` |
+| 15 | T-18.3 Marca `graph_sync_pending`, proyección por edición, reintentos y reconciliación | HT-18 | 5 | `tpi-roadmap` |
+| 16 | T-18.6 Flag de lectura en Neo4j (las escrituras siguen en Postgres) | HT-18 | 2 | `tpi-roadmap` |
 | 17 | T-18.10 Escenarios BDD de la estructura | HT-18 | 3 | `tpi-roadmap` |
 
 ## Mapa de dependencias

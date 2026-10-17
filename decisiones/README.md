@@ -32,9 +32,11 @@ Registro de decisiones **ya tomadas** que se deducen del código, los contratos 
 | DEC-018 | Catálogo cerrado de relaciones y de tipos de nodo | 2026-10-15 | aceptada | [[decisiones/DEC-018-catalogo-de-relaciones-y-tipos-de-nodo\|DEC-018]] |
 | DEC-019 | El ranking avisa el estado de sus datos, tiene caché de respaldo y la autorización falla cerrado | 2026-10-15 | aceptada | [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo\|DEC-019]] |
 | DEC-020 | La caída de un origen del gate es un motivo (`origin_unavailable`), no un 503 | 2026-10-15 | aceptada | [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503\|DEC-020]] |
+| DEC-021 | Postgres es la fuente de verdad de la estructura y Neo4j es una proyección | 2026-10-17 | aceptada | [[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion\|DEC-021]] |
 
 ## Decisiones que conviene revisar pronto
 > [!warning] Con deuda abierta
+> - [[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion\|DEC-021]]: toda escritura de estructura va a Postgres y Neo4j se proyecta desde ahí. Cambia T-18.2, T-18.3, T-18.6 y suma T-65.5. Todo dato nuevo del grafo se agrega primero en Postgres.
 > - [[decisiones/DEC-004-flags-apagados-por-defecto\|DEC-004]]: los flags apagados esconden HU ya hechas en la demo; falta decidir cuándo cambian de default.
 > - [[decisiones/DEC-001-wire-kafka-v8-snake-case\|DEC-001]]: falta confirmar que los consumidores de `roadmap.events` leen v8.
 > - [[decisiones/DEC-006-insignias-sistema-y-curso\|DEC-006]] y [[decisiones/DEC-012-curva-de-niveles-desde-par-09\|DEC-012]]: la curva PAR-09 activa es la de Backoffice (E4, 2026-10-15); actualizar el seed y lo que asuma 600/1800/4200.

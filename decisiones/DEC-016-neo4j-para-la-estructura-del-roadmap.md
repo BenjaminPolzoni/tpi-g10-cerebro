@@ -7,6 +7,9 @@ reemplaza: ""
 
 # DEC-016: Neo4j para la estructura del roadmap
 
+> [!warning] Precisada por [[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion|DEC-021]] (2026-10-17)
+> La estructura se **consulta** en Neo4j, pero se **escribe** en Postgres, que es la fuente de verdad. Neo4j es una proyección que se rearma desde Postgres. Las tablas de estructura y sus claves foráneas se mantienen.
+
 ## Contexto
 Los profes pidieron que el roadmap sea un grafo totalmente configurable: N roadmaps por curso, nodos de inicio y fin, relaciones con tipo (4 niveles) y reglas de desbloqueo combinadas. En las correcciones del 2026-10-14 piden **explícitamente** usar una BD de grafos (ej. Neo4j) en vez de tablas relacionales.
 
