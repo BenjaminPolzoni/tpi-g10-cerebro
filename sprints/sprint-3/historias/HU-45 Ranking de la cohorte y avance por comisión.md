@@ -135,7 +135,7 @@ Dependencias / Impactos
     - Tarea heredada del Sprint 2, ya cargada en Taiga.
 - [x] [#5426](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/5426) **T-45.6 Wiki, OpenAPI y diagrama de secuencia** · Closed · [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]]
     - Tarea heredada del Sprint 2, ya cargada en Taiga.
-- [ ] [#9305](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9305) **T-45.7 Reproducir y arreglar el error del ranking por comisión** · Back + Front · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
+- [x] [#9305](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9305) **T-45.7 Reproducir y arreglar el error del ranking por comisión** · Back + Front · Closed · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
     - Plan de implementación: [[13-plan-T-45-7|13 — Plan T-45.7]].
     - Decisión y reglas: [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo|DEC-019]]. Back en curso en `fix/t-45-7-error-ranking`.
     - **Qué:** reproducirlo en el entorno integrado con `ROADMAP_BY_GROUP_ENABLED=true`, anotar el pedido y la respuesta que fallan, arreglarlo (E1: se arregla este sprint).
