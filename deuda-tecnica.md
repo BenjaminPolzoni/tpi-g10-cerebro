@@ -2,7 +2,7 @@
 tags:
   - tpi
   - g10
-actualizado: 2026-10-15
+actualizado: 2026-10-17
 ---
 
 # Deuda técnica de G10 (roadmap-service)
@@ -20,7 +20,7 @@ actualizado: 2026-10-15
 | # | Imp. | Deuda | Qué hacer | Esf. | Origen | Sprint |
 |---|---|---|---|---|---|---|
 | DT-01 | 🔴 | El **Gate** (`/eligibility`) acepta a cualquier servicio con token técnico: `SecurityConfig` exige `ServiceIdentity` pero no valida el scope `roadmap.gate.read` | Validar el scope como ya se hace con `roadmap.progress.read` en `/courses/*/progress` | S | [[arquitectura/cors-topics-rutas]] | Proponer con HT-22 |
-| DT-02 | 🟠 | Autorización con **roles fijos** (`hasRole`/`hasAnyRole` en constantes por controller) y dos chequeos a mano (`RankingController`, `requireOwner`) | Migrar a permisos con el catálogo de G06 | M | [[sprints/sprint-3/07-correcciones-profes\|07]] | Sprint 3 (HT-22) |
+| DT-02 | 🟠 | Autorización con **roles fijos** (`hasRole`/`hasAnyRole` en constantes por controller) y dos chequeos a mano (`RankingController`, `requireOwner`) | Migrar a permisos con el catálogo de G06. **Actualización (2026-10-17):** el Gateway va a dejar de mandar `X-User-Roles` y mandará permisos; sin el rol, todo chequeo por rol da 403 (ver [[sprints/sprint-3/historias/HT-22 Permisos en vez de roles\|HT-22]]). T-45.9 sumó `GESTOR` al ranking | M | [[sprints/sprint-3/07-correcciones-profes\|07]] | Sprint 3 (HT-22) |
 | DT-03 | 🟠 | **No hay una matriz escrita de qué puede hacer cada rol** (ADMIN, GESTOR, PROFESSOR, STUDENT). Hoy hay que leer los controllers | Escribir la tabla rol → acciones. Es la base para HT-22 | S | Consulta del equipo (2026-10-15) | Sprint 3 (con HT-22/C10) |
 | DT-04 | 🟢 | `ProgressService.startChallenge` es **código muerto** | Borrarlo al hacer el pre-chequeo de HU-48 | S | [[sprints/sprint-3/02-pendientes\|02]] | Sprint 3 (Bloque 0) |
 | DT-05 | 🟢 | Listener **legado** de `challenges.results` (payloads v1/v2) y su flag `KAFKA_TOPIC_CHALLENGE_RESULT_ENABLED`, apagado | Borrar listener, payloads y flag | S | `application.properties` | |

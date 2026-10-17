@@ -23,6 +23,7 @@ La regla de edición era "ADMIN o profesor a cargo". Un usuario con rol `GESTOR`
   - Alcance amplio: gestor equivale a ADMIN en edición; el pool dejó de filtrar por autor para admin y gestor (`1dbdd81`).
   - El vocabulario de roles debe alinearse con Courses (`MANAGER`, "GESTOR o PROFESOR") y Users.
   - El rol `GESTOR` ya existía en Users; Courses documenta un vocabulario distinto, así que conviene fijar un solo catálogo de roles.
+- **Actualización (2026-10-17):** en T-45.9 el gestor también ve el **ranking** de cualquier cohorte como ADMIN (vista de staff con todas las comisiones), vía `Roles.isPlatformStaff` en `RankingController`. Cuando el Gateway pase a mandar permisos en vez de roles, esto se migra con [[sprints/sprint-3/historias/HT-22 Permisos en vez de roles|HT-22]].
 
 ## Referencias
 - Código / PR / doc: `d64b097` (PR #188, 2026-10-11), `common/security/Roles`, `GraphController`, `ChallengePoolController`, `SectionSyncController`; tests `GraphEditorScenariosTest`, `ChallengePoolControllerTest`, `SectionSyncControllerTest`.

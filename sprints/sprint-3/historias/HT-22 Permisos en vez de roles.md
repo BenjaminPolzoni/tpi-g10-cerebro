@@ -155,3 +155,13 @@ Las reglas usan `hasRole`/`hasAnyRole` en constantes por controller (`CAN_EDIT`,
 ### Dudas que la frenan
 
 - [[sprints/sprint-3/08-dudas|G2]] Catálogo de permisos: es de Users (G07) y todavía no está definido.
+
+### Posible cambio cercano: el Gateway deja de mandar el rol (2026-10-17)
+
+> [!warning] Aviso del equipo (2026-10-17)
+> El Gateway va a dejar de inyectar el rol (`X-User-Roles`) y va a mandar **los permisos** del usuario. Todavía no hay fecha ni nombre de header confirmados: anotado como posible cambio en un futuro no muy lejano.
+
+- **Qué rompe (verificado en `develop`, `3317456`):** `GatewayHeadersFilter` arma las authorities solo desde `X-User-Roles`. Sin ese header autentica al usuario **sin authorities** (`roles(null)` → lista vacía), así que todo `hasRole`/`hasAnyRole` responde **403**. No degrada: corta todos los endpoints de usuario.
+- **Dónde hay chequeos por rol hoy:** las constantes `CAN_*` de cada controller, `Roles.isPlatformStaff` (ADMIN/GESTOR), `requireOwner` y las ramas de `RankingController` (alumno / profesor dueño / staff).
+- **Sumado el 2026-10-17 en T-45.9:** el `GESTOR` ve el ranking como ADMIN (`CAN_VIEW_RANKING` + `Roles.isPlatformStaff`). Es un chequeo más para migrar.
+- **Qué hacer cuando se confirme:** leer el header de permisos en `GatewayHeadersFilter` y pasar los `@PreAuthorize` a `hasAuthority('roadmap.…')` con la matriz de T-22.1 ([[deuda-tecnica|DT-02 y DT-03]]). Hasta entonces seguir con roles, como dice G6.
