@@ -147,7 +147,8 @@ Dependencias / Impactos
     - **Dónde:** `RankingService`, `RankingController`.
     - **Listo cuando:** con y sin comisión devuelve lo esperado. Hay tests.
 - [ ] [#9307](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9307) **T-45.9 Filtro por comisión en la pantalla del ranking** · Front · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
-    - **Qué:** un `generic-select` con las comisiones en `ranking-panel`.
+    - Plan de implementación: [[T-45.9 Front - filtro por comisión en el ranking|Plan T-45.9]] (2026-10-17, borrador). Worktree `Frontend/2026-PIV-TPI-FE-t-45-9`, rama `feature/t-45-9-ranking-filtro-comision`.
+    - **Qué:** un `generic-select` con las comisiones en `ranking-page` (**Actualización (2026-10-17):** `ranking-panel` se borró en T-26.5).
     - **Listo cuando:** el alumno cambia de comisión y el ranking se actualiza.
 - [ ] [#9308](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9308) **T-45.10 Avance por comisión para el profesor** · Front · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
     - **Qué:** vista para el profesor con el avance de cada comisión, usando `GET /courses/{id}/groups/{gid}/progress` (`GroupProgressController`, ya existe).
