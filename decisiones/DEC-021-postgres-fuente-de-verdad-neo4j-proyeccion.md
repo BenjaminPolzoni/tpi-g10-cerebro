@@ -44,7 +44,7 @@ T-18.6 decía que, con el flag de lectura encendido, las ediciones de estructura
   - Encender y apagar el flag de lectura es seguro.
 - Negativas / deuda:
   - Neo4j queda atrasado unos milisegundos después de cada edición, o más si Neo4j estaba caído. Quien lea de Neo4j justo después de guardar puede ver la versión anterior.
-  - Postgres necesita columnas para todo lo que tiene el modelo de Neo4j. Faltaba el tipo de relación y su visibilidad: se agregó **T-65.5** en [[sprints/sprint-3/historias/HU-65 Relaciones con tipo|HU-65]].
+  - Postgres necesita columnas para todo lo que tiene el modelo de Neo4j. Faltaban las relaciones que no bloquean y los tipos ocultos: se agregó **T-65.5**, con tablas nuevas (`node_relation`, `section_relation`, `roadmap_hidden_relation_type`); `REQUIRES` sigue en las tablas de prerrequisitos, en [[sprints/sprint-3/historias/HU-65 Relaciones con tipo|HU-65]].
   - Se mantienen las tablas de estructura de Postgres y sus claves foráneas, así que D8 de [[sprints/sprint-3/04-base-de-grafos|04-base-de-grafos]] queda descartada.
 
 ## Qué cambia en las tareas
@@ -54,9 +54,9 @@ T-18.6 decía que, con el flag de lectura encendido, las ediciones de estructura
 | [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial\|T-18.3]] | Tabla `graph_sync_pending`, proyector por roadmap, reintentos y reconciliación |
 | [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial\|T-18.4]] | La caché se invalida al confirmar la edición en Postgres |
 | [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial\|T-18.6]] | El flag solo cambia de dónde se lee. Las escrituras siguen en Postgres |
-| [[sprints/sprint-3/historias/HU-65 Relaciones con tipo\|T-65.5]] (nueva) | `relation_type` y visibilidad por tipo en Postgres y en la API de prerrequisitos |
+| [[sprints/sprint-3/historias/HU-65 Relaciones con tipo\|T-65.5]] (nueva) | Tablas nuevas para los 4 tipos que no bloquean y los tipos ocultos, y API única `/roadmaps/{roadmapId}/relations` (un `requires` se delega al editor de prerrequisitos) |
 | [[sprints/sprint-3/historias/HU-62 Vista de grafo cómoda para el profesor\|T-62.2]] | Las posiciones se guardan en Postgres (`node.position_x` y `node.position_y`, V23) |
-| [[sprints/sprint-3/historias/HU-62 Vista de grafo cómoda para el profesor\|T-62.3]] | Crear y borrar relaciones arrastrando usa los endpoints de prerrequisitos, no una ruta que escriba en Neo4j |
+| [[sprints/sprint-3/historias/HU-62 Vista de grafo cómoda para el profesor\|T-62.3]] | Crear y borrar relaciones arrastrando usa `/roadmaps/{roadmapId}/relations` (T-65.5), no una ruta que escriba en Neo4j |
 | [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios\|HU-64]], HU-58, HU-59 | Se implementan sobre Postgres. El proyector los copia a Neo4j |
 
 ## Referencias

@@ -114,7 +114,7 @@ Dependencias / Impactos
 *   Servicios involucrados: Ninguno.
 *   Módulos afectados: Módulo graph, vista de grafo, mapa del alumno.
 *   Otros equipos / aprobaciones: Ninguno.
-*   Impacto en datos / migraciones: Tipo de relación y visibilidad por tipo en Postgres (`node_prerequisite`, `section_prerequisite`, T-65.5), proyectados a Neo4j (DEC-021).
+*   Impacto en datos / migraciones: Tablas nuevas en Postgres para las relaciones que no bloquean (`node_relation`, `section_relation`) y los tipos ocultos por roadmap (`roadmap_hidden_relation_type`), proyectadas a Neo4j (T-65.5, DEC-021). `REQUIRES` sigue en `node_prerequisite` y `section_prerequisite`, sin cambios.
 *   Riesgos y mitigación (opcional): Ninguno abierto (P4 respondida el 2026-10-15).
 
 ## Tareas
@@ -134,9 +134,11 @@ Dependencias / Impactos
 - [ ] [#9353](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9353) **T-65.4 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]]
     - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
 - [ ] [#10591](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/10591) **T-65.5 Guardar el tipo de relación en Postgres y aceptarlo en la API** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
-    - **Qué:** migración que agrega `relation_type` a `node_prerequisite` y `section_prerequisite` (valores del catálogo de T-65.1, por defecto `REQUIRES`) y la visibilidad por tipo. Los endpoints de prerrequisitos aceptan y devuelven el tipo, y rechazan con 400 los tipos fuera del catálogo. Solo `REQUIRES` cuenta para el desbloqueo.
+    - **Qué:** migración con tablas nuevas para los 4 tipos que no bloquean (`node_relation` y `section_relation`: origen, destino, tipo, `label` opcional, `visible` y baja lógica) y para los tipos ocultos por roadmap (`roadmap_hidden_relation_type`). `REQUIRES` **no cambia**: sigue en `node_prerequisite` y `section_prerequisite`, que leen el gate, los ciclos y las reglas. API única por roadmap: `POST /roadmaps/{roadmapId}/relations` (origen, destino, tipo y `label`), `GET /roadmaps/{roadmapId}/relations` (los 5 tipos juntos), `DELETE /roadmaps/{roadmapId}/relations/{relationId}` (baja lógica) y `PUT /roadmaps/{roadmapId}/hidden-relation-types`. Un `REQUIRES` se delega al editor de prerrequisitos que ya existe (ciclos y congelado de desbloqueos).
+    - **Errores:** 400 si el tipo no está en el catálogo, si origen y destino son de otro roadmap o de distinto nivel (nodo con sección), o si es la misma pieza; 409 si la relación ya existe, si un `REQUIRES` arma un ciclo o si el curso está archivado.
+    - **Por qué tablas nuevas y no una columna en `node_prerequisite`:** esa tabla significa «requiere» y la leen el gate, el detector de ciclos, el árbol de reglas (V28), el desbloqueo, el progreso y la restauración de Courses. Con filas de otros tipos, todos tendrían que filtrar y un olvido haría bloquear a una relación informativa. Es el mismo reparto del modelo de Neo4j (`RelationType.storedAsRelationship()`). Decidido el 2026-10-17.
     - **Por qué:** Postgres es la fuente de verdad y Neo4j se proyecta desde ahí ([[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion|DEC-021]]). Sin el tipo en Postgres, el proyector no puede copiarlo.
-    - **Listo cuando:** las relaciones existentes quedan como `REQUIRES`, se puede crear una relación de cada tipo por la API, y hay tests de que solo `REQUIRES` cambia el desbloqueo.
+    - **Listo cuando:** se crea, se lista y se borra una relación de cada tipo por la API, se ocultan y muestran tipos por roadmap, los prerrequisitos que ya existen aparecen como `requires` sin migrar datos, y hay tests (incluido el BDD de HU-65) de que solo `REQUIRES` cambia el desbloqueo.
     - **Bloquea:** T-18.2, T-65.2 y T-65.3. Agregada el 2026-10-17 por el cambio de diseño de DEC-021.
 
 ---
@@ -145,10 +147,10 @@ Dependencias / Impactos
 
 ### Qué hay hoy en el código
 
-Solo existe la relación "prerrequisito" con modo AND/OR. El catálogo de los 5 tipos (`RelationType`, T-65.1) existe solo en el módulo `graph` de Neo4j; en Postgres las tablas de prerrequisitos no tienen tipo, y eso lo resuelve T-65.5.
+Solo existe la relación "prerrequisito" con modo AND/OR. El catálogo de los 5 tipos (`RelationType`, T-65.1) existe solo en el módulo `graph` de Neo4j; en Postgres solo existe «requiere» (`node_prerequisite`, `section_prerequisite`), y T-65.5 agrega las tablas de los otros 4 tipos.
 
 > [!tip] Para T-65.2 y T-65.3 (front)
-> El tipo se elige y se lee por los endpoints de prerrequisitos que ya existen (`POST /nodes/{nodeId}/prerequisites` y los de sección), que con T-65.5 aceptan y devuelven `relation_type`. No hay una ruta aparte que escriba en Neo4j (DEC-021).
+> Un solo endpoint para los 5 tipos: `POST /roadmaps/{roadmapId}/relations` con `source_id`, `target_id`, `relation_type` y `label` opcional; `GET` del mismo recurso para listarlas y `DELETE /roadmaps/{roadmapId}/relations/{relationId}` para borrarlas. Los tipos ocultos se guardan con `PUT /roadmaps/{roadmapId}/hidden-relation-types`. Nada escribe directo en Neo4j (DEC-021).
 
 ### Depende de
 
