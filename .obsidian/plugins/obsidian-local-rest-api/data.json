@@ -1,7 +1,7 @@
 {
   "port": 27124,
   "insecurePort": 27123,
-  "enableInsecureServer": false,
+  "enableInsecureServer": true,
   "enableSignedUrls": true,
   "apiKey": "d0090a3fda5ff8cf68510e6b196cbfac4fee287c1dadcfe90881d227261f8436",
   "crypto": {
