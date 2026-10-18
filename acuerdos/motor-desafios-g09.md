@@ -49,6 +49,12 @@ Payload: `resources{coins,xp,add_live,subtract_live,active_item[]}`, `id_user`, 
 
 **Resolución del nodo (D-EVCIERRE-02, `ChallengeNodeResolver`):** `id_node` resuelve solo si existe en el roadmap de la cohorte **y** su `challenge_id` coincide. Si no, `WARN` (`error.node.id-hint-mismatch` / `id-hint-unknown`) y fallback por `challenge_id` con cardinalidad estricta: 0 nodos `node.not-found`, 1 nodo ese nodo, 2+ `node.challenge-ambiguous`.
 
+**Nota del intento (T-45.12, 2026-10-18):** la nota para el ranking «por notas» ([[sprints/sprint-3/08-dudas|P14]], T-45.11) llega **en este mismo evento**, no por consulta. No se le pide nada nuevo a G09.
+- **Campo:** `payload.result.score`, entero **0–100** redondeado (`rewardRules.roundedScore`, `AttemptClosureEventAssembler.java:73` en `tpi-engine-challenge` `main`). Viene en aprobados **y** reprobados; `null` en `CHALLENGE_ABORTED` o si no hubo corrección.
+- **Uso en Roadmap:** se guarda por intento en `xp_movement.score` (V45, T-45.11). El ranking ordena por el **promedio de la mejor nota de cada desafío rendido**; sin notas, el alumno va al final con `avg_score: null`.
+- **Histórico:** los intentos cerrados antes de V45 no tienen nota guardada. Si hiciera falta, se rellenan desde el historial del Motor (HU-10 de G09), como tarea aparte.
+- **Garantía:** renombrar o quitar `score`, o cambiar su escala, se coordina antes (garantías del contrato vigente).
+
 ### 1b. Baja de desafío (Motor → Roadmap, Kafka; T-32.1)
 Pedido en `tpi-engine-challenge#286`; G09 lo implementó en la rama `feature/issue-286-challenge-archived-roadmap-unavailable` (`b6b68bc1`, sin mergear al 2026-10-17).
 
@@ -103,6 +109,7 @@ Roadmap expone `GET /api/roadmap/courses/{courseId}/challenge-pool` (ADMIN, GEST
 - [ ] HU-48: el pre-chequeo del alumno con su JWT (`GET /api/roadmap/courses/{courseId}/nodes/{nodeId}/eligibility`, mismo `GateService`) está en `feature/t-31-1-gate-origen-no-disponible` (T-31.5); falta mergearlo y que el front lo use (T-31.6). Se retiró `/start` y se borró el código muerto `ProgressService.startChallenge`.
 - [ ] Baja de un desafío ubicado (HU-01 CA8, T-32.1): G09 implementó `CHALLENGE_ARCHIVED` y `challenge_unavailable` (§1b, `tpi-engine-challenge#286`); falta que mergee su PR. El consumidor de Roadmap está en `feature/t-32-1-desafio-no-disponible`.
 - [ ] Firma nominal del acta del gate.
+- [ ] Avisarle a G09 que el ranking por notas usa `result.score` tal como viene (T-45.12): sin cambios de su lado, que avisen si cambia el campo o la escala.
 
 > [!warning] Riesgos
 > - Si el Motor cambia el string de `producer`, sus eventos se **descartan en silencio** (pasó el 2026-10-05, `tpi-roadmap#120`).
@@ -123,3 +130,4 @@ Roadmap expone `GET /api/roadmap/courses/{courseId}/challenge-pool` (ADMIN, GEST
 - 2026-10-16: Roadmap pide a G09 el evento de baja de desafío y el motivo `challenge_unavailable` (`tpi-engine-challenge#286`).
 - 2026-10-17: G09 los implementa en su PR de `#286` (`CHALLENGE_ARCHIVED`, key `challenge_id`; gate v1.5).
 - 2026-10-15: respuestas en [[sprints/sprint-3/08-dudas|08-dudas]]: `node_id` único global, también en roadmaps clonados (G8); el profesor configura si el ranking ordena por XP o por notas, y las notas vienen del Motor (P14, falta acordar cómo llegan); "multiple choice con boss fight" es de Desafíos teóricos (P16).
+- 2026-10-18: T-45.12 cierra P14: la nota llega en `result.score` (0–100) del evento de cierre; Roadmap la guarda y ordena por el promedio de la mejor nota por desafío (T-45.11).
