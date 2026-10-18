@@ -151,6 +151,7 @@ Dependencias / Impactos
     - **Qué:** un `generic-select` con las comisiones en `ranking-page` (**Actualización (2026-10-17):** `ranking-panel` se borró en T-26.5).
     - **Listo cuando:** el alumno cambia de comisión y el ranking se actualiza.
 - [ ] [#9308](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9308) **T-45.10 Avance por comisión para el profesor** · Front · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
+    - Plan de implementación: [[T-45.10 Front - avance por comisión para el profesor|Plan T-45.10]] (2026-10-18, borrador). Worktree `Frontend/2026-PIV-TPI-FE-t-45-10`, rama `feature/t-45-10-avance-por-comision`. La pantalla de una comisión ya está (T-45.3, PR #459); esta tarea suma la comparación entre comisiones.
     - **Qué:** vista para el profesor con el avance de cada comisión, usando `GET /courses/{id}/groups/{gid}/progress` (`GroupProgressController`, ya existe).
     - **Listo cuando:** el profesor compara el avance de dos comisiones.
 - [ ] [#9309](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9309) **T-45.11 Elegir si el ranking ordena por XP o por notas** · Back + Front · New · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
