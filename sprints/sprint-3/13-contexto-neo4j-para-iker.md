@@ -9,7 +9,7 @@ para: Iker Alonso
 # 13 — Contexto para Iker: qué hay hecho de reglas y qué falta para encender Neo4j
 
 > [!info] Para quién es
-> Para Iker y para su agente. Lo escribió Santino (T-59.1) con el estado del código al **2026-10-16, 19:30**. Si algo de acá no coincide con `develop`, manda `develop`: mirá `git log origin/develop` antes de seguir. Complementa a [[sprints/sprint-3/11-plan-ejecucion-grafo|11 — Plan de ejecución del grafo]], que es el plan de Iker.
+> Para Iker y para su agente. Lo escribió Santino (T-59.1) con el estado del código al **2026-10-16, 20:10** (ya mergeadas las lecturas, #238, y el gate de Camacho, #234). Si algo de acá no coincide con `develop`, manda `develop`: mirá `git log origin/develop` antes de seguir. Complementa a [[sprints/sprint-3/11-plan-ejecucion-grafo|11 — Plan de ejecución del grafo]], que es el plan de Iker.
 
 > [!tip] Cómo leerlo
 > Orden sugerido: **1 TL;DR → 3 Qué hay en el código → 5 Qué choca con Neo4j → 7 Camino propuesto**. El resto es referencia.
@@ -29,7 +29,7 @@ para: Iker Alonso
 | T-16.3 Spring Data Neo4j + Testcontainers | Iker | Mergeada (#237) | `docs/T-16-3-SPRING-DATA-NEO4J.md`, paquete `graph/` |
 | T-16.4 Modelo del grafo | Iker | Mergeada (#220) | `docs/T-16-4-MODELO-GRAFO.md` |
 | T-59.1 Reglas combinadas como árbol | Santino | Mergeada (#224) | paquete `rules/`, V28, `UnlockRuleService` |
-| T-59.1 Lectura del árbol en los GET | Santino | **PR abierto, sin mergear** (`feature/t-59-1-arbol-en-lecturas`) | `GraphDtos`, `UnlockRuleService.nodeRulesOf` |
+| T-59.1 Lectura del árbol en los GET | Santino | Mergeada (#238) | `GraphDtos`, `UnlockRuleService.nodeRulesOf` |
 | T-16.2 Neo4j en la plataforma | Stefano | Sin hacer | `tpi-system-compose` |
 | T-18.1 Módulo `graph` completo + esquema | Iker | Sin hacer | solo hay el módulo mínimo de T-16.3 |
 | T-18.9 Lector/escritor común | Iker | Sin hacer | no hay rama |
@@ -88,7 +88,7 @@ El mismo árbol viaja en el `PATCH` y en las lecturas. Es el contrato que **la i
 ```
 
 - `PATCH /api/roadmap/nodes/{id}/rules` y `PATCH /api/roadmap/sections/{id}/rules` aceptan `{"rule": <árbol>}` o el formato plano de siempre (`mode` + `prerequisite_node_ids`). Si vienen los dos, manda el árbol. Una regla vacía quita las reglas.
-- `GET /courses/{id}` y `GET /roadmaps/{id}` traen `rule` en cada nodo y cada sección que tenga reglas (en el PR de lecturas, pendiente de merge). Una regla plana se lee como un grupo de un nivel.
+- `GET /courses/{id}` y `GET /roadmaps/{id}` traen `rule` en cada nodo y cada sección que tenga reglas (#238, ya mergeado). Una regla plana se lee como un grupo de un nivel.
 - El XP mínimo **se rechaza con 400** (`rule.min-xp-not-enforced`) hasta que T-20.2 y T-58.1 lo evalúen en el gate.
 
 ## 4. Cómo se decide qué se guarda como árbol
@@ -170,7 +170,7 @@ Son lo que T-18.9 (`StructureReader`/`StructureWriter`) tiene que abstraer antes
 | Con quién | Tema |
 |---|---|
 | **Baltasar** | Su rama `feature/t-17-3-alcance-xp-por-roadmap` tiene `V28__roadmap_progress_scope.sql` en `db/migration`. **Ya existe `V28__unlock_rule_tree.sql`** (en `db/migration-vendor`), así que Flyway falla con «más de una migración con versión 28». Su rama de gestión (`t-57-1-2`) ya la pasó a V29. Hay que renumerar la de T-17.3. Para tus migraciones nuevas, **mirá la última versión mergeada** y las de las ramas abiertas antes de elegir número |
-| **Camacho** | T-31.1 toca `GateService` y `ProgressService`. Santino va a tocarlos en T-20.1 |
+| **Camacho** | T-31.1 (#234) ya está mergeada: `GateService` ahora responde `origin_unavailable` en vez de 503 y se sacó `ProgressService.startChallenge`. No tocó `GateEvaluator` ni `NodeProgressService`, así que no choca con T-20.1 |
 | **Stefano** | T-16.2: Neo4j en `tpi-system-compose`. Sin eso, Neo4j no existe en el entorno de la plataforma ni en la demo |
 | **Santino** | Cuando mergee T-20.2 y T-58.1 se quita el rechazo del XP mínimo. Avisale si cambiás `RuleTreeStore` |
 
