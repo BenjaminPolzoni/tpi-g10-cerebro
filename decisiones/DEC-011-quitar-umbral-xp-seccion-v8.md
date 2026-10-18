@@ -42,4 +42,4 @@ no se vuelve a esas columnas. El umbral reaparece como `min_xp` de **cualquier g
 - Un alumno que no llega al XP queda bloqueado con el motivo ya existente (sin motivo nuevo en el vocabulario del
   gate, acta v1.4).
 
-Detalle: `tpi-roadmap/docs/T-58-1-XP-MINIMO.md`. Relacionadas: [[decisiones/DEC-017-n-roadmaps-por-curso-configurables|DEC-017]].
+Relacionadas: [[decisiones/DEC-017-n-roadmaps-por-curso-configurables|DEC-017]].
