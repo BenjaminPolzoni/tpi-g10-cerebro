@@ -152,7 +152,7 @@ Dependencias / Impactos
 
 > [!warning] 2026-10-17 · [[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion|DEC-021]]: nada escribe directo en Neo4j
 > - **T-62.2:** el endpoint de posiciones guarda en Postgres, en las columnas `position_x` y `position_y` de `node` que ya existen. El proyector las copia a Neo4j.
-> - **T-62.3:** crear y borrar relaciones arrastrando usa `POST` y `DELETE /roadmaps/{roadmapId}/relations` de [[sprints/sprint-3/historias/HU-65 Relaciones con tipo|T-65.5]], que guarda en Postgres los 5 tipos (un `requires` pasa por el editor de prerrequisitos). No hay una ruta que escriba en Neo4j.
+> - **T-62.3:** crear y borrar relaciones arrastrando usa `POST` y `DELETE /roadmaps/{roadmapId}/relations` de [[sprints/sprint-3/historias/HU-65 Relaciones con tipo|T-65.5]], que guarda en Postgres los 4 tipos que no bloquean; arrastrar un `requires` usa el editor de reglas (`POST /nodes/{nodeId}/prerequisites` o `PATCH .../rules`). No hay una ruta que escriba en Neo4j.
 > - Si la vista llega a mover **secciones**, `section` no tiene columnas de posición: hay que agregarlas en Postgres primero.
 
 ### Qué hay hoy en el código

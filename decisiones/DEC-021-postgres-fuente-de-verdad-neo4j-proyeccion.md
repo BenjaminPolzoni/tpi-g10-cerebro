@@ -54,7 +54,7 @@ T-18.6 decía que, con el flag de lectura encendido, las ediciones de estructura
 | [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial\|T-18.3]] | Tabla `graph_sync_pending`, proyector por roadmap, reintentos y reconciliación |
 | [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial\|T-18.4]] | La caché se invalida al confirmar la edición en Postgres |
 | [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial\|T-18.6]] | El flag solo cambia de dónde se lee. Las escrituras siguen en Postgres |
-| [[sprints/sprint-3/historias/HU-65 Relaciones con tipo\|T-65.5]] (nueva) | Tablas nuevas para los 4 tipos que no bloquean y los tipos ocultos, y API única `/roadmaps/{roadmapId}/relations` (un `requires` se delega al editor de prerrequisitos) |
+| [[sprints/sprint-3/historias/HU-65 Relaciones con tipo\|T-65.5]] (nueva) | Tablas nuevas para los 4 tipos que no bloquean y los tipos ocultos, y API `/roadmaps/{roadmapId}/relations` que lista los 5 tipos y crea los 4 informativos (un `requires` se arma con las reglas) |
 | [[sprints/sprint-3/historias/HU-62 Vista de grafo cómoda para el profesor\|T-62.2]] | Las posiciones se guardan en Postgres (`node.position_x` y `node.position_y`, V23) |
 | [[sprints/sprint-3/historias/HU-62 Vista de grafo cómoda para el profesor\|T-62.3]] | Crear y borrar relaciones arrastrando usa `/roadmaps/{roadmapId}/relations` (T-65.5), no una ruta que escriba en Neo4j |
 | [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios\|HU-64]], HU-58, HU-59 | Se implementan sobre Postgres. El proyector los copia a Neo4j |
