@@ -61,9 +61,9 @@ fecha: 2026-10-15
 10 tareas · 0 cerradas
 
 - [[sprints/sprint-3/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo|HT-20]] Gate y progreso con reglas combinadas y XP mínimo
-    - [ ] [[sprints/sprint-3/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo#Tareas|T-20.1]] Un solo evaluador de reglas para el gate y para lo que ve el alumno · New
+    - [x] [[sprints/sprint-3/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo#Tareas|T-20.1]] Un solo evaluador de reglas para el gate y para lo que ve el alumno · New
     - [ ] [[sprints/sprint-3/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo#Tareas|T-20.2]] Evaluar el XP mínimo · New
-    - [ ] [[sprints/sprint-3/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo#Tareas|T-20.3]] Escenarios BDD con el ejemplo de los profes · New
+    - [x] [[sprints/sprint-3/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo#Tareas|T-20.3]] Escenarios BDD con el ejemplo de los profes · New
     - [ ] [[sprints/sprint-3/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo#Tareas|T-20.4]] Medir la latencia del gate · New
 - [[sprints/sprint-3/historias/HU-58 Dependencias entre secciones|HU-58]] Dependencias entre secciones
     - [ ] [[sprints/sprint-3/historias/HU-58 Dependencias entre secciones#Tareas|T-58.1]] Volver a tener XP mínimo por sección · New
@@ -71,7 +71,7 @@ fecha: 2026-10-15
     - [ ] [[sprints/sprint-3/historias/HU-58 Dependencias entre secciones#Tareas|T-58.3]] Editor de reglas de sección con XP mínimo y «todas las anteriores» · New
 - [[sprints/sprint-3/historias/HU-59 Dependencias entre nodos con reglas combinadas|HU-59]] Dependencias entre nodos con reglas combinadas
     - [x] [[sprints/sprint-3/historias/HU-59 Dependencias entre nodos con reglas combinadas#Tareas|T-59.1]] Guardar reglas combinadas como árbol · New
-    - [ ] [[sprints/sprint-3/historias/HU-59 Dependencias entre nodos con reglas combinadas#Tareas|T-59.2]] Armar reglas combinadas en el editor · New
+    - [x] [[sprints/sprint-3/historias/HU-59 Dependencias entre nodos con reglas combinadas#Tareas|T-59.2]] Armar reglas combinadas en el editor · New
     - [ ] [[sprints/sprint-3/historias/HU-59 Dependencias entre nodos con reglas combinadas#Tareas|T-59.3]] Mostrarle al alumno qué le falta · New
 
 ## Franco Maximiliano Amarilla
