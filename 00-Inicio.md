@@ -33,6 +33,7 @@ flowchart LR
 | `minutas/` | Notas de reuniones (daily, profes, otros grupos) | Quien estuvo en la reunión |
 | [[deuda-tecnica]] | Deuda técnica general (no son HU): código muerto, mocks, seguridad, docs, ramas. Vive entre sprints | El equipo |
 | [[equipo]] | Integrantes, áreas que conoce cada uno | El equipo |
+| [[revision-de-prs]] | Criterios para aprobar PRs de front y back (bloqueantes, importantes, nits) | El equipo |
 | `plantillas/` | Plantillas para acuerdo, decisión y minuta | — |
 
 ## Lo urgente ahora
