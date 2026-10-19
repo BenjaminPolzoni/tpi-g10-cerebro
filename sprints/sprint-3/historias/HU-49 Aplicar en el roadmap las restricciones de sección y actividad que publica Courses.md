@@ -128,14 +128,24 @@ Dependencias / Impactos
 
 ## Tareas
 
-> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/6**. Historia en Taiga: [[taiga/historias/HU-49 Aplicar en el roadmap las restricciones de sección y actividad que publica Courses|HU-49]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7211)
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **1/6**. Historia en Taiga: [[taiga/historias/HU-49 Aplicar en el roadmap las restricciones de sección y actividad que publica Courses|HU-49]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/7211)
 
-- [ ] [#9311](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9311) **T-49.9 Corroborar qué ya está hecho** · Equipo · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
+- [x] [#9311](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9311) **T-49.9 Corroborar qué ya está hecho** · Equipo · Done · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** según E3 puede estar hecho. Probar en develop restricciones de Courses ocultas, bloqueadas y por fecha, y actualizar esta HU con lo que falte antes de seguir.
     - **Listo cuando:** la HU dice exactamente qué falta.
+    - **Resultado del análisis en develop:**
+        - **Ya implementado en develop (backend `tpi-roadmap`):**
+            - `HttpCourseRestrictionsClient`: Cliente HTTP operativo con token técnico que consulta restricciones de sección (`/api/courses/course-sections/{id}/restrictions`) y de actividad (`/api/courses/course-activities/{id}/restrictions`). Soporta parseo de condiciones `DATE` (fechas locales, offset y fechas solas con ventana inclusiva de apertura y exclusiva de cierre) y condiciones `GROUP`.
+            - `UnitRestrictionRules`: Evaluación en memoria de operadores lógicos `ALL` y `ANY` combinando pertenencia a comisiones y ventanas temporales (`DateWindow.satisfiedAt(now)`).
+            - `DateGateTest`: Suite de pruebas funcionales en el backend que verifica que ventanas vencidas y futuras bloquean con `date_restricted`, ventanas abiertas permiten (`eligible: true`), y POST a lectura de contenido fuera de fecha devuelve 403 Forbidden.
+        - **Qué falta exactamente antes de continuar:**
+            - **T-49.10 (Distinguir oculto de bloqueado):** En backend, Courses publica `on_unmet` (`HIDDEN` / `LOCKED`), pero `HttpCourseRestrictionsClient` no lo mapea y `SectionGroupRestriction` no lo almacena. `UnitRestrictionRules`, `GroupVisibilityRules` y `GroupUnitsService` deben distinguir si una restricción no cumplida oculta la entidad (`HIDDEN`) o la deja visible bloqueada con su fecha (`LOCKED`), aplicando tanto a nivel nodo, sección y roadmap completo. Faltan tests de ambos casos en los 3 niveles.
+            - **T-49.11 (Actualizar el roadmap ante cambios de restricción):** Falta consumir el evento de cambio de restricciones de G01 o implementar caché corta con lectura por pull si G01 no lo publica. Registrar el acuerdo con G01.
+            - **T-49.12 (Front: Mostrar al alumno lo bloqueado y cuándo se habilita):** En el front (`2026-PIV-TPI-FE`), el mapa 2D (`course-map-page`) y el mundo 3D (`hex-world-page`) no ocultan lo `HIDDEN`, no soportan `date_restricted` en `NodeBlockReason`, ni muestran el texto accesible «Se habilita el {fecha}» (o «Se habilita el {fecha} a las {hora}» en examen) para lectores de pantalla.
+            - **T-49.13 (Aplicar al examen la ventana horaria de Courses):** Conectar la restricción de fecha de actividad de Courses con el nodo de examen `EXAM` (`boss`), validando antes y después de la ventana con `DATE_RESTRICTED` sin persistir fechas propias en el nodo (P9). Faltan tests con reloj simulado a las 17:59, 18:30 y 20:01.
 - [ ] [#9312](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9312) **T-49.10 Distinguir oculto de bloqueado** · Back · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** con el `on_unmet` que publica Courses, `HIDDEN` saca el nodo, la sección o el roadmap de lo que ve el alumno y `LOCKED` lo deja visible bloqueado, con su fecha.
-    - **Dónde:** `CourseRestrictionsClient`, `UnitRestrictionRules`, `GroupVisibilityRules`.
+    - **Dónde:** `CourseRestrictionsClient`, `UnitRestrictionRules`, `GroupVisibilityRules`, `GroupUnitsService`.
     - **Listo cuando:** hay tests de los dos casos en nodo, sección y roadmap.
 - [ ] [#9313](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9313) **T-49.11 Actualizar el roadmap cuando Courses cambia una restricción** · Back + Coordinación · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** si G01 publica un evento de cambio, consumirlo e invalidar la caché de restricciones; si no lo publica, usar caché corta con lectura por pull. Registrar el acuerdo con G01.
@@ -145,7 +155,7 @@ Dependencias / Impactos
     - **Qué:** el mapa del alumno no muestra lo oculto y en lo bloqueado dice «Se habilita el {fecha}» (en un examen, «Se habilita el {fecha} a las {hora}»), en texto.
     - **Listo cuando:** se ve en el mapa 2D y en el mundo, y lo lee un lector de pantalla.
 - [ ] [#9315](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9315) **T-49.13 Aplicar al examen la ventana horaria que publica Courses** · Back · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
-    - **Qué:** la restricción de fecha que Courses publica para la actividad (`CourseRestrictionsClient`) se aplica al nodo `EXAM` correspondiente, sin datos propios en el nodo (P9). Antes y después de la ventana el gate responde `DATE_RESTRICTED`.
+    - **Qué:** la restricción de fecha que Courses publica para la actividad (`CourseRestrictionsClient`) se aplica al nodo `EXAM` correspondiente, sin datos propios en el nodo (P9). Antes y después de la ventana el gate responde `DATE_RESTRICTED` (antes HU-67).
     - **Listo cuando:** hay tests con reloj simulado a las 17:59, 18:30 y 20:01.
 - [ ] [#9346](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9346) **T-49.14 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]]
     - Tarea de documentación agregada en Taiga por el equipo; no estaba en la propuesta.
@@ -156,14 +166,21 @@ Dependencias / Impactos
 
 ### Qué hay hoy en el código
 
-El gate aplica la restricción por fecha. Falta distinguir oculto (HIDDEN) de bloqueado (LOCKED), consumir el evento de cambio y avisar. El front no tiene nada. Depende de G01.
+- **Backend (`tpi-roadmap` develop):**
+  - El cliente HTTP `HttpCourseRestrictionsClient` y el evaluador `UnitRestrictionRules` evalúan fechas y comisiones.
+  - El gate responde `date_restricted` para ventanas vencidas y futuras, y 403 Forbidden en lectura (`DateGateTest`).
+  - **Falta:** `on_unmet` (`HIDDEN` vs `LOCKED`) en cliente, modelo y reglas de visibilidad (nodo, sección y roadmap); actualización reactiva por evento de Courses o caché corta; vincular ventana horaria al nodo `EXAM` sin fechas propias (tests a 17:59, 18:30, 20:01).
+- **Frontend (`2026-PIV-TPI-FE` develop):**
+  - No tiene soporte para `date_restricted` en `NodeBlockReason` ni textos de habilitación por fecha/hora en mapa 2D o mundo 3D.
+  - La obligatoriedad en `detailsOf` de `roadmap-section-nodes` se mostraba únicamente para `theory`.
 
 ### Depende de
 
 - G01 Courses: evento de cambio de restricciones (bloqueante para CA3) y ventanas de examen (P9). El resto se puede empezar ya.
+- [[sprints/sprint-3/historias/HU-67 Nodo examen con ventana horaria|HU-67]] Nodo examen con ventana horaria (absorbida por T-49.13 según P9)
 
 ### Dudas resueltas (2026-10-15)
 
 - ✅ [[sprints/sprint-3/08-dudas|P9]] La ventana horaria la publica Courses.
 - ✅ [[sprints/sprint-3/08-dudas|G4]] Restricciones por roadmap, definidas por el profesor; se copian al clonar.
-- ✅ [[sprints/sprint-3/08-dudas|E3]] Ya debería estar hecho: corroborarlo.
+- ✅ [[sprints/sprint-3/08-dudas|E3]] Ya debería estar hecho: corroborado en develop (hecho el gate por fecha y cliente básico, falta `on_unmet`, evento/caché corta, visibilidad front y tests de examen).
