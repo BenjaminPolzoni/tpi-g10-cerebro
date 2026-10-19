@@ -11,6 +11,9 @@ estado: borrador
 > - Back `2026-P4-BE/tpi-roadmap` en el tip `57ff06a`.
 > - Front `2026-P4-FE/2026-PIV-TPI-FE` en el tip `8a770d50`.
 
+> [!tip] Actualización (2026-10-18)
+> Esta tabla es la foto del 2026-10-14. Lo que cambió después (HU-15, HU-43, HU-44/45, HU-48, HU-01 CA8, HU-22, mocks del front, UI-KIT) está en [[14-cambios-recientes#Qué cerró de los pendientes del Sprint 2]].
+
 > [!warning] Limitaciones
 > No se corrieron los tests. El estado sale de leer el código, los tests y los commits.
 > Los criterios de aceptación se cotejaron completos en parte de las HU. En las demás el estado se dedujo del código y de los títulos.

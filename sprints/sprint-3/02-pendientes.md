@@ -8,6 +8,11 @@ estado: borrador
 
 Son HU que figuran **Done** en Taiga pero no cumplen sus criterios de aceptación en el código, más la deuda que bloquea la demo. Se ordenan por impacto.
 
+> [!success] Actualización (2026-10-18)
+> Ya resueltos en `develop`: P0-4 (IDs de mock, FE#607), HU-15 `origin_unavailable` y HU-48 pre-chequeo (BE#234), HU-43 (BE#250), HU-01 CA8 (BE#253, FE#672, FE#757), HU-44/45 selector de comisión (FE#709, FE#739) y HU-22 «Mis insignias» (FE#750).
+> Siguen abiertos: P0-1/2 (ramas colgadas), P0-3 (flags), HU-21 (3 criterios sin otorgar), HU-20 edición en el front (FE#743 cerrado), `moveNode` 501 y reintentos del nodo en el back.
+> Detalle en [[14-cambios-recientes#Qué cerró de los pendientes del Sprint 2]].
+
 ## P0: rompen la demo o el flujo principal
 
 > [!danger] Resolver en la primera semana

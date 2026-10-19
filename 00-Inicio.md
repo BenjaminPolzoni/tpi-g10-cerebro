@@ -38,6 +38,7 @@ flowchart LR
 
 ## Lo urgente ahora
 
+- [[sprints/sprint-3/14-cambios-recientes|Cambios recientes]]: qué PRs entraron del 14 al 18/10 y alertas (migraciones, nombre del nodo).
 - [[sprints/sprint-3/02-pendientes|Pendientes del Sprint 2]]: historias en Done que no lo están.
 - [[sprints/sprint-3/09-epicas-e-historias|Épicas e historias del Sprint 3]]: qué vamos a hacer, con criterios de aceptación.
 - [[deuda-tecnica|Deuda técnica]]: lo que hay que limpiar aunque no sea una HU. Empezar por las 🔴.

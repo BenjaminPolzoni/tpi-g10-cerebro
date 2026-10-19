@@ -31,6 +31,7 @@ estado: borrador
 | 10 | [Tareas que faltan para el grafo](10-propuesta-tareas-grafo.md) | Tareas nuevas, ajustes de criterio y cambios de responsable para cerrar Neo4j, `/graph` y el componente de grafo. Para cargar en Taiga |
 | 11 | [Plan de ejecución del grafo](11-plan-ejecucion-grafo.md) | Orden día por día de HT-16, HT-18, HT-34 y la parte de back de HU-65/HU-62, con dependencias hacia y desde otras personas y grupos |
 | 13 | [Contexto para Iker: reglas y Neo4j](13-contexto-neo4j-para-iker.md) | Qué hay hecho de reglas combinadas (T-59.1), cómo se guardan hoy en Postgres, qué choca con Neo4j y un camino propuesto para encenderlo |
+| 14 | [Cambios recientes](14-cambios-recientes.md) | PRs de G10 (back y front) del 14 al 18/10: qué entró, qué sigue abierto, qué cerró de los pendientes y alertas (migraciones, nombre del nodo) |
 
 ## Mapa de la propuesta
 

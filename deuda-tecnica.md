@@ -2,7 +2,7 @@
 tags:
   - tpi
   - g10
-actualizado: 2026-10-17
+actualizado: 2026-10-18
 ---
 
 # Deuda técnica de G10 (roadmap-service)
@@ -22,9 +22,7 @@ actualizado: 2026-10-17
 | DT-01 | 🔴 | El **Gate** (`/eligibility`) acepta a cualquier servicio con token técnico: `SecurityConfig` exige `ServiceIdentity` pero no valida el scope `roadmap.gate.read` | Validar el scope como ya se hace con `roadmap.progress.read` en `/courses/*/progress` | S | [[arquitectura/cors-topics-rutas]] | Proponer con HT-22 |
 | DT-02 | 🟠 | Autorización con **roles fijos** (`hasRole`/`hasAnyRole` en constantes por controller) y dos chequeos a mano (`RankingController`, `requireOwner`) | Migrar a permisos con el catálogo de G06. **Actualización (2026-10-17):** el Gateway va a dejar de mandar `X-User-Roles` y mandará permisos; sin el rol, todo chequeo por rol da 403 (ver [[sprints/sprint-3/historias/HT-22 Permisos en vez de roles\|HT-22]]). T-45.9 sumó `GESTOR` al ranking | M | [[sprints/sprint-3/07-correcciones-profes\|07]] | Sprint 3 (HT-22) |
 | DT-03 | 🟠 | **No hay una matriz escrita de qué puede hacer cada rol** (ADMIN, GESTOR, PROFESSOR, STUDENT). Hoy hay que leer los controllers | Escribir la tabla rol → acciones. Es la base para HT-22 | S | Consulta del equipo (2026-10-15) | Sprint 3 (con HT-22/C10) |
-| DT-04 | 🟢 | `ProgressService.startChallenge` es **código muerto** | Borrarlo al hacer el pre-chequeo de HU-48 | S | [[sprints/sprint-3/02-pendientes\|02]] | Sprint 3 (Bloque 0) |
 | DT-05 | 🟢 | Listener **legado** de `challenges.results` (payloads v1/v2) y su flag `KAFKA_TOPIC_CHALLENGE_RESULT_ENABLED`, apagado | Borrar listener, payloads y flag | S | `application.properties` | |
-| DT-06 | 🟢 | Quedan `@DefaultValue("stub")` en properties de clientes | Borrarlos (HT-09 ya prohíbe stubs en el arranque) | S | [[sprints/sprint-3/02-pendientes\|02]] | |
 | DT-07 | 🟠 | `TraceIdFilter` figura en `08-comunicacion-gateway.md` pero **no existe** en develop | Confirmar si se borró a propósito y actualizar el doc | S | E7 en [[sprints/sprint-3/08-dudas\|08]] | |
 | DT-08 | 🟢 | Accounting publica `LIVES_EXHAUSTED`/`LIVES_AVAILABLE` y no hay consumidor | Decidir si hace falta; si no, sacarlo del acta | S | E8 en [[sprints/sprint-3/08-dudas\|08]] | |
 | DT-09 | 🟢 | La **caché de respaldo del ranking** (T-45.7) vive en memoria: se pierde al reiniciar el micro y no se comparte entre instancias | Si se escala a varias instancias o hace falta sobrevivir reinicios, evaluar una caché compartida | M | [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo\|DEC-019]] | |
@@ -33,12 +31,10 @@ actualizado: 2026-10-17
 
 | # | Imp. | Deuda | Qué hacer | Esf. | Origen | Sprint |
 |---|---|---|---|---|---|---|
-| DT-09 | 🔴 | **IDs de mock en rutas reales**: `DEMO_STUDENT_ID`, `COURSE_SEED_ID`, `CURRENT_STUDENT_ID` | Tomar alumno y curso de la sesión y de la ruta; sin usuario, error | S | [[sprints/sprint-3/02-pendientes\|02]] | Sprint 3 (Bloque 0) |
 | DT-10 | 🟠 | `BankDataPort` → `InMemoryBankAdapter`: vidas, monedas y XP salen de **localStorage** | Pasarlo a HTTP | M | [[sprints/sprint-3/01-estado-actual\|01]] | |
 | DT-11 | 🟢 | Adapter in-memory y `seed.ts` dentro del árbol de producción | Moverlos a tests | S | [[sprints/sprint-3/02-pendientes\|02]] | |
 | DT-12 | 🟢 | `level-curve.ts` **duplicado** en `accounting` y en `roadmap/mocks` | Dejar uno | S | [[sprints/sprint-3/01-estado-actual\|01]] | |
 | DT-13 | 🟠 | **Racha falsa**: `streak.component` muestra un **7 fijo**, sin lógica (la épica EP-592 no tiene HU) | Se implementa la racha en [[sprints/sprint-3/historias/HU-73 Ver mi racha de días con actividad\|HU-73]] (E12 en [[sprints/sprint-3/08-dudas\|08]]) | S | Consulta del equipo (2026-10-15) | |
-| DT-14 | 🟠 | UI-KIT en **0.7.1** (última 0.8.0): 9 TODOs esperando el bump | Subir a 0.8.0 y cerrar los TODOs | M | [[sprints/sprint-3/05-ui-kit\|05]] | Sprint 3 (épica UI-KIT) |
 | DT-15 | 🟢 | Roadmap con **316 colores hardcodeados** y un puente de tokens `--color-*` propio | Pasar a los tokens del kit | L | [[sprints/sprint-3/05-ui-kit\|05]] | Sprint 3 (épica UI-KIT) |
 | DT-16 | 🟢 | GLB optimizados **no versionados** (219 GLB, ~60 MB) | Versionarlos o documentar el pipeline (HT-08) | S | [[sprints/sprint-3/01-estado-actual\|01]] | |
 
@@ -57,3 +53,11 @@ actualizado: 2026-10-17
 | # | Deuda | Cómo se resolvió | PR / fecha |
 |---|---|---|---|
 | — | Outbox sin topic de salida | `roadmap.events` por defecto | #134 |
+| DT-04 | `ProgressService.startChallenge` muerto | Borrado junto con el pre-chequeo del alumno (T-31.5) | BE#234, 2026-10-16 |
+| DT-06 | `@DefaultValue("stub")` en properties de clientes | Perfiles `dev`/`prod` separados, clientes en `http` por defecto | BE#226, 2026-10-16 |
+| DT-09 (front) | IDs de mock en rutas reales | Alumno y curso desde la sesión y la ruta (HT-14) | FE#607, 2026-10-16 |
+| DT-14 | UI-KIT en 0.7.1 | `develop` usa `@2026-p4-fe/ui ^0.10.0` (verificado el 2026-10-18) | — |
+
+> [!warning] Deuda nueva (2026-10-18)
+> - **Migraciones fuera de orden:** BE#258 trae V39 con V45 ya en `develop`. Ver [[sprints/sprint-3/14-cambios-recientes#Alertas para el equipo|14 — Alertas]].
+> - **Nombre del nodo desalineado:** back 2 caracteres (BE#271), front 3.
