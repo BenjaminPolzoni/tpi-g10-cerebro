@@ -62,11 +62,11 @@ fecha: 2026-10-15
 
 - [[sprints/sprint-3/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo|HT-20]] Gate y progreso con reglas combinadas y XP mínimo
     - [x] [[sprints/sprint-3/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo#Tareas|T-20.1]] Un solo evaluador de reglas para el gate y para lo que ve el alumno · New
-    - [ ] [[sprints/sprint-3/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo#Tareas|T-20.2]] Evaluar el XP mínimo · New
+    - [x] [[sprints/sprint-3/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo#Tareas|T-20.2]] Evaluar el XP mínimo · New
     - [x] [[sprints/sprint-3/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo#Tareas|T-20.3]] Escenarios BDD con el ejemplo de los profes · New
     - [ ] [[sprints/sprint-3/historias/HT-20 Gate y progreso con reglas combinadas y XP mínimo#Tareas|T-20.4]] Medir la latencia del gate · New
 - [[sprints/sprint-3/historias/HU-58 Dependencias entre secciones|HU-58]] Dependencias entre secciones
-    - [ ] [[sprints/sprint-3/historias/HU-58 Dependencias entre secciones#Tareas|T-58.1]] Volver a tener XP mínimo por sección · New
+    - [x] [[sprints/sprint-3/historias/HU-58 Dependencias entre secciones#Tareas|T-58.1]] Volver a tener XP mínimo por sección · New
     - [ ] [[sprints/sprint-3/historias/HU-58 Dependencias entre secciones#Tareas|T-58.2]] Dependencias entre subsecciones y sin ciclos · New
     - [ ] [[sprints/sprint-3/historias/HU-58 Dependencias entre secciones#Tareas|T-58.3]] Editor de reglas de sección con XP mínimo y «todas las anteriores» · New
 - [[sprints/sprint-3/historias/HU-59 Dependencias entre nodos con reglas combinadas|HU-59]] Dependencias entre nodos con reglas combinadas
