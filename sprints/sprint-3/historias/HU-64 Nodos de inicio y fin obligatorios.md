@@ -120,13 +120,13 @@ Dependencias / Impactos
 
 > [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/5**. Historia en Taiga: [[taiga/historias/HU-64 Nodos de inicio y fin obligatorios|HU-64]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8613)
 
-- [ ] [#9179](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9179) **T-64.1 Tipos de nodo de inicio y fin** · Back · New · [[sprints/sprint-3/12-responsables#Stefano Zoffoli|Stefano Zoffoli]]
+- [ ] [#9179](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9179) **T-64.1 Tipos de nodo de inicio y fin** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** agregar `START` y `END` a los tipos de nodo (DEC-018). Al crear un roadmap y cada unidad o sección se crean solos, con los nombres «Bienvenidos» y «Felicitaciones».
     - **Listo cuando:** un roadmap nuevo y una unidad nueva ya traen los dos.
-- [ ] [#9180](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9180) **T-64.2 Validar al guardar que haya inicio, fin y camino** · Back · New · [[sprints/sprint-3/12-responsables#Stefano Zoffoli|Stefano Zoffoli]]
+- [ ] [#9180](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9180) **T-64.2 Validar al guardar que haya inicio, fin y camino** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** `GraphValidator` rechaza guardar si falta el inicio o el fin, o si algún nodo no tiene camino desde el inicio, y devuelve la lista de problemas.
     - **Listo cuando:** hay tests de cada error.
-- [ ] [#9183](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9183) **T-64.3 Agregar inicio y fin a los roadmaps que ya existen** · Back · New · [[sprints/sprint-3/12-responsables#Stefano Zoffoli|Stefano Zoffoli]]
+- [ ] [#9183](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9183) **T-64.3 Agregar inicio y fin a los roadmaps que ya existen** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** migración que agrega `START` y `END` a cada roadmap y unidad existente y los conecta con el primer y el último nodo.
     - **Listo cuando:** después de migrar, todos los roadmaps pasan la validación de T-64.2.
 - [ ] [#9187](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9187) **T-64.4 Cómo se ven el inicio y el fin** · Front · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
@@ -138,6 +138,15 @@ Dependencias / Impactos
 ---
 
 ## Contexto del Sprint 3 (no va a Taiga)
+
+> [!warning] 2026-10-19 · Decisiones de T-64.1 (Iker, reasignada en Taiga)
+> - **D1 · Inicio y fin del roadmap:** no hay nodos aparte. El inicio del roadmap es el `START` de la primera unidad y el fin es el `END` de la última. `node.section_id` es obligatorio y no se cambia el esquema.
+> - **D2 · Sin prerrequisitos:** `START` y `END` no pueden ser prerrequisito ni tenerlos (400 `node.boundary-no-prerequisites`). Se conectan solos: el inicio con los nodos que no piden nada y el fin con los que nadie pide. El gate no cambia. Por eso **T-64.3 no crea aristas**: solo agrega los dos nodos, y **T-64.2 valida el camino sobre esas conexiones implícitas**.
+> - **D3 · Flag:** `app.features.boundary-nodes.enabled` (`BOUNDARY_NODES_ENABLED`), apagado por defecto (DEC-004). Se enciende cuando el front los dibuje (T-64.4).
+> - **Reglas:** los crea el sistema (400 `node.boundary-reserved` si se piden a mano o se cambia el tipo), no se borran (409 `node.boundary-required`), no se mueven ni se marcan obligatorios (400 `node.boundary-fixed`). Se pueden renombrar y cambiarles descripción e ícono (P8). No son obligatorios, no dan XP y en el progreso del alumno nunca quedan bloqueados.
+
+> [!tip] Contrato para T-64.4 (front)
+> Cada unidad trae dos nodos más con `type` `START` («Bienvenidos») y `END` («Felicitaciones»), los dos con `sort_order` 0. La API ya los manda **primero y último** en `nodes`; no hay que reordenar. No tienen `challenge_id` ni `content_id`. El editor no tiene que ofrecer «borrar», «mover» ni «obligatorio» para ellos.
 
 ### Qué hay hoy en el código
 
