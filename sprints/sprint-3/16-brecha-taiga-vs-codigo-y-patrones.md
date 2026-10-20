@@ -10,8 +10,8 @@ Qué tareas del Sprint 3 ya están hechas en el código pero siguen en New en Ta
 
 > [!warning] Alcance y límites de este relevamiento
 > - **Taiga no se pudo leer en vivo.** El MCP de Taiga no filtra por sprint y `getUserStory` falla con los ids. El estado de Taiga sale del espejo del cerebro ([[sprints/sprint-3/12-responsables|12 — Responsables]]), que es del **2026-10-15**: puede estar desactualizado.
-> - **El código se leyó en una rama vieja** (`fix/t-45-7-catalogo-errores-ranking`, migraciones hasta V30). `develop` va más adelante: lo que acá figura como «falta» hay que confirmarlo contra `develop`. Las tareas de la sección 1 sí se verificaron contra los PRs mergeados de [[sprints/sprint-3/14-cambios-recientes|14 — Cambios recientes]] y `git log develop`.
-> - No se corrieron tests ni se creó nada en Taiga.
+> - **El código se verificó sobre `develop`** al 2026-10-19 (`8f48efb8`, PR #277, migraciones hasta V49) con búsquedas sobre `src/main/java`. Las tareas de la sección 1 salen de los PRs mergeados de [[sprints/sprint-3/14-cambios-recientes|14 — Cambios recientes]] y de `git log develop`.
+> - Las búsquedas dicen si algo **existe**, no si funciona. No se corrieron tests ni se creó nada en Taiga.
 
 Fuentes: [[sprints/sprint-3/12-responsables|12]], [[sprints/sprint-3/14-cambios-recientes|14]], [[arquitectura/patrones-de-diseno]], [[arquitectura/patrones-plataforma]], [[deuda-tecnica]].
 
@@ -40,17 +40,17 @@ Hay que cerrar estas tareas en Taiga (o confirmar que ya se cerraron después de
 
 | Tema | Tareas | Estado |
 |---|---|---|
-| Permisos | T-22.1 a T-22.4 | El código sigue con 25 `hasRole`/`hasAnyRole`. `SecurityConfig` solo valida el scope `roadmap.progress.read`, no `roadmap.gate.read` (DT-01) |
+| Permisos | T-22.1 a T-22.4 | `develop` tiene 29 usos de `hasRole`/`hasAnyRole` (eran 17 al armar HT-22). No hay ninguna referencia al scope `roadmap.gate.read`: `SecurityConfig` solo valida `roadmap.progress.read` (DT-01) |
 | Insignias | T-30.3, T-30.4, T-30.5 | `BadgeEvaluator.meets` manda `SECTION_NO_LIVES_LOST`, `NODE_NO_RETRIES` y `LIFE_RECOVERED` a `default -> false` (DT-24) |
 | Nodos y vidas | T-32.3, T-32.4 | El PUT resetea `lives_policy`; falta el campo de reintentos permitidos |
-| Gate | T-31.3, T-31.4 | Último dato de vidas con aviso de 24 h. Hay `stale` en ranking e inventario; **no verificado en el gate** |
-| Inicio y fin | HU-64 (T-64.1 a T-64.5) | `NodeType` no tiene tipos de inicio/fin. Existe la rama `feature/t-64-1-nodos-inicio-fin`, sin mergear |
+| Gate | T-31.3, T-31.4 | Último dato de vidas con aviso de 24 h. En `develop` hay `stale` en ranking e inventario, pero no en `GateEvaluator` |
+| Inicio y fin | HU-64 (T-64.1 a T-64.5) | `NodeType` sigue con `UNIT`, `CONTENT`, `THEORETICAL_CHALLENGE`, `PRACTICAL_CHALLENGE` y `EXAM`. Existe la rama `feature/t-64-1-nodos-inicio-fin`, sin mergear |
 | Reglas de sección | T-58.2, T-58.3, T-58.4 | Subsecciones sin ciclos, editor con XP mínimo y explicación al alumno. T-58.1 está en BE#268 (abierto) |
 | Qué le falta al alumno | T-59.3 | Ver [[sprints/sprint-3/15-tarea-que-le-falta-al-alumno|15]] |
 | Relaciones con tipo (front) | T-65.2, T-65.3 | Ver el nombre y elegir el tipo |
 | Vista de grafo | HU-62 (T-62.1 a T-62.6), HT-34 | Posiciones guardadas, relaciones arrastrando, teclado. Depende del componente de grafo del kit |
 | Neo4j | T-18.2 a T-18.7 | El módulo `graph/` existe pero ningún servicio lo usa y no hay proyector (DT-25, DEC-021) |
-| Restricciones de Courses | HU-49 (T-49.9 a T-49.13) | `HIDDEN`/`LOCKED` solo aparece ligado a nodos, no a restricciones de Courses. Falta evento de cambio, aviso y ventana horaria del examen. T-49.9 pide verificar qué ya está |
+| Restricciones de Courses | HU-49 (T-49.9 a T-49.13) | Parcial: existe `CourseRestrictionsClient` y `GraphValidator` lo usa para revalidar prerrequisitos de unidad. No encontré distinción oculto/bloqueado, reacción al evento de cambio ni la ventana horaria del examen. T-49.9 pide verificar qué ya está |
 | Roadmaps por grupo | HU-61 (T-61.1 a T-61.3) | Hay `GroupAccessService`, pero no la asignación de roadmap a grupos |
 | Clonar | HU-71 | BE#266 abierto |
 | Cierre del curso | HU-72 | No hay código de estado académico final |
