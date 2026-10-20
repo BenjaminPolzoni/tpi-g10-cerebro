@@ -1,21 +1,18 @@
 ---
-tags: [tpi, g10, sprint-3, plan, front]
+tags: [tpi, g10, sprint-3, plan, fix, front]
 fecha: 2026-10-20
 autor: Benja
 estado: borrador
 repo: 2026-P4-FE/2026-PIV-TPI-FE
 ---
 
-# Front — La card del curso del alumno entra al modo simple
+# Fix Front — la card del curso del alumno entra al modo simple
 
-> [!info] Contexto
-> Plan de implementación para Benja. Todavía no tiene tarea en Taiga.
-
-## Worktree
-- **Carpeta:** `~/dev/TPI_2026/Frontend/2026-PIV-TPI-FE-student-card-click`
-- **Rama:** `feature/student-card-click-simple-mode`, desde `origin/develop` en `bfc040971` (2026-10-20).
+- **Rama:** `fix/courses-card-modo-simple` (desde `origin/develop` `bfc040971`, 2026-10-20)
+- **Worktree:** `Frontend/2026-PIV-TPI-FE-fix-card-modo-simple`
+- **HU/Tarea Taiga:** sin asignar
 - **Antes de empezar:** `npm ci` (la worktree no tiene `node_modules`). Tests con `NODE_OPTIONS=--no-experimental-webstorage` (Node 25).
-- El archivo `PLAN-student-card-click.md` de la raíz del worktree es una copia de este plan: no commitearlo.
+- El archivo `PLAN-fix-card-modo-simple.md` de la raíz del worktree es una copia de este plan: no commitearlo.
 
 ## Objetivo
 En "Mis Cursos", como alumno, un click en cualquier parte de la card del curso entra al
