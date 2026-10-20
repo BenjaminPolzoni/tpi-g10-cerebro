@@ -2,6 +2,7 @@
 tags: [tpi, g10, decision]
 fecha: 2026-10-15
 estado: aceptada
+actualizado: 2026-10-19
 reemplaza: ""
 ---
 
@@ -28,6 +29,8 @@ El `node_id` es **único global**, también después de clonar: la copia genera 
 ## Consecuencias
 - Positivas: HT-17, HU-57, HU-61, HT-19 y HU-66 mantienen su alcance; el contrato con el Motor no cambia.
 - Negativas / deuda: varios ajustes nuevos por roadmap que el gate, el ranking y el nivel tienen que respetar. Clonar roadmaps es trabajo nuevo ([[sprints/sprint-3/historias/HU-71 Clonar un roadmap con sus restricciones|HU-71]]).
+
+**Actualización (2026-10-19):** el orden del ranking (P14, `roadmap.ranking_order`) sigue al alcance del ranking. Un roadmap en modo **COURSE** comparte el ranking del curso y usa el ajuste del **roadmap principal**. Solo un roadmap en modo **ROADMAP** usa su propio ajuste. La insignia ZONE_P90 se sigue dando por XP. Detalle en [[sprints/sprint-3/Planes/Benja/T-45.11 Back+Front - ranking por XP o por notas|T-45.11]] (D5 y D7).
 
 ## Referencias
 - Respuestas del 2026-10-15 en [[sprints/sprint-3/08-dudas|08-dudas]] (P1, P2, P3, P5, P14, G4, G8).
