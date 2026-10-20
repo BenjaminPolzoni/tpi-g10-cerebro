@@ -168,6 +168,14 @@ Dependencias / Impactos
 
 ## Contexto del Sprint 3 (no va a Taiga)
 
+> [!warning] 2026-10-20 · Cómo quedó T-18.3 (Iker) y qué cambia en T-18.2
+> - **Marca sin tocar servicios:** un listener de Hibernate (`graph/sync/GraphChangeListener`) ve toda alta, cambio o baja de unidades, nodos, prerrequisitos, reglas, relaciones con tipo y tipos ocultos, y antes del commit escribe la marca en `graph_sync_pending` (V50) **en la misma transacción**. Nadie tiene que acordarse de marcar: un endpoint nuevo que escriba con JPA queda cubierto solo. Lo único que no ve son los `UPDATE` nativos (por ejemplo restaurar una arista); eso lo cubre la reconciliación.
+> - **El proyector entra en T-18.3** (`RoadmapProjector`): lee el roadmap vigente con la misma regla que evalúa el gate (`UnlockRuleService`), lo convierte al modelo de T-16.4 y lo guarda en una transacción de Neo4j. Lo dado de baja en Postgres queda con `deletedAt` en Neo4j; las reglas y relaciones se regeneran en cada copia.
+> - **Disparadores:** copia enseguida después del commit (en otro hilo) y, de respaldo, cada `GRAPH_SYNC_RETRY_DELAY_MS` toma las marcas pendientes. Si Neo4j falla, la marca queda con `attempts` y `last_error`.
+> - **Flag:** `app.features.graph-sync.enabled` (`GRAPH_SYNC_ENABLED`), apagado por defecto. Las marcas se escriben siempre; con el flag apagado no se copia nada.
+> - **Reconciliación:** va en un segundo PR de T-18.3 (comparar ids y cantidades entre las dos bases y volver a marcar lo que difiera).
+> - **T-18.2 se achica:** queda «reconstruir todos los roadmaps con el proyector + reporte de cantidades», porque el proyector ya existe.
+
 ### Qué hay hoy en el código
 
 Todo está en Postgres (`section`, `node`, `section_prerequisite`, `node_prerequisite`).
