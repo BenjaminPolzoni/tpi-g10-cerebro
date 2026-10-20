@@ -11,12 +11,12 @@ en_taiga: true
 ref: 8601
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8601
 responsables_tareas: ["Iker Alonso", "Quinteros Tomás"]
-tareas_cerradas: "0/8"
+tareas_cerradas: "4/8"
 ---
 
 # HT-18: Módulo graph en Neo4j y migración inicial
 
-> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **0/8** · Sprint: **G10 - Sprint 3**
+> [!info] Sprint 3 · Épica: [[sprints/sprint-3/epicas/G10 — Múltiples roadmaps por curso y grafo configurable|Múltiples roadmaps por curso y grafo configurable]] · Estado: **New** · Responsable de la historia: **Sin asignar** · Tareas: **4/8** · Sprint: **G10 - Sprint 3**
 > Cargada en Taiga: [[taiga/historias/HT-18 Módulo graph en Neo4j y migración inicial|HT-18]] ([abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8601)) · Épica en Taiga: [[epicas/EP-8633 Múltiples roadmaps por curso y grafo configurable|EP-8633]] · Responsables de las tareas: [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]] (7), [[sprints/sprint-3/12-responsables#Quinteros Tomás|Quinteros Tomás]] (1). El 2026-10-15 suma el corte de lectura a Neo4j (qué base manda) y la validación del esquema cerrado que estaba en HU-60.
 
 > [!warning] 2026-10-17 · Cambio de diseño acordado: [[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion|DEC-021]]
@@ -136,28 +136,30 @@ Dependencias / Impactos
 
 ## Tareas
 
-> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/8**. Historia en Taiga: [[taiga/historias/HT-18 Módulo graph en Neo4j y migración inicial|HT-18]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8601)
+> [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **4/8**. Historia en Taiga: [[taiga/historias/HT-18 Módulo graph en Neo4j y migración inicial|HT-18]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8601)
 
-- [ ] [#8939](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8939) **T-18.1 Crear el módulo graph y su esquema en Neo4j** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
+- [x] [#8939](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8939) **T-18.1 Crear el módulo graph y su esquema en Neo4j** · Back · Closed · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** paquete `graph` dentro de roadmap-service con las entidades de Spring Data Neo4j del modelo de HT-16 (roadmap, sección, nodo, relaciones con tipo, reglas) y el esquema versionado con `neo4j-migrations` (unicidad por `id`).
     - **Listo cuando:** la app arranca contra Neo4j, el esquema se aplica solo y hay tests con Testcontainers de guardar y leer.
-- [ ] [#8940](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8940) **T-18.2 Pasar la estructura actual de Postgres a Neo4j** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
-    - **Qué:** proyector que lee de Postgres un roadmap entero (`section`, `node`, `node_prerequisite`, `section_prerequisite`, reglas, tipos de relación y posiciones) y lo escribe en Neo4j con `MERGE` por los mismos UUID, dando de baja lógica lo que ya no está. Corrido sobre todos los roadmaps es la migración inicial y la reconstrucción de Neo4j; T-18.3 lo reutiliza para cada edición (DEC-021). Va detrás de un flag; hasta que se pase la lectura (T-18.6) la estructura se sigue leyendo de Postgres.
-    - **Necesita:** T-65.5 (relaciones con tipo en Postgres) y, para la corrida final, T-64.3 (inicio y fin en los roadmaps existentes).
-    - **Listo cuando:** correrlo dos veces deja el mismo grafo, borrar Neo4j y correrlo lo rearma igual, y un reporte compara cantidades de nodos y relaciones entre las dos bases.
-- [ ] [#8942](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8942) **T-18.3 Mantener las dos bases en orden** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
+- [ ] [#8940](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8940) **T-18.2 Reconstruir Neo4j desde Postgres para todos los roadmaps** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
+    - **Qué:** correr el proyector de T-18.3 (`RoadmapProjector`) sobre todos los roadmaps, para la carga inicial de Neo4j y para rearmarlo desde cero cuando haga falta. Postgres sigue siendo la fuente de verdad y Neo4j es una proyección (DEC-021): no se mueve ni se borra nada de Postgres. Incluye los roadmaps dados de baja, que quedan con baja lógica en Neo4j. Respeta el flag `app.features.graph-sync.enabled`: apagado, no se copia nada. Al terminar deja un reporte por roadmap que compara cantidades entre las dos bases (unidades, nodos, grupos de reglas y relaciones con tipo) y marca los que difieran. La reconciliación de T-18.3 reutiliza esta misma comparación.
+    - **Dónde:** módulo `graph` (`graph/sync`), con un disparador de administración (job o endpoint para ADMIN).
+    - **Necesita:** T-18.3 (proyector y marcas, mergeada) y T-65.5 (relaciones con tipo en Postgres, mergeada). Para la corrida final en la demo, T-64.3 (inicio y fin en los roadmaps existentes).
+    - **Listo cuando:** correrlo dos veces deja el mismo grafo; borrar Neo4j y correrlo lo rearma igual; el reporte no muestra diferencias sobre una base de prueba y sí detecta un roadmap desfasado a propósito. Hay tests con Testcontainers.
+- [x] [#8942](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8942) **T-18.3 Mantener las dos bases en orden** · Back · Closed · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** cada edición de estructura se escribe en Postgres, se registra en `node_edit_log`, sale por el outbox como hoy y deja una marca en `graph_sync_pending(roadmap_id, marked_at)` en la misma transacción. Un `@TransactionalEventListener(AFTER_COMMIT)` proyecta el roadmap con el proyector de T-18.2, y un `@Scheduled` reintenta las marcas pendientes. La marca se borra solo si la proyección termina bien. Solo baja lógica en Neo4j. Un job de reconciliación compara ids y cantidades y vuelve a marcar los roadmaps que difieran (DEC-021).
     - **Listo cuando:** editar un nodo deja su log, su evento y su marca; con Neo4j caído la edición se guarda igual y se proyecta al volver; y el job reporta y corrige las diferencias de una base de prueba.
+    - **2026-10-20:** cerrada en Taiga con la marca, el proyector y los disparadores (#278). La reconciliación (comparar ids y cantidades y volver a marcar lo que difiera) se hace en T-18.2, que ya calcula esa comparación para su reporte.
 - [ ] [#8944](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8944) **T-18.4 Caché de reglas por roadmap para el gate** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** `GateEvaluator` lee las reglas de una caché por roadmap que se invalida cuando se confirma una edición en Postgres, para no ir a Neo4j en cada pedido del Motor ni evaluar con una regla atrasada (DEC-021).
     - **Listo cuando:** una regla editada se aplica en la siguiente consulta del gate. La medición del P95 se hace en HT-20 (T-20.4).
-- [ ] [#8945](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8945) **T-18.5 Endpoint que devuelve el grafo entero para dibujarlo** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
+- [x] [#8945](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/8945) **T-18.5 Endpoint que devuelve el grafo entero para dibujarlo** · Back · Closed · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** `GET /roadmaps/{id}/graph` con `{nodes, edges, layout}`: nodos con tipo y posición, aristas con tipo y visibilidad. Documentado en OpenAPI.
     - **Listo cuando:** el front dibuja el grafo completo con una sola llamada y hay test del contrato.
 - [ ] [#9274](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9274) **T-18.6 Pasar la lectura de la estructura a Neo4j** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** flag de lectura. Con el flag encendido, el editor, el roadmap del alumno y la vista de grafo leen secciones, nodos, relaciones y reglas de Neo4j, y el gate las lee de la caché de T-18.4. Las ediciones de estructura se siguen escribiendo **solo en Postgres** (con `node_edit_log`, su evento en el outbox y su marca en `graph_sync_pending`) y el proyector las copia a Neo4j. Con el flag apagado todo se lee de Postgres (DEC-021).
-    - **Listo cuando:** hay tests con el flag encendido y apagado, apagar el flag no pierde ninguna edición, y la reconciliación (T-18.3) no reporta diferencias antes de encenderlo en la demo.
-- [ ] [#9275](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9275) **T-18.7 Rechazar campos libres y tipos de nodo fuera del catálogo** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
+    - **Listo cuando:** hay tests con el flag encendido y apagado, apagar el flag no pierde ninguna edición, y la reconciliación (T-18.2) no reporta diferencias antes de encenderlo en la demo.
+- [x] [#9275](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9275) **T-18.7 Rechazar campos libres y tipos de nodo fuera del catálogo** · Back · Closed · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** el esquema es cerrado (P8, DEC-018): el back rechaza con 400 propiedades que no son del modelo y tipos de nodo que no están en el catálogo. Lo personalizable es nombre, ícono, descripción y reglas.
     - **Dónde:** módulo `graph`, `NodeController`.
     - **Listo cuando:** hay tests de lo permitido y lo rechazado.
@@ -173,8 +175,8 @@ Dependencias / Impactos
 > - **El proyector entra en T-18.3** (`RoadmapProjector`): lee el roadmap vigente con la misma regla que evalúa el gate (`UnlockRuleService`), lo convierte al modelo de T-16.4 y lo guarda en una transacción de Neo4j. Lo dado de baja en Postgres queda con `deletedAt` en Neo4j; las reglas y relaciones se regeneran en cada copia.
 > - **Disparadores:** copia enseguida después del commit (en otro hilo) y, de respaldo, cada `GRAPH_SYNC_RETRY_DELAY_MS` toma las marcas pendientes. Si Neo4j falla, la marca queda con `attempts` y `last_error`.
 > - **Flag:** `app.features.graph-sync.enabled` (`GRAPH_SYNC_ENABLED`), apagado por defecto. Las marcas se escriben siempre; con el flag apagado no se copia nada.
-> - **Reconciliación:** va en un segundo PR de T-18.3 (comparar ids y cantidades entre las dos bases y volver a marcar lo que difiera).
-> - **T-18.2 se achica:** queda «reconstruir todos los roadmaps con el proyector + reporte de cantidades», porque el proyector ya existe.
+> - **Reconciliación:** pasa a T-18.2 (comparar ids y cantidades entre las dos bases y volver a marcar lo que difiera), porque es la misma comparación que su reporte. T-18.3 quedó cerrada en Taiga sin ella.
+> - **T-18.2 se achica:** queda «reconstruir todos los roadmaps con el proyector + reporte de cantidades», porque el proyector ya existe. Título y descripción actualizados en Taiga el 2026-10-20.
 
 ### Qué hay hoy en el código
 

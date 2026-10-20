@@ -126,13 +126,13 @@ fecha: 2026-10-15
     - [ ] [[sprints/sprint-3/historias/HT-16 Validar la infra de Neo4j y modelar las relaciones#Tareas|T-16.3]] Probar Spring Data Neo4j con un test en el CI · New
     - [ ] [[sprints/sprint-3/historias/HT-16 Validar la infra de Neo4j y modelar las relaciones#Tareas|T-16.4]] Escribir el modelo del grafo · New
 - [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial|HT-18]] Módulo graph en Neo4j y migración inicial
-    - [ ] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.1]] Crear el módulo graph y su esquema en Neo4j · New
-    - [ ] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.2]] Pasar la estructura actual de Postgres a Neo4j · New
-    - [ ] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.3]] Mantener las dos bases en orden · New
+    - [x] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.1]] Crear el módulo graph y su esquema en Neo4j · Closed
+    - [ ] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.2]] Reconstruir Neo4j desde Postgres para todos los roadmaps · New
+    - [x] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.3]] Mantener las dos bases en orden · Closed
     - [ ] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.4]] Caché de reglas por roadmap para el gate · New
-    - [ ] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.5]] Endpoint que devuelve el grafo entero para dibujarlo · New
+    - [x] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.5]] Endpoint que devuelve el grafo entero para dibujarlo · Closed
     - [ ] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.6]] Pasar la lectura de la estructura a Neo4j · New
-    - [ ] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.7]] Rechazar campos libres y tipos de nodo fuera del catálogo · New
+    - [x] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.7]] Rechazar campos libres y tipos de nodo fuera del catálogo · Closed
 - [[sprints/sprint-3/historias/HT-32 Nodos y editor pendientes de HU-01, HU-41 y HU-43|HT-32]] Nodos y editor pendientes de HU-01, HU-41 y HU-43
     - [ ] [[sprints/sprint-3/historias/HT-32 Nodos y editor pendientes de HU-01, HU-41 y HU-43#Tareas|T-32.3]] HU-41 CA2 · Que guardar un nodo no le borre la política de vidas · New
 - [[sprints/sprint-3/historias/HU-65 Relaciones con tipo|HU-65]] Relaciones con tipo
