@@ -117,21 +117,21 @@ Qué patrones GoF y arquitectónicos usa `tpi-roadmap`, cuáles están bien, cu�
 
 ## 5. Antipatrones detectados
 
-| Olor | Dónde | Nota |
-|---|---|---|
-| God class suprimida | `services/GraphService.java:50`, `services/RankingService.java:56`, `events/RoadmapEventListener.java:42` | Ver §4 mejoras 3 y 4 |
-| E/S de red dentro de una transacción SQL | `events/outbox/OutboxPoller.java:65-97` | Ver §4 mejora 1 |
-| Modelo anémico | `entities/*` | Aceptable por la separación `entities → models`. No es prioridad |
-| Fallback con constantes | `RoadmapEventListener` (XP base por dificultad si Backoffice no responde) | Documentado en el Javadoc como excepción deliberada. Revisar que siga alineado con [[decisiones/DEC-013-roadmap-no-calcula-xp-ledger-idempotente\|DEC-013]] (el Motor calcula el XP) |
+| Olor                                     | Dónde                                                                                                     | Nota                                                                                                                                                                                 |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| God class suprimida                      | `services/GraphService.java:50`, `services/RankingService.java:56`, `events/RoadmapEventListener.java:42` | Ver §4 mejoras 3 y 4                                                                                                                                                                 |
+| E/S de red dentro de una transacción SQL | `events/outbox/OutboxPoller.java:65-97`                                                                   | Ver §4 mejora 1                                                                                                                                                                      |
+| Modelo anémico                           | `entities/*`                                                                                              | Aceptable por la separación `entities → models`. No es prioridad                                                                                                                     |
+| Fallback con constantes                  | `RoadmapEventListener` (XP base por dificultad si Backoffice no responde)                                 | Documentado en el Javadoc como excepción deliberada. Revisar que siga alineado con [[decisiones/DEC-013-roadmap-no-calcula-xp-ledger-idempotente\|DEC-013]] (el Motor calcula el XP) |
 
 ## 6. Decisiones contra código
 
-| Decisión | ¿Se cumple? |
-|---|---|
-| DEC-001, 003, 004, 005, 007, 008, 009, 010, 011, 012, 013, 014, 015, 018, 019, 020 | Sí |
-| [[decisiones/DEC-002-outbox-transaccional-eventos-salientes\|DEC-002]] Outbox | Parcial: faltan `COURSE_LEVEL_UP` y `PERFORMANCE_ZONE_CHANGED` |
-| [[decisiones/DEC-006-insignias-sistema-y-curso\|DEC-006]] Insignias | Parcial: 3 criterios nunca se otorgan |
-| [[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap\|DEC-016]] / [[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion\|DEC-021]] Neo4j | No: módulo sin uso y sin proyector |
-| [[decisiones/DEC-017-n-roadmaps-por-curso-configurables\|DEC-017]] N roadmaps | Sí (`is_primary`, `RoadmapResolver`) |
+| Decisión                                                                                                                                                | ¿Se cumple?                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| DEC-001, 003, 004, 005, 007, 008, 009, 010, 011, 012, 013, 014, 015, 018, 019, 020                                                                      | Sí                                                             |
+| [[decisiones/DEC-002-outbox-transaccional-eventos-salientes\|DEC-002]] Outbox                                                                           | Parcial: faltan `COURSE_LEVEL_UP` y `PERFORMANCE_ZONE_CHANGED` |
+| [[decisiones/DEC-006-insignias-sistema-y-curso\|DEC-006]] Insignias                                                                                     | Parcial: 3 criterios nunca se otorgan                          |
+| [[decisiones/DEC-016-neo4j-para-la-estructura-del-roadmap\|DEC-016]] / [[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion\|DEC-021]] Neo4j | No: módulo sin uso y sin proyector                             |
+| [[decisiones/DEC-017-n-roadmaps-por-curso-configurables\|DEC-017]] N roadmaps                                                                           | Sí (`is_primary`, `RoadmapResolver`)                           |
 
 Las deudas que salen de acá están en [[deuda-tecnica]] (DT-22 a DT-26).
