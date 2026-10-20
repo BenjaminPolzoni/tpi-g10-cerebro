@@ -27,7 +27,7 @@ flowchart LR
 | [[acuerdos/README\|acuerdos/]] | Acuerdos por grupo o servicio con el que integramos | El equipo, cada vez que se acuerda algo |
 | [[decisiones/README\|decisiones/]] | Decisiones técnicas (DEC-xxx): contexto, alternativas y consecuencias | El equipo |
 | [[contratos/README\|contratos/]] | Contratos OpenAPI, AsyncAPI y esquemas de eventos Kafka | El equipo |
-| [[arquitectura/contexto-integral\|arquitectura/]] | Arquitectura y contexto del micro: contexto integral, estructura de paquetes/BD, E2E, CORS y rutas | El equipo, cuando cambie el código |
+| [[arquitectura/contexto-integral\|arquitectura/]] | Arquitectura y contexto del micro: contexto integral, estructura de paquetes/BD, E2E, CORS y rutas, [[arquitectura/patrones-de-diseno\|patrones de diseño]] y [[arquitectura/patrones-plataforma\|patrones de la plataforma]] | El equipo, cuando cambie el código |
 | [[tareas/README\|tareas/]] | Especificaciones de tareas técnicas implementadas (T-xx, HU3, P-11) y su histórico | Histórico de tareas |
 | [[backlog/README\|backlog/]] | Notas de backlog técnico y funcionalidades futuras | El equipo |
 | `minutas/` | Notas de reuniones (daily, profes, otros grupos) | Quien estuvo en la reunión |

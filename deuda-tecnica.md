@@ -2,7 +2,7 @@
 tags:
   - tpi
   - g10
-actualizado: 2026-10-18
+actualizado: 2026-10-19
 ---
 
 # Deuda técnica de G10 (roadmap-service)
@@ -26,6 +26,11 @@ actualizado: 2026-10-18
 | DT-07 | 🟠 | `TraceIdFilter` figura en `08-comunicacion-gateway.md` pero **no existe** en develop | Confirmar si se borró a propósito y actualizar el doc | S | E7 en [[sprints/sprint-3/08-dudas\|08]] | |
 | DT-08 | 🟢 | Accounting publica `LIVES_EXHAUSTED`/`LIVES_AVAILABLE` y no hay consumidor | Decidir si hace falta; si no, sacarlo del acta | S | E8 en [[sprints/sprint-3/08-dudas\|08]] | |
 | DT-09 | 🟢 | La **caché de respaldo del ranking** (T-45.7) vive en memoria: se pierde al reiniciar el micro y no se comparte entre instancias | Si se escala a varias instancias o hace falta sobrevivir reinicios, evaluar una caché compartida | M | [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo\|DEC-019]] | |
+| DT-22 | 🟠 | `OutboxPoller.publishPending()` tiene `@Transactional` y espera el ACK de Kafka adentro (`send().get()`): retiene la conexión de Hikari y las filas bloqueadas | Reclamar el lote en una transacción corta, enviar fuera y marcar el resultado en otra (como `tpi-sandbox`) | M | [[arquitectura/patrones-de-diseno\|patrones]] (2026-10-19) | |
+| DT-23 | 🟠 | `COURSE_LEVEL_UP` y `PERFORMANCE_ZONE_CHANGED` figuran como publicados en `AGENTS.md` y [[arquitectura/contexto-integral]] pero no se emiten en ningún lado | Implementarlos o corregir los docs ([[decisiones/DEC-002-outbox-transaccional-eventos-salientes\|DEC-002]]) | M | [[arquitectura/patrones-de-diseno\|patrones]] (2026-10-19) | |
+| DT-24 | 🟠 | `BadgeEvaluator.meets` manda `SECTION_NO_LIVES_LOST`, `NODE_NO_RETRIES` y `LIFE_RECOVERED` a `default -> false`: esas insignias nunca se otorgan | Implementar los criterios o sacarlos de `BadgeCriterion` | M | [[arquitectura/patrones-de-diseno\|patrones]] (2026-10-19) | |
+| DT-25 | 🟢 | Módulo `graph/` (Neo4j) sin uso: ningún service lo llama y no hay proyector ([[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion\|DEC-021]]) | Terminar el proyector o sacar el módulo hasta que haga falta | L | [[arquitectura/patrones-de-diseno\|patrones]] (2026-10-19) | |
+| DT-26 | 🟠 | Clientes HTTP a Courses y Accounting sin circuit breaker: con el origen lento, cada request espera el timeout completo | Resilience4j como `CoursesCallGuard` de `tpi-theoristcal-challenge` | M | [[arquitectura/patrones-plataforma\|patrones plataforma]] (2026-10-19) | |
 
 ## Front
 
