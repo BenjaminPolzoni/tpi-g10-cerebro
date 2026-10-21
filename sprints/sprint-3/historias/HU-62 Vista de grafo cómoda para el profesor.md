@@ -140,7 +140,8 @@ Dependencias / Impactos
 - [ ] [#9168](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9168) **T-62.4 Usar el grafo con teclado** · Front · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
     - **Qué:** moverse entre nodos con teclado, foco visible y un enlace a la lista de nodos de la sección en «Contenido del curso» como alternativa.
     - **Listo cuando:** se puede revisar y editar el grafo sin mouse.
-- [ ] [#9316](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9316) **T-62.5 Elegir qué roadmap del curso ver como mapa** · Front · New · [[sprints/sprint-3/12-responsables#Mateo Delgado Costa|Mateo Delgado Costa]]
+- [ ] [#9316](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9316) **T-62.5 Elegir qué roadmap del curso ver como mapa** · Front · In progress · [[sprints/sprint-3/12-responsables#Benjamin Polzoni|Benjamin Polzoni]]
+    - **Actualización (2026-10-21):** reasignada a Benja el 2026-10-20. Código hecho en `feature/roadmap-multi-vista-profesor` (4 commits locales, sin push): selector en el editor, en el mapa y en la pestaña General. Plan: [[T-62.5 Front - alternar roadmaps y unidades en el mapa del profesor|Plan T-62.5]].
     - **Qué:** en `course-editor-page` (hoy solo el mapa), un selector con los roadmaps del curso (HU-57) que cambia el mapa que se muestra (P1).
     - **Listo cuando:** en un curso con dos roadmaps, el profesor ve el mapa de cada uno.
 - [ ] [#9351](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9351) **T-62.6 Wiki con capturas y componentes usados** · New · [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]]
