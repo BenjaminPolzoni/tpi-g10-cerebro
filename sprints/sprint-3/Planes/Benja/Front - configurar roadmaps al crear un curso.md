@@ -19,7 +19,7 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 
 ## 1. Worktree
 
-- **Carpeta:** `~/dev/TPI_2026/Frontend/2026-PIV-TPI-FE-config-roadmaps` (todavía no creada).
+- **Carpeta:** `~/dev/TPI_2026/Frontend/2026-PIV-TPI-FE-config-roadmaps` (creada 2026-10-21 en `f781dadca`, sin upstream).
 - **Rama:** `feature/roadmap-configurar-al-crear-curso`, **desde `feature/roadmap-multi-vista-profesor`** (T-62.5, `f781dadca`), no desde `develop`. Reusa su selector de roadmaps, `CourseRoadmapsService` en la pestaña General y `reorderSections`.
 - **Cuando se mergee T-62.5:** rebasear sobre `origin/develop` antes del primer push. Sin upstream hasta entonces, para que un `git push` no termine en otra rama.
 - **Antes de empezar:** `npm ci` (la worktree no trae `node_modules`). Tests con `NODE_OPTIONS=--no-experimental-webstorage` (Node 25).
