@@ -41,7 +41,7 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 - **Comisión dentro de un roadmap:**
   - Ranking con filtro opcional por comisión en el back: T-45.8, cerrada (`RankingGroupFilter`, `?groupId=`). Ver [[T-45.8 Back - ranking con filtro por comisión|plan T-45.8]].
   - Avance por comisión: `/groups/{gid}/progress`.
-  - Pantalla del ranking con filtro: [[T-45.9 Front - filtro por comisión en el ranking|T-45.9]] (New).
+  - Pantalla del ranking con filtro: [[T-45.9 Front - filtro por comisión en el ranking|T-45.9]] (**Closed** el 2026-10-18 en Taiga).
   - Selector de comisión del alumno: [[sprints/sprint-3/historias/HT-33 Comisión y material pendientes de HU-44 y HU-46|HT-33]] (New), detrás de `ROADMAP_BY_GROUP_ENABLED`.
 - **Lo que suma T-62.5** (rama `feature/roadmap-multi-vista-profesor`, sin PR aún): el profesor alterna qué roadmap ve en la pestaña General y en el mapa, con la misma tarjeta, arrastrar para ordenar y "Nueva sección" contra el roadmap elegido.
 
@@ -53,19 +53,19 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 | Caso | Hecho | Falta |
 |---|---|---|
 | 1 · un roadmap por comisión, o varios para una | 1:N (HU-57), alternar en el profesor (T-62.5) | Asignar roadmap ↔ comisiones y que el alumno vea solo los suyos, con 403 por URL (HU-61: T-61.1, T-61.2, T-61.3) |
-| 2 · uno compartido con ranking separado | Filtro por comisión en el back (T-45.8), avance por comisión | Filtro en la pantalla (T-45.9), selector del alumno (HT-33) y decidir si "separado" es una configuración del curso (ver D2, §5) |
+| 2 · uno compartido con ranking separado | Filtro por comisión en el back (T-45.8), avance por comisión | Selector del alumno (HT-33) y decidir si "separado" es una configuración del curso (ver D2, §5) |
 | Mezcla | Se combinan sin chocar: el ranking se arma por roadmap o por curso según `progress_scope`, y el filtro por comisión va encima | Lo mismo que los dos casos |
 
 ## 4. Propuesta
 
-**Recomendación:** no tocar el modal de Courses. Al terminar de crear el curso, ofrecer un paso propio, **"Configurar roadmaps"**, en nuestra pestaña Roadmaps, que junte todo en una pantalla. Así no dependemos de G01, y cada parte se enciende a medida que salen HU-61 y T-45.9.
+**Recomendación:** no tocar el modal de Courses. Al terminar de crear el curso, ofrecer un paso propio, **"Configurar roadmaps"**, en nuestra pestaña Roadmaps, que junte todo en una pantalla. Así no dependemos de G01, y cada parte se enciende a medida que sale HU-61.
 
 | Paso | Qué agrega | Depende de | Se puede hoy |
 |---|---|---|---|
 | A | Cargar las comisiones desde la misma pantalla (link o atajo a la pestaña Grupos) | Courses ya crea grupos | ✅ |
 | B | Elegir modo: **uno compartido** o **uno por comisión**, y agregar más roadmaps (p. ej. 2 para 2W2). Con más de uno se activa `multiple_roadmaps_allowed` solo | `PUT /courses/{id}/settings`, `POST /courses/{id}/roadmaps` | ✅ |
 | C | Asignar cada roadmap a sus comisiones, o a «todas» | HU-61 (tabla y `PUT /roadmaps/{id}/groups`) | ❌ |
-| D | En modo compartido, "ranking y avance separados por comisión" (sí/no) | T-45.9 y D2 | ❌ |
+| D | En modo compartido, "ranking y avance separados por comisión" (sí/no) | D2 (T-45.9 ya está cerrada) | ❌ |
 | E | Al clonar un curso, copiar sus roadmaps y asignaciones | [[sprints/sprint-3/historias/HU-71 Clonar un roadmap con sus restricciones|HU-71]] + HU-61 | ❌ |
 
 ## 5. Decisiones abiertas
@@ -121,7 +121,7 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
   - **Qué:** al terminar de crear el curso, un link "Configurar roadmaps" en el aviso de curso creado (`createdCohort`). Mientras no haya acuerdo, la entrada queda solo en la pestaña Roadmaps (F1).
 - [ ] **F4 · Asignar comisiones a cada roadmap** (paso C). **Bloqueada por HU-61** (T-61.1 y T-61.2).
   - **Qué:** en F1 y en la pestaña Roadmaps, un `generic-select` múltiple de comisiones por roadmap, o la opción «todas». Se guarda con `PUT /roadmaps/{id}/groups`. En el modo "uno por comisión" viene precargado. Es la T-61.3 de Lorenzo: hay que coordinar quién la hace para no duplicarla.
-- [ ] **F5 · Switch "ranking separado por comisión"** (paso D). **Bloqueada por B1**, y para que se vea, por [[T-45.9 Front - filtro por comisión en el ranking|T-45.9]].
+- [ ] **F5 · Switch "ranking separado por comisión"** (paso D). **Bloqueada por B1.** El filtro en la pantalla ya existe: [[T-45.9 Front - filtro por comisión en el ranking|T-45.9]], cerrada.
   - **Qué:** en el modo "uno compartido" de F1 y en la configuración del curso, un `generic-switch` que lee y escribe `rankingByGroup` en los settings. La pantalla del ranking abre filtrada por la comisión del usuario cuando está encendido.
 - [ ] **F6 · Texto de "principal"** (D4). Cuando haya roadmaps por comisión, el alumno no ve la palabra "principal". Depende de lo que se decida en D4.
 
@@ -131,9 +131,24 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 2. **B1 → B2** y **F5**, si el equipo decide guardar el ajuste (D2).
 3. **F4** cuando salga HU-61, y **F3** cuando haya acuerdo con G01.
 
-## 7. Próximos pasos
+## 7. Tareas de Taiga relacionadas (verificado en Taiga 2026-10-21)
+
+> [!warning] La copia de Taiga del cerebro es del 2026-10-15
+> Esa copia está vieja. Hoy HU-57 (T-57.1 a T-57.4), HU-71 (T-71.1 a T-71.4) y T-45.8/T-45.9 están **Closed**. HU-61 (T-61.1 a T-61.3) está **In progress**, de **Lorenzo Araujo**, con el PR #272 abierto.
+
+| Tarea del plan | Tarea de Taiga relacionada | Qué hacer |
+|---|---|---|
+| B0 | T-57.1 / T-57.2 (Closed) | Tarea nueva en HU-57, o bug si B0 falla |
+| B1, B2 | T-45.8 / T-45.9 (Closed) | Tarea nueva en HU-45, solo si se elige D2 |
+| F1, F2 | T-57.3 (Closed), la pantalla que se extiende | Tarea nueva en HU-57 |
+| F3 | ninguna (el modal es de G01) | Tarea nueva, con acuerdo de G01 |
+| F4 | **T-61.3** (In progress, Lorenzo Araujo) | No crear: ya existe |
+| F5 | T-45.9 (Closed) | Va con B1 en HU-45 |
+| E | T-71.x (Closed) | Copiar las asignaciones es de HU-61 |
+
+## 8. Próximos pasos
 
 1. Decidir D2 a D4 con el equipo. D1 queda resuelto si pasa B0.
 2. Crear en Taiga las tareas B0, F1 y F2, colgadas de HU-57; y B1, B2 y F5 si se elige D2.
 3. Coordinar con Lorenzo Araujo (HU-61) para que F4 use su endpoint `PUT /roadmaps/{id}/groups` y para no duplicar T-61.3.
-4. Retomar [[T-45.9 Front - filtro por comisión en el ranking|T-45.9]] para que F5 se vea.
+4. T-45.9 ya está cerrada: F5 solo espera a B1.
