@@ -26,6 +26,7 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 - **Back:** `~/dev/TPI_2026/Backend/tpi-roadmap-config-roadmaps`, rama `feature/roadmap-configurar-al-crear-curso` desde `origin/develop` en `32b6cbe` (creada 2026-10-21, sin upstream). Es para el evento `COURSE_COHORT_CREATED` (D1) o el campo en `course_settings` (D2).
   - Lleva copiada la plantilla `.tpi/platform/` con soporte de variante y su `.env`, sacadas de `Backend/tpi-roadmap`. **No se commitea:** aparece como cambios en `git status`.
   - Flyway: la última migración en `develop` es `V51__roadmap_section_source.sql`. Antes de crear una nueva, revisar `migration-vendor` y los PRs abiertos para no repetir la versión.
+  - **Actualización (2026-10-21):** el PR [#272](https://github.com/2026-P4-BE/tpi-roadmap/pull/272) de Lorenzo Araujo (T-61.1, rama `feature/9161-roadmap-groups`) ya usa **`V52__roadmap_group.sql`** y agrega `PUT /roadmaps/{roadmapId}/groups`. B1 tiene que ir en V53 o en la que siga libre. El PR está abierto, con cambios pedidos y conflictos con `develop`.
 
 > [!info] Relación con T-62.5
 > Este plan sigue a [[T-62.5 Front - alternar roadmaps y unidades en el mapa del profesor|T-62.5]]: allá el profesor **alterna** entre los roadmaps del curso; acá los **configura** (cuántos, de qué comisión y con qué ranking). La rama depende de la de T-62.5 hasta que esa entre a `develop`.
@@ -81,7 +82,7 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 ## 6. Tareas por worktree
 
 > [!info] Cómo leer esto
-> Cada tarea dice en qué worktree va (§1), qué paso de §4 cubre, de qué depende y cuándo está lista. Las marcadas **bloqueada** esperan a otra tarea u otro equipo. Lo de HU-61 (asignar roadmap ↔ comisión en el back) es de Stefano Zoffoli y no está acá: solo lo consumimos.
+> Cada tarea dice en qué worktree va (§1), qué paso de §4 cubre, de qué depende y cuándo está lista. Las marcadas **bloqueada** esperan a otra tarea u otro equipo. Lo de HU-61 (asignar roadmap ↔ comisión en el back) es de Lorenzo Araujo y no está acá: solo lo consumimos.
 
 ### Back · `Backend/tpi-roadmap-config-roadmaps`
 
@@ -119,7 +120,7 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 - [ ] **F3 · Ofrecer la pantalla al crear el curso** (paso B, D3). **Bloqueada por acuerdo con G01** si se toca `course-list-page`.
   - **Qué:** al terminar de crear el curso, un link "Configurar roadmaps" en el aviso de curso creado (`createdCohort`). Mientras no haya acuerdo, la entrada queda solo en la pestaña Roadmaps (F1).
 - [ ] **F4 · Asignar comisiones a cada roadmap** (paso C). **Bloqueada por HU-61** (T-61.1 y T-61.2).
-  - **Qué:** en F1 y en la pestaña Roadmaps, un `generic-select` múltiple de comisiones por roadmap, o la opción «todas». Se guarda con `PUT /roadmaps/{id}/groups`. En el modo "uno por comisión" viene precargado. Es la T-61.3 de Stefano: hay que coordinar quién la hace para no duplicarla.
+  - **Qué:** en F1 y en la pestaña Roadmaps, un `generic-select` múltiple de comisiones por roadmap, o la opción «todas». Se guarda con `PUT /roadmaps/{id}/groups`. En el modo "uno por comisión" viene precargado. Es la T-61.3 de Lorenzo: hay que coordinar quién la hace para no duplicarla.
 - [ ] **F5 · Switch "ranking separado por comisión"** (paso D). **Bloqueada por B1**, y para que se vea, por [[T-45.9 Front - filtro por comisión en el ranking|T-45.9]].
   - **Qué:** en el modo "uno compartido" de F1 y en la configuración del curso, un `generic-switch` que lee y escribe `rankingByGroup` en los settings. La pantalla del ranking abre filtrada por la comisión del usuario cuando está encendido.
 - [ ] **F6 · Texto de "principal"** (D4). Cuando haya roadmaps por comisión, el alumno no ve la palabra "principal". Depende de lo que se decida en D4.
@@ -134,5 +135,5 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 
 1. Decidir D2 a D4 con el equipo. D1 queda resuelto si pasa B0.
 2. Crear en Taiga las tareas B0, F1 y F2, colgadas de HU-57; y B1, B2 y F5 si se elige D2.
-3. Coordinar con Stefano Zoffoli (HU-61) para que F4 use su endpoint `PUT /roadmaps/{id}/groups` y para no duplicar T-61.3.
+3. Coordinar con Lorenzo Araujo (HU-61) para que F4 use su endpoint `PUT /roadmaps/{id}/groups` y para no duplicar T-61.3.
 4. Retomar [[T-45.9 Front - filtro por comisión en el ranking|T-45.9]] para que F5 se vea.
