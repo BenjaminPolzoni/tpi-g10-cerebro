@@ -23,7 +23,9 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 - **Rama:** `feature/roadmap-configurar-al-crear-curso`, **desde `feature/roadmap-multi-vista-profesor`** (T-62.5, `f781dadca`), no desde `develop`. Reusa su selector de roadmaps, `CourseRoadmapsService` en la pestaña General y `reorderSections`.
 - **Cuando se mergee T-62.5:** rebasear sobre `origin/develop` antes del primer push. Sin upstream hasta entonces, para que un `git push` no termine en otra rama.
 - **Antes de empezar:** `npm ci` (la worktree no trae `node_modules`). Tests con `NODE_OPTIONS=--no-experimental-webstorage` (Node 25).
-- **Back:** sin worktree por ahora. Hace falta si se elige el evento `COURSE_COHORT_CREATED` (D1) o el campo en `course_settings` (D2): `~/dev/TPI_2026/Backend/tpi-roadmap-config-roadmaps`, misma rama.
+- **Back:** `~/dev/TPI_2026/Backend/tpi-roadmap-config-roadmaps`, rama `feature/roadmap-configurar-al-crear-curso` desde `origin/develop` en `32b6cbe` (creada 2026-10-21, sin upstream). Es para el evento `COURSE_COHORT_CREATED` (D1) o el campo en `course_settings` (D2).
+  - Lleva copiada la plantilla `.tpi/platform/` con soporte de variante y su `.env`, sacadas de `Backend/tpi-roadmap`. **No se commitea:** aparece como cambios en `git status`.
+  - Flyway: la última migración en `develop` es `V51__roadmap_section_source.sql`. Antes de crear una nueva, revisar `migration-vendor` y los PRs abiertos para no repetir la versión.
 
 > [!info] Relación con T-62.5
 > Este plan sigue a [[T-62.5 Front - alternar roadmaps y unidades en el mapa del profesor|T-62.5]]: allá el profesor **alterna** entre los roadmaps del curso; acá los **configura** (cuántos, de qué comisión y con qué ranking). La rama depende de la de T-62.5 hasta que esa entre a `develop`.
