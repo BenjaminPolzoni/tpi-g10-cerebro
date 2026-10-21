@@ -7,7 +7,7 @@ tarea: sin tarea en Taiga
 repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 ---
 
-# Plan · Configurar roadmaps al crear un curso
+# Front · Configurar roadmaps al crear un curso
 
 > [!info] Contexto
 > Pedido de Benja (2026-10-20), después de [[T-62.5 Front - alternar roadmaps y unidades en el mapa del profesor|T-62.5]]. El profesor tiene un curso con comisiones (p. ej. 2W1 y 2W2) y quiere poder armar, desde que crea el curso:
@@ -17,7 +17,18 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 >
 > Todavía **no hay tarea en Taiga**: este plan sirve para decidir el alcance y crearlas.
 
-## 1. Cómo se crea un curso hoy (verificado 2026-10-20)
+## 1. Worktree
+
+- **Carpeta:** `~/dev/TPI_2026/Frontend/2026-PIV-TPI-FE-config-roadmaps` (todavía no creada).
+- **Rama:** `feature/roadmap-configurar-al-crear-curso`, **desde `feature/roadmap-multi-vista-profesor`** (T-62.5, `f781dadca`), no desde `develop`. Reusa su selector de roadmaps, `CourseRoadmapsService` en la pestaña General y `reorderSections`.
+- **Cuando se mergee T-62.5:** rebasear sobre `origin/develop` antes del primer push. Sin upstream hasta entonces, para que un `git push` no termine en otra rama.
+- **Antes de empezar:** `npm ci` (la worktree no trae `node_modules`). Tests con `NODE_OPTIONS=--no-experimental-webstorage` (Node 25).
+- **Back:** sin worktree por ahora. Hace falta si se elige el evento `COURSE_COHORT_CREATED` (D1) o el campo en `course_settings` (D2): `~/dev/TPI_2026/Backend/tpi-roadmap-config-roadmaps`, misma rama.
+
+> [!info] Relación con T-62.5
+> Este plan sigue a [[T-62.5 Front - alternar roadmaps y unidades en el mapa del profesor|T-62.5]]: allá el profesor **alterna** entre los roadmaps del curso; acá los **configura** (cuántos, de qué comisión y con qué ranking). La rama depende de la de T-62.5 hasta que esa entre a `develop`.
+
+## 2. Cómo se crea un curso hoy (verificado 2026-10-20)
 
 - **Curso (cohorte):** "Mis cursos → Crear curso" abre `course-cohort-form-modal` con 3 pasos (datos básicos, horario, inscripción), o 2 si se clona un curso. No tiene nada de roadmap. Es código de Courses (G01). Front: `src/app/features/courses/ui/course-cohort-form-modal/`, `course-list-page`.
 - **Comisiones:** se crean después, en la pestaña **Grupos** (`cohort-group-create-modal`), o llegan como grupos externos.
@@ -34,15 +45,15 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 > [!warning] El problema
 > La configuración está repartida en 4 pantallas con un orden forzado: curso → comisiones → activar varios roadmaps → crearlos. Y el último paso (asignar cada roadmap a sus comisiones) no existe.
 
-## 2. Qué cubre cada caso
+## 3. Qué cubre cada caso
 
 | Caso | Hecho | Falta |
 |---|---|---|
 | 1 · un roadmap por comisión, o varios para una | 1:N (HU-57), alternar en el profesor (T-62.5) | Asignar roadmap ↔ comisiones y que el alumno vea solo los suyos, con 403 por URL (HU-61: T-61.1, T-61.2, T-61.3) |
-| 2 · uno compartido con ranking separado | Filtro por comisión en el back (T-45.8), avance por comisión | Filtro en la pantalla (T-45.9), selector del alumno (HT-33) y decidir si "separado" es una configuración del curso (ver D2) |
+| 2 · uno compartido con ranking separado | Filtro por comisión en el back (T-45.8), avance por comisión | Filtro en la pantalla (T-45.9), selector del alumno (HT-33) y decidir si "separado" es una configuración del curso (ver D2, §5) |
 | Mezcla | Se combinan sin chocar: el ranking se arma por roadmap o por curso según `progress_scope`, y el filtro por comisión va encima | Lo mismo que los dos casos |
 
-## 3. Propuesta
+## 4. Propuesta
 
 **Recomendación:** no tocar el modal de Courses. Al terminar de crear el curso, ofrecer un paso propio, **"Configurar roadmaps"**, en nuestra pestaña Roadmaps, que junte todo en una pantalla. Así no dependemos de G01, y cada parte se enciende a medida que salen HU-61 y T-45.9.
 
@@ -54,16 +65,16 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 | D | En modo compartido, "ranking y avance separados por comisión" (sí/no) | T-45.9 y D2 | ❌ |
 | E | Al clonar un curso, copiar sus roadmaps y asignaciones | [[sprints/sprint-3/historias/HU-71 Clonar un roadmap con sus restricciones|HU-71]] + HU-61 | ❌ |
 
-## 4. Decisiones abiertas
+## 5. Decisiones abiertas
 
 - **D1 · El principal no existe justo después de crear el curso.** B crea roadmaps extra, pero el principal aparece recién con la sincronización de secciones. Hay dos caminos:
   - el front llama a la sincronización antes de crear los extra (rápido, solo front);
   - `tpi-roadmap` escucha un `COURSE_COHORT_CREATED` de Courses y crea el principal (más prolijo; es back y hay que coordinarlo con G01).
 - **D2 · Dónde se guarda "ranking separado por comisión".** Hoy es un parámetro de cada consulta (`groupId`), no una configuración. Si el profesor lo elige una vez, iría como campo nuevo en `course_settings` (back) y el ranking abriría filtrado por defecto.
-- **D3 · Quién lo hace.** Meterlo como pasos del modal de crear curso es código de G01. La recomendación (§3) lo evita; si igual se quiere en el modal, hay que acordarlo con G01.
+- **D3 · Quién lo hace.** Meterlo como pasos del modal de crear curso es código de G01. La recomendación (§4) lo evita; si igual se quiere en el modal, hay que acordarlo con G01.
 - **D4 · Texto de "roadmap principal".** Con roadmaps por comisión, "principal" pierde sentido para el alumno. Hay que decidir si solo lo ve el profesor.
 
-## 5. Próximos pasos
+## 6. Próximos pasos
 
 1. Decidir D1 a D4 con el equipo.
 2. Crear la tarea en Taiga para B (front), colgada de HU-57.
