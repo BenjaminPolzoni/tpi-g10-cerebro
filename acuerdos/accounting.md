@@ -11,7 +11,7 @@ contrato: "contratos/accounting-roadmap-v1.md"
 > [!info] Fuentes
 > - `contratos/accounting-roadmap-v1.md`: acta v1.0, fuente vigente del contrato funcional.
 > - `contratos/Contrato de Integración_ Accounting (Tema 08).pdf`: PDF de Accounting.
-> - `tareas/T-03-2-ACCOUNTING-CLIENT.md`, `tareas/T-15-2-ACCOUNTING-GATE-LEDGER.md`, `tareas/T-25-2-FUENTE-VIDAS-PERDIDAS.md`, `tareas/T-35-1-ENDPOINT-INVENTARIO.md`.
+> - `terminado/T-03-2-ACCOUNTING-CLIENT.md`, `terminado/T-15-2-ACCOUNTING-GATE-LEDGER.md`, `tareas/T-25-2-FUENTE-VIDAS-PERDIDAS.md`, `terminado/T-35-1-ENDPOINT-INVENTARIO.md`.
 > - Repos de la contraparte: `2026-P4-BE/tpi-accounting` (issue #227).
 > - Nota hermana, centrada en el consumo de vidas e ítems: [[acuerdos/inventario|Inventario]].
 

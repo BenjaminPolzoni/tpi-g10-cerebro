@@ -35,5 +35,5 @@ El gate es `GET /api/roadmap/courses/{courseId}/students/{studentId}/nodes/{node
 
 ## Referencias
 - Código / PR / doc: `controllers/GateController`, `services/GateService`, `services/GateEvaluator`, `models/GateReason`, `common/security/SecurityConfig`; `96fcff5` (2026-10-02), `548411d` (HU-48, 2026-10-11), `8b5578f` (DATE, 2026-10-12).
-- [[contratos/roadmap-motor-gate-v1|Acta del gate]], [[tareas/T-15-1-GATE-V3|T-15.1]] y [[contratos/respuesta-motor-a-roadmap-v2|respuesta de G09 v2]] (antes en `tpi-roadmap/docs/`, movidas al cerebro en `e292333`).
+- [[contratos/roadmap-motor-gate-v1|Acta del gate]], [[terminado/T-15-1-GATE-V3|T-15.1]] y [[contratos/respuesta-motor-a-roadmap-v2|respuesta de G09 v2]] (antes en `tpi-roadmap/docs/`, movidas al cerebro en `e292333`).
 - Relacionadas: [[acuerdos/motor-desafios-g09|Motor]], [[acuerdos/inventario|Inventario]], [[decisiones/DEC-015-4xx-de-accounting-no-es-indisponibilidad|DEC-015]], [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503|DEC-020]].

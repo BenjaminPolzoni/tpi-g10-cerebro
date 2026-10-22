@@ -11,7 +11,7 @@ contrato: "contratos/accounting-roadmap-v1.md"
 > [!info] Fuentes
 > - `contratos/accounting-roadmap-v1.md` §3.7, §5, §6.
 > - `contratos/roadmap-motor-gate-v1.md` §5, §6, §6.2.
-> - `tareas/T-35-1-ENDPOINT-INVENTARIO.md`, `tareas/T-15-4-MATRICULA-VIDAS-RECUPERACION.md`, `tareas/T-03-2-ACCOUNTING-CLIENT.md`.
+> - `terminado/T-35-1-ENDPOINT-INVENTARIO.md`, `terminado/T-15-4-MATRICULA-VIDAS-RECUPERACION.md`, `terminado/T-03-2-ACCOUNTING-CLIENT.md`.
 > - Contrato general y eventos: [[acuerdos/accounting|Accounting]].
 
 > [!question] Verificar
