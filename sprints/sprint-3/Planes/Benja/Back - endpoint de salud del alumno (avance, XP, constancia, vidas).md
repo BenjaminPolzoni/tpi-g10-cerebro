@@ -6,6 +6,8 @@ estado: aprobado
 repo: 2026-P4-BE/tpi-roadmap
 taiga: sin asignar
 orden: 2 de 4
+rama: feature/student-health-endpoint
+worktree: ~/orca/workspaces/tpi-roadmap/feature/student-health-endpoint
 ---
 
 # Back — Endpoint de «salud del alumno» (avance, XP, constancia, vidas)
@@ -69,6 +71,10 @@ Respuesta 200 (snake_case):
 4. `SecurityConfig`: matcher `GET /courses/*/students/*/health` con scope `roadmap.health.read`.
 5. OpenAPI en `docs/contracts/` y nota en [[contratos]].
 6. Tests: 3/10 nodos → 30 %; Accounting caído → `lives = null`; racha apagada → `streak = null`; alumno pidiendo otro id → 403.
+
+## 4b. Ejecución
+
+Worktree `feature/student-health-endpoint` desde `origin/develop` (`f7cfa2af`), PR a `develop`. Implementación delegada a Codex vía orquestación; sin push.
 
 ## 5. Coordinación
 
