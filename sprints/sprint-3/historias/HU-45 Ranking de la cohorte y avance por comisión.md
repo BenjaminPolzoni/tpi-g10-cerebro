@@ -202,17 +202,21 @@ PR [#1003](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/pull/1003) contra `deve
 - **Ambos:** puestos consecutivos; zonas en verde (RF-RNK-05) y rojo (RF-RNK-06) con 10 o más inscriptos; podio de tres escalones con medallas y confeti; encabezado estándar con selector de curso; selector de cursos con estado en la URL, paginado, año y orden (revisión UX/UI).
 - **Detalle:** vidas con corazones y racha del alumno (con la comisión en el pedido de progreso; sin ella el back respondía 400); legajo también desde el `profile` del ranking.
 - **Limpieza:** sin adaptador en memoria ni datos de prueba del ranking; menú del profesor dice "Ranking".
+- **Zonas desde los puestos consecutivos:** el front recalcula zona, percentil y estado con el puesto que muestra. El back cuenta el puesto compartido: en un curso con muchos empatados en 0 XP (p. ej. `dafa123c…`, 14 inscriptos) nadie llegaba al último décimo y no había zona de riesgo.
+- **RF-RNK-02 / RF-RNK-04:** columna "Percentil" (tabla y tarjetas) y una marca "Corte P90" / "Corte P10" entre filas, en lugar de los encabezados por zona.
+- **RF-RNK-03:** el alumno ve también las filas del corte P90 y del corte P10 (anónimas).
+- **RF-RNK-07:** cualquier fila abre su detalle (anónimo si no es la propia) y el detalle muestra las **monedas** (cuenta de Accounting; "—" en filas anónimas).
+- **UI:** tooltips del kit en lugar del `title` nativo; medallas del podio como emoji (el kit oculta su ícono decorativo en la apariencia sobria); sin "Ver mi detalle" en la tarjeta del alumno; "Ver ranking" del selector de cursos como botón del kit.
+
+### Decidido (2026-10-22)
+- **RF-RNK-03:** top 3 y bottom 3 quedan **anónimos** (DEC-007).
+- **RF-RNK-11:** puestos consecutivos, como está.
+- **RF-RNK-10 / RF-RNK-13:** cierre del curso y su exportación los hace **Courses**.
+- **CA5 / T-45.11:** el criterio oficial del curso lo configura **Backoffice**.
 
 ### Falta (según el PRD y esta historia)
-- [ ] **RF-RNK-02 / RF-RNK-04:** el percentil de cada fila y la marca del corte P90 / P10 no se muestran (el back los manda: `percentile`, `cutoffs`).
-- [ ] **RF-RNK-03:** el PRD pide top 3 y bottom 3 identificados; hoy son anónimos (DEC-007). Confirmar.
-- [ ] **RF-RNK-03:** el puntaje del alumno justo por encima del corte P90 y por debajo del P10 (anónimos) no se muestra como tal.
-- [ ] **RF-RNK-07:** click en fila ajena con su detalle anónimo (XP, insignias, monedas, vidas): hoy el alumno solo abre el propio. Confirmar.
-- [ ] **RF-RNK-07:** las **monedas** no están en el detalle.
-- [ ] **RF-RNK-11:** el PRD dice "misma posición" si persiste el empate; el front numera consecutivo. Confirmar o pedir un 5.º criterio al back.
-- [ ] **CA5 / T-45.11:** sin pantalla para el criterio oficial del curso (XP / notas); hoy el orden es personal.
-- [ ] **RF-RNK-10 / RF-RNK-13:** cierre del curso con estado académico final y su exportación (HU-72).
-- [ ] **RF-NOT-02:** notificación de entrada y salida de las zonas P90 / P10.
+- [ ] **RF-NOT-02:** notificación de entrada y salida de las zonas P90 / P10 (back / notificaciones).
+- [ ] **RF-RNK-07:** monedas de las filas anónimas: el endpoint del ranking no las trae (back).
 - [ ] **T-45.12:** acuerdo con G09 sobre cómo llegan las notas.
 - [ ] **T-45.13:** wiki, OpenAPI y diagrama de secuencia.
 - [ ] Legajo vacío en algunos alumnos: falta cargarlo en Courses / Users (dato).
