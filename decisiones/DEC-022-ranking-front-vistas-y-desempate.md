@@ -19,7 +19,6 @@ La pantalla del ranking (`/ranking`, `/ranking/:courseId`) se revisó con UX/UI 
 - Ve los **3 primeros, su puesto y los 3 últimos**, con un separador donde se saltean puestos (1, 2, 3 ┄ 41 ┄ 98, 99, 100). Sin buscador, filtro de estado ni orden por columnas: su ranking va **siempre por XP**.
 - Las filas ajenas siguen anónimas (DEC-007), con un nombre de programación estable por curso y lugar en la lista ("Lambda veloz", "Puntero audaz"; 512 combinaciones, sin repetir en un curso). El seudónimo del back queda de respaldo.
 - La tarjeta propia dice cuánto XP falta para entrar a la zona de promoción (P90) y el avance de obligatorios ("Obligatorios aprobados: 25 %").
-- Las reglas de promoción y de desempate están en la ayuda (ⓘ) junto al título.
 
 **Staff (profesor, admin, gestor)**
 - Buscador por nombre o legajo, filtro por estado, por grupo y "Limpiar filtros" (activo solo con algún filtro).
@@ -29,6 +28,7 @@ La pantalla del ranking (`/ranking`, `/ranking/:courseId`) se revisó con UX/UI 
 
 **Ambos**
 - **Puestos siempre consecutivos (1, 2, 3, 4…)**. En el orden del curso se respetan el orden y los criterios del back; lo que el back marca como compartido pasa a puestos seguidos, en el orden en que llega. En otro orden el front aplica la cascada RF-RNK-11 (insignias, menos vidas perdidas, ejercicios, quién llegó primero a ese XP).
+- Sin tarjeta de "Requisitos de promoción": las reglas de promoción y de desempate están en la ayuda (ⓘ) junto al título.
 - Zonas (solo con 10 o más inscriptos, RF-RNK-09): candidatos a promoción en **verde** (RF-RNK-05) y riesgo de regularidad en **rojo** (RF-RNK-06).
 - Podio de tres escalones (plata, oro al centro, bronce), con medallas y confeti 3 s al entrar; un escalón sin dueño queda como "Puesto libre".
 - El detalle se abre desde el podio, o desde el nombre para staff; no hay botón en cada fila.
