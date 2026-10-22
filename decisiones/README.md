@@ -33,6 +33,7 @@ Registro de decisiones **ya tomadas** que se deducen del código, los contratos 
 | DEC-019 | El ranking avisa el estado de sus datos, tiene caché de respaldo y la autorización falla cerrado | 2026-10-15 | aceptada | [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo\|DEC-019]] |
 | DEC-020 | La caída de un origen del gate es un motivo (`origin_unavailable`), no un 503 | 2026-10-15 | aceptada | [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503\|DEC-020]] |
 | DEC-021 | Postgres es la fuente de verdad de la estructura y Neo4j es una proyección | 2026-10-17 | aceptada | [[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion\|DEC-021]] |
+| DEC-022 | Cómo muestra el front el ranking: vistas, orden personal y puestos consecutivos | 2026-10-22 | propuesta | [[decisiones/DEC-022-ranking-front-vistas-y-desempate\|DEC-022]] |
 
 ## Decisiones que conviene revisar pronto
 > [!warning] Con deuda abierta
