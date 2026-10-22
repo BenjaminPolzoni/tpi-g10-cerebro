@@ -33,12 +33,12 @@ Lo que hay hoy en Postgres:
 - Las propiedades libres van en una columna `props jsonb`.
 - Los recorridos se hacen con `WITH RECURSIVE`, o en memoria (un roadmap tiene decenas o pocos cientos de nodos).
 
-| Ventajas | Desventajas |
-|---|---|
-| Cero infraestructura nueva. Nada que coordinar con la plataforma ni con la mesh | Las consultas de recorrido complejas son más verbosas (CTE recursivos) |
+| Ventajas                                                                                   | Desventajas                                                               |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| Cero infraestructura nueva. Nada que coordinar con la plataforma ni con la mesh            | Las consultas de recorrido complejas son más verbosas (CTE recursivos)    |
 | Una sola transacción para estructura y estado (borrar un nodo con progreso es consistente) | Modelar reglas anidadas en tablas o JSON es menos natural que en un grafo |
-| Se reusan los tests, Flyway, el outbox y el JPA existentes | No cumple la idea de "usar una BD de grafos", si los profes la piden |
-| El menor riesgo para el sprint | |
+| Se reusan los tests, Flyway, el outbox y el JPA existentes                                 | No cumple la idea de "usar una BD de grafos", si los profes la piden      |
+| El menor riesgo para el sprint                                                             |                                                                           |
 
 ### B. Apache AGE (extensión de grafos para Postgres)
 - Cypher dentro de Postgres: `SELECT * FROM cypher('roadmap', $$ MATCH ... $$)`.
