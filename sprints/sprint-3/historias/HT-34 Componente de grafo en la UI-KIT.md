@@ -11,7 +11,7 @@ prioridad_sprint: 1
 en_taiga: true
 ref: 9273
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/9273
-responsables_tareas: ["Ludmila Mailen Cejas"]
+responsables_tareas: ["Ludmila Mailen Cejas", "Iker Alonso"]
 tareas_cerradas: "0/2"
 ---
 
@@ -126,7 +126,7 @@ Dependencias / Impactos
 - [ ] [#9303](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9303) **T-34.1 Acordar el componente de grafo con el equipo del kit** · Coordinación · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
     - **Qué:** acordar la API de `generic-node-graph`, la librería que envuelve (`ngx-vflow` o `@foblex/flow` con `elkjs`) y cómo se publica. El dueño es G10 (G13).
     - **Listo cuando:** el equipo del kit aceptó la propuesta por escrito.
-- [ ] [#9304](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9304) **T-34.2 Construir y publicar generic-node-graph en el kit** · Front (repo del kit) · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
+- [ ] [#9304](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9304) **T-34.2 Construir y publicar generic-node-graph en el kit** · Front (repo del kit) · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** componente con pan, zoom, minimapa, aristas, navegación con teclado y tokens del kit; historia en Storybook; release de una versión del kit.
     - **Listo cuando:** el componente está en una versión publicada del kit y lo puede usar HU-62.
 

@@ -132,7 +132,7 @@ Dependencias / Impactos
     - **Dónde:** `roadmap-section-nodes`, `entity-editor-dialog`.
     - **Listo cuando:** el profesor identifica el nodo y lo puede arreglar sin ayuda.
 **HU-41 CA2: reintentos y política de vidas** ([us/4247](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/4247))
-- [ ] [#9295](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9295) **T-32.3 HU-41 CA2 · Que guardar un nodo no le borre la política de vidas** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
+- [x] [#9295](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9295) **T-32.3 HU-41 CA2 · Que guardar un nodo no le borre la política de vidas** · Back · Hecha (#297, mergeada el 21/10; falta cerrar en Taiga) · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** hoy un PUT del nodo sin `lives_policy` lo vuelve a STANDARD. Si el campo no viene, se conserva el valor actual.
     - **Dónde:** `NodeController`, `GraphService`.
     - **Listo cuando:** editar el nombre de un nodo no cambia su política de vidas. Hay test.

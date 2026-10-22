@@ -118,26 +118,35 @@ fecha: 2026-10-15
 
 ## Iker Alonso
 
-14 tareas · 1 cerrada
+19 tareas · 14 hechas (5 cerradas en Taiga) · 2 en revisión · 3 pendientes
+
+> [!note] Actualizado el 2026-10-21 contra lo mergeado en `develop` de `tpi-roadmap`. «Hecha» quiere decir mergeada; el estado de Taiga se cierra aparte. T-64.1 a T-64.4 y T-34.2 están a nombre de Iker en Taiga.
 
 - [[sprints/sprint-3/historias/HT-16 Validar la infra de Neo4j y modelar las relaciones|HT-16]] Validar la infra de Neo4j y modelar las relaciones
-    - [ ] [[sprints/sprint-3/historias/HT-16 Validar la infra de Neo4j y modelar las relaciones#Tareas|T-16.1]] Levantar Neo4j en el compose local · New
+    - [x] [[sprints/sprint-3/historias/HT-16 Validar la infra de Neo4j y modelar las relaciones#Tareas|T-16.1]] Levantar Neo4j en el compose local · Hecha (#222, mergeada el 16/10; falta cerrar en Taiga)
     - [ ] [[sprints/sprint-3/historias/HT-16 Validar la infra de Neo4j y modelar las relaciones#Tareas|T-16.2]] Sumar Neo4j a la plataforma y a la demo · New
-    - [ ] [[sprints/sprint-3/historias/HT-16 Validar la infra de Neo4j y modelar las relaciones#Tareas|T-16.3]] Probar Spring Data Neo4j con un test en el CI · New
-    - [ ] [[sprints/sprint-3/historias/HT-16 Validar la infra de Neo4j y modelar las relaciones#Tareas|T-16.4]] Escribir el modelo del grafo · New
+    - [x] [[sprints/sprint-3/historias/HT-16 Validar la infra de Neo4j y modelar las relaciones#Tareas|T-16.3]] Probar Spring Data Neo4j con un test en el CI · Hecha (#237, mergeada el 16/10; falta cerrar en Taiga); verificado en local: no hay CI remoto
+    - [x] [[sprints/sprint-3/historias/HT-16 Validar la infra de Neo4j y modelar las relaciones#Tareas|T-16.4]] Escribir el modelo del grafo · Hecha (#220, mergeada el 15/10; falta cerrar en Taiga)
 - [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial|HT-18]] Módulo graph en Neo4j y migración inicial
     - [x] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.1]] Crear el módulo graph y su esquema en Neo4j · Closed
-    - [ ] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.2]] Reconstruir Neo4j desde Postgres para todos los roadmaps · New
+    - [x] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.2]] Reconstruir Neo4j desde Postgres para todos los roadmaps · Hecha (#288, mergeada el 21/10; falta cerrar en Taiga)
     - [x] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.3]] Mantener las dos bases en orden · Closed
-    - [ ] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.4]] Caché de reglas por roadmap para el gate · New
+    - [x] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.4]] Caché de reglas por roadmap para el gate · Hecha (#285, mergeada el 20/10; falta cerrar en Taiga)
     - [x] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.5]] Endpoint que devuelve el grafo entero para dibujarlo · Closed
-    - [ ] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.6]] Pasar la lectura de la estructura a Neo4j · New
+    - [x] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.6]] Pasar la lectura de la estructura a Neo4j · Hecha (#291, mergeada el 21/10; falta cerrar en Taiga); #298 de Mateo con arreglos, abierta
     - [x] [[sprints/sprint-3/historias/HT-18 Módulo graph en Neo4j y migración inicial#Tareas|T-18.7]] Rechazar campos libres y tipos de nodo fuera del catálogo · Closed
 - [[sprints/sprint-3/historias/HT-32 Nodos y editor pendientes de HU-01, HU-41 y HU-43|HT-32]] Nodos y editor pendientes de HU-01, HU-41 y HU-43
-    - [ ] [[sprints/sprint-3/historias/HT-32 Nodos y editor pendientes de HU-01, HU-41 y HU-43#Tareas|T-32.3]] HU-41 CA2 · Que guardar un nodo no le borre la política de vidas · New
+    - [x] [[sprints/sprint-3/historias/HT-32 Nodos y editor pendientes de HU-01, HU-41 y HU-43#Tareas|T-32.3]] HU-41 CA2 · Que guardar un nodo no le borre la política de vidas · Hecha (#297, mergeada el 21/10; falta cerrar en Taiga)
+- [[sprints/sprint-3/historias/HT-34 Componente de grafo en la UI-KIT|HT-34]] Componente de grafo en la UI-KIT
+    - [ ] [[sprints/sprint-3/historias/HT-34 Componente de grafo en la UI-KIT#Tareas|T-34.2]] Construir y publicar generic-node-graph en el kit · New · a coordinar con Mateo, que ya armó el mapa del front
+- [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios|HU-64]] Nodos de inicio y fin obligatorios
+    - [x] [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios#Tareas|T-64.1]] Tipos de nodo de inicio y fin · Hecha (#276, mergeada el 20/10; falta cerrar en Taiga)
+    - [ ] [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios#Tareas|T-64.2]] Validar al guardar que haya inicio, fin y camino · En revisión (#300)
+    - [ ] [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios#Tareas|T-64.3]] Agregar inicio y fin a los roadmaps que ya existen · En revisión (#301, depende de #300)
+    - [ ] [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios#Tareas|T-64.4]] Cómo se ven el inicio y el fin · New · toca el mapa 2D y el mundo 3D de Mateo: a coordinar
 - [[sprints/sprint-3/historias/HU-65 Relaciones con tipo|HU-65]] Relaciones con tipo
     - [x] [[sprints/sprint-3/historias/HU-65 Relaciones con tipo#Tareas|T-65.1]] Catálogo de los 5 tipos de relación · Closed
-    - [ ] [[sprints/sprint-3/historias/HU-65 Relaciones con tipo#Tareas|T-65.5]] Guardar el tipo de relación en Postgres y aceptarlo en la API · New (agregada el 2026-10-17, [[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion|DEC-021]])
+    - [x] [[sprints/sprint-3/historias/HU-65 Relaciones con tipo#Tareas|T-65.5]] Guardar el tipo de relación en Postgres y aceptarlo en la API · Hecha (#260, mergeada el 18/10; falta cerrar en Taiga) (agregada el 2026-10-17, [[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion|DEC-021]])
 
 ## Lautaro Jesus Diego
 
@@ -182,7 +191,7 @@ fecha: 2026-10-15
 
 ## Ludmila Mailen Cejas
 
-13 tareas · 0 cerradas
+11 tareas · 0 cerradas (T-34.2 y T-64.4 pasaron a Iker en Taiga)
 
 - [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap|HT-26]] Adopción de la UI-KIT en el roadmap
     - [ ] [[sprints/sprint-3/historias/HT-26 Adopción de la UI-KIT en el roadmap#Tareas|T-26.1]] Formularios con los controles del kit · New
@@ -196,9 +205,6 @@ fecha: 2026-10-15
     - [ ] [[sprints/sprint-3/historias/HT-33 Comisión y material pendientes de HU-44 y HU-46#Tareas|T-33.4]] HU-46 CA3 · Abrir el material dentro de la página · New
 - [[sprints/sprint-3/historias/HT-34 Componente de grafo en la UI-KIT|HT-34]] Componente de grafo en la UI-KIT
     - [ ] [[sprints/sprint-3/historias/HT-34 Componente de grafo en la UI-KIT#Tareas|T-34.1]] Acordar el componente de grafo con el equipo del kit · New
-    - [ ] [[sprints/sprint-3/historias/HT-34 Componente de grafo en la UI-KIT#Tareas|T-34.2]] Construir y publicar generic-node-graph en el kit · New
-- [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios|HU-64]] Nodos de inicio y fin obligatorios
-    - [ ] [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios#Tareas|T-64.4]] Cómo se ven el inicio y el fin · New
 - [[sprints/sprint-3/historias/HU-69 Archibaldo - Enter, avatar personalizable y destello|HU-69]] Archibaldo - Enter, avatar personalizable y destello
     - [ ] [[sprints/sprint-3/historias/HU-69 Archibaldo - Enter, avatar personalizable y destello#Tareas|T-69.1]] Hablar con Archibaldo con Enter · New
     - [ ] [[sprints/sprint-3/historias/HU-69 Archibaldo - Enter, avatar personalizable y destello#Tareas|T-69.2]] Avatar y nombre de Archibaldo configurables por curso · New
@@ -270,16 +276,12 @@ fecha: 2026-10-15
 
 ## Stefano Zoffoli
 
-6 tareas · 0 cerradas
+3 tareas · 0 cerradas (T-64.1 a T-64.3 pasaron a Iker en Taiga)
 
 - [[sprints/sprint-3/historias/HU-61 Roadmaps por grupo del curso y restricciones de visualización|HU-61]] Roadmaps por grupo del curso y restricciones de visualización
     - [ ] [[sprints/sprint-3/historias/HU-61 Roadmaps por grupo del curso y restricciones de visualización#Tareas|T-61.1]] Asignar un roadmap a grupos del curso · New
     - [ ] [[sprints/sprint-3/historias/HU-61 Roadmaps por grupo del curso y restricciones de visualización#Tareas|T-61.2]] Que el alumno vea solo los roadmaps de sus grupos · New
     - [ ] [[sprints/sprint-3/historias/HU-61 Roadmaps por grupo del curso y restricciones de visualización#Tareas|T-61.3]] Asignación de grupos en la pantalla del profesor · New
-- [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios|HU-64]] Nodos de inicio y fin obligatorios
-    - [ ] [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios#Tareas|T-64.1]] Tipos de nodo de inicio y fin · New
-    - [ ] [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios#Tareas|T-64.2]] Validar al guardar que haya inicio, fin y camino · New
-    - [ ] [[sprints/sprint-3/historias/HU-64 Nodos de inicio y fin obligatorios#Tareas|T-64.3]] Agregar inicio y fin a los roadmaps que ya existen · New
 
 ## Sin asignar
 

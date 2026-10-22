@@ -10,7 +10,7 @@ prioridad: Must
 en_taiga: true
 ref: 8613
 url: https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8613
-responsables_tareas: ["Stefano Zoffoli", "Ludmila Mailen Cejas", "Franco Maximiliano Amarilla"]
+responsables_tareas: ["Iker Alonso", "Franco Maximiliano Amarilla"]
 tareas_cerradas: "0/5"
 ---
 
@@ -120,16 +120,16 @@ Dependencias / Impactos
 
 > [!info] Espejo de Taiga (sync 2026-10-15). Cerradas: **0/5**. Historia en Taiga: [[taiga/historias/HU-64 Nodos de inicio y fin obligatorios|HU-64]] · [abrir](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/us/8613)
 
-- [ ] [#9179](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9179) **T-64.1 Tipos de nodo de inicio y fin** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
+- [x] [#9179](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9179) **T-64.1 Tipos de nodo de inicio y fin** · Back · Hecha (#276, mergeada el 20/10; falta cerrar en Taiga) · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** agregar `START` y `END` a los tipos de nodo (DEC-018). Al crear un roadmap y cada unidad o sección se crean solos, con los nombres «Bienvenidos» y «Felicitaciones».
     - **Listo cuando:** un roadmap nuevo y una unidad nueva ya traen los dos.
-- [ ] [#9180](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9180) **T-64.2 Validar al guardar que haya inicio, fin y camino** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
+- [ ] [#9180](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9180) **T-64.2 Validar al guardar que haya inicio, fin y camino** · Back · En revisión (#300) · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** `GraphValidator` rechaza guardar si falta el inicio o el fin, o si algún nodo no tiene camino desde el inicio, y devuelve la lista de problemas.
     - **Listo cuando:** hay tests de cada error.
-- [ ] [#9183](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9183) **T-64.3 Agregar inicio y fin a los roadmaps que ya existen** · Back · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
+- [ ] [#9183](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9183) **T-64.3 Agregar inicio y fin a los roadmaps que ya existen** · Back · En revisión (#301) · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** migración que agrega `START` y `END` a cada roadmap y unidad existente y los conecta con el primer y el último nodo.
     - **Listo cuando:** después de migrar, todos los roadmaps pasan la validación de T-64.2.
-- [ ] [#9187](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9187) **T-64.4 Cómo se ven el inicio y el fin** · Front · New · [[sprints/sprint-3/12-responsables#Ludmila Mailen Cejas|Ludmila Mailen Cejas]]
+- [ ] [#9187](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9187) **T-64.4 Cómo se ven el inicio y el fin** · Front · New · [[sprints/sprint-3/12-responsables#Iker Alonso|Iker Alonso]]
     - **Qué:** visual propio en el mapa 2D y en el mundo 3D, con texto y no solo un ícono.
     - **Listo cuando:** el alumno identifica dónde empieza y dónde termina.
 - [ ] [#9352](https://tree.taiga.io/project/tup_santoro_exequiel-plataforma-de-aprendizaje-gamificado-de-programacion/task/9352) **T-64.5 Wiki, OpenAPI y diagrama de secuencia** · New · [[sprints/sprint-3/12-responsables#Franco Maximiliano Amarilla|Franco Maximiliano Amarilla]]
