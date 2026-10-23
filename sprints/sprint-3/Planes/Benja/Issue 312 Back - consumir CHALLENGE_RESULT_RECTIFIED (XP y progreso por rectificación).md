@@ -7,6 +7,7 @@ estado: pendiente - decisiones D1-D5 a responder en la issue
 repo: 2026-P4-BE/tpi-roadmap
 issue: https://github.com/2026-P4-BE/tpi-roadmap/issues/312
 taiga: sin tarea en Taiga
+worktree: Backend/tpi-roadmap-rectificacion (rama feature/312-rectificacion-resultado, base origin/develop 57e3f13b)
 ---
 
 # Issue #312 — Consumir `CHALLENGE_RESULT_RECTIFIED`: XP y progreso por rectificación de un intento
