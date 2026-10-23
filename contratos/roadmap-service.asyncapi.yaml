@@ -98,6 +98,7 @@ channels:
           - $ref: '#/components/messages/NodeCompletedMessage'
           - $ref: '#/components/messages/NodeUnlockedMessage'
           - $ref: '#/components/messages/BadgeAwardedMessage'
+          - $ref: '#/components/messages/MandatoryAvailabilityChangedMessage'
 
 components:
   messages:
@@ -187,6 +188,17 @@ components:
             type: string
             description: ID del estudiante (studentId)
 
+    MandatoryAvailabilityChangedMessage:
+      name: MandatoryAvailabilityChangedMessage
+      title: Cambio en la disponibilidad de desafíos obligatorios (#252)
+      payload:
+        $ref: '#/components/schemas/MandatoryAvailabilityChangedEnvelope'
+      bindings:
+        kafka:
+          key:
+            type: string
+            description: ID del estudiante (student_id)
+
   schemas:
     CanonicalEnvelope:
       type: object
@@ -264,6 +276,20 @@ components:
             payload:
               $ref: '#/components/schemas/BadgeAwardedPayload'
 
+    MandatoryAvailabilityChangedEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/CanonicalEnvelope'
+        - type: object
+          properties:
+            eventType:
+              type: string
+              enum: [ROADMAP_MANDATORY_AVAILABILITY_CHANGED]
+            producer:
+              type: string
+              enum: [tema-10-roadmap-service]
+            payload:
+              $ref: '#/components/schemas/MandatoryAvailabilityChangedPayload'
+
     NodeCompletedPayload:
       type: object
       required:
@@ -331,3 +357,42 @@ components:
           type: string
           format: uuid
           description: Identificador de la insignia otorgada. El momento del otorgamiento es el timestamp del envelope.
+
+    MandatoryAvailabilityChangedPayload:
+      type: object
+      description: >
+        Contadores de desafíos obligatorios y opcionales del alumno. Se emite
+        únicamente cuando cambian; el último estado se deduplica por
+        (course_cohort_id, student_id).
+      required:
+        - student_id
+        - course_cohort_id
+        - mandatory_completed_count
+        - mandatory_available_count
+        - optional_available_count
+        - occurred_at
+      properties:
+        student_id:
+          type: string
+          format: uuid
+          description: Identificador del estudiante.
+        course_cohort_id:
+          type: string
+          format: uuid
+          description: Identificador de la cohorte / curso.
+        mandatory_completed_count:
+          type: integer
+          minimum: 0
+          description: Desafíos obligatorios ya completados.
+        mandatory_available_count:
+          type: integer
+          minimum: 0
+          description: Desafíos obligatorios habilitados (incluye los completados).
+        optional_available_count:
+          type: integer
+          minimum: 0
+          description: Desafíos opcionales habilitados (incluye los completados).
+        occurred_at:
+          type: string
+          format: date-time
+          description: Instante del cambio en UTC.
