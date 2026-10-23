@@ -43,7 +43,7 @@ Es **Back + Front**: el front lleva los puntos 1 a 3 y el back el punto 4. Son i
 
 ### F1. «Ver mis intentos» en la torre superada
 - `hex-world-page.component.html`, rama `@else` (torre superada): agregar al lado de Repetir un botón `variant="secondary"` con `{{ 'hexWorld.viewAttempts' | t }}` → `viewAttempts(nearTower()!)`.
-- Mostrarlo **solo si la torre es un desafío real** (`activityOf(id)?.challengeId`). Una torre local no tiene intentos en Motor (ver D2 para prácticos y teóricos).
+- Mostrarlo **solo si la torre es un desafío práctico real** (`activity.type === 'practical-challenge' && activity.challengeId`). D2 resuelto: los teóricos no lo llevan, porque el alumno ya los puede releer y ver sin límite.
 - `hex-world-page.component.ts`: método `viewAttempts(t)`:
   1. `audio.playClick()`
   2. guardar la pose con `saveReturnPosition(...)`, igual que en `openChallenge`, para que al volver el barco y el personaje queden en la torre
@@ -54,7 +54,7 @@ Es **Back + Front**: el front lleva los puntos 1 a 3 y el back el punto 4. Son i
 - i18n `es.json` / `en.json`, bloque `hexWorld`: `"viewAttempts": "Ver mis intentos"` / `"View my attempts"`.
 
 ### F2. El diálogo respeta la misma decisión que la torre (punto 3)
-- `npc-dialogue.ts`, ramas `ctx.passed` (práctico y teórico): sumar la opción `{ id: 'attempts', label: t(i18n, 'viewAttempts') }`, solo si el desafío es real (sumar `ctx.realChallenge` o equivalente al contexto que ya se arma).
+- `npc-dialogue.ts`, rama `ctx.challenge === 'practical' && ctx.passed` (hoy solo tiene «Chau»): sumar la opción `{ id: 'attempts', label: t(i18n, 'viewAttempts') }`. El teórico superado queda como está (D2).
 - `NpcAction`: agregar `'attempts'`.
 - `hex-world-page.component.ts` `onTalkChoice`: `id === 'attempts'` → `closeTalk()` + `viewAttempts(tower)`.
 - `go` («Reintentar») sigue yendo a `departTo` → `openChallenge(tower, true)`. Ya es una elección explícita y equivale a Repetir.
@@ -81,9 +81,9 @@ Es **Back + Front**: el front lleva los puntos 1 a 3 y el back el punto 4. Son i
 
 ### B1. No descartar el cierre de un nodo ya superado (punto 4)
 - `ProgressService.recordResult`: **sacar el `throw`** de `node.already-passed`. Se mantiene `alreadyPassed` para la guarda que ya existe (`result.passed() && !alreadyPassed`). Así el movimiento se registra y solo se omiten el completado, `NODE_COMPLETED`, el desbloqueo por prerrequisito y el día de actividad.
-- XP del reintento según **D1**:
-  - (Recomendado, propuesta de G05) Se usa el `result.xp()` que manda Motor, porque Motor aplica la regla de nota que cuenta y la penalización por reintento.
-  - Si el grupo decide que repetir no da XP: cuando `alreadyPassed`, guardar el movimiento con `xp = 0` y no sumar a `total_xp`. Dejarlo explícito en el javadoc.
+- XP según **D1 (resuelto el 23/10)**:
+  - **Reintento de un nodo desaprobado** (no está en `completed_nodes`): **da XP**, como hoy. No se toca.
+  - **Repetición de un nodo ya aprobado** (`alreadyPassed`): **no da XP**. El movimiento se guarda con `xp = 0` (queda la traza del intento), no suma a `total_xp` y no dispara `recordXpUnlocks`. Roadmap lo fuerza aunque Motor mande XP. Dejarlo explícito en el javadoc.
 - Limpieza: si `node.already-passed` queda sin uso, quitarlo de `RoadmapErrorCode`, `ErrorCatalog` (`:150`), `messages.properties` (`:55`) y `docs/api_doc/swagger.json`.
 
 ### Tests back
@@ -94,15 +94,42 @@ Es **Back + Front**: el front lleva los puntos 1 a 3 y el back el punto 4. Son i
 
 | # | Decisión | Default si nadie responde |
 |---|---|---|
-| D1 | ¿Repetir un nodo superado da XP? (G05 propone que lo decida Motor) | Usar `result.xp()` de Motor |
-| D2 | ¿«Ver mis intentos» también en las torres teóricas o solo en las prácticas? (Iker se comprometió a los prácticos; `/attempts` lista los dos) | Mostrarlo en cualquier desafío real |
-| D3 | Fechas para responder en el issue (puntos 1 a 3 y punto 4) | Definirlas antes de responder |
+| D1 | ¿Repetir da XP? | **Resuelto (23/10):** el reintento de un nodo desaprobado da XP; la repetición de un nodo aprobado no da XP |
+| D2 | ¿«Ver mis intentos» también en los teóricos? | **Resuelto (23/10):** no. El teórico ya se puede releer y ver sin límite |
+| D3 | Fechas para responder en el issue | Pendiente (Benja) |
 
-## 5. Fuera de alcance (bloqueado por Motor / G09)
-- Popup con el resumen de Motor: nota que cuenta, veredicto, hasta tres hallazgos y los estados de `feedback_state`.
-- Mostrar «Repetir» solo cuando `attempts_left > 0` (G05 confirma que Motor ya expone `attempts_left`; falta el resumen por nodo).
-- Enlace directo a `/attempts/:attemptId/review?challengeId=` (Roadmap no guarda el `attemptId`).
-- `Accept-Language` (core del front, lo coordina quien lo mantiene).
+## 5. Motor (G09): qué ya está y qué falta pedir
+
+> [!warning] Actualización 23/10
+> G09 ya cerró el issue de G05 (`tpi-engine-challenge#316`, cerrado el 19/10) y **mergeó en `develop`** los PR #318, #321, #322 y #325. Gran parte de lo que el hilo del #270 daba como «bloqueado por Motor» **ya existe**.
+
+### 5.1 Ya disponible en Motor: para qué lo usamos
+
+| Endpoint / dato | Para qué en Roadmap |
+|---|---|
+| `GET /courses/{courseId}/students/me/nodes/{nodeId}/challenges/{challengeId}/counted-attempt` (#321) → `state`, `counted_attempt_id`, `counted_score`, `verdict`, `attempts_used`, `attempts_left` | Saber **qué intento representa el nodo**. Con `counted_attempt_id` enlazamos directo a `/attempts/:id/review` (sin pasar por `/attempts`). Con `attempts_left = 0` dejamos de ofrecer «Repetir». `NO_HISTORICAL_REFERENCE` → «resultado no disponible». `IN_PROGRESS` / `PENDING_CORRECTION` → estados visibles en la torre. |
+| `GET /attempts/{attemptId}/summary` (#322) → resultado + hasta 3 hallazgos + `feedback_state` | El **popup definitivo** de «Ver feedback», con un texto ES/EN por cada `feedback_state` (`AVAILABLE`, `WITHHELD_BY_POLICY`, `NOT_CORRECTED`, `NO_HISTORICAL_REFERENCE`, `TEMPORARILY_UNAVAILABLE`, `NOT_PRACTICAL`). |
+| `GET /attempts/{attemptId}/review` (#322) | Destino del enlace «Revisar» (es la misma pantalla de G05). Ya no hace falta `?challengeId=`. |
+| `counted_score` como nombre único (#325) | El nombre de la nota en el popup. |
+| Reenvío de `Accept-Language` a Prácticos (#322) | Que el feedback llegue en el idioma de la UI. **Falta que el front lo mande** (core del front, no es de Motor). |
+
+➡️ Con esto el popup ya **no está bloqueado**. Se puede hacer como F6 en este mismo PR o en uno aparte.
+
+### 5.2 Lo que todavía hay que pedirle a G09
+
+1. **Opción del profesor «repetible sin límite una vez aprobado».** No existe: `ChallengeSettings` solo tiene `retries`/`cooldownMinutes`, y `attempts_left = 1 + retries − usados`.
+   - **Para qué:** mostrar «Repetir» en un nodo aprobado aunque `attempts_left = 0`, y que Motor no rechace con `attempts-exhausted`.
+   - **Qué pedir:** la opción en la configuración del desafío y un dato en `counted-attempt` que diga si se puede repetir (por ejemplo, `can_repeat`), así Roadmap no deduce nada.
+2. **Que la repetición después de aprobar no cambie la nota ni consuma reintentos.**
+   - **Para qué:** con la regla `LAST`, una repetición peor bajaría la nota que cuenta, y en ese caso repetir sería un castigo. Tampoco tiene que gastar intentos `NORMAL`.
+3. **Que la repetición después de aprobar no premie desde Motor.** Que mande `xp = 0` y sin monedas, o que el evento `CHALLENGE_COMPLETED` la marque (por ejemplo, `result.post_pass_repeat`).
+   - **Para qué:** Roadmap ya fuerza XP 0 con `alreadyPassed` (B1), pero las **monedas** las acredita Contabilidad con el evento de Motor. Si Motor no lo marca, el alumno cobra monedas cada vez que repite.
+4. **Confirmar los slugs de rechazo:** `attempts-exhausted` y `attempt-cooldown-active` (ya mapeados en `failureKey`).
+   - **Para qué:** que el mensaje de «Repetir» rechazado sea claro (criterio de aceptación del #270).
+5. **Confirmar la ruta por el gateway de `counted-attempt`.** El PR #321 la lista sin prefijo; se asume `/api/engine-challenge/...`.
+
+## 6. Fuera de alcance
+- `Accept-Language` desde el front (core del front, lo coordina quien lo mantiene).
 - Retirar las torres con quiz local (lo decide el grupo).
 
 ## 6. Cierre
