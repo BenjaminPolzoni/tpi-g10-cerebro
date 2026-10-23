@@ -49,6 +49,15 @@ POST /api/users/public/auth/token
 - Errores en `application/problem+json` (RFC 9457) con `type` propio; el Gateway puede agregar `invalid-audience`, `service-unavailable`, etc.
 - Gates de cuenta de Users (solo `user`): cuenta activa, cambio de contraseña, onboarding.
 
+### Permisos (Tema 01, [tpi-roadmap#294](https://github.com/2026-P4-BE/tpi-roadmap/pull/294))
+Catálogo que trae la PR de adopción de Tema 01 (Ramiro Ibazeta), todavía en draft. Formato `segmento.entidad.acción`, con el `authz-starter` de Users:
+
+- `roadmap.graph.read` / `roadmap.graph.write`, `roadmap.badge.read` / `roadmap.badge.write`, `roadmap.progress.read`, `roadmap.ranking.read`, `roadmap.challenge.read`.
+- No viajan en headers: el starter los resuelve contra Users (grant `users.authz.read`) y el catálogo se declara en Compose.
+- Con `AUTHZ_MODE=off` (default), cada `@RequirePermission` deja pasar por sus `legacyRoles`: hoy no cambia nada.
+- El gate exige `roadmap.gate.read` (resuelve la T-22.4).
+- La matriz endpoint por endpoint está en [[arquitectura/T-22-1-matriz-permisos]].
+
 ### Eventos
 Users publica `user-events` (`STUDENT-REGISTERED`, `ACCOUNT-DEACTIVATED`) y `notification-events`. **Roadmap no los consume.** El reporte los lista con nombres en mayúsculas con guion (contrato v3 anterior).
 
@@ -64,6 +73,9 @@ Users publica `user-events` (`STUDENT-REGISTERED`, `ACCOUNT-DEACTIVATED`) y `not
 - [ ] Verificar que el vocabulario de roles que emite Users (`GESTOR`, `PROFESSOR`) coincide con el que Courses documenta (`MANAGER`, `PROFESSOR_READ_ONLY`, "GESTOR o PROFESOR").
 - [ ] Rol de profesor ayudante (`PROFESSOR_READ_ONLY` de Courses): pendiente #8 de Users, sin definir.
 - [ ] Un lote de perfiles por ids evitaría N llamadas (hoy una por alumno con presupuesto de 5 s). Solicitud no registrada.
+- [ ] **T-22.2, preguntado en la #294 el 2026-10-23** ([comentario](https://github.com/2026-P4-BE/tpi-roadmap/pull/294#issuecomment-6357831133)), esperando respuesta:
+    1. ¿El Gateway sigue mandando `X-User-Roles` con `AUTHZ_MODE=on`? Los endpoints del propio alumno (materiales, lectura, nivel, salud, inventario, marcar leído, avatar y mascota) y los de admin siguen con `@PreAuthorize` por rol; sin el rol darían 403.
+    2. ¿Qué roles reciben cada `roadmap.*` en el catálogo de Compose? Hoy el GESTOR no tiene `badge.write` ni `progress.read`.
 
 > [!warning] Riesgos
 > - Sin `users.legajo.read` el profesor ve el ranking sin legajo hasta que vence la caché (30 min).
@@ -72,6 +84,7 @@ Users publica `user-events` (`STUDENT-REGISTERED`, `ACCOUNT-DEACTIVATED`) y `not
 > - **Secret desactualizado:** si el secret de `roadmap-service` está viejo, Users responde `401` al pedir el token técnico, y todo lo que valida dueño en Courses da `503`. Desde T-45.7 ese `503` lleva el código `courses.ownership-token-unavailable`, no «Courses no responde». Pasó en la variante el 2026-10-15. Ver [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo|DEC-019]].
 
 ## Historial
+- 2026-10-23: la #294 define el catálogo de 7 permisos `roadmap.*` y el scope del gate; se adopta para la matriz (T-22.1) y se preguntan las dos dudas de la T-22.2.
 - 2026-09-26: reporte de contratos de Users incorporado (`reporte-users-contratos-y-endpoints.md`); token técnico (T-01.7).
 - 2026-10-10: ranking con perfil de Users (T-24.3) y presupuesto de carga; ranking sigue completo si Users falla.
 - 2026-10-15: secret de servicio desactualizado reproducido en la variante (`401` en el token técnico). La falla del token tiene código de error propio (T-45.7, [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo|DEC-019]]).
