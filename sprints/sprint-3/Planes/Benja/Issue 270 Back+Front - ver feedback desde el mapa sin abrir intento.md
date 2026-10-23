@@ -71,6 +71,62 @@ Es **Back + Front**: el front lleva los puntos 1 a 3 y el back el punto 4. Son i
 ### F5. Rechazo de Motor al repetir
 - Ya está. Solo queda **confirmar los slugs** con G09 (`attempts-exhausted`, `attempt-cooldown-active`) y ajustar `failureKey` si son distintos. Verificar que las claves de i18n de exhausted/cooldown existan en `es` y en `en`.
 
+### F6. Popup «Ver feedback» con el resumen de Motor
+Solo para un **práctico real superado**. Consume **solo Motor** (sección 5.1) y nunca llama a Prácticos ni a `ChallengeAttemptService`.
+
+**Relación con F1/F2:** si F6 entra en el mismo PR, el botón de la torre pasa a ser **«Ver feedback»** (abre el popup) y «Ver mis intentos» queda como link dentro del popup. La opción del diálogo (F2) también abre el popup. Si F6 va en otro PR, F1 queda como está hasta entonces.
+
+**1. Data: `data-access/challenge-attempt/node-feedback.service.ts`** (al lado de `challenge-attempt`, con `HttpGenericService.get`, mismo patrón que `my-attempts.service.ts`)
+- Tipos en el mismo archivo, en snake_case tal como llegan (solo los campos que se usan):
+  - `NodeCountedAttempt { state, counted_attempt_id, counted_score, verdict, attempts_left }`
+  - `AttemptFeedbackSummary { feedback_state, summary_items: { severity, message, code, file, line }[] }`
+- `countedAttempt(courseId, nodeId, challengeId)` → `GET /engine-challenge/courses/{courseId}/students/me/nodes/{nodeId}/challenges/{challengeId}/counted-attempt`
+- `summary(attemptId)` → `GET /engine-challenge/attempts/{attemptId}/summary`, con el header `Accept-Language: i18n.lang()` puesto en esta llamada. El `acceptLanguageInterceptor` de core solo cubre `/tutor/` y **no se toca**, porque core es compartido.
+- Ningún POST.
+
+**2. Página: `hex-world-page.component.ts`**
+- Signal `feedback = signal<{ tower; status: 'loading' | 'ready' | 'error'; counted?; summary? } | null>(null)`.
+- `viewFeedback(t)`:
+  1. pone `loading`
+  2. llama a `countedAttempt(...)`
+  3. si `state === 'COUNTED'` y hay `counted_attempt_id`, llama a `summary(id)`
+  4. pone `ready`
+  
+  Ante cualquier error pone `error`. **Nunca cae a abrir un intento.**
+- `closeFeedback()` pone `null`.
+- `openReview()`: guarda la pose (`saveReturnPosition`) y navega a `/attempts/{counted_attempt_id}/review`. `viewAttempts()` (F1) sigue para el link «Ver todos mis intentos».
+
+**3. Template: un bloque nuevo `@else if (feedback(); as fb)`** con `<aside class="hud-panel hud-panel-center">`, mismo patrón que el panel `challenge()`, sin modal nuevo.
+- `loading` → `generic-skeleton`.
+- `error` → `generic-callout` con `hexWorld.feedback.error` + botón «Reintentar lectura» (vuelve a llamar a `viewFeedback`, **no** abre un intento) + «Cerrar».
+- `ready`, según `counted.state`:
+  - `COUNTED` → nota (`counted_score`) y veredicto (`PASSED`/`FAILED`), y abajo según `summary.feedback_state`:
+    - `AVAILABLE` → hasta 3 hallazgos (`severity` + `message`, con `file:line` si viene). `message` ya llega en el idioma pedido.
+    - `WITHHELD_BY_POLICY` → «La devolución se publica cuando cierre el desafío».
+    - `NOT_CORRECTED` → «Todavía no está corregido».
+    - `TEMPORARILY_UNAVAILABLE` → «La devolución no está disponible ahora» (la nota sí se muestra).
+    - `NO_HISTORICAL_REFERENCE` → «Resultado no disponible».
+    - `NOT_PRACTICAL` → no debería pasar; mismo texto que el anterior.
+  - `IN_PROGRESS` → «Tenés un intento en curso».
+  - `PENDING_CORRECTION` → «Tu entrega está esperando la corrección».
+  - `NO_RESULT` → «El intento cerró sin resultado».
+  - `NO_ATTEMPTS` y `NO_HISTORICAL_REFERENCE` → «Resultado no disponible».
+- Acciones: «Ver revisión completa» (solo con `COUNTED`), «Ver todos mis intentos» y «Cerrar».
+
+**4. «Repetir» según Motor (F6b, opcional)**
+- Al acercarse a una torre práctica superada, pedir `countedAttempt` una vez (cachearlo por nodo en un `Map` de la página) y ocultar «Repetir» si `attempts_left === 0`.
+- Cuando G09 agregue la opción «repetible sin límite» (5.2.1), usar ese dato en lugar de `attempts_left`.
+
+**5. i18n `es`/`en`:** bloque `hexWorld.feedback.*` con `title`, `score`, `verdict.PASSED`, `verdict.FAILED`, `state.<cada feedback_state y cada estado del nodo>`, `error`, `retryRead`, `fullReview`, `allAttempts` y `close`.
+
+**6. Tests**
+- `node-feedback.service.spec.ts` (con `HttpTestingController`): las dos URLs, el header `Accept-Language` en `summary` y que no haya ningún POST.
+- `hex-world-page.component.spec.ts`:
+  - si la lectura falla, se muestra el error y `ChallengeAttemptService.open` **no** se llama
+  - `COUNTED` + `AVAILABLE` → se ven 3 hallazgos
+  - `NO_HISTORICAL_REFERENCE` → «resultado no disponible»
+- Prueba manual: hace falta que el Motor del entorno donde se pruebe tenga el `develop` del 19/10 o posterior (PR #321 y #322).
+
 ### Tests front (solo los pertinentes)
 - `npc-dialogue.spec.ts`: torre superada con desafío real → aparece la opción `attempts`. Torre local → no aparece.
 - `hex-world-page.component.spec.ts`: `viewAttempts` navega a `/attempts` y **no** llama a `ChallengeAttemptService.open` (spy). Repetir sigue llamando a `open`.
@@ -113,7 +169,7 @@ Es **Back + Front**: el front lleva los puntos 1 a 3 y el back el punto 4. Son i
 | `counted_score` como nombre único (#325) | El nombre de la nota en el popup. |
 | Reenvío de `Accept-Language` a Prácticos (#322) | Que el feedback llegue en el idioma de la UI. **Falta que el front lo mande** (core del front, no es de Motor). |
 
-➡️ Con esto el popup ya **no está bloqueado**. Se puede hacer como F6 en este mismo PR o en uno aparte.
+➡️ Con esto el popup ya **no está bloqueado**: está detallado en **F6**.
 
 ### 5.2 Lo que todavía hay que pedirle a G09
 
@@ -126,13 +182,18 @@ Es **Back + Front**: el front lleva los puntos 1 a 3 y el back el punto 4. Son i
    - **Para qué:** Roadmap ya fuerza XP 0 con `alreadyPassed` (B1), pero las **monedas** las acredita Contabilidad con el evento de Motor. Si Motor no lo marca, el alumno cobra monedas cada vez que repite.
 4. **Confirmar los slugs de rechazo:** `attempts-exhausted` y `attempt-cooldown-active` (ya mapeados en `failureKey`).
    - **Para qué:** que el mensaje de «Repetir» rechazado sea claro (criterio de aceptación del #270).
-5. **Confirmar la ruta por el gateway de `counted-attempt`.** El PR #321 la lista sin prefijo; se asume `/api/engine-challenge/...`.
+5. ~~Confirmar la ruta por el gateway de `counted-attempt`.~~ **Verificado (23/10):** el controller usa `${app.api.private-path}`, así que desde el front es `/engine-challenge/courses/.../counted-attempt`, igual que `/engine-challenge/attempts/me`.
 
 ## 6. Fuera de alcance
 - `Accept-Language` desde el front (core del front, lo coordina quien lo mantiene).
 - Retirar las torres con quiz local (lo decide el grupo).
 
-## 6. Cierre
+## 7. Orden de trabajo recomendado
+1. **Back (B1) primero.** Es chico (sacar el `throw`, XP 0 si `alreadyPassed`, un test) y no depende de nadie. Además es el único **bug que hoy pierde datos**: cada cierre sobre un nodo aprobado se descarta entero. Sale en un PR corto y se revisa mientras se hace el front.
+2. **Front** en este orden: F1 → F2 → F5 → F6 (+ F6b) → F3 → F4. F1/F2 son la base, F6 se monta encima, y F3/F4 tienen más incertidumbre (F3 requiere verificar si el alumno ve la lista; F4 puede romper lo offline).
+3. El front **no depende** del back: el popup y los botones leen de Motor. Los dos PR se pueden mergear en cualquier orden.
+
+## 8. Cierre
 - PR del front y PR del back por separado, cada uno con `Refs 2026-P4-BE/tpi-roadmap#270`.
 - Comentar en el #270 con las fechas (D3) y avisar cuando esté en `develop`, como pidió G05.
 - Checklist de aceptación del issue:
