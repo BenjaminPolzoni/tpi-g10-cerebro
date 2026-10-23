@@ -16,7 +16,7 @@ taiga: sin tarea en Taiga
 > - **Implementado:** B1–B6, aplicando las recomendaciones D1–D6. Lo hizo codex por Orca y Claude lo revisó. `enabled`, `blocked` y `blocked_reasons` van en `null` (PR 2 pendiente de D1).
 > - **Agregado fuera del plan:** el bean `Clock` en `common/config/ClockConfig.java`, para que el reloj se pueda inyectar en los servicios del dashboard.
 > - **Verificado:** `CohortSummaryServiceTest` (11), `XpTimelineServiceTest` (5), `CohortDashboardControllerTest` (7), `StreakServiceTest` (14) y `SnakeCaseContractTest` (3) en verde. `mvn verify` (Checkstyle, PMD y CPD) en verde.
-> - **Falta:** asignar revisor, merge de #325 y responder la issue con la sección 6.
+> - **Issue #309:** respondida con la sección 6 y cerrada (23/10). Falta asignar revisor y mergear #325.
 
 > [!info] Contexto
 > **Backoffice** abrió el issue #309 el 22/10. Lo creó Paz; el seguimiento lo lleva **Joaquín**. Es parte del plan de dashboards de Backoffice (referencia interna **R1**; el plan y los borradores están en [tpi-backoffice#244](https://github.com/2026-P4-BE/tpi-backoffice/pull/244), en `docs/Contracts/dashboards/`).
@@ -226,5 +226,5 @@ Seguir el estilo de `RankingController`/`RankingService` y `GroupProgressControl
 ## 9. Cierre
 - [ ] PR 1 mergeado ([#325](https://github.com/2026-P4-BE/tpi-roadmap/pull/325) abierto)
 - [ ] PR 2 mergeado, o D1 descartado
-- [ ] Backoffice confirma el contrato en la issue
-- [ ] Issue #309 cerrada
+- [ ] Backoffice confirma el contrato en la issue (respuesta publicada; quedó pendiente D5, qué token usa Backoffice)
+- [x] Issue #309 cerrada
