@@ -1,14 +1,21 @@
 ---
-tags: [tpi, g10, sprint-3, plan, resolver-issue, back, dashboards, backoffice, xp, progreso]
+tags: [tpi, g10, sprint-3, plan, resolver-issue, back, dashboards, backoffice, xp, progreso, concluido]
 fecha: 2026-10-23
 autor: Benja
-estado: borrador
+estado: concluido
 repo: 2026-P4-BE/tpi-roadmap
 issue: https://github.com/2026-P4-BE/tpi-roadmap/issues/309
 taiga: sin tarea en Taiga
 ---
 
 # Issue #309 — Resumen de progreso por cohorte y serie semanal de XP
+
+> [!success] Plan concluido (PR 1) — 23/10
+> - **Commit:** `741295a5` en `feature/309-resumen-cohorte-xp-timeline` (worktree `~/dev/TPI_2026/Backend/tpi-roadmap-dashboards-cohorte`). **Sin push ni PR todavía.**
+> - **Implementado:** B1–B6, aplicando las recomendaciones D1–D6. Lo hizo codex por Orca y Claude lo revisó. `enabled`, `blocked` y `blocked_reasons` van en `null` (PR 2 pendiente de D1).
+> - **Agregado fuera del plan:** el bean `Clock` en `common/config/ClockConfig.java`, para que el reloj se pueda inyectar en los servicios del dashboard.
+> - **Verificado:** `CohortSummaryServiceTest` (11), `XpTimelineServiceTest` (5), `CohortDashboardControllerTest` (7), `StreakServiceTest` (14) y `SnakeCaseContractTest` (3) en verde. `mvn verify` (Checkstyle, PMD y CPD) en verde.
+> - **Falta:** correr la suite completa (`./mvnw test`) antes del push, `git push -u origin feature/309-...`, abrir el PR a `develop` con `Refs #309`, y responder la issue con la sección 6.
 
 > [!info] Contexto
 > **Backoffice** abrió el issue #309 el 22/10. Lo creó Paz; el seguimiento lo lleva **Joaquín**. Es parte del plan de dashboards de Backoffice (referencia interna **R1**; el plan y los borradores están en [tpi-backoffice#244](https://github.com/2026-P4-BE/tpi-backoffice/pull/244), en `docs/Contracts/dashboards/`).
@@ -216,7 +223,7 @@ Seguir el estilo de `RankingController`/`RankingService` y `GroupProgressControl
 3. PR 2, si D1 lo pide.
 
 ## 9. Cierre
-- [ ] PR 1 mergeado
+- [ ] PR 1 mergeado (implementado y commiteado: `741295a5`, falta push y PR)
 - [ ] PR 2 mergeado, o D1 descartado
 - [ ] Backoffice confirma el contrato en la issue
 - [ ] Issue #309 cerrada
