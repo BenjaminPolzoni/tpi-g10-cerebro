@@ -20,6 +20,7 @@ taiga: sin tarea en Taiga
 > - **Actualización (2026-10-23):** #325 mergeado en `develop` (`642bd935`). SantiFenoglio primero pidió cambios y después aprobó. Revisión posterior al merge:
 >   - **Comisión:** con `group_id` se filtran los alumnos, pero el % y `by_node` se siguen calculando sobre **todos** los nodos de los roadmaps COURSE. No usa las secciones que ve la comisión, como sí hace `GroupProgressService.sectionsOf`. Con unidades restringidas por comisión, el % sale más bajo de lo real.
 >   - **Activos:** solo cuentan los movimientos con `countedInCourse = true`, así que un alumno que solo se mueve en un roadmap en modo ROADMAP no figura como activo.
+>   - **Fix de los dos puntos anteriores:** PR [#326](https://github.com/2026-P4-BE/tpi-roadmap/pull/326) (`fix/309-dashboard-comision-activos`), con revisión pedida a SantiFenoglio.
 >   - Los tests del controller llaman al método directo, así que no prueban `@PreAuthorize`, el binding de `from`/`to` ni `SecurityConfig`. Verifiqué aparte que `from=2026-08-01` se parsea bien.
 
 > [!info] Contexto
