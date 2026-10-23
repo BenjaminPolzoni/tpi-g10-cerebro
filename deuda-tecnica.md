@@ -2,7 +2,7 @@
 tags:
   - tpi
   - g10
-actualizado: 2026-10-19
+actualizado: 2026-10-23
 ---
 
 # Deuda técnica de G10 (roadmap-service)
@@ -21,7 +21,6 @@ actualizado: 2026-10-19
 |---|---|---|---|---|---|---|
 | DT-01 | 🔴 | El **Gate** (`/eligibility`) acepta a cualquier servicio con token técnico: `SecurityConfig` exige `ServiceIdentity` pero no valida el scope `roadmap.gate.read` | Validar el scope como ya se hace con `roadmap.progress.read` en `/courses/*/progress` | S | [[arquitectura/cors-topics-rutas]] | Proponer con HT-22 |
 | DT-02 | 🟠 | Autorización con **roles fijos** (`hasRole`/`hasAnyRole` en constantes por controller) y dos chequeos a mano (`RankingController`, `requireOwner`) | Migrar a permisos con el catálogo de G06. **Actualización (2026-10-17):** el Gateway va a dejar de mandar `X-User-Roles` y mandará permisos; sin el rol, todo chequeo por rol da 403 (ver [[sprints/sprint-3/historias/HT-22 Permisos en vez de roles\|HT-22]]). T-45.9 sumó `GESTOR` al ranking | M | [[sprints/sprint-3/07-correcciones-profes\|07]] | Sprint 3 (HT-22) |
-| DT-03 | 🟠 | **No hay una matriz escrita de qué puede hacer cada rol** (ADMIN, GESTOR, PROFESSOR, STUDENT). Hoy hay que leer los controllers | Escribir la tabla rol → acciones. Es la base para HT-22 | S | Consulta del equipo (2026-10-15) | Sprint 3 (con HT-22/C10) |
 | DT-05 | 🟢 | Listener **legado** de `challenges.results` (payloads v1/v2) y su flag `KAFKA_TOPIC_CHALLENGE_RESULT_ENABLED`, apagado | Borrar listener, payloads y flag | S | `application.properties` | |
 | DT-07 | 🟠 | `TraceIdFilter` figura en `08-comunicacion-gateway.md` pero **no existe** en develop | Confirmar si se borró a propósito y actualizar el doc | S | E7 en [[sprints/sprint-3/08-dudas\|08]] | |
 | DT-08 | 🟢 | Accounting publica `LIVES_EXHAUSTED`/`LIVES_AVAILABLE` y no hay consumidor | Decidir si hace falta; si no, sacarlo del acta | S | E8 en [[sprints/sprint-3/08-dudas\|08]] | |
@@ -58,6 +57,7 @@ actualizado: 2026-10-19
 | # | Deuda | Cómo se resolvió | PR / fecha |
 |---|---|---|---|
 | — | Outbox sin topic de salida | `roadmap.events` por defecto | #134 |
+| DT-03 | No había matriz escrita de qué puede hacer cada rol | Matriz de los 82 endpoints con el permiso propuesto, los roles de hoy y el chequeo de dueño: [[arquitectura/T-22-1-matriz-permisos]] (T-22.1) | rama `feature/t-22-1-matriz-permisos`, 2026-10-23 |
 | DT-04 | `ProgressService.startChallenge` muerto | Borrado junto con el pre-chequeo del alumno (T-31.5) | BE#234, 2026-10-16 |
 | DT-06 | `@DefaultValue("stub")` en properties de clientes | Perfiles `dev`/`prod` separados, clientes en `http` por defecto | BE#226, 2026-10-16 |
 | DT-09 (front) | IDs de mock en rutas reales | Alumno y curso desde la sesión y la ruta (HT-14) | FE#607, 2026-10-16 |
