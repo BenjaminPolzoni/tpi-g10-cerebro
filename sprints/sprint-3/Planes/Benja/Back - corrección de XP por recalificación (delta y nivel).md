@@ -10,6 +10,9 @@ orden: 3 de 4 (requiere D1 con G09 y D2 con el equipo)
 
 # Back — Corrección de XP cuando el Motor recalifica (delta y nivel)
 
+> [!warning] Actualización (2026-10-23)
+> G09 respondió D1 en la tpi-roadmap#312: Motor manda el **total del intento** (`target_experience`) en un evento nuevo, `CHALLENGE_RESULT_RECTIFIED`. El plan vigente está en [[Issue 312 Back - consumir CHALLENGE_RESULT_RECTIFIED (XP y progreso por rectificación)]], que también reemplaza la recomendación de D2 (ahora se acepta que la XP y el nivel bajen).
+
 > [!info] Contexto
 > Auditoría del 2026-10-22. Pregunta del equipo: si la diferencia de XP enviada por un desafío es negativa, ¿el alumno puede bajar de nivel? Hoy el caso **no está contemplado**: es accidentalmente imposible.
 
