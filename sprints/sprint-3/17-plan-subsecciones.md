@@ -133,6 +133,35 @@ Fuera de alcance: reglas entre subsecciones y ciclos (fase 2), proyector Neo4j y
 Al terminar, contame qué decisión tomaste en cada punto que el plan no cerraba, cuántas líneas agregaste (código y tests por separado) y qué quedó para la fase 2.
 ```
 
+## Prompt para la fase 2
+
+Arrancar cuando la fase 1 esté terminada (no hace falta que esté mergeada: se corta de su rama).
+
+```text
+Tarea: T-58.2, fase 2 (Taiga #9152). Reglas entre subsecciones y sin ciclos en el back de Roadmap (tpi-roadmap).
+Plan completo: C:\Users\Santino04\Desktop\tpi-g10-cerebro\sprints\sprint-3\17-plan-subsecciones.md (leé "Fase 2", "Propuestas para las decisiones abiertas" y lo que dejó la fase 1).
+
+Reglas:
+- Nada de co-autores ni "Generated with Claude Code" ni ninguna atribución a IA en commits ni en PRs.
+- Antes de escribir Java consultá el MCP skillhub (search_skills) y seguí lo que aplique. No llames propose_skill sin preguntarme.
+- Rama nueva normal: feature/t-58-2-subsecciones-reglas, cortada de feature/t-58-2-subsecciones-modelo (fase 1). Si la fase 1 ya se mergeó, cortala de origin/develop. No toques docker/docker-compose.override.yml.
+- Varios commits chicos y con sentido. Mensajes en español como el resto del repo.
+- Me evalúan por líneas: tests reales y completos de cada caso. Nada de relleno.
+- Antes de terminar corré ./mvnw -o -B clean verify (Checkstyle, PMD CommentSize de 6 líneas y 80 columnas, CPD).
+- No pushees ni abras PR sin mi OK.
+
+Qué hacer (fase 2):
+1. Hojas: la regla de una unidad o subsección (PATCH /sections/{id}/rules, plano y con árbol) acepta subsecciones como requisito. Validá que la hoja sea del mismo roadmap y esté viva; puede ser de otra unidad (S6).
+2. Contención: una hija no puede exigir a su propio padre ni el padre a su hija, directo o dentro de un grupo. Error nuevo en RoadmapErrorCode y ErrorCatalog.
+3. Ciclos: el detector de secciones (sectionGraph.assertNoCycle en GraphService) suma las aristas padre-hija antes de buscar ciclos, así se rechaza por ejemplo "1.2 exige Unidad 2" cuando "Unidad 2 exige Unidad 1". Cubrí también el agregado suelto de un prerrequisito (appendToRoot) y el cambio de modo.
+4. Lecturas: sectionRulesOf y la lectura del roadmap devuelven las reglas de las hijas; las hojas a hijas dadas de baja u ocultas se podan como las de unidades.
+5. Alumno: lo que le falta (missing y unit_missing de T-59.5) nombra la subsección cuando la exigida es una hija.
+6. Gate: verificá con tests de punta a punta que una subsección exigida bloquea y desbloquea bien, sola y combinada con XP mínimo.
+
+Fuera de alcance: proyector Neo4j y sync con Courses (fase 3), front (fase 4).
+Al terminar, contame qué decidiste en lo que el plan no cerraba, cuántas líneas agregaste (código y tests por separado) y qué quedó pendiente.
+```
+
 ## Registro
 
 | Fecha | Qué |
