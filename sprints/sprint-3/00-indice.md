@@ -34,6 +34,7 @@ estado: borrador
 | 14 | [Cambios recientes](14-cambios-recientes.md) | PRs de G10 (back y front) del 14 al 18/10: qué entró, qué sigue abierto, qué cerró de los pendientes y alertas (migraciones, nombre del nodo) |
 | 15 | [Tarea nueva: qué le falta al alumno](15-tarea-que-le-falta-al-alumno.md) | T-59.5 (back) para destrabar T-59.3, lista para cargar en Taiga, con el contrato propuesto y el registro de HU-58, HU-59 y HT-20 |
 | 16 | [Brecha Taiga vs código y patrones](16-brecha-taiga-vs-codigo-y-patrones.md) | Tareas hechas en el código pero New en Taiga, lo que falta de verdad y las mejoras de patrones/deuda que no tienen tarea |
+| 17 | [Plan de subsecciones](17-plan-subsecciones.md) | T-58.2: subsecciones como zonas dentro de la isla. Qué ya existe en Courses, back y front, alternativas, decisiones S1 a S7 para el equipo, 4 fases y el prompt de la fase 1 |
 
 ## Mapa de la propuesta
 
