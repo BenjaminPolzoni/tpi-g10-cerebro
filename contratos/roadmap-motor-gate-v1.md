@@ -2,13 +2,14 @@
 
 | Dato | Valor |
 |---|---|
-| Tarea | T-15.5 — Acta y publicación OpenAPI del contrato; T-44.3 — motivo `group_restricted` (v1.1); T6-HU48 — `challenge_id` y `attempt_type` (v1.2); restricciones `DATE` (v1.3, acta T-10.1 §3.6) |
-| Versión | **1.3 — Sprint 3** (1.2 — Sprint 3; 1.1 — Sprint 2; 1.0 — Sprint 1) |
-| Fecha | 2026-10-12 (v1.2: 2026-10-11; v1.1: 2026-10-09; v1.0: 2026-09-26) |
-| Estado | **Acordado funcionalmente; aprobación nominal pendiente** |
+| Tarea | T-15.5 — Acta y publicación OpenAPI; T-44.3 — `group_restricted` (v1.1); T6-HU48 — `challenge_id` y `attempt_type` (v1.2); restricciones `DATE` (v1.3); HT-31/T-31.1; HT-32/T-32.1; HT-20/T-20.1 (#9030, v1.6) |
+| Versión | **1.7 — Sprint 3** (1.6; 1.5; 1.4; 1.3; 1.2; 1.1; 1.0) |
+| Fecha | 2026-10-23 (v1.3: 2026-10-12; v1.2: 2026-10-11; v1.1: 2026-10-09; v1.0: 2026-09-26) |
+| Estado | **Acordado por el equipo responsable de Roadmap; v1.7 formaliza la decisión sin cambiar la forma del contrato consumido por Motor** |
 | Equipos | Roadmap (Tema 10) y Motor de Desafíos |
 
-Este documento es la fuente vigente del contrato funcional del Gate de Roadmap.
+Este documento es la fuente vigente del contrato funcional del Gate de Roadmap. La política de elegibilidad
+la define Roadmap; Motor consume la decisión y reenvía `reason` como texto.
 La especificación ejecutable se publica también en `/v3/api-docs` y
 [`docs/api_doc/swagger.json`](../api_doc/swagger.json).
 
@@ -20,6 +21,10 @@ La especificación ejecutable se publica también en `/v3/api-docs` y
 | 1.1 | 2026-10-09 | T-44.3 (HU-44): se agrega el motivo `group_restricted` (§4 y §5), un `403` para la unidad cuya sección Courses no encuentra y el `503` cuando Courses no responde (§6). Cambio aditivo: no cambia la ruta, el envelope ni los motivos existentes. |
 | 1.2 | 2026-10-11 | T6 (HU-48): el `data` del gate suma `challenge_id` y `attempt_type` (§3). Cambio aditivo: el Motor ignora los campos que no conoce; no cambia la ruta, el envelope, `eligible` ni `reason`. |
 | 1.3 | 2026-10-12 | T-10.1 §3.6: se agrega el motivo `date_restricted` (§4 y §5) y el Gate evalúa las condiciones `DATE` de Courses. Cambio aditivo: solo con el flag `ROADMAP_BY_GROUP_ENABLED` encendido; no cambia la ruta, el envelope, `eligible` ni ninguno de los motivos existentes. |
+| 1.4 | Sprint 3 | HT-31/T-31.1: incorpora `origin_unavailable` para expresar una indisponibilidad de origen en las consultas funcionales del Gate. |
+| 1.5 | Sprint 3 | HT-32/T-32.1: incorpora `challenge_unavailable` cuando Motor dio de baja el desafío asociado al nodo. |
+| 1.6 | 2026-10-23 | HT-20/T-20.1 (#9030): separa obligatoriedad de unidad y acceso al nodo. La obligatoriedad cuenta para completar la unidad; el Gate usa prerrequisitos explícitos para desbloquear nodos. No cambia ruta, envelope ni tipos de campo. |
+| 1.7 | 2026-10-23 | DEC-019 formaliza la propiedad de Roadmap sobre la regla de elegibilidad: Motor sigue reenviando `reason` como texto opaco y no requiere cambios ni aprobación de implementación. El contrato de cable permanece compatible. |
 
 La v1.1 solo cambia el comportamiento con el flag `ROADMAP_BY_GROUP_ENABLED` encendido. Con el flag
 apagado (default) el Gate responde exactamente como en la v1.0. La v1.2 es aditiva para todos los
@@ -114,15 +119,19 @@ al Motor qué desafío y qué clase de intento corresponde al nodo consultado.
 |---|---|
 | `not_enrolled` | El alumno no tiene matrícula activa en el curso-cohorte. |
 | `course_archived` | El curso o roadmap está archivado. |
-| `content_not_read` | Falta leer contenido obligatorio de la sección. |
+| `content_not_read` | Motivo histórico conservado por compatibilidad; desde v1.6 no se emite solo porque quede contenido obligatorio de la unidad sin leer. |
 | `prerequisite_pending` | No se cumplen los prerrequisitos AND/OR del nodo. |
+| `unit_prerequisite_pending` | No se cumplen los prerrequisitos explícitos de la unidad. |
 | `no_lives` | Un nodo `STANDARD` no tiene vidas libres disponibles. |
 | `group_restricted` | **v1.1.** La unidad del nodo está limitada a comisiones a las que el alumno no pertenece. Solo se emite con el flag `ROADMAP_BY_GROUP_ENABLED` encendido. |
 | `date_restricted` | **v1.3.** La unidad del nodo tiene una condición `DATE` que no se cumple en el instante de la consulta (acta T-10.1 §3.6). Solo se emite con el flag `ROADMAP_BY_GROUP_ENABLED` encendido. |
+| `origin_unavailable` | **v1.4.** No hay información vigente de un origen externo requerido por la evaluación. |
+| `challenge_unavailable` | **v1.5.** El desafío asociado dejó de estar disponible en Motor. |
+| `lives_available` | El nodo de recuperación solo se ofrece cuando no quedan vidas libres. |
 
-El vocabulario sigue siendo cerrado: Roadmap no emite ningún valor fuera de esta tabla. Como la v1.0
-lo cerraba en cinco valores, cada ampliación se coordina con el consumidor (§9). El Motor ya reconoce
-`date_restricted` como passthrough de texto (§9); la v1.3 lo incorpora al contrato activo.
+El vocabulario sigue siendo cerrado: Roadmap no emite ningún valor fuera de esta tabla. `content_not_read`
+se conserva para compatibilidad de lectura, pero desde v1.6 la obligatoriedad no es una condición implícita
+de acceso a desafíos. El Motor trata `reason` como texto y reenvía el motivo recibido (§9).
 
 Los valores históricos `recovery_pending` y `already_passed` quedan retirados del contrato activo.
 Roadmap no sustituye ninguno de ellos por otra razón. Haber completado el nodo no agrega un
@@ -135,9 +144,15 @@ Roadmap devuelve el primer bloqueo aplicable en este orden:
 1. `course_archived`;
 2. `not_enrolled`;
 3. `group_restricted` o `date_restricted` (v1.1/v1.3, restricción de la unidad, solo con el flag encendido);
-4. `content_not_read`;
-5. `prerequisite_pending`;
-6. `no_lives`.
+4. `unit_prerequisite_pending` (regla explícita de la unidad);
+5. `prerequisite_pending` (regla explícita del nodo);
+6. `no_lives` o `lives_available` según la política de vidas del nodo.
+
+Desde v1.6, la marca de obligatoriedad define qué nodos cuentan para completar una unidad; no crea una
+dependencia implícita entre nodos. Si una lectura debe desbloquear un desafío, el profesor configura ese
+nodo de contenido como prerrequisito. Una lectura satisface un prerrequisito de tipo `CONTENT`; la
+finalización de un desafío satisface un prerrequisito de desafío. El progreso obligatorio de unidad se
+consulta por separado mediante `SectionReadingProgressService` (HU-19/T-19.1, #4282).
 
 La restricción de la unidad se evalúa antes que las condiciones de progreso, para no revelar lecturas
 ni prerrequisitos de una unidad a la que el alumno no accede, y después de la matrícula: sin matrícula
@@ -170,7 +185,8 @@ Regla de `group_restricted` y `date_restricted` (HU-44, T-44.3; T-10.1 §3.6):
   evaluarse en el Gate.
 
 La evaluación de prerrequisitos reutiliza `PrerequisiteService`; el controller no implementa
-AND/OR. La lectura obligatoria reutiliza `SectionReadingProgressService`.
+AND/OR. El resumen de lectura obligatoria de unidad reutiliza `SectionReadingProgressService`, sin
+convertirse en un gate implícito de los nodos de esa unidad.
 
 Para vidas, Roadmap consulta `InventoryClient` y trabaja con:
 
@@ -258,6 +274,11 @@ no cambia el comportamiento respecto de la v1.0.
 
 La v1.1 reemplaza a la v1.0 en un solo punto: el vocabulario de §4 pasa de cinco a seis valores.
 
+La v1.6 reemplaza la regla implícita de `content_not_read` para el acceso a nodos: la obligatoriedad
+solo cuenta para completar la unidad. Los prerrequisitos explícitos de nodo y de unidad son los que
+determinan el desbloqueo. El campo `reason`, su tipo y los motivos existentes se conservan; por eso
+Motor no necesita cambiar su lógica de consumo.
+
 La v1.0 reemplazó, para Sprint 1, toda referencia anterior que:
 
 - incluya `recovery_pending` o `already_passed` como razones activas;
@@ -287,15 +308,22 @@ commits `3ee47b4`/`d07cdbb` de `tpi-engine-challenge`, `develop`, verificados en
 [`motor-desafios-evento-cierre.md`](motor-desafios-evento-cierre.md) §"Motivos del gate"), y su
 passthrough de texto lo trata como cualquier otro motivo: `403` con el `reason` recibido.
 
+La v1.6 es una regla interna de evaluación de Roadmap: no agrega ni quita campos o valores del contrato,
+conserva `content_not_read` por compatibilidad y devuelve `prerequisite_pending` cuando falta una
+dependencia explícita de contenido. El contrato de Motor describe que `reason` es texto y se reenvía,
+por lo que el consumidor no necesita interpretar la obligatoriedad ni cambiar código. La política y su
+precedencia son responsabilidad de Roadmap; la decisión quedó acordada por el equipo responsable del
+dominio el 2026-10-23 y se documenta en PR #324.
+
 Pendiente de coordinar con G09: su contrato `docs/contracts/roadmap-eligibility.yaml` todavía lista
 los cinco valores de la v1.0 (seguimiento: `2026-P4-BE/tpi-engine-challenge#234`), y falta su
 conformidad explícita con el `403` de la unidad no resuelta.
 
-Las decisiones funcionales están registradas, pero el repositorio no contiene evidencia nominal
-verificable de aprobación Roadmap ↔ Motor. La firma debe completarse antes de considerar el acta
-formalmente aprobada; no se infieren responsables.
+Las aprobaciones nominales de las versiones anteriores siguen registradas en su historial. La decisión
+de v1.6 no requiere una aprobación de implementación de Motor porque no cambia el contrato de consumo;
+el Gate y su política de acceso son propiedad del equipo Roadmap.
 
-| Equipo | Responsable | Fecha | Aprobación |
+| Alcance | Dueño / consumidor | Fecha | Estado |
 |---|---|---|---|
-| Roadmap (Tema 10) | Pendiente de registrar | Pendiente | Pendiente |
-| Motor de Desafíos | Pendiente de registrar | Pendiente | Pendiente |
+| Política v1.6 de desbloqueo de nodos | Roadmap (Tema 10) | 2026-10-23 | Acordada por el equipo responsable del dominio; PR #324 |
+| Consumo de `eligible` y `reason` | Motor de Desafíos | Sin cambio de implementación | `reason` continúa como texto opaco que el Motor reenvía; no necesita evaluar obligatoriedad ni cambiar código |
