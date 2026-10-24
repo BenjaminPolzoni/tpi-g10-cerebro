@@ -251,3 +251,49 @@ Reglas al crearlos, como en §1:
 5. **B4** · validación de al menos un roadmap por comisión (back, vista por comisión). Opcional: hasta entonces avisa el front.
 
 Paralelo con todo: abrir la issue a G01 (D3).
+
+### 9.7 Lo que le pedimos a G01 al crear el curso (D3)
+
+> [!info] Alcance
+> Es lo mínimo para que el profesor llegue a "Configurar roadmaps" justo después de crear el curso, sin tocar el modal de 3 pasos. Corresponde a F3 de §6. La issue la abre Benja; este texto es el borrador. **Estado: sin abrir** (2026-10-24).
+
+**Cómo es hoy (verificado 2026-10-24, front de `develop`)**
+
+- "Crear curso" abre `course-cohort-form-modal` (3 pasos; 2 si se clona). Al confirmar, `course-list-page.component.ts` llama a `createCourseCohort` (o `cloneCourseCohort`), guarda la respuesta en la señal `createdCohort` (línea 721, asignada en 940 y 961), cierra el modal y recarga la lista.
+- Con `createdCohort` se muestra un `generic-callout` de éxito ("Curso creado", con fechas, estado y código de invitación; plantilla alrededor de la línea 195). **No tiene ninguna acción.**
+- El modal no tiene nada de roadmap ni de comisiones: las comisiones se crean después, en la pestaña Grupos.
+
+**Qué pedimos (en orden de importancia)**
+
+1. **Un botón en el aviso de "Curso creado".** `generic-button` (`genericButton` sobre un `<a>`, variante `secondary`) con el texto "Configurar roadmaps" que lleve a la pantalla de F1: `/roadmap/teacher/course/<cohort.id>/roadmaps/setup`. Solo se muestra a quien puede configurar (ADMIN, GESTOR o PROFESSOR dueño). **Cambio de unas 10 líneas en `course-list-page` y 2 claves de i18n.** Lo hacemos nosotros en un PR chico si G01 está de acuerdo, para no sumarles trabajo.
+2. **Confirmar que el aviso se mantiene al clonar un curso.** Hoy `cloneCourseCohort` también llena `createdCohort`. Con HU-71 el clon puede traer los roadmaps y sus asignaciones; el botón sirve igual para revisarlos.
+3. **Que no cambie el contrato de la respuesta de crear/clonar** (`CourseCohortResponse.id`), porque la ruta del botón depende de ese id.
+
+**Qué no pedimos**
+
+- No pedimos pasos nuevos en el modal ni que Courses conozca los roadmaps.
+- No pedimos el alta de comisiones en esta pantalla: F2 solo manda al profesor a la pestaña Grupos y vuelve.
+- **El evento `COURSE_COHORT_CREATED` queda fuera**, salvo que B0 falle (§5, D1, camino 2). Hoy `tpi-roadmap` no lo escucha y no está verificado que Courses lo publique.
+
+**Qué hacemos nosotros mientras no responden**
+
+- F1 y F2 funcionan igual: la entrada queda en la pestaña Roadmaps del curso, sin depender del aviso.
+- F3 queda **bloqueada hasta que G01 diga que sí**; no se toca `course-list-page` sin su acuerdo.
+
+**Criterio de listo (F3)**
+
+- Tras crear o clonar un curso, el aviso muestra "Configurar roadmaps" solo a quien puede configurar, y el botón abre la pantalla de F1 con el id del curso nuevo.
+- Hay tests del aviso con y sin permiso, y de la ruta que arma el botón.
+- Sin regresiones en `course-list-page` ni en el modal.
+
+**Borrador de la issue (para G01)**
+
+> **Título:** Botón "Configurar roadmaps" en el aviso de curso creado
+>
+> **Contexto:** G10 (roadmap) está armando una pantalla para que el profesor decida cuántos roadmaps tiene el curso y cuáles ve cada comisión, y que cada comisión vea al menos uno. Hoy, al crear un curso, el aviso de éxito de `course-list-page` no ofrece ningún siguiente paso.
+>
+> **Pedido:** agregar al aviso de "Curso creado" un botón secundario "Configurar roadmaps" hacia `/roadmap/teacher/course/<id>/roadmaps/setup`, visible solo para ADMIN, GESTOR o PROFESSOR dueño del curso. No cambia el modal ni el contrato de Courses.
+>
+> **Quién lo hace:** podemos mandar nosotros el PR (≈10 líneas en `course-list-page` y 2 claves de i18n) si están de acuerdo.
+>
+> **Pregunta:** ¿les parece bien que toquemos ese archivo, y el aviso se mantiene al clonar?
