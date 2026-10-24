@@ -232,7 +232,7 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 |---|---|---|---|---|
 | Front, configurar | `~/dev/TPI_2026/Frontend/2026-PIV-TPI-FE-config-roadmaps` (**por recrear**: ya no existe en disco) | `feature/roadmap-configurar-al-crear-curso` | `feature/roadmap-multi-vista-profesor` (T-62.5) | F1, F2 |
 | Back, configurar | `~/dev/TPI_2026/Backend/tpi-roadmap-config-roadmaps` (existe) | `feature/roadmap-configurar-al-crear-curso` | `origin/develop` | B0 |
-| **Front, vista por comisión** | `~/dev/TPI_2026/Frontend/2026-PIV-TPI-FE-vista-comision` (creado 2026-10-24) | `feature/roadmap-vista-por-comision` | `origin/develop` (decidido 2026-10-24, no desde la rama de T-62.5) | F7, F8 |
+| **Front, vista por comisión** | `~/dev/TPI_2026/Frontend/2026-PIV-TPI-FE-vista-comision` (creado 2026-10-24) | `feature/roadmap-vista-por-comision` | `feature/roadmap-multi-vista-profesor` (T-62.5, ya rebaseada sobre `origin/develop`; decidido 2026-10-24: F7 arranca antes del merge) | F7, F8 |
 | **Back, vista por comisión** | `~/dev/TPI_2026/Backend/tpi-roadmap-vista-comision` (creado 2026-10-24) | `feature/roadmap-vista-por-comision` | `origin/develop` | B4 (opcional) |
 
 Reglas al crearlos, como en §1:
@@ -297,3 +297,6 @@ Paralelo con todo: abrir la issue a G01 (D3).
 > **Quién lo hace:** podemos mandar nosotros el PR (≈10 líneas en `course-list-page` y 2 claves de i18n) si están de acuerdo.
 >
 > **Pregunta:** ¿les parece bien que toquemos ese archivo, y el aviso se mantiene al clonar?
+
+> [!info] Actualización (2026-10-24) · base del worktree front
+> El worktree `2026-PIV-TPI-FE-vista-comision` se movió a `e173e68c9`, la punta de `feature/roadmap-multi-vista-profesor` (T-62.5 + D-1 a D-3), para que F7 use la pestaña General con roadmap alternable antes del merge. **Cuando T-62.5 entre a `develop`:** `git rebase origin/develop` en esta rama; los 4 commits de T-62.5 se descartan solos si el merge conserva los parches, y si fue squash hay que usar `git rebase --onto origin/develop e173e68c9`.
