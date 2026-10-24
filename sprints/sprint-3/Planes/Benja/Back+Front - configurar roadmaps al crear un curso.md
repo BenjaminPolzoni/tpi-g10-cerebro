@@ -306,7 +306,7 @@ Paralelo con todo: abrir la issue a G01 (D3).
 > [!success] F7, F1 y F2 implementadas
 > Las hizo codex (orquestado con Orca, run `run_a6bfbe42abe5`). Van **todas juntas en una sola PR a `develop`** junto con T-62.5, en vez de una PR por rama, para no esperar una aprobación por cada una.
 
-**Rama de la PR:** `feature/roadmap-configurar-al-crear-curso` (worktree `~/dev/TPI_2026/Frontend/2026-PIV-TPI-FE-config-roadmaps`, recreado el 2026-10-24). Ya tiene mergeado `origin/develop`. **Sin push ni PR todavía.** Los worktrees `vista-comision` y `multi-roadmap` quedan de más cuando se pushee.
+**Rama de la PR:** `feature/roadmap-configurar-al-crear-curso` (worktree `~/dev/TPI_2026/Frontend/2026-PIV-TPI-FE-config-roadmaps`, recreado el 2026-10-24). Ya tiene mergeado `origin/develop` (`e8f9c6d50`). **Sin push ni PR todavía.** Los worktrees `vista-comision` y `multi-roadmap` quedan de más cuando se pushee.
 
 | Tarea | Estado | Commits | Qué quedó |
 |---|---|---|---|
@@ -323,4 +323,4 @@ Paralelo con todo: abrir la issue a G01 (D3).
 - El menú "Más acciones" de General pasó a un botón dorado "Roadmap" (M-09). El botón ahora lleva `?group=` y `?roadmap=` para que el mapa abra con la selección del profesor.
 - El asistente guiado nuevo (E-12) de "Agregar contenido" **no aparece en los roadmaps no principales**, igual que las subsecciones. Es una línea si se quiere mostrar.
 
-**Verificación:** `npm run verify` pasó antes del merge (21.439 tests). Después del merge pasaron los tests de `cohort-general-page`, y `verify` completo está pendiente.
+**Verificación:** merge commiteado en `e8f9c6d50`. `npm run verify` completo pasó después del merge: 1412 archivos y 21.938 tests, 1 fallo esperado, 0 errores de lint (155 warnings).
