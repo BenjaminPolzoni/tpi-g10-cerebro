@@ -103,7 +103,7 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 
 ### Front · `Frontend/2026-PIV-TPI-FE-config-roadmaps`
 
-- [ ] **F1 · Pantalla "Configurar roadmaps"** (paso B).
+- [x] **F1 · Pantalla "Configurar roadmaps"** (paso B). **Hecha 2026-10-24** (`d50a27648`, `f1ff214ca`); ver §9.8.
   - **Qué:** una pantalla nuestra en la feature roadmap (por ejemplo `/roadmap/teacher/course/:id/roadmaps/setup`), con entrada desde la pestaña Roadmaps. El profesor elige:
     - **Uno compartido:** un solo roadmap.
     - **Uno por comisión:** un roadmap por cada comisión del curso, que sale de `CohortGroupsService`. El nombre por defecto es "Roadmap <comisión>" y se puede editar.
@@ -115,7 +115,7 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
     4. Si falla a mitad, se muestra cuáles quedaron creados y el profesor puede reintentar los que faltan.
   - **Componentes del kit:** `generic-segmented` para el modo y `GenericConfirmModal` antes de crear. Reusa `CourseRoadmapsService`.
   - **Lista cuando:** se arman los casos 1 y 2 de §3 sin tocar la pestaña Roadmaps, y hay tests del flujo feliz, de la falla a mitad y del curso que ya tiene roadmaps (ahí la pantalla solo deja agregar).
-- [ ] **F2 · Comisiones desde la misma pantalla** (paso A).
+- [x] **F2 · Comisiones desde la misma pantalla** (paso A). **Hecha 2026-10-24** (`d50a27648`, `f1ff214ca`); ver §9.8.
   - **Qué:** si el curso no tiene comisiones, un `generic-empty-state` con link a la pestaña Grupos y vuelta a la pantalla. No se duplica el alta de grupos.
   - **Lista cuando:** hay test con 0 comisiones (empty state) y con 2 (las lista).
 - [ ] **F3 · Ofrecer la pantalla al crear el curso** (paso B, D3). **Bloqueada por acuerdo con G01** si se toca `course-list-page`.
@@ -206,10 +206,10 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 | B0 | Sigue. Verificar que el principal creado por POST recibe las secciones de Courses. |
 | B1, B2, F5 | **Descartadas por D2.** |
 | B3 | Sigue condicionada a B0 y a G01. |
-| F1, F2 | Siguen. F1 pasa a incluir la regla de D4 (al menos un roadmap por comisión). |
+| F1, F2 | ✅ **Hechas 2026-10-24** (§9.8). F1 incluye la regla de D4 (al menos un roadmap por comisión). |
 | F4 | **Ya existe** (T-61.3). Solo falta integrarla en F1 y precargarla en el modo "uno por comisión". |
 | F6 | Resuelta por D4. |
-| **F7 (nueva)** | **Selector de comisión del profesor.** Un selector de comisión por encima del de roadmap, en la pestaña General y en el mapa. Al elegir una comisión muestra solo los roadmaps que ve esa comisión (los de `visibleToAll` más los suyos). |
+| **F7 (nueva)** | ✅ **Hecha 2026-10-24** (§9.8). **Selector de comisión del profesor.** Un selector de comisión por encima del de roadmap, en la pestaña General y en el mapa. Al elegir una comisión muestra solo los roadmaps que ve esa comisión (los de `visibleToAll` más los suyos). |
 | **F8 (nueva)** | **Ranking según el alcance.** En la pantalla del ranking, el alcance sale de las asignaciones: roadmaps compartidos, ranking del curso (con filtro de comisión opcional); roadmaps propios de una comisión, `/roadmaps/{id}/ranking`. Falta agregar esa consulta al puerto. |
 | **B4 (nueva, opcional)** | Validar en el back que cada comisión del curso vea al menos un roadmap. Hoy solo avisa el front. |
 
@@ -300,3 +300,27 @@ Paralelo con todo: abrir la issue a G01 (D3).
 
 > [!info] Actualización (2026-10-24) · base del worktree front
 > El worktree `2026-PIV-TPI-FE-vista-comision` se movió a `e173e68c9`, la punta de `feature/roadmap-multi-vista-profesor` (T-62.5 + D-1 a D-3), para que F7 use la pestaña General con roadmap alternable antes del merge. **Cuando T-62.5 entre a `develop`:** `git rebase origin/develop` en esta rama; los 4 commits de T-62.5 se descartan solos si el merge conserva los parches, y si fue squash hay que usar `git rebase --onto origin/develop e173e68c9`.
+
+### 9.8 Avance de implementación (2026-10-24)
+
+> [!success] F7, F1 y F2 implementadas
+> Las hizo codex (orquestado con Orca, run `run_a6bfbe42abe5`). Van **todas juntas en una sola PR a `develop`** junto con T-62.5, en vez de una PR por rama, para no esperar una aprobación por cada una.
+
+**Rama de la PR:** `feature/roadmap-configurar-al-crear-curso` (worktree `~/dev/TPI_2026/Frontend/2026-PIV-TPI-FE-config-roadmaps`, recreado el 2026-10-24). Ya tiene mergeado `origin/develop`. **Sin push ni PR todavía.** Los worktrees `vista-comision` y `multi-roadmap` quedan de más cuando se pushee.
+
+| Tarea | Estado | Commits | Qué quedó |
+|---|---|---|---|
+| T-62.5 | ✅ en la rama | 4 commits hasta `e173e68c9` | Alternar roadmaps en General y mapa (ya no se sube por separado) |
+| **F7** | ✅ hecha | `1388dbc52` (cherry-pick de `387415296`) | Selector de comisión sobre el de roadmap, en General y en el mapa. Filtra `visibleToAll` + `groupIds` de la comisión (`roadmapsVisibleToGroup`), cae al primero visible, aviso si la comisión no ve ninguno, se mantiene al ir al modo aventura |
+| **F1** | ✅ hecha | `d50a27648`, `f1ff214ca` | Pantalla `roadmap/teacher/course/:id/roadmaps/setup` con entrada desde la pestaña Roadmaps. Modo compartido o uno por comisión, roadmaps extra, asignación de comisiones, aviso D4 que bloquea confirmar, creación en secuencia (principal → settings → resto → asignaciones) y reintento sin duplicar |
+| **F2** | ✅ hecha | `d50a27648`, `f1ff214ca` | Sin comisiones: empty state con link a Grupos (el modo compartido sigue disponible) |
+| F3 | ⏸ bloqueada | — | Espera la issue a G01 (D3) |
+| F8 | ⏸ sin empezar | — | `progress_scope` **queda como está** (decisión 2026-10-24) |
+| B0, B4 | ⏸ sin empezar | — | Back |
+
+**Merge con `develop` (2026-10-24, 239 commits):** 6 conflictos resueltos.
+
+- El menú "Más acciones" de General pasó a un botón dorado "Roadmap" (M-09). El botón ahora lleva `?group=` y `?roadmap=` para que el mapa abra con la selección del profesor.
+- El asistente guiado nuevo (E-12) de "Agregar contenido" **no aparece en los roadmaps no principales**, igual que las subsecciones. Es una línea si se quiere mostrar.
+
+**Verificación:** `npm run verify` pasó antes del merge (21.439 tests). Después del merge pasaron los tests de `cohort-general-page`, y `verify` completo está pendiente.
