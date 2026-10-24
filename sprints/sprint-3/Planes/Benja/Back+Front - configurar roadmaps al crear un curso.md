@@ -372,6 +372,9 @@ Verificado en el back (`origin/develop` `0f3b4b9d`, `RankingController`):
 | F1/F2 | La pantalla "Configurar roadmaps" queda como atajo para armar todo de una vez, con las mismas reglas | ya hecha | ✅ |
 | F7 | Selector de comisión del profesor | ya hecha | ✅ |
 | F3 | Botón en el aviso de curso creado | — | ❌ descartada |
+| **B0** | Tests: el principal creado por POST recibe las secciones de Courses; si fallan, arreglar la reconciliación | back `tpi-roadmap-vista-comision`, rama `feature/roadmap-vista-por-comision` | 🔄 en curso (codex, 2026-10-24) |
+| **B4** | **Obligatoria** (Benja, 2026-10-24). Cada grupo ve siempre al menos un roadmap: 409 `roadmap.group-uncovered` en `assignGroups` y `archive` | mismo worktree back | 🔄 en curso (codex, 2026-10-24) |
+| Flag | `ROADMAP_BY_GROUP_ENABLED=true`: lo prueba Benja a mano | entorno | ⏸ manual |
 
 ### 10.4 Decisión (Benja, 2026-10-24): los separados pasan a `ROADMAP`
 
