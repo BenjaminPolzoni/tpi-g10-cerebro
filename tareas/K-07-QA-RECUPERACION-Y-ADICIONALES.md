@@ -134,8 +134,7 @@ Los valores son "antes → después". Toda la evidencia es una salida de `curl` 
    `AttemptRewardRules`). El checklist decía que el XP sube.
 3. **E2:** un intento fallido **no** cuesta una vida por defecto: el semilla usa
    `life_at_stake_policy = LAST_ATTEMPT`, así que la vida se pierde solo en el último intento permitido.
-4. **A2 / "Política de vidas":** las etiquetas del asistente son **Consume vida** y **Recuperación de
-   vida**, no "Común (exige vidas)".
+4. **A2 / "Política de vidas":** el control del asistente dice **Consume vida** y **Recuperación de vida**; "Común (exige vidas)" es la redacción de la ayuda del asistente y de las etiquetas del editor de nodos (dos nombres para la misma opción).
 
 ## Bugs y hallazgos
 
