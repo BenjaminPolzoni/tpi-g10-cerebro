@@ -387,3 +387,21 @@ Opciones que se compararon:
 
 - **Recomendado:** pasa a `ROADMAP` solo, al crearlo o clonarlo para un grupo (`PATCH` con `progressScope`, que ya existe). Así su ranking es propio, y los compartidos siguen en `COURSE`.
 - **Alternativa:** dejarlo en `COURSE` y que el ranking del alumno se filtre por su grupo. No hace falta tocar el scope, pero los grupos que comparten roadmap no comparten ranking.
+
+### 10.5 Decisión (Benja, 2026-10-24): se respeta T-19.3 y "nuevo desde 0" es `OWN`
+
+> [!warning] Lo que se encontró en B0
+> Para que pasara un test, codex hizo que las secciones de Courses se sincronizaran **solo en el principal** (`e821d72e`). Eso rompe T-19.3, acordado con G01 (V51): el sync toca **todos** los roadmaps `section_source = COURSE`, el default. La API tampoco tenía forma de crear un roadmap `OWN`. Por eso, un "nuevo desde 0" nacía espejando las secciones del curso.
+
+**Decisión:**
+- Se revierte ese cambio de la reconciliación.
+- `POST /courses/{id}/roadmaps` acepta un `section_source` opcional (`COURSE` por defecto) y el listado lo devuelve.
+- El clon copia el `section_source` del original.
+- En el front, F9 "nuevo desde 0" crea con `OWN` y arranca vacío. Clonar y compartir quedan igual.
+- F1 "uno por comisión" sigue en `COURSE`.
+
+**B4 hecha** (`2f865fd2`): 409 `roadmap.group-uncovered`, con el parámetro `groupIds`, en `assignGroups` y `archive`. El front lo muestra en la pestaña Roadmaps, en F1 y en F9.
+
+**Entorno:** el `verify` del back falló porque Docker se quedó sin espacio. Se liberaron 21 GB de caché de builds.
+
+**En curso (codex, 2026-10-24):** la corrección del back (revertir, tests de B0 según T-19.3 y `section_source`) y la del front (F9 con `OWN` y el error `group-uncovered`).
