@@ -1,6 +1,7 @@
 ---
 tags: [tpi, g10, sprint-3, plan, HU-57, HU-61, HU-45, front, back]
 fecha: 2026-10-20
+actualizado: 2026-10-24
 autor: Benja
 estado: borrador
 tarea: sin tarea en Taiga
@@ -37,7 +38,7 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 - **Comisiones:** se crean después, en la pestaña **Grupos** (`cohort-group-create-modal`), o llegan como grupos externos.
 - **Roadmap principal:** no se crea al crear el curso. `tpi-roadmap` solo escucha de Courses `STUDENT_ENROLLED`, `STUDENT_UNENROLLED` y `COURSE_COHORT_ARCHIVED` (`CoursesLifecycleEventListener`). El principal nace cuando el profesor abre el contenido por primera vez y se sincronizan las secciones de Courses (`CourseSectionsReconciliationService`).
 - **Roadmaps extra:** en la pestaña **Roadmaps** (HU-57), después de activar `multiple_roadmaps_allowed` en `PUT /courses/{id}/settings`. Se crean con `POST /courses/{id}/roadmaps`.
-- **Roadmap ↔ comisión:** **no existe**. No hay tabla ni endpoint en `tpi-roadmap` (`origin/develop` `3445890`). Es [[sprints/sprint-3/historias/HU-61 Roadmaps por grupo del curso y restricciones de visualización|HU-61]] (New).
+- **Roadmap ↔ comisión:** **no existe**. No hay tabla ni endpoint en `tpi-roadmap` (`origin/develop` `3445890`). Es [[sprints/sprint-3/historias/HU-61 Roadmaps por grupo del curso y restricciones de visualización|HU-61]] (New). **Actualización (2026-10-24):** ya existe en `origin/develop` (V58, `PUT /roadmaps/{id}/groups`, filtro del alumno y 403). Ver §9.
 - **Comisión dentro de un roadmap:**
   - Ranking con filtro opcional por comisión en el back: T-45.8, cerrada (`RankingGroupFilter`, `?groupId=`). Ver [[T-45.8 Back - ranking con filtro por comisión|plan T-45.8]].
   - Avance por comisión: `/groups/{gid}/progress`.
@@ -152,3 +153,101 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 2. Crear en Taiga las tareas B0, F1 y F2, colgadas de HU-57; y B1, B2 y F5 si se elige D2.
 3. Coordinar con Lorenzo Araujo (HU-61) para que F4 use su endpoint `PUT /roadmaps/{id}/groups` y para no duplicar T-61.3.
 4. T-45.9 ya está cerrada: F5 solo espera a B1.
+
+## 9. Actualización 2026-10-24 · decisiones y análisis contra `develop`
+
+> [!info] Qué cambió
+> Decisiones de Benja del 2026-10-24 (D2, D3, D4) y verificación del plan contra `origin/develop` del back (`c6aa13e3`) y del front. Lo que sigue **reemplaza** lo que decían D2 a D4 en §5 y marca qué tareas de §6 ya no hacen falta.
+
+### 9.1 Lo que ya está en `develop` (verificado)
+
+**Back (`tpi-roadmap`)**
+
+- **T-61.1 hecha.** `V58__roadmap_group.sql` (tabla `roadmap_group`), `RoadmapEntity.groupIds` y `visibleToAll` (TRUE por defecto, como los roadmaps anteriores a V58), y `PUT /roadmaps/{roadmapId}/groups` con `{all, group_ids}` (`RoadmapManagementService.assignGroups`). Errores `roadmap.groups-required` y `roadmap.group-unknown`. Esto reemplaza lo de V52 y el PR #272 que decía §1.
+- **T-61.2 hecha.** `RoadmapVisibilityService.visibleTo` filtra la lista del alumno y `requireVisible` da **403 `roadmap.not-visible`** al entrar por URL a un roadmap de otra comisión (`RoadmapResolver`). Los tests están en `RoadmapVisibilityTest` y `RoadmapVisibilityServiceTest`.
+- **Todo cuelga de un flag.** Con `app.features.roadmap-by-group.enabled=${ROADMAP_BY_GROUP_ENABLED:false}` apagado, no se filtra nada y el alumno ve todos los roadmaps. Hay que encenderlo en la demo.
+- **Ranking:** `GET /courses/{id}/ranking?group_id=` y `GET /roadmaps/{id}/ranking?group_id=`. Cada roadmap tiene `progress_scope` (`COURSE` o `ROADMAP`, V44), que decide si su XP suma al curso o solo al roadmap.
+- **No hay** ningún ajuste `ranking_by_group` en `course_settings` (solo `multiple_roadmaps_allowed`).
+- **No hay** ninguna regla que obligue a que cada comisión tenga al menos un roadmap visible.
+
+**Front**
+
+- **T-61.3 hecha.** `CourseRoadmapsService.assignGroups` y la asignación de comisiones en `course-roadmaps-page` (commit `ab2b44f21`), con los modelos `visibleToAll` y `groupIds`.
+- **Ranking:** la pantalla ya filtra por comisión (T-45.9), pero su puerto solo llama a `getRanking(courseCohortId, groupId)` (`ranking-data.port.ts`). **No consulta el ranking de un roadmap** (`/roadmaps/{id}/ranking`).
+- **No hay** en el profesor ningún selector de comisión que cambie la vista general ni el mapa. T-62.5 solo alterna roadmap.
+
+### 9.2 Decisiones (Benja, 2026-10-24)
+
+**D2 · El ranking sale del contenido, no de un ajuste.**
+
+- Si las comisiones **comparten contenido** (mismos roadmaps), **comparten el ranking**.
+- Si cada comisión tiene **contenido distinto**, el ranking está **separado** y el profesor elige cuál ver.
+- Consecuencia: **no se guarda una configuración `ranking_by_group`**. Se deriva de cómo se asignaron los roadmaps (`visibleToAll` y `groupIds`).
+- **Hipótesis a verificar:** que el ranking por roadmap tenga sentido solo con `progress_scope = ROADMAP`. Con `COURSE` el XP suma a todo el curso y un ranking por roadmap puede no distinguir comisiones. Hay que decidir si, al asignar un roadmap solo a una comisión, `progress_scope` pasa a `ROADMAP` solo o lo elige el profesor.
+- **Descartadas:** B1, B2 y F5 de §6.
+
+**D4 · "Principal" y mínimo de un roadmap por comisión.**
+
+- Si las comisiones comparten contenido, el **principal** es el compartido.
+- Si no, es el **primer roadmap** que aparezca, y los demás van después.
+- **Regla nueva:** cada comisión tiene que ver **como mínimo un roadmap**, el compartido o uno propio. Los adicionales se suman al inicial.
+- El back **no lo valida hoy**. Mientras no lo haga, el front avisa en la pantalla del profesor qué comisiones se quedan sin roadmap.
+- F6 queda así: el alumno no ve la palabra "principal", y el profesor sí.
+
+**D3 · Courses (G01).**
+
+- Benja va a abrir una **issue** para que G01 sepa lo que se piensa hacer. No se toca el modal de crear curso hasta que respondan. F3 sigue bloqueada.
+- Pendiente: agregar acá el número de la issue cuando exista.
+
+### 9.3 Tareas de §6 después de esto
+
+| Tarea | Estado |
+|---|---|
+| B0 | Sigue. Verificar que el principal creado por POST recibe las secciones de Courses. |
+| B1, B2, F5 | **Descartadas por D2.** |
+| B3 | Sigue condicionada a B0 y a G01. |
+| F1, F2 | Siguen. F1 pasa a incluir la regla de D4 (al menos un roadmap por comisión). |
+| F4 | **Ya existe** (T-61.3). Solo falta integrarla en F1 y precargarla en el modo "uno por comisión". |
+| F6 | Resuelta por D4. |
+| **F7 (nueva)** | **Selector de comisión del profesor.** Un selector de comisión por encima del de roadmap, en la pestaña General y en el mapa. Al elegir una comisión muestra solo los roadmaps que ve esa comisión (los de `visibleToAll` más los suyos). |
+| **F8 (nueva)** | **Ranking según el alcance.** En la pantalla del ranking, el alcance sale de las asignaciones: roadmaps compartidos, ranking del curso (con filtro de comisión opcional); roadmaps propios de una comisión, `/roadmaps/{id}/ranking`. Falta agregar esa consulta al puerto. |
+| **B4 (nueva, opcional)** | Validar en el back que cada comisión del curso vea al menos un roadmap. Hoy solo avisa el front. |
+
+### 9.4 Por dónde empezar
+
+**Por el front.** El back ya tiene lo que necesita: asignar comisiones, filtrar al alumno, el 403 y el ranking por comisión. No hay ningún endpoint nuevo para F1, F2, F7 ni F8. El back tiene dos pendientes chicos: B0 (un test) y el flag `ROADMAP_BY_GROUP_ENABLED` encendido en la demo. Orden: **F7 → F1 + F2 → F8 → B0 / B4**.
+
+### 9.5 Próximos pasos
+
+1. Abrir la issue a G01 (D3) y anotar su número acá.
+2. Decidir la hipótesis de D2 sobre `progress_scope`.
+3. Crear en Taiga F1, F2, F7 y F8 colgadas de HU-57 o HU-61, según corresponda con Lorenzo Araujo, que lleva HU-61.
+
+### 9.6 Orden de arranque y worktrees (2026-10-24)
+
+> [!info] Dos pares de worktrees
+> F1, F2 y B0 siguen en los worktrees de §1 (`config-roadmaps`). Verificado el 2026-10-24: el del **back existe**; el del **front y su rama ya no existen** (`git worktree list`), hay que recrearlos desde `feature/roadmap-multi-vista-profesor`. F7, F8 y B4 son otra funcionalidad, la **vista del profesor por comisión**, y van en worktrees propios para no mezclar ramas ni PR.
+
+| Worktree | Carpeta | Rama | Se crea desde | Tareas |
+|---|---|---|---|---|
+| Front, configurar | `~/dev/TPI_2026/Frontend/2026-PIV-TPI-FE-config-roadmaps` (**por recrear**: ya no existe en disco) | `feature/roadmap-configurar-al-crear-curso` | `feature/roadmap-multi-vista-profesor` (T-62.5) | F1, F2 |
+| Back, configurar | `~/dev/TPI_2026/Backend/tpi-roadmap-config-roadmaps` (existe) | `feature/roadmap-configurar-al-crear-curso` | `origin/develop` | B0 |
+| **Front, vista por comisión** | `~/dev/TPI_2026/Frontend/2026-PIV-TPI-FE-vista-comision` (**por crear**) | `feature/roadmap-vista-por-comision` | `feature/roadmap-multi-vista-profesor` hasta que T-62.5 entre a `develop`; después `origin/develop` | F7, F8 |
+| **Back, vista por comisión** | `~/dev/TPI_2026/Backend/tpi-roadmap-vista-comision` (**por crear**) | `feature/roadmap-vista-por-comision` | `origin/develop` | B4 (opcional) |
+
+Reglas al crearlos, como en §1:
+
+- Sin upstream hasta que T-62.5 esté mergeada; al entrar a `develop`, rebasear antes del primer push.
+- Front: `npm ci` antes de empezar y tests con `NODE_OPTIONS=--no-experimental-webstorage`.
+- Back: copiar la plantilla `.tpi/platform/` con soporte de variante y su `.env` desde `Backend/tpi-roadmap`, sin commitearla. La migración nueva, si hace falta, va después de V58: revisar `migration-vendor` y los PR abiertos antes de numerar.
+- Con `ROADMAP_BY_GROUP_ENABLED=true` en el back de prueba, si no el alumno no ve ningún filtro.
+
+**Orden para arrancar**
+
+1. **F7** · selector de comisión del profesor (front, vista por comisión). Primero, porque es la pieza que no existe y no depende de ningún endpoint nuevo.
+2. **F1 + F2** · pantalla "Configurar roadmaps" y comisiones desde la misma pantalla (front, configurar). Se pueden hacer en paralelo con F7 si hay dos personas; F4 se integra acá.
+3. **F8** · ranking según el alcance (front, vista por comisión). Necesita decidir antes la hipótesis de D2 sobre `progress_scope`.
+4. **B0** · test de integración del principal creado por POST (back, configurar). Se puede hacer en cualquier momento; no bloquea al front.
+5. **B4** · validación de al menos un roadmap por comisión (back, vista por comisión). Opcional: hasta entonces avisa el front.
+
+Paralelo con todo: abrir la issue a G01 (D3).
