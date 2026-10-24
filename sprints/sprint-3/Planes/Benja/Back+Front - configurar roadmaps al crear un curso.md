@@ -318,7 +318,8 @@ Paralelo con todo: abrir la issue a G01 (D3).
 | **F1** | ✅ hecha | `d50a27648`, `f1ff214ca` | Pantalla `roadmap/teacher/course/:id/roadmaps/setup` con entrada desde la pestaña Roadmaps. Modo compartido o uno por comisión, roadmaps extra, asignación de comisiones, aviso D4 que bloquea confirmar, creación en secuencia (principal → settings → resto → asignaciones) y reintento sin duplicar |
 | **F2** | ✅ hecha | `d50a27648`, `f1ff214ca` | Sin comisiones: empty state con link a Grupos (el modo compartido sigue disponible) |
 | F3 | ❌ descartada | — | Ver §10: no se pide nada a G01 |
-| F8 | ⏸ sin empezar | — | `progress_scope` **queda como está** (decisión 2026-10-24) |
+| F8 | ✅ hecha | `f1acb864b` | Ranking del roadmap (`/roadmaps/{id}/ranking`) para el alumno con un roadmap de su grupo en scope `ROADMAP`; el profesor elige entre el del curso y el de cada roadmap separado (§10.4) |
+| **F9** | ✅ hecha | `6af748f53` + fix | Modal al crear un grupo: compartir, nuevo o clonar (§10). El nuevo o clonado queda en scope `ROADMAP` y solo para el grupo, y los compartidos pasan a los grupos previos |
 | B0, B4 | ⏸ sin empezar | — | Back |
 
 **Merge con `develop` (2026-10-24, 239 commits):** 6 conflictos resueltos.
@@ -366,8 +367,8 @@ Verificado en el back (`origin/develop` `0f3b4b9d`, `RankingController`):
 
 | Tarea | Qué | Dónde | Estado |
 |---|---|---|---|
-| **F9** | Modal "¿Qué roadmap usa este grupo?" después de crear un grupo, con las 3 opciones de §10.1, el aviso de alumnos sin grupo, reintento si falla a mitad y cancelar = compartir (el comportamiento de hoy). Componente en `features/roadmap/ui/`; `cohort-groups-page` solo lo abre después de `createGroup` | front, `cohort-groups-page` (Courses) + roadmap | por hacer |
-| **F8** | Ranking según el alcance: si el roadmap del alumno es solo de su grupo, `/roadmaps/{id}/ranking`; si no, el del curso. Falta agregar esa consulta a `ranking-data.port.ts` | front, `features/ranking` | por hacer |
+| **F9** | ✅ **Hecha 2026-10-24** (`6af748f53` + fix de reintento). Modal "¿Qué roadmap usa este grupo?" después de crear un grupo, con las 3 opciones de §10.1, el aviso de alumnos sin grupo, reintento si falla a mitad y cancelar = compartir (el comportamiento de hoy). Componente en `features/roadmap/ui/`; `cohort-groups-page` solo lo abre después de `createGroup` | front, `cohort-groups-page` (Courses) + roadmap | ✅ hecha |
+| **F8** | Ranking según el alcance: si el roadmap del alumno es solo de su grupo, `/roadmaps/{id}/ranking`; si no, el del curso. Falta agregar esa consulta a `ranking-data.port.ts` | front, `features/ranking` | ✅ hecha (`f1acb864b`) |
 | F1/F2 | La pantalla "Configurar roadmaps" queda como atajo para armar todo de una vez, con las mismas reglas | ya hecha | ✅ |
 | F7 | Selector de comisión del profesor | ya hecha | ✅ |
 | F3 | Botón en el aviso de curso creado | — | ❌ descartada |
