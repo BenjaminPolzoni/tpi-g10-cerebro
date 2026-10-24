@@ -232,8 +232,8 @@ repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 |---|---|---|---|---|
 | Front, configurar | `~/dev/TPI_2026/Frontend/2026-PIV-TPI-FE-config-roadmaps` (**por recrear**: ya no existe en disco) | `feature/roadmap-configurar-al-crear-curso` | `feature/roadmap-multi-vista-profesor` (T-62.5) | F1, F2 |
 | Back, configurar | `~/dev/TPI_2026/Backend/tpi-roadmap-config-roadmaps` (existe) | `feature/roadmap-configurar-al-crear-curso` | `origin/develop` | B0 |
-| **Front, vista por comisión** | `~/dev/TPI_2026/Frontend/2026-PIV-TPI-FE-vista-comision` (**por crear**) | `feature/roadmap-vista-por-comision` | `feature/roadmap-multi-vista-profesor` hasta que T-62.5 entre a `develop`; después `origin/develop` | F7, F8 |
-| **Back, vista por comisión** | `~/dev/TPI_2026/Backend/tpi-roadmap-vista-comision` (**por crear**) | `feature/roadmap-vista-por-comision` | `origin/develop` | B4 (opcional) |
+| **Front, vista por comisión** | `~/dev/TPI_2026/Frontend/2026-PIV-TPI-FE-vista-comision` (creado 2026-10-24) | `feature/roadmap-vista-por-comision` | `origin/develop` (decidido 2026-10-24, no desde la rama de T-62.5) | F7, F8 |
+| **Back, vista por comisión** | `~/dev/TPI_2026/Backend/tpi-roadmap-vista-comision` (creado 2026-10-24) | `feature/roadmap-vista-por-comision` | `origin/develop` | B4 (opcional) |
 
 Reglas al crearlos, como en §1:
 
