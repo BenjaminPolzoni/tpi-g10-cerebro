@@ -327,7 +327,7 @@ Paralelo con todo: abrir la issue a G01 (D3).
 - El menú "Más acciones" de General pasó a un botón dorado "Roadmap" (M-09). El botón ahora lleva `?group=` y `?roadmap=` para que el mapa abra con la selección del profesor.
 - El asistente guiado nuevo (E-12) de "Agregar contenido" **no aparece en los roadmaps no principales**, igual que las subsecciones. Es una línea si se quiere mostrar.
 
-**Verificación:** merge commiteado en `e8f9c6d50`. `npm run verify` completo pasó después del merge: 1412 archivos y 21.938 tests, 1 fallo esperado, 0 errores de lint (155 warnings).
+**Verificación:** con F9 y F8 (`6ac9ed4fc`), `npm run verify` pasó: 1414 archivos y 21.951 tests, 1 fallo esperado, 0 errores de lint. Antes, merge commiteado en `e8f9c6d50`. `npm run verify` completo pasó después del merge: 1412 archivos y 21.938 tests, 1 fallo esperado, 0 errores de lint (155 warnings).
 
 ## 10. Rediseño 2026-10-24 · el roadmap se elige al crear un grupo
 
