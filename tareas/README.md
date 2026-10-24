@@ -17,6 +17,7 @@ Registro de diseño, decisiones puntuales y pruebas de las tareas técnicas abor
 | [[T-44-2-RECORRIDO-POR-COMISION]] | Recorrido del roadmap segmentado por comisión escolar |
 | [[P-11-5-issues]] | Seguimiento de issues de integración con Courses |
 | [[HU3-T03-2-SCHEMA-EVENTO-CONSUMIDO]] | Esquema técnico del evento de resultado consumido |
+| [[K-07-QA-RECUPERACION-Y-ADICIONALES]] | QA de los desafíos de recuperación y adicionales: resultados, bugs y dueños por servicio |
 
 ## Implementadas (archivadas)
 
