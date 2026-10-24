@@ -254,6 +254,9 @@ Paralelo con todo: abrir la issue a G01 (D3).
 
 ### 9.7 Lo que le pedimos a G01 al crear el curso (D3)
 
+> [!warning] Descartado (2026-10-24)
+> Benja decidió no abrir la issue: ya existen "crear grupos" y "gestionar roadmaps". La configuración pasa al momento de crear un grupo (§10). F3 queda descartada.
+
 > [!info] Alcance
 > Es lo mínimo para que el profesor llegue a "Configurar roadmaps" justo después de crear el curso, sin tocar el modal de 3 pasos. Corresponde a F3 de §6. La issue la abre Benja; este texto es el borrador. **Estado: sin abrir** (2026-10-24).
 
@@ -314,7 +317,7 @@ Paralelo con todo: abrir la issue a G01 (D3).
 | **F7** | ✅ hecha | `1388dbc52` (cherry-pick de `387415296`) | Selector de comisión sobre el de roadmap, en General y en el mapa. Filtra `visibleToAll` + `groupIds` de la comisión (`roadmapsVisibleToGroup`), cae al primero visible, aviso si la comisión no ve ninguno, se mantiene al ir al modo aventura |
 | **F1** | ✅ hecha | `d50a27648`, `f1ff214ca` | Pantalla `roadmap/teacher/course/:id/roadmaps/setup` con entrada desde la pestaña Roadmaps. Modo compartido o uno por comisión, roadmaps extra, asignación de comisiones, aviso D4 que bloquea confirmar, creación en secuencia (principal → settings → resto → asignaciones) y reintento sin duplicar |
 | **F2** | ✅ hecha | `d50a27648`, `f1ff214ca` | Sin comisiones: empty state con link a Grupos (el modo compartido sigue disponible) |
-| F3 | ⏸ bloqueada | — | Espera la issue a G01 (D3) |
+| F3 | ❌ descartada | — | Ver §10: no se pide nada a G01 |
 | F8 | ⏸ sin empezar | — | `progress_scope` **queda como está** (decisión 2026-10-24) |
 | B0, B4 | ⏸ sin empezar | — | Back |
 
@@ -324,3 +327,59 @@ Paralelo con todo: abrir la issue a G01 (D3).
 - El asistente guiado nuevo (E-12) de "Agregar contenido" **no aparece en los roadmaps no principales**, igual que las subsecciones. Es una línea si se quiere mostrar.
 
 **Verificación:** merge commiteado en `e8f9c6d50`. `npm run verify` completo pasó después del merge: 1412 archivos y 21.938 tests, 1 fallo esperado, 0 errores de lint (155 warnings).
+
+## 10. Rediseño 2026-10-24 · el roadmap se elige al crear un grupo
+
+> [!info] Decisión de Benja (2026-10-24)
+> No se toca el alta del curso: no hay issue a G01 y F3 queda descartada. La regla sale de cómo están armados los grupos y los roadmaps, y la única pregunta nueva aparece **al crear un grupo**.
+
+### 10.1 Reglas
+
+| Grupos | Roadmaps | Resultado | Ranking |
+|---|---|---|---|
+| 0 o 1 | 1 | Como hoy: un roadmap para todos | Compartido |
+| Varios | 1 | El mismo roadmap para todos los grupos | Compartido: el contenido es igual |
+| 0 o 1 | Varios | Todos ven todos los roadmaps | Compartido |
+| **Se crea un grupo nuevo y ya hay otro grupo y al menos un roadmap** | — | **Se pregunta:** compartir, nuevo desde 0 o clonar | Según la opción |
+
+**Las tres opciones, al crear el grupo G:**
+
+1. **Compartir el vigente.** G usa un roadmap que ya existe; si hay varios, se elige cuál. Si ese roadmap es `visibleToAll`, no se cambia nada. Si está asignado a algunos grupos, se agrega G a sus `groupIds`. **Ranking compartido** con los grupos que usan ese roadmap.
+2. **Nuevo desde 0.** Se crea un roadmap vacío solo para G. Si hacía falta, se enciende antes `multipleRoadmapsAllowed`. **Ranking separado.**
+3. **Clonar.** Se clona el vigente en el mismo curso (`POST /roadmaps/{id}/clone` con `targetCourseId` = el curso, ya existe por T-71.3), con su estructura y sin el progreso, y se asigna solo a G. **Ranking separado.**
+
+> [!warning] Detalle clave de las opciones 2 y 3
+> Para que G quede separado, los roadmaps que hoy son `visibleToAll` pasan a estar asignados a **los grupos que ya existían**, sin G. Si no se hace, G seguiría viendo el roadmap compartido y su contenido y su ranking se mezclarían.
+> - **Riesgo:** un alumno que no está en ningún grupo deja de ver esos roadmaps cuando `ROADMAP_BY_GROUP_ENABLED` está encendido.
+> - **Qué hacer:** el modal lo avisa si el curso tiene alumnos sin grupo.
+
+### 10.2 Ranking separado (F8)
+
+Verificado en el back (`origin/develop` `0f3b4b9d`, `RankingController`):
+
+- `GET /roadmaps/{id}/ranking` solo es un ranking propio del roadmap si su `progress_scope` es **`ROADMAP`**. Con **`COURSE`** devuelve el ranking del curso, con todos los alumnos mezclados.
+- `GET /courses/{id}/ranking?group_id=` filtra por **un solo** grupo.
+
+**Consecuencia:** con `progress_scope` como está hoy (`COURSE`), los grupos separados no tienen rankings distintos. La única salida sería filtrar por grupo, y eso rompe el caso de dos grupos que comparten roadmap mientras un tercero tiene el suyo: el ranking de A no incluiría a B. Se resolvió en §10.4.
+
+### 10.3 Tareas
+
+| Tarea | Qué | Dónde | Estado |
+|---|---|---|---|
+| **F9** | Modal "¿Qué roadmap usa este grupo?" después de crear un grupo, con las 3 opciones de §10.1, el aviso de alumnos sin grupo, reintento si falla a mitad y cancelar = compartir (el comportamiento de hoy). Componente en `features/roadmap/ui/`; `cohort-groups-page` solo lo abre después de `createGroup` | front, `cohort-groups-page` (Courses) + roadmap | por hacer |
+| **F8** | Ranking según el alcance: si el roadmap del alumno es solo de su grupo, `/roadmaps/{id}/ranking`; si no, el del curso. Falta agregar esa consulta a `ranking-data.port.ts` | front, `features/ranking` | por hacer |
+| F1/F2 | La pantalla "Configurar roadmaps" queda como atajo para armar todo de una vez, con las mismas reglas | ya hecha | ✅ |
+| F7 | Selector de comisión del profesor | ya hecha | ✅ |
+| F3 | Botón en el aviso de curso creado | — | ❌ descartada |
+
+### 10.4 Decisión (Benja, 2026-10-24): los separados pasan a `ROADMAP`
+
+> [!success] Resuelta
+> Un roadmap que se crea nuevo o se clona para un grupo queda con `progress_scope = ROADMAP`, y tiene ranking propio en `/roadmaps/{id}/ranking`. Los que ya existían no cambian de scope, para no tocar el XP que ya se ganó.
+>
+> **Límite conocido:** el ranking del curso de los grupos que comparten roadmap puede listar al final, con 0 XP, a alumnos de los grupos separados. Se revisa al probar F8.
+
+Opciones que se compararon:
+
+- **Recomendado:** pasa a `ROADMAP` solo, al crearlo o clonarlo para un grupo (`PATCH` con `progressScope`, que ya existe). Así su ranking es propio, y los compartidos siguen en `COURSE`.
+- **Alternativa:** dejarlo en `COURSE` y que el ranking del alumno se filtre por su grupo. No hace falta tocar el scope, pero los grupos que comparten roadmap no comparten ranking.
