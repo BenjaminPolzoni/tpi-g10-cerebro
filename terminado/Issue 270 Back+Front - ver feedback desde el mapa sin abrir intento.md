@@ -1,8 +1,17 @@
 ---
-tags: [tpi, g10, sprint-3, plan, resolver-issue, front, back, mapa, feedback]
+tags:
+  - tpi
+  - g10
+  - sprint-3
+  - plan
+  - resolver-issue
+  - front
+  - back
+  - mapa
+  - feedback
 fecha: 2026-10-22
 autor: Benja
-estado: borrador
+estado: terminado
 repo: 2026-P4-FE/2026-PIV-TPI-FE + 2026-P4-BE/tpi-roadmap
 issue: https://github.com/2026-P4-BE/tpi-roadmap/issues/270
 taiga: sin tarea en Taiga

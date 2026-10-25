@@ -41,3 +41,12 @@ Notas de tareas/planes implementados. Las cinco notas originales de esta carpeta
 | [[T-59.5 — Qué le falta al alumno para desbloquear un nodo]] | Requisitos para desbloquear nodo |
 
 Las notas con partes sustanciales pendientes o no verificadas siguen en sus carpetas de origen.
+### Planes de Benja, verificados el 2026-10-25
+
+| Documento | Funcionalidad | Evidencia |
+|---|---|---|
+| [[T-62.5 Front - alternar roadmaps y unidades en el mapa del profesor]] | Alternar roadmaps en General y en el mapa | FE #1462 mergeada; T-62.5 Closed |
+| [[Back+Front - configurar roadmaps al crear un curso]] | Roadmaps por comisión, configuración y vista del alumno | FE #1462 y BE #341 mergeadas; T-57.5 a T-57.7 y T-61.5 a T-61.8 Closed; HU-57 y HU-61 Done |
+| [[Issue 270 Back+Front - ver feedback desde el mapa sin abrir intento]] | Feedback del desafío desde el mapa | FE #1111 y #1152, BE #318 mergeadas; issue #270 cerrada |
+| [[Issue 309 Back - resumen de progreso por cohorte y serie semanal de XP]] | Resumen por cohorte y serie semanal de XP | BE #325 y #326 mergeadas; issue #309 cerrada. El PR 2 (bloqueados y motivos) quedó atado a D1 |
+| [[Front - niebla negra en las islas bloqueadas del archipiélago]] | Niebla sobre las islas bloqueadas | En `archipelago-3d.service.ts` de `develop`, con la niebla del mundo hex en vez del negro liso |

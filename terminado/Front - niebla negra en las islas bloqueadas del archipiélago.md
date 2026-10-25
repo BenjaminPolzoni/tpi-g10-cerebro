@@ -1,8 +1,14 @@
 ---
-tags: [tpi, g10, sprint-3, plan, front, mapa]
+tags:
+  - tpi
+  - g10
+  - sprint-3
+  - plan
+  - front
+  - mapa
 fecha: 2026-10-22
 autor: Benja
-estado: borrador
+estado: terminado
 repo: 2026-PIV-TPI-FE
 taiga: sin asignar
 orden: 1 de 4 (no depende de nadie)

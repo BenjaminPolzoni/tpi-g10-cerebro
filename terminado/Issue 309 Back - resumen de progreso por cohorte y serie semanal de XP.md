@@ -1,8 +1,19 @@
 ---
-tags: [tpi, g10, sprint-3, plan, resolver-issue, back, dashboards, backoffice, xp, progreso, concluido]
+tags:
+  - tpi
+  - g10
+  - sprint-3
+  - plan
+  - resolver-issue
+  - back
+  - dashboards
+  - backoffice
+  - xp
+  - progreso
+  - concluido
 fecha: 2026-10-23
 autor: Benja
-estado: concluido
+estado: terminado
 repo: 2026-P4-BE/tpi-roadmap
 issue: https://github.com/2026-P4-BE/tpi-roadmap/issues/309
 taiga: sin tarea en Taiga

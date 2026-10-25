@@ -1,10 +1,19 @@
 ---
-tags: [tpi, g10, sprint-3, plan, HU-57, HU-61, HU-45, front, back]
+tags:
+  - tpi
+  - g10
+  - sprint-3
+  - plan
+  - HU-57
+  - HU-61
+  - HU-45
+  - front
+  - back
 fecha: 2026-10-20
 actualizado: 2026-10-24
 autor: Benja
-estado: borrador
-tarea: sin tarea en Taiga
+estado: terminado
+tarea: T-57.5, T-57.6, T-57.7, T-61.5 a T-61.8 (Closed)
 repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
 ---
 
