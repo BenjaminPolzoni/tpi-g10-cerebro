@@ -57,6 +57,10 @@ por API Gateway.
 
 ### 3.1 Disponibilidad liviana de vidas para el Gate
 
+> **Estado en Roadmap (revisión T-23.2).** El código conserva la ruta configurable
+> (`ACCOUNTING_LIVES_AVAILABILITY_PATH`), pero el Gate **hoy lee las vidas de `equip-summary` (§3.7)**
+> y no depende de esta ruta.
+
 ```http
 GET /api/accounting/courses/{courseId}/accounts/{studentId}/lives-availability
 ```
@@ -219,12 +223,19 @@ una sola llamada. El vocabulario vigente mostrado por este contrato incluye `SHI
 
 ## 4. Eventos de vidas
 
+> **Estado en Roadmap (revisión T-23.2, 2026-10-20).** Roadmap **no consume** `LIVES_EXHAUSTED` ni
+> `LIVES_AVAILABLE` (§4.1 y §4.2): el código no tiene listener para ellos. Lo que sí consume son los
+> movimientos `LIFE_CREDITED` / `LIFE_DEBITED` en `accounting.events` (§4.3). Los dos eventos de abajo
+> quedan como lo acordado por Accounting, a confirmar con ese equipo si siguen vigentes. El envelope
+> real del bus es el de contratos-kafka v8, en snake_case.
+
 Ambos eventos son publicados por Accounting en `accounting.ledger.events` y usan el envelope:
 
 ```json
 {
-  "eventId": "...",
-  "eventType": "...",
+  "event_id": "...",
+  "event_type": "...",
+  "event_version": 1,
   "timestamp": "ISO-8601 UTC",
   "producer": "...",
   "payload": {}
@@ -306,6 +317,10 @@ libres" al momento del último movimiento.
 
 
 ## 5. Flujo de equipamiento
+
+> **Estado en Roadmap (revisión T-23.2, 2026-10-20).** Roadmap usa solo la consulta `equip-summary`
+> (§3.7) para mostrar vidas e inventario. **No emite ni consume** `ITEM_EQUIP_REQUESTED` /
+> `ITEM_EQUIP_RESULT` (§5.1 y §5.2): el código no los implementa. Quedan como propuesta con Accounting.
 
 Antes de iniciar un desafío, Roadmap puede consultar `equip-summary` para mostrar al alumno sus
 vidas e inventario. Roadmap maneja su selección, pero Accounting administra el estado.

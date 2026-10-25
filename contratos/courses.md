@@ -88,8 +88,8 @@ El spec es REST puro. Roadmap necesita **consumir** dos hechos del bus:
 | Inscripción validada | Crear la fila de `student_course` (hoy la pueblan los eventos de inscripción; sin ellos el micro no tendría ni un alumno) | `courseCohortId`, `studentId`, `studentNumber`, `status` |
 | Cohorte archivado | Pasar el roadmap y el ranking a solo lectura (RF-CUR-09) | `courseCohortId`, `status` |
 
-6. ¿Publican esos eventos? Si no, ¿los pueden agregar? El envelope es el de 5 campos del PDF del
-   bus y el topic lo asigna Notificaciones (ver `docs/contracts/bus-notificaciones.md`).
+6. ¿Publican esos eventos? Si no, ¿los pueden agregar? El envelope es el de 6 campos (contratos-kafka v8, snake_case)
+   del bus y el topic lo asigna Notificaciones (ver `docs/contracts/bus-notificaciones.md`).
 7. Si no hay eventos, la alternativa es que **nosotros** consultemos por REST en cada operación.
    Funciona, pero nos deja sin saber de una baja hasta que el alumno intente algo.
 
@@ -195,24 +195,26 @@ Tras inspeccionar directamente la implementación en `tpi-course` (rama `develop
 - **Topic**: `courses.events` (configurable vía `app.kafka.topics.courses=${KAFKA_TOPIC_COURSES:courses.events}`).
 - **Eventos consumidos**:
   1. `STUDENT_ENROLLED`:
-     - Payload: `{ enrollmentId, courseCohortId, studentId, validationType, enrolledAt }`
+     - Payload (snake_case, v8): `{ enrollment_id, course_cohort_id, student_id, validation_type, enrolled_at }`. Roadmap lee `course_cohort_id` y `student_id`
      - Acción: upsert idempotente en `student_course` (`active = true`, inicializa vidas y XP si es nuevo).
   2. `STUDENT_UNENROLLED`:
-     - Payload: `{ enrollmentId, courseCohortId, studentId, reason, performedByUserId, unenrolledAt }`
+     - Payload (snake_case, v8): `{ enrollment_id, course_cohort_id, student_id, reason, performed_by_user_id, unenrolled_at }`. Roadmap lee `course_cohort_id` y `student_id`
      - Acción: marca `active = false` en `student_course` para la cohorte indicada.
   3. `COURSE_COHORT_ARCHIVED`:
-     - Payload: `{ courseCohortId, courseBaseId, archivedAt }`
-     - Acción: marca `RoadmapEntity.archived = true`, pasando el roadmap y ranking a solo lectura.
+     - Payload (snake_case, v8): `{ course_cohort_id, course_base_id, archived_at }`. Roadmap lee `course_cohort_id`
+     - Acción: marca `RoadmapEntity.archived = true` en **todos los roadmaps de la cohorte**, pasando el curso y el ranking a solo lectura. Con la cohorte archivada, los cambios de gestión de roadmaps responden `409 course.archived`.
 
 ### 7.4 Mapeo y Creación del Roadmap
 - **Relación de Identificadores**: El identificador de curso en Roadmap (`courseId`) corresponde exactamente al `courseCohortId` de Courses.
-- **Creación On-Demand**: Courses no envía un payload para autogenerar el grafo del roadmap. El roadmap se instancia en Roadmap cuando el profesor a cargo da de alta la primera sección (`POST /api/roadmap/courses/{courseCohortId}/sections`).
+- **Creación On-Demand**: Courses no envía un payload para autogenerar el grafo del roadmap. El roadmap se instancia en Roadmap cuando el profesor a cargo da de alta la primera sección (`POST /api/roadmap/courses/{courseCohortId}/sections`) o crea el primer roadmap (`POST /api/roadmap/courses/{courseCohortId}/roadmaps`).
+- **Varios roadmaps por curso (HT-17, HU-57)**: un curso (`courseCohortId`) puede tener **varios roadmaps**; cada uno es un mapa distinto del mismo curso (DEC-017). El primero que se crea queda como **principal** (`is_primary`) y siempre hay uno solo. Las rutas `/api/roadmap/courses/{courseCohortId}/...` resuelven el roadmap principal y las rutas `/api/roadmap/roadmaps/{roadmapId}/...` el roadmap pedido, autorizado contra el curso al que pertenece. Crear más de uno exige que el profesor active `multiple_roadmaps_allowed` en los ajustes del curso (`409 roadmap.multiple-not-allowed` si no).
+- **Origen de las unidades (HT-19, T-19.3)**: cada roadmap tiene `section_source`: `COURSE` (por defecto: sus unidades espejan las secciones de Courses) u `OWN` (unidades propias, no se sincronizan). La sincronización de secciones solo toca los roadmaps `COURSE` que no están archivados. *Hoy no hay un endpoint para cambiar `section_source`: todos los roadmaps quedan en `COURSE`.*
 - **Validación previa**: Antes de crear o editar cualquier sección o nodo, Roadmap verifica mediante `HttpCohortOwnershipClient` que el profesor posea `canWrite: true` en Courses para dicha cohorte.
 - **Mapeo de Nodos**:
   - `THEORY`: vincula lecturas/materiales de Courses mediante `contentId`.
   - `PRACTICE`: vincula desafíos evaluados por el Motor mediante `challengeId`.
 - **Evento de Activación emitido por Courses (`COURSE_COHORT_ACTIVATED`)**:
-  - Payload: `{ courseCohortId, courseBaseId, institutionId, startDate, endDate }`.
+  - Payload (snake_case, v8): `{ course_cohort_id, course_base_id, institution_id, start_date, end_date }`. Roadmap **no reacciona** a este evento (lo ignora).
 
 ### 7.5 Tabla de Verificación de Integración Campo por Campo
 
@@ -223,10 +225,10 @@ Tras inspeccionar directamente la implementación en `tpi-course` (rama `develop
 | **Endpoint Membresía** | `GET /api/course/course-cohorts/{id}/membership` | `HttpCohortOwnershipClient` con caché Caffeine | ✅ Verificado 100% |
 | **Respuesta Membresía** | `CohortMembershipResponseDto { courseCohortId, role, canRead, canWrite }` | `MembershipResponse { courseCohortId, role, canRead, canWrite }` | ✅ Verificado 100% |
 | **Topic Kafka** | `courses.events` | `${app.kafka.topics.courses:courses.events}` | ✅ Verificado 100% |
-| **Envelope Kafka** | `EventEnvelope<T> { eventId, eventType, eventVersion, timestamp, producer, payload }` | `EventEnvelope<T> { eventId, eventType, timestamp, producer, payload, unknownFields }` | ✅ Verificado 100% |
-| **Payload `STUDENT_ENROLLED`** | `{ enrollmentId, courseCohortId, studentId, validationType, enrolledAt }` | `StudentEnrolledPayload` (mismos campos y tipos) | ✅ Verificado y mergeado en `develop` (PR #36) |
-| **Payload `STUDENT_UNENROLLED`**| `{ enrollmentId, courseCohortId, studentId, reason, performedByUserId, unenrolledAt }` | `StudentUnenrolledPayload` (mismos campos y tipos) | ✅ Verificado 100% |
-| **Payload `COURSE_COHORT_ARCHIVED`**| `{ courseCohortId, courseBaseId, archivedAt }` | `CourseCohortArchivedPayload` (mismos campos y tipos) | ✅ Verificado 100% |
+| **Envelope Kafka** | `EventEnvelope<T> { event_id, event_type, event_version, timestamp, producer, payload }` (snake_case, v8) | `EventEnvelope<T> { event_id, event_type, event_version, timestamp, producer, payload, unknownFields }`; `event_version` debe ser 1, si no va a la DLT | ✅ Verificado 100% |
+| **Payload `STUDENT_ENROLLED`** | `{ enrollment_id, course_cohort_id, student_id, validation_type, enrolled_at }` | `StudentEnrolledPayload` (mismos campos y tipos) | ✅ Verificado y mergeado en `develop` (PR #36) |
+| **Payload `STUDENT_UNENROLLED`**| `{ enrollment_id, course_cohort_id, student_id, reason, performed_by_user_id, unenrolled_at }` | `StudentUnenrolledPayload` (mismos campos y tipos) | ✅ Verificado 100% |
+| **Payload `COURSE_COHORT_ARCHIVED`**| `{ course_cohort_id, course_base_id, archived_at }` | `CourseCohortArchivedPayload` (mismos campos y tipos) | ✅ Verificado 100% |
 | **Consulta Matrículas Alumno**| `GET /api/course/enrollments/me` | `StudentCohortEnrollmentDto` | ✅ Mergeado en `develop` (PR #41) |
 | **Lote de material** | `GET /course-cohorts/{id}/activities?sectionIds=` para principal de servicio con `course.activities.read` | `HttpCoursesMaterialClient` en `mode=http`; valida el vínculo de un nodo por la sección de la unidad (T-04.2) | ✅ Implementado; el lote incluye `order_index` y `course_section_id` (§7.9) |
 | **Catálogo de Contenidos** | Tabla `course_activity` en BD; controller no expuesto aún en `develop` | `CoursesCatalogClient` mockeado (`catalog-mode=stub`) | 🟡 Mockeado en memoria (Fase actual) |
@@ -272,7 +274,7 @@ Con esta arquitectura reactiva y desacoplada, Roadmap no requiere polling ni lla
 
 ### 7.8 Reconciliación manual de secciones Courses→Roadmap
 
-- Roadmap expone `POST /api/roadmap/courses/{courseId}/sections/sync` solo cuando `app.sections.sync-enabled=true` (default `false`).
+- Roadmap expone `POST /api/roadmap/courses/{courseId}/sections/sync` solo cuando `app.sections.sync-enabled=true` (default `false`). La reconciliación se aplica a **todos los roadmaps del curso con `section_source = COURSE` que no están archivados**; los de unidades propias (`OWN`) no se tocan. Si el curso todavía no tiene ningún roadmap y Courses tiene secciones, se crea el principal; si no tiene roadmaps y Courses no devuelve secciones, responde `404 roadmap.not-found`; si tiene roadmaps pero todos son `OWN`, no hay nada que sincronizar.
 - Puede ejecutarlo un ADMIN o el profesor dueño de la cohorte. Un roadmap archivado responde `409`; Courses se consulta antes de abrir la transacción local y una respuesta incompleta/indisponible no modifica el grafo.
 - Las secciones ya vinculadas se reconcilian por UUID Courses: altas, renombres y posiciones actualizan únicamente la entidad sección; nodos, aristas y progreso se conservan. `orderIndex` de Courses es cero-based y se traduce a `sortOrder` uno-based.
 - HU-17: cuando una sección desaparece del catálogo activo (o se inactiva), Roadmap da de baja lógica la unidad, sus nodos y sus aristas (RF-NFR-01), sin borrar el progreso ya alcanzado (`completed_node`, `content_reading`, `xp_movement`, G10-E1). Si Courses vuelve a publicar la sección, la unidad se reactiva con sus nodos en lugar de crear una nueva. Una lista vacía de secciones no da de baja nada (guard T-36.7).
