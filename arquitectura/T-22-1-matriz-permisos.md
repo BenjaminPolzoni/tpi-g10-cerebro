@@ -93,13 +93,15 @@ ya existen en `SecurityConfig` (`roadmap.progress.read`, `roadmap.health.read`,
    de la matriz y no de cada `requireOwner`.
 2. **Un profesor puede leer datos de cualquier curso**, porque en estos endpoints alcanza con el rol y no se
    chequea que sea dueño:
-   - progreso de un alumno (`/students/{studentId}/progress`, por curso y por roadmap);
-   - historial de XP (`/students/{studentId}/xp-history`);
-   - insignias de un alumno (`/students/{studentId}/badges`; el service solo exige que el alumno esté inscripto);
+   - ~~progreso de un alumno (`/students/{studentId}/progress`, por curso y por roadmap)~~;
+   - ~~historial de XP (`/students/{studentId}/xp-history`)~~;
+   - ~~insignias de un alumno (`/students/{studentId}/badges`; el service solo exige que el alumno esté inscripto)~~;
    - ventana de un desafío (`/challenges/{challengeId}/window`);
    - roadmap y detalle de nodo (`GET /courses/{courseId}`, `GET /roadmaps/{roadmapId}`, `/nodes/{nodeId}`).
 
-   Conviene sumarles el chequeo de dueño en T-22.3, o abrir un issue aparte si se prefiere no esperar.
+   ✅ **Resuelto (2026-10-25)** para progreso, XP e insignias: [tpi-roadmap#343](https://github.com/2026-P4-BE/tpi-roadmap/pull/343).
+   Quedan pendientes la ventana del desafío y el roadmap/detalle de nodo; conviene sumarles el chequeo de dueño
+   en T-22.3, o abrir un issue aparte si se prefiere no esperar.
 3. **El gate acepta cualquier servicio.** `SecurityConfig` deja pasar a toda `ServiceIdentity` en
    `/students/{studentId}/nodes/{nodeId}/eligibility` sin mirar el scope (DT-01). Lo resuelve T-22.4 con
    `roadmap.gate.read`.
@@ -129,7 +131,7 @@ Rutas relativas a `/api/roadmap`. Agrupadas por controller.
 
 | Método | Ruta | Permiso propuesto | ADMIN | GESTOR | PROFESSOR | STUDENT | Servicio | Alcance hoy |
 |---|---|---|:-:|:-:|:-:|:-:|:-:|---|
-| GET | `/courses/{courseId}/students/{studentId}/badges` | `roadmap.badges.read` | ✔ |  | ✔ | propio |  | El propio alumno; staff sin chequeo de dueño ⚠️ |
+| GET | `/courses/{courseId}/students/{studentId}/badges` | `roadmap.badges.read` | ✔ |  | ✔ | propio |  | El propio alumno, ADMIN o profesor dueño |
 
 ### BoundaryNodeAdminController
 
@@ -256,8 +258,8 @@ Rutas relativas a `/api/roadmap`. Agrupadas por controller.
 | Método | Ruta | Permiso propuesto | ADMIN | GESTOR | PROFESSOR | STUDENT | Servicio | Alcance hoy |
 |---|---|---|:-:|:-:|:-:|:-:|:-:|---|
 | POST | `/nodes/{nodeId}/read` | `roadmap.learning.write` | ✔ |  |  | ✔ |  | El propio alumno |
-| GET | `/courses/{courseId}/students/{studentId}/progress` | `roadmap.progress.read` | ✔ |  | ✔ | propio |  | El propio alumno; profesor sin chequeo de dueño ⚠️ |
-| GET | `/roadmaps/{roadmapId}/students/{studentId}/progress` | `roadmap.progress.read` | ✔ |  | ✔ | propio |  | El propio alumno; profesor sin chequeo de dueño ⚠️ |
+| GET | `/courses/{courseId}/students/{studentId}/progress` | `roadmap.progress.read` | ✔ |  | ✔ | propio |  | El propio alumno, ADMIN o profesor dueño |
+| GET | `/roadmaps/{roadmapId}/students/{studentId}/progress` | `roadmap.progress.read` | ✔ |  | ✔ | propio |  | El propio alumno, ADMIN o profesor dueño |
 | GET | `/courses/{courseId}/progress` | `roadmap.progress.read` | ✔ |  | ✔ |  | ✔ | Servicio con el scope, ADMIN o profesor dueño |
 | GET | `/roadmaps/{roadmapId}/progress` | `roadmap.progress.read` | ✔ |  | ✔ |  | ✔ | Servicio con el scope, ADMIN o profesor dueño |
 | GET | `/courses/{courseId}/sections/{sectionId}/reading-progress` | `roadmap.learning.read` |  |  |  | ✔ |  | El propio alumno (id del token) |
@@ -321,7 +323,7 @@ Rutas relativas a `/api/roadmap`. Agrupadas por controller.
 
 | Método | Ruta | Permiso propuesto | ADMIN | GESTOR | PROFESSOR | STUDENT | Servicio | Alcance hoy |
 |---|---|---|:-:|:-:|:-:|:-:|:-:|---|
-| GET | `/courses/{courseId}/students/{studentId}/xp-history` | `roadmap.progress.read` | ✔ |  | ✔ | propio |  | El propio alumno; profesor sin chequeo de dueño ⚠️ |
+| GET | `/courses/{courseId}/students/{studentId}/xp-history` | `roadmap.progress.read` | ✔ |  | ✔ | propio |  | El propio alumno, ADMIN o profesor dueño |
 
 ## 5. Qué sigue
 
