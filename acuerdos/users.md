@@ -73,9 +73,10 @@ Users publica `user-events` (`STUDENT-REGISTERED`, `ACCOUNT-DEACTIVATED`) y `not
 - [ ] Verificar que el vocabulario de roles que emite Users (`GESTOR`, `PROFESSOR`) coincide con el que Courses documenta (`MANAGER`, `PROFESSOR_READ_ONLY`, "GESTOR o PROFESOR").
 - [ ] Rol de profesor ayudante (`PROFESSOR_READ_ONLY` de Courses): pendiente #8 de Users, sin definir.
 - [ ] Un lote de perfiles por ids evitaría N llamadas (hoy una por alumno con presupuesto de 5 s). Solicitud no registrada.
-- [ ] **T-22.2, preguntado en la #294 el 2026-10-23** ([comentario](https://github.com/2026-P4-BE/tpi-roadmap/pull/294#issuecomment-6357831133)), esperando respuesta:
-    1. ¿El Gateway sigue mandando `X-User-Roles` con `AUTHZ_MODE=on`? Los endpoints del propio alumno (materiales, lectura, nivel, salud, inventario, marcar leído, avatar y mascota) y los de admin siguen con `@PreAuthorize` por rol; sin el rol darían 403.
-    2. ¿Qué roles reciben cada `roadmap.*` en el catálogo de Compose? Hoy el GESTOR no tiene `badge.write` ni `progress.read`.
+- [ ] **T-22.2, abierto como [tpi-users#215](https://github.com/2026-P4-BE/tpi-users/issues/215) el 2026-10-25** (antes solo preguntado en la #294 el 23/10, [comentario](https://github.com/2026-P4-BE/tpi-roadmap/pull/294#issuecomment-6357831133), sin respuesta), esperando respuesta:
+    1. ¿El Gateway sigue mandando `X-User-Roles` con `AUTHZ_MODE=on`? Los endpoints del propio alumno (materiales, lectura, nivel, salud, inventario, marcar leído, avatar y mascota) y los de admin siguen con `@PreAuthorize` por rol; sin el rol darían 403. Es de Users: Users también lleva el Gateway (G11).
+    2. ¿Qué roles reciben cada `roadmap.*` en el catálogo de Compose? Pedimos explícitamente que **GESTOR tenga `roadmap.badge.write` (y por lo tanto `badge.read`) y `roadmap.progress.read`**, como ADMIN, siguiendo [[decisiones/DEC-009-gestores-editan-roadmaps|DEC-009]]: hoy ni el código legado ni los `legacyRoles` de la #294 se los dan. Es una inconsistencia nuestra previa a la PR, no algo que introdujo Users.
+- [ ] **Bug encontrado en la #294 (2026-10-25):** `authz-starter-0.1.0.pom` y `maven-metadata.xml`, vendoreados en `.mvn/tpi-libs`, están commiteados en LF sin `.gitattributes` que los proteja; con `core.autocrlf=true` (default de Git en Windows) el checkout los pasa a CRLF y el `checksumPolicy=fail` del repo rechaza la resolución. Bloquea compilar la rama en Windows. Reportado en el [comentario](https://github.com/2026-P4-BE/tpi-roadmap/pull/294#issuecomment-6398768912) de la PR, con la causa confirmada y el arreglo sugerido (`.mvn/tpi-libs/** -text`).
 
 > [!warning] Riesgos
 > - Sin `users.legajo.read` el profesor ve el ranking sin legajo hasta que vence la caché (30 min).
@@ -85,6 +86,7 @@ Users publica `user-events` (`STUDENT-REGISTERED`, `ACCOUNT-DEACTIVATED`) y `not
 
 ## Historial
 - 2026-10-23: la #294 define el catálogo de 7 permisos `roadmap.*` y el scope del gate; se adopta para la matriz (T-22.1) y se preguntan las dos dudas de la T-22.2.
+- 2026-10-25: Users vendoreó `authz-starter 0.1.0` en la #294 (antes solo compilaba en estático); encontramos que no compila en Windows por un `.gitattributes` faltante (CRLF corrompe los checksums del `.pom`/`maven-metadata.xml` vendoreados) y lo reportamos. Las dos dudas de T-22.2 se abrieron como [tpi-users#215](https://github.com/2026-P4-BE/tpi-users/issues/215), pidiendo además que GESTOR tenga `badge.write`/`progress.read`.
 - 2026-09-26: reporte de contratos de Users incorporado (`reporte-users-contratos-y-endpoints.md`); token técnico (T-01.7).
 - 2026-10-10: ranking con perfil de Users (T-24.3) y presupuesto de carga; ranking sigue completo si Users falla.
 - 2026-10-15: secret de servicio desactualizado reproducido en la variante (`401` en el token técnico). La falla del token tiene código de error propio (T-45.7, [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo|DEC-019]]).
