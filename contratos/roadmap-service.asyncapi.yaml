@@ -1,25 +1,33 @@
 asyncapi: '2.6.0'
 info:
   title: Roadmap Service - Contrato Asíncrono de Eventos Kafka
-  version: '1.0.0'
+  version: '2.0.0'
   description: |
-    Especificación oficial de eventos publicados y consumidos por el microservicio Roadmap (Tema 10)
-    en conformidad con la arquitectura DDD y el estándar `contratos-kafka` (v3) del Skill Hub.
-    
+    Eventos publicados y consumidos por el microservicio Roadmap (Tema 10), verificados contra
+    `develop` de `tpi-roadmap` (T-23.2). Wire **contratos-kafka v8**: sobre y payload en
+    **snake_case**, un solo nombre por campo, sin alias. Un mensaje en camelCase va a la DLT
+    (ver `tareas/T-191-KAFKA-V8-CUTOVER.md`).
+
     Reglas de integración:
-    - Todo mensaje viaja en texto plano JSON con un sobre canónico obligatorio de 6 campos.
-    - `eventVersion` es estrictamente el entero `1`.
+    - Todo mensaje viaja en texto plano JSON con un sobre de 6 campos: `event_id`, `event_type`,
+      `event_version`, `timestamp`, `producer`, `payload`.
+    - `event_version` es estrictamente el entero `1`; otro valor o su ausencia va a la DLT.
+    - `event_type` en SCREAMING_SNAKE_CASE (`[A-Z][A-Z0-9]*(_[A-Z0-9]+)*`).
     - La serialización/deserialización utiliza StringSerializer / StringDeserializer.
-    - Consumer group canónico del servicio: `tema-10-roadmap-service-group`.
-    - La resiliencia define 3 reintentos con intervalo fijo de 2000 ms y derivación automática
-      a la DLT del dominio origen (`<topico>.DLT`).
-    
-    Brechas y pendientes declarados:
-    - [P-09]: Roadmap no tiene aún un tópico de dominio propio asignado en la tabla de Dominios de Tema 11
-      (`contratos-kafka` v3). Los eventos del Outbox (`NODE_COMPLETED`, `NODE_UNLOCKED`, `BADGE_AWARDED`) quedan almacenados
-      en estado `PENDING` hasta la provisión del canal oficial en el broker compartido (`event-bus:29092`).
-    - [G-09]: Se acepta compatibilidad transitoria de lectura para nombres de campo en snake_case
-      emitidos por versiones previas del Motor de Desafíos.
+    - Consumer group por defecto del servicio: `tema-10-roadmap-service-group` (`KAFKA_GROUP_ID`).
+    - Productor por defecto: `tema-10-roadmap-service` (`KAFKA_PRODUCER`).
+    - Entrega at-least-once: se deduplica por `event_id`.
+    - Resiliencia: 3 reintentos con intervalo fijo de 2000 ms y derivación a la DLT del tópico
+      de origen (`<topico>.DLT`). Los errores de negocio o de formato van directo a la DLT, sin reintentos.
+
+    Excepciones al snake_case que siguen vigentes:
+    - `accounting.events` (`LIFE_CREDITED`, `LIFE_DEBITED`): el payload se lee en camelCase
+      (`studentId`, `courseId`) y acepta también snake_case (`student_id`, `course_id`).
+
+    Pendientes declarados:
+    - [P-09] El tópico de Roadmap (`roadmap.events`, configurable con `KAFKA_TOPIC_ROADMAP`) lo
+      provisiona Tema 11. Hasta que exista, los eventos del outbox quedan en `PENDING`.
+    - Confirmar con Gamificación, Accounting y Notificaciones que consumen `roadmap.events` en v8.
 
 servers:
   dev:
@@ -33,9 +41,9 @@ servers:
 
 channels:
   challenges.events:
-    description: Canal del dominio Desafíos (Tema 03).
+    description: Canal del dominio Desafíos (Tema 03, producer `tema-03-challenges-service`). Tópico configurable con `KAFKA_TOPIC_CHALLENGE_EVENTS`.
     publish:
-      summary: Consumo de eventos de finalización y aborto del motor de desafíos.
+      summary: Consumo del cierre de intentos y de la baja de desafíos del Motor.
       operationId: consumeChallengeEvents
       bindings:
         kafka:
@@ -44,11 +52,15 @@ channels:
         oneOf:
           - $ref: '#/components/messages/ChallengeCompletedMessage'
           - $ref: '#/components/messages/ChallengeAbortedMessage'
+          - $ref: '#/components/messages/ChallengeArchivedMessage'
 
   challenges.results:
-    description: Canal de transición del motor de desafíos (Tema 03).
+    description: |
+      DEPRECADO. Canal de transición del Motor (v1/v2, camelCase). El listener está **apagado
+      por defecto** (`app.kafka.topics.challenge-result.enabled=false`) y está previsto borrarlo.
+    deprecated: true
     publish:
-      summary: Consumo transitorio de resultados de corrección y cancelación de intentos.
+      summary: Resultados de corrección y cancelación de intentos (formato anterior).
       operationId: consumeChallengeResults
       bindings:
         kafka:
@@ -59,9 +71,9 @@ channels:
           - $ref: '#/components/messages/AttemptCanceledMessage'
 
   courses.events:
-    description: Canal del dominio Cursos (Tema 02).
+    description: Canal del dominio Cursos (Tema 03 - Courses). Tópico configurable con `KAFKA_TOPIC_COURSES_LIFECYCLE`.
     publish:
-      summary: Consumo de eventos del ciclo de vida de estudiantes y cohortes.
+      summary: Ciclo de vida de matrículas y cohortes.
       operationId: consumeCoursesLifecycleEvents
       bindings:
         kafka:
@@ -73,22 +85,35 @@ channels:
           - $ref: '#/components/messages/CourseCohortArchivedMessage'
 
   administration.events:
-    description: Canal del dominio Administración (Tema 12).
+    description: Canal del dominio Administración (Tema 12 - Backoffice). Tópico configurable con `KAFKA_TOPIC_BACKOFFICE`.
     publish:
-      summary: Consumo de eventos de cambios de estado del catálogo PAR / Backoffice.
+      summary: Cambios de parámetros globales (PAR). Roadmap invalida su caché del parámetro.
       operationId: consumeAdministrationEvents
       bindings:
         kafka:
           groupId: tema-10-roadmap-service-group
       message:
-        $ref: '#/components/messages/ParStatusChangedMessage'
+        $ref: '#/components/messages/GlobalConfigurationChangedMessage'
+
+  accounting.events:
+    description: Canal del dominio Accounting (Tema 08). Tópico configurable con `KAFKA_TOPIC_ACCOUNTING`.
+    publish:
+      summary: Movimientos de vidas, para mantener el último dato conocido.
+      operationId: consumeAccountingEvents
+      bindings:
+        kafka:
+          groupId: tema-10-roadmap-service-group
+      message:
+        oneOf:
+          - $ref: '#/components/messages/LifeCreditedMessage'
+          - $ref: '#/components/messages/LifeDebitedMessage'
 
   roadmap.events:
     description: |
-      Canal propuesto para el dominio Roadmap (Tema 10).
-      Estado actual: PENDIENTE (P-09). Sujeto a creación por Tema 11.
+      Canal del dominio Roadmap (Tema 10), publicado con Transactional Outbox. Key = `student_id`.
+      Tópico configurable con `KAFKA_TOPIC_ROADMAP`. Estado: pendiente de provisión (P-09).
     subscribe:
-      summary: Publicación de eventos de progreso en el grafo (mediante Outbox pattern).
+      summary: Publicación de eventos de progreso e insignias.
       operationId: publishRoadmapEvents
       bindings:
         kafka:
@@ -103,111 +128,136 @@ components:
   messages:
     ChallengeCompletedMessage:
       name: ChallengeCompletedMessage
-      title: Evento de desafío completado
+      title: Intento cerrado con veredicto (CHALLENGE_COMPLETED)
       payload:
-        $ref: '#/components/schemas/CanonicalEnvelope'
+        $ref: '#/components/schemas/ChallengeClosureEnvelope'
       bindings:
         kafka:
           key:
             type: string
-            description: Identificador del agregado (studentId o attemptId)
+            description: id_user (orden garantizado por alumno)
 
     ChallengeAbortedMessage:
       name: ChallengeAbortedMessage
-      title: Evento de desafío abortado
+      title: Intento cerrado sin veredicto (CHALLENGE_ABORTED)
       payload:
-        $ref: '#/components/schemas/CanonicalEnvelope'
+        $ref: '#/components/schemas/ChallengeClosureEnvelope'
+      bindings:
+        kafka:
+          key:
+            type: string
+            description: id_user
+
+    ChallengeArchivedMessage:
+      name: ChallengeArchivedMessage
+      title: Desafío dado de baja por el Motor (CHALLENGE_ARCHIVED)
+      description: Roadmap marca como «desafío no disponible» los nodos que lo usan (HU-01 CA8, T-32.1).
+      payload:
+        $ref: '#/components/schemas/ChallengeArchivedEnvelope'
 
     AttemptCorrectedMessage:
       name: AttemptCorrectedMessage
-      title: Evento de corrección de intento (transición)
+      title: Corrección de intento (ATTEMPT_CORRECTED, deprecado)
       payload:
         $ref: '#/components/schemas/CanonicalEnvelope'
 
     AttemptCanceledMessage:
       name: AttemptCanceledMessage
-      title: Evento de cancelación de intento (transición)
+      title: Cancelación de intento (ATTEMPT_CANCELED, deprecado)
       payload:
         $ref: '#/components/schemas/CanonicalEnvelope'
 
     StudentEnrolledMessage:
       name: StudentEnrolledMessage
-      title: Estudiante inscripto a cohorte
+      title: Alumno inscripto a una cohorte (STUDENT_ENROLLED)
       payload:
-        $ref: '#/components/schemas/CanonicalEnvelope'
+        $ref: '#/components/schemas/StudentEnrollmentEnvelope'
 
     StudentUnenrolledMessage:
       name: StudentUnenrolledMessage
-      title: Estudiante desinscripto de cohorte
+      title: Alumno desinscripto de una cohorte (STUDENT_UNENROLLED)
       payload:
-        $ref: '#/components/schemas/CanonicalEnvelope'
+        $ref: '#/components/schemas/StudentEnrollmentEnvelope'
 
     CourseCohortArchivedMessage:
       name: CourseCohortArchivedMessage
-      title: Cohorte de curso archivada
+      title: Cohorte archivada (COURSE_COHORT_ARCHIVED)
+      description: Roadmap archiva todos los roadmaps de la cohorte y pasa el curso y el ranking a solo lectura.
       payload:
-        $ref: '#/components/schemas/CanonicalEnvelope'
+        $ref: '#/components/schemas/CourseCohortArchivedEnvelope'
 
-    ParStatusChangedMessage:
-      name: ParStatusChangedMessage
-      title: Notificación de actualización de parámetros PAR
+    GlobalConfigurationChangedMessage:
+      name: GlobalConfigurationChangedMessage
+      title: Parámetro global cambiado (GLOBAL_CONFIGURATION_CHANGED)
       payload:
-        $ref: '#/components/schemas/CanonicalEnvelope'
+        $ref: '#/components/schemas/GlobalConfigurationChangedEnvelope'
+
+    LifeCreditedMessage:
+      name: LifeCreditedMessage
+      title: Vida acreditada (LIFE_CREDITED)
+      payload:
+        $ref: '#/components/schemas/LifeMovementEnvelope'
+
+    LifeDebitedMessage:
+      name: LifeDebitedMessage
+      title: Vida debitada (LIFE_DEBITED)
+      payload:
+        $ref: '#/components/schemas/LifeMovementEnvelope'
 
     NodeCompletedMessage:
       name: NodeCompletedMessage
-      title: Nodo del roadmap completado por estudiante
+      title: Nodo del roadmap completado por el alumno
       payload:
         $ref: '#/components/schemas/NodeCompletedEnvelope'
       bindings:
         kafka:
           key:
             type: string
-            description: ID del estudiante (studentId)
+            description: student_id
 
     NodeUnlockedMessage:
       name: NodeUnlockedMessage
-      title: Nodo del roadmap desbloqueado para estudiante
+      title: Nodo del roadmap desbloqueado para el alumno
       payload:
         $ref: '#/components/schemas/NodeUnlockedEnvelope'
       bindings:
         kafka:
           key:
             type: string
-            description: ID del estudiante (studentId)
+            description: student_id
 
     BadgeAwardedMessage:
       name: BadgeAwardedMessage
-      title: Insignia otorgada a estudiante (HU-21)
+      title: Insignia otorgada al alumno (HU-21)
       payload:
         $ref: '#/components/schemas/BadgeAwardedEnvelope'
       bindings:
         kafka:
           key:
             type: string
-            description: ID del estudiante (studentId)
+            description: student_id
 
   schemas:
     CanonicalEnvelope:
       type: object
-      description: Sobre canónico de 6 campos obligatorio según contratos-kafka v3 (§2).
+      description: Sobre de 6 campos obligatorio (contratos-kafka v8, snake_case).
       required:
-        - eventId
-        - eventType
-        - eventVersion
+        - event_id
+        - event_type
+        - event_version
         - timestamp
         - producer
         - payload
       properties:
-        eventId:
+        event_id:
           type: string
           format: uuid
-          description: Identificador único del evento para garantizar idempotencia.
-        eventType:
+          description: Identificador único del evento, para deduplicar.
+        event_type:
           type: string
           pattern: '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'
-          description: Identificador del tipo de hecho en SCREAMING_SNAKE_CASE.
-        eventVersion:
+          description: Tipo de hecho en SCREAMING_SNAKE_CASE.
+        event_version:
           type: integer
           enum: [1]
           description: Versión del contrato del payload. Estrictamente el entero 1.
@@ -217,17 +267,86 @@ components:
           description: Timestamp ISO-8601 UTC de generación del evento.
         producer:
           type: string
-          description: Identificador del microservicio emisor (ej. tema-10-roadmap-service).
+          description: Microservicio emisor (por defecto de Roadmap, tema-10-roadmap-service).
         payload:
           type: object
-          description: Cuerpo específico del evento según el eventType.
+          description: Cuerpo específico del evento según el event_type.
+
+    ChallengeClosureEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/CanonicalEnvelope'
+        - type: object
+          properties:
+            event_type:
+              type: string
+              enum: [CHALLENGE_COMPLETED, CHALLENGE_ABORTED]
+            producer:
+              type: string
+              enum: [tema-03-challenges-service]
+            payload:
+              $ref: '#/components/schemas/ChallengeClosurePayload'
+
+    ChallengeArchivedEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/CanonicalEnvelope'
+        - type: object
+          properties:
+            event_type:
+              type: string
+              enum: [CHALLENGE_ARCHIVED]
+            payload:
+              $ref: '#/components/schemas/ChallengeArchivedPayload'
+
+    StudentEnrollmentEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/CanonicalEnvelope'
+        - type: object
+          properties:
+            event_type:
+              type: string
+              enum: [STUDENT_ENROLLED, STUDENT_UNENROLLED]
+            payload:
+              $ref: '#/components/schemas/StudentEnrollmentPayload'
+
+    CourseCohortArchivedEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/CanonicalEnvelope'
+        - type: object
+          properties:
+            event_type:
+              type: string
+              enum: [COURSE_COHORT_ARCHIVED]
+            payload:
+              $ref: '#/components/schemas/CourseCohortArchivedPayload'
+
+    GlobalConfigurationChangedEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/CanonicalEnvelope'
+        - type: object
+          properties:
+            event_type:
+              type: string
+              enum: [GLOBAL_CONFIGURATION_CHANGED]
+            payload:
+              $ref: '#/components/schemas/GlobalConfigurationChangedPayload'
+
+    LifeMovementEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/CanonicalEnvelope'
+        - type: object
+          properties:
+            event_type:
+              type: string
+              enum: [LIFE_CREDITED, LIFE_DEBITED]
+            payload:
+              $ref: '#/components/schemas/LifeMovementPayload'
 
     NodeCompletedEnvelope:
       allOf:
         - $ref: '#/components/schemas/CanonicalEnvelope'
         - type: object
           properties:
-            eventType:
+            event_type:
               type: string
               enum: [NODE_COMPLETED]
             producer:
@@ -241,7 +360,7 @@ components:
         - $ref: '#/components/schemas/CanonicalEnvelope'
         - type: object
           properties:
-            eventType:
+            event_type:
               type: string
               enum: [NODE_UNLOCKED]
             producer:
@@ -255,7 +374,7 @@ components:
         - $ref: '#/components/schemas/CanonicalEnvelope'
         - type: object
           properties:
-            eventType:
+            event_type:
               type: string
               enum: [BADGE_AWARDED]
             producer:
@@ -264,70 +383,108 @@ components:
             payload:
               $ref: '#/components/schemas/BadgeAwardedPayload'
 
+    ChallengeClosurePayload:
+      type: object
+      description: Payload del cierre de intento del Motor (ver motor-desafios-evento-cierre.md).
+      required: [resources, id_user, id_course, challenge_id, result]
+      properties:
+        id_user: {type: string, format: uuid, description: Alumno.}
+        id_course: {type: string, format: uuid, description: Curso-cohorte.}
+        id_node: {type: string, format: uuid, description: Nodo desde el que se abrió el intento (pista condicionada).}
+        id_attempt: {type: string, format: uuid, description: Intento.}
+        challenge_id: {type: string, format: uuid, description: Desafío.}
+        challenge_version: {type: integer}
+        challenge_type: {type: string}
+        content_type: {type: string}
+        difficulty: {type: string}
+        mandatory: {type: boolean}
+        performed_by_user_id: {type: string, format: uuid}
+        performed_by_role: {type: string}
+        resources:
+          type: object
+          description: Lo que el Motor calcula. Roadmap aplica estos valores tal cual llegan.
+          properties:
+            coins: {type: number}
+            xp: {type: integer}
+            add_live: {type: boolean}
+            subtract_live: {type: boolean}
+            active_item: {type: array, items: {type: string}}
+        result:
+          type: object
+          properties:
+            status: {type: string}
+            score: {type: integer}
+            completed_at: {type: string, format: date-time}
+            late: {type: boolean}
+            attempt_number: {type: integer}
+            resolution_time: {type: number}
+            started_at: {type: string, format: date-time}
+            submitted_at: {type: string, format: date-time}
+            approval_threshold: {type: integer}
+            max_attempts: {type: integer}
+            last_attempt: {type: boolean}
+            closure_reason: {type: string}
+            closure_detail: {type: string}
+
+    ChallengeArchivedPayload:
+      type: object
+      required: [challenge_id]
+      properties:
+        challenge_id: {type: string, format: uuid, description: Desafío dado de baja.}
+        archived_at: {type: string, format: date-time}
+        performed_by_user_id: {type: string, format: uuid}
+
+    StudentEnrollmentPayload:
+      type: object
+      required: [course_cohort_id, student_id]
+      description: Se leen `course_cohort_id` y `student_id`; el resto de los campos de Courses se ignora.
+      properties:
+        course_cohort_id: {type: string, format: uuid}
+        student_id: {type: string, format: uuid}
+
+    CourseCohortArchivedPayload:
+      type: object
+      required: [course_cohort_id]
+      properties:
+        course_cohort_id: {type: string, format: uuid}
+
+    GlobalConfigurationChangedPayload:
+      type: object
+      required: [param_key]
+      description: Roadmap invalida la caché del parámetro `param_key`; `version` solo se usa para el log.
+      properties:
+        param_key: {type: string, description: Clave del parámetro (por ejemplo PAR-09).}
+        version: {type: string}
+
+    LifeMovementPayload:
+      type: object
+      description: Excepción al snake_case. Se lee `studentId`/`courseId` y también `student_id`/`course_id`.
+      properties:
+        studentId: {type: string, format: uuid}
+        courseId: {type: string, format: uuid}
+
     NodeCompletedPayload:
       type: object
-      required:
-        - courseId
-        - studentId
-        - nodeId
+      required: [course_id, student_id, node_id]
       properties:
-        courseId:
-          type: string
-          format: uuid
-          description: Identificador de la cohorte / curso.
-        studentId:
-          type: string
-          format: uuid
-          description: Identificador del estudiante.
-        nodeId:
-          type: string
-          format: uuid
-          description: Identificador del nodo completado en el grafo.
-        challengeId:
-          type: string
-          format: uuid
-          description: Identificador del desafío completado (si aplica).
-        sectionId:
-          type: string
-          format: uuid
-          description: Identificador de la sección contenedora.
+        course_id: {type: string, format: uuid, description: Cohorte / curso.}
+        student_id: {type: string, format: uuid}
+        node_id: {type: string, format: uuid, description: Nodo completado.}
+        challenge_id: {type: string, format: uuid, description: Desafío completado, si aplica.}
+        section_id: {type: string, format: uuid, description: Sección contenedora.}
 
     NodeUnlockedPayload:
       type: object
-      required:
-        - courseId
-        - studentId
-        - nodeId
+      required: [course_id, student_id, node_id]
       properties:
-        courseId:
-          type: string
-          format: uuid
-          description: Identificador de la cohorte / curso.
-        studentId:
-          type: string
-          format: uuid
-          description: Identificador del estudiante.
-        nodeId:
-          type: string
-          format: uuid
-          description: Identificador del nodo desbloqueado.
+        course_id: {type: string, format: uuid}
+        student_id: {type: string, format: uuid}
+        node_id: {type: string, format: uuid, description: Nodo desbloqueado.}
 
     BadgeAwardedPayload:
       type: object
-      required:
-        - courseId
-        - studentId
-        - badgeId
+      required: [course_id, student_id, badge_id]
       properties:
-        courseId:
-          type: string
-          format: uuid
-          description: Identificador de la cohorte / curso.
-        studentId:
-          type: string
-          format: uuid
-          description: Identificador del estudiante.
-        badgeId:
-          type: string
-          format: uuid
-          description: Identificador de la insignia otorgada. El momento del otorgamiento es el timestamp del envelope.
+        course_id: {type: string, format: uuid}
+        student_id: {type: string, format: uuid}
+        badge_id: {type: string, format: uuid, description: Insignia otorgada. El momento es el timestamp del sobre.}

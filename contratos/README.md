@@ -14,8 +14,8 @@ Este directorio almacena los contratos canónicos de APIs REST (OpenAPI), mensaj
 | [[accounting-roadmap-v1]] | Accounting / Inventario (Tema 08) | Disponibilidad de vidas (`lives-availability`), inventario (`equip-summary`) y cuentas por cohorte. |
 | [[backoffice-par]] | Backoffice (Tema 12) | Consulta de parámetros globales PAR (curva de niveles PAR-09) y eventos de actualización. |
 | [[CONTRATO_T10_BACKOFFICE]] | Backoffice (Tema 12) | Contrato extendido de integración de parámetros de progreso. |
-| [[bus-notificaciones]] | Notificaciones / Bus Kafka | Estándar de eventos del bus, envelope de 5 campos y topics asignados. |
-| [[roadmap-events-v1]] | Notificaciones / Plataforma | Especificación de eventos emitidos por Roadmap vía Transactional Outbox. |
-| [[roadmap-service.asyncapi.yaml]] | Plataforma Kafka | Especificación AsyncAPI formal de los eventos consumidos y producidos por Roadmap. |
+| [[bus-notificaciones]] | Notificaciones / Bus Kafka | Estándar de eventos del bus, envelope v8 de 6 campos en snake_case y topics. |
+| [[roadmap-events-v1]] | Notificaciones / Plataforma | Eventos que Roadmap publica en `roadmap.events` (`NODE_COMPLETED`, `NODE_UNLOCKED`, `BADGE_AWARDED`) vía Transactional Outbox; envelope v8. |
+| [[roadmap-service.asyncapi.yaml]] | Plataforma Kafka | AsyncAPI 2.0.0 (envelope v8, snake_case) de los eventos que Roadmap consume y produce. |
 | [[reporte-users-contratos-y-endpoints]] | Users & Identity (Tema 01) | Endpoints de tokens M2M, perfiles de usuario y legajos. |
 | [[08-comunicacion-gateway]] | API Gateway | Protocolo de ruteo, propagación de identidad y headers `X-*`. |

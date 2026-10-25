@@ -35,20 +35,22 @@ eureka:
     prefer-ip-address: true
 ```
 
+La configuración real está en `application.properties` (claves `eureka.client.*`, con el mismo valor).
+Además, el servicio publica la salud en un **puerto de gestión aparte** (`management.server.port`, por defecto `8011`,
+variable `MANAGEMENT_PORT`) y lo informa a Eureka en `eureka.instance.metadata-map.management.port`.
+
 **Checklist Eureka:**
-- [ ] `register-with-eureka=true`
-- [ ] `fetch-registry=false`
-- [ ] `healthcheck.enabled=true`
-- [ ] `/actuator/health/liveness` y `/readiness` exponen probe status
+- [x] `register-with-eureka=true`
+- [x] `fetch-registry=false`
+- [x] `healthcheck.enabled=true`
+- [x] `/actuator/health/liveness` y `/readiness` exponen probe status (expone `health`, `info` y `prometheus`; la readiness incluye `flyway` y `db`)
 
 ## 3. Rutas públicas vs privadas
 
-```yaml
-app:
-  api:
-    base-path: /api/roadmap
-    public-path: /api/roadmap/public
-    private-path: /api/roadmap
+```properties
+# application.properties
+app.api.public-path=/api/roadmap/public
+app.api.private-path=/api/roadmap
 ```
 
 | Nivel | Path | Acceso |
@@ -56,8 +58,9 @@ app:
 | **Público** | `/api/roadmap/public/**` | Sin autenticación (healthcheck, docs) |
 | **Privado** | `/api/roadmap/**` | Requiere JWT válido (el Gateway lo valida) |
 
-> Los controllers usan `@RequestMapping("${app.api.base-path:/api/roadmap}")`
-> como base, y los endpoints públicos van bajo `/public/`.
+> Los controllers privados usan `@RequestMapping("${app.api.private-path}")` y los públicos
+> (hoy solo `PingController`) `@RequestMapping("${app.api.public-path}")`. No existe una
+> propiedad `app.api.base-path`.
 
 ## 4. Headers que el Gateway inyecta
 
@@ -76,6 +79,12 @@ El **IdentityPropagationFilter** del Gateway:
 | `X-Request-Id` | `UUID` | Correlación de la request |
 
 > **Nunca** reinventar headers. Consumir estos tal cual.
+
+`GatewayHeadersFilter` arma la identidad solo con estos headers y **no autentica** si llegan mezclados:
+un pedido de usuario (`X-Principal-Type: user`) con `X-User-Id` UUID válido se rechaza si trae también
+`X-Service-Id`, `X-Service-Scopes` o `X-Delegated-User`; un pedido de servicio (`service`) exige
+`X-Service-Id` y `X-Service-Scopes` y se rechaza si trae `X-User-Id`, `X-User-Roles` o `X-Delegated-User`.
+Un `X-User-Roles` con un elemento vacío (por ejemplo `A,,B`) también se rechaza.
 
 ## 5. Autorización: el Gateway NO autoriza por rol
 
@@ -103,21 +112,19 @@ if (rolesHeader == null || rolesHeader.isBlank()) {
 }
 ```
 
-## 6. Trace ID en logs
+## 6. Trace ID en las respuestas de error
 
-El `TraceIdFilter` (`infrastructure/config/TraceIdFilter.java`) extrae:
-- `traceparent` → MDC `traceId` (32 hex chars)
-- `X-Request-Id` → MDC `requestId`
+Roadmap **no tiene** un filtro que cargue el trace ID en el log (el `TraceIdFilter` se borró a propósito,
+decisión E7 de HT-23, y no hay `logback-spring.xml` con `%X{traceId}`). Hoy el trace ID se usa solo
+en los errores HTTP:
 
-Formato de log (configurado en `logback-spring.xml`):
-
-```
-2026-09-16 20:17:29.123 [main] [abc123:def456] INFO  c.u.f.r.RoadmapService - Procesando...
-```
+- `TraceId.from(traceparent, X-Request-Id)` toma el `traceId` del header W3C `traceparent`
+  (`00-<traceId>-<spanId>-<flags>`, segunda parte) o, si no vino, el `X-Request-Id`.
+- `ApiExceptionHandler` y los handlers de seguridad (`ProblemJsonSecurityHandlers`) lo agregan como
+  `trace_id` al problem+json de la respuesta; se omite si no vino ninguno de los dos headers.
 
 **Checklist trace:**
-- [ ] `TraceIdFilter` registrado como `@Component`
-- [ ] `logback-spring.xml` con `%X{traceId}:%X{requestId}` en el pattern
+- [x] Los errores devuelven `trace_id` cuando el Gateway manda `traceparent` o `X-Request-Id`
 - [ ] No loguear el JWT ni headers sensibles (solo traceId/requestId)
 
 ## 7. Registro en el Gateway (allowlist)
@@ -143,14 +150,19 @@ spring.cloud.gateway.discovery.locator.include-expression=
 | 3 | Rutas public/private configuradas | ✅ `app.api.public-path` / `app.api.private-path` |
 | 4 | Allowlist en Gateway solicitada | ⬜ Pendiente (pedir al squad Gateway) |
 | 5 | Consumir headers del Gateway, no reinventar | ✅ `@RequestHeader` en controllers |
-| 6 | Loguear trace ID | ✅ `TraceIdFilter` + `logback-spring.xml` |
+| 6 | Devolver el trace ID en los errores | ✅ `TraceId` + `ApiExceptionHandler` (`trace_id` en el problem+json) |
 
 ## 9. Docker (ya configurado)
 
-`docker-compose.yml` ya incluye:
-- **eureka** (stand-in local, puerto 8761)
-- **gateway** (stand-in local, puerto 8080)
-- **ms-roadmap** (con `EUREKA_URL=http://eureka:8761/eureka/`)
-- **postgres** + **kafka**
+`docker/docker-compose.yml` incluye cuatro servicios:
+- **postgres** (base de datos del servicio)
+- **neo4j** (estructura del roadmap, T-18.1)
+- **event-bus** (Kafka en modo KRaft, sin Zookeeper; puerto 29092 hacia el host)
+- **app** (el servicio, perfil `dev` por defecto)
 
-Para levantar todo: `docker compose up --build`
+**No** incluye stand-ins de Eureka ni del Gateway. Dentro del contenedor Eureka está apagado
+(`EUREKA_CLIENT_ENABLED=false`) y toda llamada saliente va a `GATEWAY_URL`, que por defecto
+apunta al Gateway del host (`http://host.docker.internal:8080`). Con `KAFKA_TOPIC_ROADMAP` vacío
+(el valor por defecto del compose) el outbox no publica en el bus.
+
+Para levantar todo: `docker compose -f docker/docker-compose.yml up --build -d`

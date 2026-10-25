@@ -184,7 +184,7 @@ Ejemplo: un profesor anuló un intento que estaba en curso.
 |---|---|---|
 | `id_user` | UUID | Alumno (nuestro `studentId`) |
 | `id_course` | UUID | Curso (nuestro `id_course`) |
-| `id_node` | UUID | Nodo de Roadmap desde el que se abrió el intento. **Resolución primaria condicionada** del nodo: resuelve solo si el nodo existe en el roadmap de la cohorte **y** su `challenge_id` coincide con el del evento. Si existe con un `challenge_id` distinto, Roadmap **no** usa ese nodo inconsistente: registra un WARN y cae a la resolución por `challenge_id`. Si no viene o no existe, también cae a la resolución por `challenge_id` (D-EVCIERRE-02; ver "Resolución del nodo") |
+| `id_node` | UUID | Nodo de Roadmap desde el que se abrió el intento. **Resolución primaria condicionada** del nodo: resuelve solo si el nodo existe en un roadmap de **ese mismo curso** (`id_course`) **y** su `challenge_id` coincide con el del evento; ese roadmap puede ser el principal o cualquier otro del curso (HT-17). Si existe con un `challenge_id` distinto, Roadmap **no** usa ese nodo inconsistente: registra un WARN y cae a la resolución por `challenge_id`. Si no viene o no existe, también cae a la resolución por `challenge_id` (D-EVCIERRE-02; ver "Resolución del nodo") |
 | `id_attempt` | UUID | Intento |
 | `challenge_id` | UUID | Desafío |
 | `challenge_version` | entero | Versión con la que se resolvió |
@@ -346,21 +346,29 @@ pendiente que actualicen su `docs/contracts/roadmap-eligibility.yaml`, que lista
 
 ## Resolución del nodo (D-EVCIERRE-02)
 
-El resultado del motor se asocia a un nodo del roadmap de la cohorte con esta política,
-implementada en `ChallengeNodeResolver`:
+Un curso puede tener **varios roadmaps** (HT-17, DEC-017), así que primero se decide **en qué roadmap** se registra el resultado y después **qué nodo** de ese roadmap. Cuando solo hay uno, el comportamiento es el de siempre.
 
-1. Si el evento trae `id_node`, ese nodo resuelve **solo si existe en el roadmap de la cohorte
+**Paso 0: roadmap del resultado** (T-19.4, `ResultRoadmapLocator`):
+
+- Si el evento trae `id_node` y ese nodo existe, su `challenge_id` coincide con el del evento y su roadmap es **del mismo curso** (`id_course`), el resultado se registra en **ese roadmap**, sea el principal o no.
+- En cualquier otro caso (sin `id_node`, nodo inexistente, `challenge_id` distinto o nodo de otro curso) se usa el **roadmap principal del curso**. Si el curso no tiene principal, el evento falla sin reintento (`node.not-found`).
+
+**Resolución del nodo dentro de ese roadmap**, implementada en `ChallengeNodeResolver`:
+
+1. Si el evento trae `id_node`, ese nodo resuelve **solo si existe en el roadmap elegido
    y su `challenge_id` coincide con el del evento**. Si existe pero su `challenge_id` no
    coincide, se registra un `WARN` (`error.node.id-hint-mismatch`), **no** se usa ese nodo
    inconsistente y se pasa al paso 3.
 2. Si el evento trae `id_node` pero no existe en el roadmap, se registra un `WARN`
    (`error.node.id-hint-unknown`) y se pasa al paso 3.
-3. Fallback por `challenge_id` con cardinalidad estricta: `0` nodos →
+3. Fallback por `challenge_id` con cardinalidad estricta, **solo dentro del roadmap elegido en el paso 0** (no se buscan los otros roadmaps del curso): `0` nodos →
    `node.not-found`; `1` nodo → ese nodo; `2+` nodos → `node.challenge-ambiguous`.
 
 Esto preserva la compatibilidad con los eventos legacy (v1/v2) que no incluyen `id_node` y evita
 completar un nodo ajeno cuando el `id_node` del evento apunta a un nodo cuyo `challenge_id` no
 coincide.
+
+**Efecto en el XP con varios roadmaps (HT-17, T-17.3).** El movimiento del ledger guarda en qué roadmap se ganó (`roadmap_id`) y si suma al total del curso (`counted_in_course`), según el `progress_scope` que tenía ese roadmap al llegar el evento: `COURSE` (por defecto) suma al total del curso; `ROADMAP` queda como XP propio del roadmap. El evento del Motor **no cambia**: el Motor sigue informando por curso y Roadmap asigna el resultado al roadmap que corresponde. Cambiar el modo rige hacia adelante y no reescribe lo anterior.
 
 **Estado del ítem `id_node`:** la política de resolución está **implementada** en
 `ChallengeNodeResolver`; el ítem queda **abierto** hasta la confirmación de G09
