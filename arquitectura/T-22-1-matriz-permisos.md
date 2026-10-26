@@ -3,7 +3,7 @@ tags: [tpi, g10, roadmap, sprint-3, seguridad, permisos]
 tarea: "T-22.1 (#9090)"
 historia: "[[sprints/sprint-3/historias/HT-22 Permisos en vez de roles|HT-22]]"
 estado: propuesta
-actualizado: 2026-10-23
+actualizado: 2026-10-26
 ---
 
 # T-22.1 — Matriz de permisos del micro
@@ -64,8 +64,8 @@ ya existen en `SecurityConfig` (`roadmap.progress.read`, `roadmap.health.read`,
 |---|:-:|:-:|:-:|:-:|:-:|:-:|
 | `roadmap.avatar.edit` | 2 |  |  |  | ✔ |  |
 | `roadmap.avatar.read` | 4 |  |  |  | ✔ |  |
-| `roadmap.badges.manage` | 4 | ✔ |  | ✔ |  |  |
-| `roadmap.badges.read` | 1 | ✔ |  | ✔ | propio |  |
+| `roadmap.badges.manage` | 4 | ✔ | ✔ | ✔ |  |  |
+| `roadmap.badges.read` | 1 | ✔ | ✔ | ✔ | propio |  |
 | `roadmap.challenge-pool.read` | 2 | ✔ | ✔ | ✔ |  |  |
 | `roadmap.gate.read` (scope) | 1 |  |  |  |  | ✔ |
 | `roadmap.graph.edit` | 25 | ✔ | ✔ | ✔ |  |  |
@@ -87,10 +87,12 @@ ya existen en `SecurityConfig` (`roadmap.progress.read`, `roadmap.health.read`,
 
 1. **El GESTOR no recibe el mismo trato en todos lados.** Desde [[decisiones/DEC-009-gestores-editan-roadmaps|DEC-009]] pasa el chequeo de dueño como ADMIN
    en el grafo, el pool, el mentor, el sync, las relaciones, la validación, los roadmaps, la vista del grafo
-   y el ranking. Pero **no** tiene acceso al catálogo de insignias (`BadgeCatalogController`), al nivel de un
-   alumno (`LevelController`), a la salud de un alumno (`HealthController`) ni al progreso de la cohorte o de
+   y el ranking. ~~Pero **no** tiene acceso al catálogo de insignias (`BadgeCatalogController`)~~ ni a la salud
+   de un alumno (`HealthController`), al nivel de un alumno (`LevelController`) o al progreso de la cohorte o de
    una comisión (`ProgressController`, `GroupProgressController`). Con permisos, esto pasa a ser una decisión
    de la matriz y no de cada `requireOwner`.
+   ✅ **Resuelto (2026-10-26)** para el catálogo de insignias: `BadgeCatalogController` y `BadgeController`
+   incluyen a GESTOR y ya no consultan el dueño en Courses ([PR #347](https://github.com/2026-P4-BE/tpi-roadmap/pull/347)).
 2. **Un profesor puede leer datos de cualquier curso**, porque en estos endpoints alcanza con el rol y no se
    chequea que sea dueño:
    - ~~progreso de un alumno (`/students/{studentId}/progress`, por curso y por roadmap)~~;
@@ -122,16 +124,16 @@ Rutas relativas a `/api/roadmap`. Agrupadas por controller.
 
 | Método | Ruta | Permiso propuesto | ADMIN | GESTOR | PROFESSOR | STUDENT | Servicio | Alcance hoy |
 |---|---|---|:-:|:-:|:-:|:-:|:-:|---|
-| GET | `/courses/{courseId}/badges` | `roadmap.badges.manage` | ✔ |  | ✔ |  |  | Dueño del curso (ADMIN sin chequeo) |
-| POST | `/courses/{courseId}/badges` | `roadmap.badges.manage` | ✔ |  | ✔ |  |  | Dueño del curso (ADMIN sin chequeo) |
-| PUT | `/courses/{courseId}/badges/{badgeId}` | `roadmap.badges.manage` | ✔ |  | ✔ |  |  | Dueño del curso (ADMIN sin chequeo) |
-| DELETE | `/courses/{courseId}/badges/{badgeId}` | `roadmap.badges.manage` | ✔ |  | ✔ |  |  | Dueño del curso (ADMIN sin chequeo) |
+| GET | `/courses/{courseId}/badges` | `roadmap.badges.manage` | ✔ | ✔ | ✔ |  |  | Dueño del curso (ADMIN y GESTOR sin chequeo) |
+| POST | `/courses/{courseId}/badges` | `roadmap.badges.manage` | ✔ | ✔ | ✔ |  |  | Dueño del curso (ADMIN y GESTOR sin chequeo) |
+| PUT | `/courses/{courseId}/badges/{badgeId}` | `roadmap.badges.manage` | ✔ | ✔ | ✔ |  |  | Dueño del curso (ADMIN y GESTOR sin chequeo) |
+| DELETE | `/courses/{courseId}/badges/{badgeId}` | `roadmap.badges.manage` | ✔ | ✔ | ✔ |  |  | Dueño del curso (ADMIN y GESTOR sin chequeo) |
 
 ### BadgeController
 
 | Método | Ruta | Permiso propuesto | ADMIN | GESTOR | PROFESSOR | STUDENT | Servicio | Alcance hoy |
 |---|---|---|:-:|:-:|:-:|:-:|:-:|---|
-| GET | `/courses/{courseId}/students/{studentId}/badges` | `roadmap.badges.read` | ✔ |  | ✔ | propio |  | El propio alumno, ADMIN o profesor dueño |
+| GET | `/courses/{courseId}/students/{studentId}/badges` | `roadmap.badges.read` | ✔ | ✔ | ✔ | propio |  | El propio alumno, ADMIN, GESTOR o profesor dueño |
 
 ### BoundaryNodeAdminController
 
