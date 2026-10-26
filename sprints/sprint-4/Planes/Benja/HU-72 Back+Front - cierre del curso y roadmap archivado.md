@@ -57,7 +57,7 @@ base: BE origin/develop 6268b669 · FE origin/develop 264d37e10 · Courses tpi-c
 ## 3. Pasos — Coordinación (T-72.1)
 
 1. Abrir un issue en `2026-P4-BE/tpi-course` con el título «Escribir finalAcademicStatus antes de archivar». Incluir la evidencia (`CohortArchiveRules` exige el dato y nadie lo escribe), el contrato de D1, los valores `PROMOTED | REGULAR | NOT_REGULAR | DROPPED_OUT` y que fuera de esos cuatro responda 400.
-2. Pedir que `GET /course/course-cohorts/{id}/enrollments` (o el que use la pantalla) devuelva `finalAcademicStatus` y `studentNumber`, para mostrar lo ya confirmado.
+2. ~~Pedir que el listado devuelva `finalAcademicStatus` y `studentNumber`~~: **ya lo devuelve** `GET /course-cohorts/{id}/enrollments` (verificado en `develop` `01c8df4`, 2026-10-26). Borrador del issue: [[sprints/sprint-4/borradores/Issue G01 - escribir el estado académico final]].
 3. Registrar el acuerdo en `acuerdos/courses-g01.md` («Pendiente / próximos pasos» y la tabla de eventos) y marcar G14 como resuelta en `08-dudas`.
 4. Mock: agregar el endpoint a `Mock_back_micros/tpi-roadmap-mocks/mocks/services/courses/enrollments.mjs`, que ya maneja `finalAcademicStatus` en `store.mjs`.
 
