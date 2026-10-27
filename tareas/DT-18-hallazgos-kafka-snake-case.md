@@ -7,7 +7,7 @@ estado: resuelta
 # DT-18 — Contratos Kafka de Roadmap a snake_case (hallazgos)
 
 Referencia: [[deuda-tecnica]] · [[decisiones/DEC-001-wire-kafka-v8-snake-case|DEC-001]] · skill `contratos-kafka` (v12).
-Commit en el repo: `9281be3d` (rama `feature/dt-18-kafka-docs-cbd7df`, sin PR). Verificado contra el código de `develop` (`6268b669` + `fea2fece`), leyendo las fuentes en disco: el grafo `codebase-memory-mcp` no estaba disponible en esta sesión.
+Los cambios a los docs del repo **no se commitearon**: están como diff en [[tareas/DT-18-cambios-docs-repo]], sin aplicar. Verificado contra el código de `develop` (`6268b669` + `fea2fece`), leyendo las fuentes en disco: el grafo `codebase-memory-mcp` no estaba disponible en esta sesión.
 
 ## Qué se tocó
 
@@ -19,7 +19,7 @@ Commit en el repo: `9281be3d` (rama `feature/dt-18-kafka-docs-cbd7df`, sin PR). 
 - `contratos/bus-notificaciones.md`, `contratos/accounting-roadmap-v1.md`, `contratos/CONTRATO_T10_BACKOFFICE.md`: ejemplos JSON de eventos y nombres del sobre.
 - `arquitectura/contexto-integral.md` §4, `estructura-codigo.md`, `e2e-flujo-completo.md`; `acuerdos/` (backoffice, notificaciones-bus, courses-g01); `microservicios/` 01, 02, 03, 06, 10; `decisiones/DEC-001`.
 
-**Repo (`tpi-roadmap`)**: `README.md`, `AGENTS.md`, `.agents/agent.md`, `docs/faq-notifications-bus.md`.
+**Repo (`tpi-roadmap`)**, solo como diff propuesto en [[tareas/DT-18-cambios-docs-repo]]: `README.md`, `AGENTS.md`, `.agents/agent.md`, `docs/faq-notifications-bus.md`. Hasta aplicarlo, esos cuatro siguen diciendo que `COURSE_LEVEL_UP`/`PERFORMANCE_ZONE_CHANGED` se emiten, `PAR_STATUS_CHANGED`, etc.
 
 ## Hallazgos doc ↔ código
 
@@ -50,4 +50,4 @@ Commit en el repo: `9281be3d` (rama `feature/dt-18-kafka-docs-cbd7df`, sin PR). 
 - Formato exacto de `occurred_at` (Instant serializado por Jackson 3 sin `@JsonFormat`; se documentó ISO-8601 UTC sin correr el productor).
 - Que los consumidores de `roadmap.events` (Backoffice, Notificaciones, Gamificación) ya lean snake_case (sigue abierto en DEC-001).
 - Texto de la HU-11 en Taiga: vive en Taiga, no en el vault; sigue pendiente (DT-19).
-- `mvn verify`: ver el resultado en el informe de la sesión.
+- `mvn verify`: no se corrió completo (no se tocó código). Un test falla en `develop` por otra causa: `ErrorCatalogTest` (`xp-history.sort-unknown` sin entrada en `ErrorCatalog`).
