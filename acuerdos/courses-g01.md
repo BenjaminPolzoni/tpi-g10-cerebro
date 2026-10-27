@@ -67,7 +67,7 @@ Base path de Courses: `/api/course` (singular), siempre vía Gateway. Audience d
 Courses escribe el wire v8 en snake_case (`KafkaEventWire`, verificado en `docs/T-191-KAFKA-V8-CUTOVER.md`). Ver [[acuerdos/notificaciones-bus|bus de eventos]] y [[decisiones/DEC-001-wire-kafka-v8-snake-case|DEC-001]].
 
 > [!question] Verificar
-> `courses.md` §7.3 todavía muestra los payloads en camelCase (`courseCohortId`, `enrolledAt`). Tras #191 Roadmap lee solo snake_case. Confirmar con un evento real de G01. **G5 (2026-10-15): todo en snake_case.**
+> `courses.md` §7.3 ya muestra los payloads en snake_case (corregido en DT-18, 2026-10-27). Roadmap lee solo `course_cohort_id` y `student_id`. Confirmar con un evento real de G01 que los demás campos (`enrollment_id`, `enrolled_at`, ...) también viajan en snake_case: el código no los lee, así que no se pudo verificar. **G5 (2026-10-15): todo en snake_case.**
 
 ### Lo que exponemos a Courses
 Nada específico. El front de Courses no nos consume por contrato. Roadmap expone el sync manual `POST /api/roadmap/courses/{courseId}/sections/sync` (ADMIN, GESTOR o profesor dueño) **solo con `SECTIONS_SYNC_ENABLED=true`**.

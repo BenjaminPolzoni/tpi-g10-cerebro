@@ -24,7 +24,7 @@ Roadmap **escribe y lee solo snake_case** en el sobre (`event_id`, `event_type`,
   - `LIFE_CREDITED`/`LIFE_DEBITED` de Accounting siguen con payload camelCase: única excepción, leída con alias hasta `tpi-accounting#227`.
   - Las filas `PENDING` del outbox anteriores al corte quedan en camelCase: hay que drenarlas antes de desplegar (runbook en `T-191`).
   - Falta confirmar que Gamificación, Accounting y Notificaciones consumen `roadmap.events` en v8.
-  - `roadmap-service.asyncapi.yaml`, `KAFKA_EVENT_STANDARD (1).md` y el texto de Taiga HT-11 siguen en camelCase/v3.
+  - `roadmap-service.asyncapi.yaml`, `KAFKA_EVENT_STANDARD (1).md` y el texto de Taiga HT-11 siguen en camelCase/v3. *(Actualización 2026-10-27, DT-18: el asyncapi, el estándar y los contratos de Roadmap pasaron a snake_case; queda pendiente el texto de Taiga HT-11.)*
   - El listener legado v1/v2 quedó apagado pero no borrado.
 
 ## Referencias
