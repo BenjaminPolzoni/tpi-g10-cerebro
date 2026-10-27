@@ -60,7 +60,7 @@ contrato: "tpi-roadmap/docs/contracts/08-comunicacion-gateway.md"
 | Backoffice | `backoffice-service` | `backoffice.parameters.read` |
 | Users | `users-service` | `users.profile.read`, `users.legajo.read` |
 
-- **Lo que ofrecemos** (`tpi-integration.yml`): `roadmap.gate.read` y `roadmap.progress.read`. Solo `roadmap.progress.read` se **exige** en código (lectura de progreso agregado); el gate admite cualquier principal de servicio.
+- **Lo que ofrecemos** (`tpi-integration.yml`): `roadmap.gate.read` y `roadmap.progress.read`. Se **exigen** en código `roadmap.gate.read` (gate, desde `402a4094`, 2026-10-25) y `roadmap.progress.read` (lectura de progreso agregado).
 - Credenciales: `ROADMAP_TECHNICAL_CLIENT_ID` / `ROADMAP_TECHNICAL_CLIENT_SECRET` por entorno y Vault (`secret/tpi/shared/clients/<team>`). **Nunca en el repo ni por chat.**
 
 ### Formato de errores y envelope

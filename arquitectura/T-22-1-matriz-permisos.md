@@ -105,6 +105,7 @@ ya existen en `SecurityConfig` (`roadmap.progress.read`, `roadmap.health.read`,
 3. **El gate acepta cualquier servicio.** `SecurityConfig` deja pasar a toda `ServiceIdentity` en
    `/students/{studentId}/nodes/{nodeId}/eligibility` sin mirar el scope (DT-01). Lo resuelve T-22.4 con
    `roadmap.gate.read`.
+   ✅ **Resuelto (2026-10-25)** en `develop`: `402a4094`.
 4. **`POST /nodes/{nodeId}/read` acepta ADMIN**, pero marca la lectura con el id de quien llama: un ADMIN se
    marca a sí mismo como alumno. Parece un resto; con permisos quedaría solo para el alumno
    (`roadmap.learning.write`).
@@ -169,7 +170,7 @@ Rutas relativas a `/api/roadmap`. Agrupadas por controller.
 
 | Método | Ruta | Permiso propuesto | ADMIN | GESTOR | PROFESSOR | STUDENT | Servicio | Alcance hoy |
 |---|---|---|:-:|:-:|:-:|:-:|:-:|---|
-| GET | `/courses/{courseId}/students/{studentId}/nodes/{nodeId}/eligibility` | `roadmap.gate.read` (scope) |  |  |  |  | ✔ | Solo servicio; hoy no valida el scope (T-22.4) |
+| GET | `/courses/{courseId}/students/{studentId}/nodes/{nodeId}/eligibility` | `roadmap.gate.read` (scope) |  |  |  |  | ✔ | Solo servicio con el scope; 403 sin él (T-22.4, `402a4094`) |
 | GET | `/courses/{courseId}/nodes/{nodeId}/eligibility` | `roadmap.learning.read` |  |  |  | ✔ |  | El propio alumno (id del token) |
 
 ### GraphAdminController
@@ -331,5 +332,5 @@ Rutas relativas a `/api/roadmap`. Agrupadas por controller.
   Gateway). El Gateway avisó que va a dejar de mandar `X-User-Roles` para mandar permisos.
 - **T-22.3:** pasar cada `@PreAuthorize` a `hasAuthority('roadmap.…')` con esta tabla, juntar los chequeos de
   dueño y resolver los hallazgos 1, 2 y 4. Cada endpoint con su test de permitido y 403.
-- **T-22.4:** exigir `roadmap.gate.read` en el gate.
+- **T-22.4:** ✅ hecho en `develop` (`402a4094`, 2026-10-25): el gate exige `roadmap.gate.read`.
 - Si se agrega o cambia un endpoint antes de T-22.3, sumarlo a esta tabla.
