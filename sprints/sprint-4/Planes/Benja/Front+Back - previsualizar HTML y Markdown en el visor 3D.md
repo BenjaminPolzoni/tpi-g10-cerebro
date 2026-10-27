@@ -91,5 +91,5 @@ Archivos: `roadmap/ui/material-access/material-access.component.ts`, `roadmap/do
 
 | Parte | Rama | Worktree |
 |---|---|---|
-| Front | `BenjaminPolzoni/html-content-3d-viewer-front` | `~/orca/workspaces/2026-PIV-TPI-FE/html-content-3d-viewer-front` |
+| Front | `fix/3d-viewer-material-preview` | `~/orca/workspaces/2026-PIV-TPI-FE/fix-3d-viewer-material-preview` |
 | Roadmap back (solo T5) | `BenjaminPolzoni/html-content-3d-viewer-back` | `~/orca/workspaces/tpi-roadmap/html-content-3d-viewer-back` |
