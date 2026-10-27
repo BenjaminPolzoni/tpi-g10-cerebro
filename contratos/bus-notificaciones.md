@@ -14,15 +14,15 @@ Bloquea: **T-03.2** (topic del evento consumido) y **T-01.12.5** (outbox y event
 
 El contrato vigente publicado en el repositorio de Notificaciones define:
 
-- Envelope obligatorio de **6 campos**: `eventId`, `eventType`, `eventVersion`, `timestamp`, `producer`, `payload`.
-- `eventVersion` es entero obligatorio; el contrato documentado exige `1`.
-- `eventType`: hecho pasado, `SCREAMING_SNAKE_CASE`, en **inglés**. Estable una vez publicado.
+- Envelope obligatorio de **6 campos**: `event_id`, `event_type`, `event_version`, `timestamp`, `producer`, `payload`.
+- `event_version` es entero obligatorio; el contrato documentado exige `1`.
+- `event_type`: hecho pasado, `SCREAMING_SNAKE_CASE`, en **inglés**. Estable una vez publicado.
 - `timestamp`: ISO 8601 **UTC**, el momento del hecho (uno solo, no hecho vs. publicación).
-- Los campos del envelope se serializan en **camelCase**.
+- Los campos del envelope se serializan en **snake_case** (`contratos-kafka` v8 en adelante; la versión inicial de este borrador decía camelCase, corregido en DT-18).
 - No se crean topics unilateralmente: el broker se aprovisiona centralmente y usa un topic por dominio (`<dominio>.events`).
 - La tabla oficial registra `courses.events` y `courses.events.DLT`; para consumidores se documentan 3 reintentos con espera fija de 2 s antes de derivar a la DLT.
 
-El `EventEnvelope` de Roadmap ya modela seis campos y versiona con `eventVersion`; el doc previo de cinco campos estaba desactualizado. El contrato sigue figurando como borrador en este documento hasta registrar el acuerdo formal aplicable a Roadmap.
+El `EventEnvelope` de Roadmap ya modela seis campos y versiona con `event_version`; el doc previo de cinco campos estaba desactualizado. El contrato sigue figurando como borrador en este documento hasta registrar el acuerdo formal aplicable a Roadmap.
 
 ---
 
@@ -30,10 +30,10 @@ El `EventEnvelope` de Roadmap ya modela seis campos y versiona con `eventVersion
 
 | Evento | Productor | Topic | Estado |
 |---|---|---|---|
-| `CHALLENGE_COMPLETED` / `CHALLENGE_ABORTED` | `tema-03-challenges-service` | `challenges.events` | **Vigente** (`motor-desafios-evento-cierre.md`): `key = userId`, envelope y payload en camelCase (tpi-roadmap#120) **con** `eventVersion: 1` (contradice el "sin `eventVersion`" de §1: abierto con Notificaciones), se filtra por `producer` porque Tema 05 comparte el topic. Reemplaza al formato v2 (`challenges.results`, `key = attemptId`, `producer = "challenges-service"`), que sigue con su listener hasta que el Motor migre |
-| Ajuste de XP posterior | `challenge-service` | **?** | `eventType` sin definir (ver contrato de Motor) |
-| `ITEM_EQUIP_REQUESTED` / `ITEM_EQUIP_RESULT` | Roadmap ↔ Accounting | `accounting.holds.events` | Request y respuesta por el mismo topic, correlación por `correlationId` = nuestro `eventId`. Acordado con Accounting; firma nominal pendiente |
-| `LIVES_EXHAUSTED` / `LIVES_AVAILABLE` | Accounting | `accounting.ledger.events` | Confirmado por el acta Accounting ↔ Roadmap v1 |
+| `CHALLENGE_COMPLETED` / `CHALLENGE_ABORTED` | `tema-03-challenges-service` | `challenges.events` | **Vigente** (`motor-desafios-evento-cierre.md`): `key = id_user`, envelope y payload en snake_case (tpi-roadmap#120) **con** `event_version: 1` (contradice el "sin `event_version`" de §1: abierto con Notificaciones), se filtra por `producer` porque Tema 05 comparte el topic. Reemplaza al formato v2 (`challenges.results`, `key = attemptId`, `producer = "challenges-service"`), que sigue con su listener hasta que el Motor migre |
+| Ajuste de XP posterior | `challenge-service` | **?** | `event_type` sin definir (ver contrato de Motor) |
+| `ITEM_EQUIP_REQUESTED` / `ITEM_EQUIP_RESULT` | Roadmap ↔ Accounting | `accounting.holds.events` | Request y respuesta por el mismo topic, correlación por `correlationId` = nuestro `event_id`. Acordado con Accounting; firma nominal pendiente |
+| `LIVES_EXHAUSTED` / `LIVES_AVAILABLE` | Accounting | `accounting.ledger.events` | Confirmado por el acta Accounting ↔ Roadmap v1; **el código de Roadmap hoy no tiene listener para este topic** (solo `accounting.events`) |
 | `LIFE_CREDITED` / `LIFE_DEBITED` | Accounting | `accounting.events` | Consumido por `AccountingEventsListener` para proyectar `recovery_pending` (informativo; el Gate sigue leyendo Accounting). Sobre en snake_case; payload aún camelCase de Accounting (`tpi-accounting#227`), leído con alias |
 | Inscripción / archivado de curso | Courses | `courses.events` | Topic de dominio documentado; los nombres/payloads específicos de ciclo de vida quedan en sus contratos de dominio. |
 | Cambios de sección/actividad | Courses | `courses.events` | El topic de dominio está documentado; no encontramos contrato de eventos específicos de sección/actividad ni payloads. La tabla de Notificaciones solo describe el dominio Courses en general. |
@@ -59,25 +59,22 @@ nunca deben apuntar al mismo topic (mismo `groupId`, Kafka repartiría los mensa
    `key = id_user`; `challenges.results` no existe en el broker de la plataforma. Historia: primero
    `challenge-events` (inventado nuestro), después `challenges.results` (respuesta v2 §2.1). A
    confirmar con el primer evento integrado.
-2. **Resuelto por el contrato de plataforma:** un topic general por dominio, con el `eventType`
+2. **Resuelto por el contrato de plataforma:** un topic general por dominio, con el `event_type`
    discriminando eventos; los topics no se crean unilateralmente.
 3. **`groupId`**: confirmamos `roadmap-service` como consumidor. ¿Hay convención distinta?
-4. **`auto-offset-reset=earliest`**: nos apoyamos en la idempotencia por `eventId` para absorber
+4. **`auto-offset-reset=earliest`**: nos apoyamos en la idempotencia por `event_id` para absorber
    replays. ¿Hay algún topic donde eso sea problema?
 
 ### 2.1 Casing del envelope y compatibilidad del productor
 
-El contrato publicado por Notificaciones especifica el envelope en **camelCase**
-(`"eventId"`, `"eventType"`, `"eventVersion"`). El evento real que nos pasó el Motor
-(Grupo 9) viene en **snake_case**: `event_id`, `event_type`.
-
-Nuestro `EventEnvelope` escribe camelCase, incluye `eventVersion`, y además lee aliases snake_case
-para compatibilidad con el Motor (T-01.12.2). La excepción del Motor debe seguir registrada como
-una desviación de productor; no cambia el casing contractual común.
+El sobre y los payloads viajan en **snake_case** (`event_id`, `event_type`, `event_version`), según `contratos-kafka` v8 en adelante.
+Nuestro `EventEnvelope` escribe y lee **solo snake_case**, sin alias; un sobre camelCase va a la DLT
+([[decisiones/DEC-001-wire-kafka-v8-snake-case|DEC-001]]). Hasta v3 el contrato de plataforma figuraba en camelCase y Roadmap
+toleraba ambos; esa ventana se cerró (DT-18, 2026-10-27).
 
 No queda pregunta abierta sobre el contrato común de envelope. Sí falta confirmar con el equipo de
 Courses si sus futuros eventos de secciones/actividades usarán el estándar publicado, y definir sus
-`eventType`, payload y clave.
+`event_type`, payload y clave.
 
 La tabla estándar presenta claves por agregado; para Courses indica `courseId`. Confirmar con
 Courses si esa clave representa `courseCohortId` para eventos cuya entidad afectada sea una cohorte.
@@ -98,56 +95,56 @@ Cinco eventos, todos con `producer: "roadmap-service"`.
 > negocio dentro de la tabla `outbox_event`. La publicación diferida en Kafka la realiza `OutboxPoller`
 > usando la variable de entorno `KAFKA_TOPIC_ROADMAP` (`app.kafka.topics.roadmap-events`).
 > Si la variable está vacía (por defecto, D-T01125-01), los eventos permanecen acumulados como `PENDING`.
-> Message key = `studentId` (propuesta B5). Al asignarse el topic en el bus, basta configurar dicha
+> Message key = `student_id` (propuesta B5). Al asignarse el topic en el bus, basta configurar dicha
 > variable para que el poller publique lo acumulado sin pérdida de eventos.
 
 ### `NODE_COMPLETED`
 ```json
 {
-  "eventId": "uuid", "eventType": "NODE_COMPLETED",
-  "timestamp": "2026-09-02T19:31:00Z", "producer": "roadmap-service",
-  "payload": { "courseId": "uuid", "studentId": "uuid", "nodeId": "uuid",
-               "challengeId": "uuid", "sectionId": "uuid" }
+  "event_id": "uuid", "event_type": "NODE_COMPLETED", "event_version": 1,
+  "timestamp": "2026-09-02T19:31:00Z", "producer": "tema-10-roadmap-service",
+  "payload": { "course_id": "uuid", "student_id": "uuid", "node_id": "uuid",
+               "challenge_id": "uuid", "section_id": "uuid" }
 }
 ```
 
 ### `NODE_UNLOCKED`
 ```json
 {
-  "eventId": "uuid", "eventType": "NODE_UNLOCKED",
-  "timestamp": "2026-09-02T19:31:00Z", "producer": "roadmap-service",
-  "payload": { "courseId": "uuid", "studentId": "uuid", "nodeId": "uuid" }
+  "event_id": "uuid", "event_type": "NODE_UNLOCKED", "event_version": 1,
+  "timestamp": "2026-09-02T19:31:00Z", "producer": "tema-10-roadmap-service",
+  "payload": { "course_id": "uuid", "student_id": "uuid", "node_id": "uuid" }
 }
 ```
 
-### `COURSE_LEVEL_UP` (curva PAR-09)
+### `COURSE_LEVEL_UP` (curva PAR-09) — forma propuesta, NO emitido por el código hoy
 ```json
 {
-  "eventId": "uuid", "eventType": "COURSE_LEVEL_UP",
-  "timestamp": "2026-09-02T19:31:00Z", "producer": "roadmap-service",
-  "payload": { "courseId": "uuid", "studentId": "uuid", "newLevel": 3, "totalXp": 1250 }
+  "event_id": "uuid", "event_type": "COURSE_LEVEL_UP", "event_version": 1,
+  "timestamp": "2026-09-02T19:31:00Z", "producer": "tema-10-roadmap-service",
+  "payload": { "course_id": "uuid", "student_id": "uuid", "new_level": 3, "total_xp": 1250 }
 }
 ```
 
-### `PERFORMANCE_ZONE_CHANGED` (entrada/salida de P90/P10)
+### `PERFORMANCE_ZONE_CHANGED` (entrada/salida de P90/P10) — forma propuesta, NO emitido por el código hoy
 ```json
 {
-  "eventId": "uuid", "eventType": "PERFORMANCE_ZONE_CHANGED",
-  "timestamp": "2026-09-02T19:31:00Z", "producer": "roadmap-service",
-  "payload": { "courseId": "uuid", "studentId": "uuid",
-               "previousZone": "MIDDLE", "currentZone": "P90" }
+  "event_id": "uuid", "event_type": "PERFORMANCE_ZONE_CHANGED", "event_version": 1,
+  "timestamp": "2026-09-02T19:31:00Z", "producer": "tema-10-roadmap-service",
+  "payload": { "course_id": "uuid", "student_id": "uuid",
+               "previous_zone": "MIDDLE", "current_zone": "P90" }
 }
 ```
 
 ### `BADGE_AWARDED` (HU-21, T-21.2)
 Se encola en el outbox en la misma transacción que el otorgamiento (`BadgeEventService`) y queda
-`PENDING` hasta que se configure `KAFKA_TOPIC_ROADMAP`. Message key = `studentId`. El momento del
+`PENDING` hasta que se configure `KAFKA_TOPIC_ROADMAP`. Message key = `student_id`. El momento del
 otorgamiento es el `timestamp` del envelope.
 ```json
 {
-  "eventId": "uuid", "eventType": "BADGE_AWARDED", "eventVersion": 1,
+  "event_id": "uuid", "event_type": "BADGE_AWARDED", "event_version": 1,
   "timestamp": "2026-10-03T19:31:00Z", "producer": "tema-10-roadmap-service",
-  "payload": { "courseId": "uuid", "studentId": "uuid", "badgeId": "uuid" }
+  "payload": { "course_id": "uuid", "student_id": "uuid", "badge_id": "uuid" }
 }
 ```
 > Pendiente con Notificaciones: confirmar el topic, la key, el envelope y la política de DLQ (P8).
@@ -190,10 +187,10 @@ Nuestra clasificación actual (`KafkaConsumerConfig`):
 | Situación | Qué hacemos |
 |---|---|
 | Envelope incompleto, JSON ilegible, UUID malformado | Poison pill: log `WARN`, offset avanza |
-| `eventType` desconocido | Log `INFO`, offset avanza, sin interpretar |
+| `event_type` desconocido | Log `INFO`, offset avanza, sin interpretar |
 | Alumno no matriculado, nodo/desafío ajenos al curso | `NonRetryableEventException` → log + DLQ si está configurada |
 | `esRepeticion = true` | Descarte de negocio, log `DEBUG` |
-| `eventId` ya registrado | No-op silencioso (idempotencia) |
+| `event_id` ya registrado | No-op silencioso (idempotencia) |
 | BD caída, timeout | Reintento con `ExponentialBackOff`, después DLQ |
 
 ### Preguntas
@@ -239,6 +236,6 @@ cerramos T-03.2. **P5 y P9** vienen justo después, para arrancar el outbox.
 
 ### Lo que NO depende de ustedes
 
-El consumidor ya está implementado y testeado (idempotencia por `eventId`, clasificación de
-errores, poison pills, `eventType` desconocido). Los cuatro eventos de salida ya tienen su payload
+El consumidor ya está implementado y testeado (idempotencia por `event_id`, clasificación de
+errores, poison pills, `event_type` desconocido). Los cuatro eventos de salida ya tienen su payload
 definido. Solo falta **a dónde mandarlos y de dónde leer**.

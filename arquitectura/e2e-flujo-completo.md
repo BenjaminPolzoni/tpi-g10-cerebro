@@ -40,7 +40,7 @@ matrícula y `E2E_MARKET_OFFER_ID` (oferta activa de ese curso con stock).
    `POST /api/roadmap/sections/{sectionId}/nodes` (nodo `PRACTICAL_CHALLENGE`
    con el `challenge_id` elegido del pool).
 3. **Matrícula**: publica `STUDENT_ENROLLED` en `courses.events` (envelope de 6
-   campos camelCase, `eventVersion=1`, payload `{courseCohortId, studentId}`).
+   campos snake_case, `event_version=1`, payload `{course_cohort_id, student_id}`).
 4. **Cierre de intento v3**: publica `CHALLENGE_COMPLETED` en
    `challenges.events` con `producer=tema-03-challenges-service`,
    `resources.xp` y `result.status=APPROVED` (contrato

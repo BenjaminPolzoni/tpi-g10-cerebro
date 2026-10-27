@@ -13,7 +13,7 @@ El microservicio **`tpi-roadmap`** es el componente central de progresión pedag
 ### Responsabilidades Core (Ownership Exclusivo)
 1. **Grafo de Aprendizaje:** Modelado y navegación de cursos, secciones, nodos y dependencias/prerrequisitos lógicos (AND / OR a elección del docente, RF-CUR-06).
 2. **Gate de Elegibilidad:** Habilitación previa y validación de condiciones para que un alumno inicie un desafío (matrícula activa en Courses, curso no archivado, prerrequisitos del grafo satisfechos, materiales obligatorios leídos, vidas > 0 consultadas a Inventario).
-3. **Ledger de XP Propio:** Registro inmutable (append-only en `xp_movement`) e idempotente por `eventId` del XP **ya calculado que envía el motor de desafíos**. Roadmap **no calcula XP** ni multiplicadores (`RF-CFG-06`).
+3. **Ledger de XP Propio:** Registro inmutable (append-only en `xp_movement`) e idempotente por `event_id` del XP **ya calculado que envía el motor de desafíos**. Roadmap **no calcula XP** ni multiplicadores (`RF-CFG-06`).
 4. **Ranking y Gamificación:** Tablas de clasificación por cohorte, zonas de rendimiento (P90, MIDDLE, P10 con umbral de ≥ 10 alumnos) y resolución de desempates en cascada (`RF-RNK-11`).
 5. **Outbox Transaccional:** Garantía de publicación at-least-once de eventos de dominio a Kafka sin inconsistencias con la base de datos relacional.
 
@@ -160,7 +160,7 @@ Antes de que un estudiante inicie un intento, el Motor consulta al Gate de Roadm
 - **Regla Fundamental de XP:**
   > **Roadmap NO calcula XP.** El motor de desafíos calcula el XP base y todos los multiplicadores asociados. Roadmap recibe el XP ya calculado en el evento y lo acredita directamente en su ledger inmutable (`xp_movement`), sumándolo a `StudentCourse.total_xp`.
 - Si `verdict == "PASSED"`, Roadmap:
-  1. Registra el movimiento en el Ledger de XP (idempotente por `eventId`).
+  1. Registra el movimiento en el Ledger de XP (idempotente por `event_id`).
   2. Marca el nodo como completado en `completed_node`.
   3. Evalúa y desbloquea nodos dependientes en el grafo.
   4. Recalcula ranking y zonas (`P90`, `MIDDLE`, `P10`) si la cohorte tiene ≥ 10 alumnos.
@@ -231,51 +231,54 @@ Antes de que un estudiante inicie un intento, el Motor consulta al Gate de Roadm
 ## 4. Convenciones de Eventos en Apache Kafka
 
 ### 4.1 Envelope Estándar Obligatorio (Contrato del Bus)
-Todos los eventos respetan el contrato de **5 campos obligatorios** establecido por el PDF del bus y la clase [`EventEnvelope.java`](../src/main/java/com/utn/tpi/roadmap/events/EventEnvelope.java). **No contiene `eventVersion`**:
+Todos los eventos respetan el sobre de **6 campos obligatorios en snake_case** de `contratos-kafka` (v8 en adelante) y la clase [`EventEnvelope.java`](../src/main/java/com/utn/tpi/roadmap/events/EventEnvelope.java). `event_version` es el entero `1` y es obligatorio (actualizado en DT-18, 2026-10-27; antes decía 5 campos, sin `event_version`, en camelCase):
 
 ```json
 {
-  "eventId": "550e8400-e29b-41d4-a716-446655440000",
-  "eventType": "NOMBRE_DEL_EVENTO",
+  "event_id": "550e8400-e29b-41d4-a716-446655440000",
+  "event_type": "NOMBRE_DEL_EVENTO",
+  "event_version": 1,
   "timestamp": "2026-09-24T10:00:00.000Z",
-  "producer": "roadmap-service",
+  "producer": "tema-10-roadmap-service",
   "payload": {}
 }
 ```
 
-- `eventId`: UUID único por evento (crítico para idempotencia en el ledger).
-- `eventType`: Nombre en inglés, MAYÚSCULAS con guión bajo (`_`).
-- `timestamp`: Marca temporal en formato ISO 8601 UTC.
-- `producer`: Identificador del microservicio emisor (`roadmap-service`).
+- `event_id`: UUID único por evento (crítico para idempotencia en el ledger).
+- `event_type`: Nombre en inglés, MAYÚSCULAS con guión bajo (`_`).
+- `event_version`: entero obligatorio, hoy `1` (ausente, decimal o texto va a la DLT).
+- `timestamp`: Marca temporal en formato ISO 8601 UTC con offset obligatorio.
+- `producer`: Identificador del microservicio emisor (`tema-10-roadmap-service`, propiedad `app.kafka.producer`).
 - `payload`: Objeto JSON con el cuerpo específico del evento.
 
-> **Resiliencia en Casing:** `EventEnvelope.java` serializa en **camelCase** y deserializa tolerantemente tanto **camelCase** (`eventId`, `eventType`) como **snake_case** (`event_id`, `event_type`).
+> **Casing:** `EventEnvelope.java` escribe y lee **solo snake_case** (`@JsonProperty` explícito, sin alias; [[decisiones/DEC-001-wire-kafka-v8-snake-case|DEC-001]]). Un sobre en camelCase va a la DLT. Excepciones de lectura que quedan en el código: los alias camelCase de `LIFE_CREDITED`/`LIFE_DEBITED` (Accounting) y los payloads del listener retirado de `challenges.results`.
 
 ### 4.2 Matriz de Tópicos
 | Topic | Tipo | Origen | Destino / Consumidor | Key | Eventos |
 |---|---|---|---|---|---|
-| `challenges.events` (vigente) | Consumo | `tema-03-challenges-service` | `roadmap-service` | `userId` | `CHALLENGE_COMPLETED`, `CHALLENGE_ABORTED` |
-| `challenges.results` (formato anterior, hasta que el Motor migre) | Consumo | `challenges-service` | `roadmap-service` | `attemptId` | `CHALLENGE_COMPLETED`, `CHALLENGE_ABORTED` (v2), `ATTEMPT_CORRECTED`, `ATTEMPT_CANCELED` (v1) |
-| `accounting.ledger.events` | Consumo | `accounting-service` | `roadmap-service` | `studentId` | `LIVES_EXHAUSTED`, `LIVES_AVAILABLE` |
-| `accounting.events` (`${KAFKA_TOPIC_ACCOUNTING}`) | Consumo | `accounting-service` | `roadmap-service` | `studentId` | `LIFE_CREDITED`, `LIFE_DEBITED` (proyecta `recovery_pending`, informativo) |
-| `administration.events` | Consumo | `tema-12-backoffice-service` | `roadmap-service` | `param_key` | `GLOBAL_CONFIGURATION_CHANGED` |
-| `roadmap.events` (`${KAFKA_TOPIC_ROADMAP}`) | Publicación | `roadmap-service` | Notificaciones / Plataforma | `studentId` | `NODE_COMPLETED`, `NODE_UNLOCKED`, `COURSE_LEVEL_UP`, `PERFORMANCE_ZONE_CHANGED` |
+| `challenges.events` (vigente) | Consumo | `tema-03-challenges-service` | `roadmap-service` | `id_user` | `CHALLENGE_COMPLETED`, `CHALLENGE_ABORTED`, `CHALLENGE_ARCHIVED`, `CHALLENGE_RESULT_RECTIFIED` |
+| `challenges.results` (formato anterior, hasta que el Motor migre) | Consumo | `challenges-service` | `roadmap-service` | `attempt_id` | `CHALLENGE_COMPLETED`, `CHALLENGE_ABORTED` (v2), `ATTEMPT_CORRECTED`, `ATTEMPT_CANCELED` (v1) |
+| `accounting.ledger.events` | Consumo | `accounting-service` | `roadmap-service` | `student_id` | `LIVES_EXHAUSTED`, `LIVES_AVAILABLE` (**no los consume el código hoy**: no hay listener de `accounting.ledger.events`) |
+| `accounting.events` (`${KAFKA_TOPIC_ACCOUNTING}`) | Consumo | `accounting-service` | `roadmap-service` | `student_id` | `LIFE_CREDITED`, `LIFE_DEBITED` (proyecta `recovery_pending`, informativo) |
+| `administration.events` | Consumo | `tema-12-backoffice-service` | `roadmap-service` | `param_key` | `GLOBAL_CONFIGURATION_CHANGED`, `PARAMETER_DEFINITION_CREATED` |
+| `roadmap.events` (`${KAFKA_TOPIC_ROADMAP}`) | Publicación | `roadmap-service` | Notificaciones / Plataforma | `student_id` | `NODE_COMPLETED`, `NODE_UNLOCKED`, `BADGE_AWARDED`, `ROADMAP_MANDATORY_AVAILABILITY_CHANGED` (y `PARAMETER_CATALOG_DECLARED`, key `T10_ROADMAP`). `COURSE_LEVEL_UP` y `PERFORMANCE_ZONE_CHANGED` **no se emiten todavía** |
 
 ### 4.3 Eventos Publicados por Roadmap (Vía Outbox Pattern)
 
 1. **`NODE_COMPLETED`:**
    ```json
    {
-     "eventId": "uuid-v4",
-     "eventType": "NODE_COMPLETED",
+     "event_id": "uuid-v4",
+     "event_type": "NODE_COMPLETED",
+     "event_version": 1,
      "timestamp": "2026-09-26T20:00:00.000Z",
-     "producer": "roadmap-service",
+     "producer": "tema-10-roadmap-service",
      "payload": {
-       "courseId": "uuid-cohorte",
-       "studentId": "uuid-alumno",
-       "nodeId": "uuid-nodo",
-       "challengeId": "uuid-desafio",
-       "sectionId": "uuid-seccion"
+       "course_id": "uuid-cohorte",
+       "student_id": "uuid-alumno",
+       "node_id": "uuid-nodo",
+       "challenge_id": "uuid-desafio",
+       "section_id": "uuid-seccion"
      }
    }
    ```
@@ -283,46 +286,49 @@ Todos los eventos respetan el contrato de **5 campos obligatorios** establecido 
 2. **`NODE_UNLOCKED`:**
    ```json
    {
-     "eventId": "uuid-v4",
-     "eventType": "NODE_UNLOCKED",
+     "event_id": "uuid-v4",
+     "event_type": "NODE_UNLOCKED",
+     "event_version": 1,
      "timestamp": "2026-09-26T20:00:00.000Z",
-     "producer": "roadmap-service",
+     "producer": "tema-10-roadmap-service",
      "payload": {
-       "courseId": "uuid-cohorte",
-       "studentId": "uuid-alumno",
-       "nodeId": "uuid-nodo"
+       "course_id": "uuid-cohorte",
+       "student_id": "uuid-alumno",
+       "node_id": "uuid-nodo"
      }
    }
    ```
 
-3. **`COURSE_LEVEL_UP`:**
+3. **`COURSE_LEVEL_UP`** — *forma propuesta; el código todavía no lo emite:*
    ```json
    {
-     "eventId": "uuid-v4",
-     "eventType": "COURSE_LEVEL_UP",
+     "event_id": "uuid-v4",
+     "event_type": "COURSE_LEVEL_UP",
+     "event_version": 1,
      "timestamp": "2026-09-26T20:00:00.000Z",
-     "producer": "roadmap-service",
+     "producer": "tema-10-roadmap-service",
      "payload": {
-       "courseId": "uuid-cohorte",
-       "studentId": "uuid-alumno",
-       "newLevel": 3,
-       "totalXp": 1250
+       "course_id": "uuid-cohorte",
+       "student_id": "uuid-alumno",
+       "new_level": 3,
+       "total_xp": 1250
      }
    }
    ```
 
-4. **`PERFORMANCE_ZONE_CHANGED`:**
+4. **`PERFORMANCE_ZONE_CHANGED`** — *forma propuesta; el código todavía no lo emite:*
    ```json
    {
-     "eventId": "uuid-v4",
-     "eventType": "PERFORMANCE_ZONE_CHANGED",
+     "event_id": "uuid-v4",
+     "event_type": "PERFORMANCE_ZONE_CHANGED",
+     "event_version": 1,
      "timestamp": "2026-09-26T20:00:00.000Z",
-     "producer": "roadmap-service",
+     "producer": "tema-10-roadmap-service",
      "payload": {
-       "courseId": "uuid-cohorte",
-       "studentId": "uuid-alumno",
-       "previousZone": "MIDDLE",
-       "currentZone": "P90"
+       "course_id": "uuid-cohorte",
+       "student_id": "uuid-alumno",
+       "previous_zone": "MIDDLE",
+       "current_zone": "P90"
      }
    }
    ```
@@ -400,7 +406,7 @@ Antes de dar por finalizada cualquier funcionalidad en `tpi-roadmap`:
 - [ ] ¿El endpoint respeta los prefijos `${app.api.public-path}` o `${app.api.private-path}` (sin `"/api/"` literal)?
 - [ ] ¿Los errores se emiten en formato RFC 9457 (`application/problem+json`)?
 - [ ] ¿Las llamadas a otros servicios pasan por el Gateway con token de servicio?
-- [ ] ¿Los eventos Kafka respetan el envelope estándar de 5 campos (sin `eventVersion`)?
-- [ ] ¿Se garantiza idempotencia mediante `eventId` en la base de datos?
+- [ ] ¿Los eventos Kafka respetan el sobre estándar de 6 campos en snake_case (con `event_version: 1`)?
+- [ ] ¿Se garantiza idempotencia mediante `event_id` en la base de datos?
 - [ ] ¿Los eventos publicados se persisten en `outbox_event` dentro de la transacción de negocio?
 - [ ] ¿Los tests (`mvn -B verify`: JUnit 5, BDD Cucumber, Checkstyle y PMD) pasan con 0 violaciones?

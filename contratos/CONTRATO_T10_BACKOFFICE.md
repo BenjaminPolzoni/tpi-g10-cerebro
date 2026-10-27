@@ -160,19 +160,19 @@ public class XpBaseByDifficultyDto {
 * **Payload emitido:**
 ```json
 {
-  "eventId": "uuid-par-01",
-  "eventType": "GLOBAL_CONFIGURATION_CHANGED",
-  "eventVersion": 1,
+  "event_id": "uuid-par-01",
+  "event_type": "GLOBAL_CONFIGURATION_CHANGED",
+  "event_version": 1,
   "timestamp": "2026-09-24T10:00:00Z",
   "producer": "tema-12-backoffice-service",
   "payload": {
-    "paramKey": "PAR-01",
+    "param_key": "PAR-01",
     "value": { "easy": 100, "medium": 250, "hard": 500 },
     "version": 2,
-    "previousVersion": 1,
+    "previous_version": 1,
     "description": "XP base según dificultad",
-    "updatedAt": "2026-09-24T10:00:00Z",
-    "updatedBy": "usr-admin-8831"
+    "updated_at": "2026-09-24T10:00:00Z",
+    "updated_by": "usr-admin-8831"
   }
 }
 ```
@@ -204,19 +204,19 @@ Integer xpDesbloqueoDefault = response.getValue(); // 500 XP
 * **Payload emitido:**
 ```json
 {
-  "eventId": "uuid-par-08",
-  "eventType": "GLOBAL_CONFIGURATION_CHANGED",
-  "eventVersion": 1,
+  "event_id": "uuid-par-08",
+  "event_type": "GLOBAL_CONFIGURATION_CHANGED",
+  "event_version": 1,
   "timestamp": "2026-09-24T10:05:00Z",
   "producer": "tema-12-backoffice-service",
   "payload": {
-    "paramKey": "PAR-08",
+    "param_key": "PAR-08",
     "value": 500,
     "version": 2,
-    "previousVersion": 1,
+    "previous_version": 1,
     "description": "XP requerida por defecto para desbloquear contenido",
-    "updatedAt": "2026-09-24T10:05:00Z",
-    "updatedBy": "usr-admin-8831"
+    "updated_at": "2026-09-24T10:05:00Z",
+    "updated_by": "usr-admin-8831"
   }
 }
 ```
@@ -275,30 +275,30 @@ public class LevelThresholdDto {
 * **Payload emitido:**
 ```json
 {
-  "eventId": "uuid-par-09",
-  "eventType": "GLOBAL_CONFIGURATION_CHANGED",
-  "eventVersion": 1,
+  "event_id": "uuid-par-09",
+  "event_type": "GLOBAL_CONFIGURATION_CHANGED",
+  "event_version": 1,
   "timestamp": "2026-09-24T10:10:00Z",
   "producer": "tema-12-backoffice-service",
   "payload": {
-    "paramKey": "PAR-09",
+    "param_key": "PAR-09",
     "value": [
-      { "level": 1, "xpRequired": 0 },
-      { "level": 2, "xpRequired": 500 },
-      { "level": 3, "xpRequired": 1200 },
-      { "level": 4, "xpRequired": 2200 },
-      { "level": 5, "xpRequired": 3500 },
-      { "level": 6, "xpRequired": 5200 },
-      { "level": 7, "xpRequired": 7300 },
-      { "level": 8, "xpRequired": 9800 },
-      { "level": 9, "xpRequired": 13000 },
-      { "level": 10, "xpRequired": 17000 }
+      { "level": 1, "xp_required": 0 },
+      { "level": 2, "xp_required": 500 },
+      { "level": 3, "xp_required": 1200 },
+      { "level": 4, "xp_required": 2200 },
+      { "level": 5, "xp_required": 3500 },
+      { "level": 6, "xp_required": 5200 },
+      { "level": 7, "xp_required": 7300 },
+      { "level": 8, "xp_required": 9800 },
+      { "level": 9, "xp_required": 13000 },
+      { "level": 10, "xp_required": 17000 }
     ],
     "version": 2,
-    "previousVersion": 1,
+    "previous_version": 1,
     "description": "Curva progresiva de XP acumulada por nivel (10 niveles)",
-    "updatedAt": "2026-09-24T10:10:00Z",
-    "updatedBy": "usr-admin-8831"
+    "updated_at": "2026-09-24T10:10:00Z",
+    "updated_by": "usr-admin-8831"
   }
 }
 ```

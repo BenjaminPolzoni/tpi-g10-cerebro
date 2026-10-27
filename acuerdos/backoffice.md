@@ -59,7 +59,7 @@ Respuesta: `{ "key": "PAR-01", "value": {...}, "version": 1 }` (`ParameterRespon
 - Resto del payload según el contrato recibido, con nombres v8 **a confirmar por Backoffice**: `value`, `previous_version`, `description`, `updated_at`, `updated_by` (el DTO de Backoffice usa `previous_version` y `actor_id`, ver `T-191-KAFKA-V8-CUTOVER.md`).
 
 ### Kafka (Roadmap → Backoffice): `roadmap.events` v1
-- Topic `roadmap.events` (DLT `roadmap.events.DLT`), producer `tema-10-roadmap-service`, key = `studentId`, at-least-once, idempotencia por `eventId`, publicado por outbox cada ~3 s.
+- Topic `roadmap.events` (DLT `roadmap.events.DLT`), producer `tema-10-roadmap-service`, key = `student_id`, at-least-once, idempotencia por `event_id`, publicado por outbox cada ~3 s.
 - `NODE_COMPLETED {courseId, studentId, nodeId, challengeId, sectionId}`, `NODE_UNLOCKED {courseId, studentId, nodeId}`, `BADGE_AWARDED {courseId, studentId, badgeId}`. `courseId` = `courseCohortId`. El XP **no viaja**.
 - Declarados y aún **sin emisión**: `COURSE_LEVEL_UP`, `PERFORMANCE_ZONE_CHANGED`.
 - Lectura de arranque en frío: `GET /api/roadmap/courses/{courseId}/progress?page=0&size=50` (máx 200). Autoriza servicio con scope **`roadmap.progress.read`** (audience `roadmap-service`; ofrecido en el registry, `tpi-system-compose` PR #193) o usuario ADMIN/PROFESSOR. Solo matrículas activas, orden estable por `student_id`.

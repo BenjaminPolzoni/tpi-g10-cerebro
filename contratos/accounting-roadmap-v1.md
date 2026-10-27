@@ -223,8 +223,8 @@ Ambos eventos son publicados por Accounting en `accounting.ledger.events` y usan
 
 ```json
 {
-  "eventId": "...",
-  "eventType": "...",
+  "event_id": "...",
+  "event_type": "...",
   "timestamp": "ISO-8601 UTC",
   "producer": "...",
   "payload": {}
@@ -237,15 +237,15 @@ Representa la transición `freeLives > 0` → `freeLives = 0`.
 
 ```json
 {
-  "eventId": "123e4567-e89b-12d3-a456-426614174000",
-  "eventType": "LIVES_EXHAUSTED",
+  "event_id": "123e4567-e89b-12d3-a456-426614174000",
+  "event_type": "LIVES_EXHAUSTED",
   "timestamp": "2026-09-25T18:00:00Z",
   "producer": "tema-08-accounting",
   "payload": {
-    "courseId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    "studentId": "8b1e2c4a-1234-4a1b-9c3d-abcdef123456",
-    "currentLives": 0,
-    "reservedLives": 0
+    "course_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "student_id": "8b1e2c4a-1234-4a1b-9c3d-abcdef123456",
+    "current_lives": 0,
+    "reserved_lives": 0
   }
 }
 ```
@@ -256,15 +256,15 @@ Representa la transición `freeLives = 0` → `freeLives > 0`.
 
 ```json
 {
-  "eventId": "123e4567-e89b-12d3-a456-426614174001",
-  "eventType": "LIVES_AVAILABLE",
+  "event_id": "123e4567-e89b-12d3-a456-426614174001",
+  "event_type": "LIVES_AVAILABLE",
   "timestamp": "2026-09-25T18:10:00Z",
   "producer": "tema-08-accounting",
   "payload": {
-    "courseId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    "studentId": "8b1e2c4a-1234-4a1b-9c3d-abcdef123456",
-    "currentLives": 1,
-    "reservedLives": 0
+    "course_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "student_id": "8b1e2c4a-1234-4a1b-9c3d-abcdef123456",
+    "current_lives": 1,
+    "reserved_lives": 0
   }
 }
 ```
@@ -324,14 +324,14 @@ Roadmap publica en `accounting.inventory.commands`:
 
 ```json
 {
-  "eventId": "123e4567-e89b-12d3-a456-426614174010",
-  "eventType": "ITEM_EQUIP_REQUESTED",
+  "event_id": "123e4567-e89b-12d3-a456-426614174010",
+  "event_type": "ITEM_EQUIP_REQUESTED",
   "timestamp": "2026-09-19T23:00:00Z",
   "producer": "tema-10-roadmap",
   "payload": {
-    "studentId": "8b1e2c4a-1234-4a1b-9c3d-abcdef123456",
-    "courseId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    "itemInstanceIds": [
+    "student_id": "8b1e2c4a-1234-4a1b-9c3d-abcdef123456",
+    "course_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "item_instance_ids": [
       "11111111-1111-1111-1111-111111111111",
       "22222222-2222-2222-2222-222222222222"
     ]
@@ -347,20 +347,20 @@ Accounting publica en `accounting.inventory.commands`:
 
 ```json
 {
-  "eventId": "123e4567-e89b-12d3-a456-426614174011",
-  "eventType": "ITEM_EQUIP_RESULT",
+  "event_id": "123e4567-e89b-12d3-a456-426614174011",
+  "event_type": "ITEM_EQUIP_RESULT",
   "timestamp": "2026-09-19T23:00:01Z",
   "producer": "tema-08-accounting",
   "payload": {
-    "correlationId": "123e4567-e89b-12d3-a456-426614174010",
-    "studentId": "8b1e2c4a-1234-4a1b-9c3d-abcdef123456",
-    "courseId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "correlation_id": "123e4567-e89b-12d3-a456-426614174010",
+    "student_id": "8b1e2c4a-1234-4a1b-9c3d-abcdef123456",
+    "course_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
     "equipped": [
       "11111111-1111-1111-1111-111111111111"
     ],
     "rejected": [
       {
-        "itemInstanceId": "22222222-2222-2222-2222-222222222222",
+        "item_instance_id": "22222222-2222-2222-2222-222222222222",
         "reason": "ITEM_NOT_AVAILABLE"
       }
     ]
@@ -368,7 +368,7 @@ Accounting publica en `accounting.inventory.commands`:
 }
 ```
 
-`correlationId` referencia el `eventId` de `ITEM_EQUIP_REQUESTED`.
+`correlationId` referencia el `event_id` de `ITEM_EQUIP_REQUESTED`.
 
 ## 6. Política de degradación
 

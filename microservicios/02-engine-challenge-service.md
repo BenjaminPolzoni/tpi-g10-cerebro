@@ -101,7 +101,7 @@
 
 - **Tópico:** `challenges.events`
 - **Producer:** `engine-challenge-service`
-- **Clave del Mensaje (`Key`):** `userId` (o `studentId`)
+- **Clave del Mensaje (`Key`):** `id_user` (alumno)
 - **Envelope Oficial (5 Campos, snake_case v8):**
 
 ### Schema de `CHALLENGE_COMPLETED`:

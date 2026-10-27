@@ -124,7 +124,7 @@ Todas las llamadas salientes desde Roadmap hacia `course-service` se realizan a 
 ### Eventos Producidos por Courses:
 1. **`STUDENT_ENROLLED`:**
    - Emitido cuando un alumno se matricula a una cohorte.
-   - Clave del mensaje (`Key`): `courseId` o `studentId`.
+   - Clave del mensaje (`Key`): `course_id` o `student_id` (snake_case).
    - Payload:
 ```json
 {

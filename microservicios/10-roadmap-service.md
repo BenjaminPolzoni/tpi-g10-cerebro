@@ -85,7 +85,7 @@
 - Acceso al catálogo de desafíos sin filtrado restrictivo de autor para administradores y gestores.
 
 ### 2.10 Transactional Outbox (`outbox_event`, V15)
-- Publicación confiable a `roadmap.events` de los eventos `NODE_COMPLETED`, `NODE_UNLOCKED`, `COURSE_LEVEL_UP`, `BADGE_AWARDED` y `PERFORMANCE_ZONE_CHANGED`.
+- Publicación confiable a `roadmap.events` de los eventos `NODE_COMPLETED`, `NODE_UNLOCKED`, `BADGE_AWARDED` y `ROADMAP_MANDATORY_AVAILABILITY_CHANGED` (wire snake_case, key `student_id`). `COURSE_LEVEL_UP` y `PERFORMANCE_ZONE_CHANGED` están declarados pero todavía no se emiten.
 
 ---
 

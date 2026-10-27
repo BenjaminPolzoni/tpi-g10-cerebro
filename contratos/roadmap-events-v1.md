@@ -8,11 +8,11 @@ los consume y construye su read model.
 |---|---|
 | Topic | `roadmap.events` (DLT `roadmap.events.DLT`) |
 | Producer | `tema-10-roadmap-service` |
-| Key | `studentId` (UUID como string) |
-| Envelope | 6 campos: `eventId`, `eventType`, `eventVersion`, `timestamp`, `producer`, `payload` |
+| Key | `student_id` (UUID como string; es el valor, el nombre se escribe en snake_case) |
+| Envelope | 6 campos en snake_case: `event_id`, `event_type`, `event_version`, `timestamp`, `producer`, `payload` |
 | `timestamp` | ISO‑8601 UTC del **hecho** (no del encolado) |
-| Entrega | At‑least‑once. Idempotencia por `eventId` (un duplicado no reproyecta) |
-| Orden | Solo dentro de una partición; la key es `studentId` |
+| Entrega | At‑least‑once. Idempotencia por `event_id` (un duplicado no reproyecta) |
+| Orden | Solo dentro de una partición; la key es `student_id` |
 
 ## Frescura
 
@@ -28,18 +28,18 @@ Un alumno superó un nodo del roadmap (desafío o contenido).
 
 ```json
 {
-  "courseId": "uuid (courseCohortId)",
-  "studentId": "uuid",
-  "nodeId": "uuid",
-  "challengeId": "uuid",
-  "sectionId": "uuid"
+  "course_id": "uuid (course_cohort_id)",
+  "student_id": "uuid",
+  "node_id": "uuid",
+  "challenge_id": "uuid",
+  "section_id": "uuid"
 }
 ```
 
-- `courseId` es **el `courseCohortId`** (la cohorte), no el curso base.
+- `course_id` es **el `course_cohort_id`** (la cohorte), no el curso base.
 - El **XP no viaja** en el evento: Roadmap no lo calcula. Para el XP acumulado
   usar `GET /api/roadmap/courses/{courseId}/students/{studentId}/progress` (`xp_total`).
-- `challengeId` puede ser `null` en nodos que no son desafío.
+- `challenge_id` puede ser `null` en nodos que no son desafío.
 
 ### `NODE_UNLOCKED` v1
 
@@ -47,9 +47,9 @@ Un nodo pasó a estar habilitado para el alumno.
 
 ```json
 {
-  "courseId": "uuid (courseCohortId)",
-  "studentId": "uuid",
-  "nodeId": "uuid"
+  "course_id": "uuid (course_cohort_id)",
+  "student_id": "uuid",
+  "node_id": "uuid"
 }
 ```
 
@@ -59,11 +59,39 @@ Un alumno obtuvo una insignia (HU‑21).
 
 ```json
 {
-  "courseId": "uuid (courseCohortId)",
-  "studentId": "uuid",
-  "badgeId": "uuid"
+  "course_id": "uuid (course_cohort_id)",
+  "student_id": "uuid",
+  "badge_id": "uuid"
 }
 ```
+
+### `ROADMAP_MANDATORY_AVAILABILITY_CHANGED` v1
+
+Cambió la cantidad de desafíos obligatorios/opcionales disponibles o completados
+de un alumno en una cohorte (#252). Se emite solo si algún contador cambia.
+
+```json
+{
+  "student_id": "uuid",
+  "course_cohort_id": "uuid",
+  "mandatory_completed_count": 3,
+  "mandatory_available_count": 2,
+  "optional_available_count": 1,
+  "occurred_at": "2026-10-15T08:30:00Z"
+}
+```
+
+- Acá la cohorte viaja como `course_cohort_id`, **no** como `course_id` como en los otros
+  tres eventos (así lo emite el código: `RoadmapMandatoryAvailabilityPayload`).
+- Se calcula después del commit del hecho y se encola en su propia transacción
+  (`MandatoryAvailabilityWriter`); no sale en la misma transacción que `NODE_COMPLETED`.
+
+### `PARAMETER_CATALOG_DECLARED` v1
+
+Snapshot del catálogo de parámetros dinámicos de Roadmap, publicado una vez al arrancar
+(#311), key `T10_ROADMAP`, mismo topic `roadmap.events`. Contrato propio en el repo:
+`docs/contracts/roadmap-parameter-catalog.asyncapi.yaml`. No lleva `student_id`, así que
+los consumidores de eventos de alumno deben ignorar este `event_type`.
 
 ## Declarados, aún no emitidos
 

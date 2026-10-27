@@ -137,7 +137,7 @@ Trae vidas, saldo de monedas e ítems equipados en una sola llamada por alumno:
 
 - **Tópico:** `accounting.events`
 - **Producer:** `accounting-service`
-- **Clave del Mensaje (`Key`):** `studentId`
+- **Clave del Mensaje (`Key`):** `student_id`
 
 ### Eventos Consumidos por Roadmap:
 1. **`LIFE_DEBITED`:**

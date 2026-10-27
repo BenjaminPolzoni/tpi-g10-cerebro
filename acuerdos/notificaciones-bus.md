@@ -17,12 +17,12 @@ contrato: "contratos/bus-notificaciones.md"
 > - Contraparte: `2026-P4-BE/tpi-notifications` → `docs/contratos-kafka.md`.
 
 ## Qué se acordó
-- **Está prohibido crear topics** desde un micro; el broker lo aprovisiona la plataforma (Tema 11) y no hay `auto.create.topics`. Se usa **un topic por dominio** (`<dominio>.events`) y el `eventType` discrimina el hecho.
+- **Está prohibido crear topics** desde un micro; el broker lo aprovisiona la plataforma (Tema 11) y no hay `auto.create.topics`. Se usa **un topic por dominio** (`<dominio>.events`) y el `event_type` discrimina el hecho.
 - **Sobre obligatorio de 6 campos:** `event_id`, `event_type`, `event_version` (entero, `1`), `timestamp` (ISO-8601 UTC del hecho), `producer`, `payload`. Desde `contratos-kafka` v8 todo va en `snake_case`. Ver [[decisiones/DEC-001-wire-kafka-v8-snake-case|DEC-001]].
 - Mensajes en JSON plano (`StringSerializer`/`StringDeserializer`), `acks=all` en el productor, `enable.auto.commit=false`, ack manual.
 - Consumer group propio: **`tema-10-roadmap-service-group`**. Producer: **`tema-10-roadmap-service`** (property `app.kafka.producer`, nunca `spring.application.name`).
 - Resiliencia documentada por el bus: 3 reintentos fijos de 2 s y derivación a `<topic>.DLT`. Roadmap no tiene DLQ única: lo no reintentable va a la DLT del dominio origen.
-- Todo evento propio sale por **outbox transaccional**, key = `studentId`. Ver [[decisiones/DEC-002-outbox-transaccional-eventos-salientes|DEC-002]].
+- Todo evento propio sale por **outbox transaccional**, key = `student_id`. Ver [[decisiones/DEC-002-outbox-transaccional-eventos-salientes|DEC-002]].
 - No se emite `xp.otorgado`: nadie lo consume.
 
 ## Quién lo acordó
@@ -45,7 +45,7 @@ contrato: "contratos/bus-notificaciones.md"
 
 ### Eventos que publicamos (`roadmap.events`)
 - `NODE_COMPLETED {courseId, studentId, nodeId, challengeId, sectionId}`, `NODE_UNLOCKED {courseId, studentId, nodeId}`, `BADGE_AWARDED {courseId, studentId, badgeId}`. `courseId` = `courseCohortId`.
-- Previstos pero **sin emisión**: `COURSE_LEVEL_UP {newLevel, totalXp}`, `PERFORMANCE_ZONE_CHANGED {previousZone, currentZone}` (vocabulario `P90/MIDDLE/P10`, solo con >= 10 inscriptos).
+- Previstos pero **sin emisión**: `COURSE_LEVEL_UP {new_level, total_xp}`, `PERFORMANCE_ZONE_CHANGED {previous_zone, current_zone}` (vocabulario `P90/MIDDLE/P10`, solo con >= 10 inscriptos).
 - Entrega at-least-once; el `event_id` queda fijo en cada reintento (se serializa el sobre al encolar). Estados `PENDING/PUBLISHED/FAILED` (5 intentos); `FAILED` actúa de DLQ del productor.
 - Frescura: poller cada 3 s; el SLA se mide desde `timestamp`.
 
@@ -65,11 +65,12 @@ contrato: "contratos/bus-notificaciones.md"
 - `docs/T-191-KAFKA-V8-CUTOVER.md`: runbook de corte del outbox (drenar `PENDING`, lag a cero, desplegar).
 
 ## Pendiente / próximos pasos
-- [ ] **`event_version` en el sobre del Motor**: contradice la regla "sin `eventVersion`" de §1; abierto con Notificaciones (no se decide unilateralmente).
+- [ ] **`event_version` en el sobre del Motor**: contradice la regla "sin `eventVersion`" de §1 (documento anterior, camelCase); abierto con Notificaciones (no se decide unilateralmente).
 - [ ] Confirmar con **Gamificación, Accounting y Notificaciones** que consumen `roadmap.events` en v8 (pendiente declarado en `T-191`).
-- [ ] Acta de Roadmap con Notificaciones: topics de salida, key `studentId`, política de DLQ (P5, P8, P9, P11-13).
+- [ ] Acta de Roadmap con Notificaciones: topics de salida, key `student_id`, política de DLQ (P5, P8, P9, P11-13).
 - [ ] Si Courses publica eventos de sección/actividad, definir `event_type`, payload y key (¿`courseId` = `courseCohortId`?).
-- [ ] Regenerar `roadmap-service.asyncapi.yaml` a v8 y actualizar el texto de Taiga HT-11 (dice camelCase).
+- [x] Regenerar `roadmap-service.asyncapi.yaml` a v8 (hecho en DT-18, 2026-10-27: v2.0.0, snake_case, verificado contra el código).
+- [ ] Actualizar el texto de Taiga HT-11 (dice camelCase).
 - [ ] Borrar el listener legado v1/v2 y su flag.
 - [ ] `ITEM_EQUIP_*`: la tabla lo ubica en `accounting.holds.events` y el acta de Accounting en `accounting.inventory.commands`.
 - [ ] Emitir `COURSE_LEVEL_UP` y `PERFORMANCE_ZONE_CHANGED`.

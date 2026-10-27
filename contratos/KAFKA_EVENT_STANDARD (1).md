@@ -1,3 +1,11 @@
+> [!warning] Documento histórico, actualizado en DT-18 (2026-10-27)
+> La fuente canónica vigente es la skill `contratos-kafka` del Skill Hub (v12): sobre de 6 campos obligatorios en
+> **snake_case** (`event_id`, `event_type`, `event_version`, `timestamp`, `producer`, `payload`), payload en snake_case,
+> `event_type` en `SCREAMING_SNAKE_CASE` y un tópico `<dominio>.events` por dominio. Los nombres de campo y de evento de este
+> texto se pasaron de camelCase/guiones a snake_case ([[decisiones/DEC-001-wire-kafka-v8-snake-case|DEC-001]]); lo demás (nombres de
+> topic de ejemplo como `challenge-events`, claves, DLT, `organization_id`) puede estar desactualizado: ante cualquier
+> diferencia manda la skill.
+
 # Kafka Event Standard
 
 ## 1. Objetivo
@@ -29,7 +37,7 @@ La arquitectura de eventos se basa en los siguientes principios:
 2. Los topics se organizan **por dominio**.
 3. Todos los eventos utilizan un **envelope común**.
 4. Cada tipo de evento define su propio `payload`.
-5. Cada evento posee una versión explícita mediante `eventVersion`.
+5. Cada evento posee una versión explícita mediante `event_version`.
 6. Cada dominio debe definir una estrategia de **Kafka Message Key**.
 7. Los contratos publicados deben considerarse una **API pública entre microservicios**.
 8. Los cambios incompatibles requieren una nueva versión del contrato.
@@ -54,9 +62,9 @@ Kafka Message
 │
 └── Value
      │
-     ├── eventId
-     ├── eventType
-     ├── eventVersion
+     ├── event_id
+     ├── event_type
+     ├── event_version
      ├── timestamp
      ├── producer
      │
@@ -69,9 +77,9 @@ Cada elemento cumple una responsabilidad diferente:
 |---|---|
 | Topic | Determina a qué dominio pertenece el evento |
 | Key | Determina qué eventos deben mantenerse relacionados y ordenados |
-| eventId | Identifica una instancia única del evento |
-| eventType | Indica qué ocurrió |
-| eventVersion | Identifica la versión del contrato |
+| event_id | Identifica una instancia única del evento |
+| event_type | Indica qué ocurrió |
+| event_version | Identifica la versión del contrato |
 | timestamp | Indica cuándo ocurrió |
 | producer | Identifica quién publicó el evento |
 | payload | Contiene los datos específicos del evento |
@@ -98,16 +106,16 @@ se utiliza un topic correspondiente al dominio:
 chat-events
 ```
 
-Dentro del topic pueden existir diferentes `eventType`:
+Dentro del topic pueden existir diferentes `event_type`:
 
 ```text
 chat-events
 │
-├── MESSAGE-SENT
-├── MESSAGE-EDITED
-├── MESSAGE-DELETED
-├── USER-BLOCKED
-└── CHANNEL-CLOSED
+├── MESSAGE_SENT
+├── MESSAGE_EDITED
+├── MESSAGE_DELETED
+├── USER_BLOCKED
+└── CHANNEL_CLOSED
 ```
 
 Otros ejemplos podrían ser:
@@ -124,7 +132,7 @@ Los nombres definitivos de los topics deben ser acordados y documentados por el 
 
 ### Regla
 
-> Un topic representa un dominio de negocio. El `eventType` identifica el hecho específico ocurrido dentro de ese dominio.
+> Un topic representa un dominio de negocio. El `event_type` identifica el hecho específico ocurrido dentro de ese dominio.
 
 ---
 
@@ -134,9 +142,9 @@ Todos los eventos Kafka se serializan como JSON utilizando el siguiente envelope
 
 ```json
 {
-  "eventId": "550e8400-e29b-41d4-a716-446655440000",
-  "eventType": "NOMBRE-DEL-EVENTO",
-  "eventVersion": 1,
+  "event_id": "550e8400-e29b-41d4-a716-446655440000",
+  "event_type": "NOMBRE_DEL_EVENTO",
+  "event_version": 1,
   "timestamp": "2026-09-11T17:30:25.123Z",
   "producer": "tema-XX-nombre",
   "payload": {}
@@ -146,9 +154,9 @@ Todos los eventos Kafka se serializan como JSON utilizando el siguiente envelope
 Los campos:
 
 ```text
-eventId
-eventType
-eventVersion
+event_id
+event_type
+event_version
 timestamp
 producer
 payload
@@ -160,21 +168,21 @@ No deben modificarse, eliminarse o renombrarse unilateralmente por un microservi
 
 ---
 
-# 6. `eventId`
+# 6. `event_id`
 
-`eventId` identifica de manera única una instancia concreta de un evento.
+`event_id` identifica de manera única una instancia concreta de un evento.
 
 Ejemplo:
 
 ```json
-"eventId": "550e8400-e29b-41d4-a716-446655440000"
+"event_id": "550e8400-e29b-41d4-a716-446655440000"
 ```
 
 ## Reglas
 
 - DEBE ser un UUID.
 - DEBE generarse al crear el evento.
-- Dos eventos diferentes NO DEBEN compartir el mismo `eventId`.
+- Dos eventos diferentes NO DEBEN compartir el mismo `event_id`.
 - NO representa una entidad de negocio.
 - NO debe utilizarse como reemplazo de la Kafka Message Key.
 
@@ -182,14 +190,14 @@ Los consumidores pueden utilizarlo para detectar eventos procesados previamente 
 
 ---
 
-# 7. `eventType`
+# 7. `event_type`
 
-`eventType` identifica qué hecho ocurrió dentro del sistema.
+`event_type` identifica qué hecho ocurrió dentro del sistema.
 
 Ejemplo:
 
 ```json
-"eventType": "CHALLENGE-COMPLETED"
+"event_type": "CHALLENGE_COMPLETED"
 ```
 
 Los eventos representan **hechos que ya ocurrieron**, no órdenes para realizar acciones.
@@ -199,48 +207,48 @@ Los eventos representan **hechos que ya ocurrieron**, no órdenes para realizar 
 Los nombres:
 
 - DEBEN estar escritos en mayúsculas.
-- DEBEN utilizar `-` como separador.
+- DEBEN utilizar `_` como separador (`SCREAMING_SNAKE_CASE`, p. ej. `CHALLENGE_COMPLETED`).
 - DEBEN representar hechos del dominio.
 - DEBEN mantenerse estables una vez publicados.
 
 ### Correcto
 
 ```text
-CHALLENGE-COMPLETED
-MESSAGE-SENT
-USER-BLOCKED
-COURSE-CREATED
-COURSE-PUBLISHED
-PASSWORD-CHANGED
-RETENTION-PERIOD-EXPIRED
+CHALLENGE_COMPLETED
+MESSAGE_SENT
+USER_BLOCKED
+COURSE_CREATED
+COURSE_PUBLISHED
+PASSWORD_CHANGED
+RETENTION_PERIOD_EXPIRED
 ```
 
 ### Evitar
 
 ```text
-CREATE-COURSE
-SEND-MESSAGE
-BLOCK-USER
+CREATE_COURSE
+SEND_MESSAGE
+BLOCK_USER
 ```
 
 Preferir:
 
 ```text
-COURSE-CREATED
-MESSAGE-SENT
-USER-BLOCKED
+COURSE_CREATED
+MESSAGE_SENT
+USER_BLOCKED
 ```
 
 ---
 
-# 8. `eventVersion`
+# 8. `event_version`
 
-`eventVersion` identifica la versión del **contrato público de un determinado tipo de evento**.
+`event_version` identifica la versión del **contrato público de un determinado tipo de evento**.
 
 Ejemplo:
 
 ```json
-"eventVersion": 1
+"event_version": 1
 ```
 
 La versión:
@@ -262,12 +270,12 @@ puede seguir produciendo:
 
 ```json
 {
-  "eventType": "MESSAGE-SENT",
-  "eventVersion": 1
+  "event_type": "MESSAGE_SENT",
+  "event_version": 1
 }
 ```
 
-si el contrato público de `MESSAGE-SENT` no cambió.
+si el contrato público de `MESSAGE_SENT` no cambió.
 
 ---
 
@@ -335,26 +343,26 @@ Ejemplo:
 
 ```json
 {
-  "studentId": "123",
-  "challengeId": "456",
-  "xpEarned": 50,
-  "attemptId": "789",
+  "student_id": "123",
+  "challenge_id": "456",
+  "xp_earned": 50,
+  "attempt_id": "789",
   "grade": "APROBADO"
 }
 ```
 
-La estructura del payload depende **100 % del `eventType` y de su `eventVersion`**.
+La estructura del payload depende **100 % del `event_type` y de su `event_version`**.
 
 Por ejemplo:
 
 ```text
-CHALLENGE-COMPLETED v1
+CHALLENGE_COMPLETED v1
         │
         └── payload
-             ├── studentId
-             ├── challengeId
-             ├── xpEarned
-             ├── attemptId
+             ├── student_id
+             ├── challenge_id
+             ├── xp_earned
+             ├── attempt_id
              └── grade
 ```
 
@@ -362,12 +370,12 @@ Otro evento puede utilizar una estructura completamente diferente:
 
 ```json
 {
-  "eventType": "MESSAGE-SENT",
-  "eventVersion": 1,
+  "event_type": "MESSAGE_SENT",
+  "event_version": 1,
   "payload": {
-    "messageId": "msg-123",
-    "channelId": "channel-456",
-    "senderId": "user-789"
+    "message_id": "msg-123",
+    "channel_id": "channel-456",
+    "sender_id": "user-789"
   }
 }
 ```
@@ -376,7 +384,7 @@ No existe una estructura global obligatoria dentro de `payload`.
 
 Sin embargo:
 
-> Una vez publicado el contrato de un `eventType` y `eventVersion`, productores y consumidores DEBEN respetarlo.
+> Una vez publicado el contrato de un `event_type` y `event_version`, productores y consumidores DEBEN respetarlo.
 
 ---
 
@@ -395,9 +403,9 @@ channel-456
 
 Value:
 {
-  "eventId": "...",
-  "eventType": "MESSAGE-SENT",
-  "eventVersion": 1,
+  "event_id": "...",
+  "event_type": "MESSAGE_SENT",
+  "event_version": 1,
   ...
 }
 ```
@@ -423,22 +431,22 @@ Por ejemplo, para Chat:
 
 ```text
 Topic: chat-events
-Key: channelId
+Key: channel_id
 ```
 
 Los eventos:
 
 ```text
-MESSAGE-SENT
-MESSAGE-SENT
-MESSAGE-EDITED
-MESSAGE-DELETED
+MESSAGE_SENT
+MESSAGE_SENT
+MESSAGE_EDITED
+MESSAGE_DELETED
 ```
 
 del mismo canal utilizan:
 
 ```text
-channelId = channel-456
+channel_id = channel-456
 ```
 
 como key.
@@ -448,13 +456,13 @@ Conceptualmente:
 ```text
 channel-456
 
-MESSAGE-SENT
+MESSAGE_SENT
       │
-MESSAGE-SENT
+MESSAGE_SENT
       │
-MESSAGE-EDITED
+MESSAGE_EDITED
       │
-MESSAGE-DELETED
+MESSAGE_DELETED
       │
       ▼
 Partition N
@@ -488,7 +496,7 @@ Si la respuesta es:
 Entonces:
 
 ```text
-key = channelId
+key = channel_id
 ```
 
 Si la respuesta es:
@@ -498,7 +506,7 @@ Si la respuesta es:
 Entonces:
 
 ```text
-key = userId
+key = user_id
 ```
 
 Si la respuesta es:
@@ -508,7 +516,7 @@ Si la respuesta es:
 Entonces:
 
 ```text
-key = courseId
+key = course_id
 ```
 
 La estrategia de key debe evitar concentrar innecesariamente grandes cantidades de eventos en una única entidad.
@@ -516,7 +524,7 @@ La estrategia de key debe evitar concentrar innecesariamente grandes cantidades 
 Por ejemplo:
 
 ```text
-key = challengeId
+key = challenge_id
 ```
 
 podría provocar que todos los estudiantes resolviendo el mismo desafío envíen eventos hacia la misma partición.
@@ -524,24 +532,24 @@ podría provocar que todos los estudiantes resolviendo el mismo desafío envíen
 Dependiendo del dominio, podría ser más apropiado utilizar:
 
 ```text
-studentId
+student_id
 ```
 
 o:
 
 ```text
-attemptId
+attempt_id
 ```
 
 La elección debe realizarse según las necesidades reales de orden y distribución.
 
 ---
 
-# 15. Message Key vs `eventId`
+# 15. Message Key vs `event_id`
 
 Estos conceptos NO deben confundirse.
 
-## `eventId`
+## `event_id`
 
 Identifica:
 
@@ -574,7 +582,7 @@ Key: channel-456
 y diferentes:
 
 ```text
-eventId
+event_id
 ```
 
 Esto es completamente correcto.
@@ -592,16 +600,16 @@ Ejemplo:
 
 Topic: `chat-events`
 
-Message Key: `channelId`
+Message Key: `channel_id`
 
 Justificación:
 Los eventos pertenecientes al mismo canal deben conservar su orden relativo.
 
 Ejemplos de eventos:
-- MESSAGE-SENT
-- MESSAGE-EDITED
-- MESSAGE-DELETED
-- CHANNEL-CLOSED
+- MESSAGE_SENT
+- MESSAGE_EDITED
+- MESSAGE_DELETED
+- CHANNEL_CLOSED
 ```
 
 La estrategia NO debe ser inferida por cada desarrollador o por una IA.
@@ -616,7 +624,7 @@ Esta tabla debe mantenerse actualizada a medida que se definan los dominios.
 
 | Dominio | Topic | Message Key | Justificación |
 |---|---|---|---|
-| Chat | `chat-events` | `channelId` | Preservar orden dentro del canal |
+| Chat | `chat-events` | `channel_id` | Preservar orden dentro del canal |
 | Cursos | `course-events` | Pendiente | Pendiente |
 | Usuarios | `user-events` | Pendiente | Pendiente |
 | Challenges | `challenge-events` | Pendiente | Pendiente |
@@ -636,7 +644,7 @@ Modificar un contrato existente puede romper consumidores desarrollados por otro
 Por esta razón, los eventos utilizan:
 
 ```json
-"eventVersion": 1
+"event_version": 1
 ```
 
 La versión debe incrementarse únicamente cuando exista un **breaking change**.
@@ -651,9 +659,9 @@ Por ejemplo, versión original:
 
 ```json
 {
-  "studentId": "123",
-  "challengeId": "456",
-  "xpEarned": 50
+  "student_id": "123",
+  "challenge_id": "456",
+  "xp_earned": 50
 }
 ```
 
@@ -661,17 +669,17 @@ Agregar un campo opcional:
 
 ```json
 {
-  "studentId": "123",
-  "challengeId": "456",
-  "xpEarned": 50,
-  "courseId": "999"
+  "student_id": "123",
+  "challenge_id": "456",
+  "xp_earned": 50,
+  "course_id": "999"
 }
 ```
 
 puede mantenerse como:
 
 ```json
-"eventVersion": 1
+"event_version": 1
 ```
 
 si los consumidores existentes pueden ignorar campos desconocidos.
@@ -685,13 +693,13 @@ Los siguientes cambios deben considerarse potencialmente incompatibles:
 ### Eliminar un campo
 
 ```text
-studentId → eliminado
+student_id → eliminado
 ```
 
 ### Renombrar un campo
 
 ```text
-xpEarned → experience
+xp_earned → experience
 ```
 
 ### Cambiar el tipo
@@ -699,13 +707,13 @@ xpEarned → experience
 Antes:
 
 ```json
-"xpEarned": 50
+"xp_earned": 50
 ```
 
 Después:
 
 ```json
-"xpEarned": "50 XP"
+"xp_earned": "50 XP"
 ```
 
 ### Cambiar el significado semántico
@@ -727,7 +735,7 @@ Un consumidor o productor anterior puede no conocerlo.
 Antes:
 
 ```json
-"userId": "123"
+"user_id": "123"
 ```
 
 Después:
@@ -769,15 +777,15 @@ La regla fundamental es:
 
 ```json
 {
-  "eventId": "uuid",
-  "eventType": "CHALLENGE-COMPLETED",
-  "eventVersion": 1,
+  "event_id": "uuid",
+  "event_type": "CHALLENGE_COMPLETED",
+  "event_version": 1,
   "timestamp": "2026-09-11T17:30:25.123Z",
   "producer": "tema-03-challenges",
   "payload": {
-    "studentId": "123",
-    "challengeId": "456",
-    "xpEarned": 50
+    "student_id": "123",
+    "challenge_id": "456",
+    "xp_earned": 50
   }
 }
 ```
@@ -785,7 +793,7 @@ La regla fundamental es:
 Supongamos que posteriormente se decide reemplazar:
 
 ```text
-xpEarned
+xp_earned
 ```
 
 por una estructura más compleja:
@@ -803,14 +811,14 @@ Debe publicarse como:
 
 ```json
 {
-  "eventId": "uuid",
-  "eventType": "CHALLENGE-COMPLETED",
-  "eventVersion": 2,
+  "event_id": "uuid",
+  "event_type": "CHALLENGE_COMPLETED",
+  "event_version": 2,
   "timestamp": "2026-09-11T17:30:25.123Z",
   "producer": "tema-03-challenges",
   "payload": {
-    "studentId": "123",
-    "challengeId": "456",
+    "student_id": "123",
+    "challenge_id": "456",
     "reward": {
       "xp": 50,
       "bonus": 10
@@ -828,8 +836,8 @@ Una nueva versión no implica necesariamente que la versión anterior pueda elim
 Durante una migración pueden coexistir:
 
 ```text
-CHALLENGE-COMPLETED v1
-CHALLENGE-COMPLETED v2
+CHALLENGE_COMPLETED v1
+CHALLENGE_COMPLETED v2
 ```
 
 Los consumidores pueden necesitar soportar temporalmente ambas versiones:
@@ -838,10 +846,10 @@ Los consumidores pueden necesitar soportar temporalmente ambas versiones:
 Evento recibido
       │
       ▼
-eventType
+event_type
       │
       ▼
-eventVersion
+event_version
       │
       ├── 1 → Handler V1
       │
@@ -858,9 +866,9 @@ Todo productor Kafka debe:
 
 1. Seleccionar el topic correspondiente a su dominio.
 2. Utilizar la estrategia de Message Key definida para ese dominio/evento.
-3. Generar un `eventId` único.
-4. Utilizar un `eventType` documentado.
-5. Indicar el `eventVersion` correspondiente.
+3. Generar un `event_id` único.
+4. Utilizar un `event_type` documentado.
+5. Indicar el `event_version` correspondiente.
 6. Generar un timestamp ISO 8601 UTC.
 7. Identificarse mediante `producer`.
 8. Construir el payload según el contrato documentado.
@@ -883,8 +891,8 @@ Todo consumidor debe:
 
 1. Recibir el mensaje del topic correspondiente.
 2. Validar el envelope.
-3. Identificar `eventType`.
-4. Identificar `eventVersion`.
+3. Identificar `event_type`.
+4. Identificar `event_version`.
 5. Interpretar el payload según ese contrato.
 6. Ignorar campos adicionales que no necesite cuando sea posible.
 7. Manejar eventos desconocidos.
@@ -901,10 +909,10 @@ Mensaje recibido
 Validar envelope
        │
        ▼
-Identificar eventType
+Identificar event_type
        │
        ▼
-Identificar eventVersion
+Identificar event_version
        │
        ▼
 Validar payload
@@ -923,7 +931,7 @@ Por esta razón:
 
 > Los consumidores que ejecuten operaciones sensibles deben contemplar idempotencia.
 
-El `eventId` puede utilizarse para detectar eventos previamente procesados.
+El `event_id` puede utilizarse para detectar eventos previamente procesados.
 
 Ejemplo:
 
@@ -931,7 +939,7 @@ Ejemplo:
 Recibir evento
       │
       ▼
-Consultar eventId
+Consultar event_id
       │
       ├── Ya procesado
       │       │
@@ -943,10 +951,10 @@ Consultar eventId
          Procesar evento
               │
               ▼
-         Registrar eventId
+         Registrar event_id
 ```
 
-La existencia de `eventId` NO implementa idempotencia automáticamente.
+La existencia de `event_id` NO implementa idempotencia automáticamente.
 
 Cada consumidor debe implementar la estrategia correspondiente cuando sea necesaria.
 
@@ -954,17 +962,17 @@ Cada consumidor debe implementar la estrategia correspondiente cuando sea necesa
 
 # 27. Eventos desconocidos
 
-Un consumidor puede recibir un `eventType` que no reconoce.
+Un consumidor puede recibir un `event_type` que no reconoce.
 
 Esto puede ocurrir porque un productor comenzó a publicar un nuevo evento dentro del mismo dominio.
 
 Los consumidores NO deben asumir que conocen todos los eventos existentes en un topic.
 
-Un `eventType` desconocido debe ser manejado de forma segura según la política definida por el proyecto.
+Un `event_type` desconocido debe ser manejado de forma segura según la política definida por el proyecto.
 
 En particular:
 
-> La incorporación de un nuevo `eventType` dentro de un topic no debería romper consumidores existentes.
+> La incorporación de un nuevo `event_type` dentro de un topic no debería romper consumidores existentes.
 
 ---
 
@@ -974,16 +982,16 @@ Un consumidor también puede recibir:
 
 ```json
 {
-  "eventType": "MESSAGE-SENT",
-  "eventVersion": 3
+  "event_type": "MESSAGE_SENT",
+  "event_version": 3
 }
 ```
 
 cuando solamente conoce:
 
 ```text
-MESSAGE-SENT v1
-MESSAGE-SENT v2
+MESSAGE_SENT v1
+MESSAGE_SENT v2
 ```
 
 El consumidor NO debe interpretar automáticamente el payload como una versión conocida.
@@ -999,7 +1007,7 @@ Todo nuevo evento debe documentarse antes de considerarse parte estable del cont
 Formato recomendado:
 
 ```md
-## CHALLENGE-COMPLETED
+## CHALLENGE_COMPLETED
 
 ### Descripción
 
@@ -1015,7 +1023,7 @@ Challenges
 
 ### Event Type
 
-`CHALLENGE-COMPLETED`
+`CHALLENGE_COMPLETED`
 
 ### Event Version
 
@@ -1027,7 +1035,7 @@ Challenges
 
 ### Message Key
 
-`studentId`
+`student_id`
 
 ### Consumidores conocidos
 
@@ -1038,25 +1046,25 @@ Challenges
 
 | Campo | Tipo | Obligatorio | Descripción |
 |---|---|---|---|
-| studentId | string | Sí | Identificador del estudiante |
-| challengeId | string | Sí | Identificador del desafío |
-| xpEarned | number | Sí | XP obtenido |
-| attemptId | string | Sí | Identificador del intento |
+| student_id | string | Sí | Identificador del estudiante |
+| challenge_id | string | Sí | Identificador del desafío |
+| xp_earned | number | Sí | XP obtenido |
+| attempt_id | string | Sí | Identificador del intento |
 | grade | string | Sí | Resultado del desafío |
 
 ### Ejemplo
 
 {
-  "eventId": "550e8400-e29b-41d4-a716-446655440000",
-  "eventType": "CHALLENGE-COMPLETED",
-  "eventVersion": 1,
+  "event_id": "550e8400-e29b-41d4-a716-446655440000",
+  "event_type": "CHALLENGE_COMPLETED",
+  "event_version": 1,
   "timestamp": "2026-09-11T17:30:25.123Z",
   "producer": "tema-03-challenges",
   "payload": {
-    "studentId": "123",
-    "challengeId": "456",
-    "xpEarned": 50,
-    "attemptId": "789",
+    "student_id": "123",
+    "challenge_id": "456",
+    "xp_earned": 50,
+    "attempt_id": "789",
     "grade": "APROBADO"
   }
 }
@@ -1069,7 +1077,7 @@ Challenges
 Copiar y completar esta plantilla:
 
 ```md
-## NOMBRE-DEL-EVENTO
+## NOMBRE_DEL_EVENTO
 
 ### Descripción
 
@@ -1077,7 +1085,7 @@ Copiar y completar esta plantilla:
 
 ### Dominio
 
-[NOMBRE-DOMINIO]
+[NOMBRE_DOMINIO]
 
 ### Topic
 
@@ -1085,7 +1093,7 @@ Copiar y completar esta plantilla:
 
 ### Event Type
 
-`NOMBRE-DEL-EVENTO`
+`NOMBRE_DEL_EVENTO`
 
 ### Event Version
 
@@ -1116,9 +1124,9 @@ Copiar y completar esta plantilla:
 ### Ejemplo
 
 {
-  "eventId": "UUID",
-  "eventType": "NOMBRE-DEL-EVENTO",
-  "eventVersion": 1,
+  "event_id": "UUID",
+  "event_type": "NOMBRE_DEL_EVENTO",
+  "event_version": 1,
   "timestamp": "2026-09-11T17:30:25.123Z",
   "producer": "tema-XX-nombre",
   "payload": {}
@@ -1132,7 +1140,7 @@ Copiar y completar esta plantilla:
 Antes de publicar un nuevo evento debe verificarse:
 
 - [ ] El evento representa un hecho y no un comando.
-- [ ] El `eventType` sigue la convención definida.
+- [ ] El `event_type` sigue la convención definida.
 - [ ] El dominio está identificado.
 - [ ] El topic está definido.
 - [ ] El producer está identificado.
@@ -1141,7 +1149,7 @@ Antes de publicar un nuevo evento debe verificarse:
 - [ ] El payload está documentado.
 - [ ] Cada campo tiene un tipo definido.
 - [ ] Cada campo indica si es obligatorio u opcional.
-- [ ] El evento comienza con `eventVersion: 1`.
+- [ ] El evento comienza con `event_version: 1`.
 - [ ] Existe un ejemplo JSON válido.
 - [ ] Los consumidores conocidos están documentados.
 - [ ] Se verificó que no exista ya otro evento equivalente.
@@ -1158,10 +1166,10 @@ Las siguientes reglas son obligatorias.
 
 - Utilizar JSON para el Value del mensaje.
 - Mantener exactamente la estructura común del envelope.
-- Generar `eventId` como UUID.
-- Utilizar `eventVersion`.
+- Generar `event_id` como UUID.
+- Utilizar `event_version`.
 - Utilizar timestamps ISO 8601 UTC.
-- Utilizar el `eventType` documentado.
+- Utilizar el `event_type` documentado.
 - Identificar correctamente al `producer`.
 - Consultar el contrato específico antes de construir un payload.
 - Consultar la estrategia de Message Key del dominio.
@@ -1182,11 +1190,11 @@ Las siguientes reglas son obligatorias.
 - Inventar campos del payload cuando existe un contrato documentado.
 - Cambiar tipos de datos arbitrariamente.
 - Eliminar campos obligatorios.
-- Cambiar un `eventType` existente unilateralmente.
-- Incrementar `eventVersion` por cambios compatibles.
+- Cambiar un `event_type` existente unilateralmente.
+- Incrementar `event_version` por cambios compatibles.
 - Realizar breaking changes sin advertirlo.
 - Asumir que todos los consumidores conocen una nueva versión.
-- Utilizar `eventId` como Message Key salvo que exista una decisión explícita que lo justifique.
+- Utilizar `event_id` como Message Key salvo que exista una decisión explícita que lo justifique.
 - Asumir que Kafka garantiza orden global entre particiones.
 
 Cuando exista información marcada como:
@@ -1225,15 +1233,15 @@ Value:
 
 ```json
 {
-  "eventId": "550e8400-e29b-41d4-a716-446655440000",
-  "eventType": "MESSAGE-SENT",
-  "eventVersion": 1,
+  "event_id": "550e8400-e29b-41d4-a716-446655440000",
+  "event_type": "MESSAGE_SENT",
+  "event_version": 1,
   "timestamp": "2026-09-11T17:30:25.123Z",
   "producer": "tema-05-chat",
   "payload": {
-    "messageId": "message-999",
-    "channelId": "channel-456",
-    "senderId": "user-123"
+    "message_id": "message-999",
+    "channel_id": "channel-456",
+    "sender_id": "user-123"
   }
 }
 ```
@@ -1250,14 +1258,14 @@ channel-456
 
 ```json
 {
-  "eventId": "6d70d204-d33d-47ea-9751-f12ab7f718a2",
-  "eventType": "MESSAGE-EDITED",
-  "eventVersion": 1,
+  "event_id": "6d70d204-d33d-47ea-9751-f12ab7f718a2",
+  "event_type": "MESSAGE_EDITED",
+  "event_version": 1,
   "timestamp": "2026-09-11T17:32:10.456Z",
   "producer": "tema-05-chat",
   "payload": {
-    "messageId": "message-999",
-    "channelId": "channel-456"
+    "message_id": "message-999",
+    "channel_id": "channel-456"
   }
 }
 ```
@@ -1285,15 +1293,15 @@ Message Key
 │
 └── ¿Qué eventos deben permanecer relacionados y ordenados?
 
-eventType
+event_type
 │
 └── ¿Qué ocurrió?
 
-eventVersion
+event_version
 │
 └── ¿Qué versión del contrato representa?
 
-eventId
+event_id
 │
 └── ¿Qué instancia concreta del evento es?
 
@@ -1314,9 +1322,9 @@ El contrato mínimo obligatorio es:
 
 ```json
 {
-  "eventId": "UUID",
-  "eventType": "NOMBRE-DEL-EVENTO",
-  "eventVersion": 1,
+  "event_id": "UUID",
+  "event_type": "NOMBRE_DEL_EVENTO",
+  "event_version": 1,
   "timestamp": "ISO-8601-UTC",
   "producer": "tema-XX-nombre",
   "payload": {}
@@ -1341,10 +1349,10 @@ Las siguientes decisiones se consideran parte del estándar actual del proyecto:
 | Serialización | JSON |
 | Organización de topics | Por dominio |
 | Envelope | Común para todos los microservicios |
-| Payload | Específico por `eventType` y versión |
+| Payload | Específico por `event_type` y versión |
 | Identificador de evento | UUID |
 | Timestamp | ISO 8601 UTC |
-| Versionado | `eventVersion` dentro del envelope |
+| Versionado | `event_version` dentro del envelope |
 | Primera versión | `1` |
 | Nueva versión | Solo ante breaking changes |
 | Message Key | Definida explícitamente por dominio según necesidades de orden |
@@ -1395,9 +1403,9 @@ Message Key explícita
 +
 Envelope común
 +
-eventType
+event_type
 +
-eventVersion
+event_version
 +
 Payload documentado
 ```

@@ -32,11 +32,11 @@
 ### Matriz Oficial de Tópicos
 | Tópico | Dirección respecto a Roadmap | Particionado (`Key`) | Eventos Principales |
 |---|---|---|---|
-| **`challenges.events`** | Consumo | `userId` | `CHALLENGE_COMPLETED`, `CHALLENGE_ABORTED` |
-| **`accounting.events`** | Consumo | `studentId` | `LIFE_CREDITED`, `LIFE_DEBITED` |
-| **`administration.events`** | Consumo | `param_key` | `GLOBAL_CONFIGURATION_CHANGED` |
-| **`courses.events`** | Consumo | `courseId` | `STUDENT_ENROLLED`, `COURSE_ARCHIVED` |
-| **`roadmap.events`** | Publicación (Outbox) | `studentId` | `NODE_COMPLETED`, `NODE_UNLOCKED`, `COURSE_LEVEL_UP`, `BADGE_AWARDED`, `PERFORMANCE_ZONE_CHANGED` |
+| **`challenges.events`** | Consumo | `id_user` | `CHALLENGE_COMPLETED`, `CHALLENGE_ABORTED`, `CHALLENGE_ARCHIVED`, `CHALLENGE_RESULT_RECTIFIED` |
+| **`accounting.events`** | Consumo | `student_id` | `LIFE_CREDITED`, `LIFE_DEBITED` |
+| **`administration.events`** | Consumo | `param_key` | `GLOBAL_CONFIGURATION_CHANGED`, `PARAMETER_DEFINITION_CREATED` |
+| **`courses.events`** | Consumo | `course_cohort_id` / `student_id` (según el agregado, define Courses) | `STUDENT_ENROLLED`, `STUDENT_UNENROLLED`, `COURSE_COHORT_ARCHIVED` |
+| **`roadmap.events`** | Publicación (Outbox) | `student_id` | `NODE_COMPLETED`, `NODE_UNLOCKED`, `BADGE_AWARDED`, `ROADMAP_MANDATORY_AVAILABILITY_CHANGED` (`COURSE_LEVEL_UP` y `PERFORMANCE_ZONE_CHANGED` están declarados pero **no se emiten**) |
 
 ---
 
@@ -92,9 +92,10 @@ sequenceDiagram
 ### Eventos Publicados por Roadmap en `roadmap.events`:
 1. **`NODE_COMPLETED`:** Estudiante finalizó todos los requerimientos de un nodo.
 2. **`NODE_UNLOCKED`:** Nuevo nodo disponible en el árbol tras cumplir prerrequisitos.
-3. **`COURSE_LEVEL_UP`:** Estudiante alcanzó un nuevo nivel en base a la curva PAR-09.
-4. **`BADGE_AWARDED`:** Estudiante recibió una insignia del sistema o del docente.
-5. **`PERFORMANCE_ZONE_CHANGED`:** Estudiante ingresó o cambió de zona percentil (P90 / MIDDLE / P10).
+3. **`BADGE_AWARDED`:** Estudiante recibió una insignia del sistema o del docente.
+4. **`ROADMAP_MANDATORY_AVAILABILITY_CHANGED`:** Cambió la cantidad de desafíos obligatorios/opcionales disponibles o completados del alumno en la cohorte (#252).
+
+Declarados en el catálogo pero **sin emisión en el código** (verificado en DT-18, 2026-10-27): `COURSE_LEVEL_UP` (nuevo nivel, curva PAR-09) y `PERFORMANCE_ZONE_CHANGED` (zona percentil P90 / MIDDLE / P10). Contrato completo y payloads en snake_case: `contratos/roadmap-events-v1.md` y `contratos/roadmap-service.asyncapi.yaml`.
 
 ---
 

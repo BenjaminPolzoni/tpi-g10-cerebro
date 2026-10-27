@@ -85,8 +85,8 @@ El spec es REST puro. Roadmap necesita **consumir** dos hechos del bus:
 
 | Evento | Para qué | Payload mínimo que necesitamos |
 |---|---|---|
-| Inscripción validada | Crear la fila de `student_course` (hoy la pueblan los eventos de inscripción; sin ellos el micro no tendría ni un alumno) | `courseCohortId`, `studentId`, `studentNumber`, `status` |
-| Cohorte archivado | Pasar el roadmap y el ranking a solo lectura (RF-CUR-09) | `courseCohortId`, `status` |
+| Inscripción validada | Crear la fila de `student_course` (hoy la pueblan los eventos de inscripción; sin ellos el micro no tendría ni un alumno) | `course_cohort_id`, `student_id`, `student_number`, `status` |
+| Cohorte archivado | Pasar el roadmap y el ranking a solo lectura (RF-CUR-09) | `course_cohort_id`, `status` |
 
 6. ¿Publican esos eventos? Si no, ¿los pueden agregar? El envelope es el de 5 campos del PDF del
    bus y el topic lo asigna Notificaciones (ver `docs/contracts/bus-notificaciones.md`).
@@ -192,16 +192,17 @@ Tras inspeccionar directamente la implementación en `tpi-course` (rama `develop
   - Se cachea con Caffeine (TTL corto, máx. 500 entradas) para no sobrecargar las consultas repetitivas de edición del roadmap.
 
 ### 7.3 Sincronización Asíncrona de Matrículas y Cierre de Cohorte (`CoursesEventListener`)
-- **Topic**: `courses.events` (configurable vía `app.kafka.topics.courses=${KAFKA_TOPIC_COURSES:courses.events}`).
+- **Topic**: `courses.events` (configurable vía `app.kafka.topics.courses=${KAFKA_TOPIC_COURSES:courses.events}`; el listener usa `app.kafka.topics.courses-lifecycle`, mismo valor por defecto).
+- **Wire**: sobre y payload en `snake_case` (`contratos-kafka` v8, [[decisiones/DEC-001-wire-kafka-v8-snake-case|DEC-001]]). Un mensaje en camelCase no se lee y va a la DLT (`courses.events.DLT`). Actualizado en DT-18 (2026-10-27); antes figuraba en camelCase.
 - **Eventos consumidos**:
   1. `STUDENT_ENROLLED`:
-     - Payload: `{ enrollmentId, courseCohortId, studentId, validationType, enrolledAt }`
+     - Payload: `{ enrollment_id, course_cohort_id, student_id, validation_type, enrolled_at }`. Roadmap **solo lee** `course_cohort_id` y `student_id` (`StudentEnrolledPayload`); el resto se ignora y queda en el log de campos desconocidos.
      - Acción: upsert idempotente en `student_course` (`active = true`, inicializa vidas y XP si es nuevo).
   2. `STUDENT_UNENROLLED`:
-     - Payload: `{ enrollmentId, courseCohortId, studentId, reason, performedByUserId, unenrolledAt }`
+     - Payload: `{ enrollment_id, course_cohort_id, student_id, reason, performed_by_user_id, unenrolled_at }`. Roadmap **solo lee** `course_cohort_id` y `student_id` (`StudentUnenrolledPayload`).
      - Acción: marca `active = false` en `student_course` para la cohorte indicada.
   3. `COURSE_COHORT_ARCHIVED`:
-     - Payload: `{ courseCohortId, courseBaseId, archivedAt }`
+     - Payload: `{ course_cohort_id, course_base_id, archived_at }`. Roadmap **solo lee** `course_cohort_id` (`CourseCohortArchivedPayload`).
      - Acción: marca `RoadmapEntity.archived = true`, pasando el roadmap y ranking a solo lectura.
 
 ### 7.4 Mapeo y Creación del Roadmap
@@ -212,7 +213,7 @@ Tras inspeccionar directamente la implementación en `tpi-course` (rama `develop
   - `THEORY`: vincula lecturas/materiales de Courses mediante `contentId`.
   - `PRACTICE`: vincula desafíos evaluados por el Motor mediante `challengeId`.
 - **Evento de Activación emitido por Courses (`COURSE_COHORT_ACTIVATED`)**:
-  - Payload: `{ courseCohortId, courseBaseId, institutionId, startDate, endDate }`.
+  - Payload: `{ course_cohort_id, course_base_id, institution_id, start_date, end_date }`. Roadmap **no lo consume** (`CoursesLifecycleEventListener` solo atiende `STUDENT_ENROLLED`, `STUDENT_UNENROLLED` y `COURSE_COHORT_ARCHIVED`).
 
 ### 7.5 Tabla de Verificación de Integración Campo por Campo
 
@@ -223,10 +224,10 @@ Tras inspeccionar directamente la implementación en `tpi-course` (rama `develop
 | **Endpoint Membresía** | `GET /api/course/course-cohorts/{id}/membership` | `HttpCohortOwnershipClient` con caché Caffeine | ✅ Verificado 100% |
 | **Respuesta Membresía** | `CohortMembershipResponseDto { courseCohortId, role, canRead, canWrite }` | `MembershipResponse { courseCohortId, role, canRead, canWrite }` | ✅ Verificado 100% |
 | **Topic Kafka** | `courses.events` | `${app.kafka.topics.courses:courses.events}` | ✅ Verificado 100% |
-| **Envelope Kafka** | `EventEnvelope<T> { eventId, eventType, eventVersion, timestamp, producer, payload }` | `EventEnvelope<T> { eventId, eventType, timestamp, producer, payload, unknownFields }` | ✅ Verificado 100% |
-| **Payload `STUDENT_ENROLLED`** | `{ enrollmentId, courseCohortId, studentId, validationType, enrolledAt }` | `StudentEnrolledPayload` (mismos campos y tipos) | ✅ Verificado y mergeado en `develop` (PR #36) |
-| **Payload `STUDENT_UNENROLLED`**| `{ enrollmentId, courseCohortId, studentId, reason, performedByUserId, unenrolledAt }` | `StudentUnenrolledPayload` (mismos campos y tipos) | ✅ Verificado 100% |
-| **Payload `COURSE_COHORT_ARCHIVED`**| `{ courseCohortId, courseBaseId, archivedAt }` | `CourseCohortArchivedPayload` (mismos campos y tipos) | ✅ Verificado 100% |
+| **Envelope Kafka** | `EventEnvelope<T> { event_id, event_type, event_version, timestamp, producer, payload }` | `EventEnvelope<T> { event_id, event_type, event_version, timestamp, producer, payload }` (record Java con `@JsonProperty` snake_case; `unknownFields` es un campo Java para campos ajenos, no un nombre de wire) | ✅ Verificado 100% |
+| **Payload `STUDENT_ENROLLED`** | `{ enrollment_id, course_cohort_id, student_id, validation_type, enrolled_at }` | `StudentEnrolledPayload { course_cohort_id, student_id }` (lee solo esos dos; el resto cae en `unknownFields`) | ✅ Verificado y mergeado en `develop` (PR #36) |
+| **Payload `STUDENT_UNENROLLED`**| `{ enrollment_id, course_cohort_id, student_id, reason, performed_by_user_id, unenrolled_at }` | `StudentUnenrolledPayload { course_cohort_id, student_id }` (lee solo esos dos) | ✅ Verificado 100% |
+| **Payload `COURSE_COHORT_ARCHIVED`**| `{ course_cohort_id, course_base_id, archived_at }` | `CourseCohortArchivedPayload { course_cohort_id }` (lee solo ese campo) | ✅ Verificado 100% |
 | **Consulta Matrículas Alumno**| `GET /api/course/enrollments/me` | `StudentCohortEnrollmentDto` | ✅ Mergeado en `develop` (PR #41) |
 | **Lote de material** | `GET /course-cohorts/{id}/activities?sectionIds=` para principal de servicio con `course.activities.read` | `HttpCoursesMaterialClient` en `mode=http`; valida el vínculo de un nodo por la sección de la unidad (T-04.2) | ✅ Implementado; el lote incluye `order_index` y `course_section_id` (§7.9) |
 | **Catálogo de Contenidos** | Tabla `course_activity` en BD; controller no expuesto aún en `develop` | `CoursesCatalogClient` mockeado (`catalog-mode=stub`) | 🟡 Mockeado en memoria (Fase actual) |
