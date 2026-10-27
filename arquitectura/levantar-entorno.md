@@ -262,6 +262,30 @@ Tiene que decir `roadmap-service:polzoni`. Para volver a la estable: el mismo co
 - **Acceso desde otro nodo del tailnet (hipótesis, sin verificar):** `http://group-10-frontend-polzoni-2.tail767776.ts.net:8000`. nginx escucha en el `:8000` dentro del namespace del sidecar, pero depende de que las ACL dejen entrar a `tag:frontend-edge`.
 - **Dos fronts a la vez:** el paso 4 reemplaza al que corre. Para tener dos, el segundo stack necesita otro `LOCAL_PORT`, otro `TS_HOSTNAME` y otro nombre de proyecto (`docker compose -p <nombre> ...`).
 
+### Garage y `/_s3`: las dos formas de la URL firmada
+
+> [!warning] Hallazgo del 2026-10-26
+> El profe no podía guardar un `.html` desde la vista simple, y el visor 3D no podía leer el material. En DevTools: `POST .../contents` → `201`, el `PUT` del archivo → `(failed)` con **preflight** fallido (CORS), y enseguida `DELETE .../course-contents/{id}` → `204`, porque el front deshace el alta cuando la subida falla.
+
+**Por qué:** Courses firma las URLs para `http://tpi-plataforma.tail767776.ts.net:3900`, pero el **edge de la plataforma** ya las reescribe a su propio `/_s3` antes de que lleguen a nuestro edge. Entonces al front local le llega `http://tpi-plataforma.tail767776.ts.net/_s3/...` (puerto 80, con `/_s3`). El `nginx/default.conf` de `Frontend/local-edge` solo reescribía la forma vieja (`...:3900`), así que esta pasaba sin tocar: el navegador iba a otro origen y CORS la bloqueaba. Afecta subidas (`PUT`) y lecturas (`GET` del visor, PDF, HTML).
+
+**Cómo darse cuenta rápido:** si en los logs del edge (`docker logs front-local-edge-1`) no aparece ningún pedido a `/_s3/` mientras subís o abrís un archivo, la URL no se está reescribiendo.
+
+**Arreglo:** en `Frontend/local-edge/nginx/default.conf`, dentro de `location /api/`, dejar **las dos** líneas `sub_filter` (nginx acepta varias):
+
+```nginx
+sub_filter "http://tpi-plataforma.tail767776.ts.net:3900" "$scheme://$http_host/_s3";
+# The platform edge may have already rewritten that origin to its own /_s3: point it here too.
+sub_filter "http://tpi-plataforma.tail767776.ts.net/_s3" "$scheme://$http_host/_s3";
+```
+
+Después, `docker exec front-local-edge-1 nginx -s reload` (o recrear el edge como en el paso 4). No hace falta rebuildear la imagen del front. La location `/_s3/` no se toca: sigue mandando `Host: tpi-plataforma.tail767776.ts.net:3900`, que es el host para el que Garage valida la firma.
+
+**Chequeo:** `curl -s -o /dev/null -w '%{http_code}\n' localhost:8000/_s3/course-materials/x` → `403` (XML de Garage, sin firma) significa que llega. Después, en el navegador, el `PUT` tiene que ir a `http://127.0.0.1:8000/_s3/...` y **sin** preflight (mismo origen).
+
+> [!tip] Recargar
+> Tras cambiar la imagen o el nginx, recargar la pestaña con `Cmd+Shift+R`: el navegador puede seguir con el bundle viejo.
+
 ## Reglas que no se rompen
 
 - Nunca `ports:`, `networks:`, `dns:` ni `extra_hosts:` en el servicio del micro. Nunca publicar `:8082` ni puertos de la plataforma (JWKS pasa por el gateway).
@@ -284,4 +308,6 @@ Tiene que decir `roadmap-service:polzoni`. Para volver a la estable: el mismo co
 | Variante responde pero sin datos de cohortes | Base propia vacía: cargar seed (HT-21) o mirar contra Courses con cohorte real |
 | Sin eventos del Motor/inscripciones | Kafka aislado: usar `KAFKA_MODE=routed` (sin garantía de efectos únicos) |
 | `ERR_NAME_NOT_RESOLVED` hacia `...:3900` | Página abierta fuera de `localhost:8000` o nginx sin la ruta `/_s3/` |
+| `PUT`/`GET` a `...ts.net/_s3/...` con preflight `(failed)`, y `DELETE` del contenido recién creado | Falta el segundo `sub_filter` (forma `/_s3` del edge de la plataforma). Ver "Garage y `/_s3`" arriba |
+| El build falla por el UI kit o faltan exports de `@2026-p4-fe/ui` | `build/ui-kit.tgz` no coincide con la versión del `package-lock.json` del commit: `npm pack @2026-p4-fe/ui@<versión>` en `build/` y copiarlo como `ui-kit.tgz` |
 | `400 challengeId: must not be blank` tras el 2FA | Desajuste camelCase/snake_case front↔users-service (ver `decisiones/`) |
