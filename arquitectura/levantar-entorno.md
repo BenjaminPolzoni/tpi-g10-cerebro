@@ -1,6 +1,6 @@
 ---
 tags: [tpi, g10, runbook, entorno, tailscale, skills]
-actualizado: 2026-10-15
+actualizado: 2026-10-26
 ---
 
 # Levantar el entorno: front + back (estable o de prueba)
@@ -102,6 +102,36 @@ docker image rm roadmap-service-polzoni-app
 ```
 
 **Front: build vs. hot reload.** La imagen sale de un commit (`WEBAPP_IMAGE`), no del árbol de trabajo. Para ver cambios del front al instante: `docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d` (overlay del dev server, ver skill `local-front-through-tailscale-mesh`). Reconstruir tras cambios de nginx: `docker compose up -d --force-recreate` (un `up -d` simple deja el nginx viejo).
+
+### Buildear la imagen del front desde cualquier worktree
+
+**Actualización (2026-10-26).** Desde `Frontend/local-edge`, cambiando `WT` por el worktree a buildear:
+
+```bash
+cd ~/dev/TPI_2026/Frontend/local-edge
+WT=~/dev/TPI_2026/Frontend/<worktree>
+TAG=$(git -C "$WT" rev-parse --short=9 HEAD)
+
+# 1. Exportar el árbol (incluye lo no commiteado)
+#    Para develop limpio: git -C "$WT" archive origin/develop | tar -x -C build/fe
+rm -rf build/fe && mkdir -p build/fe
+git -C "$WT" ls-files -co --exclude-standard | rsync -a --files-from=- "$WT"/ build/fe/
+
+# 2. Subir el budget anyComponentStyle (solo en la copia exportada, nunca en el repo)
+sed -i '' '/"anyComponentStyle"/,/maximumError/ s/"maximumError": "[^"]*"/"maximumError": "200kb"/' build/fe/angular.json
+
+# 3. Buildear la imagen (~15 min)
+docker build -f Dockerfile.front-no-token -t tpi-front-webapp:$TAG build
+
+# 4. Apuntar a la imagen nueva y levantar
+sed -i '' "s/^WEBAPP_IMAGE=.*/WEBAPP_IMAGE=tpi-front-webapp:$TAG/" .env
+docker compose up -d
+# Con header X-Tpi-Variant: docker compose -f docker-compose.yml -f docker-compose.variant.yml up -d
+```
+
+- **Por qué el parche:** `build:prod` de develop falla por el budget `anyComponentStyle` en varios componentes.
+- **Acceso:** `http://127.0.0.1:8000`. **Hipótesis (sin verificar):** desde otro nodo del tailnet, `http://group-10-frontend-polzoni-2.tail767776.ts.net:8000`, porque nginx escucha en el `:8000` dentro del namespace del sidecar; depende de que las ACL permitan entrar a `tag:frontend-edge`.
+- **Dos fronts a la vez:** el `up -d` reemplaza al que corre. Para tener dos, el segundo stack necesita otro `LOCAL_PORT`, otro `TS_HOSTNAME` y otro nombre de proyecto (`docker compose -p <nombre> ...`).
 
 ## Reglas que no se rompen
 
