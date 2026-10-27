@@ -93,3 +93,25 @@ Archivos: `roadmap/ui/material-access/material-access.component.ts`, `roadmap/do
 |---|---|---|
 | Front | `fix/3d-viewer-material-preview` | `~/orca/workspaces/2026-PIV-TPI-FE/fix-3d-viewer-material-preview` |
 | Roadmap back (solo T5) | `BenjaminPolzoni/html-content-3d-viewer-back` | `~/orca/workspaces/tpi-roadmap/html-content-3d-viewer-back` |
+
+## Adicionales (2026-10-26)
+
+Cosas que salieron al probar el plan y que van en la misma rama `fix/3d-viewer-material-preview`. Todo commiteado, **sin push** y **sin tests corridos** (se corren al abrir la PR).
+
+### A1 — Tarjetas de curso simétricas y descripción truncada
+
+- **Problema:** en `/courses` (vista Tarjeta), la caja de Vidas / Monedas / Nivel quedaba a distinta altura según el curso tuviera descripción o no, y una descripción larga agrandaba la tarjeta.
+- **Cambio (commit `b64473887`):** `courses/ui/student-course-card`
+  - Siempre se reserva el lugar de la descripción (2 renglones), aunque el curso no tenga: la caja de stats queda alineada en toda la fila.
+  - La descripción se corta en 2 renglones con "…" al final de la última palabra que entra.
+  - Solo si está cortada: al pasar el mouse (o con foco de teclado) aparece un recuadro con **solo** la descripción completa, con el mismo estilo que la ayuda ("i"); se va al sacar el mouse, al perder el foco o con `Esc`.
+  - Usa `GenericPopover` del kit. `GenericTooltip` no sirvió: dibuja una burbuja invertida sin borde, distinta del recuadro de la ayuda (posible issue del UI-KIT).
+  - Textos nuevos `courses.studentCard.fullDescription` en es/en/pt.
+- **Pendiente:** probarlo en la imagen local y revisar que el popover no robe el foco al abrirse con el mouse.
+
+### A2 — Hallazgos que cambiaron el plan
+
+- **`include_sections=true` viene vacío** en la plataforma (Courses responde la lista sin contenidos). El visor 3D ahora busca los metadatos **por sección** (la unidad y sus zonas, `courseSectionId`), como la vista simple. Commit `914f65869`.
+- **Respaldo sin Courses:** si Courses no describe el archivo y la URL no tiene extensión, el visor le pide a Storage los primeros bytes y decide por `Content-Type`, nombre de archivo o la firma `%PDF-`. Commit `c89d64ec9`.
+- **Front local y Garage:** las URLs firmadas llegan ya reescritas por el edge de la plataforma (`.../ts.net/_s3/...`); el edge local necesitaba un segundo `sub_filter`. Documentado en [[arquitectura/levantar-entorno|Levantar el entorno]] ("Garage y `/_s3`").
+- **Marcar como leído:** ya existía para alumnos ("Finalizar ✅", se habilita al abrir el material y llama a `markContentRead`). En la vista previa del profe dice "Cerrar" y no guarda nada, a propósito.
