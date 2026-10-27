@@ -115,3 +115,13 @@ Cosas que salieron al probar el plan y que van en la misma rama `fix/3d-viewer-m
 - **Respaldo sin Courses:** si Courses no describe el archivo y la URL no tiene extensión, el visor le pide a Storage los primeros bytes y decide por `Content-Type`, nombre de archivo o la firma `%PDF-`. Commit `c89d64ec9`.
 - **Front local y Garage:** las URLs firmadas llegan ya reescritas por el edge de la plataforma (`.../ts.net/_s3/...`); el edge local necesitaba un segundo `sub_filter`. Documentado en [[arquitectura/levantar-entorno|Levantar el entorno]] ("Garage y `/_s3`").
 - **Marcar como leído:** ya existía para alumnos ("Finalizar ✅", se habilita al abrir el material y llama a `markContentRead`). En la vista previa del profe dice "Cerrar" y no guarda nada, a propósito.
+
+### A3 — Estado del nodo unificado (web + 3D) (2026-10-27)
+
+- **Pedido:** un solo badge de estado por nodo, siempre pegado a la derecha, con los colores de hoy y los mismos estados en la vista simple y en el 3D.
+  - Desafíos: **Visto** (entró sin intento), **Rehacer** (nota + reintentos que quedan antes de gastar vidas), **Aprobado** (nota), **Para corregir** (espera al profe).
+  - Contenido teórico: **Pendiente de lectura** / **Leído**.
+- **Cambio (commit `d212da397`):** regla única en `roadmap/domain/node-student-status.ts` (con spec), usada por `section-resources-container` y `section-resource-list` (web) y por `unit-node-list` y `node-detail` (3D).
+  - Nota, reintentos y veredicto: `NodeFeedbackService.countedAttempt` por desafío no bloqueado (el mismo pedido que ya usaba el 3D). Mientras carga o si falla, cae al progreso (Aprobado / Rehacer sin nota).
+  - **Visto:** `VisitService` marca el desafío al abrirlo. **Límite:** se guarda en el `localStorage` del navegador, no viaja entre dispositivos. Para eso hace falta un campo en el back (pendiente).
+- **Pendiente:** probarlo en la imagen local con un alumno que tenga desafíos aprobados, desaprobados y por corregir.
