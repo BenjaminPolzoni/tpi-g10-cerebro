@@ -37,7 +37,7 @@ antecedentes: HT-31 (T-31.1 origin_unavailable, T-31.4 vidas vencidas, T-31.6 pr
 4. **La unidad bloqueada da un consejo equivocado** (`nextStep.generic`).
 5. El texto dice "Probá en unos minutos", pero la caché de vidas se renueva cada 30 s y un parpadeo de Courses dura segundos. "En unos instantes" se ajusta más.
 
-## 3. Decisiones (a confirmar)
+## 3. Decisiones (confirmadas 2026-10-27)
 
 | # | Decisión | Recomendación |
 |---|---|---|
