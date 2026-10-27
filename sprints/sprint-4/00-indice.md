@@ -40,7 +40,7 @@ estado: estructura inicial - borrador
 
 ## Candidato a Sprint 4
 
-- [[sprints/sprint-4/Planes/Benja/Front+Back - previsualizar HTML y Markdown en el visor 3D|Previsualizar HTML y Markdown en el visor 3D]] — arrastre **propuesto, no programado ni aprobado**. [Plan detallado de Sprint 3](../sprint-3/Planes/Benja/Front+Back%20-%20previsualizar%20HTML%20y%20Markdown%20en%20el%20visor%203D.md).
+- [[sprints/sprint-4/Planes/Benja/Front+Back - previsualizar HTML y Markdown en el visor 3D|Previsualizar HTML y Markdown en el visor 3D]] — **implementado, en revisión** en [FE#1666](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/pull/1666) (2026-10-27), con tarjetas de curso y estado del nodo como adicionales. [Plan detallado de Sprint 3](../sprint-3/Planes/Benja/Front+Back%20-%20previsualizar%20HTML%20y%20Markdown%20en%20el%20visor%203D.md).
 
 ## Próximos pasos de planificación
 

@@ -2,7 +2,8 @@
 tags: [tpi, g10, sprint-4, plan, front, back, visor-3d, html, markdown, pdf]
 fecha: 2026-10-26
 autor: Benjamin Polzoni
-estado: plan listo - pendiente de implementación (solo Front; Back condicional)
+estado: en revisión - PR FE#1666 (solo Front; Back no hizo falta)
+actualizado: 2026-10-27
 repo: 2026-P4-FE/2026-PIV-TPI-FE (tpi-roadmap solo si falla el supuesto de permisos)
 ---
 
@@ -125,3 +126,8 @@ Cosas que salieron al probar el plan y que van en la misma rama `fix/3d-viewer-m
   - Nota, reintentos y veredicto: `NodeFeedbackService.countedAttempt` por desafío no bloqueado (el mismo pedido que ya usaba el 3D). Mientras carga o si falla, cae al progreso (Aprobado / Rehacer sin nota).
   - **Visto:** `VisitService` marca el desafío al abrirlo. **Límite:** se guarda en el `localStorage` del navegador, no viaja entre dispositivos. Para eso hace falta un campo en el back (pendiente).
 - **Pendiente:** probarlo en la imagen local con un alumno que tenga desafíos aprobados, desaprobados y por corregir.
+
+## PR (2026-10-27)
+
+- Front: [#1666](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/pull/1666), `fix/3d-viewer-material-preview` → `develop`. Incluye el plan (T2–T4) y los adicionales A1–A3. Back (T5) no hizo falta.
+- `verify` OK. La suite completa tiene 22 tests que también fallan en `develop` limpio (rutas del roadmap, invitaciones, generador de preguntas, ajustes de comisión, "Modo Aventura" de la tarjeta, entre otros): ajenos a este PR. Los specs que toca el PR pasan.
