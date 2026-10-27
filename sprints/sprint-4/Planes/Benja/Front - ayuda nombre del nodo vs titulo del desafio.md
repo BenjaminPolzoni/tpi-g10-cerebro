@@ -2,7 +2,7 @@
 tags: [tpi, g10, sprint-4, plan, front, roadmap, challenges, help-hint]
 fecha: 2026-10-27
 autor: Benjamin Polzoni
-estado: implementado sin commit - falta tests, verify y PR
+estado: en revisión - PR FE#1688
 actualizado: 2026-10-27
 repo: 2026-P4-FE/2026-PIV-TPI-FE
 rama: fix/challenge-name-on-create
@@ -85,3 +85,13 @@ Se manda a implementar con `/orchestration` → worker **codex** en el mismo wor
 - [ ] Ver la app real: oscuro/claro, arcade/sobrio, 320 px y zoom 200 %, es/en, teclado y `Esc`.
 - [ ] PR con: definiciones + fuentes + quién las definió, la justificación popover vs tooltip y lo no verificado.
 - [ ] Decidir lo de la pantalla de Challenges (ver aviso de §1).
+
+## 6. Actualización (2026-10-27) — cambio de regla y PR
+
+- **Regla final (pedida por Benjamin):** en un nodo de desafío el nombre del nodo es **siempre** el título del desafío. Se eliminó la casilla «se llama igual».
+  - Desafío nuevo: el nombre del nodo llega prellenado y **editable** a `/challenges/new`; al volver, el nodo toma el título final.
+  - Desafío existente: al elegirlo, el nombre del nodo pasa a ser su título y queda bloqueado.
+- Selector «Desafío existente / nuevo» al 50/50 como el de vidas; título largo del desafío cortado con «…».
+- Paso 3 de ambas ayudas reescrito para la regla nueva.
+- **PR:** [FE#1688](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/pull/1688), con verify y specs tocados en verde. Los 24 fallos de la suite completa también fallan en `develop`.
+- **Pendiente:** issue al UI-KIT por `GenericSegmented` a ancho completo (hoy `::ng-deep`, UI-004), lector de pantalla y CI.
