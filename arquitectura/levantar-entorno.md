@@ -81,7 +81,8 @@ grep APP_VARIANT .tpi/platform/.env          # debe decir polzoni
 .tpi/platform/up.sh mesh                     # el Dockerfile compila el jar; minutos la primera vez
 .tpi/platform/verify.sh mesh                 # repetir tras ~1 min si Eureka no la vio
 
-# 2. Front local (una vez) apuntado a la variante
+# 2. Front local (una vez) apuntado a la variante. No buildea: solo agrega el header X-Tpi-Variant.
+#    Para buildear una imagen nueva del front, ver "Buildear la imagen del front desde cualquier worktree".
 FRONT=~/dev/TPI_2026/Frontend/local-edge
 .tpi/platform/front-variant.sh "$FRONT" on --name polzoni
 
@@ -105,33 +106,161 @@ docker image rm roadmap-service-polzoni-app
 
 ### Buildear la imagen del front desde cualquier worktree
 
-**Actualización (2026-10-26).** Desde `Frontend/local-edge`, cambiando `WT` por el worktree a buildear:
+**Actualización (2026-10-26).** Copiar y pegar bloque por bloque, en orden. Cada paso dice **dónde pararse** y **qué hace**. Mac = Terminal (zsh/bash). Windows = **PowerShell**, salvo el paso 5, que es un script bash y va en **Git Bash**.
 
+> [!warning] Antes de empezar
+> - **Docker Desktop tiene que estar corriendo.**
+> - Cambiar `<worktree>` por la carpeta del front que se quiere buildear (por ejemplo `2026-PIV-TPI-FE`).
+> - Las rutas suponen el repo en `~/dev/TPI_2026` (Mac) o `$HOME\dev\TPI_2026` (Windows). Si lo tenés en otro lado, ajustalas.
+> - Las variables (`WT`, `TAG`) viven solo en esa consola: hacer todos los pasos en la **misma ventana**.
+> - Los bloques de Windows no están probados en una PC con Windows: si alguno falla, anotar acá el arreglo.
+
+#### Paso 0. Pararse en el front local y definir qué se buildea
+
+**Dónde:** cualquier lado; el bloque te mueve a `Frontend/local-edge`, donde están el `docker-compose.yml`, el `.env` y el `Dockerfile.front-no-token`.
+**Qué hace:** guarda en `WT` la ruta del worktree y en `TAG` el commit actual (9 caracteres), que va a ser el nombre de la imagen.
+
+Mac:
 ```bash
 cd ~/dev/TPI_2026/Frontend/local-edge
 WT=~/dev/TPI_2026/Frontend/<worktree>
 TAG=$(git -C "$WT" rev-parse --short=9 HEAD)
-
-# 1. Exportar el árbol (incluye lo no commiteado)
-#    Para develop limpio: git -C "$WT" archive origin/develop | tar -x -C build/fe
-rm -rf build/fe && mkdir -p build/fe
-git -C "$WT" ls-files -co --exclude-standard | rsync -a --files-from=- "$WT"/ build/fe/
-
-# 2. Subir el budget anyComponentStyle (solo en la copia exportada, nunca en el repo)
-sed -i '' '/"anyComponentStyle"/,/maximumError/ s/"maximumError": "[^"]*"/"maximumError": "200kb"/' build/fe/angular.json
-
-# 3. Buildear la imagen (~15 min)
-docker build -f Dockerfile.front-no-token -t tpi-front-webapp:$TAG build
-
-# 4. Apuntar a la imagen nueva y levantar
-sed -i '' "s/^WEBAPP_IMAGE=.*/WEBAPP_IMAGE=tpi-front-webapp:$TAG/" .env
-docker compose up -d
-# Con header X-Tpi-Variant: docker compose -f docker-compose.yml -f docker-compose.variant.yml up -d
+echo "$TAG"
 ```
 
-- **Por qué el parche:** `build:prod` de develop falla por el budget `anyComponentStyle` en varios componentes.
-- **Acceso:** `http://127.0.0.1:8000`. **Hipótesis (sin verificar):** desde otro nodo del tailnet, `http://group-10-frontend-polzoni-2.tail767776.ts.net:8000`, porque nginx escucha en el `:8000` dentro del namespace del sidecar; depende de que las ACL permitan entrar a `tag:frontend-edge`.
-- **Dos fronts a la vez:** el `up -d` reemplaza al que corre. Para tener dos, el segundo stack necesita otro `LOCAL_PORT`, otro `TS_HOSTNAME` y otro nombre de proyecto (`docker compose -p <nombre> ...`).
+Windows (PowerShell):
+```powershell
+cd $HOME\dev\TPI_2026\Frontend\local-edge
+$WT  = "$HOME\dev\TPI_2026\Frontend\<worktree>"
+$TAG = git -C $WT rev-parse --short=9 HEAD
+$TAG
+```
+
+#### Paso 1. Copiar el código del worktree a la carpeta de build
+
+**Dónde:** `Frontend/local-edge` (paso 0).
+**Qué hace:** borra `build/fe` y copia ahí los archivos del worktree que trackea git **más los nuevos sin commitear** (respeta `.gitignore`, así que no copia `node_modules`). Es lo que va a entrar en la imagen. Elegir **una** de las dos opciones.
+
+Opción A: el worktree como está (con cambios sin commitear).
+
+Mac:
+```bash
+rm -rf build/fe && mkdir -p build/fe
+git -C "$WT" ls-files -co --exclude-standard | rsync -a --files-from=- "$WT"/ build/fe/
+```
+
+Windows (PowerShell):
+```powershell
+Remove-Item -Recurse -Force build\fe -ErrorAction SilentlyContinue
+git -C $WT ls-files -co --exclude-standard | ForEach-Object {
+  $dst = Join-Path build\fe $_
+  New-Item -ItemType Directory -Force (Split-Path $dst) | Out-Null
+  Copy-Item (Join-Path $WT $_) $dst
+}
+```
+
+Opción B: `develop` limpio, sin nada local. En este caso el `TAG` tiene que ser el de develop.
+
+Mac:
+```bash
+git -C "$WT" fetch origin develop
+TAG=$(git -C "$WT" rev-parse --short=9 origin/develop)
+rm -rf build/fe && mkdir -p build/fe
+git -C "$WT" archive -o "$PWD/build/fe.tar" origin/develop && tar -xf build/fe.tar -C build/fe && rm build/fe.tar
+```
+
+Windows (PowerShell):
+```powershell
+git -C $WT fetch origin develop
+$TAG = git -C $WT rev-parse --short=9 origin/develop
+Remove-Item -Recurse -Force build\fe -ErrorAction SilentlyContinue; New-Item -ItemType Directory build\fe | Out-Null
+git -C $WT archive -o "$PWD\build\fe.tar" origin/develop; tar -xf build\fe.tar -C build\fe; Remove-Item build\fe.tar
+```
+
+#### Paso 2. Parchear el límite de CSS (solo en la copia)
+
+**Dónde:** `Frontend/local-edge`.
+**Qué hace:** en `build/fe/angular.json` sube el `maximumError` del budget `anyComponentStyle` a `200kb`. Sin esto `build:prod` de develop falla porque varios componentes pasan el límite. Toca **solo la copia**, nunca el repo.
+
+Mac:
+```bash
+sed -i '' '/"anyComponentStyle"/,/maximumError/ s/"maximumError": "[^"]*"/"maximumError": "200kb"/' build/fe/angular.json
+grep -A2 anyComponentStyle build/fe/angular.json
+```
+
+Windows (PowerShell):
+```powershell
+$f = "build\fe\angular.json"
+(Get-Content $f -Raw) -replace '("anyComponentStyle",\s*"maximumWarning":\s*"[^"]*",\s*"maximumError":\s*)"[^"]*"', '$1"200kb"' | Set-Content $f -NoNewline
+Select-String -Path $f -Pattern anyComponentStyle -Context 0,2
+```
+
+La última línea tiene que mostrar `"maximumError": "200kb"`.
+
+#### Paso 3. Buildear la imagen (unos 15 minutos)
+
+**Dónde:** `Frontend/local-edge`.
+**Qué hace:** compila Angular en modo producción dentro de Docker con lo que hay en `build/` y crea la imagen `tpi-front-webapp:<TAG>`. No hace falta token de GitHub: el UI kit sale del tarball `build/ui-kit.tgz`.
+
+Mac:
+```bash
+docker build -f Dockerfile.front-no-token -t tpi-front-webapp:$TAG build
+```
+
+Windows (PowerShell):
+```powershell
+docker build -f Dockerfile.front-no-token -t "tpi-front-webapp:$TAG" build
+```
+
+#### Paso 4. Usar la imagen nueva y levantar el front
+
+**Dónde:** `Frontend/local-edge`.
+**Qué hace:** cambia `WEBAPP_IMAGE` en el `.env` para que apunte a la imagen recién creada y levanta los 3 contenedores (`mesh`, `webapp`, `edge`). Si ya había un front corriendo, lo reemplaza. Le pega al **back estable**.
+
+Mac:
+```bash
+sed -i '' "s/^WEBAPP_IMAGE=.*/WEBAPP_IMAGE=tpi-front-webapp:$TAG/" .env
+docker compose up -d
+curl -s localhost:8000/healthz
+```
+
+Windows (PowerShell):
+```powershell
+(Get-Content .env) -replace '^WEBAPP_IMAGE=.*', "WEBAPP_IMAGE=tpi-front-webapp:$TAG" | Set-Content .env
+docker compose up -d
+curl.exe -s localhost:8000/healthz
+```
+
+El último comando tiene que responder `ok`. Abrir **`http://localhost:8000`**.
+
+#### Paso 5 (opcional). Apuntar el front a nuestro back de prueba (variante polzoni)
+
+**Este paso no buildea nada.** Agrega el header `X-Tpi-Variant: polzoni` al nginx del front y lo reinicia, así las llamadas al roadmap van a nuestra variante (`roadmap-service:polzoni`) en vez de a la estable. Solo sirve si la variante está levantada (paso 1 de la receta corta).
+
+**Dónde:** `Backend/tpi-roadmap`, porque el script vive en `.tpi/platform/` de ese repo y la ruta es relativa.
+
+Mac:
+```bash
+cd ~/dev/TPI_2026/Backend/tpi-roadmap
+FRONT=~/dev/TPI_2026/Frontend/local-edge
+.tpi/platform/front-variant.sh "$FRONT" on --name polzoni
+curl -si localhost:8000/api/roadmap/public/ping | grep -i served-by
+```
+
+Windows (**Git Bash**, no PowerShell):
+```bash
+cd ~/dev/TPI_2026/Backend/tpi-roadmap
+FRONT=~/dev/TPI_2026/Frontend/local-edge
+.tpi/platform/front-variant.sh "$FRONT" on --name polzoni
+curl -si localhost:8000/api/roadmap/public/ping | grep -i served-by
+```
+
+Tiene que decir `roadmap-service:polzoni`. Para volver a la estable: el mismo comando con `off` en vez de `on --name polzoni`.
+
+#### Notas
+
+- **Acceso desde otro nodo del tailnet (hipótesis, sin verificar):** `http://group-10-frontend-polzoni-2.tail767776.ts.net:8000`. nginx escucha en el `:8000` dentro del namespace del sidecar, pero depende de que las ACL dejen entrar a `tag:frontend-edge`.
+- **Dos fronts a la vez:** el paso 4 reemplaza al que corre. Para tener dos, el segundo stack necesita otro `LOCAL_PORT`, otro `TS_HOSTNAME` y otro nombre de proyecto (`docker compose -p <nombre> ...`).
 
 ## Reglas que no se rompen
 
