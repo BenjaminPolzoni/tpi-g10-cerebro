@@ -2,7 +2,8 @@
 tags: [tpi, g10, sprint-4, plan, front, roadmap, challenges, help-hint]
 fecha: 2026-10-27
 autor: Benjamin Polzoni
-estado: aprobado - pendiente de implementar
+estado: implementado sin commit - falta tests, verify y PR
+actualizado: 2026-10-27
 repo: 2026-P4-FE/2026-PIV-TPI-FE
 rama: fix/challenge-name-on-create
 ---
@@ -63,18 +64,18 @@ Va junto al campo en `challenge-rich-text-field`, con el envoltorio `challenges/
 
 Fuente de cada aprobación en `help-sources.ts`: `defined by Benjamin Polzoni, 2026-10-27`.
 
-**Pendiente:** aprobar la versión en inglés (`en.json`) que redacte el worker.
+**Actualización (2026-10-27):** implementado por codex vía Orca; `check:fast` pasa. Para el título del desafío se usó `app-help-hint` directo (no `field-help`, cuyo servicio no tiene título). **Pendiente:** aprobar la versión en inglés (`en.json`) que redacte el worker.
 
 ## 4. Pasos de implementación
 
 Se manda a implementar con `/orchestration` → worker **codex** en el mismo worktree.
 
-- [ ] **Roadmap:** crear `src/app/features/roadmap/help-topics.ts` y `help-sources.ts` desde las plantillas de `docs/skills/help-hint/templates/` (forma de `accounting/help-topics.ts`).
-- [ ] **Challenges:** sumar el tema `challengeTitle` a `challenges/help-topics.ts` y su `help-sources.ts`.
-- [ ] **i18n:** claves `roadmap.help.nodeName.title|step1..3` y `challenges.help.challengeTitle.title|step1..3` en `es.json` y `en.json`, solo aditivas.
-- [ ] **Botones:** `app-help-hint` junto al campo de nombre del nodo (editor + wizard) y junto al título del desafío (vía `field-help`). Patrón `title-row`, `flex-shrink: 0`, sin meterlo en el `<label>`/encabezado.
-- [ ] **Specs:** spec de topics (claves en ambos idiomas, 1–3 pasos, con fuente) y uno por componente (`aria-label` = `Ayuda: <tema>`, botón fuera del encabezado). Se escriben, **no se corren** mientras se programa.
-- [ ] **Validación del worker:** solo `npm run check:fast`. Sin commit ni push.
+- [x] **Roadmap:** crear `src/app/features/roadmap/help-topics.ts` y `help-sources.ts` desde las plantillas de `docs/skills/help-hint/templates/` (forma de `accounting/help-topics.ts`).
+- [x] **Challenges:** sumar el tema `challengeTitle` a `challenges/help-topics.ts` y su `help-sources.ts`.
+- [x] **i18n:** claves `roadmap.help.nodeName.title|step1..3` y `challenges.help.challengeTitle.title|step1..3` en `es.json` y `en.json`, solo aditivas.
+- [x] **Botones:** `app-help-hint` junto al campo de nombre del nodo (editor + wizard) y junto al título del desafío (vía `field-help`). Patrón `title-row`, `flex-shrink: 0`, sin meterlo en el `<label>`/encabezado.
+- [x] **Specs:** spec de topics (claves en ambos idiomas, 1–3 pasos, con fuente) y uno por componente (`aria-label` = `Ayuda: <tema>`, botón fuera del encabezado). Se escriben, **no se corren** mientras se programa.
+- [x] **Validación del worker:** solo `npm run check:fast`. Sin commit ni push.
 
 ## 5. Antes de abrir la PR
 
