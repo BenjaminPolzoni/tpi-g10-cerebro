@@ -26,14 +26,14 @@ antecedentes: HT-18 (T-18.3 copia, T-18.4 caché del gate, T-18.6 lectura), DEC-
 - **Plataforma** (`.tpi/platform/docker-compose.yml`): Neo4j 5.26 levantado, `GRAPH_SYNC_ENABLED: "true"` fijo, `GRAPH_READ_ENABLED` a `false` por default, `NEO4J_HEALTH_ENABLED` a `false`, y `RULE_CACHE_ENABLED` ausente, o sea apagado.
 - **`RoadmapDigest`** (la reconciliación) compara los operandos de cada regla. Si la regla cruda no entra en la comparación, una copia vieja no se detecta como diferente.
 
-## 2. Decisiones (a confirmar)
+## 2. Decisiones (confirmadas 2026-10-27; D4 ajustada a Neo4j)
 
 | # | Decisión | Recomendación |
 |---|---|---|
 | D1 | Cómo se guarda en Neo4j una hoja que apunta a una pieza dada de baja | Guardarla como **propiedad** de `:Rule`, `prunedLeaves: ["<posición>\|<NODE\|SECTION\|>\|<uuid>"]`, y no como arista. Una pieza que se dio de baja antes del primer `rebuild` **no existe** en Neo4j, así que no hay hacia dónde trazar la arista. Además, el editor, `/relations` y la vista de grafo no leen esa propiedad, así que la paridad de T-18.6 no se toca. |
 | D2 | Flag | **No sumar un flag nuevo.** El gate lee de Neo4j cuando `RULE_CACHE_ENABLED` y `GRAPH_READ_ENABLED` están los dos en `true`. Si se quiere apagar sólo el gate, se puede sumar `GRAPH_RULES_ENABLED`, pero no parece necesario. |
 | D3 | Ids dados de baja que Neo4j no conoce | Quedan como «desconocidos» en la foto, y `CachedRuleReads` los resuelve con `DirectRuleReads` (Postgres). El resultado es correcto, sólo cuesta una consulta más en ese caso raro. No se agrega una consulta de bajas a Postgres. |
-| D4 | `roadmapOf(ownerId)` | Sigue en SQL. Es una consulta por clave primaria y queda en caché sin vencer, porque el roadmap de una pieza no cambia. |
+| D4 | `roadmapOf(ownerId)` | **Se lee de Neo4j** (`(:Roadmap)-[:HAS_SECTION]->(:Section {id})`, o `-[:HAS_NODE]->(:Node {id})`). Va a SQL sólo si el flag está apagado, si Neo4j falla o si no conoce la pieza, como pasa con una pieza recién creada cuya copia está pendiente. Caffeine no guarda los `null`, así que esa pieza se vuelve a buscar en el pedido siguiente. El resultado queda en caché sin vencer, porque el roadmap de una pieza no cambia. |
 | D5 | Encender en la estable | La instancia estable del roadmap **la corre un compañero**. Se prueba primero en la variante `polzoni` y después se le pasa la secuencia de encendido al dueño de la estable. |
 
 ## 3. Pasos — Copia cruda (`graph/sync`, `graph/model`)
@@ -58,7 +58,8 @@ antecedentes: HT-18 (T-18.3 copia, T-18.4 caché del gate, T-18.6 lectura), DEC-
    | unidades visibles | `visible && deletedAt == null`, menos las zonas cuyo padre no es visible (misma regla que en `load`, T-58.2) |
    | padres | `parentOf` |
 3. `RoadmapRuleCache.load`: `graphReadSwitch.fromNeo4j(roadmapId, () -> neo4jLoader.load(roadmapId)).orElseGet(() -> loader.load(roadmapId))`. Con la marca pendiente, con Neo4j caído o con el flag apagado, sigue cargando de Postgres como hoy. La invalidación por `GraphStructureChanged` no cambia: después de una edición, la próxima foto sale de Postgres mientras haya marca, y de Neo4j una vez que la copia termina.
-4. Borrar el comentario "El gate no lee de acá" de `GraphReadSwitch` y actualizar `docs/T-18-6-LECTURA-NEO4J.md`, en la sección «Por qué el gate y el progreso siguen en Postgres»: el progreso sigue en Postgres y el gate ya no.
+4. `RoadmapRuleCache.rulesOwning`: el índice pieza → roadmap se carga con `neo4jLoader.roadmapOf(ownerId)` y, si devuelve `null` o falla, con `loader.roadmapOf(ownerId)` en SQL (ver D4). La consulta Cypher hace `MATCH` por `id`, que tiene índice único desde la migración `V0001`. Agregar a `RoadmapRuleCacheTest` el caso en que Neo4j no conoce la pieza y responde Postgres.
+5. Borrar el comentario "El gate no lee de acá" de `GraphReadSwitch` y actualizar `docs/T-18-6-LECTURA-NEO4J.md`, en la sección «Por qué el gate y el progreso siguen en Postgres»: el progreso sigue en Postgres y el gate ya no.
 
 ## 5. Pasos — Encender
 
