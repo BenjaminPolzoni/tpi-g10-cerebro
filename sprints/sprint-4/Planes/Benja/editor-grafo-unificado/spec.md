@@ -256,3 +256,30 @@ Las otras ~80 claves que usa la página borrada se limpian solo tras un grep por
 - GIVEN el conjunto de obstáculos no extremos del layout
 - WHEN se ejecuta la prueba de dominio del router
 - THEN ningún segmento de la ruta intersecta el rectángulo de un obstáculo ni la caja de su etiqueta.
+
+## R13. Paneles laterales plegables
+
+- R13.1 El árbol de estructura izquierdo y el panel derecho (overview/inspector/asistente) MUST poder plegarse por separado mediante un botón visible en su borde y atajos `[` (árbol) y `]` (panel derecho). El lienzo MUST ocupar el espacio liberado y conservar el centro de cámara al cambiar el ancho.
+- R13.2 Cada preferencia de plegado MUST persistirse por profesor en `localStorage`, dentro de `try/catch`; un error de almacenamiento usa el valor por defecto sin romper el editor.
+- R13.3 Si el panel derecho estaba plegado y se selecciona un nodo, sección o flecha, o se abre el asistente, MUST abrirse temporalmente el panel contextual. Al cerrar/limpiar esa selección o cerrar el asistente, MUST volver al estado plegado preferido. El overview nunca MUST abrirse automáticamente.
+- R13.4 Los toggles MUST exponer `aria-expanded` y `aria-controls`; al plegar/expandir, el foco permanece en el botón que permite reabrir y se anuncia el nuevo estado en `aria-live`.
+
+#### Escenario: plegar los dos paneles
+- GIVEN ambos paneles están abiertos
+- WHEN el profesor activa el botón de cada borde o los atajos `[` y `]`
+- THEN cada panel se pliega independientemente, el lienzo usa el ancho liberado y la cámara conserva su centro; los botones anuncian y reflejan su estado accesible.
+
+#### Escenario: panel temporal del inspector
+- GIVEN la preferencia guardada deja plegado el panel derecho
+- WHEN el profesor selecciona nodo, sección o flecha en el mapa
+- THEN se abre el inspector contextual temporalmente; al limpiar la selección vuelve a plegarse, y el overview no se abre solo.
+
+#### Escenario: asistente temporal
+- GIVEN el panel derecho está plegado
+- WHEN el profesor abre el asistente desde un `+` o un drop
+- THEN el panel abre el asistente; al cerrar o cancelar recupera la preferencia plegada y el foco vuelve al disparador.
+
+#### Escenario: preferencia por profesor y almacenamiento no disponible
+- GIVEN dos profesores o `localStorage` no disponible
+- WHEN cada uno alterna paneles, o la lectura/escritura lanza una excepción
+- THEN las preferencias disponibles no se mezclan entre profesores y el editor continúa con el default seguro sin excepción visible.
