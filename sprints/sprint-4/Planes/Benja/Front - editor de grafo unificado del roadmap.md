@@ -43,6 +43,9 @@ El `RoadmapStore` ya tiene todas las operaciones que hacen falta: `addSection`, 
 
 ## 3. Mapeo al back (lo que se guarda y dónde)
 
+> [!important] Enmienda 2026-10-28 — las flechas son solo reglas
+> Benjamin decidió que **toda flecha es una regla de desbloqueo**. El editor no crea, no edita y no muestra relaciones informativas (Recomienda, Pertenece a, Parte de, Relacionado): arrastrar de A a B crea directamente «B requiere A», sin selector de tipo. Las relaciones informativas que ya existen en la base no se tocan. Con eso quedan afuera las filas de la tabla sobre tipos informativos y sobre cambiar el tipo de una flecha, y deja de existir el problema de las dos llamadas al back. Los tipos informativos y los creados por el profesor van, si alguna vez hacen falta, en la historia aparte.
+
 | Acción en el grafo | Llamada | Notas |
 | --- | --- | --- |
 | Flecha **Requiere** a un nodo | `saveRules` (regla del nodo destino) | `requires` no es una relación: es una hoja de la regla. El back responde 400 `relation.requires-uses-rules` si se manda como relación |
@@ -66,7 +69,7 @@ El catálogo es **cerrado** (DEC-018, `CREATEABLE_RELATION_TYPES`) y el back rec
 - Endpoints: `GET/POST/PATCH/DELETE /roadmaps/{id}/relation-types`, y que `relations` acepte el id de un tipo propio además del enum.
 - Front: el catálogo pasa a ser la unión del enum y los tipos del roadmap. El estilo de línea de los tipos propios es fijo (punteado verde, con etiqueta).
 
-**Decisión (2026-10-28):** este cambio usa solo los 5 tipos del catálogo. Los tipos propios van en una **historia aparte**, empezando por el back; F9 sale de este cambio y el botón «+ Tipo nuevo» no se implementa todavía.
+**Decisión (2026-10-28):** este cambio solo crea reglas (`requires`); ver la enmienda de la sección 3. Los tipos propios van en una **historia aparte**, empezando por el back; F9 sale de este cambio y el botón «+ Tipo nuevo» no se implementa todavía.
 
 ## 5. Que se vea igual en la vista simple y en el roadmap
 

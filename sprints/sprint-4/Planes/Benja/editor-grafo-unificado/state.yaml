@@ -1,0 +1,7 @@
+change: editor-grafo-unificado
+phase: proposal
+status: done
+updated: 2026-10-28
+artifacts:
+  proposal: proposal.md
+next: [spec, design]
