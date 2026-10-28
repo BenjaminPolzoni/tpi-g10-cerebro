@@ -1,4 +1,4 @@
-# Diseño: editor unificado del grafo del roadmap
+ # Diseño: editor unificado del grafo del roadmap
 
 ## Enfoque y decisiones
 
@@ -26,7 +26,7 @@ flowchart LR
  Side -->|save/create/remove| Page
 ```
 
-Canvas inputs: `units` jerárquicas (≤5), requisitos, selección, colapsos, forma, `validateConnection(): {allowed,reason}`, pending/saving. Outputs: `selectNode`, `selectSection`, `connectRequested`, `createRequested({sectionId?,prerequisiteId?})`, `moveRequested`, `collapseRequested`. Puertos en nodos/headers y flecha fantasma. `prerequisitePolicy` y `prerequisiteOptions` dan preflight/opciones de UX para ciclo y contención; los duplicados se advierten localmente, pero el backend valida cada intento. Soltar en vacío/marco abre wizard precargado. Marco colapsado es destino de sección: solo source sección es válido; source nodo se rechaza, nunca apunta implícitamente a hijo.
+Canvas inputs: `units` jerárquicas (≤5), requisitos, selección, colapsos, forma, `validateConnection(): {allowed,reason}`, pending/saving. Outputs: `selectNode`, `selectSection`, `connectRequested`, `createRequested({sectionId?,prerequisiteId?})`, `moveRequested`, `collapseRequested`. Puertos en nodos/headers y flecha fantasma. `prerequisitePolicy` y `prerequisiteOptions` dan preflight/opciones de UX para ciclo y contención; los duplicados se advierten localmente, pero el backend valida cada intento. Soltar en vacío/marco abre wizard precargado. Un marco colapsado es destino de la regla de esa sección: un source nodo externo elegible también es válido como hoja `NODE`; nunca se redirige implícitamente a un nodo hijo. Se conserva el rechazo por contención.
 
 ## Layout, creación y persistencia
 
@@ -104,17 +104,17 @@ Los códigos enumerados son los del catálogo/servicios inspeccionados (`Roadmap
 |---|---|---|---|
 | Ciclo | `prerequisitePolicy` avisa temprano; puede estar viejo | `PATCH .../nodes/{id}/rules`: `409 node.prerequisite-cycle`; sección: `409 section.prerequisite-cycle` (`GraphService`, `DependencyGraphService`) | implementado en back |
 | Contención (requisito y contenido/ancestro) | `prerequisitePolicy` rechaza con motivo | `PATCH .../sections/{id}/rules`: `409 section.prerequisite-containment`; reglas de nodo chequean el grafo combinado y `rule.self-reference` (`DependencyGraphService`) | implementado en back |
-| Una regla de sección solo admite secciones | Filtrar opciones a unidades/subsecciones; bloquear tipo nodo y mostrar preflight | `PATCH .../sections/{id}/rules`: hoy `RuleLeafEligibility.requireEligibleForSection` recorre nodos tipados y acepta nodos externos elegibles; agregar rechazo `400 rule.element-type-invalid` para cada hoja `NODE` | falta en back |
+| Regla de sección con hojas de nodo | Ofrecer nodos externos elegibles; preflight de contención como pista, sin reemplazar el request | `PATCH .../sections/{id}/rules`: `RuleLeafEligibility.requireEligibleForSection` acepta hojas `NODE` externas y rechaza nodos dentro de la sección o cualquiera de sus subsecciones (`RuleLeafEligibility.java:73-85`); `requireEligibleForNode` rechaza las secciones que contienen al nodo (`RuleLeafEligibility.java:51-58`). La contención entre secciones/ancestros y descendientes se valida en `SubsectionGuard.requireNoContainment` (`SubsectionGuard.java:81-100`) | implementado en back |
 | Hoja duplicada | Ocultar/bloquear duplicado y anunciarlo | `PATCH .../nodes/{id}/rules`: flat `409 node.prerequisite-duplicate`; árbol `400 rule.duplicate-operand`; secciones validan duplicados de árbol (`RuleTreeValidator`) | implementado en back |
 | Profundidad máxima 5 | No ofrecer crear hija por encima de nivel 5 | `POST .../courses/{id}/sections` con `parentSectionId`: `400 section.too-deep` (`SubsectionGuard.MAX_DEPTH=5`). Profundidad de árbol de reglas usa `400 rule.too-deep` con máximo configurable; confirmar que el entorno dé 5 | implementado en back |
-| `minXp` inválido (negativo/no entero) | Validar formato y mostrar rango como ayuda | `PATCH .../rules`: `400 rule.min-xp-negative`; confirmar el rechazo de fracciones inválidas en el DTO | implementado en back |
+| `minXp` negativo / fracción | Validar formato y mostrar rango como ayuda | `PATCH .../rules`: `400 rule.min-xp-negative`; rechazo de fracciones inválidas pendiente de confirmar en el DTO | verificar (negativo implementado) |
 | Grupo vacío | No permitir guardar grupo vacío en UI | `PATCH .../rules`: `400 rule.empty-group` salvo grupo con `minXp` que sí expresa condición (`RuleTreeValidator`) | implementado en back |
 | Referencia a elemento eliminado u oculto/fuera de alcance | Deshabilitar candidatos no disponibles; no inferir acceso por visibilidad cargada | `PATCH .../rules`: not-found/`400 node.prerequisite-invalid` o `409 node.prerequisite-out-of-scope`; verificar equivalentes de secciones y que oculto se rechace según política | verificar |
 | Permiso insuficiente | Ocultar/inhabilitar comandos solo como UX | Cada mutación: `403` (autorización backend; validar path y código/`type` del gateway) | implementado en back |
 | Curso archivado | Deshabilitar controles al leer `archived`, solo como pista | Mutaciones Graph: `409 course.archived` (`GraphService`) | implementado en back |
 | Concurrencia / dos editores | Guardar una acción a la vez localmente; refrescar al recuperar foco | Mutaciones con versión/lock o conflicto inequívoco: confirmar contrato; el front relee tras 2xx y en foco, pero no resuelve conflictos por sí solo | verificar |
 
-No se encontró un hueco confirmado entre las reglas revisadas. Ocho controles tienen evidencia de backend: ciclo, contención, hoja duplicada, profundidad de subsección, grupo vacío, XP negativo, permisos y curso archivado. Hay un gap confirmado: la regla de sección acepta hojas `NODE` tipadas elegibles. Tarea propuesta para `tpi-roadmap`: en `PATCH /sections/{sectionId}/rules`, rechazar cualquier hoja `NODE` con `400 rule.element-type-invalid`, antes de persistir, y agregar pruebas para flat/tree y hojas dentro/fuera de la sección. Quedan además tres puntos por verificar con pruebas/código: fracción/no entero en `minXp`; referencias eliminadas u ocultas (incluida sección); y control/serialización de ediciones concurrentes. Si alguno no tiene control backend, abrir una tarea análoga con status/código estable y pruebas; hasta entonces no se registra como garantizado. Ninguna fila puede quedar protegida solo por el front.
+No hay gaps confirmados entre las validaciones revisadas. Nueve controles tienen evidencia de backend: ciclo, contención (incluidas hojas `NODE` en reglas de sección), hoja duplicada, profundidad de subsección, grupo vacío, XP negativo, permisos y curso archivado, además de elegibilidad de nodos externos para reglas de sección. Quedan tres puntos por verificar con pruebas/código: fracción/no entero en `minXp`; referencias eliminadas u ocultas (incluida sección); y control/serialización de ediciones concurrentes. Si alguno no tiene control backend, abrir una tarea análoga con status/código estable y pruebas; hasta entonces no se registra como garantizado. Ninguna fila puede quedar protegida solo por el front.
 
 ### Flujo de guardado y sincronización
 

@@ -43,7 +43,7 @@ Las otras ~80 claves que usa la página borrada se limpian solo tras un grep por
 - R2.3 El editor MUST NOT crear, editar ni mostrar relaciones informativas; las existentes en la base MUST permanecer intactas.
 - R2.4 Durante el arrastre MUST verse una flecha fantasma; si el destino es inválido, MUST mostrar el motivo.
 - R2.5 Soltar en el vacío MUST abrir el asistente para un nodo nuevo que ya requiere a A.
-- R2.6 Una regla de sección SOLO admite secciones (`saveUnitRules`); una de nodo, nodos (`saveRules`).
+- R2.6 Las reglas de sección (`saveUnitRules`) admiten hojas tipadas `SECTION` y `NODE`; las de nodo (`saveRules`), las hojas admitidas por su contrato. El back valida elegibilidad y contención.
 
 #### Escenario: crear una regla
 - GIVEN dos nodos A y B sin relación
@@ -60,10 +60,15 @@ Las otras ~80 claves que usa la página borrada se limpian solo tras un grep por
 - WHEN se arrastra entre N y S (en cualquier sentido)
 - THEN el preflight puede advertir la contención y, si se intenta guardar, el back decide; su rechazo no cambia la regla confirmada.
 
-#### Escenario: nodo hacia sección
-- GIVEN un nodo N y una sección S no contenedora
-- WHEN se arrastra de N a S
-- THEN se rechaza: las reglas de sección solo admiten secciones.
+#### Escenario: nodo externo hacia sección
+- GIVEN el nodo X está fuera de la unidad U y de todas sus subsecciones
+- WHEN arrastro X → U
+- THEN se guarda la regla de U con la hoja X vía `PATCH /sections/{U}/rules`, y solo se muestra guardado tras 2xx.
+
+#### Escenario: nodo contenido hacia sección
+- GIVEN el nodo N está dentro de U o de una de sus subsecciones
+- WHEN se arrastra N → U
+- THEN la contención se puede advertir como preflight, el back rechaza el intento y no cambia la regla confirmada.
 
 #### Escenario: duplicado
 - GIVEN B ya requiere A
@@ -85,7 +90,7 @@ Las otras ~80 claves que usa la página borrada se limpian solo tras un grep por
 #### Escenario: flecha hacia un marco colapsado
 - GIVEN el marco M está colapsado y contiene a X
 - WHEN se arrastra de A al marco M
-- THEN se trata como una regla de sección (A debe ser sección) o se rechaza con motivo si A es nodo; nunca se crea contra X de forma implícita.
+- THEN si A es un nodo externo elegible, se guarda como hoja `NODE` de la regla de M; si viola contención, se rechaza. Nunca se redirige implícitamente a X.
 
 #### Escenario: plegado de flechas
 - GIVEN X requiere A y M, que contiene a X, se colapsa

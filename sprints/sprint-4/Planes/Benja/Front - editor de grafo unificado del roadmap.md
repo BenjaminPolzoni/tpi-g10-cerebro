@@ -36,7 +36,7 @@ El `RoadmapStore` ya tiene todas las operaciones que hacen falta: `addSection`, 
    - arrastrar desde el punto de conexión crea una relación;
    - arrastrar el cuerpo mueve la tarjeta;
    - soltar la flecha en un espacio vacío abre el asistente con un nodo nuevo ya conectado.
-3. **Las subsecciones son marcos anidados** dentro de su unidad, colapsables. Al colapsar un marco, sus flechas pasan a apuntar al marco.
+3. **Las subsecciones son marcos anidados** dentro de su unidad, colapsables. Al colapsar un marco, sus flechas se pliegan al borde; una flecha externa nodo → marco es válida como regla de la sección y nunca se redirige implícitamente a un nodo interno.
 4. **La creación usa el mismo asistente de la vista simple**, abierto en el panel derecho (no en un modal) y con la sección y el requisito ya cargados.
 5. **La forma del nodo se puede elegir:** tarjeta o círculo (grafo clásico), con la misma estética. Es una preferencia del profesor guardada en `localStorage`, porque no es dato del curso.
 6. **El árbol de estructura del panel izquierdo se pliega y despliega** por sección, y tiene «Desplegar todo / Plegar todo». Al seleccionar algo en el lienzo se despliega su camino.
@@ -46,7 +46,7 @@ El `RoadmapStore` ya tiene todas las operaciones que hacen falta: `addSection`, 
 > [!important] Contrato obligatorio
 > El contrato endpoint-por-endpoint, payloads, respuestas, errores/mensajes, reversión y la matriz de validaciones están en [`editor-grafo-unificado/design.md`, «Contrato con el back y validaciones`](editor-grafo-unificado/design.md#contrato-con-el-back-y-validaciones). Esa sección manda para toda implementación: **el backend es la única autoridad** para reglas y mutaciones. Las comprobaciones del front son preflight de UX y nunca sustituyen el request ni la decisión del back.
 
-Todas las flechas visibles de este editor son reglas de desbloqueo: a un nodo se guardan con `saveRules`; a una unidad o subsección, con `saveUnitRules`. Flat usa `{mode, prerequisite_node_ids}` o `{mode, prerequisite_section_ids}`; AND/OR anidados o XP mínimo usan `{rule}` sin aplanar. Las conexiones informativas ya existentes permanecen intactas, pero este editor no las crea, edita ni presenta.
+Todas las flechas visibles de este editor son reglas de desbloqueo: a un nodo se guardan con `saveRules`; a una unidad o subsección, con `saveUnitRules`, cuyas hojas pueden ser `NODE` o `SECTION` según el tipo declarado. Flat usa `{mode, prerequisite_node_ids}` o `{mode, prerequisite_section_ids}`; AND/OR anidados o XP mínimo usan `{rule}` sin aplanar. Un nodo externo elegible puede ser requisito de una sección; se rechaza la contención (sección que exige un nodo dentro de sí o sus subsecciones, y nodo que exige una sección que lo contiene). El backend decide y el front solo ofrece preflight. Las conexiones informativas ya existentes permanecen intactas, pero este editor no las crea, edita ni presenta.
 
 Para nodos y estructura: contenido, desafío teórico y práctico usan `addActivity`; unidad usa `addSection`; subsección usa `addZone` (que crea por el endpoint de secciones con `parentSectionId`). Movimiento entre secciones usa `moveActivityToSection`, reordenamiento `moveActivityTo` y eliminación `removeActivity`. Los paths efectivos incluyen el prefijo `environment.apiUrl` (`/api`) más `/roadmap`; el detalle verificable y sus referencias a líneas de adapter y backend viven en el contrato enlazado arriba.
 
