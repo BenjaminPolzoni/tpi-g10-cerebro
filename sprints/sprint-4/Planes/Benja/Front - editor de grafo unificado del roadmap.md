@@ -43,23 +43,14 @@ El `RoadmapStore` ya tiene todas las operaciones que hacen falta: `addSection`, 
 
 ## 3. Mapeo al back (lo que se guarda y dónde)
 
-> [!important] Enmienda 2026-10-28 — las flechas son solo reglas
-> Benjamin decidió que **toda flecha es una regla de desbloqueo**. El editor no crea, no edita y no muestra relaciones informativas (Recomienda, Pertenece a, Parte de, Relacionado): arrastrar de A a B crea directamente «B requiere A», sin selector de tipo. Las relaciones informativas que ya existen en la base no se tocan. Con eso quedan afuera las filas de la tabla sobre tipos informativos y sobre cambiar el tipo de una flecha, y deja de existir el problema de las dos llamadas al back. Los tipos informativos y los creados por el profesor van, si alguna vez hacen falta, en la historia aparte.
+> [!important] Contrato obligatorio
+> El contrato endpoint-por-endpoint, payloads, respuestas, errores/mensajes, reversión y la matriz de validaciones están en [`editor-grafo-unificado/design.md`, «Contrato con el back y validaciones`](editor-grafo-unificado/design.md#contrato-con-el-back-y-validaciones). Esa sección manda para toda implementación: **el backend es la única autoridad** para reglas y mutaciones. Las comprobaciones del front son preflight de UX y nunca sustituyen el request ni la decisión del back.
 
-| Acción en el grafo | Llamada | Notas |
-| --- | --- | --- |
-| Flecha **Requiere** a un nodo | `saveRules` (regla del nodo destino) | `requires` no es una relación: es una hoja de la regla. El back responde 400 `relation.requires-uses-rules` si se manda como relación |
-| Flecha **Requiere** a una unidad o subsección | `saveUnitRules` | La regla de una sección solo admite otras secciones. La flecha de un nodo a una sección se rechaza en la UI con el motivo |
-| Flecha **Recomienda / Pertenece a / Parte de / Relacionado** | `addRelation` → `POST /roadmaps/{id}/relations` | Une dos nodos o dos secciones, nunca un nodo con una sección. Tiene visibilidad para el alumno |
-| Cambiar el tipo de una flecha | `updateRelation` entre tipos informativos; si pasa de Requiere a informativo o al revés: quitar la hoja de la regla y crear la relación (o al revés) | Son dos llamadas. Si falla la segunda, se deshace la primera y se avisa |
-| Borrar una flecha | `removeRelation` o quitar la hoja de la regla con `saveRules` / `saveUnitRules` | Se confirma en línea, sin modal |
-| Invertir una flecha | Borrar y volver a crear | Antes se valida que no cierre un ciclo |
-| Crear desafío, contenido o subsección | `addActivity` / `addZone` + regla con los requisitos elegidos | Es el mismo camino que usa la vista simple |
-| Mover una tarjeta a otra sección | `moveActivityToSection` | Antes se valida la contención: si el nodo quedaría adentro de una sección con la que tiene una regla, se rechaza el movimiento y no se borra nada (REPO-04 / REPO-05) |
-| Reordenar dentro de la sección | `moveActivityTo` | Las reglas no se tocan |
-| Mover un marco de unidad en el lienzo | Solo es posición visual | Persistir las posiciones manuales queda pendiente: punto 11 del backlog `learning-map-improvements.md` |
+Todas las flechas visibles de este editor son reglas de desbloqueo: a un nodo se guardan con `saveRules`; a una unidad o subsección, con `saveUnitRules`. Flat usa `{mode, prerequisite_node_ids}` o `{mode, prerequisite_section_ids}`; AND/OR anidados o XP mínimo usan `{rule}` sin aplanar. Las conexiones informativas ya existentes permanecen intactas, pero este editor no las crea, edita ni presenta.
 
-El indicador «Guardando… / Guardado» de la barra superior refleja el estado real de la llamada. Si una llamada falla, el grafo vuelve al estado anterior y se avisa con el motivo, nunca con un éxito falso (REPO-09).
+Para nodos y estructura: contenido, desafío teórico y práctico usan `addActivity`; unidad usa `addSection`; subsección usa `addZone` (que crea por el endpoint de secciones con `parentSectionId`). Movimiento entre secciones usa `moveActivityToSection`, reordenamiento `moveActivityTo` y eliminación `removeActivity`. Los paths efectivos incluyen el prefijo `environment.apiUrl` (`/api`) más `/roadmap`; el detalle verificable y sus referencias a líneas de adapter y backend viven en el contrato enlazado arriba.
+
+El indicador de guardado es pesimista: `saving` sigue activo hasta la respuesta, el éxito solo sigue a 2xx y a una relectura, y un error revierte al último estado confirmado con mensaje traducido y reintento. Si crear el nodo se confirma pero guardar su regla falla, queda el nodo sin regla y se informa el fallo parcial; no se simula atomicidad. Las reglas, el curso archivado y los permisos siempre los decide `tpi-roadmap`, incluso cuando el preflight no detecta el problema.
 
 ## 4. Tipos de relación creados por el profesor
 
@@ -97,7 +88,7 @@ El catálogo es **cerrado** (DEC-018, `CREATEABLE_RELATION_TYPES`) y el back rec
 - No queda ninguna ruta ni pestaña que lleve a la vista de círculos.
 - Desde el grafo se puede crear una unidad, una subsección, un desafío práctico, un desafío teórico y un contenido, con los mismos pasos y validaciones que en General.
 - Arrastrar de un nodo a otro y elegir «Requiere» guarda la regla. Al recargar la página, la flecha sigue ahí y se ve en General.
-- Una flecha que cerraría un ciclo, que une un nodo con la sección que lo contiene o que mezcla un nodo con una sección en un tipo informativo, se rechaza antes de llamar al back, con el motivo en palabras.
+- El preflight puede anticipar ciclos, contención y combinaciones inválidas con un motivo claro, pero nunca sustituye la validación del backend: cada intento de mutación se decide en `tpi-roadmap` y solo se confirma tras 2xx.
 - Mover una tarjeta nunca borra reglas: o se mueve con todo o se rechaza.
 - Todo se puede hacer sin mouse: «Conectar con…» (`C`), «Nuevo» (`N`), el selector de sección en Datos como alternativa a arrastrar, y la lista de conexiones como alternativa a las flechas. Foco visible y anuncios en `aria-live`.
 - Tarjetas y círculos muestran la misma información: tipo, nombre, XP, candado con la cantidad de requisitos, oculto y opcional.

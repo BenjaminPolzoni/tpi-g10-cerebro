@@ -53,12 +53,12 @@ Las otras ~80 claves que usa la página borrada se limpian solo tras un grep por
 #### Escenario: ciclo
 - GIVEN B requiere A
 - WHEN se arrastra de B a A
-- THEN el destino se rechaza con el motivo «ciclo» y no se llama al back.
+- THEN el preflight puede anticipar el motivo «ciclo», pero el intento de guardar se valida en el back; solo una respuesta 2xx confirma la flecha y el rechazo backend restaura el estado confirmado.
 
 #### Escenario: contención
 - GIVEN el nodo N está dentro de la sección S
 - WHEN se arrastra entre N y S (en cualquier sentido)
-- THEN se rechaza con el motivo de contención y no hay llamada.
+- THEN el preflight puede advertir la contención y, si se intenta guardar, el back decide; su rechazo no cambia la regla confirmada.
 
 #### Escenario: nodo hacia sección
 - GIVEN un nodo N y una sección S no contenedora
@@ -68,7 +68,7 @@ Las otras ~80 claves que usa la página borrada se limpian solo tras un grep por
 #### Escenario: duplicado
 - GIVEN B ya requiere A
 - WHEN se vuelve a arrastrar de A a B
-- THEN no se llama al back y se anuncia que la regla ya existe.
+- THEN el front puede avisar que la hoja parece duplicada; el back valida igualmente cada intento de guardado y la UI no afirma éxito sin 2xx.
 
 #### Escenario: relaciones informativas existentes
 - GIVEN la base tiene una RECOMMENDS entre A y B
@@ -143,7 +143,7 @@ Las otras ~80 claves que usa la página borrada se limpian solo tras un grep por
 #### Escenario: mudanza inválida
 - GIVEN S2 es requisito de N
 - WHEN se intenta mover N dentro de S2
-- THEN se rechaza con motivo y no hay llamada.
+- THEN el preflight puede advertir la contención, pero la decisión final es del back; un rechazo restaura la ubicación confirmada.
 
 ## R7. Árbol plegable y panel de resumen
 
@@ -199,3 +199,32 @@ Las otras ~80 claves que usa la página borrada se limpian solo tras un grep por
 - GIVEN el foco en A y B requiere A
 - WHEN se pulsa `C` y se elige A como destino de B (ciclo)
 - THEN no se crea y se anuncia el motivo.
+
+
+## R11 — El back es la autoridad
+
+- R11.1 Toda validación local (ciclo, contención, tipo, duplicados, profundidad o campos) MUST ser preflight de UX únicamente. Cada regla y mutación MUST ser validada y decidida por `tpi-roadmap`; el preflight puede advertir temprano pero MUST NOT sustituir la validación backend ni presentarse como decisión final.
+- R11.2 El editor MUST considerar guardado únicamente una respuesta 2xx del back. Mientras espera, mantiene `saving` activo y bloquea el doble envío equivalente; no presenta estado optimista de negocio.
+- R11.3 Ante rechazo HTTP, timeout o error de red, MUST restaurar la última lectura confirmada, traducir código/status a un mensaje claro y accionable con opción de reintentar. MUST NOT mostrar `detail` técnico crudo.
+- R11.4 Si una operación de varios pasos confirma la creación del nodo y falla después la regla, MUST conservar el nodo confirmado, no mostrar la regla y explicar el fallo parcial.
+- R11.5 Tras un guardado exitoso, al recuperar foco y al detectar conflicto, MUST releer el estado backend para reflejar cambios concurrentes.
+
+#### Escenario R11.1: el backend detecta un ciclo que el preflight no vio
+- GIVEN otro editor agregó una regla después de la última lectura local y el preflight no detecta que la flecha nueva forma un ciclo
+- WHEN se envía la regla y el backend responde `409 node.prerequisite-cycle` (o `section.prerequisite-cycle`)
+- THEN la UI no anuncia éxito, restaura el grafo confirmado, muestra el motivo de ciclo y permite reintentar tras releer.
+
+#### Escenario R11.2: curso archivado
+- GIVEN el profesor tenía abierto un roadmap que luego se archivó
+- WHEN intenta guardar cualquier cambio y el back responde `409 course.archived`
+- THEN no se muestra el cambio como guardado, se vuelve a la lectura confirmada y se explica que el curso está archivado.
+
+#### Escenario R11.3: error 5xx
+- GIVEN el request de guardado llega al servidor pero el servicio responde `5xx`
+- WHEN llega la respuesta de error
+- THEN el saving termina, no se muestra éxito, la interfaz restaura el último estado confirmado y ofrece reintentar con un mensaje claro de indisponibilidad.
+
+#### Escenario R11.4: se pierde la red entre crear un nodo y guardar su regla
+- GIVEN el request de creación del nodo recibió 2xx y se perdió la red antes de confirmar la regla posterior
+- WHEN el flujo parcial termina con error de red
+- THEN el nodo queda porque el back confirmó su creación, la regla no aparece como guardada, y la UI dice explícitamente que el nodo se creó pero su requisito no; tras recuperar conexión relee antes de ofrecer reintento.
