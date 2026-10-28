@@ -233,3 +233,26 @@ Las otras ~80 claves que usa la página borrada se limpian solo tras un grep por
 - GIVEN el request de creación del nodo recibió 2xx y se perdió la red antes de confirmar la regla posterior
 - WHEN el flujo parcial termina con error de red
 - THEN el nodo queda porque el back confirmó su creación, la regla no aparece como guardada, y la UI dice explícitamente que el nodo se creó pero su requisito no; tras recuperar conexión relee antes de ofrecer reintento.
+
+
+## R12. Ruteo de flechas legible
+
+- R12.1 El router del motor real MUST enrutar cada flecha con segmentos ortogonales y esquinas redondeadas, con un tramo recto visible desde el puerto de origen y otro hasta el puerto de destino, más una punta de flecha visible en el destino.
+- R12.2 Ningún segmento MUST atravesar un nodo no extremo ni su etiqueta, ni salir del marco que contiene la ruta. Las rutas paralelas MUST quedar separadas y el cálculo MUST penalizar los giros.
+- R12.3 Hover o selección de una flecha MUST resaltar sus dos extremos sin depender solo del color.
+- R12.4 Estas garantías MUST mantenerse tras reordenar, alternar visibilidad o forma, y colapsar o expandir marcos anidados.
+
+#### Escenario: obstáculos y marcos anidados
+- GIVEN una flecha entre dos puertos y nodos intermedios con etiquetas dentro de marcos anidados
+- WHEN el motor calcula o recalcula la ruta por un cambio de orden, visibilidad, forma o colapso
+- THEN la ruta evita todo obstáculo que no sea extremo, conserva los stubs y la punta, y no se extiende fuera de su marco.
+
+#### Escenario: aristas paralelas y selección
+- GIVEN dos flechas paralelas entre los mismos extremos
+- WHEN se muestran, se hoverean o se selecciona una
+- THEN sus rutas quedan separadas, los giros evitan zigzags innecesarios y ambos extremos de la flecha activa se resaltan.
+
+#### Escenario: prueba de intersección
+- GIVEN el conjunto de obstáculos no extremos del layout
+- WHEN se ejecuta la prueba de dominio del router
+- THEN ningún segmento de la ruta intersecta el rectángulo de un obstáculo ni la caja de su etiqueta.

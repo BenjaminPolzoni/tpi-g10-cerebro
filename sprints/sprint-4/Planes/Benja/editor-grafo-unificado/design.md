@@ -9,7 +9,7 @@ La página coordina `RoadmapStore`; el backend es la única verdad. A→B agrega
 | `/map` monta el grafo con `unsavedChangesGuard`; `/graph` redirige; una pestaña de mapa. | Dos editores duplican flujos y estado. |
 | Validar con `prerequisitePolicy`, `prerequisiteOptions` y `rule-tree`. | Evita reglas divergentes; reutiliza chequeos de ciclo/contención. |
 | Preferencia de forma en `localStorage` dentro de `try/catch`; default tarjeta. | Preferencia personal, no dato del curso. |
-| Router jerárquico: rutas entre marcos raíz actuales; enmarcado local simplificado. | `routeEdges` soporta regiones planas/carriles, no obstáculos recursivos. |
+| Router jerárquico y consciente de obstáculos en todos los niveles. | El router actual no evita obstáculos recursivos. |
 
 ## Corte y contratos
 
@@ -30,17 +30,17 @@ Canvas inputs: `units` jerárquicas (≤5), requisitos, selección, colapsos, fo
 
 ## Layout, creación y persistencia
 
-Añadir `parentId`/depth a entrada y rectángulos de `LayoutRegion`; `DagreLayoutEngine`/`packRegions` distribuyen hermanos. Al colapsar, `routeEdges` proyecta extremos ocultos al borde del ancestro; expandir restaura endpoints. Entre raíces se conserva router actual; dentro de marco, carriles ortogonales locales que no cruzan headers. Secciones vacías conservan marco, aviso y acción; volver sube nivel y subsecciones anidan hasta cinco.
+Añadir `parentId`/depth a entrada y rectángulos de `LayoutRegion`; `DagreLayoutEngine`/`packRegions` distribuyen hermanos. Al colapsar, el router proyecta extremos ocultos al borde del ancestro; expandir restaura endpoints. `domain/map-layout/edge-router.ts` enruta también dentro de marcos anidados evitando nodos y etiquetas no extremos y sin salir del marco: stubs de 16 px en puertos, ruta ortogonal con esquinas redondeadas, costo de giro, separación de paralelas y punta visible. Hover/selección resalta ambos extremos. Debe recalcularse tras reordenar, cambiar visibilidad o forma y colapsar/expandir. `edge-router.spec.ts` comprueba que ningún segmento intersecte obstáculos no extremos. El HTML de referencia del mockup usa A* ortogonal en grilla de 10 px, penalidad de giro 25, proximidad paralela 7 y stubs de 16 px; es referencia, no implementación de producción. Secciones vacías conservan marco, aviso y acción; volver sube nivel y subsecciones anidan hasta cinco.
 
 `MAP_METRICS` define tamaños (`cardWidth/cardHeight`, `circleDiameter`) y puertos según forma. Datos idénticos en ambas; CSS variante con `--tpi-*`, sin hex/font literals, total <10 kB.
 
-Sin selección, panel muestra overview; con selección, inspector. Wizard reutiliza `initialSectionId`, `initialDraft`, `connections`, `createChallenge`/`NodeWizardDraft` y mapeo `onWizardCreateChallenge` de `section-nodes`; no duplica validación. Reemplazar `wizardSectionId` por contexto; unidad usa `addSection`, subsección `addZone`. Crear nodo: `addActivity`→`saveRules`; si falla regla, conservar nodo, quitar flecha y advertir/reintentar.
+Sin selección, el panel muestra el overview con conteos del roadmap, «Para revisar» (secciones vacías y nodos sin reglas) y atajos de teclado. Con selección, muestra el inspector con requisitos y dependientes; el overview no muestra requisitos del elemento seleccionado. Wizard reutiliza `initialSectionId`, `initialDraft`, `connections`, `createChallenge`/`NodeWizardDraft` y mapeo `onWizardCreateChallenge` de `section-nodes`; no duplica validación. Reemplazar `wizardSectionId` por contexto; unidad usa `addSection`, subsección `addZone`. Crear nodo: `addActivity`→`saveRules`; si falla regla, conservar nodo, quitar flecha y advertir/reintentar.
 
 Cada comando activa signal `saving`; éxito solo tras callback/recarga. Error revierte al confirmado y conserva contexto reintentable; no hay estado optimista de negocio. Mover valida REPO-04/05 y usa `moveActivityToSection`; ordenar usa `moveActivityTo`, sin tocar reglas. `section-nodes` tiene store separado (`embeds/roadmap-editor.providers.ts`) y estudiante consume las mismas reglas desde backend.
 
 ## Tree, overview, acceso y eliminación
 
-Árbol inputs: `sections`, `selectedId`, `collapsedIds`; outputs: `select`, `toggle`, `expandAll`, `collapseAll`. Selección expande ancestros y centra canvas. Overview recibe seleccionado/requisitos/dependientes y emite `removeRule`. La lista de conexiones ofrece alternativa a flechas.
+Árbol inputs: `sections`, `selectedId`, `collapsedIds`; outputs: `select`, `toggle`, `expandAll`, `collapseAll`. Selección expande ancestros y centra canvas. Sin selección se muestra el overview informativo; con selección, el inspector recibe requisitos/dependientes y permite `removeRule`. La lista de conexiones ofrece alternativa a flechas.
 
 WCAG 2.2 AA: C conecta (destino, Enter/Esc); N abre wizard con enfocado como requisito; selector sustituye drag. `aria-live` anuncia resultados/razones; foco visible y gestionado; flechas distinguen estado por trazo/icono/texto, no solo color.
 
@@ -54,7 +54,7 @@ Eliminar `pages/course-map-page/**` (incluye page/estilos, `map-layout.ts`, `map
 
 Pruebas al final antes del PR: unitarias de reglas/layout; componentes (contratos, teclado/ARIA); store (ambos saves, rollback, fallo parcial/movimiento); rutas/guard; regresión simple y aceptación alumno/docente; i18n/WCAG. Sin migración. Riesgos: endpoint de reglas para subsecciones y routing/drag profundo.
 
-## Trazabilidad R1–R10
+## Trazabilidad R1–R12
 
 | Requisito | Elemento de diseño |
 |---|---|
@@ -64,10 +64,12 @@ Pruebas al final antes del PR: unitarias de reglas/layout; componentes (contrato
 | R4 | Wizard reutilizado, `addActivity`→`saveRules`, `addZone`, fallo parcial. |
 | R5 | Saving signal, reload, rollback y contexto reintentable. |
 | R6 | Preflight y movimientos sin podar reglas. |
-| R7 | Árbol plegable y overview con reglas/dependientes/quitar. |
+| R7 | Árbol plegable, overview vacío informativo y inspector contextual con reglas/dependientes/quitar. |
 | R8 | Tarjeta/círculo y preferencia local tolerante a fallo. |
 | R9 | Store/backend compartido con vista simple y estudiante. |
 | R10 | Atajos, selector/lista alternativos, foco, anuncios y señal no cromática. |
+| R11 | Preflight UX; autoridad backend, guardado pesimista, rollback, relectura y error parcial. |
+| R12 | `edge-router.ts` obstáculo-aware en marcos anidados; stubs, giros, paralelas, puntas, resaltado y prueba de intersección. |
 
 ## Pregunta abierta
 

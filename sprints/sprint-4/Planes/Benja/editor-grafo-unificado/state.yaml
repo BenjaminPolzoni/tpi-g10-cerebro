@@ -1,11 +1,13 @@
 change: editor-grafo-unificado
-phase: spec
+phase: tasks
 status: done
 updated: 2026-10-28
 artifacts:
   proposal: proposal.md
   spec: spec.md
+  tasks: tasks.md
 proposal: done
 spec: done
-next: [design]
+next: [apply]
 design: done
+tasks: done
