@@ -1,7 +1,11 @@
 change: editor-grafo-unificado
-phase: proposal
+phase: spec
 status: done
 updated: 2026-10-28
 artifacts:
   proposal: proposal.md
-next: [spec, design]
+  spec: spec.md
+proposal: done
+spec: done
+next: [design]
+design: done

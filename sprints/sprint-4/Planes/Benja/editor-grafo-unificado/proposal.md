@@ -69,3 +69,10 @@ Es un cambio solo de front, en una rama y sin migraciones. Se revierte el merge,
 - [ ] Mover una tarjeta nunca borra reglas.
 - [ ] Todo se puede hacer con el teclado, con anuncios `aria-live`.
 - [ ] La tarjeta y el círculo muestran la misma información.
+
+## Enmiendas 2026-10-28
+
+Decisiones del usuario posteriores a la propuesta. MANDAN sobre el texto de arriba.
+
+1. **Toda flecha es una regla de desbloqueo.** El editor no crea, no edita y no muestra relaciones informativas (recommends, belongs_to, part_of, related_to); las existentes en la base no se tocan. Arrastrar de A a B crea «B requiere A», sin selector de tipo. Desaparecen el cambio de tipo y el problema de las dos llamadas al back (el riesgo «Requiere↔informativo no es atómico» y la pregunta 4 dejan de aplicar). Los tipos informativos y los creados por el profesor quedan para una historia aparte. Cambia F2 (sin selector de los 5 tipos) y F5 (solo `saveRules`/`saveUnitRules`, sin `/roadmaps/{id}/relations`).
+2. **Rutas.** `/roadmap/teacher/course/:id/map` es la única ruta del editor y monta `GraphEditorPageComponent` con `unsavedChangesGuard`. `/graph` redirige a `/map` (responde la pregunta 1) y queda una sola pestaña. Se borra `course-map-page`.
