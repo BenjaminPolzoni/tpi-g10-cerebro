@@ -10,6 +10,7 @@ Back localizado: `~/dev/TPI_2026/Backend/tpi-roadmap`.
 
 - [ ] **Reglas de sección para subsecciones** — `PATCH /sections/{id}/rules` con una sección hija (`parentSectionId != null`) en todos los entornos (local, mesh, prod). Lo usa T-05b/T-06d. Pregunta abierta del [[design]].
 - [ ] **Hoja `NODE` en regla de sección** — `PATCH /sections/{id}/rules` con `{rule}` (árbol) que contenga una hoja tipada `NODE` de un nodo externo. Verificar `RuleLeafEligibility.requireEligibleForSection` (`:73-85`) y que el flat `prerequisiteSectionIds` no la acepte. Lo usa T-05b.
+- [ ] **Bloqueo del alumno con hojas `NODE` en reglas de sección** — el progreso del alumno (`GET .../students/{id}/progress`, `unit_prerequisite_pending`) debe bloquear una unidad/subsección cuya regla `{rule}` exige un NODO no completado. El front (`domain/unlock-rules.ts`: `unitLockOf`/`pendingUnitPrerequisites`) hoy solo mira `prerequisiteSectionIds` y XP y depende del back para esto. Detectado en T-14 (2026-10-28).
 - [ ] **Códigos de error estables** — que cada rechazo de la tabla del design salga con `code` de dominio (no solo `detail`): `node.prerequisite-cycle`, `node.prerequisite-duplicate`, `node.prerequisite-out-of-scope`, `section.prerequisite-cycle`, `section.prerequisite-containment`, `section.too-deep`, `rule.*`, `course.archived`, `node.section-invalid`, `node.order-conflict`. El front traduce por código.
 
 ## 2. Verificaciones T-16 (gaps posibles → backlog back)
