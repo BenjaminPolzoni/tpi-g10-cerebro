@@ -1,6 +1,6 @@
 change: editor-grafo-unificado
-phase: tasks
-status: done
+phase: apply
+status: in-progress
 updated: 2026-10-28
 artifacts:
   proposal: proposal.md
@@ -8,7 +8,14 @@ artifacts:
   tasks: tasks.md
 proposal: done
 spec: done
-next: [apply]
+next: [apply, verify]
 design: done
 tasks: done
 tasks_review: done
+apply:
+  branch: BenjaminPolzoni/fix-vista-y-uso-del-roadmap-en-el-mapa-de-nodos
+  orca_run: run_4114653e103a
+  done: [T-01a, T-01b, T-01c, T-02, T-03a, T-05a]
+  partial: [T-04]   # dominio listo; cablear en canvas dentro de T-03b
+  known_regressions:
+    - "onAddNode del grafo navega a /map (ahora es la misma página); se arregla en T-06a"
