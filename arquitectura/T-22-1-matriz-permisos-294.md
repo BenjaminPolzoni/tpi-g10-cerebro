@@ -1,4 +1,3 @@
-
 ---
 tags: [tpi, g10, roadmap, sprint-3, seguridad, permisos]
 tarea: "T-22.3 (#9092) · DT-02 / DT-03"
