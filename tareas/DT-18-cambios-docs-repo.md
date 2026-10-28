@@ -1,12 +1,12 @@
 ---
 tags: [tpi, g10, tarea, deuda-tecnica, kafka, docs-repo]
 fecha: 2026-10-27
-estado: pendiente-de-aplicar
+estado: commiteado-en-rama
 ---
 
 # DT-18 — Cambios propuestos a los docs del repo `tpi-roadmap`
 
-No se commitearon al repo (decisión del equipo: los docs de tareas van al vault). Es el diff exacto de `README.md`, `AGENTS.md`, `.agents/agent.md` y `docs/faq-notifications-bus.md` contra `develop` (`fea2fece`). Para aplicarlo: copiar el bloque a un archivo `dt18.patch` y correr `git apply --ignore-whitespace dt18.patch` en una rama desde `develop`. Hallazgos y contexto: [[tareas/DT-18-hallazgos-kafka-snake-case]].
+Commiteados en el repo como `6ab3f09e` (rama `feature/dt-18-kafka-docs-cbd7df`, sin PR); esta es la copia en el vault. Es el diff exacto de `README.md`, `AGENTS.md`, `.agents/agent.md` y `docs/faq-notifications-bus.md` contra `develop` (`fea2fece`). Si hubiera que reaplicarlo: copiar el bloque a un archivo `dt18.patch` y correr `git apply --ignore-whitespace dt18.patch` en una rama desde `develop`. Hallazgos y contexto: [[tareas/DT-18-hallazgos-kafka-snake-case]].
 
 ```diff
 diff --git a/.agents/agent.md b/.agents/agent.md

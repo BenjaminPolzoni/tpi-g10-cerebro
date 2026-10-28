@@ -7,7 +7,7 @@ estado: resuelta
 # DT-18 — Contratos Kafka de Roadmap a snake_case (hallazgos)
 
 Referencia: [[deuda-tecnica]] · [[decisiones/DEC-001-wire-kafka-v8-snake-case|DEC-001]] · skill `contratos-kafka` (v12).
-Los cambios a los docs del repo **no se commitearon**: están como diff en [[tareas/DT-18-cambios-docs-repo]], sin aplicar. Verificado contra el código de `develop` (`6268b669` + `fea2fece`), leyendo las fuentes en disco: el grafo `codebase-memory-mcp` no estaba disponible en esta sesión.
+Commit en el repo: `6ab3f09e` (rama `feature/dt-18-kafka-docs-cbd7df`, sin push ni PR); copia del diff en [[tareas/DT-18-cambios-docs-repo]]. Verificado contra el código de `develop` (`6268b669` + `fea2fece`), leyendo las fuentes en disco: el grafo `codebase-memory-mcp` no estaba disponible en esta sesión.
 
 ## Qué se tocó
 
@@ -19,7 +19,7 @@ Los cambios a los docs del repo **no se commitearon**: están como diff en [[tar
 - `contratos/bus-notificaciones.md`, `contratos/accounting-roadmap-v1.md`, `contratos/CONTRATO_T10_BACKOFFICE.md`: ejemplos JSON de eventos y nombres del sobre.
 - `arquitectura/contexto-integral.md` §4, `estructura-codigo.md`, `e2e-flujo-completo.md`; `acuerdos/` (backoffice, notificaciones-bus, courses-g01); `microservicios/` 01, 02, 03, 06, 10; `decisiones/DEC-001`.
 
-**Repo (`tpi-roadmap`)**, solo como diff propuesto en [[tareas/DT-18-cambios-docs-repo]]: `README.md`, `AGENTS.md`, `.agents/agent.md`, `docs/faq-notifications-bus.md`. Hasta aplicarlo, esos cuatro siguen diciendo que `COURSE_LEVEL_UP`/`PERFORMANCE_ZONE_CHANGED` se emiten, `PAR_STATUS_CHANGED`, etc.
+**Repo (`tpi-roadmap`)**: `README.md`, `AGENTS.md`, `.agents/agent.md`, `docs/faq-notifications-bus.md` (commit `6ab3f09e`; diff en [[tareas/DT-18-cambios-docs-repo]]).
 
 ## Hallazgos doc ↔ código
 
