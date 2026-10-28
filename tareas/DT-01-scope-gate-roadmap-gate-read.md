@@ -9,9 +9,9 @@ La validación **ya estaba en `develop`** desde `402a4094` (Mateo, 2026-10-25, `
 - `SecurityConfig.canReadGate`: solo una `ServiceIdentity` cuyo `X-Service-Scopes` contiene `roadmap.gate.read` (comparación exacta, lista separada por comas).
 - 401 y 403 salen como `problem+json` (`ProblemJsonSecurityHandlers`, `code: FORBIDDEN`).
 
-Esta tarea sumó solo tests en `GateControllerTest` (rama `feature/dt-01-gate-scope-d991d3`, commit `dca67455`): scope de otro endpoint → 403 problem+json; scopes parecidos (`roadmap.gate.readonly`, `roadmap.gate`, mayúsculas, prefijo) → 403; `roadmap.gate.read` junto a otros → 200.
+Esta tarea sumó solo tests en `GateControllerTest` ([tpi-roadmap#356](https://github.com/2026-P4-BE/tpi-roadmap/pull/356), rama `feature/dt-01-gate-scope-d991d3`, commit `dca67455`): scope de otro endpoint → 403 problem+json; scopes parecidos (`roadmap.gate.readonly`, `roadmap.gate`, mayúsculas, prefijo) → 403; `roadmap.gate.read` junto a otros → 200.
 
-Aparte, `mvn verify` estaba rojo en `develop` por `ErrorCatalogTest` (faltaba `xp-history.sort-unknown` de #352). Se arregla en la rama `fix/xp-history-sort-unknown-catalog`.
+Aparte, `mvn verify` estaba rojo en `develop` por `ErrorCatalogTest` (faltaba `xp-history.sort-unknown` de #352). Se arregla en la misma PR #356 (commit `e7211694`).
 
 ## Evidencia del contrato (verificada el 2026-10-27, solo lectura)
 
