@@ -143,3 +143,73 @@ El grafo unificado no conserva un segundo modelo de negocio. La ruta principal l
 ### Trazabilidad
 
 R2 y R6 quedan sujetos a la tabla de endpoints y a esta matriz; R4 cubre el fallo parcial de crear nodo/regla; R5 y REPO-09 se precisan en flujo de guardado/mock; R9 queda precisado en lecturas compartidas. **R11** exige que ningún preflight del cliente sustituya el rechazo del backend (ver `spec.md`, escenarios R11.1–R11.4).
+
+## Iteración 2 — creación integrada y paridad con General
+
+### Decisión de reutilización
+
+La fuente del editor completo de General no es `NodeCreationWizardComponent`: General monta `SectionResourcesContainerComponent` → `RoadmapSectionNodesComponent`, y el menú de fila abre `EntityEditorDialogComponent` con `kind="node"`, materiales, catálogo, candidatos y regla guardada. Ese drawer ya organiza identidad, configuración/disponibilidad y reglas. El wizard (`ui/node-creation-wizard`) es un flujo distinto de alta por pasos (tipo → detalle → prerrequisitos → revisión) y el Graph editor lo monta inline en `graph-editor-page`.
+
+Decisión: conservar un picker breve «¿Qué nodo querés crear?» como puerta única, pero para contenido/desafío abrir el editor de entidad de General dentro del panel derecho del grafo con Información / Configuración / Reglas; compartir mediante extracción presentacional si `EntityEditorDialogComponent` requiere ajuste entre diálogo/drawer. `NodeCreationWizardComponent` se reduce a wrapper/contexto/transición compatible y sus callers se migran sin duplicar formularios. Para sección/subsección se reutilizan `SectionFormModalComponent`/`SectionEditorDrawerComponent`/widgets existentes (según campos y owner), no se amplía el editor de nodos con formulario estructural. Las acciones de upload, material, challenge pool y authoring siguen en sus servicios/rutas actuales.
+
+### Flujo de guardado y proyección
+
+1. El picker captura el elemento disparador y el contexto (roadmap/comisión, sección destino, nodo fuente para requisito y posición). `LearningMapCanvasComponent` emite una intención; tree/inspector/kebab invocan el mismo controlador de la page.
+2. El editor compartido recibe tipo y `initialSectionId`, opciones de material/catálogo/reglas. No crea por cada tecla/cambio de tab.
+3. Submit valida localmente y llama al `RoadmapStore`/`HttpRoadmapAdapter` correspondiente. El store ya captura el modelo creado en `addSection` y el id (`onCreated`) en `addActivity`; para la iteración la API de callback debe exponer una respuesta tipada estable con identificador, owner y orden, en vez de depender de `void` en interfaz. Mantener la respuesta de servidor, no inventar objeto local.
+4. Tras 2xx el store solicita `reloadConfirmed`; al resolver la lectura, la page identifica el elemento real por id, centra cámara dentro del marco actual, abre el inspector en datos, selecciona el nodo y devuelve el foco a un control útil. El layout (`domain/map-layout`) consume secciones/subsecciones con `sortOrder` y reglas/conexiones leídas; añadir selección no muta el grafo.
+5. El éxito audible/visual y cierre del editor esperan relectura. Una edición preserva la selección; un cambio de sección usa la ubicación que leyó el backend. Error HTTP/red restaura lectura confirmada, conserva input si se puede y ofrece reintento sin duplicar. Cuando alta se confirmó y regla falla, conservar alta y reintentar solo la regla (R11).
+
+`RoadmapStore.reload()` hoy mantiene carga stale-while-revalidate y callbacks genéricos; `addActivity` dispara `reload()` y notifica callbacks antes de que el refresh termine. `GraphEditorSession.saveConnectionRule` ya espera `reloadConfirmed()` para confirmar regla. La nueva interfaz debe cerrar esa diferencia para la nueva creación y selección enfocada, sin cambiar de modo general a optimismo. El adapter ya proporciona respuesta de alta (`ApiResponse<BackendNodeResponse>`/`BackendSectionResponse` por el contrato documentado) pero store abstrae parte de esa respuesta.
+
+### Reglas multifuente entre marcos
+
+Un owner por operación: nodo destino usa `saveRules` (`PATCH /nodes/{id}/rules`); unidad/subsección destino usa `saveUnitRules` (`PATCH /sections/{id}/rules`). Canvas multi-select + acción «Conectar a…» recopila fuentes, owner y operador; editar desde el inspector ofrece la misma lista/selector (funciona con teclado/táctil). Componer un `RuleGroup` completo y actualizarlo en un solo PATCH evita que requests separados de «agregar una leaf» se pisen. AND es todos los operands; OR es cualquier operand. Un grupo puede contener secciones y nodos admitidos por el tipo de owner. La previsualización propone el árbol final y explica número de fuentes, jamás un estado confirmado.
+
+`RuleGroup`/`RuleNode` ya codifica grupos AND/OR y minXP; `ruleLeavesTyped` conserva kinds NODE/SECTION. `RoadmapStore.saveRules/saveUnitRules` llaman a `updateRuleTree` cuando hay árbol, `HttpRoadmapAdapter.updateRuleTree/updateSectionRuleTree` serializa `{rule}`; flat conserva DTO legacy. El backend inspeccionado `RuleLeafEligibility` admite nodos elegibles externos para reglas de sección y bloquea hijos/contenidos; `SubsectionGuard` valida contención/ciclo/profundidad. La aceptación final y rechazos son del backend. Las relaciones DEC-018 de `/roadmaps/{id}/relations` no son requisitos de desbloqueo y no representan operandos AND/OR.
+
+### Inventario de comandos y wiring objetivo
+
+| Dueño / acción General | Punto actual | Wiring objetivo en graph |
+|---|---|---|
+| Estructura: create/edit/delete/order section/subsection | `CohortGeneralPageComponent` + `SectionFormModalComponent`, `SectionDeleteConfirmModalComponent`, `SectionsService`/`RoadmapStore` | Canvas header `+`/kebab + tree item/inspector, con formulario reutilizado y restricciones `managedInCourses`/OWN. |
+| Visibilidad, bioma/tema, reglas de sección | `GeneralSectionCardComponent`, `RoadmapUnitSettingsComponent`, `SectionEditorDrawerComponent`, `RoadmapSectionNodesComponent.openUnitRules` | Inspector/header/kebab del marco; mismas acciones de store/drawer y relectura. |
+| Alta contenido/desafío | `section-content-actions.ts`, `SectionResourcesContainerComponent`, `RoadmapSectionNodesComponent`, `EntityEditorDialogComponent` | Picker único + editor compartido; `+` contextual solo añade contexto. |
+| Edit/delete/order node | `RoadmapSectionNodesComponent` → `EntityEditorDialogComponent`, confirmación, `RoadmapStore` | Kebab canvas/tree/inspector; `moveActivityTo` para orden, `removeActivity` para delete. |
+| Reglas/conexiones | `PrerequisitePickerComponent`/`RulesWizardComponent`, `saveRules/saveUnitRules` | Puertos + multiselección y `NodeInspectorComponent`/árbol/listado accesible; rule owner siempre visible. |
+| Contenido publicado / navegación desafío | `CourseContentService`, `ChallengesService` y routes | Invocar host existente o navegar manteniendo contexto/draft; no replicar servicio. |
+
+No se propone mover entidades que no están bajo control de General ni cambiar endpoints de Cursos. «Reordenar subsección» se limita a sus siblings si la API actual lo soporta; si el back solo persiste orden raíz, registrar el gap y no fingir persistencia.
+
+### Secuencia
+
+```mermaid
+sequenceDiagram
+  actor T as Docente
+  participant C as Canvas/Tree/Inspector
+  participant P as Picker único
+  participant E as Editor compartido General
+  participant S as RoadmapStore
+  participant A as HttpRoadmapAdapter
+  participant B as tpi-roadmap
+  participant L as Layout/Canvas
+  T->>C: Crear / + contextual
+  C->>P: intención + sectionId/source/position
+  P->>E: tipo elegido + datos iniciales
+  T->>E: Completa tabs y guarda
+  E->>S: DTO completo
+  S->>A: add/update
+  A->>B: POST/PATCH
+  B-->>S: 2xx + entidad/id/orden
+  S->>A: GET roadmap confirmado
+  A->>B: GET
+  B-->>S: secciones, nodos, reglas y relaciones
+  S-->>L: nueva proyección
+  L-->>T: nodo en marco, seleccionado/centrado, anuncio
+```
+
+Si la regla contextual es un segundo PATCH, se intercala entre el alta y la lectura final. Si ese PATCH falla, se relee el nodo creado, se comunica fallo parcial y la acción reintentar no vuelve a llamar al POST.
+
+### Ajustes visuales ya iniciados
+
+Antes de implementar se verifican contra el checkout/muestra visual: (a) título de sección legible en encabezado del marco (`learning-map-canvas.component.css/html`), (b) lista de unidades alineada en el wizard (`node-creation-wizard.component.css/html`). Si el arreglo existe, cerrar como validación manual y registrar evidencia; si no, hacer cambio aislado y cubrir a escritorio/móvil. No dar por hecha la mejora solo por estar mencionada.

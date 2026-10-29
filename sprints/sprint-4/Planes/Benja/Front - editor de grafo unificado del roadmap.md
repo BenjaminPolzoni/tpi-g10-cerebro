@@ -105,3 +105,13 @@ El catálogo es **cerrado** (DEC-018, `CREATEABLE_RELATION_TYPES`) y el back rec
 - `docs/roadmap/graph-editor-requirements.md` y `graph-editor-handoff.md` (repo FE)
 - `docs/roadmap/learning-map-improvements.md` (backlog del editor)
 - `docs/roadmap/prerequisite-gate-policy.md`
+
+## Iteración 2 — creación integrada y paridad con General (2026-10-29)
+
+Se agregó una segunda fase, sin reescribir el plan/tareas existentes: picker único «¿Qué nodo querés crear?» seguido del drawer/tabs de entidad de General; paridad de acciones de secciones, nodos, tema/visibilidad/orden/reglas; reconciliación de alta con respuesta backend + lectura antes de seleccionar/centrar; y requisitos multifuente entre unidades/subsecciones con AND/OR. Contratos actuales y pendientes de confirmar (respuesta de alta, reorden de subsecciones, hojas tipadas y evaluación) están en [[editor-grafo-unificado/implementacion-para-coordinar-bien#6.-brechas-de-back-para-la-iteración-2]].
+
+- [[editor-grafo-unificado/proposal#iteración-2--creación-integrada-y-paridad-con-general|Propuesta / alcance]]
+- [[editor-grafo-unificado/spec#iteración-2--creación-integrada-y-paridad-con-general|Requisitos R15–R18 + escenarios]]
+- [[editor-grafo-unificado/design#iteración-2--creación-integrada-y-paridad-con-general|Decisión de reutilización y secuencia]]
+- [[editor-grafo-unificado/tasks#iteración-2--creación-integrada-y-paridad-con-general|Tareas T-22–T-28 (pendientes)]]
+- [[editor-grafo-unificado/state|Estado de Iteración 2: pendiente]]
