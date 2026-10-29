@@ -38,3 +38,7 @@ No se ejecutaron pruebas; `ok` significa evidencia estática y no certificación
 - El front llama siempre por `RoadmapStore` → `HttpRoadmapAdapter` (`/api/roadmap/...`). No cambia contratos.
 - Si el back cambia algún código de error o shape de `{rule}`, avisar antes: rompe la traducción de mensajes y T-05b.
 - Al cerrar los puntos de §1 y §2, marcar aquí y en `state.yaml`.
+
+## 5. Bloqueo encontrado al levantar develop (2026-10-29)
+
+- [ ] **Flyway `V73__outbox_event_organization.sql` (commit `6e81581a`, develop `02e10f8c`) falla sobre bases con datos:** `ALTER TABLE outbox_event ADD COLUMN organization_id UUID NOT NULL` sin default ni backfill → `column "organization_id" of relation "outbox_event" contains null values`. Cualquier entorno con filas en `outbox_event` (variante local, posiblemente estable/prod) no arranca. Arreglo propuesto (back): nueva migración que agregue la columna nullable, haga backfill (organización del curso/agregado o la org por defecto vigente), y recién después `SET NOT NULL`; o borrar/archivar eventos ya publicados antes. No editar V73 si ya se aplicó en algún entorno.
