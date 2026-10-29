@@ -212,4 +212,4 @@ Si la regla contextual es un segundo PATCH, se intercala entre el alta y la lect
 
 ### Ajustes visuales ya iniciados
 
-Antes de implementar se verifican contra el checkout/muestra visual: (a) título de sección legible en encabezado del marco (`learning-map-canvas.component.css/html`), (b) lista de unidades alineada en el wizard (`node-creation-wizard.component.css/html`). Si el arreglo existe, cerrar como validación manual y registrar evidencia; si no, hacer cambio aislado y cubrir a escritorio/móvil. No dar por hecha la mejora solo por estar mencionada.
+La implementación está hecha en el checkout FE por `eacc922ed fix(roadmap): improve section header and destination alignment`: (a) `.region-title`/`.region-name` priorizan legibilidad del título del marco y el nivel pasa al `title`; (b) `place-count` queda en la ranura trailing de `generic-list-item` y la sangría usa tokens. Sigue pendiente en T-27 la validación visual manual con nombres largos y 100%/200%, y con lista anidada a 360/768 px; no inferir cierre de QA a partir del commit.

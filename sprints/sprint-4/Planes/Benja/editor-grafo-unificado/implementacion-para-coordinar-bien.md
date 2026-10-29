@@ -57,7 +57,7 @@ La exploración de `src/app/features/roadmap/data-access/roadmap/roadmap.store.t
 
 ### UX pequeños ya mencionados
 
-- [ ] **Título de sección legible en el header de frame:** revisión estática del checkout halló `.region-title`/`.region-name` con font token, recorte/ellipsis y alineación; falta verificar en screenshot a 100%/200% y con nombre largo para cerrar como hecho.
-- [ ] **Lista de unidades alineada en wizard:** la vista usa `generic-list-item` y sangría por profundidad en `node-creation-wizard.component.ts`; falta revisar visualmente varios niveles y conteo al mismo eje en 360/768 px. Mantener en progreso hasta evidencia; no afirmar que ya está resuelto por el CSS estático.
+- [x] **Implementación de título legible y lista de unidades alineada:** ya está en FE commit `eacc922ed fix(roadmap): improve section header and destination alignment` (`learning-map-canvas.component.{css,html}`, `node-creation-wizard.component.{css,ts}`). El título gana tamaño/espacio mínimo y el conteo de nivel deja de competir con él; la lista usa tokens y el conteo queda en `trailing`.
+- [ ] **Verificación visual de esos dos arreglos (en progreso):** revisar screenshot a 100%/200% y con nombre largo, y lista anidada a 360/768 px; cerrar con evidencia o registrar defecto reproducible en T-27. La implementación está hecha, el QA visual no se da por hecho.
 
 Resolver y marcar casillas con evidencia, version de back y tests concretos. Estas incertidumbres no cambian la regla existente: preflight no sustituye la decisión del servicio; ningún estado de guardado se confirma antes de 2xx y lectura reconciliada.
