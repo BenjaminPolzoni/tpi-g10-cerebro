@@ -340,7 +340,7 @@ Permite al docente/gestor/admin ver **absolutamente todo lo que hizo cada alumno
       - `UNLOCK`: `origin` (`PROGRESS`, `XP`, `RULE_CHANGE`), `unlocked_by_node_id`, `unlocked_by_node_name`, `unlocked_at`.
       - `COMPLETION` / `READING`: `completed_at` / `read_at`.
 
-##### 2. `GET /api/roadmap/courses/{courseId}/students/{studentId}/roadmap-Analytics` (Resumen consolidado de un alumno)
+##### 2. `GET /api/roadmap/courses/{courseId}/students/{studentId}/roadmap-analytics` (Resumen consolidado de un alumno)
 Devuelve las métricas consolidadas de un alumno en el roadmap para la cabecera de inspección docente:
 - `total_dwell_time_seconds` (tiempo total en el roadmap), desglosado por `sections[]` y `nodes[]` (`node_id`, `node_name`, `visit_count`, `total_seconds`, `last_visited_at`).
 - `nodes_unlocked[]` (todos los nodos desbloqueados con fecha y origen).
@@ -476,7 +476,22 @@ Muestra todas las acciones administrativas y docentes sobre el roadmap:
 
 ---
 
-## 5. Plan de implementación paso a paso (Fases y Tareas)
+## 5. Punto de arranque y Estrategia de Ramas (Branches)
+
+> [!IMPORTANT] Dónde arrancar: **Backend (`Backend/tpi-roadmap-develop`)**
+> Conviene arrancar por **Backend (Fases 1 y 2)** porque el Frontend depende directamente de los nuevos contratos REST (`/logs/audit`, `/logs/student-activity`, `/students/me/activity-log`, `/navigation-sessions` y los filtros `?nodeId=&roadmapId=` en `/xp-history`), además de las migraciones `V79` y `V80` y del fix de desbloqueos en `ProgressService.markAsRead`.
+>
+> - **Repositorio inicial**: `Backend/tpi-roadmap-develop`
+> - **Rama creada (activa)**: `BenjaminPolzoni/roadmap-logs-auditoria` (creada desde `origin/develop` en `02e10f8c`)
+> - **Orden recomendado de arranque en esta rama**:
+>   1. **Paso 1 (Quick win + base de datos)**: Fix de 1 línea en `ProgressService.markAsRead` (`prerequisites.recordUnlocksAfter(nodeId, studentId, null)`) + migraciones Flyway `V79__roadmap_audit_log.sql` y `V80__student_navigation_session.sql`.
+>   2. **Paso 2 (Auditoría docente/admin)**: `RoadmapAuditLogEntity` + `RoadmapAuditService` conectado en `GraphService` / `RoadmapManagementService` + `GET /api/roadmap/courses/{courseId}/logs/audit` y actualización de `GET /api/roadmap/nodes/{nodeId}/edit-log` (soportando nodos eliminados).
+>   3. **Paso 3 (Telemetría y actividad del alumno)**: `POST /navigation-sessions`, extensión de `XpHistoryController` con `?nodeId=&roadmapId=`, y `GET /students/me/activity-log` + `GET /logs/student-activity`.
+> - **Siguiente rama (Frontend)**: una vez listos los endpoints en back, crear `BenjaminPolzoni/roadmap-logs-auditoria-front` desde `origin/develop` en `Frontend/2026-PIV-TPI-FE` para ejecutar las Fases 3 y 4.
+
+---
+
+## 6. Plan de implementación paso a paso (Fases y Tareas)
 
 ### Fase 1 — Persistencia y Auditoría Docente en Backend (`tpi-roadmap`)
 - [ ] **T-1.1**: Crear migración Flyway `V79__roadmap_audit_log.sql` con la tabla `roadmap_audit_log`, índices y migración de datos existentes desde `node_edit_log`.
@@ -510,7 +525,7 @@ Muestra todas las acciones administrativas y docentes sobre el roadmap:
 
 ---
 
-## 6. Riesgos y consideraciones de diseño
+## 7. Riesgos y consideraciones de diseño
 
 > [!IMPORTANT] Decisiones clave para evitar problemas de rendimiento y consistencia
 > 1. **Control de sesiones huérfanas en el tracking de tiempo (`student_navigation_session`)**:
