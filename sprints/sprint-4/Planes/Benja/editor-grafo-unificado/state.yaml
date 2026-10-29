@@ -31,7 +31,7 @@ iteration_2:
     design: design.md#iteración-2
     tasks: tasks.md#iteración-2
     backend_gaps: implementacion-para-coordinar-bien.md#6
-  done: [T-22, T-23]
-  commits: [3c5a3c1aa, 5174b7201, 5538d0ab8, afbc9c240, 3cceb51eb]
-  pending: [T-24, T-25, T-26, T-27, T-28]
-  verification: "T-22/T-23 suite and visual checks deferred to T-28; T-23 partial: B-10"
+  done: [T-22, T-23, T-24]
+  commits: [3c5a3c1aa, 5174b7201, 5538d0ab8, afbc9c240, 3cceb51eb, 815f6ceb5]
+  pending: [T-25, T-26, T-27, T-28]
+  verification: "T-22/T-23/T-24 suite and visual checks deferred to T-28; T-23 partial: B-10"
