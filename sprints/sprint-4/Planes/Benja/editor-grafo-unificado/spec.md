@@ -283,3 +283,31 @@ Las otras ~80 claves que usa la página borrada se limpian solo tras un grep por
 - GIVEN dos profesores o `localStorage` no disponible
 - WHEN cada uno alterna paneles, o la lectura/escritura lanza una excepción
 - THEN las preferencias disponibles no se mezclan entre profesores y el editor continúa con el default seguro sin excepción visible.
+
+## R14. Uso desde dispositivos móviles (táctil y pantalla angosta)
+
+Agregado 2026-10-29 a pedido del usuario. Aplica al editor (`/map`) y a sus paneles; mismo comportamiento y mismas reglas que en escritorio (el back sigue siendo la autoridad).
+
+- R14.1 **Táctil en el lienzo:** arrastrar con un dedo mueve la cámara; pellizcar hace zoom; tocar selecciona. Implementado con Pointer Events (no eventos de mouse), con `touch-action` acorde para que el navegador no robe el gesto.
+- R14.2 **Conectar sin precisión de mouse:** los puertos MUST tener área táctil ≥ 44×44 px (WCAG 2.5.8 / 2.5.5). Además, una alternativa sin arrastre: con un nodo/sección seleccionado, la acción «Conectar» del inspector o del menú contextual activa el modo «elegir destino» (tocar destino → confirmar), equivalente a `C`/`Enter`.
+- R14.3 **Mover y reordenar sin arrastre largo:** «Mover a sección» (selector) y acciones «Subir/Bajar» en el inspector cubren el arrastre; un long-press (≈500 ms) inicia el arrastre del cuerpo del nodo, para no confundirlo con desplazar el lienzo.
+- R14.4 **Acciones que hoy aparecen al hover** («+», puertos, quitar flecha) MUST ser alcanzables al tocar/seleccionar el elemento (sin hover).
+- R14.5 **Pantalla angosta (< 768 px):** árbol y panel derecho pasan a hojas/drawers superpuestos (no columnas fijas), uno a la vez, con cierre accesible y foco gestionado; el lienzo ocupa el ancho completo. La barra superior (búsqueda, roadmap, comisión, forma, zoom) se compacta en un menú sin perder ninguna opción.
+- R14.6 **Asistente y confirmaciones** se ven completos en 360 px de ancho, sin scroll horizontal; los campos usan tipos de input móviles adecuados.
+- R14.7 **Sin teclado físico:** ningún flujo depende solo de atajos (`C`, `N`, `[`, `]`, Supr); cada uno tiene un control visible equivalente.
+- R14.8 Preferencias (forma, paneles) MAY guardarse por separado para móvil y escritorio.
+
+#### Escenario: conectar en el celular
+- GIVEN un profesor en un celular con el mapa abierto
+- WHEN toca un nodo A, elige «Conectar», toca el nodo B y confirma
+- THEN se guarda «B requiere A» con el mismo flujo pesimista que en escritorio y se anuncia el resultado.
+
+#### Escenario: paneles en pantalla angosta
+- GIVEN un ancho de 375 px
+- WHEN el profesor abre el árbol
+- THEN aparece como hoja superpuesta, el foco entra en ella, y al cerrarla vuelve al botón que la abrió; el panel derecho no queda abierto al mismo tiempo.
+
+#### Escenario: zoom y paneo táctil
+- GIVEN el mapa en una tablet
+- WHEN el profesor pellizca y arrastra con un dedo sobre el fondo
+- THEN cambia el zoom y se mueve la cámara, sin mover nodos ni crear flechas.

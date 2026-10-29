@@ -8,7 +8,7 @@ artifacts:
   tasks: tasks.md
 proposal: done
 spec: done
-next: [T-17 tests + levantar imagen, verify]
+next: [T-17 tests, T-20/T-21 móvil, probar en imagen, verify]
 design: done
 tasks: done
 tasks_review: done
