@@ -19,3 +19,4 @@ Antecedente: [carpeta homóloga de Sprint 3](../../../sprint-3/Planes/Benja/) (s
 - [[sprints/sprint-4/Planes/Benja/Front - mensajes y reintentos ante origin_unavailable|Gate · Mensajes y reintentos ante origin_unavailable]] (plan de front)
 - [[sprints/sprint-4/Planes/Benja/Back+Front - endpoints sin uso del roadmap|Auditoría · Endpoints sin uso del roadmap]] (9 huérfanos: borrar 2, conectar 4, mantener 3)
 - [[sprints/sprint-4/Planes/Benja/Front - editor de grafo unificado del roadmap|Roadmap · Editor de grafo unificado]] (plan de front, mockup aprobado 2026-10-28; tipos propios necesitan back)
+- [[sprints/sprint-4/Planes/Benja/Back+Front - logs y auditoria del roadmap|Roadmap · Sistema de logs, telemetría de alumnos y auditoría docente]] (plan Back+Front: vista alumno y vista profesor/gestor/admin)
