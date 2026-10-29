@@ -82,6 +82,14 @@ Base: `tpi-roadmap` `origin/develop` `efa19734`. Evidencia estática, no certifi
 
 **Cierre técnico (2026-10-29):** rama `BenjaminPolzoni/feature-graph-editor-iteration-2` publicada sin PR; commits `3a08b8c2`, `b924b3ac`, `0eb65a70`, `94305179`, `a51435e8`, `7672d338`. `./mvnw clean verify` terminó BUILD SUCCESS: 3598 tests, 0 fallos, 0 errores, 4 omitidos; Checkstyle, PMD y cobertura aprobados. El hook pre-push también ejecutó `mvn verify` exitosamente. Las primeras dos ejecuciones limpias tuvieron tests verdes pero fallaron respectivamente Checkstyle y PMD, corregidos en los commits indicados; aún quedan los smoke tests de despliegue y los casos de progreso extremo a extremo señalados arriba.
 
+### B-11 — Sync no incorpora una sección creada en Courses: fixture local fijo (2026-10-29)
+
+**Diagnóstico: entorno local, no se identificó un bug en Java.** La cohorte observada es `2bee96b9-b7c1-46b8-a397-1a9ac427d506`. `docker logs roadmap-service-polzoni` registra repetidamente `remote=1 created=0 ... unchanged=1`; `docker logs roadmap-service-polzoni-m2m-shim` confirma que el listado pasa por ese shim. `docker exec roadmap-service-polzoni-m2m-shim nginx -T` muestra que `GET /api/course/course-cohorts/2bee96b9-b7c1-46b8-a397-1a9ac427d506/sections` devuelve siempre un JSON **hardcodeado** con una sola sección, `8477a116-358c-481f-89b4-997391270a1f`, en vez de consultar Courses. La configuración está montada desde `tpi-roadmap-develop/.tpi/platform/m2m-shim.conf`; no se modificó ni se reinició el shim.
+
+`CourseSectionSyncService.sync` reconcilia el catálogo recibido: si el fixture no contiene la nueva sección, no puede descubrirla. En ese contenedor `GRAPH_READ_ENABLED=false`, por lo que la lectura de Neo4j no explica este caso. En una prueba HTTP local de diagnóstico, con `CourseSectionsClient` devolviendo primero una sección y luego dos, tanto el segundo POST de sync como el GET inmediato incluyeron la sección nueva (1 test, 0 fallos); la prueba temporal se descartó por instrucción de coordinación y no se modificó Java.
+
+**Acción pendiente del entorno:** enrutar ese GET del shim al Courses real con autenticación técnica válida, o actualizar el fixture con la sección nueva; después repetir sync y GET, verificando `remote` y `created`. No tratar la actualización de un fixture fijo como prueba de integración con Courses real, ni afirmar que otros ambientes tengan el mismo problema sin verificarlos.
+
 ### UX pequeños ya mencionados
 
 - [x] **Implementación de título legible y lista de unidades alineada:** ya está en FE commit `eacc922ed fix(roadmap): improve section header and destination alignment` (`learning-map-canvas.component.{css,html}`, `node-creation-wizard.component.{css,ts}`). El título gana tamaño/espacio mínimo y el conteo de nivel deja de competir con él; la lista usa tokens y el conteo queda en `trailing`.
