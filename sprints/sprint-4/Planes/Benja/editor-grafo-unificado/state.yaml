@@ -1,7 +1,7 @@
 change: editor-grafo-unificado
 phase: apply
 status: in-progress
-updated: 2026-10-28
+updated: 2026-10-29
 artifacts:
   proposal: proposal.md
   spec: spec.md
@@ -18,5 +18,6 @@ apply:
   done: [T-01a, T-01b, T-01c, T-02, T-03a, T-03b, T-04, T-05a, T-05b, T-05c, T-05d, T-06a, T-06b, T-06c, T-06d, T-14, T-15, T-07, T-08, T-09, T-10, T-11, T-12, T-13, T-16, T-17, T-18, T-19, T-20, T-21]
   reuse: a995d077b  # ver reutilizable-de-course-map-page.md
   extra: ["4c8e9f304 fallback de bloqueo de unidad con hojas NODE (unlock-rules)", "e2280761a requisito contextual persistido en el borrador del asistente"]
+  blocked_by: "tpi-plataforma offline al levantar (2026-10-29); back develop V73–V78 sin backfill (ver implementacion-para-coordinar-bien.md §5)"
   known_regressions:
     - "(resuelta en f73c1864c) onAddNode navegaba a /map"
