@@ -45,3 +45,7 @@ if (violations === null || violations.length > 0) {
 }
 ```
 La traducción de motivos ya existe en `domain/prerequisite-policy.ts`; no se restaura un mapeador duplicado. El preflight no sustituye la validación del servidor.
+
+## Omisión detectada 2026-10-29
+
+| `course-map-page.component.html:99-130` + `.ts` (`routeRoadmapId`, `onRoadmapChange`, `onCommissionChange`, `roadmapOptions`, `commissionOptions`, `activeRoadmapName`, `commissionLabel`) | Selector de comisión, selector de roadmap y barra de contexto del mapa (multi-roadmap, T-57.3). | T-19 | Reutilizar: faltaba en este inventario y el grafo quedó sin forma de ver/cambiar el roadmap activo. |

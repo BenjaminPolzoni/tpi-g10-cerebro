@@ -78,3 +78,4 @@ Decisiones del usuario posteriores a la propuesta. MANDAN sobre el texto de arri
 2. **Rutas.** `/roadmap/teacher/course/:id/map` es la única ruta del editor y monta `GraphEditorPageComponent` con `unsavedChangesGuard`. `/graph` redirige a `/map` (responde la pregunta 1) y queda una sola pestaña. Se borra `course-map-page`.
 
 3. **Reglas de sección con nodos.** Una unidad o subsección puede requerir un nodo externo elegible; se guarda como hoja `NODE` vía `PATCH /sections/{id}/rules` y solo se confirma tras 2xx. Se mantiene el rechazo backend por contención; un drop sobre marco colapsado nunca se redirige a un nodo interno.
+4. **Control desde un dispositivo móvil (2026-10-29).** El editor del grafo (`/map`), el árbol, el inspector, el asistente y la barra de contexto (roadmap/comisión) MUST poder usarse desde un celular o tablet: táctil y pantallas angostas. Ver R14 en [[spec]] y T-20/T-21 en [[tasks]].
