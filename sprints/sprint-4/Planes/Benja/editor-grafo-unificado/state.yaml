@@ -15,9 +15,9 @@ tasks_review: done
 apply:
   branch: BenjaminPolzoni/fix-vista-y-uso-del-roadmap-en-el-mapa-de-nodos
   orca_run: run_4114653e103a
-  done: [T-01a, T-01b, T-01c, T-02, T-03a, T-03b, T-04, T-05a, T-05b, T-05c, T-05d, T-06b, T-06c, T-14, T-15, T-16]
+  done: [T-01a, T-01b, T-01c, T-02, T-03a, T-03b, T-04, T-05a, T-05b, T-05c, T-05d, T-06a, T-06b, T-06c, T-14, T-15, T-16]
   reuse: a995d077b  # ver reutilizable-de-course-map-page.md
-  partial: [T-06a, T-06d]
+  partial: [T-06d]
   extra: ["4c8e9f304 fallback de bloqueo de unidad con hojas NODE (unlock-rules)"]
   known_regressions:
-    - "onAddNode del grafo navega a /map (ahora es la misma página); se arregla en T-06a"
+    - "(resuelta en f73c1864c) onAddNode navegaba a /map"
