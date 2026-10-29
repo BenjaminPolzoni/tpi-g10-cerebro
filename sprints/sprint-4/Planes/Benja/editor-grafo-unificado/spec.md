@@ -311,3 +311,120 @@ Agregado 2026-10-29 a pedido del usuario. Aplica al editor (`/map`) y a sus pane
 - GIVEN el mapa en una tablet
 - WHEN el profesor pellizca y arrastra con un dedo sobre el fondo
 - THEN cambia el zoom y se mueve la cámara, sin mover nodos ni crear flechas.
+
+## Iteración 2 — creación integrada y paridad con General
+
+Esta adenda agrega R15–R18 sin alterar los requisitos ni las tareas anteriores. «General» refiere a `/o/:org/courses/:courseId/general` (actualmente `CohortGeneralPageComponent`). La fuente observada para editar nodos es `RoadmapSectionNodesComponent` dentro de `SectionResourcesContainerComponent`, que abre `EntityEditorDialogComponent`; `NodeCreationWizardComponent` es el asistente separado, no el editor por pestañas que usa la edición inline de General.
+
+### Inventario de paridad: acciones de General y superficie del grafo
+
+| Acción disponible en General | Fuente actual | Cómo queda disponible en el grafo |
+|---|---|---|
+| Crear sección/unidad | Toolbar de `CohortGeneralPageComponent`; `SectionFormModalComponent` / `RoadmapStore.addSection` | «+» de barra/lienzo; picker «Sección» y formulario. Unidad Courses-managed del roadmap principal sigue perteneciendo a General/sync; OWN permite crear desde el grafo. |
+| Crear subsección (hasta nivel 5) | `contentActionItems`; tarjetas `GeneralSectionCardComponent` y `GeneralSubsectionCardComponent`; `RoadmapStore.addZone` | «+» de marco/árbol precarga padre; misma regla de profundidad, ownership y endpoint. |
+| Editar nombre/descripción | Menú ⋮ de las tarjetas; `SectionFormModalComponent` o `SectionEditorDrawerComponent`; `RoadmapStore.editSection` | Kebab de marco e inspector/árbol. Preservar XP/bioma y demás campos; no ofrecer edición de entidades `managedInCourses` cuyo sync impone General. |
+| Eliminar sección/subsección | Menú ⋮ + `SectionDeleteConfirmModalComponent`; `SectionsService.deleteSection` o `RoadmapStore.removeSection` | Kebab/árbol con confirmación, estado ocupado, anuncio y rechazo backend visible. |
+| Ordenar secciones | Drag CDK y Alt+↑/↓ en `CohortGeneralPageComponent`; `SectionsService.reorderSections` o `RoadmapStore.reorderSections` | Drag de marco y «Subir/Bajar» accesible en inspector/árbol; solo entre hermanos. |
+| Expandir/colapsar todo | Toolbar de `CohortGeneralPageComponent`; disclosure de tarjeta | Acciones de árbol «Expandir todo / Plegar todo», más colapso individual del marco (R7). |
+| Visibilidad | Menú de tarjeta + `CohortGeneralPageComponent.toggleSectionVisibility`; Courses `SectionsService.updateSection`, OWN `RoadmapStore.updateSectionVisibility` | Kebab de marco/inspector; chip actualizado tras respuesta y lectura, ownership gobierna disponibilidad. |
+| Tema/bioma | `RoadmapUnitSettingsComponent` en `GeneralSectionCardComponent`; `RoadmapStore` | Selector en header del marco/inspector, reutilizando widget o extrayéndolo, sin duplicar opciones/persistencia. |
+| Añadir contenido/material teórico | Menú `section-content-actions.ts`; `SectionResourcesContainerComponent.addContent`; `RoadmapSectionNodesComponent.addContent`; `EntityEditorDialogComponent` y servicios Courses | Picker único → contenido teórico → mismo drawer/tabs; conservar material existente, carga/publicación/vínculo y tipos archivo/enlace/video/texto-Markdown. |
+| Añadir desafío práctico/teórico; «Lista completa» o «Crear desafío nuevo» | Menú de contenido, `RoadmapSectionNodesComponent.addChallenge`, `EntityEditorDialogComponent`, `ChallengePoolStore`/`ChallengesService` | Picker de tipo único y editor compartido; mantener catálogo, permisos/authoring, retorno y borrador. Nombre de nodo separado del título del desafío. |
+| Editar datos/configuración/reglas | Menú ⋮ de fila; `EntityEditorDialogComponent` y `RoadmapStore.editActivity` + `saveRules` | Kebab del nodo, inspector y árbol; pestañas Información/Configuración/Reglas con validación y campos completos de General. |
+| Borrar nodo o material no vinculado | Menú ⋮ y confirmación de `RoadmapSectionNodesComponent`; `RoadmapStore.removeActivity` o `CourseContentService.deleteContent` | Menú/inspector/árbol con confirmación y diferenciación «quitar nodo» vs borrar material; rollback/relectura. |
+| Reordenar nodos dentro de sección | Drag, flechas/atajos de `RoadmapSectionNodesComponent`; `RoadmapStore.moveActivityTo` / reorder | Drag dentro del marco + acciones «Subir/Bajar» del inspector/árbol; conservar reglas. |
+| Mover nodo entre secciones | Acción propia del grafo: `moveActivityToSection` (no es acción equivalente en General) | Mantener selector y drop actuales con R6/R11; presentarlo también en inspector/árbol. |
+| Reglas de sección/subsección | `SectionEditorDrawerComponent` o `RoadmapSectionNodesComponent.openUnitRules` → `RulesWizardComponent`; `saveUnitRules` | Reglas del marco/inspector y puertos; fuentes SECTION/NODE elegibles y AND/OR. |
+| Reglas de nodo / conexiones | `EntityEditorDialogComponent`, `RulesWizardComponent`, `PrerequisitePickerComponent`; `RoadmapStore.saveRules` | Inspector, árbol, puertos/canvas, lista accesible «Conexiones» y quitar requisito. |
+| Abrir/leer recursos y desafíos | `SectionResourcesContainerComponent` + `RoadmapSectionNodesComponent` | Mantener enlaces y vista de lectura en el inspector/árbol; estudiante nunca recibe acciones de edición. |
+
+El grafo ofrece capacidades editables de General donde son propias del roadmap. Publicación o borrado de material, authoring externo de desafíos, navegación y lectura siguen usando servicios/rutas existentes, no copias de negocio.
+
+## R15. Entrada única y editor de entidad compartido
+
+- R15.1 «Crear nodo» MUST abrir primero «¿Qué nodo querés crear?» con contenido teórico, desafío práctico, desafío teórico, subsección y sección, filtrado por propiedad/permisos/contexto.
+- R15.2 Luego, contenido/desafío MUST abrir el mismo editor de General (`EntityEditorDialogComponent` o extracción compatible), con tabs Información, Configuración y Reglas y todos sus campos/validaciones. Sección/subsección usa el formulario de sección y reglas que correspondan.
+- R15.3 Debe haber un solo flujo visual de alta; barra, `+` contextual y creación desde vacío llaman al mismo flujo. Un contexto solo precarga sección, requisito, posición y tipo si ya fue elegido. Cancelar no escribe.
+- R15.4 Se prefiere reutilizar `EntityEditorDialogComponent` antes que duplicar configuración en el `NodeCreationWizardComponent`; este puede actuar de wrapper/picker o migrar callers gradualmente. Si su contrato actual no sirve en el panel, extraer formulario presentacional compartido sin crear un segundo editor.
+- R15.5 Conservar «Lista completa» / «Crear desafío nuevo», selección práctico/teórico, authoring y retorno del borrador; contenido conserva elección, publicación y vínculo de material.
+
+#### Escenario: crear contenido desde un marco
+- GIVEN el profesor está en un marco elegible
+- WHEN elige «Crear nodo» → «Contenido teórico»
+- THEN se abre el drawer de General con Información/Configuración/Reglas y sección precargada; cancelar no llama al backend.
+
+#### Escenario: crear desafío y volver del authoring
+- GIVEN se eligió «Desafío práctico» desde un nodo o marco
+- WHEN se elige «Crear desafío nuevo» y vuelve del authoring
+- THEN se conservan borrador, nombre, configuración y sección, y una sola confirmación crea el nodo.
+
+## R16. Paridad funcional contextual con General
+
+- R16.1 El grafo MUST exponer todas las acciones editables de la tabla anterior mediante `+`/kebab del marco, menú contextual de nodo, inspector o árbol. Ninguna acción depende solo de hover/drag; incluye controles táctiles de R14.
+- R16.2 Paridad estructural: alta/edición/borrado confirmado/orden/visibilidad/tema/reglas de secciones y subsecciones. Paridad de nodos: alta de contenido/desafío, edición completa, borrado confirmado, orden interno, movimiento y reglas/conexiones.
+- R16.3 Ambos lugares usan store/adapters/servicios compartidos y respetan ownership Courses vs OWN; el front puede orientar, el back decide.
+- R16.4 Operaciones no propias del grafo (publicar material, abrir recursos, authoring de desafíos) mantienen sus componentes/rutas actuales.
+- R16.5 Mutaciones se reflejan tras relectura; errores, confirmaciones, foco y anuncios cumplen R11/WCAG.
+
+#### Escenario: entidad Courses-managed
+- GIVEN una sección tiene `courseSectionId` y es `managedInCourses`
+- WHEN se abre el menú de marco del roadmap principal
+- THEN no ofrece renombrar/borrar lo que gobierna General/sync; indica la vista propietaria y sí permite reglas/conexiones compatibles.
+
+#### Escenario: tema y edición conservan configuración
+- GIVEN una unidad OWN tiene nombre, XP y tema
+- WHEN se cambia el tema y luego el nombre
+- THEN cada cambio se guarda sin restablecer XP/tema, y el canvas coincide con la lectura del back.
+
+#### Escenario: edición completa de desafío
+- GIVEN General permite editar datos/configuración/reglas de un desafío
+- WHEN se edita ese nodo desde menú o inspector del grafo
+- THEN aparecen los mismos campos y validaciones; cancelar no cambia el grafo y guardar actualiza lista, inspector y canvas.
+
+## R17. Respuesta, layout y foco tras guardar
+
+- R17.1 Capturar la respuesta de creación/edición (id, `sortOrder`, owner y campos normalizados disponibles); la lectura fresca del roadmap sigue siendo la proyección confirmada del canvas.
+- R17.2 Tras 2xx, releer owner/roadmap, actualizar nodos, relaciones y reglas; ubicar el nuevo elemento dentro del marco destino usando su orden confirmado y seleccionar/centrar/enfocar. No insertar entidad ni regla de modo optimista.
+- R17.3 Edición conserva selección/layout; movimiento usa owner confirmado. Ante fallo se conserva estado confirmado y no se enfoca una entidad inexistente.
+- R17.4 Crear nodo + guardar requisito sigue siendo no transaccional: ante fallo del segundo paso se conserva el nodo, se informa error parcial y se reintenta solo regla, sin duplicar alta (R11.4).
+- R17.5 El anuncio «Guardado» espera el fin de relectura; anunciar nombre, sección y resultado. Si la persona inició otra acción durante el request, no robarle foco.
+
+#### Escenario: alta con id y orden normalizado
+- GIVEN el backend acepta alta y responde con id/`sortOrder`
+- WHEN finaliza la recarga
+- THEN el nodo aparece en la sección y posición confirmadas con relaciones/reglas leídas, queda seleccionado/centrado y solo entonces se anuncia éxito.
+
+#### Escenario: alta confirmada con regla rechazada
+- GIVEN alta 2xx y PATCH posterior de regla rechazado
+- WHEN termina la secuencia
+- THEN queda el nodo confirmado sin flecha, con mensaje parcial y acción de reintento que no repite alta.
+
+## R18. Requisitos de varias fuentes, también entre secciones
+
+- R18.1 Permitir conectar varias fuentes al mismo destino (nodo o sección), de unidades/subsecciones distintas, además de reglas sección→sección; ofrecer multiselección + «Conectar a…» y selector de fuentes en el owner como alternativa al drag.
+- R18.2 AND significa «todos»; OR «cualquiera». El usuario ve/elige operador de grupo antes de guardar. Guardar un owner reemplaza su regla completa y una lectura confirma cada conexión.
+- R18.3 Un gesto multifuente se serializa como un único árbol/regla completo por owner; no hacer PATCH por fuente en paralelo. Quitar/editar una fuente preserva otros grupos, operadores y XP mínimo.
+- R18.4 Ciclos, duplicados, elegibilidad fuera de roadmap, referencias ocultas/eliminadas, contención (nodo dentro de sección destino o sus descendientes) y profundidad son preflight UX y validación final backend. Marco colapsado es destino sección, nunca se redirige a hijo.
+- R18.5 Multiselección, destino y operador se operan con teclado/táctil, foco y `aria-live`; no confirmar antes del 2xx y relectura.
+
+#### Escenario: varios nodos de diferentes unidades, AND
+- GIVEN A está en Unidad 1, B en una subsección y C en Unidad 2
+- WHEN se selecciona A y B y se conectan a C con «Todos (AND)»
+- THEN se envía una regla de C con ambos leaves; tras aceptación y lectura aparecen ambas flechas.
+
+#### Escenario: regla alternativa OR
+- GIVEN un owner puede desbloquearse al completar A o B
+- WHEN el profesor elige «Cualquiera (OR)» y guarda
+- THEN se persiste el grupo OR y General/alumno recibe la misma semántica.
+
+#### Escenario: sección con nodo y otra sección como requisito
+- GIVEN S no contiene A ni Unidad 1
+- WHEN se agrega A (NODE) y Unidad 1 (SECTION) como AND en S
+- THEN la llamada usa `PATCH /roadmap/sections/{S}/rules` con árbol `{rule}` y leaves tipadas; la UI solo confirma tras 2xx y lectura.
+
+#### Escenario: rechazo backend por ciclo o contención
+- GIVEN una fuente elegida causa ciclo o está dentro del owner sección
+- WHEN el backend rechaza después del preflight
+- THEN se restaura el árbol confirmado, se anuncia motivo, y se permite releer/reintentar.
+
+**Contrato observado:** `RuleGroup` ya expresa múltiples leaves y AND/OR; `RoadmapStore.saveRules` / `saveUnitRules` reemplazan la regla de un owner, y `HttpRoadmapAdapter` envía PATCH a `/nodes/{id}/rules` o `/sections/{id}/rules`, usando `{rule}` para árboles y leaves tipadas. El backend inspeccionado acepta NODE externo elegible en reglas de sección y valida subsecciones, ciclos y contención. Verificar la versión desplegada; no usar `/roadmaps/{id}/relations` para reglas de desbloqueo: DEC-018 y ese endpoint corresponden a relaciones tipadas, no al árbol AND/OR.
