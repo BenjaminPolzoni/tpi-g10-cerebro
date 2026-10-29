@@ -80,6 +80,8 @@ Base: `tpi-roadmap` `origin/develop` `efa19734`. Evidencia estática, no certifi
 
 **Migraciones:** `origin/develop` tiene V78 como máximo en `db/migration` y V47 en cada carpeta vendor. Antes de crear una migración volver a listar ambas carpetas y consultar PRs abiertos; no reutilizar ni bajar de la versión más alta. La incidencia V73–V78 de §5 es separada: una migración posterior no puede corregir retroactivamente un fallo que impide llegar a ella.
 
+**Cierre técnico (2026-10-29):** rama `BenjaminPolzoni/feature-graph-editor-iteration-2` publicada sin PR; commits `3a08b8c2`, `b924b3ac`, `0eb65a70`, `94305179`, `a51435e8`, `7672d338`. `./mvnw clean verify` terminó BUILD SUCCESS: 3598 tests, 0 fallos, 0 errores, 4 omitidos; Checkstyle, PMD y cobertura aprobados. El hook pre-push también ejecutó `mvn verify` exitosamente. Las primeras dos ejecuciones limpias tuvieron tests verdes pero fallaron respectivamente Checkstyle y PMD, corregidos en los commits indicados; aún quedan los smoke tests de despliegue y los casos de progreso extremo a extremo señalados arriba.
+
 ### UX pequeños ya mencionados
 
 - [x] **Implementación de título legible y lista de unidades alineada:** ya está en FE commit `eacc922ed fix(roadmap): improve section header and destination alignment` (`learning-map-canvas.component.{css,html}`, `node-creation-wizard.component.{css,ts}`). El título gana tamaño/espacio mínimo y el conteo de nivel deja de competir con él; la lista usa tokens y el conteo queda en `trailing`.
