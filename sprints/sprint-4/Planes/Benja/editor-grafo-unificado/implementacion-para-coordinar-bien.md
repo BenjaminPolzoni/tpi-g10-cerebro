@@ -53,7 +53,7 @@ Base: `tpi-roadmap` `origin/develop` `efa19734`. Evidencia estática, no certifi
   **Estado:** ya soportado; tests de alta válida y rollback HTTP en `0eb65a70`.
 
 - [x] **B-02 — Owner explícito en respuesta de nodo.** Los POST/PUT/PATCH/move de nodo responden `NodeResponse` (`dtos/GraphDtos.java:738`): incluyen `id` y `sort_order`, pero no `section_id`; el POST conoce owner por URL y move por request, aunque no confirma el owner en respuesta. Agregar `section_id` aditivo a respuestas de nodo, conservando campos actuales; ejemplo `{"data":{"id":"<uuid>","section_id":"<uuid>","sort_order":2}}`. 201 alta, 200 edición/movimiento; mantener 4xx actuales. Probar serialización, alta, movimiento y lectura, incluidos callers anteriores; sin migración prevista. Depende T-25; T-24 lo consume en movimiento.
-  **Estado:** implementado en `3a08b8c2` (lecturas Postgres y Neo4j incluidas); tests HTTP de create/update/patch/move/read.
+  **Estado:** implementado en `3a08b8c2` y ajuste de calidad `94305179` (lecturas Postgres y Neo4j incluidas); tests HTTP de create/update/patch/move/read.
 
 - [ ] **B-03 — Alta y orden de subsecciones: ya soportado en código.** `POST /courses/{courseId}/sections` o `/roadmaps/{roadmapId}/sections` acepta `parent_section_id`; `PATCH /sections/{id}` acepta `sort_order`; `GraphService.java:191-212,250-265,917-960` desplaza solo hermanas del mismo padre. Request `{"sort_order":2}`; respuesta 200 incluye `data.id`, `data.parent_section_id`, `data.sort_order`; alta 201. Probar HTTP con dos padres, raíces y zonas, y releer el orden; confirmar versión y smoke test en cada despliegue. Sin migración prevista. Depende T-23/T-25.
   **Estado:** ya soportado; test HTTP de orden por padre en `0eb65a70`; smoke test desplegado pendiente.
