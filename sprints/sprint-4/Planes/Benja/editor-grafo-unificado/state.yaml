@@ -15,7 +15,7 @@ tasks_review: done
 apply:
   branch: BenjaminPolzoni/fix-vista-y-uso-del-roadmap-en-el-mapa-de-nodos
   orca_run: run_4114653e103a
-  done: [T-01a, T-01b, T-01c, T-02, T-03a, T-03b, T-04, T-05a, T-05b, T-05c, T-05d, T-06a, T-06b, T-06c, T-06d, T-14, T-15, T-07, T-08, T-09, T-10, T-11, T-12, T-13, T-16, T-17, T-18, T-19]
+  done: [T-01a, T-01b, T-01c, T-02, T-03a, T-03b, T-04, T-05a, T-05b, T-05c, T-05d, T-06a, T-06b, T-06c, T-06d, T-14, T-15, T-07, T-08, T-09, T-10, T-11, T-12, T-13, T-16, T-17, T-18, T-19, T-20]
   reuse: a995d077b  # ver reutilizable-de-course-map-page.md
   extra: ["4c8e9f304 fallback de bloqueo de unidad con hojas NODE (unlock-rules)", "e2280761a requisito contextual persistido en el borrador del asistente"]
   known_regressions:
