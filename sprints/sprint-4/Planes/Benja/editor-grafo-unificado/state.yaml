@@ -22,8 +22,8 @@ apply:
   known_regressions:
     - "(resuelta en f73c1864c) onAddNode navegaba a /map"
 iteration_2:
-  phase: pending
-  status: proposed
+  phase: apply
+  status: in-progress
   updated: 2026-10-29
   artifacts:
     proposal: proposal.md#iteración-2
@@ -31,4 +31,7 @@ iteration_2:
     design: design.md#iteración-2
     tasks: tasks.md#iteración-2
     backend_gaps: implementacion-para-coordinar-bien.md#6
-  pending: [T-22, T-23, T-24, T-25, T-26, T-27, T-28]
+  done: [T-22]
+  commits: [3c5a3c1aa, 5174b7201]
+  pending: [T-23, T-24, T-25, T-26, T-27, T-28]
+  verification: "T-22 suite and visual checks deferred to T-28"
