@@ -96,3 +96,15 @@ Tabla `roadmap_edge_route`:
 - Persistir las flechas agrupadas de regiones ocultas.
 - Zoom y desplazamiento del canvas (siguen siendo estado de la vista).
 - Rutas para el mapa 3D.
+
+## 9. Decisiones acordadas para el MVP (2026-10-30)
+
+- Layout compartido por roadmap, guardado completo mediante `GET`, `PUT` y `DELETE /roadmaps/{roadmapId}/layout`. Sin endpoints individuales en el MVP.
+- Documento con `regions` (desplazamientos `regionId`, `offsetX`, `offsetY`) y `edges` (clave canónica y campos estructurados). Las subsecciones y nodos heredan el movimiento de su padre en el front.
+- Identidad: `REQUIRES:{source}->{target}` para nodos; si hay sección, agregar `:{sourceKind}->{targetKind}`. Informativas: `{TIPO}:{relationId}`. Cada clave debe identificar una sola flecha; el front debe deduplicar dependencias repetidas y el back rechazar claves duplicadas e incoherentes.
+- Una fila `roadmap_layout` por roadmap: versión, auditoría y documento como texto, compatible con PostgreSQL y H2. Escrituras atómicas con `If-Match` obligatorio; `412` si está desactualizado, `428` si falta. GET y PUT devuelven ETag fuerte; DELETE restablece con 204.
+- La vista del alumno aplica los filtros existentes de matrícula, comisión y visibilidad; el editor usa la política de edición del curso. `Cache-Control: private`; `Vary` debe reflejar los encabezados reales de identidad. Los ETag fuertes de vistas filtradas deben distinguir representaciones, sin confundirlos con el ETag de edición.
+- Al leer se ocultan rutas de relaciones o reglas ya no vigentes. Restaurar una relación recupera su ruta salvo que se haya guardado un documento sin ella entre tanto. En escritura se rechazan referencias no vigentes, regiones ajenas o duplicadas, y claves inválidas.
+- Al clonar el roadmap con estructura se copia el layout remapeando los identificadores de secciones, nodos y relaciones.
+- Validar lados, números finitos, tramos ortogonales y límites de tamaño acordados (propuesta: 24 waypoints por flecha y 500 flechas). Error de validación 422 `ROADMAP_LAYOUT_INVALID`, con detalle; además 403, 404, 412 y 428.
+- El back conserva `basis`, `start`, `end` y `waypoints` como datos visuales; el front descarta rutas con `basis` desactualizado. Las flechas agrupadas y zoom quedan fuera de alcance.
