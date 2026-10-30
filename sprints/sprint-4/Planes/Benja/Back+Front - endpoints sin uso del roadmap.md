@@ -2,7 +2,7 @@
 tags: [tpi, g10, sprint-4, plan, back, front, roadmap, auditoria, deuda]
 fecha: 2026-10-28
 autor: Benjamin Polzoni
-estado: borrador
+estado: en-progreso (BE PR #376)
 repo: 2026-P4-BE/tpi-roadmap, 2026-PIV-TPI-FE
 base: BE origin/develop 90d305bd (2026-10-28)
 antecedentes: AUDITORIA-develop-2026-10-28 (pestaña «Endpoints sin uso», servicio tpi-roadmap), HU-13, HU-41, HU-65, #310, #332, #349
@@ -11,7 +11,7 @@ antecedentes: AUDITORIA-develop-2026-10-28 (pestaña «Endpoints sin uso», serv
 # Back+Front · Endpoints sin uso del roadmap
 
 > [!info] Alcance
-> La auditoría del 2026-10-28 marca **9 endpoints de `tpi-roadmap` como «Huérfano»**: ningún front, micro, desktop ni infra los llama. En este plan se explica de dónde salió cada uno y se decide si **se borra**, **se conecta** o **se mantiene**. Es una propuesta y todavía no hay código.
+> La auditoría del 2026-10-28 marca **9 endpoints de `tpi-roadmap` como «Huérfano»**: ningún front, micro, desktop ni infra los llama. En este plan se explica de dónde salió cada uno y se decide si **se borra**, **se conecta** o **se mantiene**. El backend ya fue implementado y enviado en la PR [#376](https://github.com/2026-P4-BE/tpi-roadmap/pull/376). Restan las conexiones de Frontend.
 
 ## 1. Qué hay hoy, endpoint por endpoint
 
