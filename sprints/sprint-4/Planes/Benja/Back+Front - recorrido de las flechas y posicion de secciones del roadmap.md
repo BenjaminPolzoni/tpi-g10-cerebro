@@ -111,7 +111,7 @@ Tabla `roadmap_edge_route`:
 
 ### Inicio de implementación en backend
 
-- Creada la base de persistencia y revisión del documento (`V73__roadmap_layout.sql`, entidad, repositorio y `RoadmapLayoutStore`). El lock del roadmap serializa también la primera escritura; restablecer conserva la fila y avanza la revisión para impedir reutilizar una versión anterior.
+- Creada la base de persistencia y revisión del documento (`V86__roadmap_layout.sql`, entidad, repositorio y `RoadmapLayoutStore`). El lock del roadmap serializa también la primera escritura; restablecer conserva la fila y avanza la revisión para impedir reutilizar una versión anterior.
 - Avance posterior: implementados GET/PUT/DELETE, validaciones del documento y del grafo (incluye reglas mixtas), filtro de alumno, ETag por representación y clonación con IDs remapeados. Los editores siguen la autorización existente del grafo: ADMIN, GESTOR y profesor titular; el alumno solo lee su vista. Falta completar la verificación de integración y cobertura antes de dar el MVP por terminado.
 - Pendiente comprobar la deduplicación de `REQUIRES` del front y revisar el número de migración contra develop y PRs abiertos antes de integrar.
 
@@ -120,4 +120,9 @@ Tabla `roadmap_edge_route`:
 Verificado en el código del front (`domain/rule-tree.ts:120` y `domain/graph-editor-projection.ts:221-278`): `ruleLeavesTyped` junta las hojas de la regla de cada nodo o sección en un `Map` por `{tipo}:{id}`, así que una dependencia repetida dentro de un árbol de reglas se dibuja **una sola vez**. Como cada nodo o sección tiene una única regla, la clave `REQUIRES:{source}->{target}[:{sourceKind}->{targetKind}]` identifica una sola flecha dibujada. Las informativas usan `{TIPO}:{relationId}`, único por relación. Quedan fuera de la persistencia las flechas agrupadas de regiones ocultas, cuya clave es del trazo y no de la relación. El bloqueo de «Pendiente comprobar la deduplicación» queda resuelto desde el lado del front.
 
 Aclaración para el back: la clave que usa hoy el front es interna (`REQUIRES:a->b`). Si el documento incluye además los campos estructurados (`kind`, `sourceType`, `sourceId`, `targetType`, `targetId`, `relationId`), el back puede validar unicidad con esa tupla y tratar `key` solo como redundante; el front la reconstruye al leer.
-- Verificación realizada: 29 tests dirigidos, incluidos los de clonación y dos escrituras concurrentes con el mismo ETag sobre H2; pasaron. También pasó el chequeo de calidad con `mvn -DskipTests -Djacoco.skip=true verify`. Pendientes: suite completa `mvn test` y `mvn verify`, pruebas con PostgreSQL/gateway/front, y comprobar V73 contra develop y PRs abiertos.
+- Verificación realizada: 29 tests dirigidos, incluidos los de clonación y dos escrituras concurrentes con el mismo ETag sobre H2; pasaron. También pasó el chequeo de calidad con `mvn -DskipTests -Djacoco.skip=true verify`. Pendientes: suite completa `mvn test` y `mvn verify`, pruebas con PostgreSQL/gateway/front, y comprobar V86 contra PRs abiertos antes de integrar.
+
+### Adaptación antes de abrir la PR
+
+- Se integró `origin/develop` y se renumeró la migración a V86; el layout hereda el aislamiento de organización del roadmap padre y los endpoints usan los permisos existentes `roadmap.graph.read` y `roadmap.graph.write`. Se rechazan identidades de servicio: el MVP es solo para personas.
+- El contrato devuelve el documento sin el sobre de API para mantener estable la representación y el ETag; se introdujo una exclusión explícita del envoltorio para estos endpoints.
