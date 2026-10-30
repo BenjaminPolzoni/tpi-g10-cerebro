@@ -108,3 +108,15 @@ Tabla `roadmap_edge_route`:
 - Al clonar el roadmap con estructura se copia el layout remapeando los identificadores de secciones, nodos y relaciones.
 - Validar lados, números finitos, tramos ortogonales y límites de tamaño acordados (propuesta: 24 waypoints por flecha y 500 flechas). Error de validación 422 `ROADMAP_LAYOUT_INVALID`, con detalle; además 403, 404, 412 y 428.
 - El back conserva `basis`, `start`, `end` y `waypoints` como datos visuales; el front descarta rutas con `basis` desactualizado. Las flechas agrupadas y zoom quedan fuera de alcance.
+
+### Inicio de implementación en backend
+
+- Creada la base de persistencia y revisión del documento (`V73__roadmap_layout.sql`, entidad, repositorio y `RoadmapLayoutStore`). El lock del roadmap serializa también la primera escritura; restablecer conserva la fila y avanza la revisión para impedir reutilizar una versión anterior.
+- Todavía no están expuestos los endpoints ni implementadas la validación, el filtrado o la clonación. La etiqueta interna del store identifica la revisión del documento almacenado; la API debe calcular sus ETag teniendo en cuenta la representación filtrada y cómo cambia cuando cambia el grafo.
+- Pendiente comprobar la deduplicación de `REQUIRES` del front y revisar el número de migración contra develop y PRs abiertos antes de integrar.
+
+### Confirmación del front: deduplicación de REQUIRES (2026-10-30)
+
+Verificado en el código del front (`domain/rule-tree.ts:120` y `domain/graph-editor-projection.ts:221-278`): `ruleLeavesTyped` junta las hojas de la regla de cada nodo o sección en un `Map` por `{tipo}:{id}`, así que una dependencia repetida dentro de un árbol de reglas se dibuja **una sola vez**. Como cada nodo o sección tiene una única regla, la clave `REQUIRES:{source}->{target}[:{sourceKind}->{targetKind}]` identifica una sola flecha dibujada. Las informativas usan `{TIPO}:{relationId}`, único por relación. Quedan fuera de la persistencia las flechas agrupadas de regiones ocultas, cuya clave es del trazo y no de la relación. El bloqueo de «Pendiente comprobar la deduplicación» queda resuelto desde el lado del front.
+
+Aclaración para el back: la clave que usa hoy el front es interna (`REQUIRES:a->b`). Si el documento incluye además los campos estructurados (`kind`, `sourceType`, `sourceId`, `targetType`, `targetId`, `relationId`), el back puede validar unicidad con esa tupla y tratar `key` solo como redundante; el front la reconstruye al leer.
