@@ -112,7 +112,7 @@ Tabla `roadmap_edge_route`:
 ### Inicio de implementación en backend
 
 - Creada la base de persistencia y revisión del documento (`V73__roadmap_layout.sql`, entidad, repositorio y `RoadmapLayoutStore`). El lock del roadmap serializa también la primera escritura; restablecer conserva la fila y avanza la revisión para impedir reutilizar una versión anterior.
-- Todavía no están expuestos los endpoints ni implementadas la validación, el filtrado o la clonación. La etiqueta interna del store identifica la revisión del documento almacenado; la API debe calcular sus ETag teniendo en cuenta la representación filtrada y cómo cambia cuando cambia el grafo.
+- Avance posterior: implementados GET/PUT/DELETE, validaciones del documento y del grafo (incluye reglas mixtas), filtro de alumno, ETag por representación y clonación con IDs remapeados. Los editores siguen la autorización existente del grafo: ADMIN, GESTOR y profesor titular; el alumno solo lee su vista. Falta completar la verificación de integración y cobertura antes de dar el MVP por terminado.
 - Pendiente comprobar la deduplicación de `REQUIRES` del front y revisar el número de migración contra develop y PRs abiertos antes de integrar.
 
 ### Confirmación del front: deduplicación de REQUIRES (2026-10-30)
