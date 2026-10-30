@@ -127,3 +127,15 @@ Aclaración para el back: la clave que usa hoy el front es interna (`REQUIRES:a-
 - Se integró `origin/develop` y se renumeró la migración a V86; el layout hereda el aislamiento de organización del roadmap padre y los endpoints usan los permisos existentes `roadmap.graph.read` y `roadmap.graph.write`. Se rechazan identidades de servicio: el MVP es solo para personas.
 - El contrato devuelve el documento sin el sobre de API para mantener estable la representación y el ETag; se introdujo una exclusión explícita del envoltorio para estos endpoints.
 - PR backend abierta contra `develop`: [tpi-roadmap #374](https://github.com/2026-P4-BE/tpi-roadmap/pull/374). El hook pre-push ejecutó `mvn verify`: 4395 pruebas, 0 fallos, 4 omitidas; cobertura, Checkstyle y PMD aprobados. Se aislaron con rollback dos fixtures globales de insignias que contaminaban el catálogo durante la suite. Los checks de GitHub están pendientes y aún falta validar la integración real con front/gateway y PostgreSQL.
+
+### Cambio de contrato: rutas libres (2026-10-30)
+
+Decisión de producto: una ruta que el docente fijó a mano **no se descarta nunca** porque cambie la geometría (reordenar nodos, mover una sección, cambiar tamaños). Solo se mueve la punta conectada al elemento que cambió; los puntos intermedios (`waypoints`) quedan como están, y la ruta vuelve a ser automática solo con «Restablecer recorrido» o «Restablecer vista».
+
+Por eso el documento **deja de llevar `start`, `end` y `basis`** (coordenadas absolutas de los extremos, que quedaban viejas) y pasa a llevar, por flecha:
+
+- `sourceAnchor` y `targetAnchor`: `{ side: "left" | "right" | "top" | "bottom", t: número entre 0 y 1 }`, donde `t` es la posición a lo largo de ese lado (0,5 es el medio; el front lo limita a 0,1–0,9).
+- `waypoints`: sin cambios, coordenadas absolutas del mundo del canvas.
+- `sourceSide` y `targetSide` desaparecen del documento: el lado vive dentro de cada ancla.
+
+El back no debe interpretar la geometría ni invalidar rutas por ella. Sigue validando números finitos, tramos ortogonales entre waypoints, lados válidos, `t` en [0, 1] y los límites de tamaño. El front sigue leyendo el formato anterior de `localStorage` (con `start`/`end`) y lo convierte. Este cambio sustituye lo dicho antes sobre descartar rutas con `basis` desactualizado.
