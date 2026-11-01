@@ -5,13 +5,23 @@ info:
   description: |
     Eventos publicados y consumidos por el microservicio Roadmap (Tema 10), conforme al estándar
     `contratos-kafka` (v8 en adelante, hoy v12) del Skill Hub. Verificado contra el código de
-    `tpi-roadmap` (rama `develop`, 2026-10-27, DT-18): el contrato describe lo que el código emite y
+    `tpi-roadmap` (rama `develop` con #294, 2026-10-28, DT-18): el contrato describe lo que el código emite y
     lee, no lo que se supone.
 
     Reglas de integración:
     - Todo mensaje viaja en texto plano JSON, en wire **snake_case** (sobre y payload), con el sobre
       canónico de 6 campos obligatorios: `event_id`, `event_type`, `event_version`, `timestamp`,
-      `producer`, `payload`.
+      `producer`, `payload`, más `organization_id` (UUID) cuando el evento tiene organización. Los
+      eventos globales (`GLOBAL_CONFIGURATION_CHANGED`, `PARAMETER_CATALOG_DECLARED`,
+      `PARAMETER_DEFINITION_CREATED`) no lo llevan.
+    - `organization_id` viaja también como header Kafka `organization_id`. `develop` (desde #294) lo
+      publica siempre en los eventos del outbox, en el JSON y en el header. La versión en `main`
+      (release 3.0.0) todavía no lo incluye: hasta el próximo release, los eventos de una instancia
+      desplegada desde `main` salen sin `organization_id` y los consumidores deben aceptar las dos formas.
+    - `timestamp` es el momento en que Roadmap **encoló** el evento (`Instant.now()` en
+      `OutboxService.enqueue`), no necesariamente el del hecho. Ver `occurred_at` en
+      `ROADMAP_MANDATORY_AVAILABILITY_CHANGED`.
+    - Los duplicados (reintentos del poller y redrive manual) llevan siempre el mismo `event_id`.
     - `event_version` es estrictamente el entero `1` (ausente, decimal o texto va a la DLT).
     - Un mensaje con el sobre en camelCase (`eventId`, `eventType`, ...) se rechaza y va a la DLT:
       un solo nombre por campo, sin alias (DEC-001).
@@ -27,6 +37,8 @@ info:
       existe en el bus; sus payloads siguen en camelCase en el código (ver el canal más abajo).
     - `LIFE_CREDITED` / `LIFE_DEBITED` de Accounting: el código acepta además los nombres camelCase como
       alias de lectura (`@JsonAlias`), excepción documentada en DEC-001 hasta `tpi-accounting#227`.
+    - `CHALLENGE_REVERSED` de `challenges.events` se ignora a propósito: es un pedido que Accounting todavía
+      puede rechazar. La XP se descuenta con su respuesta en `accounting.events` (#391).
 
 servers:
   dev:
@@ -43,12 +55,17 @@ channels:
     description: |
       Canal del dominio Desafíos. Roadmap filtra por `producer == "tema-03-challenges-service"`
       (el topic lo comparte Tema 05) y descarta los demás. Key del mensaje: `id_user`.
+      Todo evento de este canal necesita `organization_id`, en el JSON o en el header Kafka del mismo nombre;
+      si no viene, el consumidor lo reintenta (3 veces, 2 s) y termina en la DLT del canal. Si el JSON y el
+      header traen valores distintos, o el header no es un UUID, va directo a la DLT.
     publish:
       summary: Consumo del cierre de intentos del Motor de Desafíos y de la baja de desafíos.
       operationId: consumeChallengeEvents
       bindings:
         kafka:
-          groupId: tema-10-roadmap-service-group
+          groupId:
+            type: string
+            enum: [tema-10-roadmap-service-group]
       message:
         oneOf:
           - $ref: '#/components/messages/ChallengeCompletedMessage'
@@ -66,7 +83,9 @@ channels:
       operationId: consumeChallengeResults
       bindings:
         kafka:
-          groupId: tema-10-roadmap-service-group
+          groupId:
+            type: string
+            enum: [tema-10-roadmap-service-group]
       message:
         oneOf:
           - $ref: '#/components/messages/LegacyChallengeCompletedMessage'
@@ -75,25 +94,38 @@ channels:
           - $ref: '#/components/messages/AttemptCanceledMessage'
 
   accounting.events:
-    description: Canal del dominio Contabilidad (Tema 08). Key del mensaje según `accounting-service-kafka-contract`.
+    description: |
+      Canal del dominio Contabilidad (Tema 08). Key del mensaje según `accounting-service-kafka-contract`.
+      Todo evento de este canal necesita `organization_id`, en el JSON o en el header Kafka del mismo nombre;
+      si no viene, el consumidor lo reintenta (3 veces, 2 s) y termina en la DLT del canal. Si el JSON y el
+      header traen valores distintos, o el header no es un UUID, va directo a la DLT.
     publish:
-      summary: Consumo de movimientos de vidas para proyectar la recuperación y otorgar la insignia.
+      summary: Consumo de movimientos de vidas y de las respuestas a la reversión de un intento.
       operationId: consumeAccountingEvents
       bindings:
         kafka:
-          groupId: tema-10-roadmap-service-group
+          groupId:
+            type: string
+            enum: [tema-10-roadmap-service-group]
       message:
         oneOf:
           - $ref: '#/components/messages/LifeMovementMessage'
+          - $ref: '#/components/messages/LiquidationReversalAnswerMessage'
 
   courses.events:
-    description: Canal del dominio Cursos (Tema 02).
+    description: |
+      Canal del dominio Cursos (Tema 02).
+      Todo evento de este canal necesita `organization_id`, en el JSON o en el header Kafka del mismo nombre;
+      si no viene, el consumidor lo reintenta (3 veces, 2 s) y termina en la DLT del canal. Si el JSON y el
+      header traen valores distintos, o el header no es un UUID, va directo a la DLT.
     publish:
       summary: Consumo de eventos del ciclo de vida de estudiantes y cohortes.
       operationId: consumeCoursesLifecycleEvents
       bindings:
         kafka:
-          groupId: tema-10-roadmap-service-group
+          groupId:
+            type: string
+            enum: [tema-10-roadmap-service-group]
       message:
         oneOf:
           - $ref: '#/components/messages/StudentEnrolledMessage'
@@ -105,12 +137,16 @@ channels:
       Canal del dominio Administración (Tema 12). Roadmap lo lee con dos listeners:
       `ParRefreshListener` (refresca la escala de niveles PAR-09) y `DynamicParameterListener`
       (grupo propio `tema-10-roadmap-service-parameter-catalog`; solo productor `tema-12-backoffice-service`).
+      Los eventos de este canal que Roadmap lee (`GLOBAL_CONFIGURATION_CHANGED`,
+      `PARAMETER_DEFINITION_CREATED`) son globales: no exigen `organization_id`.
     publish:
       summary: Consumo de cambios de configuración global y de definición de parámetros.
       operationId: consumeAdministrationEvents
       bindings:
         kafka:
-          groupId: tema-10-roadmap-service-group
+          groupId:
+            type: string
+            enum: [tema-10-roadmap-service-group]
       message:
         oneOf:
           - $ref: '#/components/messages/GlobalConfigurationChangedMessage'
@@ -120,6 +156,9 @@ channels:
     description: |
       Canal del dominio Roadmap (Tema 10). DLT: `roadmap.events.DLT`. Key del mensaje: `student_id`
       (excepto `PARAMETER_CATALOG_DECLARED`, key `T10_ROADMAP`). Publicación mediante Transactional Outbox.
+      Los eventos del outbox llevan el header Kafka `organization_id` (y `traceparent` / `X-Request-Id`
+      cuando el hecho los tenía). `PARAMETER_CATALOG_DECLARED` es global: no lleva `student_id` ni
+      `organization_id` y se publica directo al arrancar, sin outbox.
     subscribe:
       summary: Publicación de eventos de progreso en el grafo y disponibilidad de desafíos (Outbox).
       operationId: publishRoadmapEvents
@@ -201,6 +240,12 @@ components:
       payload:
         $ref: '#/components/schemas/LifeMovementEnvelope'
 
+    LiquidationReversalAnswerMessage:
+      name: LiquidationReversalAnswerMessage
+      title: Respuesta a la reversión de un intento (LIQUIDATION_REVERSED / LIQUIDATION_REVERSAL_REJECTED)
+      payload:
+        $ref: '#/components/schemas/LiquidationReversalAnswerEnvelope'
+
     StudentEnrolledMessage:
       name: StudentEnrolledMessage
       title: Estudiante inscripto a cohorte
@@ -234,6 +279,8 @@ components:
     NodeCompletedMessage:
       name: NodeCompletedMessage
       title: Nodo del roadmap completado por estudiante
+      headers:
+        $ref: '#/components/schemas/OutboxMessageHeaders'
       payload:
         $ref: '#/components/schemas/NodeCompletedEnvelope'
       bindings:
@@ -245,6 +292,8 @@ components:
     NodeUnlockedMessage:
       name: NodeUnlockedMessage
       title: Nodo del roadmap desbloqueado para estudiante
+      headers:
+        $ref: '#/components/schemas/OutboxMessageHeaders'
       payload:
         $ref: '#/components/schemas/NodeUnlockedEnvelope'
       bindings:
@@ -256,6 +305,8 @@ components:
     BadgeAwardedMessage:
       name: BadgeAwardedMessage
       title: Insignia otorgada a estudiante (HU-21)
+      headers:
+        $ref: '#/components/schemas/OutboxMessageHeaders'
       payload:
         $ref: '#/components/schemas/BadgeAwardedEnvelope'
       bindings:
@@ -267,6 +318,8 @@ components:
     MandatoryAvailabilityChangedMessage:
       name: MandatoryAvailabilityChangedMessage
       title: Cambió la disponibilidad de desafíos obligatorios/opcionales (#252)
+      headers:
+        $ref: '#/components/schemas/OutboxMessageHeaders'
       payload:
         $ref: '#/components/schemas/MandatoryAvailabilityEnvelope'
       bindings:
@@ -288,6 +341,22 @@ components:
             enum: [T10_ROADMAP]
 
   schemas:
+    OutboxMessageHeaders:
+      type: object
+      description: Headers Kafka que `OutboxPoller` agrega a cada evento del outbox.
+      required: [organization_id]
+      properties:
+        organization_id:
+          type: string
+          format: uuid
+          description: Igual al campo `organization_id` del sobre.
+        traceparent:
+          type: string
+          description: W3C Trace Context del hecho, si había.
+        X-Request-Id:
+          type: string
+          description: Id de correlación del request que originó el hecho, si había.
+
     CanonicalEnvelope:
       type: object
       description: Sobre canónico de 6 campos obligatorios en snake_case (contratos-kafka v8+, §2).
@@ -314,10 +383,23 @@ components:
         timestamp:
           type: string
           format: date-time
-          description: Timestamp ISO-8601 UTC con offset obligatorio.
+          description: |
+            Timestamp ISO-8601 UTC con offset obligatorio. En los eventos de Roadmap sale como
+            `Instant.toString()` (p. ej. `2026-10-29T00:10:16.446930500Z`, con 0, 3, 6 o 9 dígitos de fracción) y
+            es el momento en que se encoló el evento (`Instant.now()` en `OutboxService.enqueue`): en `NODE_COMPLETED`, `NODE_UNLOCKED`
+            y `BADGE_AWARDED` coincide con el hecho porque se encolan en la misma transacción;
+            `ROADMAP_MANDATORY_AVAILABILITY_CHANGED` se encola después del commit y trae `occurred_at`.
+            En los eventos consumidos, el momento que fijó el productor.
         producer:
           type: string
           description: Identificador del microservicio emisor (ej. tema-10-roadmap-service).
+        organization_id:
+          type: string
+          format: uuid
+          description: |
+            Organización propietaria del evento. Opcional en el sobre: ausente en los eventos globales
+            (`GLOBAL_CONFIGURATION_CHANGED`, `PARAMETER_CATALOG_DECLARED`, `PARAMETER_DEFINITION_CREATED`) y en
+            los publicados por versiones de Roadmap anteriores a #294 (`main` 3.0.0).
         payload:
           type: object
           description: Cuerpo específico del evento según el event_type.
@@ -384,10 +466,15 @@ components:
       type: object
       required: [course_id, student_id, node_id]
       properties:
+        course_cohort_id:
+          type: string
+          format: uuid
+          description: Identificador de la cohorte, no del curso base. Los eventos previos a este campo no lo traen.
         course_id:
           type: string
           format: uuid
-          description: Identificador de la cohorte (course_cohort_id), no del curso base.
+          deprecated: true
+          description: Mismo valor que course_cohort_id. Se quita cuando los consumidores migren.
         student_id:
           type: string
           format: uuid
@@ -410,10 +497,15 @@ components:
       type: object
       required: [course_id, student_id, node_id]
       properties:
+        course_cohort_id:
+          type: string
+          format: uuid
+          description: Identificador de la cohorte. Los eventos previos a este campo no lo traen.
         course_id:
           type: string
           format: uuid
-          description: Identificador de la cohorte (course_cohort_id).
+          deprecated: true
+          description: Mismo valor que course_cohort_id. Se quita cuando los consumidores migren.
         student_id:
           type: string
           format: uuid
@@ -427,10 +519,15 @@ components:
       type: object
       required: [course_id, student_id, badge_id]
       properties:
+        course_cohort_id:
+          type: string
+          format: uuid
+          description: Identificador de la cohorte. Los eventos previos a este campo no lo traen.
         course_id:
           type: string
           format: uuid
-          description: Identificador de la cohorte (course_cohort_id).
+          deprecated: true
+          description: Mismo valor que course_cohort_id. Se quita cuando los consumidores migren.
         student_id:
           type: string
           format: uuid
@@ -443,7 +540,7 @@ components:
     MandatoryAvailabilityPayload:
       type: object
       description: |
-        Acá la cohorte viaja como `course_cohort_id` (no `course_id` como en NODE_*/BADGE_AWARDED).
+        La cohorte viaja solo como `course_cohort_id`: este evento nunca tuvo `course_id`.
         Se emite solo si algún contador cambia; deduplicado por (course_cohort_id, student_id).
       required:
         - student_id
@@ -570,6 +667,7 @@ components:
                 max_score: {type: integer, nullable: true}
                 target_experience: {type: integer, description: 'XP objetivo, en el mismo rango que el de un cierre.'}
                 required_minimums_met: {type: boolean, nullable: true}
+                minimums_waived: {type: boolean, nullable: true, description: 'Dispensa docente en esta revisión; true permite APPROVED con mínimos incumplidos.'}
                 closure_event_id: {type: string, format: uuid, nullable: true}
                 previous_result_revision: {type: integer, nullable: true}
                 source_revision: {type: integer, nullable: true}
@@ -710,6 +808,29 @@ components:
                 student_id: {type: string, format: uuid}
                 course_id: {type: string, format: uuid}
                 movement_type: {type: string}
+
+    LiquidationReversalAnswerEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/CanonicalEnvelope'
+        - type: object
+          properties:
+            event_type:
+              type: string
+              enum: [LIQUIDATION_REVERSED, LIQUIDATION_REVERSAL_REJECTED]
+            payload:
+              type: object
+              description: |
+                Descuenta la XP neta del intento una sola vez, por más respuestas que lleguen, con
+                `LIQUIDATION_REVERSED` o con `LIQUIDATION_REVERSAL_REJECTED` y `reason = NOTHING_TO_REVERSE`.
+                Cualquier otro rechazo no toca la XP. No se revocan el nodo, los desbloqueos ni las insignias.
+                Acepta además `studentId`, `courseId` y `attemptId` como alias de lectura (excepción de
+                DEC-001 hasta `tpi-accounting#227`). Un intento desconocido va a la DLT para conciliación.
+              required: [student_id, course_id, attempt_id]
+              properties:
+                student_id: {type: string, format: uuid}
+                course_id: {type: string, format: uuid}
+                attempt_id: {type: string, format: uuid, description: El `id_attempt` de Motor.}
+                reason: {type: string, description: Solo en `LIQUIDATION_REVERSAL_REJECTED`.}
 
     StudentEnrolledEnvelope:
       allOf:
