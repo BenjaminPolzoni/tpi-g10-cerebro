@@ -61,10 +61,12 @@ Permisos de hoy:
 - **Contexto y retorno:** el wizard trabaja con el roadmap y la selección actuales; contenido y desafío todavía abren el roadmap principal y las páginas no devuelven el nodo creado como `select`. Preservar también `group`, el destino de retorno y la selección.
 - **Permisos:** las páginas usan `facade.canWrite`; la membresía y `authorChallenges` actualmente pueden impedir el acceso o la escritura de Gestor/Admin. Separar la asignación de desafíos existentes de la creación de payloads.
 
+- **Decisión de preservación:** extraer el formulario exclusivo de sección a un componente presentacional, conservando bioma, XP, posición, prerrequisitos, textos y estilos al eliminar el wizard (aprobado por coordinación).
+
 ## Tareas
 - [ ] **T-01 Inventario antes de borrar** (memoria «reutilizar antes de borrar»). Listar qué hace el wizard que las pantallas no hacen: subida de contenido (`contentUploadRequested`), IA (`aiEnabled`), regla precargada, alta de sección desde el chooser, borradores de `NodeDraftStorage`. Lo que falte se porta a la pantalla, no se pierde.
-- [ ] **T-02 Query nueva en las pantallas.** `roadmapId` (mismo nombre que en la de subsección, hueco 10), `group`, `prerequisiteId`, `prerequisiteKind` y `type` (solo desafío) como `input()` en `ContentNodeCreatePageComponent` y `ChallengeNodeCreatePageComponent`. Abrir el roadmap pedido y precargar regla y tipo.
-- [ ] **T-03 Navegación desde la vista de nodos.** En `graph-editor-page`, `onCreateChosen`:
+- [x] **T-02 Query nueva en las pantallas.** `roadmapId` (mismo nombre que en la de subsección, hueco 10), `group`, `prerequisiteId`, `prerequisiteKind` y `type` (solo desafío) como `input()` en `ContentNodeCreatePageComponent` y `ChallengeNodeCreatePageComponent`. Abrir el roadmap pedido y precargar regla y tipo.
+- [x] **T-03 Navegación desde la vista de nodos.** En `graph-editor-page`, `onCreateChosen`:
   - `theory` → `content/new`.
   - `practical-challenge` / `theoretical-challenge` → `challenge/new?type=…`.
   - `subsection` → `subsection/new` (si la unidad no tiene sección de Courses, ver hueco 9).
