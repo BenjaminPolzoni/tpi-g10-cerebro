@@ -88,15 +88,15 @@ Entradas que el grafo le pasa al editar (`graph-editor-page.component.html` ~722
   - `ContentNodeCreatePage` lee `nodeId`, busca el nodo y le pasa al editor inline todas las entradas `initial*` que hoy le pasa el grafo, con `isNew=false`.
   - Al guardar, usa E-01.
   - Título «Editar nodo».
-- [ ] **E-03 Desafío en modo edición: carga.**
+- [x] **E-03 Desafío en modo edición: carga.**
   - Ruta `challenge/:nodeId/edit`.
   - `ChallengeNodeCreatePage` lee `nodeId` y precarga la fuente (`existing`) con el desafío vinculado, el tipo, el icono, el paso `course` completo y las reglas.
-- [ ] **E-04 Desafío en modo edición: pasos libres.** Todos los pasos abiertos, guardado desde cualquier paso, validación completa al guardar y salto al primer paso con error. `rules` y `content` editables: si cambian, se guarda también el desafío (decisión 1).
-- [ ] **E-05 Campos que le faltan a la página de desafío.** Sumar reintentos por nodo, roles de IA y regla combinada (`RuleGroup`) al paso `course`, copiando los controles del panel.
-- [ ] **E-06 Desafío en modo edición: guardar.** Arma el resultado de la edición y llama a E-01 (PUT). Confirmación de apagado con `GenericConfirmModal destructive`. Vuelve con `select=<nodeId>`.
-- [ ] **E-07 La vista de nodos navega.** Las acciones `edit` y `change` del menú del nodo llevan a `content/:id/edit` o a `challenge/:id/edit` según el tipo; `change` abre directamente en el paso `challenge`. Se borran `editingNodeId`, `saveNodeEdit`, `pendingTurnOff` y el `<app-entity-editor-dialog>` del grafo.
-- [ ] **E-08 La vista simple navega.** `editNode` lleva a las mismas rutas. Se borran `onSave` (la parte de edición) y su estado.
-- [ ] **E-09 Altas que quedan en el drawer.** Pasar a las pantallas las altas de la vista simple (recurso pendiente, `newNode`, `resumeDraft`) y el nodo de recuperación de `cohort-general-page`. Después borrar el modo `drawer` de `entity-editor-dialog` y su CSS.
+- [x] **E-04 Desafío en modo edición: pasos libres.** Todos los pasos abiertos, guardado desde cualquier paso, validación completa al guardar y salto al primer paso con error. `rules` y `content` editables: si cambian, se guarda también el desafío (decisión 1).
+- [x] **E-05 Campos que le faltan a la página de desafío.** Sumar reintentos por nodo, roles de IA y regla combinada (`RuleGroup`) al paso `course`, copiando los controles del panel.
+- [x] **E-06 Desafío en modo edición: guardar.** Arma el resultado de la edición y llama a E-01 (PUT). Confirmación de apagado con `GenericConfirmModal destructive`. Vuelve con `select=<nodeId>`.
+- [x] **E-07 La vista de nodos navega.** Las acciones `edit` y `change` del menú del nodo llevan a `content/:id/edit` o a `challenge/:id/edit` según el tipo; `change` abre directamente en el paso `challenge`. Se borran `editingNodeId`, `saveNodeEdit`, `pendingTurnOff` y el `<app-entity-editor-dialog>` del grafo.
+- [x] **E-08 La vista simple navega.** `editNode` lleva a las mismas rutas. Se borran `onSave` (la parte de edición) y su estado.
+- [x] **E-09 Altas que quedan en el drawer.** Pasar a las pantallas las altas de la vista simple (recurso pendiente, `newNode`, `resumeDraft`) y el nodo de recuperación de `cohort-general-page`. Después borrar el modo `drawer` de `entity-editor-dialog` y su CSS.
 - [ ] ~~E-10 Historial~~: fuera de alcance, espera a backend (decisión 3).
 - [ ] **E-11 Tests y verify** solo antes de la PR: specs de las pantallas en modo edición, del método del store, de la navegación de las dos vistas y de las rutas.
 
