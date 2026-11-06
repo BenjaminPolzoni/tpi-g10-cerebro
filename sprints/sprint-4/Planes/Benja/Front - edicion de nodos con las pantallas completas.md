@@ -115,6 +115,16 @@ Entradas que el grafo le pasa al editar (`graph-editor-page.component.html` ~722
   - En «Existente» el tipo se puede elegir y el buscador muestra desafíos de ese tipo. Al guardar, el nodo pasa a ese tipo.
   - Al editar, también se ofrece «Nuevo» (con `authorChallenges`): crea un desafío nuevo, de cualquier tipo, y lo vincula al nodo.
   - El orden del guardado al cambiar de desafío: primero el desafío nuevo, si corresponde; después el PUT del nodo, con su `type` y su `challengeId`. Los pasos que dependen del tipo (Reglas y Contenido) se ajustan al tipo nuevo.
+- [ ] **E-15 Apagar los ítems solo para este nodo con un desafío existente** (Benja, 2026-11-06). Con un desafío existente, el paso «Curso» muestra solo la lista de efectos (`nodeEffects`) y no deja apagar los ítems. El back ya lo soporta (`tpi-roadmap` `ItemEffects`, `GraphService.updateItemEffects`):
+  - `null` = sin override, decide el desafío;
+  - lista vacía = el docente no permite ningún ítem;
+  - lista = solo esos efectos.
+  
+  Cambio, **solo front**:
+  - La tarjeta de ítems de «Curso» (desafío existente) se ve igual que la de «Reglas»: título «Ítems permitidos», selector «Activos / Inactivos», buscador, filtro por tipo, «Seleccionar todos» y la lista. El texto aclara que vale **solo para este nodo**.
+  - «Inactivos» guarda una lista vacía (ningún ítem). «Activos» guarda los efectos marcados.
+  - Si el usuario no toca la tarjeta, se conserva el valor que tenía el nodo. Un nodo nuevo, o uno con `null`, sigue en `null`: no se fuerza un override.
+  - Al editar, se precarga desde `node.allowedItemEffects`: `null` muestra los ítems del desafío como «Activos» sin override; `[]` muestra «Inactivos»; una lista muestra «Activos» con esos efectos.
 - [ ] ~~E-10 Historial~~: fuera de alcance, espera a backend (decisión 3).
 - [x] **E-11 Tests y verify** solo antes de la PR: specs de las pantallas en modo edición, del método del store, de la navegación de las dos vistas y de las rutas.
 
