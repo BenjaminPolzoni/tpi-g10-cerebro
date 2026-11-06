@@ -98,7 +98,7 @@ Entradas que el grafo le pasa al editar (`graph-editor-page.component.html` ~722
 - [x] **E-08 La vista simple navega.** `editNode` lleva a las mismas rutas. Se borran `onSave` (la parte de edición) y su estado.
 - [x] **E-09 Altas que quedan en el drawer.** Pasar a las pantallas las altas de la vista simple (recurso pendiente, `newNode`, `resumeDraft`) y el nodo de recuperación de `cohort-general-page`. Después borrar el modo `drawer` de `entity-editor-dialog` y su CSS.
 - [ ] ~~E-10 Historial~~: fuera de alcance, espera a backend (decisión 3).
-- [ ] **E-11 Tests y verify** solo antes de la PR: specs de las pantallas en modo edición, del método del store, de la navegación de las dos vistas y de las rutas.
+- [x] **E-11 Tests y verify** solo antes de la PR: specs de las pantallas en modo edición, del método del store, de la navegación de las dos vistas y de las rutas.
 
 
 ### Tests eliminados (E-11)
