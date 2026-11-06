@@ -45,20 +45,25 @@ Permisos de hoy:
    - `cohortProfessorGuard` los manda a `/courses/:id/general` si no son miembros de la comisión. Hay que dejarlos pasar cuando tienen `editRoadmap`, y que la pantalla quede con permiso de escritura (`facade.canWrite`).
    - **Hipótesis a verificar:** que `cohortMembershipGuard` (anterior en la cadena) también los deje pasar.
 7. **Desafío nuevo para Gestor y Admin.** **Riesgo:** hoy el back rechaza que GESTOR o ADMIN creen el payload de un desafío. Propuesta: la ruta `challenge/new` pasa a `editRoadmap`. Dentro de la pantalla, «Crear desafío nuevo» solo se ofrece con `authorChallenges`, y «Asignar desafío existente» del pool (`readChallengePool`) se ofrece a todos. Si se quiere que Gestor y Admin también creen desafíos, es un cambio de back (practical/theoretical payload) y va aparte.
+   - **Sin confirmar (2026-11-05):** Benja no sabe si el back de `tpi-roadmap` deja a GESTOR y ADMIN asignar desafíos existentes. Hay que verificarlo en `tpi-roadmap` antes de cerrar T-08. No se da por resuelto.
+8. **Tercer uso del wizard** (hallado al revisar el código, 2026-11-05). `courses/pages/cohort-general-page/cohort-general-page.component.ts` también usa `NodeCreationWizardComponent`: el import está en la línea ~105 y `<app-node-creation-wizard>` en el template inline, línea ~460. Hay que sacarlo de ahí antes de borrar la carpeta (T-06b).
+9. **Subsección en una unidad que solo existe en el roadmap.** Solo existe la ruta `general/sections/:sectionId/subsection/new`, que exige `sectionId`. En el grafo hay unidades sin sección de Courses. Hay que agregar `general/subsection/new` con `nodeUnitId`, o decidir qué pasa en ese caso (T-03).
+10. **Nombre del parámetro del roadmap.** `SubsectionCreatePageComponent` ya recibe `roadmapId` y hace `roadmapId ? store.open(cohortId, roadmapId) : store.ensureOpen(cohortId)`. En T-02 hay que copiar ese patrón y usar el mismo nombre (`roadmapId`) en contenido y desafío, en vez de crear un `roadmap` nuevo.
 
 ## Tareas
 - [ ] **T-01 Inventario antes de borrar** (memoria «reutilizar antes de borrar»). Listar qué hace el wizard que las pantallas no hacen: subida de contenido (`contentUploadRequested`), IA (`aiEnabled`), regla precargada, alta de sección desde el chooser, borradores de `NodeDraftStorage`. Lo que falte se porta a la pantalla, no se pierde.
-- [ ] **T-02 Query nueva en las pantallas.** `roadmap`, `group`, `prerequisiteId`, `prerequisiteKind` y `type` (solo desafío) como `input()` en `ContentNodeCreatePageComponent` y `ChallengeNodeCreatePageComponent`. Abrir el roadmap pedido y precargar regla y tipo.
+- [ ] **T-02 Query nueva en las pantallas.** `roadmapId` (mismo nombre que en la de subsección, hueco 10), `group`, `prerequisiteId`, `prerequisiteKind` y `type` (solo desafío) como `input()` en `ContentNodeCreatePageComponent` y `ChallengeNodeCreatePageComponent`. Abrir el roadmap pedido y precargar regla y tipo.
 - [ ] **T-03 Navegación desde la vista de nodos.** En `graph-editor-page`, `onCreateChosen`:
   - `theory` → `content/new`.
   - `practical-challenge` / `theoretical-challenge` → `challenge/new?type=…`.
-  - `subsection` → `subsection/new`.
+  - `subsection` → `subsection/new` (si la unidad no tiene sección de Courses, ver hueco 9).
   - Usar `courseSectionId` de la unidad o la ruta sin sección. Pasar `nodeUnitId` y `returnUrl = router.url`.
   - `section` queda como hoy, con el formulario de sección.
 - [ ] **T-04 Volver con el nodo seleccionado.** Las pantallas devuelven `select=<nodeId>` al `returnUrl` cuando vienen del mapa, y el editor lo enfoca y lo anuncia.
 - [ ] **T-05 Quitar el wizard de la vista de nodos.** Sacar `<app-node-creation-wizard>` y su estado del editor: `creationKind`, `wizardDraft`, `onWizardCreateChallenge`, `saveCreatedNode`, `saveCreatedSubsection`, `contentUpload*` si no quedan usos. El chooser se mantiene como paso previo.
 - [ ] **T-06 Quitar el wizard de la vista simple.** Sacar `openWizard`, `wizardSectionId`, `wizardDraft`, el camino `draft.wizard` de `resumeDraft` y el `<app-node-creation-wizard>` del HTML de `roadmap-section-nodes`. Los borradores viejos con `wizard` se descartan.
-- [ ] **T-07 Borrar `ui/node-creation-wizard/`** (componente, CSS, specs) y las claves i18n que queden huérfanas, una vez que T-05 y T-06 no dejen usos.
+- [ ] **T-06b Quitar el wizard de la página general del curso.** Sacar `NodeCreationWizardComponent` de `cohort-general-page.component.ts` (import y template) y llevar esa creación a las pantallas (ver hueco 8).
+- [ ] **T-07 Borrar `ui/node-creation-wizard/`** (componente, CSS, specs) y las claves i18n que queden huérfanas, una vez que T-05, T-06 y T-06b no dejen usos.
 - [ ] **T-08 Permisos Profesor, Gestor y Admin.**
   - Rutas `content/new`, `challenge/new` y `subsection/new` con `permissionGuard('editRoadmap')`.
   - `cohortProfessorGuard`, o un guard nuevo para estas tres rutas, deja pasar a quien tenga `editRoadmap` aunque no sea miembro.
