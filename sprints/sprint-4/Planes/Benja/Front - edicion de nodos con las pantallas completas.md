@@ -100,6 +100,16 @@ Entradas que el grafo le pasa al editar (`graph-editor-page.component.html` ~722
 - [ ] ~~E-10 Historial~~: fuera de alcance, espera a backend (decisión 3).
 - [ ] **E-11 Tests y verify** solo antes de la PR: specs de las pantallas en modo edición, del método del store, de la navegación de las dos vistas y de las rutas.
 
+
+### Tests eliminados (E-11)
+- **Cola y guardado del drawer de recuperación:** ya no existe el editor/cola embebido; se comprueba la navegación a la página de desafío con la unidad y `recoveryOnly`.
+- **Confirmación de apagado desde el mapa y la lista:** el drawer dejó de guardar; la confirmación y la cadena de guardado se prueban en la página y en `RoadmapStore`.
+- **Creación, edición, validación y configuración dentro del drawer de nodos:** se eliminan las pruebas que abrían el drawer, verificaban sus estados y guardaban nombre, obligatoriedad, reglas, ítems, IA y disponibilidad desde la lista; las páginas, el editor reutilizado y el store cubren esos comportamientos, y ambas vistas comprueban la navegación con contexto.
+- **Portal, cierre y cancelación del drawer de entidad:** desapareció el contenedor `GenericDrawer`; se conserva la cobertura de cancelación, cambios sin guardar, bloqueo durante el guardado y protección de navegación mediante el editor y las páginas.
+- **Motor, desafíos archivados y reintentos del drawer:** se eliminan las pruebas de lectura y selección propias del drawer; la página de desafío cubre la carga, edición, errores, cambios del desafío y sus reglas.
+- **Materiales, repositorio y editor rico abiertos desde el drawer:** la fila ahora navega a las páginas con los parámetros del recurso y formato; se prueban esas rutas y se conserva la prueba de eliminación del recurso enlazado.
+- **Borrador y retorno del autor de desafío al drawer montado:** se eliminan las pruebas de reapertura, identidad, selección del catálogo, modalidad, rechazo de navegación y almacenamiento del drawer, porque ya no existe ese handoff; las páginas cubren el guardado y la recuperación del borrador, los errores, el guard de cambios y `returnUrl`/`select`.
+
 ## Fuera de alcance
 - Editar **unidades y subsecciones** (nombre, bioma, reglas de la unidad): siguen con sus diálogos actuales.
 - Cambios de back: no hacen falta, porque el PUT y el PATCH ya existen y validan.
