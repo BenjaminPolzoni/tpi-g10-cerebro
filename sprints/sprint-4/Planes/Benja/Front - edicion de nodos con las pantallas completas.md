@@ -2,7 +2,7 @@
 tags: [tpi, g10, sprint-4, plan, front, roadmap, graph-editor, courses]
 fecha: 2026-11-06
 autor: Benjamin Polzoni
-estado: propuesta
+estado: aprobado
 repo: 2026-P4-FE/2026-PIV-TPI-FE
 rama: BenjaminPolzoni/unified-node-creation-pages (worktree ~/orca/workspaces/2026-PIV-TPI-FE/unified-node-creation-pages)
 ---
@@ -64,7 +64,7 @@ Entradas que el grafo le pasa al editar (`graph-editor-page.component.html` ~722
 3. **Qué pasos tiene un desafío al editar.** Pasos actuales: `challenge`, `rules`, `course`, `content`, `review` (~179).
    - `rules` y `content` editan el **contenido del desafío** (el quiz o el práctico), que pertenece a los servicios de desafíos de otros grupos.
    - Al editar un nodo, el desafío ya existe: se edita **qué desafío está vinculado** (paso `challenge`, con «Cambiar desafío») y **la configuración del nodo** (paso `course`).
-   - Propuesta: `rules` y `content` se muestran **solo para leer**, con un enlace a la pantalla de edición del desafío, que ya existe en `/challenges/...`. Ver pregunta 1.
+   - Decisión: `rules` y `content` **se pueden editar** (decisión 1).
 4. **Campos que la pantalla de desafío no tiene y el panel sí:**
    - reintentos por nodo (`allowedRetries`, que no aparece en la página);
    - roles de IA (`aiRoles`);
@@ -91,21 +91,20 @@ Entradas que el grafo le pasa al editar (`graph-editor-page.component.html` ~722
 - [ ] **E-03 Desafío en modo edición: carga.**
   - Ruta `challenge/:nodeId/edit`.
   - `ChallengeNodeCreatePage` lee `nodeId` y precarga la fuente (`existing`) con el desafío vinculado, el tipo, el icono, el paso `course` completo y las reglas.
-- [ ] **E-04 Desafío en modo edición: pasos libres.** Todos los pasos abiertos, guardado desde cualquier paso, validación completa al guardar y salto al primer paso con error. `rules` y `content` según la respuesta a la pregunta 1.
+- [ ] **E-04 Desafío en modo edición: pasos libres.** Todos los pasos abiertos, guardado desde cualquier paso, validación completa al guardar y salto al primer paso con error. `rules` y `content` editables: si cambian, se guarda también el desafío (decisión 1).
 - [ ] **E-05 Campos que le faltan a la página de desafío.** Sumar reintentos por nodo, roles de IA y regla combinada (`RuleGroup`) al paso `course`, copiando los controles del panel.
 - [ ] **E-06 Desafío en modo edición: guardar.** Arma el resultado de la edición y llama a E-01 (PUT). Confirmación de apagado con `GenericConfirmModal destructive`. Vuelve con `select=<nodeId>`.
 - [ ] **E-07 La vista de nodos navega.** Las acciones `edit` y `change` del menú del nodo llevan a `content/:id/edit` o a `challenge/:id/edit` según el tipo; `change` abre directamente en el paso `challenge`. Se borran `editingNodeId`, `saveNodeEdit`, `pendingTurnOff` y el `<app-entity-editor-dialog>` del grafo.
 - [ ] **E-08 La vista simple navega.** `editNode` lleva a las mismas rutas. Se borran `onSave` (la parte de edición) y su estado.
-- [ ] **E-09 (según la pregunta 2) Altas que quedan en el drawer.** Pasar a las pantallas las altas de la vista simple (recurso pendiente, `newNode`, `resumeDraft`) y el nodo de recuperación de `cohort-general-page`. Después borrar el modo `drawer` de `entity-editor-dialog` y su CSS.
-- [ ] **E-10 (opcional) Historial.** Borrar la pestaña oculta (pestaña, panel, carga de `getNodeEditLog`, claves `entityEditor.history.*`, specs). Antes hay que confirmar con backend qué pasa con `GET /nodes/{id}/edit-log`.
+- [ ] **E-09 Altas que quedan en el drawer.** Pasar a las pantallas las altas de la vista simple (recurso pendiente, `newNode`, `resumeDraft`) y el nodo de recuperación de `cohort-general-page`. Después borrar el modo `drawer` de `entity-editor-dialog` y su CSS.
+- [ ] ~~E-10 Historial~~: fuera de alcance, espera a backend (decisión 3).
 - [ ] **E-11 Tests y verify** solo antes de la PR: specs de las pantallas en modo edición, del método del store, de la navegación de las dos vistas y de las rutas.
 
 ## Fuera de alcance
-- Editar el **contenido del desafío** (preguntas, enunciado, plantilla): es de los servicios de desafíos y ya tiene su propia pantalla.
 - Editar **unidades y subsecciones** (nombre, bioma, reglas de la unidad): siguen con sus diálogos actuales.
 - Cambios de back: no hacen falta, porque el PUT y el PATCH ya existen y validan.
 
-## Preguntas abiertas
-1. En un nodo de desafío, ¿los pasos «Reglas» y «Contenido» se muestran solo para leer, con un enlace para editar el desafío en su pantalla, o se ocultan al editar?
-2. ¿Sacamos **todo** el drawer, incluidas las altas que todavía lo usan en la vista simple y el nodo de recuperación de la página general (E-09)? ¿O solo la edición, dejando esas altas para otra PR?
-3. ¿Borramos ahora la pestaña Historial oculta (E-10), o esperamos la decisión de backend?
+## Decisiones (Benja, 2026-11-06)
+1. **«Reglas» y «Contenido» son editables** al editar un nodo de desafío: se edita también el desafío en sí (quiz o práctico) con los métodos de actualización que ya existen en el front (`ChallengesService`, `ChallengeAuthoringService`, la ida y vuelta al editor práctico). **Riesgo:** esos servicios son de otros grupos y pueden rechazar a Gestor y Admin. En ese caso, la pantalla muestra el error y no pierde lo que ya se guardó del nodo. No se toca ningún back.
+2. **Se saca todo el drawer en esta rama.** E-09 entra.
+3. **El historial espera a backend.** E-10 queda fuera.
