@@ -104,13 +104,13 @@ Entradas que el grafo le pasa al editar (`graph-editor-page.component.html` ~722
   - Al guardar, `updateChallenge` manda los valores del formulario (título, descripción y dificultad). Solo se llama si algo cambió.
   - El título de la página es «Editar desafío», en lugar de «Nuevo desafío»; el resto del diseño es igual.
   - Mismos pasos (Desafío, Reglas, Curso, Contenido, Revisión), todos abiertos.
-- [ ] **E-13 Ítems en un solo lugar** (Benja, 2026-11-06). Hoy los efectos de ítems aparecen dos veces:
+- [x] **E-13 Ítems en un solo lugar** (Benja, 2026-11-06). Hoy los efectos de ítems aparecen dos veces:
   - en «Reglas», como configuración del desafío en el Motor (`form.settings().itemsAllowed` y `allowedItemEffects`, con prendido/apagado y máximo);
   - en «Curso», como reemplazo por nodo en `tpi-roadmap` (`nodeEffects`, que agregó E-05 en 70dd5c696d; el back lo manda al Motor con `ChallengeParameterResolver`).
   
   Regla nueva: se muestra en **«Reglas»** cuando se crea o se edita el desafío propio, y en **«Curso»** solo cuando se asigna un desafío existente de otro, porque en ese caso «Reglas» no aparece. Nunca en los dos lugares a la vez.
   - Al editar un nodo que ya tiene un reemplazo propio (`allowedItemEffects` distinto del valor por defecto), no se pierde: se conserva al guardar.
-- [ ] **E-14 Cambiar el tipo del nodo vinculando otro desafío** (Benja, 2026-11-06). El tipo lo bloquea solo el front (`[isTypeLocked]="!!nodeId() || challengeLocked()"`, línea ~153 del HTML). El back (`GraphValidator`) solo exige que el tipo del nodo coincida con el del desafío vinculado (`node.challenge-type-mismatch`).
+- [x] **E-14 Cambiar el tipo del nodo vinculando otro desafío** (Benja, 2026-11-06). El tipo lo bloquea solo el front (`[isTypeLocked]="!!nodeId() || challengeLocked()"`, línea ~153 del HTML). El back (`GraphValidator`) solo exige que el tipo del nodo coincida con el del desafío vinculado (`node.challenge-type-mismatch`).
   - En «Vinculado» (se edita el mismo desafío) el tipo sigue bloqueado, porque un desafío no cambia de servicio.
   - En «Existente» el tipo se puede elegir y el buscador muestra desafíos de ese tipo. Al guardar, el nodo pasa a ese tipo.
   - Al editar, también se ofrece «Nuevo» (con `authorChallenges`): crea un desafío nuevo, de cualquier tipo, y lo vincula al nodo.
