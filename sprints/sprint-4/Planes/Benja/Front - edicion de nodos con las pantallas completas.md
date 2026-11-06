@@ -146,3 +146,59 @@ Entradas que el grafo le pasa al editar (`graph-editor-page.component.html` ~722
 1. **«Reglas» y «Contenido» son editables** al editar un nodo de desafío: se edita también el desafío en sí (quiz o práctico) con los métodos de actualización que ya existen en el front (`ChallengesService`, `ChallengeAuthoringService`, la ida y vuelta al editor práctico). **Riesgo:** esos servicios son de otros grupos y pueden rechazar a Gestor y Admin. En ese caso, la pantalla muestra el error y no pierde lo que ya se guardó del nodo. No se toca ningún back.
 2. **Se saca todo el drawer en esta rama.** E-09 entra.
 3. **El historial espera a backend.** E-10 queda fuera.
+
+## Reglas con alcance: general del desafío o solo este nodo (pedido de Benja, 2026-11-06)
+
+### Qué se pide
+Al asignar o editar un desafío en un nodo, el paso **«Reglas»** se puede editar siempre, también con un desafío «Existente». Arriba del paso aparece un selector de alcance:
+- **General del desafío:** cambia el desafío en el servicio de desafíos. Vale en todos los cursos y nodos que lo usan sin un ajuste propio.
+- **Solo este nodo:** cambia solo este nodo y se guarda en `tpi-roadmap`. El desafío no se toca.
+
+### Qué se puede ajustar por nodo (relevado en `tpi-roadmap` develop, `ChallengeParameters`)
+| Regla del paso «Reglas» | ¿Por nodo? | Cómo se guarda por nodo |
+|---|---|---|
+| Intentos que no consumen vidas | Sí | `allowedRetries`, con el tope PAR-13 de la cohorte |
+| Tiempo por intento | Sí | `timeLimitMinutes` (PUT con `replaceBoundaries`) |
+| Ítems permitidos (activos, inactivos, cuáles) | Sí, pero **solo restringe** | `allowedItemEffects`: se cruza con los efectos del desafío; `[]` = ninguno, `null` = hereda. No puede habilitar un ítem que el desafío no permite. |
+| Uso de IA (tutor, evaluador) | Sí | `usesAi` + `aiRoles` (`null` = hereda) |
+| Dificultad | Sí (paso 1) | `difficulty` |
+| Nota para aprobar, redondeo, cómo se corrige, qué pasa al acabarse el tiempo, máximo de ítems por intento, monedas | **No** | Solo en la configuración general. El Motor no recibe esos valores por nodo, y cambiarlo es de otros grupos. |
+
+### Decisiones propuestas
+- **Dónde está el selector y qué trae por defecto:**
+  - Con «Existente»: arranca en **«Solo este nodo»**.
+  - Con «Vinculado» (editar el desafío propio): arranca en **«General»**.
+  - Con «Nuevo» (crear): no hay selector, porque todo es general.
+- **«General» habilitado** solo si el usuario puede editar ese desafío: tiene `authorChallenges` y el servicio de desafíos lo deja. Si el servicio rechaza el guardado (por ejemplo, porque es de otro autor), se muestra el error y no se pierde lo que ya se guardó del nodo. Se avisa: «Estos cambios modifican el desafío en todos los cursos donde se usa».
+- **En «Solo este nodo»:**
+  - Los campos que no se pueden ajustar por nodo (ver tabla) se ven **deshabilitados**, con el valor del desafío y el texto «Solo se cambia en la configuración general».
+  - Cada campo que se puede ajustar muestra si **hereda** el valor del desafío o tiene un **valor propio**, y tiene la acción «Usar el del desafío» (vuelve a `null`).
+- **Un solo lugar:** los ajustes por nodo de intentos, tiempo, IA e ítems se **mudan de «Curso» a «Reglas»**, en el modo «Solo este nodo». «Curso» queda con disponibilidad, prerrequisitos, visibilidad, obligatoriedad y vidas. Así se cumple la regla de E-13: nunca dos lugares.
+- **Dos borradores:** lo que se edita en «General» y lo que se edita en «Solo este nodo» se guardan por separado. Cambiar el selector no borra lo del otro modo. Al guardar se manda lo que cambió en cada uno: primero el desafío (`updateChallenge`) y después el nodo (la cadena del store). «Revisión» muestra qué cambia en el desafío y qué solo en el nodo.
+- **Contenido:** con «Existente» sigue sin poder editarse (es del desafío). Se edita con «Vinculado».
+
+### Tareas
+- [ ] **E-16 Paso «Reglas» siempre disponible.** Quitar `rules` de `EXISTING_SKIPS` (`challenge-node-create-page.component.ts` ~217/2214). Cargar la versión del desafío elegido también con «Existente», para mostrar sus valores.
+- [ ] **E-17 Selector de alcance.**
+  - `GenericSegmented` arriba de «Reglas», con dos estados: `scope = 'challenge' | 'node'`.
+  - Valor por defecto según el origen, como dicen las decisiones.
+  - «General» deshabilitado sin `authorChallenges`.
+  - Textos i18n en es, en y pt.
+- [ ] **E-18 Modo «Solo este nodo».**
+  - Los campos ajustables leen y escriben el borrador del nodo: `nodeRetries`, `nodeTimeLimit`, `nodeAi`/`nodeAiRoles` y `nodeEffects`, con la lógica de E-15 (`null`/`[]`/lista).
+  - Indicador «hereda» o «propio», y la acción «Usar el del desafío».
+  - Los campos no ajustables quedan deshabilitados, con su texto.
+  - Los ítems solo restringen: no se puede activar un ítem que el desafío no permite.
+- [ ] **E-19 Mudar los ajustes de nodo de «Curso» a «Reglas».** Sacar de «Curso» los controles de intentos, tiempo, IA e ítems del nodo; queda lo demás. Revisar que E-13 y E-15 no los dupliquen.
+- [ ] **E-20 Guardado en dos partes y Revisión.** Primero `updateChallenge` (si cambió algo general), después la cadena del nodo (si cambió algo del nodo). Error parcial: si el desafío falla, el nodo no se guarda y se muestra el error; si el nodo falla después de guardar el desafío, se avisa con el error del nodo. «Revisión» lista los cambios generales y los del nodo, por separado.
+- [ ] **E-21 Tests y verify:**
+  - selector y valores por defecto por origen;
+  - campos deshabilitados en modo nodo;
+  - herencia y «Usar el del desafío»;
+  - guardado en dos partes, en orden;
+  - errores parciales;
+  - nada duplicado en «Curso».
+
+### Preguntas abiertas
+1. ¿Está bien que, con «Existente», arranque en «Solo este nodo», y con «Vinculado», en «General»?
+2. Para ajustar por nodo la nota para aprobar, el redondeo o qué pasa al acabarse el tiempo, hace falta que el Motor y el servicio de desafíos acepten esos valores por intento. Eso es de otros grupos. ¿Lo dejamos deshabilitado con el aviso, o abrimos un issue a esos grupos?
