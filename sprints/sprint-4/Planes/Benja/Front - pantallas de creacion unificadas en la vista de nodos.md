@@ -50,6 +50,17 @@ Permisos de hoy:
 9. **Subsección en una unidad que solo existe en el roadmap.** Solo existe la ruta `general/sections/:sectionId/subsection/new`, que exige `sectionId`. En el grafo hay unidades sin sección de Courses. Hay que agregar `general/subsection/new` con `nodeUnitId`, o decidir qué pasa en ese caso (T-03).
 10. **Nombre del parámetro del roadmap.** `SubsectionCreatePageComponent` ya recibe `roadmapId` y hace `roadmapId ? store.open(cohortId, roadmapId) : store.ensureOpen(cohortId)`. En T-02 hay que copiar ese patrón y usar el mismo nombre (`roadmapId`) en contenido y desafío, en vez de crear un `roadmap` nuevo.
 
+## Inventario T-01
+
+- **Subida de contenido:** el wizard delega `contentUploadRequested` al contenedor; la página de contenido aloja `EntityEditorDialogComponent`, que publica recursos y registra los creados en la sesión para limpiarlos si se abandona. Conservar esta funcionalidad y comprobar el caso de unidad sin sección de Courses.
+- **IA:** el wizard recibe `aiEnabled`; la página de contenido ya deriva ese valor de la comisión y lo pasa al editor. La página de desafío también contempla la disponibilidad de IA; conservar ambas restricciones.
+- **Regla precargada:** el wizard recibe `initialPrerequisiteId` y `initialPrerequisiteKind`; las páginas todavía no reciben ese contexto por query. Falta precargarlo sin sobrescribir la edición o un borrador restaurado.
+- **Tipo de desafío:** el wizard conserva el tipo escogido; la página de desafío todavía no lo recibe por query.
+- **Alta de sección:** el wizard tiene formulario para secciones y subsecciones; mantener el formulario actual de sección y dirigir subsecciones a su página, incluyendo unidades exclusivas del roadmap.
+- **Borradores:** `NodeDraftStorage` conserva el borrador del wizard durante el viaje a `/challenges/new` y permite recuperarlo desde la vista simple. La página de desafío tiene su propio borrador en `sessionStorage` para el viaje al editor práctico, pero no es equivalente a recuperar borradores antiguos del wizard; T-06 indica descartar explícitamente estos últimos. No eliminar el mecanismo de edición de `entity-editor-dialog`.
+- **Contexto y retorno:** el wizard trabaja con el roadmap y la selección actuales; contenido y desafío todavía abren el roadmap principal y las páginas no devuelven el nodo creado como `select`. Preservar también `group`, el destino de retorno y la selección.
+- **Permisos:** las páginas usan `facade.canWrite`; la membresía y `authorChallenges` actualmente pueden impedir el acceso o la escritura de Gestor/Admin. Separar la asignación de desafíos existentes de la creación de payloads.
+
 ## Tareas
 - [ ] **T-01 Inventario antes de borrar** (memoria «reutilizar antes de borrar»). Listar qué hace el wizard que las pantallas no hacen: subida de contenido (`contentUploadRequested`), IA (`aiEnabled`), regla precargada, alta de sección desde el chooser, borradores de `NodeDraftStorage`. Lo que falte se porta a la pantalla, no se pierde.
 - [ ] **T-02 Query nueva en las pantallas.** `roadmapId` (mismo nombre que en la de subsección, hueco 10), `group`, `prerequisiteId`, `prerequisiteKind` y `type` (solo desafío) como `input()` en `ContentNodeCreatePageComponent` y `ChallengeNodeCreatePageComponent`. Abrir el roadmap pedido y precargar regla y tipo.
