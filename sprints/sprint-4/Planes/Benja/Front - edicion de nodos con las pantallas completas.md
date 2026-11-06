@@ -177,20 +177,20 @@ Al asignar o editar un desafío en un nodo, el paso **«Reglas»** se puede edit
 - **Contenido:** con «Existente» sigue sin poder editarse (es del desafío). Se edita con «Vinculado».
 
 ### Tareas
-- [ ] **E-16 Paso «Reglas» siempre disponible.** Quitar `rules` de `EXISTING_SKIPS` (`challenge-node-create-page.component.ts` ~217/2214). Cargar la versión del desafío elegido también con «Existente», para mostrar sus valores.
-- [ ] **E-17 Selector de alcance.**
+- [x] **E-16 Paso «Reglas» siempre disponible.** Quitar `rules` de `EXISTING_SKIPS` (`challenge-node-create-page.component.ts` ~217/2214). Cargar la versión del desafío elegido también con «Existente», para mostrar sus valores.
+- [x] **E-17 Selector de alcance.**
   - `GenericSegmented` arriba de «Reglas», con dos estados: `scope = 'challenge' | 'node'`.
   - Arranca siempre en «Solo este nodo».
   - «General» deshabilitado sin `authorChallenges`.
   - Textos i18n en es, en y pt.
-- [ ] **E-18 Modo «Solo este nodo».**
+- [x] **E-18 Modo «Solo este nodo».**
   - Los campos ajustables leen y escriben el borrador del nodo: `nodeRetries`, `nodeTimeLimit`, `nodeAi`/`nodeAiRoles` y `nodeEffects`, con la lógica de E-15 (`null`/`[]`/lista).
   - Indicador «hereda» o «propio», y la acción «Usar el del desafío».
   - Los campos no ajustables quedan deshabilitados, con su texto.
   - Los ítems solo restringen: no se puede activar un ítem que el desafío no permite.
-- [ ] **E-19 Mudar los ajustes de nodo de «Curso» a «Reglas».** Sacar de «Curso» los controles de intentos, tiempo, IA e ítems del nodo; queda lo demás. Revisar que E-13 y E-15 no los dupliquen.
-- [ ] **E-20 Guardado en dos partes y Revisión.** Primero `updateChallenge` (si cambió algo general), después la cadena del nodo (si cambió algo del nodo). Error parcial: si el desafío falla, el nodo no se guarda y se muestra el error; si el nodo falla después de guardar el desafío, se avisa con el error del nodo. «Revisión» lista los cambios generales y los del nodo, por separado.
-- [ ] **E-21 Tests y verify:**
+- [x] **E-19 Mudar los ajustes de nodo de «Curso» a «Reglas».** Sacar de «Curso» los controles de intentos, tiempo, IA e ítems del nodo; queda lo demás. Revisar que E-13 y E-15 no los dupliquen.
+- [x] **E-20 Guardado en dos partes y Revisión.** Primero `updateChallenge` (si cambió algo general), después la cadena del nodo (si cambió algo del nodo). Error parcial: si el desafío falla, el nodo no se guarda y se muestra el error; si el nodo falla después de guardar el desafío, se avisa con el error del nodo. «Revisión» lista los cambios generales y los del nodo, por separado.
+- [x] **E-21 Tests y verify:**
   - selector y valores por defecto por origen;
   - campos deshabilitados en modo nodo;
   - herencia y «Usar el del desafío»;
