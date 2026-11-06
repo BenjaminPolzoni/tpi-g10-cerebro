@@ -4,7 +4,7 @@ fecha: 2026-11-05
 autor: Benjamin Polzoni
 estado: propuesta
 repo: 2026-P4-FE/2026-PIV-TPI-FE
-rama: por definir (base develop 3d063e37b6)
+rama: BenjaminPolzoni/unified-node-creation-pages (worktree ~/orca/workspaces/2026-PIV-TPI-FE/unified-node-creation-pages)
 ---
 
 # Plan — Pantallas de creación unificadas en la vista de nodos

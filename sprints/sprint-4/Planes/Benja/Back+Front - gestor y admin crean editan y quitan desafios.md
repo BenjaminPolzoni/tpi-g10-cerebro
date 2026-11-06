@@ -1,102 +1,62 @@
 ---
-tags: [tpi, g10, sprint-4, plan, back, front, permisos, challenges]
+tags: [tpi, g10, sprint-4, plan, back, front, permisos, roadmap]
 fecha: 2026-11-05
 autor: Benjamin Polzoni
 estado: propuesta
-repo: 2026-P4-BE/tpi-users, 2026-P4-BE/tpi-practical-challenge, 2026-P4-BE/tpi-theoristcal-challenge, 2026-P4-FE/2026-PIV-TPI-FE
-rama: feature/gestor-admin-challenge-authoring
+actualizado: 2026-11-05
+repo: 2026-P4-FE/2026-PIV-TPI-FE, 2026-P4-BE/tpi-roadmap
+rama: BenjaminPolzoni/unified-node-creation-pages (front) · BenjaminPolzoni/gestor-admin-roadmap-authoring (back)
 ---
 
-# Plan — Gestor y Admin crean, editan y quitan desafíos
+# Plan — Gestor y Admin arman el roadmap con desafíos (solo roadmap)
 
-Continúa el [[sprints/sprint-4/Planes/Benja/Front - pantallas de creacion unificadas en la vista de nodos|plan de pantallas de creación unificadas]] (hueco 7). Pedido de Benja, 2026-11-05: Profesor, Gestor y Admin tienen que poder **crear, editar y quitar** desafíos teóricos y prácticos desde las pantallas de creación. Hoy lo frenan las validaciones del back.
+Continúa el [[sprints/sprint-4/Planes/Benja/Front - pantallas de creacion unificadas en la vista de nodos|plan de pantallas de creación unificadas]] (hueco 7).
 
-> [!info] Análisis sobre `develop` del 2026-11-05
-> - tpi-practical-challenge `9f76b27`
-> - tpi-theoristcal-challenge `3a97e9c`
-> - tpi-users `develop`
-> - tpi-engine-challenge `main 66fffd85`
->
-> Las rutas son relativas a `src/main/java/ar/edu/utn/frc/tup/p4/`.
+> [!warning] Alcance: solo el roadmap (decisión de Benja, 2026-11-05)
+> Se tocan **solo** el front (`2026-PIV-TPI-FE`, feature roadmap) y el back del roadmap (`tpi-roadmap`). **No se cambia ningún repo de otro grupo**: tpi-users, tpi-practical-challenge, tpi-theoristcal-challenge, tpi-engine-challenge ni tpi-course.
 
-## Cómo se autoriza hoy (dos capas en cada micro)
-1. **Anotación** `@RequirePermission(code, legacyRoles)`.
-   - Con `AUTHZ_MODE=on` manda el **código de permiso** del snapshot. Los códigos salen de los paquetes de fábrica de tpi-users (`users/permissions/FactoryPack.java` y migraciones `V179`, `V184`, `V206`).
-   - Con `off`/`shadow` mandan los `legacyRoles` del token.
-2. **Servicio**: regla por **rol en la comisión** (Courses: PROFESSOR, PROFESSOR_READ_ONLY, GESTOR) y, a veces, una excepción para el ADMIN de plataforma.
+## Qué permite hoy el back del roadmap (`tpi-roadmap` develop `f382db61`, 2026-11-05)
+- **Escritura del grafo** (crear, editar, mover y quitar nodos, unidades y reglas): `GraphController` con `roadmap.graph.write`, `legacyRoles={ADMIN,GESTOR,PROFESSOR}`. Los paquetes de PROFESSOR, GESTOR y ADMIN tienen ese código.
+- **Pool de desafíos asignables**: `ChallengePoolController` y `ChallengeCoursesController` con `roadmap.challenge-pool.read` para los tres roles.
+- **Dueño del curso**: `GraphViewController.requireEditor` y `RoadmapLayoutController.requireEditor` dejan pasar al *platform staff* (ADMIN o GESTOR, `common/security/Roles.isPlatformStaff`). Al profesor solo lo dejan pasar en sus comisiones (`CohortOwnershipClient.isOwner`).
+- **Asignar un desafío a un nodo**: `services/GraphValidator.usableBy`. El staff de plataforma asigna **cualquier desafío publicado**. El profesor, solo los que él escribió.
 
-## Diagnóstico por micro
+**Conclusión:** para crear contenido, asignar desafíos existentes y quitar nodos, **el back del roadmap ya permite a Gestor y Admin**. No hace falta un cambio de back salvo que la verificación (B-01) muestre otra cosa.
 
-| Micro | Capa 1 (anotación + paquete) | Capa 2 (servicio) | ¿Qué falta? |
-|---|---|---|---|
-| **tpi-engine-challenge** (Motor: el desafío en sí, alta, edición, estado/archivo) | `ChallengeController` POST, PUT y PATCH `/estado` con `legacyRoles={PROFESSOR,ADMIN,GESTOR}`. Los paquetes GESTOR, ADMIN y ORG_ADMIN ya tienen `engine-challenge.challenge.write`. | `challenges/service/ChallengeAccess.java`: escriben PROFESSOR y GESTOR de la comisión; **el admin pasa todas las reglas**. | **Nada.** Ya permite. |
-| **tpi-theoristcal-challenge** (cuestionario: contenido y preguntas) | `ContentController` POST y PUT con `legacyRoles={PROFESSOR,GESTOR}`, **sin ADMIN**. `ItemController` (preguntas: POST, PUT, DELETE, impact, categories), `ItemFileImportController`, `ItemImportTemplateController` y `SavedRubricController` **solo PROFESSOR**. Paquetes: GESTOR y ADMIN **no tienen** `theoretical-challenge.content.write`, `.item.write` ni `.item.read`. | `services/ContentAccessGuard.java`: `requireWriter` llama a `requireNotAdmin()`, **"el administrador solo lee el contenido"** (decisión explícita del equipo). `CourseBankGuard` sí deja escribir al GESTOR de la comisión. | Anotaciones: sumar GESTOR y ADMIN. Paquetes: sumar los códigos. Servicio: decidir lo del admin. |
-| **tpi-practical-challenge** (payload práctico: plantilla, variantes, provisión, revisión) | `controllers/PracticalChallengeController` POST, PUT/PATCH `/{id}` y `/variants`; `workspace/web/TemplateAuthoringController` (`template/sync`, `validation`); `ChallengeProvisioningController`; `TemplateSnapshotController`; `DetectedCompositionController`; `vpcr/controllers/ReviewChallengeController`. **Todos solo PROFESSOR.** Paquetes: GESTOR y ADMIN no tienen `practical-challenge.challenge.write` ni `.challenge-authoring.read`. | `services/ChallengeAccessPolicy.java`: `EDIT_ROLES={PROFESSOR,GESTOR}` de la comisión. **No hay excepción para el admin**: si no es miembro de la comisión, `canEdit` da `false`. | Anotaciones y paquetes, como en el teórico. Servicio: sumar la excepción para el admin. |
-| **tpi-users** (paquetes de fábrica) | `GESTOR`, `ADMIN` y `ORG_ADMIN` solo tienen `engine-challenge.challenge.write` y `roadmap.graph.write` de esta familia. | — | Migración nueva que agregue los códigos a esos paquetes y actualice el `FactoryPack.java` y la matriz `factory-packs-compose-matrix-vNNN.json`. |
-| **Front** | `core/services/permissions.service.ts:31` `authorChallenges: ['PROFESSOR']`, también `manageChallengeVariants` y `readChallengeVariants`. | `cohortProfessorGuard`. | Abrir esas capacidades a GESTOR y ADMIN cuando el back esté. |
-
-> [!warning] Hallazgos a confirmar
-> - `practical-challenge.challenge-authoring.write` (`ReviewChallengeController` PUT y `/ready`) **no aparece en ningún paquete**, ni siquiera en PROFESSOR. Con `AUTHZ_MODE=on` podría estar denegado para todos. **Hipótesis**: verificar en el catálogo de compose.
-> - El GESTOR ya figura en los `legacyRoles` del `ContentController` teórico, pero su paquete no tiene `theoretical-challenge.content.write`. Con `on` hoy queda afuera aunque el servicio lo acepte.
-> - **"GESTOR" tiene dos sentidos**: el rol de plataforma (paquete) y el rol en la comisión (Courses). El servicio mira el de la comisión. Un gestor de plataforma que no es miembro de la comisión sigue rechazado por la capa 2. Hay que decidir si el gestor de plataforma pasa como el admin o si se lo agrega como miembro GESTOR de la comisión.
-
-## Qué significa "quitar"
-- **Sacar el nodo del roadmap**: `roadmap.graph.write`. Ya lo tienen los tres roles.
-- **Archivar o desactivar el desafío**: Motor `PATCH /{id}/estado`. Ya lo tienen los tres roles. El chequeo previo teórico `GET /by-challenge/{id}/deactivation-check` ya admite PROFESSOR, GESTOR y ADMIN.
-- **Borrar una pregunta del banco**: `DELETE /items/{id}`, hoy solo PROFESSOR.
-
-## Decisiones a tomar antes de mandar el agente
-- **D1 — Admin en el teórico.** `requireNotAdmin()` es una regla deliberada del equipo dueño (G04). Propuesta: que el admin escriba el cuestionario pero **siga sin corregir ni asentar notas** (`requireCorrector` no se toca). Coordinarlo con el equipo dueño en la PR.
-- **D2 — Admin en el práctico.** Sumar en `ChallengeAccessPolicy.canEdit` una excepción para el admin (mismo criterio que `ChallengeAccess` del Motor: "admins pass every rule") que respete la organización (`OrganizationAccess`).
-- **D3 — Gestor sin membresía.** ¿El gestor de plataforma escribe en cualquier comisión de su organización, igual que el admin? ¿O solo donde es miembro GESTOR? Recomendación: **solo donde es miembro**, que ya funciona en la capa 2. Así el cambio queda en anotaciones y paquetes.
-- **D4 — Corrección y notas** (corregir intentos, ajustes de nota, credenciales Git del docente): **fuera de alcance**, siguen solo PROFESSOR.
+## Lo que no se puede hacer desde el roadmap
+- **Escribir un desafío nuevo** (las preguntas del teórico, la plantilla y las variantes del práctico) lo validan los servicios de otros grupos. Según el relevamiento del 2026-11-05, hoy solo aceptan PROFESSOR. El Motor ya acepta a los tres.
+- Consecuencia en el front: **Gestor y Admin asignan un desafío existente y crean contenido teórico**. «Crear desafío nuevo» se ofrece solo a quien tiene `authorChallenges`, que hoy es PROFESSOR, como está.
+- Si se quiere que Gestor y Admin también escriban el desafío, se **pide a esos grupos** con un issue en su repo. No lo cambiamos nosotros.
+- **Hipótesis a verificar:** la subida de archivos de una lectura pasa por Courses (`CourseContentService`), de otro grupo. Hay que confirmar que acepta a Gestor y Admin. Si no, se muestra el error y se pide a ese grupo.
 
 ## Tareas
 
-### tpi-users
-- [ ] **U-01** Migración `V2xx__gestor_admin_challenge_authoring.sql` (revisar la versión libre en develop y en las PRs abiertas, ver memoria «Flyway en tpi-roadmap»). Agrega a `GESTOR`, `ADMIN` y `ORG_ADMIN`:
-  - `practical-challenge.challenge.write`
-  - `practical-challenge.challenge.read`
-  - `practical-challenge.challenge-authoring.read`
-  - `practical-challenge.challenge-authoring.write` (si existe en el catálogo)
-  - `theoretical-challenge.content.write`
-  - `theoretical-challenge.item.read`
-  - `theoretical-challenge.item.write`
-- [ ] **U-02** Actualizar `FactoryPack.java` (`gestorPermissions()` y `adminPermissions()`) y la matriz `src/test/resources/permission-catalog/factory-packs-compose-matrix-vNNN.json`. Correr `FactoryPackCatalogueMigrationTest`.
-- [ ] **U-03** Si el catálogo de compose no tiene algún código, sumarlo en tpi-system-compose (skill `tpi-adopt-permissions`).
+### Front (worktree `~/orca/workspaces/2026-PIV-TPI-FE/unified-node-creation-pages`)
+- [ ] **F-01 Entrada a las pantallas.**
+  - Las rutas `content/new`, `challenge/new` y `subsection/new` de `features/courses/courses.routes.ts` usan `permissionGuard('editRoadmap')` en lugar de `authorChallenges` en el `canMatch`.
+  - Para esas rutas, `cohortProfessorGuard` deja pasar a quien tenga `editRoadmap` aunque no sea miembro de la comisión, como hace el back con el staff.
+  - Verificar con la skill `tpi-front-permissions`.
+- [ ] **F-02 Pantalla de desafío por capacidad.** En `ChallengeNodeCreatePageComponent`:
+  - «Asignar desafío existente» del pool: para todos los que tienen `editRoadmap`.
+  - «Crear desafío nuevo»: solo con `authorChallenges`.
+  - Sin `authorChallenges`, la pantalla abre directo en «asignar existente», sin el botón de crear.
+- [ ] **F-03 Escritura en la pantalla.** `facade.canWrite` y `isAdmin` deben quedar en `true` para Gestor y Admin sin membresía, para que el formulario no quede en solo lectura.
+- [ ] **F-04 Mensajes de error claros.** Si un servicio externo responde 403 (subida de archivos o Motor), la pantalla lo dice con `GenericCallout tone="danger"` y no pierde el formulario.
 
-### tpi-theoristcal-challenge
-- [ ] **T-01** `legacyRoles` con `PROFESSOR, GESTOR, ADMIN` en las escrituras y lecturas de autoría:
-  - `ContentController` (POST, PUT, `points`).
-  - `ChallengeHistoryController` (`restore`, `points/impact`).
-  - `ItemController` (todo).
-  - `ItemFileImportController`.
-  - `ItemImportTemplateController`.
-  - `SavedRubricController`.
-  - Mantener solo PROFESSOR las de corrección (`AttemptController` 349/385) y las de marketplace.
-- [ ] **T-02** `ContentAccessGuard.requireWriter`: dejar escribir al admin según D1, sin tocar `requireCorrector`.
-- [ ] **T-03** Ver si la autoría de ítems (categorías, `authorId`) asume un profesor: `ItemCategoryService` usa `authorId` "el profesor". Comprobar que un gestor o admin no cree ítems huérfanos ni invisibles para el profesor de la comisión.
-- [ ] **T-04** Tests de matriz (permitido o denegado) por rol: PROFESSOR, GESTOR miembro, GESTOR no miembro, ADMIN, PROFESSOR_READ_ONLY (denegado), STUDENT (denegado).
+### Back (worktree `~/orca/workspaces/tpi-roadmap/gestor-admin-roadmap-authoring`)
+- [ ] **B-01 Verificación, sin código.** Por el gateway, como GESTOR y como ADMIN no miembros de la comisión:
+  - Crear un nodo de contenido.
+  - Crear un nodo desafío con un desafío publicado de otro autor.
+  - Editarlo y quitarlo.
+  - Leer el pool.
+  - Usar el roadmap secundario y el filtro de comisión (`?roadmap=&group=`).
+  - Skill `tpi-verify-integration`.
+  - Si algo responde 403 en `tpi-roadmap`, se corrige ahí.
+- [ ] **B-02 (solo si B-01 falla)** Ajustar el `requireEditor` o la regla de `tpi-roadmap` que falle, con un test de matriz: PROFESSOR dueño, PROFESSOR no dueño, GESTOR, ADMIN y STUDENT denegado.
 
-### tpi-practical-challenge
-- [ ] **P-01** `legacyRoles` con `PROFESSOR, GESTOR, ADMIN` en la autoría:
-  - `PracticalChallengeController` POST, PUT/PATCH y `variants`.
-  - `TemplateAuthoringController` (`sync`, `validation`, lecturas de autoría).
-  - `ChallengeProvisioningController` (`retry` y lectura).
-  - `TemplateSnapshotController`.
-  - `DetectedCompositionController`.
-  - `ReviewChallengeController`.
-  - Las lecturas de catálogo de autoría (`PracticalTechnologyCatalogController`, `LlmGradingRubricController`, `composition/web/*`) cuando hoy son solo PROFESSOR.
-- [ ] **P-02** `ChallengeAccessPolicy`: excepción para el admin en `canEdit` y `canView`, dentro de su organización (D2). Revisar `authoring/application/AuthoringOperationService.requireEditor` y el alta (quién puede crear en una comisión).
-- [ ] **P-03** Sin cambios: `TeacherGit*`, `GradeAdjustmentController`, corrección (D4).
-- [ ] **P-04** Tests de matriz como T-04.
-
-### Front (2026-PIV-TPI-FE), después del back
-- [ ] **F-01** `core/services/permissions.service.ts`: `authorChallenges`, `manageChallengeVariants` y `readChallengeVariants` pasan a `['PROFESSOR','GESTOR','ADMIN']`. Actualizar los comentarios que dicen que el back los rechaza.
-- [ ] **F-02** En la pantalla de desafío, con el back listo, «crear nuevo» se ofrece a los tres roles (cierra el hueco 7 del plan de front).
-- [ ] **F-03** Verificar con la skill `tpi-verify-integration`: crear, editar y archivar un desafío teórico y uno práctico como GESTOR y como ADMIN por el gateway.
+> [!note] Hallazgo aparte (no pedido)
+> `GraphValidator.usableBy` no deja que un profesor asigne un desafío escrito por **otro profesor de la misma comisión**: solo los suyos. No entra en este plan; anotarlo si aparece.
 
 ## Reglas para el agente
-- Cuatro worktrees, uno por repo, con la rama `feature/gestor-admin-challenge-authoring` desde `develop`. El front de este plan va en el worktree del front.
-- Skills: `tpi-adopt-permissions` (anotaciones, paquetes, la trampa del handler final), `tpi-merge-develop` si hay colisión de Flyway, `tpi-verify-integration` para la evidencia.
-- No tocar las reglas de corrección ni de notas. No pushear sin pedirlo.
+- Solo `2026-PIV-TPI-FE` (feature roadmap y las rutas de creación en courses) y `tpi-roadmap`.
+- Sin tests mientras se programa; tests y verify solo antes de la PR. Una sola rama por repo. No pushear sin pedirlo.
