@@ -13,17 +13,9 @@ Antecedente: [carpeta homóloga de Sprint 3](../../../sprint-3/Planes/Benja/) (s
 ## Planes
 
 - [[sprints/sprint-4/Planes/Benja/HU-72 Back+Front - cierre del curso y roadmap archivado|HU-72 · Cierre del curso y roadmap archivado]] (T-72.1–T-72.4, arrastre del Sprint 3)
-- [[sprints/sprint-4/Planes/Benja/Issue 349 Back - historial de movimientos XP|Issue #349 · Historial de movimientos XP para Accounting]] (plan de back)
-- [[sprints/sprint-4/Planes/Benja/Front - ayuda nombre del nodo vs titulo del desafio|Ayuda · Nombre del nodo vs Título del desafío]] (plan de front, textos aprobados 2026-10-27)
-- [[sprints/sprint-4/Planes/Benja/Back - copia y lectura de reglas del gate desde Neo4j|Gate · Copia y lectura de reglas desde Neo4j]] (plan de back, HT-18 continuación)
 - [[sprints/sprint-4/Planes/Benja/Front - mensajes y reintentos ante origin_unavailable|Gate · Mensajes y reintentos ante origin_unavailable]] (plan de front)
-- [[sprints/sprint-4/Planes/Benja/Back+Front - endpoints sin uso del roadmap|Auditoría · Endpoints sin uso del roadmap]] (9 huérfanos: borrar 2, conectar 4, mantener 3)
-- [[sprints/sprint-4/Planes/Benja/Front - editor de grafo unificado del roadmap|Roadmap · Editor de grafo unificado]] (plan de front, mockup aprobado 2026-10-28; tipos propios necesitan back)
 - [[sprints/sprint-4/Planes/Benja/Back+Front - logs y auditoria del roadmap|Roadmap · Sistema de logs, telemetría de alumnos y auditoría docente]] (plan Back+Front: vista alumno y vista profesor/gestor/admin)
-- [[sprints/sprint-4/Planes/Benja/Back+Front - recorrido de las flechas y posicion de secciones del roadmap|Roadmap · Recorrido de las flechas y posición de secciones en el back]] (plan Back+Front, propuesta 2026-10-30; hoy en `localStorage`, FE#1865)
-- [[sprints/sprint-4/Planes/Benja/Front - resolver revision de la PR 1865 del editor de grafo|Roadmap · Resolver la revisión de FE#1865]] (plan de front, 3 comentarios P2: hojas SECTION en Desbloqueo, dependientes sección al borrar, botones al UI kit)
-- [[sprints/sprint-4/Planes/Benja/Back - entrar a una isla bloqueada por un nodo de otra unidad|Gate · Entrar a una isla bloqueada para hacer el nodo que desbloquea otra unidad]] (plan de back, propuesta 2026-11-02; worktree gate-cross-unit-node-entry, D1-D2 por confirmar)
-- [[sprints/sprint-4/Planes/Benja/Front - carga mas rapida de la vista simple del curso|Performance · Carga más rápida de la vista simple del curso]] (medido 2026-11-02; cola HTTP/1.1, pedidos secundarios, guards en serie)
 - [[sprints/sprint-4/Planes/Benja/Front - pantallas de creacion unificadas en la vista de nodos|Roadmap · Pantallas de creación unificadas en la vista de nodos]] (plan de front, propuesta 2026-11-05; elimina el wizard lateral, Profesor/Gestor/Admin)
 - [[sprints/sprint-4/Planes/Benja/Back+Front - gestor y admin crean editan y quitan desafios|Permisos · Gestor y Admin arman el roadmap con desafíos]] (plan front + tpi-roadmap, propuesta 2026-11-05; solo repos del roadmap, el back ya permite)
 - [[sprints/sprint-4/Planes/Benja/Front - edicion de nodos con las pantallas completas|Roadmap · Edición de nodos con las pantallas completas]] (plan de front, propuesta 2026-11-06; reemplaza el panel lateral de edición por las pantallas de alta en modo edición)
+- [[sprints/sprint-4/Planes/Benja/Back - profesor de curso con rol de alumno en la plataforma|Permisos · Profesor de curso con rol de alumno en la plataforma]] (plan de back, propuesta 2026-11-06; 403 ROADMAP_NOT_VISIBLE al ver el roadmap del curso)
