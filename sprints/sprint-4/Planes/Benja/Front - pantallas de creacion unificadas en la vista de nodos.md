@@ -64,7 +64,7 @@ Permisos de hoy:
 - **Decisión de preservación:** extraer el formulario exclusivo de sección a un componente presentacional, conservando bioma, XP, posición, prerrequisitos, textos y estilos al eliminar el wizard (aprobado por coordinación).
 
 ## Tareas
-- [ ] **T-01 Inventario antes de borrar** (memoria «reutilizar antes de borrar»). Listar qué hace el wizard que las pantallas no hacen: subida de contenido (`contentUploadRequested`), IA (`aiEnabled`), regla precargada, alta de sección desde el chooser, borradores de `NodeDraftStorage`. Lo que falte se porta a la pantalla, no se pierde.
+- [x] **T-01 Inventario antes de borrar** (memoria «reutilizar antes de borrar»). Listar qué hace el wizard que las pantallas no hacen: subida de contenido (`contentUploadRequested`), IA (`aiEnabled`), regla precargada, alta de sección desde el chooser, borradores de `NodeDraftStorage`. Lo que falte se porta a la pantalla, no se pierde.
 - [x] **T-02 Query nueva en las pantallas.** `roadmapId` (mismo nombre que en la de subsección, hueco 10), `group`, `prerequisiteId`, `prerequisiteKind` y `type` (solo desafío) como `input()` en `ContentNodeCreatePageComponent` y `ChallengeNodeCreatePageComponent`. Abrir el roadmap pedido y precargar regla y tipo.
 - [x] **T-03 Navegación desde la vista de nodos.** En `graph-editor-page`, `onCreateChosen`:
   - `theory` → `content/new`.
@@ -72,18 +72,22 @@ Permisos de hoy:
   - `subsection` → `subsection/new` (si la unidad no tiene sección de Courses, ver hueco 9).
   - Usar `courseSectionId` de la unidad o la ruta sin sección. Pasar `nodeUnitId` y `returnUrl = router.url`.
   - `section` queda como hoy, con el formulario de sección.
-- [ ] **T-04 Volver con el nodo seleccionado.** Las pantallas devuelven `select=<nodeId>` al `returnUrl` cuando vienen del mapa, y el editor lo enfoca y lo anuncia.
-- [ ] **T-05 Quitar el wizard de la vista de nodos.** Sacar `<app-node-creation-wizard>` y su estado del editor: `creationKind`, `wizardDraft`, `onWizardCreateChallenge`, `saveCreatedNode`, `saveCreatedSubsection`, `contentUpload*` si no quedan usos. El chooser se mantiene como paso previo.
-- [ ] **T-06 Quitar el wizard de la vista simple.** Sacar `openWizard`, `wizardSectionId`, `wizardDraft`, el camino `draft.wizard` de `resumeDraft` y el `<app-node-creation-wizard>` del HTML de `roadmap-section-nodes`. Los borradores viejos con `wizard` se descartan.
-- [ ] **T-06b Quitar el wizard de la página general del curso.** Sacar `NodeCreationWizardComponent` de `cohort-general-page.component.ts` (import y template) y llevar esa creación a las pantallas (ver hueco 8).
-- [ ] **T-07 Borrar `ui/node-creation-wizard/`** (componente, CSS, specs) y las claves i18n que queden huérfanas, una vez que T-05, T-06 y T-06b no dejen usos.
-- [ ] **T-08 Permisos Profesor, Gestor y Admin.**
+- [x] **T-04 Volver con el nodo seleccionado.** Las pantallas devuelven `select=<nodeId>` al `returnUrl` cuando vienen del mapa, y el editor lo enfoca y lo anuncia.
+- [x] **T-05 Quitar el wizard de la vista de nodos.** Sacar `<app-node-creation-wizard>` y su estado del editor: `creationKind`, `wizardDraft`, `onWizardCreateChallenge`, `saveCreatedNode`, `saveCreatedSubsection`, `contentUpload*` si no quedan usos. El chooser se mantiene como paso previo.
+- [x] **T-06 Quitar el wizard de la vista simple.** Sacar `openWizard`, `wizardSectionId`, `wizardDraft`, el camino `draft.wizard` de `resumeDraft` y el `<app-node-creation-wizard>` del HTML de `roadmap-section-nodes`. Los borradores viejos con `wizard` se descartan.
+- [x] **T-06b Quitar el wizard de la página general del curso.** Sacar `NodeCreationWizardComponent` de `cohort-general-page.component.ts` (import y template) y llevar esa creación a las pantallas (ver hueco 8).
+- [x] **T-07 Borrar `ui/node-creation-wizard/`** (componente, CSS, specs) y las claves i18n que queden huérfanas, una vez que T-05, T-06 y T-06b no dejen usos.
+- [x] **T-08 Permisos Profesor, Gestor y Admin.**
   - Rutas `content/new`, `challenge/new` y `subsection/new` con `permissionGuard('editRoadmap')`.
   - `cohortProfessorGuard`, o un guard nuevo para estas tres rutas, deja pasar a quien tenga `editRoadmap` aunque no sea miembro.
   - Dentro de la pantalla de desafío, «crear nuevo» solo con `authorChallenges` (ver hueco 7).
   - Verificar con la skill `tpi-front-permissions`.
-- [ ] **T-09 Edición sin cambios.** Comprobar que `app-entity-editor-dialog` sigue editando igual en las dos vistas, incluida la ida y vuelta a `/challenges/new` para cambiar el desafío.
+- [x] **T-09 Edición sin cambios.** Comprobar que `app-entity-editor-dialog` sigue editando igual en las dos vistas, incluida la ida y vuelta a `/challenges/new` para cambiar el desafío.
 - [ ] **T-10 Tests y verify** solo antes de abrir la PR (memoria «sin tests al programar»): specs de las pantallas (query nueva), del editor (navegación) y de los guards.
+
+## Seguimiento de T-09
+
+El editor de la vista simple conserva su ida y vuelta a `/challenges/new`. El diálogo de edición del grafo anterior no conectaba esa acción; se mantiene sin cambios y queda como hueco para el rediseño posterior de edición, según la decisión de coordinación.
 
 ## Fuera de alcance
 - Rediseño del panel de edición (`app-entity-editor-dialog`): se hace después.
