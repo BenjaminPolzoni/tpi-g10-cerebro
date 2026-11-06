@@ -82,7 +82,7 @@ Entradas que el grafo le pasa al editar (`graph-editor-page.component.html` ~722
 9. **Sacar el drawer del todo.** Si se quiere borrar el modo `drawer` del componente, también hay que pasar a las pantallas los tres altos de la vista simple y el nodo de recuperación de `cohort-general-page`. Ver pregunta 2.
 
 ## Tareas
-- [ ] **E-01 Store: un solo guardado de edición.** Pasar la cadena de `saveNodeEdit` (grafo, ~1238) y de `onSave` (vista simple, ~2188) a un método del `RoadmapStore`. Las dos vistas lo llaman y por ahora no cambia nada visible.
+- [x] **E-01 Store: un solo guardado de edición.** Pasar la cadena de `saveNodeEdit` (grafo, ~1238) y de `onSave` (vista simple, ~2188) a un método del `RoadmapStore`. Las dos vistas lo llaman y por ahora no cambia nada visible.
 - [ ] **E-02 Contenido en modo edición.**
   - Ruta `content/:nodeId/edit`.
   - `ContentNodeCreatePage` lee `nodeId`, busca el nodo y le pasa al editor inline todas las entradas `initial*` que hoy le pasa el grafo, con `isNew=false`.
