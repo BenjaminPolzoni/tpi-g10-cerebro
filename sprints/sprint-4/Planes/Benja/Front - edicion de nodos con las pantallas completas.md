@@ -97,6 +97,13 @@ Entradas que el grafo le pasa al editar (`graph-editor-page.component.html` ~722
 - [x] **E-07 La vista de nodos navega.** Las acciones `edit` y `change` del menú del nodo llevan a `content/:id/edit` o a `challenge/:id/edit` según el tipo; `change` abre directamente en el paso `challenge`. Se borran `editingNodeId`, `saveNodeEdit`, `pendingTurnOff` y el `<app-entity-editor-dialog>` del grafo.
 - [x] **E-08 La vista simple navega.** `editNode` lleva a las mismas rutas. Se borran `onSave` (la parte de edición) y su estado.
 - [x] **E-09 Altas que quedan en el drawer.** Pasar a las pantallas las altas de la vista simple (recurso pendiente, `newNode`, `resumeDraft`) y el nodo de recuperación de `cohort-general-page`. Después borrar el modo `drawer` de `entity-editor-dialog` y su CSS.
+- [ ] **E-12 Editar un desafío se ve igual que crearlo** (pedido de Benja, 2026-11-06). Hoy, al editar, el paso «Desafío» abre en «Existente» (`source.set('existing')`, `challenge-node-create-page.component.ts` ~1658) y muestra el buscador de desafíos en lugar del formulario. Además, `saveEditedChallenge` (~2331) manda el título, la descripción y la dificultad de la versión cargada, no lo que editó el usuario. Cambio:
+  - Al editar, el paso «Desafío» abre con el **mismo diseño que «Nuevo»**: el formulario `app-challenge-definition-card` (título, descripción, tipo y dificultad) precargado con la versión del desafío vinculado, más el icono y la vista previa «Tu desafío».
+  - El tipo queda bloqueado, porque el nodo no puede cambiar de tipo.
+  - El selector de origen sigue: la primera opción es el desafío vinculado, que se edita en el formulario, y «Existente» permite vincular otro desafío, igual que «Cambiar desafío».
+  - Al guardar, `updateChallenge` manda los valores del formulario (título, descripción y dificultad). Solo se llama si algo cambió.
+  - El título de la página es «Editar desafío», en lugar de «Nuevo desafío»; el resto del diseño es igual.
+  - Mismos pasos (Desafío, Reglas, Curso, Contenido, Revisión), todos abiertos.
 - [ ] ~~E-10 Historial~~: fuera de alcance, espera a backend (decisión 3).
 - [x] **E-11 Tests y verify** solo antes de la PR: specs de las pantallas en modo edición, del método del store, de la navegación de las dos vistas y de las rutas.
 
