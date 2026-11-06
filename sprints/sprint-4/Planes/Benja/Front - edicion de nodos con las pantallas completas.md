@@ -166,8 +166,7 @@ Al asignar o editar un desafío en un nodo, el paso **«Reglas»** se puede edit
 
 ### Decisiones propuestas
 - **Dónde está el selector y qué trae por defecto:**
-  - Con «Existente»: arranca en **«Solo este nodo»**.
-  - Con «Vinculado» (editar el desafío propio): arranca en **«General»**.
+  - Con «Existente» o «Vinculado»: arranca siempre en **«Solo este nodo»** (decisión 1).
   - Con «Nuevo» (crear): no hay selector, porque todo es general.
 - **«General» habilitado** solo si el usuario puede editar ese desafío: tiene `authorChallenges` y el servicio de desafíos lo deja. Si el servicio rechaza el guardado (por ejemplo, porque es de otro autor), se muestra el error y no se pierde lo que ya se guardó del nodo. Se avisa: «Estos cambios modifican el desafío en todos los cursos donde se usa».
 - **En «Solo este nodo»:**
@@ -181,7 +180,7 @@ Al asignar o editar un desafío en un nodo, el paso **«Reglas»** se puede edit
 - [ ] **E-16 Paso «Reglas» siempre disponible.** Quitar `rules` de `EXISTING_SKIPS` (`challenge-node-create-page.component.ts` ~217/2214). Cargar la versión del desafío elegido también con «Existente», para mostrar sus valores.
 - [ ] **E-17 Selector de alcance.**
   - `GenericSegmented` arriba de «Reglas», con dos estados: `scope = 'challenge' | 'node'`.
-  - Valor por defecto según el origen, como dicen las decisiones.
+  - Arranca siempre en «Solo este nodo».
   - «General» deshabilitado sin `authorChallenges`.
   - Textos i18n en es, en y pt.
 - [ ] **E-18 Modo «Solo este nodo».**
@@ -199,6 +198,13 @@ Al asignar o editar un desafío en un nodo, el paso **«Reglas»** se puede edit
   - errores parciales;
   - nada duplicado en «Curso».
 
-### Preguntas abiertas
-1. ¿Está bien que, con «Existente», arranque en «Solo este nodo», y con «Vinculado», en «General»?
-2. Para ajustar por nodo la nota para aprobar, el redondeo o qué pasa al acabarse el tiempo, hace falta que el Motor y el servicio de desafíos acepten esos valores por intento. Eso es de otros grupos. ¿Lo dejamos deshabilitado con el aviso, o abrimos un issue a esos grupos?
+### Decisiones de Benja (2026-11-06)
+1. **Siempre arranca en «Solo este nodo»**, con «Existente» o con «Vinculado».
+2. **Tiene que quedar muy claro qué se está editando.** Al mover el selector cambia todo el paso, no solo la palanca:
+   - un aviso fijo arriba del paso: «Estás editando solo este nodo: el desafío no cambia», en tono info, o «Estás editando el desafío para todos los cursos donde se usa», en tono warning;
+   - el título del paso: «Reglas de este nodo» o «Reglas generales del desafío»;
+   - una marca en la tarjeta (borde o etiqueta) con el color del alcance;
+   - en «Revisión», los cambios separados bajo esos mismos dos títulos.
+   
+   Todo con componentes y tonos del kit (`GenericCallout`, `GenericBadge`), sin colores sueltos.
+3. Las reglas que no se pueden ajustar por nodo quedan **deshabilitadas con el aviso**. No se abre issue a otros grupos por ahora.
