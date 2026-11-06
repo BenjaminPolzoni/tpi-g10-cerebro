@@ -83,7 +83,7 @@ Entradas que el grafo le pasa al editar (`graph-editor-page.component.html` ~722
 
 ## Tareas
 - [x] **E-01 Store: un solo guardado de edición.** Pasar la cadena de `saveNodeEdit` (grafo, ~1238) y de `onSave` (vista simple, ~2188) a un método del `RoadmapStore`. Las dos vistas lo llaman y por ahora no cambia nada visible.
-- [ ] **E-02 Contenido en modo edición.**
+- [x] **E-02 Contenido en modo edición.**
   - Ruta `content/:nodeId/edit`.
   - `ContentNodeCreatePage` lee `nodeId`, busca el nodo y le pasa al editor inline todas las entradas `initial*` que hoy le pasa el grafo, con `isNew=false`.
   - Al guardar, usa E-01.
