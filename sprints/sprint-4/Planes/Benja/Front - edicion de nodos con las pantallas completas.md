@@ -208,3 +208,45 @@ Al asignar o editar un desafío en un nodo, el paso **«Reglas»** se puede edit
    
    Todo con componentes y tonos del kit (`GenericCallout`, `GenericBadge`), sin colores sueltos.
 3. Las reglas que no se pueden ajustar por nodo quedan **deshabilitadas con el aviso**. No se abre issue a otros grupos por ahora.
+
+## Reglas por nodo con la misma vista que al crear (pedido de Benja, 2026-11-06)
+
+### Qué se pide
+1. Con «Existente», la lista de desafíos se puede **filtrar por teóricos y prácticos**. Antes solo mostraba el tipo del formulario (Práctico por defecto) y al crear no había cómo cambiarlo. El arreglo provisorio `c576703371` puso un selector de tipo; se reemplaza por un filtro.
+2. El modo «Solo este nodo» de «Reglas» tiene que verse **exactamente igual** que el paso «Reglas» al crear:
+   - a la izquierda, la tarjeta «Ítems permitidos en el desafío» (Activos/Inactivos + lista);
+   - a la derecha, la tarjeta «Reglas» (`app-challenge-rules-card`).
+   
+   Los campos vienen **llenos con los valores vigentes**: el valor propio del nodo o, si no tiene, el del desafío. Hoy es una columna de inputs sueltos, con un «Usar el del desafío» por campo y una caja de inputs deshabilitados.
+
+### Diseño
+- **Filtro de tipo.** Señal `poolFilter: 'ALL' | 'THEORETICAL' | 'PRACTICAL'`, por defecto `'ALL'`. Se muestra como `GenericSegmented` «Todos / Teóricos / Prácticos», arriba del buscador.
+  - `poolOptions` filtra por `poolFilter`, no por `form.type()`.
+  - Al elegir un desafío, `form.type` sigue al desafío, como ya hace `chooseExisting`.
+  - Se borran el `generic-select` de tipo y `setChallengeType`. El cambio de tipo del nodo en edición se hace eligiendo un desafío del otro tipo.
+  - `poolLoading` y `poolFailed` con `'ALL'`: cargando si alguno carga, error si alguno falla.
+- **Bloqueo por campo en `app-challenge-rules-card`.** Input nuevo opcional `editableFields = input<ReadonlySet<'retries' | 'timeLimit' | 'ai'> | null>(null)`.
+  - Con `null` no cambia nada para las demás pantallas.
+  - Con un set, los campos que no están en el set quedan deshabilitados. Al lado se ve el texto `challengeNodeCreate.scope.generalOnly` o un hint equivalente. Esos campos son nota, redondeo, corrección, al acabarse el tiempo, etc.
+- **Modo nodo = mismo layout.** Con alcance «Solo este nodo» se usa la misma grilla `cn-grid cn-grid-items` que al crear:
+  - **Izquierda:** la tarjeta de ítems, con el mismo `generic-segmented` Activos/Inactivos y el mismo `app-allowed-items-picker`, ligados a `nodeEffects` / `setNodeItemsAllowed` / `setNodeItemEffects`. Mismo título; la descripción es `challengeNodeCreate.items.nodeHint`.
+  - **Derecha:** `app-challenge-rules-card` ligado a un **settings efectivo del nodo**: los settings del desafío con lo propio del nodo encima. Al editar, solo se escriben en el borrador del nodo los campos ajustables:
+    - `retries` → `nodeRetries`;
+    - `timeLimitMinutes` → `nodeTimeLimit`;
+    - IA → `nodeAi` + `nodeAiRoles` (tutor ↔ `TUTOR`, evaluador ↔ `CORRECTOR`).
+    - `[editableFields]` = `{retries, timeLimit, ai}`.
+  - Se borran los inputs sueltos, los «Usar el del desafío» por campo, la caja de inputs deshabilitados y el `generic-section-card` contenedor.
+  - Queda **una sola** acción «Usar los valores del desafío», que restablece todo el borrador del nodo. Va en la fila del selector de alcance o en la cabecera.
+  - Se mantienen el selector de alcance, el callout info/warning y la marca de alcance (badge o borde) de las decisiones de 2026-11-06.
+- **Modo general:** también con la misma grilla de dos tarjetas, igual que al crear, editando `form.settings` e `itemEffects`, sin la tarjeta envolvente.
+
+### Tareas
+- [ ] **E-22 Filtro de tipo en «Existente».** Lo de «Filtro de tipo». i18n es/en/pt. Tests: con `'ALL'` aparecen los dos tipos; cada filtro deja solo el suyo; elegir un teórico pone `form.type = 'THEORETICAL'`.
+- [ ] **E-23 `editableFields` en la tarjeta de reglas.** Input + deshabilitado por campo + test en `challenge-rules-card.component.spec.ts`.
+- [ ] **E-24 Modo nodo con el layout de crear.** Lo de «Modo nodo = mismo layout» y «Modo general». Tests:
+  - el modo nodo muestra la tarjeta de reglas con los valores del desafío cuando el nodo hereda;
+  - con valor propio, muestra el del nodo;
+  - editar intentos o tiempo escribe en el borrador del nodo y no en `form.settings`;
+  - «Usar los valores del desafío» vuelve todo a heredado;
+  - los campos no ajustables están deshabilitados.
+- [ ] **E-25 Chequeo.** `npx tsc --noEmit -p tsconfig.app.json`, specs tocados con node@22, `npm run verify`.
