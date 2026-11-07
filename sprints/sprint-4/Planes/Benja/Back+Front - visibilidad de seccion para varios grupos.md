@@ -65,13 +65,13 @@ La restricción de una sección (tpi-course) es una lista plana de condiciones c
 
 ### Front (`section-editor-drawer`)
 
-- [ ] **V-04** `cohort-general-page.component.ts`: calcular los grupos que comparten el roadmap seleccionado (`selectedRoadmapId`). Si el roadmap tiene `visibleToAll !== false`, son todos los grupos de la cohorte; si no, sus `groupIds`. Pasarlos al drawer con un input nuevo (`roadmapGroupIds`).
-- [ ] **V-05** Drawer: mostrar el bloque de grupos solo si `roadmapGroupIds().length >= 2`. Las fechas siguen visibles siempre.
-- [ ] **V-06** Drawer: reemplazar `generic-select` por una lista de `generic-checkbox` dentro de un `fieldset` con `legend`, como en `roadmap-setup-page`, una por grupo del roadmap. Ninguno marcado = la ven todos. El estado pasa de `selectedGroupId: string` a `selectedGroupIds: string[]`.
-- [ ] **V-07** Carga (`section-editor-drawer.component.ts` ~l.320): leer **todas** las condiciones `GROUP`, no solo la primera con `find`. Si alguno de los grupos guardados no comparte el roadmap, conservarlo en `otherConditions` para no borrarlo al guardar.
-- [ ] **V-08** Guardado (`saveVisibility`, ~l.650): una condición `GROUP` por grupo marcado; sin cambios en `DATE` ni en el operador.
-- [ ] **V-09** i18n (es/en/pt): label "Grupos que ven la sección", ayuda "Si no marcás ninguno, la ven todos los grupos del roadmap. Las fechas aplican a los grupos marcados.". Quitar `sectionDrawer.visibility.anyGroup` si queda sin uso.
-- [ ] **V-10** Specs del drawer: el bloque se oculta con 1 grupo y se muestra con 2; marcar 2 grupos manda 2 `GROUP`; se conservan los grupos ajenos al roadmap.
+- [x] **V-04** `cohort-general-page.component.ts`: calcular los grupos que comparten el roadmap seleccionado (`selectedRoadmapId`). Si el roadmap tiene `visibleToAll !== false`, son todos los grupos de la cohorte; si no, sus `groupIds`. Pasarlos al drawer con un input nuevo (`roadmapGroupIds`).
+- [x] **V-05** Drawer: mostrar el bloque de grupos solo si `roadmapGroupIds().length >= 2`. Las fechas siguen visibles siempre.
+- [x] **V-06** Drawer: reemplazar `generic-select` por una lista de `generic-checkbox` dentro de un `fieldset` con `legend`, como en `roadmap-setup-page`, una por grupo del roadmap. Ninguno marcado = la ven todos. El estado pasa de `selectedGroupId: string` a `selectedGroupIds: string[]`.
+- [x] **V-07** Carga (`section-editor-drawer.component.ts` ~l.320): leer **todas** las condiciones `GROUP`, no solo la primera con `find`. Si alguno de los grupos guardados no comparte el roadmap, conservarlo en `otherConditions` para no borrarlo al guardar.
+- [x] **V-08** Guardado (`saveVisibility`, ~l.650): una condición `GROUP` por grupo marcado; sin cambios en `DATE` ni en el operador.
+- [x] **V-09** i18n (es/en/pt): label "Grupos que ven la sección", ayuda "Si no marcás ninguno, la ven todos los grupos del roadmap. Las fechas aplican a los grupos marcados.". Quitar `sectionDrawer.visibility.anyGroup` si queda sin uso.
+- [x] **V-10** Specs del drawer: el bloque se oculta con 1 grupo y se muestra con 2; marcar 2 grupos manda 2 `GROUP`; se conservan los grupos ajenos al roadmap.
 
 ## Orden
 
