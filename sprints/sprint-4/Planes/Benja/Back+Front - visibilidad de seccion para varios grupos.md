@@ -56,7 +56,7 @@ La restricción de una sección (tpi-course) es una lista plana de condiciones c
 
 ### tpi-course
 
-- [ ] **V-01** Pedido a Courses en [tpi-course#316](https://github.com/2026-P4-BE/tpi-course/issues/316) (evaluador + validación de grupo repetido + tests + Swagger). Lo implementa el equipo de Courses; nosotros no tocamos ese repo.
+- [x] **V-01** Pedido a Courses en [tpi-course#316](https://github.com/2026-P4-BE/tpi-course/issues/316) (evaluador + validación de grupo repetido + tests + Swagger). Lo implementa el equipo de Courses; nosotros no tocamos ese repo.
 
 ### tpi-roadmap
 
