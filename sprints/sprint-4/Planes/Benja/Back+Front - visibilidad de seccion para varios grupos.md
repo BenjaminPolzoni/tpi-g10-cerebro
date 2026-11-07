@@ -56,12 +56,12 @@ La restricción de una sección (tpi-course) es una lista plana de condiciones c
 
 ### tpi-course
 
-- [ ] **V-01** Implementar el pedido de arriba (evaluador + validación de grupo repetido + tests + Swagger).
+- [ ] **V-01** Pedido a Courses en [tpi-course#316](https://github.com/2026-P4-BE/tpi-course/issues/316) (evaluador + validación de grupo repetido + tests + Swagger). Lo implementa el equipo de Courses; nosotros no tocamos ese repo.
 
 ### tpi-roadmap
 
-- [ ] **V-02** `GroupVisibilityRules.isVisibleIn`: con `GROUP` alcanza con `restriction.groupIds().contains(groupId)`; quitar la rama `ALL → containsAll`. Actualizar el Javadoc (acta T-10.1 §4 ya no aplica a grupos) y los tests: `ALL` con 2 grupos → visible en la vista de cualquiera de los dos.
-- [ ] **V-03** Revisar `StudentGroupUnits` y los demás usos de `SectionGroupRestriction.operator()` para que nada vuelva a exigir pertenecer a todos los grupos.
+- [x] **V-02** `GroupVisibilityRules.isVisibleIn`: con `GROUP` alcanza con `restriction.groupIds().contains(groupId)`; quitar la rama `ALL → containsAll`. Actualizar el Javadoc (acta T-10.1 §4 ya no aplica a grupos) y los tests: `ALL` con 2 grupos → visible en la vista de cualquiera de los dos.
+- [x] **V-03** Revisar `StudentGroupUnits` y los demás usos de `SectionGroupRestriction.operator()` para que nada vuelva a exigir pertenecer a todos los grupos.
 
 ### Front (`section-editor-drawer`)
 
