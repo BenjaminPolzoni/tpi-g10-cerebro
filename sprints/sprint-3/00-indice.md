@@ -36,6 +36,10 @@ estado: borrador
 | 16 | [Brecha Taiga vs código y patrones](16-brecha-taiga-vs-codigo-y-patrones.md) | Tareas hechas en el código pero New en Taiga, lo que falta de verdad y las mejoras de patrones/deuda que no tienen tarea |
 | 17 | [Plan de subsecciones](17-plan-subsecciones.md) | T-58.2: subsecciones como zonas dentro de la isla. Qué ya existe en Courses, back y front, alternativas, decisiones S1 a S7 para el equipo, 4 fases y el prompt de la fase 1 |
 
+## Planes de Benjamin Polzoni
+
+- [[sprints/sprint-3/Planes/Benja/Front+Back - previsualizar HTML y Markdown en el visor 3D|Previsualizar HTML y Markdown de la vista sobria dentro del visor 3D]] — plan de Front y cambio condicional de Roadmap; ver el contenido sin descargarlo.
+
 ## Mapa de la propuesta
 
 ```mermaid
