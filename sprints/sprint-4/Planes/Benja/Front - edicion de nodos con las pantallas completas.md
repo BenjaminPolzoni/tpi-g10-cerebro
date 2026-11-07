@@ -241,12 +241,12 @@ Al asignar o editar un desafío en un nodo, el paso **«Reglas»** se puede edit
 - **Modo general:** también con la misma grilla de dos tarjetas, igual que al crear, editando `form.settings` e `itemEffects`, sin la tarjeta envolvente.
 
 ### Tareas
-- [ ] **E-22 Filtro de tipo en «Existente».** Lo de «Filtro de tipo». i18n es/en/pt. Tests: con `'ALL'` aparecen los dos tipos; cada filtro deja solo el suyo; elegir un teórico pone `form.type = 'THEORETICAL'`.
-- [ ] **E-23 `editableFields` en la tarjeta de reglas.** Input + deshabilitado por campo + test en `challenge-rules-card.component.spec.ts`.
-- [ ] **E-24 Modo nodo con el layout de crear.** Lo de «Modo nodo = mismo layout» y «Modo general». Tests:
+- [x] **E-22 Filtro de tipo en «Existente».** Lo de «Filtro de tipo». i18n es/en/pt. Tests: con `'ALL'` aparecen los dos tipos; cada filtro deja solo el suyo; elegir un teórico pone `form.type = 'THEORETICAL'`.
+- [x] **E-23 `editableFields` en la tarjeta de reglas.** Input + deshabilitado por campo + test en `challenge-rules-card.component.spec.ts`.
+- [x] **E-24 Modo nodo con el layout de crear.** Lo de «Modo nodo = mismo layout» y «Modo general». Tests:
   - el modo nodo muestra la tarjeta de reglas con los valores del desafío cuando el nodo hereda;
   - con valor propio, muestra el del nodo;
   - editar intentos o tiempo escribe en el borrador del nodo y no en `form.settings`;
   - «Usar los valores del desafío» vuelve todo a heredado;
   - los campos no ajustables están deshabilitados.
-- [ ] **E-25 Chequeo.** `npx tsc --noEmit -p tsconfig.app.json`, specs tocados con node@22, `npm run verify`.
+- [x] **E-25 Chequeo.** `npx tsc --noEmit -p tsconfig.app.json`, specs tocados con node@22, `npm run verify`.
