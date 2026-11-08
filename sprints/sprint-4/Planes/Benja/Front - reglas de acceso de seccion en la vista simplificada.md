@@ -4,7 +4,7 @@ fecha: 2026-11-08
 autor: Benjamin Polzoni
 estado: en curso
 repo: 2026-P4-FE/2026-PIV-TPI-FE
-rama: BenjaminPolzoni/RamaDeAjusteDeVisibilidad
+rama: fix/section-access-rules-simple-view (FE#2477)
 ---
 
 # Plan — Reglas de acceso de sección en la vista simplificada
