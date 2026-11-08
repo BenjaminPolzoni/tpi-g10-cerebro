@@ -65,28 +65,28 @@ marca todos los nodos (y subsecciones) como `blocked: false`.
 
 **Regla dura: solo componentes de `@2026-p4-fe/ui` y tokens `--tpi-*`.**
 
-- [ ] R-08 `ruleOptions` (drawer): validar **cada** elemento (secciones de cualquier nivel y nodos)
+- [x] R-08 `ruleOptions` (drawer): validar **cada** elemento (secciones de cualquier nivel y nodos)
       con `prerequisitePolicy(this.store.sections(), [])` contra
       `{ kind: 'section', id: unit.id }`. `blocked = !verdict.allowed && !savedLeaf` (un elemento ya
       guardado sigue elegible para poder quitarlo). Quitar el fallback que ofrecía todas las
       secciones sin bloquear cuando no había candidatos. La propia unidad sigue mostrándose con sus
       nodos, todos bloqueados.
-- [ ] R-09 `PrerequisiteOption` gana `reason?: string` (texto ya traducido). `prerequisite-picker`
+- [x] R-09 `PrerequisiteOption` gana `reason?: string` (texto ya traducido). `prerequisite-picker`
       muestra `row.reason` en la nota de la fila y en su `aria-label` cuando existe; si no, el texto
       actual `requirementsPicker.tree.blocked`. Las filas bloqueadas siguen `disabled` (no se
       pueden clickear). Sin cambios de comportamiento para el editor de nodos (no pasa `reason`).
-- [ ] R-10 Textos del motivo (claves nuevas `sectionDrawer.rules.blocked.*`, en es/en/pt), según el
+- [x] R-10 Textos del motivo (claves nuevas `sectionDrawer.rules.blocked.*`, en es/en/pt), según el
       primer motivo del veredicto:
       - `containment` en un **nodo** → "No podés elegir un nodo de esta misma sección."
       - `containment` en una **sección** → "No se puede elegir: contiene a esta sección o está dentro de ella."
       - `self` → "Es esta misma sección."
       - `cycle` → "No se puede elegir: ya depende de esta sección y cerraría un ciclo."
       - otro (`optional`, `boundary`, `recovery`) → "No se puede elegir: " + `prerequisitePolicy.reason.<motivo>`.
-- [ ] R-11 XP mínimo **arriba**: mover el `generic-input` del XP justo debajo del texto de
+- [x] R-11 XP mínimo **arriba**: mover el `generic-input` del XP justo debajo del texto de
       introducción de la pestaña Reglas, antes de los botones de selección y del árbol.
-- [ ] R-12 Panel de la regla: `requirementOperandRows(..., kindOf)` con `'node'` para nodos y
+- [x] R-12 Panel de la regla: `requirementOperandRows(..., kindOf)` con `'node'` para nodos y
       `'unit'` para secciones (hoy dice "Unidad" en todos).
-- [ ] R-13 Error al guardar reglas: `saveRules` llama `saveUnitRules(..., { inlineError: true })` y
+- [x] R-13 Error al guardar reglas: `saveRules` llama `saveUnitRules(..., { inlineError: true })` y
       el error que muestra el pie es `roadmapErrorMessage(err, t('roadmapStore.unitRulesFailed'), i18n)`
       (no el genérico de la configuración de la sección). En `roadmap-error-message.ts` mapear
       `rule.self-reference` → `ROADMAP_RULE_SELF_REFERENCE`, `rule.optional-prerequisite` →
@@ -95,7 +95,7 @@ marca todos los nodos (y subsecciones) como `blocked: false`.
       - SELF_REFERENCE: "La regla exige un elemento de esta misma sección. Quitalo y guardá de nuevo."
       - OPTIONAL_PREREQUISITE: "La regla exige un nodo opcional, que el alumno puede saltear. Quitalo y guardá de nuevo."
       - CONTAINMENT: "Una sección no puede exigir a la que la contiene ni a una de sus subsecciones."
-- [ ] R-14 Specs del drawer: nodo de la propia sección bloqueado con su motivo; nodo de una sección
+- [x] R-14 Specs del drawer: nodo de la propia sección bloqueado con su motivo; nodo de una sección
       posterior que no depende de esta → elegible (caso 5); nodo de una sección que depende de esta
       → bloqueado por ciclo (caso 4); el XP se renderiza antes del picker; error 400
       `rule.self-reference` muestra el texto nuevo.
