@@ -7,6 +7,11 @@ reemplaza: ""
 
 # DEC-007: El anonimato del ranking se resuelve en el servidor
 
+> [!important] Actualización de la decisión
+> El acuerdo del equipo en [tpi-roadmap#427](https://github.com/2026-P4-BE/tpi-roadmap/pull/427) reemplaza la regla de anonimato de las filas ajenas que se documenta abajo. El servidor aplica la vista que configura el profesor por curso. En **Completa**, el alumno ve toda la clasificación. En **Compacta**, ve su fila y hasta dos puestos cercanos. Si está primero, ve a los dos de abajo. Si está último, ve a los dos de arriba.
+>
+> Hasta que el profesor guarde una configuración, el curso usa la **Vista compacta**. En las dos vistas, incluida la compacta por defecto, las filas visibles de compañeros llevan su identidad y su nombre cuando Users devuelve el perfil. El profesor elige cuántas filas se muestran. El alumno no puede optar por quedar fuera de las filas visibles. Los cortes P90 y P10 se informan sin identidad.
+
 ## Contexto
 RF-RNK-03: un alumno solo puede ver su propia identidad en el ranking; el profesor ve a todos. Las reglas de orden vivían en el front (`ranking.rules.ts`). Mostrar el nombre de otros alumnos al profesor requiere Users, que puede fallar.
 
