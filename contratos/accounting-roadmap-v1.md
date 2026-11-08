@@ -3,8 +3,9 @@
 | Dato | Valor |
 |---|---|
 | Tarea | T-03.1 — Acta del contrato de vidas e ítems con Inventario/Accounting |
-| Versión | 1.0 |
-| Fecha | 2026-09-26 |
+| Versión | 1.1 |
+| Fecha | 2026-09-26 (1.1: 2026-11-08) |
+| Cambios 1.1 | §3.7: wire `snake_case`, ítems por tiempo (`expires_at`, `duration_minutes`, cargas nulables) |
 | Estado | **Acordado funcionalmente; firma nominal pendiente** |
 | Equipos | Roadmap (Tema 10) y Accounting (Tema 08) |
 
@@ -181,33 +182,54 @@ Roadmap a exponer datos personales.
 GET /api/accounting/courses/{courseId}/accounts/{studentId}/equip-summary
 ```
 
+El cuerpo se muestra en `snake_case`, que es como lo envía Accounting y como lo lee Roadmap
+(`HttpInventoryClient`). El resto del acta conserva la notación camelCase original hasta su
+revisión.
+
 ```json
 {
-  "currentLives": 3,
-  "reservedLives": 1,
-  "availableBalance": 850.00,
+  "current_lives": 3,
+  "reserved_lives": 1,
+  "available_balance": 850.00,
   "items": [
     {
-      "itemInstanceId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "catalogItemId": "SHIELD-001",
-      "itemName": "Escudo x2",
-      "itemType": "SHIELD",
-      "itemEffect": "LIFE_PROTECTION",
-      "applicableChallengeScope": "ALL",
+      "item_instance_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "catalog_item_id": "SHIELD-001",
+      "item_name": "Escudo x2",
+      "item_type": "SHIELD",
+      "item_effect": "LIFE_PROTECTION",
+      "applicable_challenge_scope": "ALL",
       "status": "EQUIPPED",
-      "maxCharges": 2,
-      "remainingUses": 2
+      "max_charges": 2,
+      "remaining_uses": 2,
+      "expires_at": null,
+      "duration_minutes": null
     },
     {
-      "itemInstanceId": "8b1e2c4a-1234-4a1b-9c3d-abcdef123456",
-      "catalogItemId": "BOOST-007",
-      "itemName": "Doble puntos",
-      "itemType": "BOOST",
-      "itemEffect": "SCORE_MULTIPLIER",
-      "applicableChallengeScope": "PRACTICAL_ONLY",
+      "item_instance_id": "8b1e2c4a-1234-4a1b-9c3d-abcdef123456",
+      "catalog_item_id": "BOOST-007",
+      "item_name": "Doble puntos",
+      "item_type": "BOOST",
+      "item_effect": "SCORE_MULTIPLIER",
+      "applicable_challenge_scope": "PRACTICAL_ONLY",
       "status": "CONSUMED",
-      "maxCharges": 1,
-      "remainingUses": 0
+      "max_charges": 1,
+      "remaining_uses": 0,
+      "expires_at": null,
+      "duration_minutes": null
+    },
+    {
+      "item_instance_id": "5c9d3e21-0000-4a1b-9c3d-abcdef654321",
+      "catalog_item_id": "BOOST-TTL-60",
+      "item_name": "Doble XP 1 h",
+      "item_type": "BOOST",
+      "item_effect": "SCORE_MULTIPLIER",
+      "applicable_challenge_scope": "ALL",
+      "status": "EQUIPPED",
+      "max_charges": null,
+      "remaining_uses": null,
+      "expires_at": "2026-11-07T15:00:00Z",
+      "duration_minutes": 60
     }
   ]
 }
@@ -216,6 +238,30 @@ GET /api/accounting/courses/{courseId}/accounts/{studentId}/equip-summary
 La colección `items` representa el listado completo de ítems del estudiante para ese curso en
 una sola llamada. El vocabulario vigente mostrado por este contrato incluye `SHIELD`, `BOOST`,
 `LIFE_PROTECTION`, `SCORE_MULTIPLIER`, `ALL`, `PRACTICAL_ONLY`, `EQUIPPED` y `CONSUMED`.
+Accounting puede incluir campos adicionales, como `equipped_row`; Roadmap los ignora.
+
+#### Ítems por cargas y por tiempo
+
+Un ítem es **por cargas** o **por tiempo** (tpi-roadmap#432, tpi-accounting#447):
+
+| Campo | Ítem por cargas | Ítem por tiempo |
+|---|---|---|
+| `max_charges` | entero `>= 0` | `null` |
+| `remaining_uses` | entero `>= 0` | `null` |
+| `expires_at` | `null` | texto ISO-8601 UTC con zona (por ejemplo `2026-11-07T15:00:00Z`) |
+| `duration_minutes` | `null` | entero de 1 a 525600 |
+
+- Las dos cargas van informadas o las dos en `null`. Un ítem con una sola en `null` es inválido,
+  y Roadmap descarta el resumen entero.
+- `expires_at` no es obligatorio para que el ítem se muestre. Sin zona, Roadmap lo toma como
+  UTC; si es ilegible, muestra el ítem sin vencimiento.
+- Cuando un ítem por tiempo vence, Accounting lo pasa a `CONSUMED` (estado terminal) y sigue
+  apareciendo en `items` con las cargas en `null`.
+- Un ítem por tiempo equipado entra a la reserva de los desafíos. Esa reserva la hace Motor
+  contra Accounting y no pasa por este resumen.
+
+**Coordinación del despliegue:** Roadmap tolera estos ítems desde tpi-roadmap#435. Accounting
+deja de omitir los ítems por tiempo del resumen recién cuando esa PR esté mergeada y desplegada.
 
 ## 4. Eventos de vidas
 
