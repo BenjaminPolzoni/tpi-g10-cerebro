@@ -7,6 +7,11 @@ reemplaza: ""
 
 # DEC-022: Cómo muestra el front el ranking (vistas, orden y desempate)
 
+> [!important] Actualización de la vista del alumno
+> El acuerdo del equipo en [tpi-roadmap#427](https://github.com/2026-P4-BE/tpi-roadmap/pull/427) reemplaza la vista fija y el anonimato de las filas ajenas que se documentan abajo. El profesor elige **Completa** (toda la clasificación) o **Compacta** (fila propia y hasta dos puestos cercanos, ambos del mismo lado si está primero o último). El alumno usa el criterio oficial del curso, XP o Notas.
+>
+> La **Vista compacta** se aplica desde el inicio, incluso antes de que el profesor guarde los ajustes. Los compañeros de las filas visibles aparecen identificados tanto en la vista por defecto como en las vistas elegidas. El profesor elige cuántas filas se muestran y el alumno no puede optar por quedar fuera. Roadmap decide qué filas puede recibir el front, según la actualización de [[decisiones/DEC-007-anonimato-ranking-en-servidor|DEC-007]].
+
 > [!info] Aceptada
 > Son decisiones de producto tomadas en la revisión del ranking (PR front [#1003](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/pull/1003), rama `feature/ranking-alumno`). Las diferencias con el PRD y con [[decisiones/DEC-007-anonimato-ranking-en-servidor|DEC-007]] de abajo las confirmó el equipo el 2026-10-22.
 
