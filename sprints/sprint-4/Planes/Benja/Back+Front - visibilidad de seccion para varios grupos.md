@@ -2,7 +2,7 @@
 tags: [tpi, g10, sprint-4, plan, back, front, courses, roadmap, multi-roadmap]
 fecha: 2026-11-06
 autor: Benjamin Polzoni
-estado: propuesta
+estado: hecho
 repo: 2026-P4-BE/tpi-course, 2026-P4-BE/tpi-roadmap, 2026-P4-FE/2026-PIV-TPI-FE
 rama: BenjaminPolzoni/unified-node-creation-pages (front)
 ---
