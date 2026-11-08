@@ -35,15 +35,16 @@ Las respuestas del ranking (`StaffRankingView`, `StudentRankingView`) suman dos 
 
 - **`data_status`:**
   - `FRESH`: armado completo.
-  - `DEGRADED`: faltó Accounting o Backoffice (el ranking sale con XP al día y vidas o nivel nulos, sin cambiar el orden), o en la vista del profesor a alguna fila le falta el perfil de Users y sale con seudónimo. Lo de Users se sumó en la revisión del PR #231 (2026-10-16).
-  - `STALE`: servido desde la caché.
+  - `DEGRADED`: faltan datos remotos, por ejemplo vidas de Accounting, nivel de Backoffice o perfiles de Users. Cuando falta un perfil, la fila visible lleva un nombre de respaldo por puesto tanto para el alumno como para el profesor.
+  - `STALE`: vista de staff servida desde la caché de respaldo.
 - **`generated_at`:** instante en que se armó la vista.
 
 ### Caché de respaldo
-- **Dónde:** el último ranking armado vive en memoria (Caffeine). La vista del profesor se guarda por `courseCohortId`; la del alumno, por `(courseCohortId, studentId)`.
+- **Dónde:** el último ranking de staff vive en memoria (Caffeine), separado por ámbito de XP y comisión.
 - **Configuración:** TTL y tamaño por property con variable de entorno (por ejemplo `RANKING_FALLBACK_CACHE_TTL`, 24 h por defecto).
 - **Cuándo se usa:** **solo** si armar el ranking falla **después** de pasar la autorización (por ejemplo, la base). Se devuelve con `data_status=STALE` y su `generated_at` original, y se deja un `WARN`.
 - **Sin caché:** `503 ranking.unavailable`.
+- **Vista del alumno y vista previa:** se arman con los datos y la visibilidad de la solicitud. Ante un error de base devuelven `503 ranking.unavailable`. Así, una respuesta completa guardada anteriormente no puede exponer filas después de que el profesor pase a la vista compacta.
 
 ## Alternativas descartadas
 - **Servir el ranking cacheado si no se puede validar al dueño**, recordando la última validación positiva: un profe dado de baja podría ver datos mientras dure la caché. Se prioriza la seguridad (misma línea que [[decisiones/DEC-003-gate-pull-identidad-de-servicio-fail-closed|DEC-003]]).
@@ -55,7 +56,7 @@ Las respuestas del ranking (`StaffRankingView`, `StudentRankingView`) suman dos 
 - **Positivas:**
   - El diagnóstico distingue el token técnico de Courses caído.
   - El usuario sabe cuándo los datos están incompletos o viejos.
-  - Una caída de la base después de autorizar ya no deja la pantalla vacía.
+  - Una caída de la base después de autorizar permite conservar la última vista de staff dentro del TTL.
 - **Negativas / deuda:**
   - El `503` de dueño que vieron los profes **sigue siendo un error**. Solo lo amortigua la caché corta de validaciones positivas que ya tiene `HttpCohortOwnershipClient`.
   - La caché se pierde al reiniciar el micro y no se comparte entre instancias ([[deuda-tecnica#Back|DT-09]]).
