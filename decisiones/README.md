@@ -34,6 +34,7 @@ Registro de decisiones **ya tomadas** que se deducen del código, los contratos 
 | DEC-020 | La caída de un origen del gate es un motivo (`origin_unavailable`), no un 503 | 2026-10-15 | aceptada | [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503\|DEC-020]] |
 | DEC-021 | Postgres es la fuente de verdad de la estructura y Neo4j es una proyección | 2026-10-17 | aceptada | [[decisiones/DEC-021-postgres-fuente-de-verdad-neo4j-proyeccion\|DEC-021]] |
 | DEC-022 | Cómo muestra el front el ranking: vistas, orden personal y puestos consecutivos | 2026-10-22 | aceptada | [[decisiones/DEC-022-ranking-front-vistas-y-desempate\|DEC-022]] |
+| DEC-023 | La obligatoriedad completa unidades; los nodos se desbloquean por prerrequisitos explícitos | 2026-10-23 | aceptada por Roadmap; coordinación G09 pendiente | [[decisiones/DEC-023-obligatoriedad-de-unidad-y-prerrequisitos-de-nodo\|DEC-023]] |
 
 ## Decisiones que conviene revisar pronto
 > [!warning] Con deuda abierta
