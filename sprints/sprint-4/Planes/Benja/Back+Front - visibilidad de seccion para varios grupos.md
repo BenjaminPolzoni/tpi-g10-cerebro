@@ -1,5 +1,14 @@
 ---
-tags: [tpi, g10, sprint-4, plan, back, front, courses, roadmap, multi-roadmap]
+tags:
+  - tpi
+  - g10
+  - sprint-4
+  - plan
+  - back
+  - front
+  - courses
+  - roadmap
+  - multi-roadmap
 fecha: 2026-11-06
 autor: Benjamin Polzoni
 estado: hecho
