@@ -32,3 +32,7 @@ tags: [presentacion, roadmap]
 **¿Backoffice define todos los valores del nodo?** No. Hay parámetros globales de Backoffice, overrides efectivos de Courses, configuración del Motor y defaults propios de Roadmap; ver [[12-Crear-y-editar-nodos]].
 
 **¿Editar un nodo con intentos borra o recalcula el progreso?** No se verificó un efecto integral de ese tipo. La configuración de IA sí se bloquea ante intentos iniciados o cerrados; revisar el cambio concreto antes de prometer efectos retroactivos.
+
+## ¿Si cargué DIFÍCIL por error, puedo editar o borrar y revertir XP, monedas e ítems?
+
+**No en una sola operación.** Editar solo cambia parámetros para intentos posteriores; borrar conserva XP y premios, aunque retira el completado y da de baja definiciones de insignia vinculadas. Una rectificación de nota legítima puede ajustar XP, monedas y escudo bajo reglas específicas, pero no corrige la dificultad histórica ni devuelve todos los ítems. Existe además una reversión por intento liquidado en el Motor: Accounting puede compensar monedas, vidas y cargas y, tras confirmación, Roadmap compensa XP; requiere permisos y motivo, puede rechazarse, conserva insignias y completado, y no la encontramos como botón del front inspeccionado. Ver [[10-revertir-recompensas]] y [[12-Crear-y-editar-nodos#Caso: me equivoqué de dificultad]].

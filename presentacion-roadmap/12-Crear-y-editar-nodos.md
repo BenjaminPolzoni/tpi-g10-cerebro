@@ -23,6 +23,24 @@ Por último, los valores no vienen todos del mismo lugar. Backoffice mantiene pa
 
 **Transición:** «Ahora sí, veamos cómo las reglas del recorrido se convierten en una respuesta cuando el alumno quiere entrar».»
 
+## Caso: me equivoqué de dificultad
+
+**Para decir:** «Podés corregir la dificultad del nodo para los próximos intentos, pero eso no recalcula los premios de los alumnos que ya lo resolvieron. Borrar el nodo tampoco los deshace. Si hay una nota realmente equivocada, su revisión puede ajustar XP y, según el cambio de resultado, monedas y escudo; no es una herramienta para cambiar retroactivamente la dificultad. Además existe una reversión explícita **por intento** desde el Motor, sujeta a autorización y confirmación de Accounting: puede compensar el XP, las monedas y cargas consumidas, pero no recalcula el premio como si siempre hubiera sido fácil ni revoca insignias. No prometemos que haya un botón disponible ni que todas las reversiones sean aceptadas». 
+
+En la tabla, **rectificar** significa revisar legítimamente la nota de un intento; no significa editar dificultad. «No» indica que la acción de la columna no realiza esa reversión automáticamente.
+
+| Recurso | Editar dificultad | Rectificar nota | Borrar nodo |
+|---|---|---|---|
+| XP | **No** retroactivo; Roadmap guarda el cambio para futuros intentos. | **Parcial**: Motor recalcula con parámetros originales y Roadmap registra diferencia; depende de resultado y reglas. | **No**: Roadmap conserva XP. |
+| Monedas | **No**; no se solicita ajuste. | **Parcial**: Accounting ajusta si cambia el veredicto y se cumple la liquidación; puede rechazarse. | **No**: no se solicita compensación a Accounting. |
+| Ítems | **No**; no se devuelven por editar. | **Parcial**: Accounting puede devolver o gastar escudo y ajustar vidas al cambiar veredicto; no reintegra en general multiplicadores. | **No**: no devuelve cargas. |
+| Insignias | **No** revoca premios. | **No** revoca las ya ganadas; Roadmap puede otorgar nuevas si corresponde. | **No** revoca las ganadas; Roadmap da de baja definiciones vinculadas. |
+
+**Alternativa separada:** por cada intento liquidado, una persona autorizada puede solicitar la reversión por el endpoint del Motor, con motivo. Accounting intenta compensar el neto de monedas, vidas y cargas gastadas; tras su confirmación Roadmap compensa el XP del intento. Hay condiciones, posibles rechazos y no hallamos un botón de ese flujo en el front de desafíos revisado. La reversión conserva el completado y las insignias, y descuenta el XP entero del intento, no solo la diferencia entre dificultades. Si hace falta, Accounting también ofrece movimientos manuales de monedas sujetos a política y permisos; no reemplazan una reversión integral.
+
+> [!info]- Detalle técnico: tres operaciones distintas
+> `CHALLENGE_RESULT_RECTIFIED` se origina en una revisión de nota y Motor la calcula con parámetros fijados al intento; Roadmap aplica delta y Accounting ajusta según veredicto. `CHALLENGE_REVERSED` solicita otra cosa: Accounting confirma o rechaza y Roadmap compensa XP solo ante confirmación o `NOTHING_TO_REVERSE`. Editar o dar de baja un nodo no dispara ninguno. El detalle, condiciones, rutas y dudas están en [[10-revertir-recompensas]].
+
 ## Crear un nodo: paso a paso
 
 1. Abrir la cohorte, el roadmap y su unidad desde el editor o el contenido de la sección; elegir agregar actividad.

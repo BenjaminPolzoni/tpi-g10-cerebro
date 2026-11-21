@@ -22,3 +22,7 @@ tags: [presentacion, roadmap]
 | Flags/seguridad | `AUTHZ_MODE` por defecto off en fuente; configuración efectiva desconocida | «Confirmamos el modo y la matriz real en el ambiente antes de la demo». |
 | Feedback y rendimiento | Motor, feedback por tipo, FPS y compatibilidad no verificados | «Mostramos solo lo ensayado; el detalle de corrección pertenece al Motor». |
 | Eventos | Outbox/reintentos no prueban entrega exactamente una vez ni consumo | «Tenemos mecanismos de entrega e idempotencia específicos, no una garantía global». |
+
+## Dificultad equivocada y recompensas históricas
+
+Editar dificultad o dar de baja un nodo no recalcula ni revierte automáticamente recompensas ya otorgadas. La rectificación es una revisión de nota, no de dificultad histórica, y no revoca insignias. Existe reversión explícita por intento en el Motor, con autorización, liquidación previa y confirmación de Accounting: puede compensar XP, monedas, vida y cargas, pero no garantiza aceptación, no recalcula la diferencia por dificultad y conserva completados e insignias. No se verificó botón de reversión en el front de desafíos. Detalle y condiciones: [[10-revertir-recompensas]].
