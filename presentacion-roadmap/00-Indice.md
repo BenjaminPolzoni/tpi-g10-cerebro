@@ -4,7 +4,7 @@ tags: [presentacion, roadmap]
 
 # Roadmap G10: índice de la presentación
 
-La charla empieza donde terminan los otros equipos. Guion orientativo: **38 minutos**, más preguntas. Las afirmaciones describen código inspeccionado, no una demo integrada ejecutada.
+La charla empieza donde terminan los otros equipos. Guion orientativo: **41 minutos**, más preguntas. Las afirmaciones describen código inspeccionado, no una demo integrada ejecutada.
 
 | Orden | Sección | Tiempo |
 |---|---|---:|
@@ -18,6 +18,7 @@ La charla empieza donde terminan los otros equipos. Guion orientativo: **38 minu
 | 8 | [[07-Progreso-ranking-e-insignias]] | 5 min |
 | 9 | [[08-Seguimiento-y-cierre]] | 3 min |
 | 10 | [[09-Integracion-y-decisiones]] | 3 min |
+| 11 | [[11-Identificadores-y-datos-entre-micros]] | 3 min |
 
 ## Apoyo
 [[A1-Guion-de-demo]] · [[A2-Endpoints-y-eventos]] · [[A3-Decisiones-en-codigo]] · [[A4-Limites-conocidos]] · [[A5-Glosario]] · [[A6-Preguntas-dificiles]] · [[99-Dudas-abiertas]]

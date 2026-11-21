@@ -21,3 +21,9 @@ tags: [presentacion, roadmap]
 **¿Todo el ranking es anónimo?** Depende de configuración y vista; no lo garantizamos universalmente.
 
 **¿El grafo de Obsidian demuestra Neo4j funcionando?** No. `C/demo-neo4j/` contiene datos simulados sin sincronización con base.
+
+**¿Nunca usan nombres para relacionar datos?** En general se relacionan por UUID, pero la sincronización puede adoptar unidades legacy por nombre y orden, o zonas manuales por nombre y padre. Una coincidencia accidental es un riesgo del enlace inicial; ver [[11-Identificadores-y-datos-entre-micros]].
+
+**¿Qué pasa si Users o Courses no responden?** Depende de la operación: puede faltar información de perfil, una matrícula no verificarse o el material marcarse no disponible; no se debe presentar una falla como prueba de que no existen datos.
+
+**¿El resultado del Motor trae el ID del roadmap?** El contrato consumido inspeccionado trae cohorte, alumno y desafío, y puede traer nodo e intento; Roadmap resuelve el mapa. No afirmamos que todos los mensajes incluyan roadmapId.

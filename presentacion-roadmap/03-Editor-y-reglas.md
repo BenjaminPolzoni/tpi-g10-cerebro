@@ -57,3 +57,5 @@ Mostrar dos nodos conectados y una relación informativa; abrir una regla con al
 **¿Se guarda el arrastre?** Se implementaron orden y cambio de sección; el layout regional usa ETag. Coordenadas libres de nodo devuelven 501 local en el adaptador.
 
 **¿Los datos del ejemplo existen en producción?** No; el ejemplo del cerebro es simulado.
+
+**¿Cómo se identifica un nodo o una sección, por ID o por nombre?** Por UUID propio; la sección puede vincular además el UUID de Courses. Para adoptar estructuras anteriores se compara nombre bajo condiciones específicas: ver [[11-Identificadores-y-datos-entre-micros]].
