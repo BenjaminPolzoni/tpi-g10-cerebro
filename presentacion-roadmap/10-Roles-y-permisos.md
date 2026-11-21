@@ -31,13 +31,31 @@ Lectura orientativa de roles legacy y packs de fábrica; **✓ condicionado** a 
 | Editar grafo y reglas | `roadmap.graph.write` | ✓ dueño | — | ✓ | ✓ |
 | Ranking de curso o mapa | `roadmap.ranking.read` | ✓ dueño, vista staff | ✓ propia/configurada | ✓ staff | ✓ staff |
 | Dashboard de cohorte | `roadmap.dashboard.read` | ✓ dueño | — | ✓ | ✓ |
-| Progreso propio | `roadmap.student-progress.read` | — | ✓ | — | — |
-| Progreso de otros | `roadmap.students-progress.read` | ✓ dueño | — | no en pack citado | ✓ |
+| Mi progreso (vista del alumno logueado: gate, nivel, inventario, cofres, calendario) | `roadmap.student-progress.read` | — | ✓ | — | — |
+| Progreso de la cohorte, alumno por alumno (`GET /courses/{id}/progress`, `/roadmaps/{id}/progress`) | `roadmap.cohort-progress.read` + ser dueño o tener `roadmap.cohort-admin.read` | ✓ dueño | ✗ (pasa el permiso, cae en el control de dueño) | ✗ (ídem: no es dueño ni tiene `cohort-admin.read`) | ✓ |
+| Detalle por alumno (avance por comisión, salud y nivel de un alumno) | `roadmap.students-progress.read` | ✓ dueño | — | ✗ no está en su pack de fábrica | ✓ |
+
+> [!info]- Detalle técnico: por qué el gestor no ve el progreso por alumno
+> Los cuatro packs de fábrica tienen `roadmap.cohort-progress.read` (`tpi-users/.../FactoryPack.java`), pero `ProgressController.cohortProgressOf` (`ProgressController.java:240-245`) llama además a `CohortOwnershipGuard.requireCohortViewer`, que solo deja pasar a servicios, al dueño de la cohorte o a quien tenga `roadmap.cohort-admin.read` (`CohortOwnershipGuard.java`, `RoadmapAuthorizationService.java:156-157`). Ese permiso solo está en el pack ADMIN. Para que el gestor lo vea alcanza con asignarle `roadmap.cohort-admin.read` y `roadmap.students-progress.read` en Users, sin tocar código.
 | Mantenimiento técnico | `roadmap.maintenance.write` | — | — | — | ✓ |
 | Cierre académico | No se confirma permiso de cierre en Roadmap | — | — | — | — |
 
 > [!info]- Detalle técnico: alcance de la tabla
 > Matriz legacy y packs: `_presentacion-src/tpi-roadmap/docs/T-22-1-MATRIZ-PERMISOS.md:10-40` y `_presentacion-src/tpi-users/src/main/java/ar/edu/utn/frc/tup/p4/usersservice/users/permissions/FactoryPack.java:176-182`, `:351-361`, `:494-505`, `:704-719`. Hay controles adicionales y excepciones por endpoint: [[07-roles-y-permisos]]. La publicación de desafíos corresponde al Motor, no equivale a mostrar un mapa.
+
+### Cómo se otorga un permiso en Roadmap
+
+1. **Catálogo:** Roadmap define los códigos `roadmap.*`, que se sincronizan con Users.
+2. **Asignación:** Users asigna los permisos a cada cuenta mediante *packs* (de fábrica o asignados), no por el nombre del rol, y emite el JWT al iniciar sesión.
+3. **Gateway:** valida el token, borra los headers de identidad que traiga el cliente e inyecta en Roadmap la identidad y la organización verificadas.
+4. **Roadmap, en dos capas:**
+   - `@RequirePermission` en cada endpoint exige el código de permiso. Modos de `AUTHZ_MODE`: `off` (deciden los roles legacy), `shadow` (deciden los roles legacy y se registran las diferencias con el permiso nuevo) y `on` (decide solo el permiso).
+   - Control del recurso: organización coincidente, docente dueño de la cohorte, alumno inscripto y filtrado por su comisión.
+5. **Front:** el snapshot de capacidades muestra menús y protege rutas; es comodidad, el back vuelve a validar.
+6. **Servicios (M2M):** token técnico con scopes propios, nunca los permisos de una persona.
+
+> [!warning] Antes de la demo
+> `AUTHZ_MODE` viene en `off` por defecto (`_presentacion-src/tpi-roadmap/src/main/resources/application.properties:16`): si el ambiente no lo cambió, deciden los roles legacy y no los permisos. Confirmar el modo del ambiente y contarlo en consecuencia.
 
 ```mermaid
 flowchart LR
