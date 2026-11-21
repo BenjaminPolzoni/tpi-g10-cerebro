@@ -39,6 +39,24 @@ stateDiagram-v2
  Principal --> Archivado: Courses archiva cohorte
 ```
 
+## Principal y secundarios
+
+| | Principal | Secundario o alternativo |
+|---|---|---|
+| Función | Referencia por defecto de las rutas por curso para staff. | Otro recorrido de la misma cohorte, seleccionable según audiencia. |
+| Audiencia | Puede ser para todos o para comisiones; no se puede ocultar. | Para todos o comisiones; puede ocultarse o archivarse con controles de cobertura. |
+| Secciones | Se sincroniza si su origen es Courses. | También se sincroniza si su origen es Courses; si es propio, no. |
+| XP y progreso | Alcance configurable por cohorte o por roadmap. | La misma elección; no depende de ser principal. |
+
+Un alumno matriculado sin comisión ve los mapas destinados a todos, si los hay. No hay garantía de que vea el principal si está restringido a comisiones; la resolución por curso elige el principal visible o, si no lo es, el primer mapa visible.
+
+**Para promover uno:** 1. En el listado, con permisos de gestión, elegí un secundario con secciones de Courses. 2. Si está oculto, mostralo. 3. Usá «Hacer principal». El anterior pasa a secundario en la misma operación. No se trasladan automáticamente progreso ni comisiones; revisá audiencia y alcance antes de cambiarlo. La próxima sync sigue el origen de cada mapa, no la bandera principal.
+
+**Límite:** con múltiples mapas apagado se admite solo el primero; al habilitarlo, no se encontró un límite numérico por cohorte en la ruta de alta revisada. Apagarlo después no borra los que ya existen.
+
+> [!info]- Detalle técnico: promoción y sync
+> `PATCH /roadmaps/{id}` con `is_primary: true` requiere `roadmap.course-roadmaps.write` y control de contexto. No admite ocultar ni archivar el principal individualmente. La sync reconcilia **todos** los mapas activos `section_source=COURSE`, no solo el principal; `OWN` queda afuera. El front no ofrece promover OWN, aunque el backend revisado no lo rechaza explícitamente al promocionar: no presentarlo como garantía de la API. Ver [[11-roadmaps-principal-y-origen-de-nodos]].
+
 ## Qué se ve en pantalla
 Mostrar la cohorte, sus unidades, el listado de mapas y el asistente sin guardar. Si se ensayó, usar una cohorte limpia separada para la primera sincronización.
 
@@ -55,3 +73,7 @@ Mostrar la cohorte, sus unidades, el listado de mapas y el asistente sin guardar
 **¿Se publica el roadmap entero?** No se verificó un flujo global de publicación; recursos y desafíos tienen sus propios estados.
 
 **¿Qué ocurre al archivarse la cohorte?** Roadmap recibe el evento y archiva sus mapas; el flujo integral depende de Courses.
+
+**¿Cambiar el principal borra el avance?** No se encontró una migración ni borrado de progreso en esa operación; puede cambiar qué mapa se resuelve por defecto.
+
+**¿Cuántos mapas permite una cohorte?** Sin flag, uno; con el flag, no hallamos tope numérico en el alta revisada.

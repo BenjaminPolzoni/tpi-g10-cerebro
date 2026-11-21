@@ -23,6 +23,24 @@ Por último, los valores no vienen todos del mismo lugar. Backoffice mantiene pa
 
 **Transición:** «Ahora sí, veamos cómo las reglas del recorrido se convierten en una respuesta cuando el alumno quiere entrar».»
 
+## De dónde salen los desafíos y los contenidos
+
+Para un desafío, el editor consulta el pool del Motor a través de Roadmap y separa teóricos de prácticos. El docente ve sus publicados; personal habilitado puede ver los de otros autores. También puede iniciar la creación de uno nuevo desde el editor cuando esa opción está habilitada y volver para vincularlo. Un borrador puede vincularse en el flujo admitido, pero no iniciarse hasta publicarse: no es lo mismo el filtro del pool que la validación de un desafío concreto.
+
+Para un contenido, el editor consulta los materiales de Courses: archivos, enlaces, videos externos y repositorios. Puede publicar material nuevo desde el editor. La validación al guardar comprueba que esté publicado en la sección de Courses asociada; una unidad propia sin sección usa material de cohorte. Roadmap guarda el nodo y la referencia, no una copia del archivo. Al abrirlo consulta sus datos a Courses.
+
+```mermaid
+flowchart LR
+ M[Motor: desafíos] --> P[Pool y validación]
+ C[Courses: materiales] --> V[Selector y validación]
+ P --> R[Roadmap: nodo y referencia]
+ V --> R
+ R -->|detalle en vivo| C
+```
+
+> [!info]- Detalle técnico: fuentes y fallas
+> El pool es `GET /courses/{id}/challenge-pool?type=THEORETICAL|PRACTICAL` y trae publicados; la validación acepta también borradores autorizados. El selector consulta contenidos de cohorte con `include_sections=true`, pero el servidor valida la sección efectiva al vincular: no todo lo listado necesariamente será aceptado. Si Motor no responde no se puede validar y guardar el desafío; si Courses falla no se puede validar el vínculo, aunque al consultar un nodo ya guardado su material puede figurar no disponible. Ver [[11-roadmaps-principal-y-origen-de-nodos]].
+
 ## Caso: me equivoqué de dificultad
 
 **Para decir:** «Podés corregir la dificultad del nodo para los próximos intentos, pero eso no recalcula los premios de los alumnos que ya lo resolvieron. Borrar el nodo tampoco los deshace. Si hay una nota realmente equivocada, su revisión puede ajustar XP y, según el cambio de resultado, monedas y escudo; no es una herramienta para cambiar retroactivamente la dificultad. Además existe una reversión explícita **por intento** desde el Motor, sujeta a autorización y confirmación de Accounting: puede compensar el XP, las monedas y cargas consumidas, pero no recalcula el premio como si siempre hubiera sido fácil ni revoca insignias. No prometemos que haya un botón disponible ni que todas las reversiones sean aceptadas». 

@@ -36,3 +36,12 @@ tags: [presentacion, roadmap]
 ## ¿Si cargué DIFÍCIL por error, puedo editar o borrar y revertir XP, monedas e ítems?
 
 **No en una sola operación.** Editar solo cambia parámetros para intentos posteriores; borrar conserva XP y premios, aunque retira el completado y da de baja definiciones de insignia vinculadas. Una rectificación de nota legítima puede ajustar XP, monedas y escudo bajo reglas específicas, pero no corrige la dificultad histórica ni devuelve todos los ítems. Existe además una reversión por intento liquidado en el Motor: Accounting puede compensar monedas, vidas y cargas y, tras confirmación, Roadmap compensa XP; requiere permisos y motivo, puede rechazarse, conserva insignias y completado, y no la encontramos como botón del front inspeccionado. Ver [[10-revertir-recompensas]] y [[12-Crear-y-editar-nodos#Caso: me equivoqué de dificultad]].
+
+**¿Qué pasa si Neo4j o Kafka se desincronizan?** Postgres es la fuente de verdad. El admin, con `roadmap.maintenance.write`, puede reconstruir o reconciliar Neo4j desde Postgres y reintentar los eventos del outbox que fallaron, sin tocar la base a mano. Detalle en [[10-Roles-y-permisos]].
+
+
+**¿La sync de Courses toca solo el principal?** No. En la versión revisada toca todos los roadmaps activos con origen de secciones `COURSE`; los de secciones propias quedan afuera.
+
+**¿Puedo cambiar el principal sin perder el avance?** Sí: la promoción cambia qué mapa es principal, no migra ni borra el progreso ni reasigna comisiones. Revisá qué mapa y audiencia verá cada alumno después.
+
+**¿Por qué veo un material pero no puedo vincularlo?** El selector consulta la cohorte, pero al guardar se valida que el material publicado pertenezca a la sección correspondiente, salvo el caso de unidad propia. También puede fallar la consulta a Courses.
