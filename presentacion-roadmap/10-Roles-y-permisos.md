@@ -43,6 +43,14 @@ Lectura orientativa de roles legacy y packs de fábrica; **✓ condicionado** a 
 > [!info]- Detalle técnico: alcance de la tabla
 > Matriz legacy y packs: `_presentacion-src/tpi-roadmap/docs/T-22-1-MATRIZ-PERMISOS.md:10-40` y `_presentacion-src/tpi-users/src/main/java/ar/edu/utn/frc/tup/p4/usersservice/users/permissions/FactoryPack.java:176-182`, `:351-361`, `:494-505`, `:704-719`. Hay controles adicionales y excepciones por endpoint: [[07-roles-y-permisos]]. La publicación de desafíos corresponde al Motor, no equivale a mostrar un mapa.
 
+> [!info]- Detalle técnico: qué es «mantenimiento técnico» (`roadmap.maintenance.write`)
+> Son 5 endpoints de operación, bajo `/admin/...` en la ruta privada, solo para ADMIN (legacy) o quien tenga el permiso. No tienen pantalla en el front: se usan para reparar datos, no en el uso diario.
+> - `POST /admin/graph/rebuild`: reconstruye Neo4j entero copiando todos los roadmaps desde Postgres, incluidos los dados de baja (`GraphAdminController.java:38-39`).
+> - `POST /admin/graph/reconcile`: compara Neo4j con Postgres y marca en `graph_sync_pending` los roadmaps que difieren para que se reproyecten (`GraphAdminController.java:54-55`).
+> - `POST /admin/outbox/{eventId}/retry`: vuelve a PENDING un evento Kafka del outbox que quedó FAILED y limpia su error y backoff (`OutboxAdminController.java:40-41`).
+> - `POST /admin/outbox/retry-failed`: lo mismo para todos los eventos FAILED (`OutboxAdminController.java:59-60`).
+> - `POST /admin/boundary-nodes/backfill`: agrega START («Bienvenidos») y END («Felicitaciones») a las unidades viejas que no los tienen (`BoundaryNodeAdminController.java:34-35`).
+
 ### Cómo se otorga un permiso en Roadmap
 
 1. **Catálogo:** Roadmap define los códigos `roadmap.*`, que se sincronizan con Users.

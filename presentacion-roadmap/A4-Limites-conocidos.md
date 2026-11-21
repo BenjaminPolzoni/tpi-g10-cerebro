@@ -26,3 +26,14 @@ tags: [presentacion, roadmap]
 ## Dificultad equivocada y recompensas históricas
 
 Editar dificultad o dar de baja un nodo no recalcula ni revierte automáticamente recompensas ya otorgadas. La rectificación es una revisión de nota, no de dificultad histórica, y no revoca insignias. Existe reversión explícita por intento en el Motor, con autorización, liquidación previa y confirmación de Accounting: puede compensar XP, monedas, vida y cargas, pero no garantiza aceptación, no recalcula la diferencia por dificultad y conserva completados e insignias. No se verificó botón de reversión en el front de desafíos. Detalle y condiciones: [[10-revertir-recompensas]].
+
+## Decisión pendiente: el gestor no ve el progreso por alumno
+
+> [!question] Pendiente de decisión del equipo
+> El pack de fábrica del gestor trae `roadmap.cohort-progress.read`, pero el progreso de la cohorte alumno por alumno exige además ser dueño de la cohorte o tener `roadmap.cohort-admin.read`, que solo tiene el admin (`ProgressController.java:240-245`, `CohortOwnershipGuard.requireCohortViewer`). El detalle por alumno (avance por comisión, salud y nivel) pide `roadmap.students-progress.read`, que el gestor tampoco tiene. Opciones:
+> - **Dejarlo así:** el gestor ve agregados (dashboard, ranking) y el detalle por alumno queda para el docente dueño y el admin.
+> - **Habilitarlo:** asignar al gestor `roadmap.cohort-admin.read` y `roadmap.students-progress.read` en Users, sin tocar código. Antes hay que revisar qué más habilita `cohort-admin.read`.
+>
+> **Respuesta si preguntan:** «Hoy el detalle por alumno es del docente responsable y de administración; habilitarlo para gestión es una asignación de permisos en Users que estamos definiendo».
+
+Ver [[10-Roles-y-permisos]].
