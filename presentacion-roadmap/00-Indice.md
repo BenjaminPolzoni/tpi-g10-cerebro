@@ -4,7 +4,7 @@ tags: [presentacion, roadmap]
 
 # Roadmap G10: índice de la presentación
 
-La charla empieza donde terminan los otros equipos. Guion orientativo: **41 minutos**, más preguntas. Las afirmaciones describen código inspeccionado, no una demo integrada ejecutada.
+La charla empieza donde terminan los otros equipos. Guion orientativo: **45 minutos**, más preguntas. Las afirmaciones describen código inspeccionado, no una demo integrada ejecutada.
 
 | Orden | Sección | Tiempo |
 |---|---|---:|
@@ -12,13 +12,14 @@ La charla empieza donde terminan los otros equipos. Guion orientativo: **41 minu
 | 2 | [[02-Dominio-y-primer-roadmap]] | 4 min |
 | 3 | [[10-Roles-y-permisos]] | 3 min |
 | 4 | [[03-Editor-y-reglas]] | 5 min |
-| 5 | [[04-Gate-y-examen]] | 3 min |
-| 6 | [[05-Mundo-3D]] | 7 min |
-| 7 | [[06-Materiales-y-assets]] | 2 min |
-| 8 | [[07-Progreso-ranking-e-insignias]] | 5 min |
-| 9 | [[08-Seguimiento-y-cierre]] | 3 min |
-| 10 | [[09-Integracion-y-decisiones]] | 3 min |
-| 11 | [[11-Identificadores-y-datos-entre-micros]] | 3 min |
+| 5 | [[12-Crear-y-editar-nodos]] | 4 min |
+| 6 | [[04-Gate-y-examen]] | 3 min |
+| 7 | [[05-Mundo-3D]] | 7 min |
+| 8 | [[06-Materiales-y-assets]] | 2 min |
+| 9 | [[07-Progreso-ranking-e-insignias]] | 5 min |
+| 10 | [[08-Seguimiento-y-cierre]] | 3 min |
+| 11 | [[09-Integracion-y-decisiones]] | 3 min |
+| 12 | [[11-Identificadores-y-datos-entre-micros]] | 3 min |
 
 ## Apoyo
 [[A1-Guion-de-demo]] · [[A2-Endpoints-y-eventos]] · [[A3-Decisiones-en-codigo]] · [[A4-Limites-conocidos]] · [[A5-Glosario]] · [[A6-Preguntas-dificiles]] · [[99-Dudas-abiertas]]

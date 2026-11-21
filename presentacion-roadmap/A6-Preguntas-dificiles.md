@@ -27,3 +27,8 @@ tags: [presentacion, roadmap]
 **¿Qué pasa si Users o Courses no responden?** Depende de la operación: puede faltar información de perfil, una matrícula no verificarse o el material marcarse no disponible; no se debe presentar una falla como prueba de que no existen datos.
 
 **¿El resultado del Motor trae el ID del roadmap?** El contrato consumido inspeccionado trae cohorte, alumno y desafío, y puede traer nodo e intento; Roadmap resuelve el mapa. No afirmamos que todos los mensajes incluyan roadmapId.
+
+
+**¿Backoffice define todos los valores del nodo?** No. Hay parámetros globales de Backoffice, overrides efectivos de Courses, configuración del Motor y defaults propios de Roadmap; ver [[12-Crear-y-editar-nodos]].
+
+**¿Editar un nodo con intentos borra o recalcula el progreso?** No se verificó un efecto integral de ese tipo. La configuración de IA sí se bloquea ante intentos iniciados o cerrados; revisar el cambio concreto antes de prometer efectos retroactivos.

@@ -39,7 +39,7 @@ Todo esto convierte al editor en una herramienta para expresar decisiones pedag�
 
 Al mirar la Práctica integradora, podemos explicar al alumno que no basta con llegar visualmente hasta ella: antes tiene que cumplir la lectura y una evaluación, además de reunir la experiencia requerida. Si elige el primer quiz, la alternativa ya cumplió su función; si elige el segundo, el resultado es equivalente para ese grupo de la regla. Ese ejemplo hace visible por qué usamos grupos anidados y no solo una lista plana. También ayuda al docente a revisar las consecuencias antes de guardar: qué actividad depende de cuál, quién podrá verla y qué sucede si cambia la organización de la unidad.
 
-**Transición:** «Veamos ahora cómo esas reglas se convierten en una respuesta clara cuando el alumno quiere entrar a una actividad».»
+**Transición:** «Antes de ver el ingreso del alumno, abramos el detalle de [[12-Crear-y-editar-nodos]] para recorrer el alta y la edición de una actividad».»
 
 ## Qué se ve en pantalla
 Mostrar dos nodos conectados y una relación informativa; abrir una regla con alternativa. Reordenar en copia de prueba y refrescar; intentar un ciclo solo si está ensayado. No prometer persistencia de coordenadas libres.
