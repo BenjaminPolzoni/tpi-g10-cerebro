@@ -37,3 +37,14 @@ Editar dificultad o dar de baja un nodo no recalcula ni revierte automáticament
 > **Respuesta si preguntan:** «Hoy el detalle por alumno es del docente responsable y de administración; habilitarlo para gestión es una asignación de permisos en Users que estamos definiendo».
 
 Ver [[10-Roles-y-permisos]].
+
+## Decisión pendiente: promover a principal un mapa con secciones propias
+
+> [!question] Pendiente de decisión del equipo
+> El front solo ofrece «Hacer principal» para mapas con secciones de Courses (`section_source=COURSE`), pero el back (`PATCH /roadmaps/{id}` con `is_primary: true`) no rechaza explícitamente un mapa con secciones propias (`OWN`). Si alguien llama directo a la API, la cohorte puede quedar con un principal que la sincronización con Courses no toca. Opciones:
+> - **Cerrar la brecha en el back:** validar que el principal tenga `section_source=COURSE` y responder 409 si no.
+> - **Aceptarlo:** permitir principales con secciones propias y habilitarlo también en el front.
+>
+> **Respuesta si preguntan:** «La interfaz solo permite promover mapas vinculados a Courses; estamos alineando esa misma regla en el servidor».
+
+Detalle en [[02-Dominio-y-primer-roadmap]] y [[11-roadmaps-principal-y-origen-de-nodos]].

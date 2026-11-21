@@ -77,3 +77,9 @@ Mostrar la cohorte, sus unidades, el listado de mapas y el asistente sin guardar
 **¿Cambiar el principal borra el avance?** No se encontró una migración ni borrado de progreso en esa operación; puede cambiar qué mapa se resuelve por defecto.
 
 **¿Cuántos mapas permite una cohorte?** Sin flag, uno; con el flag, no hallamos tope numérico en el alta revisada.
+
+**¿El principal es el que se une con Courses y los secundarios son derivados?** No. Lo que une un mapa con Courses es que sus secciones vengan de Courses (`section_source=COURSE`), y eso lo puede tener cualquier mapa. El principal es el mapa por defecto: el que abre el staff al entrar por curso. Un secundario puede nacer de un clon, pero después es independiente.
+
+**¿Por qué puedo restringir el principal a ciertas comisiones si no lo puedo ocultar?** Porque son dos cosas distintas. Ocultar (`hidden`) lo apaga para todos y dejaría la cohorte sin mapa por defecto; por eso no se permite. Asignarlo a comisiones solo define quién lo ve: por ejemplo, el principal para la comisión A y un secundario para la B.
+
+**¿Qué ve un alumno sin comisión si el principal está restringido?** Los mapas destinados a todos. Si no hay ninguno, no ve ningún mapa: conviene que la cohorte siempre tenga al menos un mapa para todos.
