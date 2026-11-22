@@ -7,6 +7,15 @@ reemplaza: ""
 
 # DEC-007: El anonimato del ranking se resuelve en el servidor
 
+> [!note] Actualización propuesta para revisión
+> La vista **Compacta** conserva la fila propia y hasta dos puestos cercanos. Roadmap omite `student_id` y `profile` de los compañeros. El alumno ve esas celdas difuminadas.
+>
+> En **Completa**, Roadmap devuelve el nombre y la foto de perfil de los compañeros cuando Users los proporciona. El legajo se reserva al staff. El ajuste `NAME` se ignora en `full_hidden_fields`.
+>
+> La apariencia del personaje 3D del podio se puede mostrar en ambas vistas. Los umbrales y cortes se publican sin identidad. Esta actualización sustituye el criterio de identidad de filas visibles del acuerdo #427 una vez aprobada.
+>
+> [Roadmap #514](https://github.com/2026-P4-BE/tpi-roadmap/pull/514) · [Frontend #3042](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/pull/3042)
+
 > [!important] Actualización de la decisión
 > El acuerdo del equipo en [tpi-roadmap#427](https://github.com/2026-P4-BE/tpi-roadmap/pull/427) reemplaza la regla de anonimato de las filas ajenas que se documenta abajo. El servidor aplica la vista que configura el profesor por curso. En **Completa**, el alumno ve toda la clasificación. En **Compacta**, ve su fila y hasta dos puestos cercanos. Si está primero, ve a los dos de abajo. Si está último, ve a los dos de arriba.
 >

@@ -7,6 +7,13 @@ reemplaza: ""
 
 # DEC-022: Cómo muestra el front el ranking (vistas, orden y desempate)
 
+> [!note] Actualización propuesta para revisión
+> La vista **Compacta** difumina el nombre y la foto de los compañeros visibles. En **Completa** se muestran el nombre y la foto cuando están disponibles. La fila propia se muestra identificada en ambas vistas.
+>
+> El mismo criterio aplica a la tabla, la vista previa y el ranking 3D. El personaje 3D del podio puede seguir mostrando su apariencia guardada en compacta. Los campos de progreso respetan la configuración del curso en cada vista.
+>
+> [DEC-007](DEC-007-anonimato-ranking-en-servidor.md) · [Frontend #3042](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/pull/3042) · [Roadmap #514](https://github.com/2026-P4-BE/tpi-roadmap/pull/514)
+
 > [!important] Actualización de la vista del alumno
 > El acuerdo del equipo en [tpi-roadmap#427](https://github.com/2026-P4-BE/tpi-roadmap/pull/427) reemplaza la vista fija y el anonimato de las filas ajenas que se documentan abajo. El profesor elige **Completa** (toda la clasificación) o **Compacta** (fila propia y hasta dos puestos cercanos, ambos del mismo lado si está primero o último). El alumno usa el criterio oficial del curso, XP o Notas.
 >
