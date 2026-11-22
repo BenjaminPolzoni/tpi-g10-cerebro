@@ -2,7 +2,7 @@
 tags: [tpi, g10, sprint-4, plan, front, roadmap, graph-editor, courses]
 fecha: 2026-11-22
 autor: Benjamin Polzoni
-estado: en curso
+estado: implementado (falta prueba en navegador y PR)
 repo: 2026-P4-FE/2026-PIV-TPI-FE
 rama: BenjaminPolzoni/Normalizar-pantallas-videjas-de-la-vista-de-grafos (worktree ~/orca/workspaces/2026-PIV-TPI-FE/Normalizar-pantallas-videjas-de-la-vista-de-grafos)
 ---
@@ -26,15 +26,15 @@ En la vista de grafos (`/roadmap/teacher/course/:id/map`), crear y editar seccio
 | 9 | Volver desde prerrequisitos | `RequirementsPickerPage`: «Volver» usa `<app-back-link [to]="returnUrl()">` y `[routerLink]="returnUrl()"`. Si el returnUrl trae `?roadmap=…`, `routerLink` toma el `?` como parte del path y el `**` redirige a `/roadmap/teacher` | «Cancelar» y «Guardar y volver» funcionan porque usan `navigateByUrl` |
 
 ## Tareas
-- [ ] **N-01: chooser «Crear» del grafo.** Mismas opciones que la vista simple, más Sección (5 en total): Recurso, Repositorio de GitHub, Desafío, Subsección y Sección. Mismos textos e iconos que `contentActionItems()`; reutilizar esas claves i18n. Borrar `practical-challenge` y `theoretical-challenge` del tipo `CreateChoice` y del i18n (es/en/pt).
-- [ ] **N-02: Recurso.** Abre el mismo `ResourceWizard` («Agregar recursos») que la vista simple, con el mismo host o la misma ruta, y se cierra o vuelve al grafo. Ya no navega a `content/new`.
-- [ ] **N-03: editar recurso.** En el grafo, un nodo de archivo, link, video o texto abre el `ResourceWizard` en modo edición («Editar recurso»), con la misma regla que `edit(row)` de RSN. Los demás nodos siguen con `navigateNodeEdit`.
-- [ ] **N-04: Repositorio de GitHub.** Mismo flujo que la vista simple: `RepositorySelectionPage`, o el drawer si la unidad es propia del roadmap, con `returnUrl` al grafo.
-- [ ] **N-05: Desafío.** Una sola opción que navega a `…/challenge/new` **sin** `type`. El tipo se elige en la pantalla.
-- [ ] **N-06: editar subsección o sección.** Toda acción de editar del grafo (⋮ «Cambiar nombre», el lápiz o el inspector) navega a la misma pantalla que la vista simple, `…/sections/:id/edit` (`SectionEditPage`), con `returnUrl`. «Regla de sección» sigue abriendo prerrequisitos, pero no la usa ninguna acción de «editar». Si `SectionEditPage` no tiene el estilo de `SubsectionCreatePage` (pasos Información y Prerrequisitos), igualarla, porque la vista simple también la usa.
-- [ ] **N-07: crear sección y subsección desde el ⋮.** «Agregar subsección» del ⋮ → `SubsectionCreatePage`. «Sección» → `general/section/new`. Las dos llevan `returnUrl` y dejan de usar `SectionFormModal` y el drawer. Antes de borrar el modal o el drawer, comprobar si los usa una sección propia del roadmap: en ese caso, mismo criterio que la vista simple.
-- [ ] **N-08: volver desde prerrequisitos.** Arreglar la causa en `shared/ui/back-link/back-link.component.ts`: si `to` es un string con `?` o `#`, pasar `router.parseUrl(to)` (un UrlTree) a `routerLink`. Lo mismo en los `[routerLink]="returnUrl()"` de `requirements-picker-page.component.html`. Además, `backLabel` compara `endsWith('/graph')` y tiene que reconocer `/map` (ignorando la query).
-- [ ] **N-09: el regreso al grafo.** Toda pantalla abierta desde el grafo (creación, edición, repositorio, prerrequisitos) vuelve con `returnUrl = router.url` al grafo, a la misma comisión y roadmap.
+- [x] **N-01: chooser «Crear» del grafo.** Mismas opciones que la vista simple, más Sección (5 en total): Recurso, Repositorio de GitHub, Desafío, Subsección y Sección. Mismos textos e iconos que `contentActionItems()`; reutilizar esas claves i18n. Borrar `practical-challenge` y `theoretical-challenge` del tipo `CreateChoice` y del i18n (es/en/pt).
+- [x] **N-02: Recurso.** Abre el mismo `ResourceWizard` («Agregar recursos») que la vista simple, con el mismo host o la misma ruta, y se cierra o vuelve al grafo. Ya no navega a `content/new`.
+- [x] **N-03: editar recurso.** En el grafo, un nodo de archivo, link, video o texto abre el `ResourceWizard` en modo edición («Editar recurso»), con la misma regla que `edit(row)` de RSN. Los demás nodos siguen con `navigateNodeEdit`.
+- [x] **N-04: Repositorio de GitHub.** Mismo flujo que la vista simple: `RepositorySelectionPage`, o el drawer si la unidad es propia del roadmap, con `returnUrl` al grafo.
+- [x] **N-05: Desafío.** Una sola opción que navega a `…/challenge/new` **sin** `type`. El tipo se elige en la pantalla.
+- [x] **N-06: editar subsección o sección.** Toda acción de editar del grafo (⋮ «Cambiar nombre», el lápiz o el inspector) navega a la misma pantalla que la vista simple, `…/sections/:id/edit` (`SectionEditPage`), con `returnUrl`. «Regla de sección» sigue abriendo prerrequisitos, pero no la usa ninguna acción de «editar». Si `SectionEditPage` no tiene el estilo de `SubsectionCreatePage` (pasos Información y Prerrequisitos), igualarla, porque la vista simple también la usa.
+- [x] **N-07: crear sección y subsección desde el ⋮.** «Agregar subsección» del ⋮ → `SubsectionCreatePage`. «Sección» → `general/section/new`. Las dos llevan `returnUrl` y dejan de usar `SectionFormModal` y el drawer. Antes de borrar el modal o el drawer, comprobar si los usa una sección propia del roadmap: en ese caso, mismo criterio que la vista simple.
+- [x] **N-08: volver desde prerrequisitos.** Arreglar la causa en `shared/ui/back-link/back-link.component.ts`: si `to` es un string con `?` o `#`, pasar `router.parseUrl(to)` (un UrlTree) a `routerLink`. Lo mismo en los `[routerLink]="returnUrl()"` de `requirements-picker-page.component.html`. Además, `backLabel` compara `endsWith('/graph')` y tiene que reconocer `/map` (ignorando la query).
+- [x] **N-09: el regreso al grafo.** Toda pantalla abierta desde el grafo (creación, edición, repositorio, prerrequisitos) vuelve con `returnUrl = router.url` al grafo, a la misma comisión y roadmap.
 
 ## Fuera de alcance
 - «Resumir» en la tarjeta de sección: no es «Organizar». Colapsa la sección a sus nodos de entrada e hitos (`setView(unit,'summary')`) y aparece cuando la sección supera `summaryThreshold` nodos. No hay ninguna acción «Organizar». El único layout es «Restablecer mapa» en la toolbar.
