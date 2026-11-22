@@ -7,20 +7,8 @@ reemplaza: ""
 
 # DEC-022: Cómo muestra el front el ranking (vistas, orden y desempate)
 
-> [!note] Actualización propuesta para revisión
-> La vista **Compacta** difumina el nombre y la foto de los compañeros visibles. En **Completa** se muestran el nombre y la foto cuando están disponibles. La fila propia se muestra identificada en ambas vistas.
->
-> El mismo criterio aplica a la tabla, la vista previa y el ranking 3D. El personaje 3D del podio puede seguir mostrando su apariencia guardada en compacta. Los campos de progreso respetan la configuración del curso en cada vista.
->
-> [DEC-007](DEC-007-anonimato-ranking-en-servidor.md) · [Frontend #3042](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/pull/3042) · [Roadmap #514](https://github.com/2026-P4-BE/tpi-roadmap/pull/514)
-
-> [!important] Actualización de la vista del alumno
-> El acuerdo del equipo en [tpi-roadmap#427](https://github.com/2026-P4-BE/tpi-roadmap/pull/427) reemplaza la vista fija y el anonimato de las filas ajenas que se documentan abajo. El profesor elige **Completa** (toda la clasificación) o **Compacta** (fila propia y hasta dos puestos cercanos, ambos del mismo lado si está primero o último). El alumno usa el criterio oficial del curso, XP o Notas.
->
-> La **Vista compacta** se aplica desde el inicio, incluso antes de que el profesor guarde los ajustes. Los compañeros de las filas visibles aparecen identificados tanto en la vista por defecto como en las vistas elegidas. El profesor elige cuántas filas se muestran y el alumno no puede optar por quedar fuera. Roadmap decide qué filas puede recibir el front, según la actualización de [[decisiones/DEC-007-anonimato-ranking-en-servidor|DEC-007]].
-
 > [!info] Aceptada
-> Son decisiones de producto tomadas en la revisión del ranking (PR front [#1003](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/pull/1003), rama `feature/ranking-alumno`). Las diferencias con el PRD y con [[decisiones/DEC-007-anonimato-ranking-en-servidor|DEC-007]] de abajo las confirmó el equipo el 2026-10-22.
+> Las decisiones iniciales de interfaz se tomaron en la revisión de [Frontend #1003](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/pull/1003). La selección de vista por curso se incorporó en [Roadmap #427](https://github.com/2026-P4-BE/tpi-roadmap/pull/427).
 
 ## Contexto
 La pantalla del ranking (`/ranking`, `/ranking/:courseId`) se revisó con UX/UI y con uso real. El back ya resuelve el anonimato y los puestos (DEC-007, DEC-019); el front decide cómo los muestra.
@@ -28,9 +16,10 @@ La pantalla del ranking (`/ranking`, `/ranking/:courseId`) se revisó con UX/UI 
 ## Decisión
 
 **Alumno**
-- Ve los **3 primeros, su puesto, los 3 últimos y las filas de los cortes P90 y P10** (RF-RNK-03), con un separador donde se saltean puestos (1, 2, 3 ┄ 10 ┄ 41 ┄ 91 ┄ 98, 99, 100). Sin buscador, filtro de estado ni orden por columnas: su ranking va **siempre por XP**.
-- Las filas ajenas siguen anónimas (DEC-007), con un nombre de programación estable por curso y lugar en la lista ("Lambda veloz", "Puntero audaz"; 512 combinaciones, sin repetir en un curso). El seudónimo del back queda de respaldo.
-- Cualquier fila abre su detalle (RF-RNK-07): la ajena, anónima y solo con números (XP, insignias, vidas, monedas, diferencia).
+- El profesor elige la vista del curso. El alumno usa el orden oficial del curso, por XP o por nota. Roadmap define las filas y los datos que recibe el front según [[decisiones/DEC-007-anonimato-ranking-en-servidor|DEC-007]].
+- **Compacta (por defecto)**: muestra el puesto propio y hasta dos compañeros cercanos. En el primer o el último puesto, ambos pueden quedar del mismo lado. Las celdas de nombre y foto de los compañeros se muestran difuminadas con marcadores genéricos.
+- **Completa**: la tabla permite recorrer toda la clasificación. Muestra el nombre y la foto de los compañeros cuando están disponibles. Si falta el perfil, usa un seudónimo.
+- La fila propia se muestra identificada en ambas vistas. La tabla, el detalle, la vista previa y el ranking 3D respetan la visibilidad de identidad de la vista correspondiente. El podio puede mostrar el personaje 3D guardado aunque la identidad del estudiante esté oculta. Los campos de progreso respetan los ajustes de cada vista.
 - La tarjeta propia dice cuánto XP falta para entrar a la zona de promoción (P90) y el avance de obligatorios ("Obligatorios aprobados: 25 %").
 
 **Staff (profesor, admin, gestor)**
@@ -50,7 +39,7 @@ La pantalla del ranking (`/ranking`, `/ranking/:courseId`) se revisó con UX/UI 
 
 ## Se aparta de (confirmado)
 - **RF-RNK-11 y DEC-007** ("si persiste el empate, misma posición"): el front numera consecutivo.
-- **RF-RNK-03** (el alumno ve top 3 y bottom 3 **identificados**): se mantienen anónimos, como DEC-007.
+- **RF-RNK-03**: la tabla del alumno sigue la vista elegida para el curso. La visibilidad de los nombres y las fotos depende de esa vista, como establece DEC-007.
 
 ## Fuera del front
 - **RF-RNK-10 / RF-RNK-13** (cierre del curso y su exportación): Courses.
@@ -63,5 +52,6 @@ La pantalla del ranking (`/ranking`, `/ranking/:courseId`) se revisó con UX/UI 
 - Negativas / deuda: el front y el back pueden diferir en la zona de una fila empatada; si se quiere una sola fuente, el back debería asignar las zonas con puestos consecutivos.
 
 ## Referencias
+- [Cambio de visibilidad #10](https://github.com/BenjaminPolzoni/tpi-g10-cerebro/pull/10), [Frontend #3042](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/pull/3042) y [Roadmap #514](https://github.com/2026-P4-BE/tpi-roadmap/pull/514).
 - PR front [#1003](https://github.com/2026-P4-FE/2026-PIV-TPI-FE/pull/1003): `ranking-page` (`withZones`, `cutPlaces`, `pageRows`), `ranking-course-picker`, `ranking-groups`, `ranking-group-detail`, `ranking-detail`, `domain/ranking.rules.ts` (`rankBy`, `rankGroups`), `domain/anonymous-alias.ts`.
 - [[sprints/sprint-3/historias/HU-45 Ranking de la cohorte y avance por comisión|HU-45]], [[decisiones/DEC-007-anonimato-ranking-en-servidor|DEC-007]], [[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo|DEC-019]].
