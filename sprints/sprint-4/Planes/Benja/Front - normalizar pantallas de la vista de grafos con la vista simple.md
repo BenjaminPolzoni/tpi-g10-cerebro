@@ -2,7 +2,7 @@
 tags: [tpi, g10, sprint-4, plan, front, roadmap, graph-editor, courses]
 fecha: 2026-11-22
 autor: Benjamin Polzoni
-estado: en curso (N-12, N-13)
+estado: implementado (falta prueba en navegador y PR)
 repo: 2026-P4-FE/2026-PIV-TPI-FE
 rama: BenjaminPolzoni/Normalizar-pantallas-videjas-de-la-vista-de-grafos (worktree ~/orca/workspaces/2026-PIV-TPI-FE/Normalizar-pantallas-videjas-de-la-vista-de-grafos)
 ---
@@ -38,8 +38,8 @@ En la vista de grafos (`/roadmap/teacher/course/:id/map`), crear y editar seccio
 
 - [x] **N-10, menú ⋮ de sección (2026-11-22):** quedan Tema/bioma, Editar sección (→ `SectionEditPage`, `stepStart=rules` desde las flechas «requiere»), Agregar subsección, Mostrar/Ocultar y Eliminar. Se quitaron Regla de sección, Crear unidades en General, Cambiar nombre, Subir y Bajar.
 - [x] **N-11, atajos y Esc (2026-11-22):** el panel lista solo `+`, `-`, `0` y `Esc`. Esc deselecciona el nodo, la sección o la relación y cierra el panel; si hay un overlay abierto, cierra solo ese overlay.
-- [ ] **N-12, XP mínimo al crear sección o subsección (2026-11-23):** el paso Prerrequisitos de `SubsectionCreatePage` (que usa `SectionFormModal` con `showPrerequisites`) suma el mismo campo «XP mínimo (opcional)» que el paso Prerrequisitos de `SectionEditPage` (`section-editor-drawer`). Al crear, la regla se guarda con `minXp` por el mismo camino que la edición. Vale para secciones y subsecciones, en Courses y en roadmaps propios. Se puede crear solo con XP, sin elementos.
-- [ ] **N-13, `reloadAfterWrite` (2026-11-23):** después de un alta en el grafo (asistente de recursos, drawer de repositorio), recargar `cohortContents` con `reloadAfterWrite(resource, injector)` de `core/http`, no con `reload()`. Es la regla nueva de CLAUDE.md.
+- [x] **N-12, XP mínimo al crear sección o subsección (2026-11-23):** el paso Prerrequisitos de `SubsectionCreatePage` (que usa `SectionFormModal` con `showPrerequisites`) suma el mismo campo «XP mínimo (opcional)» que el paso Prerrequisitos de `SectionEditPage` (`section-editor-drawer`). Al crear, la regla se guarda con `minXp` por el mismo camino que la edición. Vale para secciones y subsecciones, en Courses y en roadmaps propios. Se puede crear solo con XP, sin elementos.
+- [x] **N-13, `reloadAfterWrite` (2026-11-23):** después de un alta en el grafo (asistente de recursos, drawer de repositorio), recargar `cohortContents` con `reloadAfterWrite(resource, injector)` de `core/http`, no con `reload()`. Es la regla nueva de CLAUDE.md.
 
 ## Fuera de alcance
 - «Resumir» en la tarjeta de sección: no es «Organizar». Colapsa la sección a sus nodos de entrada e hitos (`setView(unit,'summary')`) y aparece cuando la sección supera `summaryThreshold` nodos. No hay ninguna acción «Organizar». El único layout es «Restablecer mapa» en la toolbar.
