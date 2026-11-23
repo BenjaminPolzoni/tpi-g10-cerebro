@@ -2,7 +2,7 @@
 tags: [tpi, g10, sprint-4, plan, front, roadmap, graph-editor, courses]
 fecha: 2026-11-22
 autor: Benjamin Polzoni
-estado: PR #3131 abierta
+estado: PR #3131, aplicando review
 repo: 2026-P4-FE/2026-PIV-TPI-FE
 rama: BenjaminPolzoni/Normalizar-pantallas-videjas-de-la-vista-de-grafos (worktree ~/orca/workspaces/2026-PIV-TPI-FE/Normalizar-pantallas-videjas-de-la-vista-de-grafos)
 ---
@@ -40,6 +40,14 @@ En la vista de grafos (`/roadmap/teacher/course/:id/map`), crear y editar seccio
 - [x] **N-11, atajos y Esc (2026-11-22):** el panel lista solo `+`, `-`, `0` y `Esc`. Esc deselecciona el nodo, la sección o la relación y cierra el panel; si hay un overlay abierto, cierra solo ese overlay.
 - [x] **N-12, XP mínimo al crear sección o subsección (2026-11-23):** el paso Prerrequisitos de `SubsectionCreatePage` (que usa `SectionFormModal` con `showPrerequisites`) suma el mismo campo «XP mínimo (opcional)» que el paso Prerrequisitos de `SectionEditPage` (`section-editor-drawer`). Al crear, la regla se guarda con `minXp` por el mismo camino que la edición. Vale para secciones y subsecciones, en Courses y en roadmaps propios. Se puede crear solo con XP, sin elementos.
 - [x] **N-13, `reloadAfterWrite` (2026-11-23):** después de un alta en el grafo (asistente de recursos, drawer de repositorio), recargar `cohortContents` con `reloadAfterWrite(resource, injector)` de `core/http`, no con `reload()`. Es la regla nueva de CLAUDE.md.
+
+### Review de la PR #3131 (MateoDelgadoCosta, 2026-11-23, CHANGES_REQUESTED)
+- [ ] **N-14: vista simple con unidad OWN.** En `cohort-general-page.component.ts` `onAssistantChosen`, decidir por `unit.courseSectionId`. Si la unidad tiene sección de Courses: Recurso → `general/resources/new?sectionId=…` y Repositorio → `general/sections/:sid/repository` (con `roadmapId`/`nodeUnitId` si el roadmap no es el principal). Si no tiene (OWN): Recurso crea el nodo en la unidad, igual que el grafo (ResourceWizard embebido con la unidad, o `content/new?nodeUnitId=…`). Repositorio pasa siempre `roadmapId` + `nodeUnitId`. Specs en `cohort-general-page.component.spec.ts` para los 5 tipos, con sección de Courses y con unidad OWN.
+- [ ] **N-15: sacar `description` inventado.** Quitarlo de `BackendSectionResponse`, del mapper y de `Section`: tpi-roadmap no lo tiene. En el modal «Editar sección» de una unidad OWN (`graph-editor-page` `ownSectionEditing`), ocultar el campo descripción, como hacía «Cambiar nombre», para no descartarlo en silencio.
+- [ ] **N-16: código muerto.** Borrar `RoadmapStore.addZone` y su spec, y las claves i18n sin uso `graphEditor.sectionActions.created`, `graphEditor.wizard.newZoneOf` y `graphEditor.ownership.zoneInCourses` (es/en/pt), si grep confirma que no se usan.
+- [ ] **N-17: Esc con el panel mobile.** Si lo único abierto es el panel mobile, Esc tiene que cancelar el lote o la selección pendiente y deseleccionar, no tratarlo como overlay.
+- Subir/Bajar: los quitó el usuario a propósito; se le responde así al reviewer.
+- `local-verify`: después de agy, `npm run verify` y push **con** el hook. El fallo de compose-quiz ya está arreglado en develop (#3128).
 
 ## Fuera de alcance
 - «Resumir» en la tarjeta de sección: no es «Organizar». Colapsa la sección a sus nodos de entrada e hitos (`setView(unit,'summary')`) y aparece cuando la sección supera `summaryThreshold` nodos. No hay ninguna acción «Organizar». El único layout es «Restablecer mapa» en la toolbar.
