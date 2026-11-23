@@ -2,7 +2,7 @@
 tags: [tpi, g10, sprint-4, plan, front, roadmap, graph-editor, courses]
 fecha: 2026-11-22
 autor: Benjamin Polzoni
-estado: implementado (falta prueba en navegador y PR)
+estado: PR #3131 abierta
 repo: 2026-P4-FE/2026-PIV-TPI-FE
 rama: BenjaminPolzoni/Normalizar-pantallas-videjas-de-la-vista-de-grafos (worktree ~/orca/workspaces/2026-PIV-TPI-FE/Normalizar-pantallas-videjas-de-la-vista-de-grafos)
 ---
