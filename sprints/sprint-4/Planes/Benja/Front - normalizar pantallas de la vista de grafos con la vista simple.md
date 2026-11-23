@@ -2,7 +2,7 @@
 tags: [tpi, g10, sprint-4, plan, front, roadmap, graph-editor, courses]
 fecha: 2026-11-22
 autor: Benjamin Polzoni
-estado: PR #3131, review aplicada (4f783b35bd)
+estado: PR #3131, N-18/N-19 en curso
 repo: 2026-P4-FE/2026-PIV-TPI-FE
 rama: BenjaminPolzoni/Normalizar-pantallas-videjas-de-la-vista-de-grafos (worktree ~/orca/workspaces/2026-PIV-TPI-FE/Normalizar-pantallas-videjas-de-la-vista-de-grafos)
 ---
@@ -46,6 +46,8 @@ En la vista de grafos (`/roadmap/teacher/course/:id/map`), crear y editar seccio
 - [x] **N-15: sacar `description` inventado.** Quitarlo de `BackendSectionResponse`, del mapper y de `Section`: tpi-roadmap no lo tiene. En el modal «Editar sección» de una unidad OWN (`graph-editor-page` `ownSectionEditing`), ocultar el campo descripción, como hacía «Cambiar nombre», para no descartarlo en silencio.
 - [x] **N-16: código muerto.** Borrar `RoadmapStore.addZone` y su spec, y las claves i18n sin uso `graphEditor.sectionActions.created`, `graphEditor.wizard.newZoneOf` y `graphEditor.ownership.zoneInCourses` (es/en/pt), si grep confirma que no se usan.
 - [x] **N-17: Esc con el panel mobile.** Si lo único abierto es el panel mobile, Esc tiene que cancelar el lote o la selección pendiente y deseleccionar, no tratarlo como overlay.
+- [ ] **N-18: el grafo usa la página de recursos.** Develop (`fe36f2dec3`) pasó «Recurso» y «Editar» de un recurso en la vista simple a una página propia (`general/[sections/:sid/]resource-wizard`, `ResourceWizardPageComponent` + `ResourceWizardHandoffService`), como `goToResourceWizard` de `roadmap-section-nodes`. El grafo sigue con `ResourceWizardHost` como capa encima de toda la pantalla: tiene que navegar a esa página, con `returnUrl` al grafo, y borrar el host del grafo (`resourceWizardUnitId`/`resourceWizardEdit`).
+- [ ] **N-19: el «Crear → Recurso» de la vista simple** (`cohort-general-page` `onAssistantChosen`) va a la misma página, no a `resources/new` ni a `content/new`, tanto con sección de Courses como en una unidad OWN.
 - Subir/Bajar: los quitó el usuario a propósito; se le responde así al reviewer.
 - `local-verify`: después de agy, `npm run verify` y push **con** el hook. El fallo de compose-quiz ya está arreglado en develop (#3128).
 
