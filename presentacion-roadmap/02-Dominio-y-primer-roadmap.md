@@ -1,0 +1,85 @@
+---
+tags: [presentacion, roadmap]
+---
+
+# 2. Del curso al primer recorrido
+
+## Lo que decimos
+
+«Antes de entrar al mapa, ubiquemos sus piezas. Trabajamos dentro de una organización y de una cohorte, es decir, una cursada concreta administrada por Courses. Esa cohorte puede tener comisiones y uno o varios roadmaps. Cada roadmap organiza secciones, subsecciones y nodos. En el lenguaje de la experiencia, una sección nos ayuda a dividir el recorrido; un nodo representa una actividad o un límite que el sistema utiliza para estructurarla.
+
+Entre las actividades encontramos contenidos de lectura, desafíos teóricos, desafíos prácticos y exámenes. Los materiales académicos se administran desde Courses; los desafíos tienen su propio ciclo en los servicios correspondientes y el Motor resuelve los intentos. Roadmap vincula esas piezas con el lugar que ocupan en la cursada, su orden y las condiciones que necesita cumplir cada alumno para avanzar. Así evitamos pedirle al docente que mantenga dos cursos distintos para obtener una experiencia más rica.
+
+Veamos el primer ingreso. El docente parte de una cohorte que ya tiene sus unidades en Courses. Al abrir la edición, la aplicación consulta el mapa y dispara la sincronización de secciones. Ese trabajo toma las secciones de origen, las vincula con el recorrido y refleja cambios como nombres, orden y estado. Si todavía no existe un roadmap y hay secciones activas, la sincronización puede crear el principal. Para el docente, el resultado es una base sobre la que puede comenzar a trabajar en lugar de tener que copiar la estructura a mano.
+
+> [!info]- Detalle técnico: sincronización
+> `POST /courses/{courseId}/sections/sync` encola un job y responde 202; la reconciliación crea o vincula, renombra, ordena y da baja o reactiva secciones. Ver `B/java/com/utn/tpi/roadmap/services/CourseSectionsReconciliationService.java` y `F/app/features/roadmap/embeds/course-status/roadmap-course-status.component.ts`.
+
+Además está el asistente de configuración. En una cursada nueva ofrece preparar un recorrido compartido o borradores orientados a comisiones. El docente define los nombres y la audiencia y el asistente realiza la creación. Cuando hay más de un mapa, el listado permite reconocer cuál es el principal y cuáles son las alternativas, y administrar su nombre, asignación y estado. También se puede clonar una variante para partir de una estructura existente.
+
+Esta capacidad sirve, por ejemplo, para organizar recorridos diferentes dentro de una misma cohorte sin perder el marco común de la cursada. La configuración de múltiples roadmaps habilita ese trabajo. El principal tiene una función especial en la resolución del recorrido, mientras que las variantes se pueden orientar a grupos determinados. El alumno accede según el contexto y las opciones que tenga disponibles; el docente puede elegir el mapa específico que está editando.
+
+La gestión está pensada para personas autorizadas, como el docente responsable o personal habilitado. La interfaz contempla capacidades para mostrar las opciones de edición, y el servidor también verifica el contexto correspondiente. Cuando Courses comunica que la cohorte se archivó, Roadmap actualiza el estado de sus recorridos y la edición deja de ser la actividad normal de una cursada activa.
+
+> [!info]- Detalle técnico: permisos y organización
+> El front usa capacidades; el servidor aplica permisos, contexto de organización y, donde corresponde, propiedad del curso. Roles legacy y modo de autorización afectan el resultado. Ver `B/java/com/utn/tpi/roadmap/services/RoadmapAuthorizationService.java` y `F/app/core/guards/permission.guard.ts`.
+
+Con estas entidades podemos hablar del mismo curso desde dos perspectivas: Courses organiza la cursada y Roadmap construye la experiencia de aprendizaje sobre ella. Ese punto de partida nos permite pasar de una colección de unidades a un camino explícito, con actividades y decisiones sobre cómo avanzar.
+
+Esa estructura también nos prepara para incorporar nuevas actividades sin cambiar el sentido general del recorrido.
+
+**Transición:** «Ahora que tenemos el recorrido creado, veamos cómo el docente conecta sus actividades y define las reglas del camino».»
+
+
+```mermaid
+stateDiagram-v2
+ [*] --> Principal: creación o sync
+ Principal --> Alternativo: crear o clonar
+ Alternativo --> Archivado: archivar
+ Principal --> Archivado: Courses archiva cohorte
+```
+
+## Principal y secundarios
+
+| | Principal | Secundario o alternativo |
+|---|---|---|
+| Función | Referencia por defecto de las rutas por curso para staff. | Otro recorrido de la misma cohorte, seleccionable según audiencia. |
+| Audiencia | Puede ser para todos o para comisiones; no se puede ocultar. | Para todos o comisiones; puede ocultarse o archivarse con controles de cobertura. |
+| Secciones | Se sincroniza si su origen es Courses. | También se sincroniza si su origen es Courses; si es propio, no. |
+| XP y progreso | Alcance configurable por cohorte o por roadmap. | La misma elección; no depende de ser principal. |
+
+Un alumno matriculado sin comisión ve los mapas destinados a todos, si los hay. No hay garantía de que vea el principal si está restringido a comisiones; la resolución por curso elige el principal visible o, si no lo es, el primer mapa visible.
+
+**Para promover uno:** 1. En el listado, con permisos de gestión, elegí un secundario con secciones de Courses. 2. Si está oculto, mostralo. 3. Usá «Hacer principal». El anterior pasa a secundario en la misma operación. No se trasladan automáticamente progreso ni comisiones; revisá audiencia y alcance antes de cambiarlo. La próxima sync sigue el origen de cada mapa, no la bandera principal.
+
+**Límite:** con múltiples mapas apagado se admite solo el primero; al habilitarlo, no se encontró un límite numérico por cohorte en la ruta de alta revisada. Apagarlo después no borra los que ya existen.
+
+> [!info]- Detalle técnico: promoción y sync
+> `PATCH /roadmaps/{id}` con `is_primary: true` requiere `roadmap.course-roadmaps.write` y control de contexto. No admite ocultar ni archivar el principal individualmente. La sync reconcilia **todos** los mapas activos `section_source=COURSE`, no solo el principal; `OWN` queda afuera. El front no ofrece promover OWN, aunque el backend revisado no lo rechaza explícitamente al promocionar: no presentarlo como garantía de la API. Ver [[11-roadmaps-principal-y-origen-de-nodos]].
+
+## Qué se ve en pantalla
+Mostrar la cohorte, sus unidades, el listado de mapas y el asistente sin guardar. Si se ensayó, usar una cohorte limpia separada para la primera sincronización.
+
+## Preguntas probables
+
+**¿Puede haber distintos recorridos por comisión?** Sí, con múltiples roadmaps habilitados y audiencia configurada.
+
+**¿Qué pasa si Courses no tiene secciones activas?** La sync no crea el principal en ese caso; puede crearse explícitamente.
+
+**¿Se pueden clonar mapas?** Sí; clonar crea una variante, no un historial de versiones.
+
+**¿Quién puede editar?** Docente dueño o personal habilitado según contexto, permisos y configuración.
+
+**¿Se publica el roadmap entero?** No se verificó un flujo global de publicación; recursos y desafíos tienen sus propios estados.
+
+**¿Qué ocurre al archivarse la cohorte?** Roadmap recibe el evento y archiva sus mapas; el flujo integral depende de Courses.
+
+**¿Cambiar el principal borra el avance?** No se encontró una migración ni borrado de progreso en esa operación; puede cambiar qué mapa se resuelve por defecto.
+
+**¿Cuántos mapas permite una cohorte?** Sin flag, uno; con el flag, no hallamos tope numérico en el alta revisada.
+
+**¿El principal es el que se une con Courses y los secundarios son derivados?** No. Lo que une un mapa con Courses es que sus secciones vengan de Courses (`section_source=COURSE`), y eso lo puede tener cualquier mapa. El principal es el mapa por defecto: el que abre el staff al entrar por curso. Un secundario puede nacer de un clon, pero después es independiente.
+
+**¿Por qué puedo restringir el principal a ciertas comisiones si no lo puedo ocultar?** Porque son dos cosas distintas. Ocultar (`hidden`) lo apaga para todos y dejaría la cohorte sin mapa por defecto; por eso no se permite. Asignarlo a comisiones solo define quién lo ve: por ejemplo, el principal para la comisión A y un secundario para la B.
+
+**¿Qué ve un alumno sin comisión si el principal está restringido?** Los mapas destinados a todos. Si no hay ninguno, no ve ningún mapa: conviene que la cohorte siempre tenga al menos un mapa para todos.

@@ -111,3 +111,5 @@ Nada específico. El front de Courses no nos consume por contrato. Roadmap expon
 - 2026-10-15: T-45.7. La validación de dueño sigue fail-closed, aunque el ranking tenga caché de respaldo ([[decisiones/DEC-019-ranking-estado-de-datos-y-cache-de-respaldo|DEC-019]]).
 - 2026-10-15: respuestas en [[sprints/sprint-3/08-dudas|08-dudas]]: eventos en snake_case (G5); el profesor elige por roadmap secciones de Courses o propias (P3) y define las restricciones de cada roadmap, que se copian al clonarlo (G4); la ventana horaria de los exámenes la publica Courses (P9).
 - 2026-10-15: dudas nuevas G14 (cierre de curso: dónde se guarda `finalAcademicStatus`) para HU-72, y P17 (clonar a otro curso un roadmap con secciones de Courses) para HU-71.
+
+- 2026-10-26: **G14 → pedido publicado** en [tpi-course#239](https://github.com/2026-P4-BE/tpi-course/issues/239): `PUT /course-cohorts/{id}/final-academic-statuses` en lote. Hoy `CohortArchiveRules` exige el estado final y nadie lo escribe (develop `01c8df4`), así que no se puede archivar una cohorte con alumnos. El PR lo arma G10 (Benja). Ver [[sprints/sprint-4/borradores/Issue G01 - escribir el estado académico final]].
