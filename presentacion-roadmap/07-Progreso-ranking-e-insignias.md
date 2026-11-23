@@ -51,6 +51,23 @@ El recorrido de datos también nos permite distinguir lo que estamos viendo: una
 
 **Transición:** «Con esta información individual disponible, pasemos a la vista que ayuda al docente a seguir a toda la comisión».»
 
+## Cómo se calcula el XP de un intento
+
+El XP lo calcula el **Motor** al cerrar el intento; Roadmap lo recibe en el evento, lo registra en su libro de movimientos y arma el acumulado.
+
+1. **¿Aprobó?** Si el intento no aprueba (nota por debajo del umbral, 60 por defecto) o es un desafío de recuperación, no da XP. La recuperación devuelve una vida en lugar de XP.
+2. **Máximo del desafío:** es el XP configurado en el desafío o, si no tiene, el de su dificultad según PAR-01 (fácil 100, media 250, difícil 500). Si el nodo define una dificultad propia, usa esa. Los parámetros quedan congelados al abrir el intento.
+3. **Proporcional a la nota:** XP = máximo × nota%, redondeado. Solo un 100 % da el máximo; con menos, el tope es el máximo − 1.
+4. **Ajuste por uso de IA (PAR-05):** suma o resta según cómo usó el tutor, si está habilitado.
+5. **Ítem multiplicador de XP:** se aplica y se vuelve a topear.
+6. **Penalizaciones:** reintentos, pérdida de vida y recuperación. Solo en desafíos normales; el examen no se penaliza.
+7. **Bonos de racha y meta diaria:** cada uno es XP × % / 100, calculado sobre el XP ya ajustado, y se suman.
+
+**Ejemplo:** desafío de dificultad media (250 XP), nota 80 %, sin IA, ítems ni penalizaciones: 250 × 0,80 = **200 XP**.
+
+> [!info]- Detalle técnico: dónde está la fórmula
+> Motor: `ExperienceEngine.award` (`attempts/service/experience/ExperienceEngine.java:41-64`) aplica el orden filas → IA → tope → ítem → tope → penalización → rachas; `AttemptOutcomeCalculator.java:300-330` elige el máximo (XP configurado con semántica `MAX_PROPORTIONAL`, o PAR-01/PAR-02 congelado con `FLAT`) y `:352-362` documenta el orden completo de modificadores; `AttemptRewardRules.java:26` fija el umbral 60 y `:165-175` resuelve el máximo base (XP configurado → complejidad LLM → dificultad del nodo → dificultad del desafío). Roadmap no recalcula: `ProgressService.java:135-200` aplica el XP del evento con idempotencia por `event_id`. Las monedas siguen otra regla (`AttemptRewardRules.coins`) y los intentos LLM no dan monedas.
+
 ## Qué se ve en pantalla
 Mostrar XP, insignia obtenida y ranking con datos ficticios preparados; si hay empate real, señalar explícitamente la diferencia de presentación. Mostrar comparación de comisiones si hay al menos dos con alumnos.
 
