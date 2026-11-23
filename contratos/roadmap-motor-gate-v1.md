@@ -2,10 +2,10 @@
 
 | Dato | Valor |
 |---|---|
-| Tarea | T-15.5 — Acta y publicación OpenAPI del contrato; T-44.3 — motivo `group_restricted` (v1.1); T6-HU48 — `challenge_id` y `attempt_type` (v1.2); restricciones `DATE` (v1.3, acta T-10.1 §3.6); T-31.1 — `origin_unavailable` en vez de `503` (v1.4, HT-31); T-32.1 — `challenge_unavailable` (v1.5, HT-32) |
-| Versión | **1.5 — Sprint 3** (1.4 — Sprint 3; 1.3 — Sprint 3; 1.2 — Sprint 3; 1.1 — Sprint 2; 1.0 — Sprint 1) |
-| Fecha | 2026-10-17, G09 implementa la v1.5 en su PR de `tpi-engine-challenge#286` (v1.4: 2026-10-16; v1.3: 2026-10-12; v1.2: 2026-10-11; v1.1: 2026-10-09; v1.0: 2026-09-26) |
-| Estado | **v1.5 aceptada por G09 (2026-10-17)**: la implementaron en su PR de `#286`, sin mergear todavía. Entra en `develop` de Roadmap al mergear T-32.1. La v1.4 (aprobada el 2026-10-16) entra con T-31.1. Aprobación nominal pendiente |
+| Tarea | T-15.5 — Acta y publicación OpenAPI del contrato; T-44.3 — motivo `group_restricted` (v1.1); T6-HU48 — `challenge_id` y `attempt_type` (v1.2); restricciones `DATE` (v1.3, acta T-10.1 §3.6); T-31.1 — `origin_unavailable` en vez de `503` (v1.4, HT-31); T-32.1 — `challenge_unavailable` (v1.5, HT-32); HT-20/T-20.1 (#9030), HU-19/T-19.1 (#4282), HU-59/T-59.1 (#9155) y DEC-023 (v1.6) |
+| Versión | **1.6 — Sprint 3** (1.5 — Sprint 3; 1.4 — Sprint 3; 1.3 — Sprint 3; 1.2 — Sprint 3; 1.1 — Sprint 2; 1.0 — Sprint 1) |
+| Fecha | 2026-10-23 (v1.5: 2026-10-17; v1.4: 2026-10-16; v1.3: 2026-10-12; v1.2: 2026-10-11; v1.1: 2026-10-09; v1.0: 2026-09-26) |
+| Estado | **v1.6: decisión aceptada por Roadmap; coordinación y revisión del cambio semántico con G09 pendiente**. Las versiones 1.4 y 1.5 fueron aceptadas por G09. |
 | Equipos | Roadmap (Tema 10) y Motor de Desafíos |
 
 Este documento es la fuente vigente del contrato funcional del Gate de Roadmap.
@@ -22,6 +22,7 @@ La especificación ejecutable se publica también en `/v3/api-docs` y
 | 1.3 | 2026-10-12 | T-10.1 §3.6: se agrega el motivo `date_restricted` (§4 y §5) y el Gate evalúa las condiciones `DATE` de Courses. Cambio aditivo: solo con el flag `ROADMAP_BY_GROUP_ENABLED` encendido; no cambia la ruta, el envelope, `eligible` ni ninguno de los motivos existentes. |
 | 1.4 | 2026-10-16 | **Aprobada por G09** (propuesta el 2026-10-15; T-31.1, HU-15 CA5, [[decisiones/DEC-020-gate-origen-no-disponible-en-vez-de-503\|DEC-020]]): si Accounting o Courses no responden sin dato vigente, el Gate responde `200` con `eligible=false` y `reason=origin_unavailable` en lugar del `503` (§6). **No es aditivo**: el Gate deja de devolver `503` por un origen caído. Además se documenta `unit_prerequisite_pending` (§4 y §5), que el Gate ya emitía desde los prerrequisitos entre unidades ([[decisiones/DEC-010-prerrequisitos-por-seccion-v25\|DEC-010]]) y faltaba en el acta. El valor se acordó en inglés (`origin_unavailable`, no `origen_no_disponible`) a pedido de G09, por consistencia con el resto del vocabulario. |
 | 1.5 | 2026-10-17 | **Aceptada por G09** (T-32.1, HU-01 CA8; pedida en `tpi-engine-challenge#286`, junto con el evento `CHALLENGE_ARCHIVED`): un nodo cuyo desafío dio de baja el Motor responde `200` con `eligible=false` y `reason=challenge_unavailable` (§4 y §5). Cambio aditivo: no cambia la ruta, el envelope ni los motivos existentes. |
+| 1.6 | 2026-10-23 | DEC-023 (HT-20/T-20.1, HU-19/T-19.1, HU-59/T-59.1): separa finalización obligatoria de unidad y desbloqueo de nodos. La marca `mandatory` no agrega prerrequisitos implícitos; el Gate usa las reglas explícitas de nodo y unidad. `content_not_read` se conserva por compatibilidad, pero no se emite por una lectura obligatoria pendiente. No cambia ruta, envelope ni vocabulario publicado. Pendiente notificar y coordinar la revisión semántica con G09. |
 
 La v1.1 solo cambia el comportamiento con el flag `ROADMAP_BY_GROUP_ENABLED` encendido. Con el flag
 apagado (default) el Gate responde exactamente como en la v1.0. La v1.2 es aditiva para todos los
@@ -129,7 +130,7 @@ al Motor qué desafío y qué clase de intento corresponde al nodo consultado.
 |---|---|
 | `not_enrolled` | El alumno no tiene matrícula activa en el curso-cohorte. |
 | `course_archived` | El curso o roadmap está archivado. |
-| `content_not_read` | Falta leer contenido obligatorio de la sección. |
+| `content_not_read` | Valor histórico conservado por compatibilidad. Desde v1.6 no se emite por contenido obligatorio pendiente; una dependencia explícita de lectura pendiente se informa como `prerequisite_pending` o `unit_prerequisite_pending`. |
 | `prerequisite_pending` | No se cumplen los prerrequisitos AND/OR del nodo. |
 | `no_lives` | Un nodo `STANDARD` no tiene vidas libres disponibles. |
 | `group_restricted` | **v1.1.** La unidad del nodo está limitada a comisiones a las que el alumno no pertenece. Solo se emite con el flag `ROADMAP_BY_GROUP_ENABLED` encendido. |
@@ -138,7 +139,7 @@ al Motor qué desafío y qué clase de intento corresponde al nodo consultado.
 | `origin_unavailable` | **v1.4.** Accounting o Courses no respondieron, o respondieron con un dato inválido, y no hay dato vigente (§6). Reemplaza al `503`. |
 | `challenge_unavailable` | **v1.5.** El Motor dio de baja el desafío del nodo (`CHALLENGE_ARCHIVED`, T-32.1). Roadmap marcó el nodo como «desafío no disponible» y lo apagó; el progreso del alumno no cambia ([[decisiones/DEC-005-baja-logica-sin-borrar-progreso\|DEC-005]]). |
 
-El vocabulario sigue siendo cerrado: Roadmap no emite ningún valor fuera de esta tabla. Como la v1.0
+El vocabulario documenta los valores reconocidos por el contrato. Desde v1.6, `content_not_read` se conserva para compatibilidad histórica, pero no se emite por obligatoriedad pendiente. Roadmap no emite ningún valor fuera de esta tabla. Como la v1.0
 lo cerraba en cinco valores, cada ampliación se coordina con el consumidor (§9). El Motor ya reconoce
 `date_restricted` como passthrough de texto (§9); la v1.3 lo incorpora al contrato activo.
 
@@ -154,9 +155,10 @@ Roadmap devuelve el primer bloqueo aplicable en este orden:
 2. `not_enrolled`;
 3. `group_restricted` o `date_restricted` (v1.1/v1.3, restricción de la unidad, solo con el flag encendido);
 4. `unit_prerequisite_pending` (unidad requisito incompleta);
-5. `content_not_read`;
-6. `prerequisite_pending`;
-7. `no_lives`.
+5. `prerequisite_pending` (prerrequisito explícito del nodo);
+6. `no_lives`.
+
+Desde v1.6, `mandatory` determina qué nodos cuentan para completar la unidad y no crea una dependencia implícita entre nodos. Si una lectura debe habilitar un desafío, el nodo de contenido debe configurarse como prerrequisito. Una lectura satisface un prerrequisito `CONTENT`; un desafío requiere una finalización registrada. El progreso obligatorio de unidad se consulta por separado (HU-19/T-19.1, #4282). La evaluación usa el tipo actual del nodo, por lo que una lectura histórica no satisface un nodo que ahora sea un desafío.
 
 `challenge_unavailable` (v1.5) va antes que todos: se decide con el nodo, sin consultar
 Courses ni Accounting, y gana también sobre el `403` del nodo no disponible, porque el nodo
@@ -380,5 +382,9 @@ formalmente aprobada; no se infieren responsables.
 
 | Equipo | Responsable | Fecha | Aprobación |
 |---|---|---|---|
-| Roadmap (Tema 10) | Pendiente de registrar | Pendiente | Pendiente |
-| Motor de Desafíos | Pendiente de registrar | Pendiente | Pendiente |
+| Roadmap (Tema 10) | Equipo responsable del dominio | 2026-10-23 | Decisión registrada en [[decisiones/DEC-023-obligatoriedad-de-unidad-y-prerrequisitos-de-nodo\|DEC-023]]; PR #324 |
+| Motor de Desafíos (G09) | Consumidor del contrato | Pendiente de coordinación | Revisar y tomar conocimiento del cambio semántico de v1.6; no se presume aprobación. No requiere cambio de código si continúa tratando `reason` como texto opaco. |
+
+### Compatibilidad de la v1.6 con el consumidor (pendiente de coordinar con G09)
+
+La v1.6 no cambia la ruta, el envelope, los campos ni los valores que puede deserializar el consumidor. Sí cambia cuándo Roadmap devuelve elegibilidad: la lectura obligatoria por sí sola deja de bloquear desafíos y solo los prerrequisitos explícitos afectan el acceso. Como las versiones anteriores del contrato se coordinaron con G09, se notificará este cambio para que confirme el comportamiento esperado del consumidor antes de cerrar la revisión del contrato. No se registra aquí una aprobación que todavía no se recibió.
