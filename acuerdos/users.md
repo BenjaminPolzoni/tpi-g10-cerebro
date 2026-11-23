@@ -14,6 +14,54 @@ contrato: "tpi-roadmap/docs/contracts/reporte-users-contratos-y-endpoints.md"
 > - Repo de la contraparte: `2026-P4-BE/tpi-users` (issue #89 `ScopeCatalog`).
 > - Es un **reporte** (descripción del servicio), no un acta firmada con Users.
 
+## Actualización de permisos — 2026-10-28 (PR Roadmap #294)
+
+La matriz vigente tiene **23 permisos de persona**, no siete. Esta actualización
+sustituye las referencias al catálogo inicial en el historial de abajo. El detalle
+está en [la matriz de Roadmap](https://github.com/2026-P4-BE/tpi-roadmap/blob/feature/tema-01-identity-permissions-adoption/docs/T-22-1-MATRIZ-PERMISOS.md).
+
+| Permiso | Roles legacy / paquetes por defecto |
+|---|---|
+| `roadmap.avatar.read` | STUDENT |
+| `roadmap.avatar.write` | STUDENT |
+| `roadmap.badges.read` | ADMIN, GESTOR, PROFESSOR |
+| `roadmap.badges.write` | ADMIN, GESTOR, PROFESSOR |
+| `roadmap.challenge-pool.read` | ADMIN, GESTOR, PROFESSOR |
+| `roadmap.challenge-window.read` | ADMIN, PROFESSOR |
+| `roadmap.cohort-admin.read` | ADMIN |
+| `roadmap.cohort-progress.read` | STUDENT, ADMIN, GESTOR, PROFESSOR |
+| `roadmap.cohort.read` | ADMIN, GESTOR |
+| `roadmap.cohort.write` | ADMIN, GESTOR |
+| `roadmap.course-roadmaps.read` | STUDENT, ADMIN, GESTOR, PROFESSOR |
+| `roadmap.course-roadmaps.write` | ADMIN, GESTOR, PROFESSOR |
+| `roadmap.dashboard.read` | ADMIN, GESTOR, PROFESSOR |
+| `roadmap.graph-tools.read` | ADMIN, GESTOR, PROFESSOR |
+| `roadmap.graph.read` | STUDENT, ADMIN, GESTOR, PROFESSOR |
+| `roadmap.graph.write` | ADMIN, GESTOR, PROFESSOR |
+| `roadmap.maintenance.write` | ADMIN |
+| `roadmap.mentor.read` | STUDENT, ADMIN, GESTOR, PROFESSOR |
+| `roadmap.mentor.write` | ADMIN, GESTOR, PROFESSOR |
+| `roadmap.ranking.read` | STUDENT, ADMIN, GESTOR, PROFESSOR |
+| `roadmap.student-progress.read` | STUDENT |
+| `roadmap.student-progress.write` | STUDENT, ADMIN |
+| `roadmap.students-progress.read` | ADMIN, PROFESSOR |
+
+
+Compose [#312](https://github.com/2026-P4-BE/tpi-system-compose/pull/312), head
+`10f6407c`, ya incluye `roadmap.cohort-admin.read` (ADMIN) y
+`roadmap.cohort-progress.read` (ADMIN, GESTOR, PROFESSOR, STUDENT), además de ofrecer
+`roadmap.progress.read` como scope M2M independiente. Users
+[#227](https://github.com/2026-P4-BE/tpi-users/pull/227) aporta los paquetes y V209.
+Ambos despliegues deben preceder a `AUTHZ_MODE=on`; el acceso legacy se conserva
+con el modo apagado. Los permisos nunca sustituyen las comprobaciones de dueño
+y organización. Las observaciones de 2026-10-25 sobre paquetes pendientes y siete
+códigos son históricas, no instrucciones para el despliegue actual.
+
+El starter oficial es `authz-starter-v0.1.0`, commit
+`b496edd19a136c240a197860e97f49fa09ab4de1` de Users. La distribución oficial
+actual es un repositorio Maven vendoreado generado desde ese tag; una publicación
+en registry requiere coordinación de Identity y credenciales de paquetes.
+
 ## Qué se acordó
 - **Users es el dueño de la identidad:** registro, credenciales, 2FA, sesiones, roles, whitelist y emisión de tokens (persona y servicio). No publica puertos: todo entra por el Gateway. No valida el JWT: confía en los headers `X-*` del Gateway.
 - Roadmap lee **perfiles de alumnos de a uno** (`GET /api/users/profile/{id}`) para mostrarlos al **profesor** en el ranking (HU-24, T-24.3). Users no tiene lote por ids.
